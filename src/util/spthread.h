@@ -32,13 +32,13 @@ typedef struct spthread_st {
 
 // NOTE:
 // None of these are signal safe
-// Also note that most of these functions are not safe to suspension, 
+// Also note that most of these functions are not safe to suspension,
 // meaning that if the thread calling these is an spthread and is suspended
 // in the middle of spthread_continue or spthread_suspend, then it may not work.
-// 
-// Make sure that the calling thread cannot be suspended before calling these functions.
-// Exceptions to this are spthread_exit(), spthread_self() and if a thread is
-// continuing or suspending itself.
+//
+// Make sure that the calling thread cannot be suspended before calling these
+// functions. Exceptions to this are spthread_exit(), spthread_self() and if a
+// thread is continuing or suspending itself.
 
 // spthread_create:
 // this function works similar to pthread_create, except for two differences.

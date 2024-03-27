@@ -6,15 +6,17 @@
 #define _DEFAULT_SOURCE 1
 #endif
 
+#define _XOPEN_SOURCE 700
+
 #include <pthread.h>
 #include <signal.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <unistd.h>
-#include <stdbool.h>
 
-#include "util/spthread.h"
+#include "../src/util/spthread.h"
 
 #define NUM_THREADS 4
 #define BUF_SIZE 4096
@@ -24,7 +26,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 static spthread_t threads[NUM_THREADS];
-static const int centisecond = 10000; // 10 milliseconds
+static const int centisecond = 10000;  // 10 milliseconds
 
 static pthread_mutex_t done_lock;
 static bool done = false;
@@ -33,18 +35,18 @@ static bool done = false;
 // can be left empty since we just need
 // to know that the handler has gone off and not
 // terminate when we get the signal.
-static void alarm_handler(int signum) { }
+static void alarm_handler(int signum) {}
 
 static void scheduler(void) {
   int curr_thread_num = 0;
-  
+
   // mask for while scheduler is waiting for
   // alarm to go off
   sigset_t suspend_set;
   sigfillset(&suspend_set);
   sigdelset(&suspend_set, SIGALRM);
 
-  // just to make sure that 
+  // just to make sure that
   // sigalrm doesn't terminate the process
   struct sigaction act = (struct sigaction){
       .sa_handler = alarm_handler,
@@ -60,7 +62,7 @@ static void scheduler(void) {
   pthread_sigmask(SIG_UNBLOCK, &alarm_set, NULL);
 
   struct itimerval it;
-  it.it_interval = (struct timeval) { .tv_usec = centisecond * 10 };
+  it.it_interval = (struct timeval){.tv_usec = centisecond * 10};
   it.it_value = it.it_interval;
   setitimer(ITIMER_REAL, &it, NULL);
 
@@ -77,21 +79,20 @@ static void scheduler(void) {
     pthread_mutex_lock(&done_lock);
   }
   pthread_mutex_unlock(&done_lock);
-  
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // thread funcs stuff
 ///////////////////////////////////////////////////////////////////////////////
-static void* cat([[ maybe_unused ]] void* arg) {
+static void* cat([[maybe_unused]] void* arg) {
   // arg is ignored, mark it that way so compiler stops complaining
-  
+
   fputs("cat: started\n", stderr);
   char buffer[BUF_SIZE];
 
   while (true) {
     const ssize_t n = read(STDIN_FILENO, buffer, BUF_SIZE);
-    if (n == 0) { // Ctrl-D
+    if (n == 0) {  // Ctrl-D
       break;
     }
 
@@ -99,7 +100,7 @@ static void* cat([[ maybe_unused ]] void* arg) {
       write(STDOUT_FILENO, buffer, n);
     }
   }
-  
+
   fputs("cat: returning\n", stderr);
 
   pthread_mutex_lock(&done_lock);
@@ -110,10 +111,11 @@ static void* cat([[ maybe_unused ]] void* arg) {
 }
 
 static void* inc(void* arg) {
-  int thread_num = *(int*) arg;
+  int thread_num = *(int*)arg;
   free(arg);
-  for (int i = 0; ; i++) {
-    dprintf(STDERR_FILENO, "%*cThread %d: i = %d\n", thread_num * 20, ' ', thread_num, i);
+  for (int i = 0;; i++) {
+    dprintf(STDERR_FILENO, "%*cThread %d: i = %d\n", thread_num * 20, ' ',
+            thread_num, i);
     usleep(thread_num * centisecond);
   }
   return NULL;
