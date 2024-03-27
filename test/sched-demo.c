@@ -1,3 +1,11 @@
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200809L
+#endif
+
+#ifndef _DEFAULT_SOURCE
+#define _DEFAULT_SOURCE 1
+#endif
+
 #include <pthread.h>
 #include <signal.h>
 #include <stdio.h>
@@ -6,7 +14,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 
-#include "./spthread.h"
+#include "util/spthread.h"
 
 #define NUM_THREADS 4
 #define BUF_SIZE 4096
