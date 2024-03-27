@@ -1,0 +1,35 @@
+\doxysection{src/util/kernel.h File Reference}
+\hypertarget{kernel_8h}{}\label{kernel_8h}\index{src/util/kernel.h@{src/util/kernel.h}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+pcb\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3}{k\+\_\+proc\+\_\+create}} (pcb\+\_\+t \texorpdfstring{$\ast$}{*}parent)
+\begin{DoxyCompactList}\small\item\em Create a new child process, inheriting applicable properties from the parent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\+\_\+proc\+\_\+cleanup}} (pcb\+\_\+t \texorpdfstring{$\ast$}{*}proc)
+\begin{DoxyCompactList}\small\item\em Clean up a terminated/finished thread\textquotesingle{}s resources. This may include freeing the PCB, handling children, etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}\label{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e} 
+\index{kernel.h@{kernel.h}!k\_proc\_cleanup@{k\_proc\_cleanup}}
+\index{k\_proc\_cleanup@{k\_proc\_cleanup}!kernel.h@{kernel.h}}
+\doxysubsubsection{\texorpdfstring{k\_proc\_cleanup()}{k\_proc\_cleanup()}}
+{\footnotesize\ttfamily void k\+\_\+proc\+\_\+cleanup (\begin{DoxyParamCaption}\item[{pcb\+\_\+t \texorpdfstring{$\ast$}{*}}]{proc }\end{DoxyParamCaption})}
+
+
+
+Clean up a terminated/finished thread\textquotesingle{}s resources. This may include freeing the PCB, handling children, etc. 
+
+\Hypertarget{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3}\label{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3} 
+\index{kernel.h@{kernel.h}!k\_proc\_create@{k\_proc\_create}}
+\index{k\_proc\_create@{k\_proc\_create}!kernel.h@{kernel.h}}
+\doxysubsubsection{\texorpdfstring{k\_proc\_create()}{k\_proc\_create()}}
+{\footnotesize\ttfamily pcb\+\_\+t \texorpdfstring{$\ast$}{*} k\+\_\+proc\+\_\+create (\begin{DoxyParamCaption}\item[{pcb\+\_\+t \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
+
+
+
+Create a new child process, inheriting applicable properties from the parent. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the child PCB. 
+\end{DoxyReturn}

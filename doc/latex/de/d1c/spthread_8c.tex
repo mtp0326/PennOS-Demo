@@ -1,0 +1,197 @@
+\doxysection{src/util/spthread.c File Reference}
+\hypertarget{spthread_8c}{}\label{spthread_8c}\index{src/util/spthread.c@{src/util/spthread.c}}
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}./spthread.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structspthread__fwd__args__st}{spthread\+\_\+fwd\+\_\+args\+\_\+st}}
+\item 
+struct \mbox{\hyperlink{structspthread__signal__args__st}{spthread\+\_\+signal\+\_\+args\+\_\+st}}
+\item 
+struct \mbox{\hyperlink{structspthread__meta__st}{spthread\+\_\+meta\+\_\+st}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{spthread_8c_a369266c24eacffb87046522897a570d5}{\+\_\+\+GNU\+\_\+\+SOURCE}}
+\item 
+\#define \mbox{\hyperlink{spthread_8c_a78c99ffd76a7bb3c8c74db76207e9ab4}{\+\_\+\+XOPEN\+\_\+\+SOURCE}}~700
+\item 
+\#define \mbox{\hyperlink{spthread_8c_a78d2c967692b28a42becb102670560e0}{MILISEC\+\_\+\+IN\+\_\+\+NANO}}~100000
+\item 
+\#define \mbox{\hyperlink{spthread_8c_a8f88c94afe5985b3187e6d6a006da60f}{SPTHREAD\+\_\+\+RUNNING\+\_\+\+STATE}}~0
+\item 
+\#define \mbox{\hyperlink{spthread_8c_a83488fd87ada8d612d51b7f94d64d1ef}{SPTHREAD\+\_\+\+SUSPENDED\+\_\+\+STATE}}~1
+\item 
+\#define \mbox{\hyperlink{spthread_8c_ae207b67c432d475264fcfd027390d70a}{SPTHREAD\+\_\+\+TERMINATED\+\_\+\+STATE}}~2
+\item 
+\#define \mbox{\hyperlink{spthread_8c_ab737b8f9ea16ebeae1016b924a4a7ab3}{SPTHREAD\+\_\+\+SIG\+\_\+\+SUSPEND}}~-\/1
+\item 
+\#define \mbox{\hyperlink{spthread_8c_a091e2f97d5f00c5ccfbb645510e1c1c6}{SPTHREAD\+\_\+\+SIG\+\_\+\+CONTINUE}}~-\/2
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{spthread_8c_a6993ce178ebbd398c97b9cd8ea65b8cd}{pthread\+\_\+fn}}) (void \texorpdfstring{$\ast$}{*})
+\item 
+typedef struct \mbox{\hyperlink{structspthread__fwd__args__st}{spthread\+\_\+fwd\+\_\+args\+\_\+st}} \mbox{\hyperlink{spthread_8c_a24c186a409f51af6ec692dd429b83a06}{spthread\+\_\+fwd\+\_\+args}}
+\item 
+typedef struct \mbox{\hyperlink{structspthread__signal__args__st}{spthread\+\_\+signal\+\_\+args\+\_\+st}} \mbox{\hyperlink{spthread_8c_abef5a855e7d796293833c92abfa09b33}{spthread\+\_\+signal\+\_\+args}}
+\item 
+typedef struct \mbox{\hyperlink{structspthread__meta__st}{spthread\+\_\+meta\+\_\+st}} \mbox{\hyperlink{spthread_8c_a7d49c4f347524afc12bf23eba1ff5652}{spthread\+\_\+meta\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{spthread_8c_af738cce9e16f33dcb4fce0bea93a52c6}{spthread\+\_\+create}} (\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} \texorpdfstring{$\ast$}{*}thread, const pthread\+\_\+attr\+\_\+t \texorpdfstring{$\ast$}{*}attr, \mbox{\hyperlink{spthread_8c_a6993ce178ebbd398c97b9cd8ea65b8cd}{pthread\+\_\+fn}} start\+\_\+routine, void \texorpdfstring{$\ast$}{*}arg)
+\item 
+int \mbox{\hyperlink{spthread_8c_aa37f790c2e88ccfa449187cb037481ac}{spthread\+\_\+suspend}} (\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} thread)
+\item 
+int \mbox{\hyperlink{spthread_8c_a7c3ca239db745d66988f26351a6ce4c2}{spthread\+\_\+suspend\+\_\+self}} ()
+\item 
+int \mbox{\hyperlink{spthread_8c_a6aac317083366a15920f3138122c192e}{spthread\+\_\+continue}} (\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} thread)
+\item 
+int \mbox{\hyperlink{spthread_8c_adea681af1ea43e9f5f34f2874750adf3}{spthread\+\_\+cancel}} (\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} thread)
+\item 
+bool \mbox{\hyperlink{spthread_8c_ad3e7764f877cd27e792198c3dfc1e161}{spthread\+\_\+self}} (\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} \texorpdfstring{$\ast$}{*}thread)
+\item 
+int \mbox{\hyperlink{spthread_8c_a7aee68db395798ef0d54f95df7427d19}{spthread\+\_\+join}} (\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} thread, void \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}retval)
+\item 
+void \mbox{\hyperlink{spthread_8c_a5bec8b8653a47cad27a42da67b2a07fa}{spthread\+\_\+exit}} (void \texorpdfstring{$\ast$}{*}status)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{spthread_8c_a369266c24eacffb87046522897a570d5}\label{spthread_8c_a369266c24eacffb87046522897a570d5} 
+\index{spthread.c@{spthread.c}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+GNU\+\_\+\+SOURCE}
+
+\Hypertarget{spthread_8c_a78c99ffd76a7bb3c8c74db76207e9ab4}\label{spthread_8c_a78c99ffd76a7bb3c8c74db76207e9ab4} 
+\index{spthread.c@{spthread.c}!\_XOPEN\_SOURCE@{\_XOPEN\_SOURCE}}
+\index{\_XOPEN\_SOURCE@{\_XOPEN\_SOURCE}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{\_XOPEN\_SOURCE}{\_XOPEN\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+XOPEN\+\_\+\+SOURCE~700}
+
+\Hypertarget{spthread_8c_a78d2c967692b28a42becb102670560e0}\label{spthread_8c_a78d2c967692b28a42becb102670560e0} 
+\index{spthread.c@{spthread.c}!MILISEC\_IN\_NANO@{MILISEC\_IN\_NANO}}
+\index{MILISEC\_IN\_NANO@{MILISEC\_IN\_NANO}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{MILISEC\_IN\_NANO}{MILISEC\_IN\_NANO}}
+{\footnotesize\ttfamily \#define MILISEC\+\_\+\+IN\+\_\+\+NANO~100000}
+
+\Hypertarget{spthread_8c_a8f88c94afe5985b3187e6d6a006da60f}\label{spthread_8c_a8f88c94afe5985b3187e6d6a006da60f} 
+\index{spthread.c@{spthread.c}!SPTHREAD\_RUNNING\_STATE@{SPTHREAD\_RUNNING\_STATE}}
+\index{SPTHREAD\_RUNNING\_STATE@{SPTHREAD\_RUNNING\_STATE}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{SPTHREAD\_RUNNING\_STATE}{SPTHREAD\_RUNNING\_STATE}}
+{\footnotesize\ttfamily \#define SPTHREAD\+\_\+\+RUNNING\+\_\+\+STATE~0}
+
+\Hypertarget{spthread_8c_a091e2f97d5f00c5ccfbb645510e1c1c6}\label{spthread_8c_a091e2f97d5f00c5ccfbb645510e1c1c6} 
+\index{spthread.c@{spthread.c}!SPTHREAD\_SIG\_CONTINUE@{SPTHREAD\_SIG\_CONTINUE}}
+\index{SPTHREAD\_SIG\_CONTINUE@{SPTHREAD\_SIG\_CONTINUE}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{SPTHREAD\_SIG\_CONTINUE}{SPTHREAD\_SIG\_CONTINUE}}
+{\footnotesize\ttfamily \#define SPTHREAD\+\_\+\+SIG\+\_\+\+CONTINUE~-\/2}
+
+\Hypertarget{spthread_8c_ab737b8f9ea16ebeae1016b924a4a7ab3}\label{spthread_8c_ab737b8f9ea16ebeae1016b924a4a7ab3} 
+\index{spthread.c@{spthread.c}!SPTHREAD\_SIG\_SUSPEND@{SPTHREAD\_SIG\_SUSPEND}}
+\index{SPTHREAD\_SIG\_SUSPEND@{SPTHREAD\_SIG\_SUSPEND}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{SPTHREAD\_SIG\_SUSPEND}{SPTHREAD\_SIG\_SUSPEND}}
+{\footnotesize\ttfamily \#define SPTHREAD\+\_\+\+SIG\+\_\+\+SUSPEND~-\/1}
+
+\Hypertarget{spthread_8c_a83488fd87ada8d612d51b7f94d64d1ef}\label{spthread_8c_a83488fd87ada8d612d51b7f94d64d1ef} 
+\index{spthread.c@{spthread.c}!SPTHREAD\_SUSPENDED\_STATE@{SPTHREAD\_SUSPENDED\_STATE}}
+\index{SPTHREAD\_SUSPENDED\_STATE@{SPTHREAD\_SUSPENDED\_STATE}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{SPTHREAD\_SUSPENDED\_STATE}{SPTHREAD\_SUSPENDED\_STATE}}
+{\footnotesize\ttfamily \#define SPTHREAD\+\_\+\+SUSPENDED\+\_\+\+STATE~1}
+
+\Hypertarget{spthread_8c_ae207b67c432d475264fcfd027390d70a}\label{spthread_8c_ae207b67c432d475264fcfd027390d70a} 
+\index{spthread.c@{spthread.c}!SPTHREAD\_TERMINATED\_STATE@{SPTHREAD\_TERMINATED\_STATE}}
+\index{SPTHREAD\_TERMINATED\_STATE@{SPTHREAD\_TERMINATED\_STATE}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{SPTHREAD\_TERMINATED\_STATE}{SPTHREAD\_TERMINATED\_STATE}}
+{\footnotesize\ttfamily \#define SPTHREAD\+\_\+\+TERMINATED\+\_\+\+STATE~2}
+
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{spthread_8c_a6993ce178ebbd398c97b9cd8ea65b8cd}\label{spthread_8c_a6993ce178ebbd398c97b9cd8ea65b8cd} 
+\index{spthread.c@{spthread.c}!pthread\_fn@{pthread\_fn}}
+\index{pthread\_fn@{pthread\_fn}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{pthread\_fn}{pthread\_fn}}
+{\footnotesize\ttfamily typedef void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*} pthread\+\_\+fn) (void \texorpdfstring{$\ast$}{*})}
+
+\Hypertarget{spthread_8c_a24c186a409f51af6ec692dd429b83a06}\label{spthread_8c_a24c186a409f51af6ec692dd429b83a06} 
+\index{spthread.c@{spthread.c}!spthread\_fwd\_args@{spthread\_fwd\_args}}
+\index{spthread\_fwd\_args@{spthread\_fwd\_args}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_fwd\_args}{spthread\_fwd\_args}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structspthread__fwd__args__st}{spthread\+\_\+fwd\+\_\+args\+\_\+st}} \mbox{\hyperlink{spthread_8c_a24c186a409f51af6ec692dd429b83a06}{spthread\+\_\+fwd\+\_\+args}}}
+
+\Hypertarget{spthread_8c_a7d49c4f347524afc12bf23eba1ff5652}\label{spthread_8c_a7d49c4f347524afc12bf23eba1ff5652} 
+\index{spthread.c@{spthread.c}!spthread\_meta\_t@{spthread\_meta\_t}}
+\index{spthread\_meta\_t@{spthread\_meta\_t}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_meta\_t}{spthread\_meta\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structspthread__meta__st}{spthread\+\_\+meta\+\_\+st}} \mbox{\hyperlink{spthread_8c_a7d49c4f347524afc12bf23eba1ff5652}{spthread\+\_\+meta\+\_\+t}}}
+
+\Hypertarget{spthread_8c_abef5a855e7d796293833c92abfa09b33}\label{spthread_8c_abef5a855e7d796293833c92abfa09b33} 
+\index{spthread.c@{spthread.c}!spthread\_signal\_args@{spthread\_signal\_args}}
+\index{spthread\_signal\_args@{spthread\_signal\_args}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_signal\_args}{spthread\_signal\_args}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structspthread__signal__args__st}{spthread\+\_\+signal\+\_\+args\+\_\+st}} \mbox{\hyperlink{spthread_8c_abef5a855e7d796293833c92abfa09b33}{spthread\+\_\+signal\+\_\+args}}}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{spthread_8c_adea681af1ea43e9f5f34f2874750adf3}\label{spthread_8c_adea681af1ea43e9f5f34f2874750adf3} 
+\index{spthread.c@{spthread.c}!spthread\_cancel@{spthread\_cancel}}
+\index{spthread\_cancel@{spthread\_cancel}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_cancel()}{spthread\_cancel()}}
+{\footnotesize\ttfamily int spthread\+\_\+cancel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}}}]{thread }\end{DoxyParamCaption})}
+
+\Hypertarget{spthread_8c_a6aac317083366a15920f3138122c192e}\label{spthread_8c_a6aac317083366a15920f3138122c192e} 
+\index{spthread.c@{spthread.c}!spthread\_continue@{spthread\_continue}}
+\index{spthread\_continue@{spthread\_continue}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_continue()}{spthread\_continue()}}
+{\footnotesize\ttfamily int spthread\+\_\+continue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}}}]{thread }\end{DoxyParamCaption})}
+
+\Hypertarget{spthread_8c_af738cce9e16f33dcb4fce0bea93a52c6}\label{spthread_8c_af738cce9e16f33dcb4fce0bea93a52c6} 
+\index{spthread.c@{spthread.c}!spthread\_create@{spthread\_create}}
+\index{spthread\_create@{spthread\_create}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_create()}{spthread\_create()}}
+{\footnotesize\ttfamily int spthread\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{thread,  }\item[{const pthread\+\_\+attr\+\_\+t \texorpdfstring{$\ast$}{*}}]{attr,  }\item[{\mbox{\hyperlink{spthread_8c_a6993ce178ebbd398c97b9cd8ea65b8cd}{pthread\+\_\+fn}}}]{start\+\_\+routine,  }\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+\Hypertarget{spthread_8c_a5bec8b8653a47cad27a42da67b2a07fa}\label{spthread_8c_a5bec8b8653a47cad27a42da67b2a07fa} 
+\index{spthread.c@{spthread.c}!spthread\_exit@{spthread\_exit}}
+\index{spthread\_exit@{spthread\_exit}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_exit()}{spthread\_exit()}}
+{\footnotesize\ttfamily void spthread\+\_\+exit (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{status }\end{DoxyParamCaption})}
+
+\Hypertarget{spthread_8c_a7aee68db395798ef0d54f95df7427d19}\label{spthread_8c_a7aee68db395798ef0d54f95df7427d19} 
+\index{spthread.c@{spthread.c}!spthread\_join@{spthread\_join}}
+\index{spthread\_join@{spthread\_join}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_join()}{spthread\_join()}}
+{\footnotesize\ttfamily int spthread\+\_\+join (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}}}]{thread,  }\item[{void \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{retval }\end{DoxyParamCaption})}
+
+\Hypertarget{spthread_8c_ad3e7764f877cd27e792198c3dfc1e161}\label{spthread_8c_ad3e7764f877cd27e792198c3dfc1e161} 
+\index{spthread.c@{spthread.c}!spthread\_self@{spthread\_self}}
+\index{spthread\_self@{spthread\_self}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_self()}{spthread\_self()}}
+{\footnotesize\ttfamily bool spthread\+\_\+self (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{thread }\end{DoxyParamCaption})}
+
+\Hypertarget{spthread_8c_aa37f790c2e88ccfa449187cb037481ac}\label{spthread_8c_aa37f790c2e88ccfa449187cb037481ac} 
+\index{spthread.c@{spthread.c}!spthread\_suspend@{spthread\_suspend}}
+\index{spthread\_suspend@{spthread\_suspend}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_suspend()}{spthread\_suspend()}}
+{\footnotesize\ttfamily int spthread\+\_\+suspend (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}}}]{thread }\end{DoxyParamCaption})}
+
+\Hypertarget{spthread_8c_a7c3ca239db745d66988f26351a6ce4c2}\label{spthread_8c_a7c3ca239db745d66988f26351a6ce4c2} 
+\index{spthread.c@{spthread.c}!spthread\_suspend\_self@{spthread\_suspend\_self}}
+\index{spthread\_suspend\_self@{spthread\_suspend\_self}!spthread.c@{spthread.c}}
+\doxysubsubsection{\texorpdfstring{spthread\_suspend\_self()}{spthread\_suspend\_self()}}
+{\footnotesize\ttfamily int spthread\+\_\+suspend\+\_\+self (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+

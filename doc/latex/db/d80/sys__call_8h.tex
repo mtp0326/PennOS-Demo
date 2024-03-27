@@ -1,0 +1,133 @@
+\doxysection{src/util/sys\+\_\+call.h File Reference}
+\hypertarget{sys__call_8h}{}\label{sys__call_8h}\index{src/util/sys\_call.h@{src/util/sys\_call.h}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+pid\+\_\+t \mbox{\hyperlink{sys__call_8h_a43b789c710ba1501bcd8cf54e4382e50}{s\+\_\+spawn}} (void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}func)(void \texorpdfstring{$\ast$}{*}), char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]}, int fd0, int fd1)
+\begin{DoxyCompactList}\small\item\em Create a child process that executes the function {\ttfamily func}. The child will retain some attributes of the parent. \end{DoxyCompactList}\item 
+pid\+\_\+t \mbox{\hyperlink{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid}} (pid\+\_\+t pid, int \texorpdfstring{$\ast$}{*}wstatus, bool nohang)
+\begin{DoxyCompactList}\small\item\em Wait on a child of the calling process, until it changes state. If {\ttfamily nohang} is true, this will not block the calling process and return immediately. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill}} (pid\+\_\+t pid, int signal)
+\begin{DoxyCompactList}\small\item\em Send a signal to a particular process. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}{s\+\_\+exit}} (void)
+\begin{DoxyCompactList}\small\item\em Unconditionally exit the calling process. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\+\_\+nice}} (pid\+\_\+t pid, int priority)
+\begin{DoxyCompactList}\small\item\em Set the priority of the specified thread. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sys__call_8h_aec37528a3c7935864924764d1911126c}{s\+\_\+sleep}} (unsigned int ticks)
+\begin{DoxyCompactList}\small\item\em Suspends execution of the calling proces for a specified number of clock ticks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}\label{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690} 
+\index{sys\_call.h@{sys\_call.h}!s\_exit@{s\_exit}}
+\index{s\_exit@{s\_exit}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_exit()}{s\_exit()}}
+{\footnotesize\ttfamily void s\+\_\+exit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Unconditionally exit the calling process. 
+
+\Hypertarget{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}\label{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76} 
+\index{sys\_call.h@{sys\_call.h}!s\_kill@{s\_kill}}
+\index{s\_kill@{s\_kill}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_kill()}{s\_kill()}}
+{\footnotesize\ttfamily int s\+\_\+kill (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{int}]{signal }\end{DoxyParamCaption})}
+
+
+
+Send a signal to a particular process. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & Process ID of the target proces. \\
+\hline
+{\em signal} & Signal number to be sent. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on error. 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8h_ac711d33fcf2573a590b224b6debab996}\label{sys__call_8h_ac711d33fcf2573a590b224b6debab996} 
+\index{sys\_call.h@{sys\_call.h}!s\_nice@{s\_nice}}
+\index{s\_nice@{s\_nice}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_nice()}{s\_nice()}}
+{\footnotesize\ttfamily int s\+\_\+nice (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{int}]{priority }\end{DoxyParamCaption})}
+
+
+
+Set the priority of the specified thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & Process ID of the target thread. \\
+\hline
+{\em priority} & The new priorty value of the thread (0, 1, or 2) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8h_aec37528a3c7935864924764d1911126c}\label{sys__call_8h_aec37528a3c7935864924764d1911126c} 
+\index{sys\_call.h@{sys\_call.h}!s\_sleep@{s\_sleep}}
+\index{s\_sleep@{s\_sleep}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_sleep()}{s\_sleep()}}
+{\footnotesize\ttfamily void s\+\_\+sleep (\begin{DoxyParamCaption}\item[{unsigned int}]{ticks }\end{DoxyParamCaption})}
+
+
+
+Suspends execution of the calling proces for a specified number of clock ticks. 
+
+This function is analogous to {\ttfamily sleep(3)} in Linux, with the behavior that the system clock continues to tick even if the call is interrupted. The sleep can be interrupted by a P\+\_\+\+SIGTERM signal, after which the function will return prematurely.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ticks} & Duration of the sleep in system clock ticks. Must be greater than 0. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{sys__call_8h_a43b789c710ba1501bcd8cf54e4382e50}\label{sys__call_8h_a43b789c710ba1501bcd8cf54e4382e50} 
+\index{sys\_call.h@{sys\_call.h}!s\_spawn@{s\_spawn}}
+\index{s\_spawn@{s\_spawn}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_spawn()}{s\_spawn()}}
+{\footnotesize\ttfamily pid\+\_\+t s\+\_\+spawn (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*})(void \texorpdfstring{$\ast$}{*})}]{func,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]},  }\item[{int}]{fd0,  }\item[{int}]{fd1 }\end{DoxyParamCaption})}
+
+
+
+Create a child process that executes the function {\ttfamily func}. The child will retain some attributes of the parent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Function to be executed by the child process. \\
+\hline
+{\em argv} & Null-\/terminated array of args, including the command name as argv\mbox{[}0\mbox{]}. \\
+\hline
+{\em fd0} & Input file descriptor. \\
+\hline
+{\em fd1} & Output file descriptor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pid\+\_\+t The process ID of the created child process. 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}\label{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3} 
+\index{sys\_call.h@{sys\_call.h}!s\_waitpid@{s\_waitpid}}
+\index{s\_waitpid@{s\_waitpid}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_waitpid()}{s\_waitpid()}}
+{\footnotesize\ttfamily pid\+\_\+t s\+\_\+waitpid (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{int \texorpdfstring{$\ast$}{*}}]{wstatus,  }\item[{bool}]{nohang }\end{DoxyParamCaption})}
+
+
+
+Wait on a child of the calling process, until it changes state. If {\ttfamily nohang} is true, this will not block the calling process and return immediately. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & Process ID of the child to wait for. \\
+\hline
+{\em wstatus} & Pointer to an integer variable where the status will be stored. \\
+\hline
+{\em nohang} & If true, return immediately if no child has exited. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pid\+\_\+t The process ID of the child which has changed state on success, -\/1 on error. 
+\end{DoxyReturn}

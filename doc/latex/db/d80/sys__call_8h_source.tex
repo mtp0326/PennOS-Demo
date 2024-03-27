@@ -1,0 +1,20 @@
+\doxysection{sys\+\_\+call.\+h}
+\hypertarget{sys__call_8h_source}{}\label{sys__call_8h_source}\index{src/util/sys\_call.h@{src/util/sys\_call.h}}
+\mbox{\hyperlink{sys__call_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*============================\ system\ call\ functions\ for\ interacting\ with\ PennOS\ process\ creation\ ===================================*/}}
+\DoxyCodeLine{00012\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a43b789c710ba1501bcd8cf54e4382e50}{s\_spawn}}(\textcolor{keywordtype}{void}*\ (*func)(\textcolor{keywordtype}{void}*),\ \textcolor{keywordtype}{char}\ *argv[],\ \textcolor{keywordtype}{int}\ fd0,\ \textcolor{keywordtype}{int}\ fd1);}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00023\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}{s\_waitpid}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}*\ wstatus,\ \textcolor{keywordtype}{bool}\ nohang);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\_kill}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ signal);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}{s\_exit}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{/*============================\ system\ calls\ for\ interacting\ with\ the\ scheduler\ ===================================*/}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\_nice}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ priority);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00060\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_aec37528a3c7935864924764d1911126c}{s\_sleep}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ticks);}
+
+\end{DoxyCode}
