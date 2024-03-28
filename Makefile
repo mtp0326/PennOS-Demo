@@ -4,7 +4,7 @@ LOG_DIR = log
 DOC_DIR = doc
 TESTS_DIR = test
 
-.PHONY: all tests info format clean
+.PHONY: all tests info format clean doxygen
 
 CC = gcc-12
 CXX = g++-12
@@ -13,6 +13,11 @@ CXXFLAGS = -pthread -Wall -Werror -O0 -g --std=c++20
 
 # tells it to search for 
 CPPFLAGS = -I $(SRC_DIR)
+
+
+DOXYGEN_FILES = $(SRCS) $(HDRS) Doxyfile
+
+DOC_MARKER = $(DOC_DIR)/.doxygen_marker
 
 # add each test name to this list
 # for example:
@@ -36,7 +41,7 @@ OBJS = $(SRCS:.c=.o)
 
 TEST_OBJS = $($(wildcard $(TESTS_DIR)/*.c):.c=.o)
 
-all: $(EXECS)
+all: $(EXECS) doxygen
 
 tests: $(TEST_EXECS)
 
@@ -63,6 +68,15 @@ info:
 
 format:
 	clang-format -i --verbose --style=Chromium $(MAIN_FILES) $(TEST_MAINS) $(SRCS) $(HDRS)
+
+
+$(DOC_MARKER): $(DOXYGEN_FILES)
+	@command -v doxygen >/dev/null 2>&1 || { echo "Doxygen not installed, please install -maya"; exit 0; }
+	@echo "Running Doxygen in the background..."
+	@(doxygen Doxyfile > /dev/null 2>&1 && touch $(DOC_MARKER)) &
+
+
+doxygen:$(DOC_MARKER)
 
 clean:
 	rm $(OBJS) $(EXECS) $(TEST_EXECS)
