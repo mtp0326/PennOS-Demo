@@ -6,6 +6,7 @@
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>PennOS: test/sched-demo.c File Reference</title>
+<link rel="icon" href="../../icons8-document-50.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -22,6 +23,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">PennOS<span id="projectnumber">&#160;1.0</span>
    </div>
@@ -84,12 +86,12 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;pthread.h&gt;</code><br />
 <code>#include &lt;signal.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;sys/time.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="../../dc/d15/spthread_8h_source.html">util/spthread.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../dc/d15/spthread_8h_source.html">../src/util/spthread.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -97,6 +99,8 @@ Macros</h2></td></tr>
 <tr class="separator:a3024ccd4a9af5109d24e6c57565d74a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fb447618db946a9e2a596d9ea18763f" id="r_a8fb447618db946a9e2a596d9ea18763f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fb447618db946a9e2a596d9ea18763f">_DEFAULT_SOURCE</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a8fb447618db946a9e2a596d9ea18763f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78c99ffd76a7bb3c8c74db76207e9ab4" id="r_a78c99ffd76a7bb3c8c74db76207e9ab4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78c99ffd76a7bb3c8c74db76207e9ab4">_XOPEN_SOURCE</a>&#160;&#160;&#160;700</td></tr>
+<tr class="separator:a78c99ffd76a7bb3c8c74db76207e9ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7735206bdfad487588bba2126b806ab7" id="r_a7735206bdfad487588bba2126b806ab7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7735206bdfad487588bba2126b806ab7">NUM_THREADS</a>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:a7735206bdfad487588bba2126b806ab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6821bafc3c88dfb2e433a095df9940c6" id="r_a6821bafc3c88dfb2e433a095df9940c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6821bafc3c88dfb2e433a095df9940c6">BUF_SIZE</a>&#160;&#160;&#160;4096</td></tr>
@@ -132,6 +136,20 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define _POSIX_C_SOURCE&#160;&#160;&#160;200809L</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a78c99ffd76a7bb3c8c74db76207e9ab4" name="a78c99ffd76a7bb3c8c74db76207e9ab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78c99ffd76a7bb3c8c74db76207e9ab4">&#9670;&#160;</a></span>_XOPEN_SOURCE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _XOPEN_SOURCE&#160;&#160;&#160;700</td>
         </tr>
       </table>
 </div><div class="memdoc">

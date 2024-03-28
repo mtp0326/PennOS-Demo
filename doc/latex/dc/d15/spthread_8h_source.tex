@@ -36,13 +36,13 @@
 \DoxyCodeLine{00032\ }
 \DoxyCodeLine{00033\ \textcolor{comment}{//\ NOTE:}}
 \DoxyCodeLine{00034\ \textcolor{comment}{//\ None\ of\ these\ are\ signal\ safe}}
-\DoxyCodeLine{00035\ \textcolor{comment}{//\ Also\ note\ that\ most\ of\ these\ functions\ are\ not\ safe\ to\ suspension,\ }}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ Also\ note\ that\ most\ of\ these\ functions\ are\ not\ safe\ to\ suspension,}}
 \DoxyCodeLine{00036\ \textcolor{comment}{//\ meaning\ that\ if\ the\ thread\ calling\ these\ is\ an\ spthread\ and\ is\ suspended}}
 \DoxyCodeLine{00037\ \textcolor{comment}{//\ in\ the\ middle\ of\ spthread\_continue\ or\ spthread\_suspend,\ then\ it\ may\ not\ work.}}
-\DoxyCodeLine{00038\ \textcolor{comment}{//\ }}
-\DoxyCodeLine{00039\ \textcolor{comment}{//\ Make\ sure\ that\ the\ calling\ thread\ cannot\ be\ suspended\ before\ calling\ these\ functions.}}
-\DoxyCodeLine{00040\ \textcolor{comment}{//\ Exceptions\ to\ this\ are\ spthread\_exit(),\ spthread\_self()\ and\ if\ a\ thread\ is}}
-\DoxyCodeLine{00041\ \textcolor{comment}{//\ continuing\ or\ suspending\ itself.}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ Make\ sure\ that\ the\ calling\ thread\ cannot\ be\ suspended\ before\ calling\ these}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ functions.\ Exceptions\ to\ this\ are\ spthread\_exit(),\ spthread\_self()\ and\ if\ a}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ thread\ is\ continuing\ or\ suspending\ itself.}}
 \DoxyCodeLine{00042\ }
 \DoxyCodeLine{00043\ \textcolor{comment}{//\ spthread\_create:}}
 \DoxyCodeLine{00044\ \textcolor{comment}{//\ this\ function\ works\ similar\ to\ pthread\_create,\ except\ for\ two\ differences.}}
