@@ -3,6 +3,7 @@ BIN_DIR = bin
 LOG_DIR = log
 DOC_DIR = doc
 TESTS_DIR = test
+DOXYGEN_ENABLED = 1
 
 .PHONY: all tests info format clean doxygen
 
@@ -69,12 +70,12 @@ info:
 format:
 	clang-format -i --verbose --style=Chromium $(MAIN_FILES) $(TEST_MAINS) $(SRCS) $(HDRS)
 
-
 $(DOC_MARKER): $(DOXYGEN_FILES)
-	@command -v doxygen >/dev/null 2>&1 || { echo "Doxygen not installed, please install -maya"; exit 0; }
-	@echo "Running Doxygen in the background..."
-	@(doxygen Doxyfile > /dev/null 2>&1 && touch $(DOC_MARKER)) &
-
+	@if [ "$(DOXYGEN_ENABLED)" = "1" ]; then \
+		command -v doxygen >/dev/null 2>&1 || { echo "Doxygen not installed, please install it -maya"; exit 0; }; \
+		echo "Running Doxygen in the background..."; \
+		( nohup doxygen Doxyfile > /dev/null 2>&1 && touch $(DOC_MARKER)) & \
+	fi
 
 doxygen:$(DOC_MARKER)
 

@@ -40,7 +40,6 @@ typedef struct spthread_st {
 // Make sure that the calling thread cannot be suspended before calling these
 // functions. Exceptions to this are spthread_exit(), spthread_self() and if a
 // thread is continuing or suspending itself.
-
 // spthread_create:
 // this function works similar to pthread_create, except for two differences.
 // 1) the created pthread is able to be asychronously suspended, and continued
@@ -75,6 +74,8 @@ int spthread_create(spthread_t* thread,
 //   This thread must be created using the spthread_create() function,
 //   if created by some other function, the behaviour is undefined.
 //
+
+
 // returns:
 // - 0 on success
 // - EAGAIN if the thread could not be signaled
