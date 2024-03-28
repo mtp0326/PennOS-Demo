@@ -77,22 +77,91 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">kernel.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &quot;<a class="el" href="../../dc/d15/spthread_8h_source.html">spthread.h</a>&quot;</code><br />
+</div>
 <p><a href="../../d0/daa/kernel_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This structure stores all required information about a running process.  <a href="../../dc/d5f/structpcb__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a71acfdbc74942780681d06efcc05a0a5" id="r_a71acfdbc74942780681d06efcc05a0a5"><td class="memItemLeft" align="right" valign="top">typedef struct pcb_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71acfdbc74942780681d06efcc05a0a5">pcb_t</a></td></tr>
+<tr class="separator:a71acfdbc74942780681d06efcc05a0a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ab97efa0d1c4aeaf55ff756bf16685854" id="r_ab97efa0d1c4aeaf55ff756bf16685854"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab97efa0d1c4aeaf55ff756bf16685854">process_state_t</a> { <a class="el" href="#ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304">RUNNING</a>
+, <a class="el" href="#ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c">STOPPED</a>
+, <a class="el" href="#ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61">BLOCKED</a>
+, <a class="el" href="#ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512">ZOMBIED</a>
+ }</td></tr>
+<tr class="memdesc:ab97efa0d1c4aeaf55ff756bf16685854"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the possible states of a process in the system.  <a href="#ab97efa0d1c4aeaf55ff756bf16685854">More...</a><br /></td></tr>
+<tr class="separator:ab97efa0d1c4aeaf55ff756bf16685854"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a736760f5a73bbd7d6c9e4607c49837a3" id="r_a736760f5a73bbd7d6c9e4607c49837a3"><td class="memItemLeft" align="right" valign="top">pcb_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a736760f5a73bbd7d6c9e4607c49837a3">k_proc_create</a> (pcb_t *parent)</td></tr>
+<tr class="memitem:a736760f5a73bbd7d6c9e4607c49837a3" id="r_a736760f5a73bbd7d6c9e4607c49837a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a736760f5a73bbd7d6c9e4607c49837a3">k_proc_create</a> (<a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *parent)</td></tr>
 <tr class="memdesc:a736760f5a73bbd7d6c9e4607c49837a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new child process, inheriting applicable properties from the parent.  <br /></td></tr>
 <tr class="separator:a736760f5a73bbd7d6c9e4607c49837a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87071d3f59ebc0d6f626c885eb27c27e" id="r_a87071d3f59ebc0d6f626c885eb27c27e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87071d3f59ebc0d6f626c885eb27c27e">k_proc_cleanup</a> (pcb_t *proc)</td></tr>
+<tr class="memitem:a87071d3f59ebc0d6f626c885eb27c27e" id="r_a87071d3f59ebc0d6f626c885eb27c27e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87071d3f59ebc0d6f626c885eb27c27e">k_proc_cleanup</a> (<a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *proc)</td></tr>
 <tr class="memdesc:a87071d3f59ebc0d6f626c885eb27c27e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up a terminated/finished thread's resources. This may include freeing the PCB, handling children, etc.  <br /></td></tr>
 <tr class="separator:a87071d3f59ebc0d6f626c885eb27c27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a71acfdbc74942780681d06efcc05a0a5" name="a71acfdbc74942780681d06efcc05a0a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71acfdbc74942780681d06efcc05a0a5">&#9670;&#160;</a></span>pcb_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct pcb_t pcb_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ab97efa0d1c4aeaf55ff756bf16685854" name="ab97efa0d1c4aeaf55ff756bf16685854"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab97efa0d1c4aeaf55ff756bf16685854">&#9670;&#160;</a></span>process_state_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#ab97efa0d1c4aeaf55ff756bf16685854">process_state_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Defines the possible states of a process in the system. </p>
+<p>This enumeration lists all the possible states that a process could be in at any given time. It is used within the <a class="el" href="../../dc/d5f/structpcb__t.html" title="This structure stores all required information about a running process.">pcb_t</a> structure to track the current state of each process. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304" name="ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304"></a>RUNNING&#160;</td><td class="fielddoc"><p>Process is currently executing. A process enters the RUNNING state when the scheduler selects it for execution, typically from the READY state. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c" name="ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c"></a>STOPPED&#160;</td><td class="fielddoc"><p>Process is not executing, but can be resumed. A process should only become STOPPED if signaled by s_kill, recieving the P_SIGSTOP signal. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61" name="ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61"></a>BLOCKED&#160;</td><td class="fielddoc"><p>Process is not executing, waiting for an event to occur. A process should only be blocked if it made a call to either s_waitpid or s_sleep. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512" name="ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512"></a>ZOMBIED&#160;</td><td class="fielddoc"><p>Process has finished execution but awaits resource cleanup. A process enters the ZOMBIED state after it has finished its execution and is waiting for the parent process to read its exit status. If the parent process ever exits prior to reading exit status, this process should immediately cleaned up. <br  />
+ </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a87071d3f59ebc0d6f626c885eb27c27e" name="a87071d3f59ebc0d6f626c885eb27c27e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87071d3f59ebc0d6f626c885eb27c27e">&#9670;&#160;</a></span>k_proc_cleanup()</h2>
@@ -103,13 +172,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void k_proc_cleanup </td>
           <td>(</td>
-          <td class="paramtype">pcb_t *</td>          <td class="paramname"><span class="paramname"><em>proc</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *</td>          <td class="paramname"><span class="paramname"><em>proc</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Clean up a terminated/finished thread's resources. This may include freeing the PCB, handling children, etc. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proc</td><td>This is a pointer to the process control block of a process that has terminated. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -120,15 +195,21 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pcb_t * k_proc_create </td>
+          <td class="memname"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> * k_proc_create </td>
           <td>(</td>
-          <td class="paramtype">pcb_t *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Create a new child process, inheriting applicable properties from the parent. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>This is a pointer to the process control block of the parent, from which it inherits. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the child PCB. </dd></dl>
 
 </div>

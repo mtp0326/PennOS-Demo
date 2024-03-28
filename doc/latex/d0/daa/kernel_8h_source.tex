@@ -2,9 +2,28 @@
 \hypertarget{kernel_8h_source}{}\label{kernel_8h_source}\index{src/util/kernel.h@{src/util/kernel.h}}
 \mbox{\hyperlink{kernel_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ }
-\DoxyCodeLine{00006\ pcb\_t*\ \mbox{\hyperlink{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3}{k\_proc\_create}}(pcb\_t\ *parent);}
-\DoxyCodeLine{00007\ }
-\DoxyCodeLine{00012\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\_proc\_cleanup}}(pcb\_t\ *proc);}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{spthread_8h}{spthread.h}}"{}}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304}{RUNNING}},\ \ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c}{STOPPED}},\ \ }
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61}{BLOCKED}},\ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512}{ZOMBIED}}\ \ \ }
+\DoxyCodeLine{00031\ \}\ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\_state\_t}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpcb__t}{pcb\_t}}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{structspthread__st}{spthread\_st}}\ \mbox{\hyperlink{structpcb__t_a190c3857c9ed42aa1a0e967eb47e574a}{handle}};\ }
+\DoxyCodeLine{00040\ \ \ \ \ pid\_t\ \mbox{\hyperlink{structpcb__t_afa909915326969a57c5c1bd8b43954d4}{pid}};\ }
+\DoxyCodeLine{00041\ \ \ \ \ pid\_t\ \mbox{\hyperlink{structpcb__t_ab2289d15508ab3188ef4276b93270eb9}{ppid}};\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//\ need\ to\ store\ child\ pids}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structpcb__t_ad70cf1a6bd13085e99d0cce7eae3afc9}{priority}};\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ need\ to\ store\ all\ open\ file\ descriptors}}
+\DoxyCodeLine{00045\ \}\ \mbox{\hyperlink{kernel_8h_a71acfdbc74942780681d06efcc05a0a5}{pcb\_t}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00053\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ \mbox{\hyperlink{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3}{k\_proc\_create}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}\ *parent);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\_proc\_cleanup}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}\ *proc);}
 
 \end{DoxyCode}

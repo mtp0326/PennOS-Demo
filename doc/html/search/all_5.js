@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['main_0',['main',['../d0/dd1/sched-demo_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'sched-demo.c']]],
-  ['meta_1',['meta',['../d6/dad/structspthread__st.html#aa9b951de39f02b3b4054f6da7f05ccfe',1,'spthread_st']]],
-  ['meta_5fmutex_2',['meta_mutex',['../d0/d22/structspthread__meta__st.html#ad773779046583b05bd265ae93bcf881e',1,'spthread_meta_st']]],
-  ['milisec_5fin_5fnano_3',['MILISEC_IN_NANO',['../de/d1c/spthread_8c.html#a78d2c967692b28a42becb102670560e0',1,'spthread.c']]]
+  ['k_5fproc_5fcleanup_0',['k_proc_cleanup',['../d0/daa/kernel_8h.html#a87071d3f59ebc0d6f626c885eb27c27e',1,'kernel.h']]],
+  ['k_5fproc_5fcreate_1',['k_proc_create',['../d0/daa/kernel_8h.html#a736760f5a73bbd7d6c9e4607c49837a3',1,'kernel.h']]],
+  ['kernel_2ec_2',['kernel.c',['../d9/d26/kernel_8c.html',1,'']]],
+  ['kernel_2eh_3',['kernel.h',['../d0/daa/kernel_8h.html',1,'']]]
 ];

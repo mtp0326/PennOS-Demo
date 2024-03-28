@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.21)  26 MAR 2024 12:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.21)  27 MAR 2024 18:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -884,30 +884,45 @@ Chapter 3.
 
 ]
 Chapter 4.
-(./de/db6/structspthread__fwd__args__st.tex
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 6
+(./dc/d5f/structpcb__t.tex
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 10
 .
+
+(/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
+5.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
 )
 LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 6.
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 10.79993pt on input line 20.
+(Font)              scaled to size 8.99994pt on input line 15.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 25.
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 25
-.
+(Font)              scaled to size 8.09995pt on input line 16.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 16.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 8.09995pt on input line 16.
 
-(/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-))
-(./d0/d22/structspthread__meta__st.tex [7])
-(./d0/ddf/structspthread__signal__args__st.tex [8])
-(./d6/dad/structspthread__st.tex) [9] [10
+Underfull \hbox (badness 10000) in paragraph at lines 16--17
 
-]
+ []
+
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 10.79993pt on input line 26.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 7.19995pt on input line 34.
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
+
+ []
+
+[7]) (./de/db6/structspthread__fwd__args__st.tex [8])
+(./d0/d22/structspthread__meta__st.tex)
+(./d0/ddf/structspthread__signal__args__st.tex [9])
+(./d6/dad/structspthread__st.tex) [10]
 Chapter 5.
 (./da/ddd/README_8md.tex) (./d4/dc4/pennfat_8c.tex) (./d8/d75/pennos_8c.tex)
 (./d9/d26/kernel_8c.tex) (./d0/daa/kernel_8h.tex
@@ -915,23 +930,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--1
 
  []
 
-LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.09995pt on input line 7.
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 7.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 7.
-LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
-(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 9.
-LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 9.
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 17.
-[11]
-LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 8.99994pt on input line 33.
 
-Underfull \hbox (badness 10000) detected at line 33
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
+(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 29.
+LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
+(Font)              scaled to size 8.09995pt on input line 29.
+[11
+
+]
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 78.
+ [12]
+Underfull \hbox (badness 10000) detected at line 104
 [][][]
  []
 
@@ -940,24 +954,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--11
 
  []
 
-[12] [13]
+[13] [14]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 166.
- [14]) (./dc/d15/spthread_8h.tex
+ [15]) (./dc/d15/spthread_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--5
 
  []
 
-[15] [16]) (./dc/d15/spthread_8h_source.tex [17] [18])
+[16] [17]) (./dc/d15/spthread_8h_source.tex [18] [19] [20])
 (./d8/d74/sys__call_8c.tex) (./db/d80/sys__call_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--1
 
  []
 
-[19]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 7.
- [20]
+[21]
 Underfull \hbox (badness 10000) detected at line 48
 [][][]
  []
@@ -967,7 +980,7 @@ Underfull \hbox (badness 10000) detected at line 68
 [][][]
  []
 
-[21]
+[22]
 Underfull \hbox (badness 10000) detected at line 109
 [][][]
  []
@@ -977,35 +990,37 @@ Underfull \hbox (badness 10000) detected at line 131
 [][][]
  []
 
-) (./db/d80/sys__call_8h_source.tex) (./d0/dd1/sched-demo_8c.tex
+) (./db/d80/sys__call_8h_source.tex [23]) (./d0/dd1/sched-demo_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--11
 
  []
 
-[22]) [23] [24
+[24]) [25] [26
 
 ] (./refman.ind
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 22.39185pt on input line 1.
- [25
+ [27
 
 
-] [26]) (./refman.aux)
+] [28] [29
+
+]) (./refman.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-03-14>
  ***********
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 437B6D305B81E193A3380F55331A6953;18761.
+(rerunfilecheck)             Checksum: 9A436437C04159AFDD3D4CBDF3521E01;21126.
  ) 
 Here is how much of TeX's memory you used:
- 18285 strings out of 474104
- 296657 string characters out of 5743473
- 1945493 words of memory out of 5000000
- 40056 multiletter control sequences out of 15000+600000
+ 18360 strings out of 474104
+ 298953 string characters out of 5743473
+ 1951493 words of memory out of 5000000
+ 40092 multiletter control sequences out of 15000+600000
  611702 words of font info for 105 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 101i,16n,117p,550b,754s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,16n,117p,671b,744s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 ></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></
@@ -1015,10 +1030,10 @@ ve/2024/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2024
 /texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/local/texlive/2024/texmf
 -dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2024/texmf-dist/f
 onts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (32 pages, 151762 bytes).
+Output written on refman.pdf (35 pages, 162704 bytes).
 PDF statistics:
- 1121 PDF objects out of 1200 (max. 8388607)
- 1058 compressed objects within 11 object streams
- 220 named destinations out of 1000 (max. 500000)
- 769 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1294 PDF objects out of 1440 (max. 8388607)
+ 1226 compressed objects within 13 object streams
+ 256 named destinations out of 1000 (max. 500000)
+ 873 words of extra memory for PDF output out of 10000 (max. 10000000)
 

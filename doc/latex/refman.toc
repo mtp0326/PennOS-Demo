@@ -5,93 +5,106 @@
 \contentsline {chapter}{\numberline {3}File Index}{5}{chapter.3}%
 \contentsline {section}{\numberline {3.1}File List}{5}{section.3.1}%
 \contentsline {chapter}{\numberline {4}Data Structure Documentation}{7}{chapter.4}%
-\contentsline {section}{\numberline {4.1}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}fwd\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}args\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{7}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Field Documentation}{7}{subsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.1.1}actual\_arg}{7}{subsubsection.4.1.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.1.2}actual\_routine}{7}{subsubsection.4.1.1.2}%
-\contentsline {subsubsection}{\numberline {4.1.1.3}child\_meta}{7}{subsubsection.4.1.1.3}%
-\contentsline {subsubsection}{\numberline {4.1.1.4}setup\_cond}{7}{subsubsection.4.1.1.4}%
-\contentsline {subsubsection}{\numberline {4.1.1.5}setup\_done}{8}{subsubsection.4.1.1.5}%
-\contentsline {subsubsection}{\numberline {4.1.1.6}setup\_mutex}{8}{subsubsection.4.1.1.6}%
-\contentsline {section}{\numberline {4.2}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}meta\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{8}{section.4.2}%
+\contentsline {section}{\numberline {4.1}pcb\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{7}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Detailed Description}{7}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Field Documentation}{7}{subsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.1}handle}{7}{subsubsection.4.1.2.1}%
+\contentsline {subsubsection}{\numberline {4.1.2.2}pid}{8}{subsubsection.4.1.2.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.3}ppid}{8}{subsubsection.4.1.2.3}%
+\contentsline {subsubsection}{\numberline {4.1.2.4}priority}{8}{subsubsection.4.1.2.4}%
+\contentsline {section}{\numberline {4.2}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}fwd\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}args\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{8}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Field Documentation}{8}{subsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.1.1}meta\_mutex}{8}{subsubsection.4.2.1.1}%
-\contentsline {subsubsection}{\numberline {4.2.1.2}state}{8}{subsubsection.4.2.1.2}%
-\contentsline {subsubsection}{\numberline {4.2.1.3}suspend\_set}{8}{subsubsection.4.2.1.3}%
-\contentsline {section}{\numberline {4.3}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}signal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}args\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{8}{section.4.3}%
+\contentsline {subsubsection}{\numberline {4.2.1.1}actual\_arg}{8}{subsubsection.4.2.1.1}%
+\contentsline {subsubsection}{\numberline {4.2.1.2}actual\_routine}{8}{subsubsection.4.2.1.2}%
+\contentsline {subsubsection}{\numberline {4.2.1.3}child\_meta}{9}{subsubsection.4.2.1.3}%
+\contentsline {subsubsection}{\numberline {4.2.1.4}setup\_cond}{9}{subsubsection.4.2.1.4}%
+\contentsline {subsubsection}{\numberline {4.2.1.5}setup\_done}{9}{subsubsection.4.2.1.5}%
+\contentsline {subsubsection}{\numberline {4.2.1.6}setup\_mutex}{9}{subsubsection.4.2.1.6}%
+\contentsline {section}{\numberline {4.3}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}meta\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{9}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Field Documentation}{9}{subsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.1.1}ack}{9}{subsubsection.4.3.1.1}%
-\contentsline {subsubsection}{\numberline {4.3.1.2}shutup\_mutex}{9}{subsubsection.4.3.1.2}%
-\contentsline {subsubsection}{\numberline {4.3.1.3}signal}{9}{subsubsection.4.3.1.3}%
-\contentsline {section}{\numberline {4.4}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{9}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Field Documentation}{9}{subsection.4.4.1}%
-\contentsline {subsubsection}{\numberline {4.4.1.1}meta}{9}{subsubsection.4.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.4.1.2}thread}{9}{subsubsection.4.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.3.1.1}meta\_mutex}{9}{subsubsection.4.3.1.1}%
+\contentsline {subsubsection}{\numberline {4.3.1.2}state}{9}{subsubsection.4.3.1.2}%
+\contentsline {subsubsection}{\numberline {4.3.1.3}suspend\_set}{9}{subsubsection.4.3.1.3}%
+\contentsline {section}{\numberline {4.4}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}signal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}args\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{10}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Field Documentation}{10}{subsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.1}ack}{10}{subsubsection.4.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.2}shutup\_mutex}{10}{subsubsection.4.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.4.1.3}signal}{10}{subsubsection.4.4.1.3}%
+\contentsline {section}{\numberline {4.5}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{10}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Field Documentation}{10}{subsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.1.1}meta}{10}{subsubsection.4.5.1.1}%
+\contentsline {subsubsection}{\numberline {4.5.1.2}thread}{10}{subsubsection.4.5.1.2}%
 \contentsline {chapter}{\numberline {5}File Documentation}{11}{chapter.5}%
 \contentsline {section}{\numberline {5.1}doc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}README.md File Reference}{11}{section.5.1}%
 \contentsline {section}{\numberline {5.2}src/pennfat.c File Reference}{11}{section.5.2}%
 \contentsline {section}{\numberline {5.3}src/pennos.c File Reference}{11}{section.5.3}%
 \contentsline {section}{\numberline {5.4}src/util/kernel.c File Reference}{11}{section.5.4}%
 \contentsline {section}{\numberline {5.5}src/util/kernel.h File Reference}{11}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Function Documentation}{11}{subsection.5.5.1}%
-\contentsline {subsubsection}{\numberline {5.5.1.1}k\_proc\_cleanup()}{11}{subsubsection.5.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.5.1.2}k\_proc\_create()}{12}{subsubsection.5.5.1.2}%
-\contentsline {section}{\numberline {5.6}kernel.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{12}{section.5.6}%
-\contentsline {section}{\numberline {5.7}src/util/spthread.c File Reference}{12}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Macro Definition Documentation}{13}{subsection.5.7.1}%
-\contentsline {subsubsection}{\numberline {5.7.1.1}\_GNU\_SOURCE}{13}{subsubsection.5.7.1.1}%
-\contentsline {subsubsection}{\numberline {5.7.1.2}\_XOPEN\_SOURCE}{13}{subsubsection.5.7.1.2}%
-\contentsline {subsubsection}{\numberline {5.7.1.3}MILISEC\_IN\_NANO}{13}{subsubsection.5.7.1.3}%
-\contentsline {subsubsection}{\numberline {5.7.1.4}SPTHREAD\_RUNNING\_STATE}{13}{subsubsection.5.7.1.4}%
-\contentsline {subsubsection}{\numberline {5.7.1.5}SPTHREAD\_SIG\_CONTINUE}{13}{subsubsection.5.7.1.5}%
-\contentsline {subsubsection}{\numberline {5.7.1.6}SPTHREAD\_SIG\_SUSPEND}{13}{subsubsection.5.7.1.6}%
-\contentsline {subsubsection}{\numberline {5.7.1.7}SPTHREAD\_SUSPENDED\_STATE}{14}{subsubsection.5.7.1.7}%
-\contentsline {subsubsection}{\numberline {5.7.1.8}SPTHREAD\_TERMINATED\_STATE}{14}{subsubsection.5.7.1.8}%
-\contentsline {subsection}{\numberline {5.7.2}Typedef Documentation}{14}{subsection.5.7.2}%
-\contentsline {subsubsection}{\numberline {5.7.2.1}pthread\_fn}{14}{subsubsection.5.7.2.1}%
-\contentsline {subsubsection}{\numberline {5.7.2.2}spthread\_fwd\_args}{14}{subsubsection.5.7.2.2}%
-\contentsline {subsubsection}{\numberline {5.7.2.3}spthread\_meta\_t}{14}{subsubsection.5.7.2.3}%
-\contentsline {subsubsection}{\numberline {5.7.2.4}spthread\_signal\_args}{14}{subsubsection.5.7.2.4}%
-\contentsline {subsection}{\numberline {5.7.3}Function Documentation}{14}{subsection.5.7.3}%
-\contentsline {subsubsection}{\numberline {5.7.3.1}spthread\_cancel()}{14}{subsubsection.5.7.3.1}%
-\contentsline {subsubsection}{\numberline {5.7.3.2}spthread\_continue()}{14}{subsubsection.5.7.3.2}%
-\contentsline {subsubsection}{\numberline {5.7.3.3}spthread\_create()}{14}{subsubsection.5.7.3.3}%
-\contentsline {subsubsection}{\numberline {5.7.3.4}spthread\_exit()}{15}{subsubsection.5.7.3.4}%
-\contentsline {subsubsection}{\numberline {5.7.3.5}spthread\_join()}{15}{subsubsection.5.7.3.5}%
-\contentsline {subsubsection}{\numberline {5.7.3.6}spthread\_self()}{15}{subsubsection.5.7.3.6}%
-\contentsline {subsubsection}{\numberline {5.7.3.7}spthread\_suspend()}{15}{subsubsection.5.7.3.7}%
-\contentsline {subsubsection}{\numberline {5.7.3.8}spthread\_suspend\_self()}{15}{subsubsection.5.7.3.8}%
-\contentsline {section}{\numberline {5.8}src/util/spthread.h File Reference}{15}{section.5.8}%
-\contentsline {subsection}{\numberline {5.8.1}Macro Definition Documentation}{16}{subsection.5.8.1}%
-\contentsline {subsubsection}{\numberline {5.8.1.1}SIGPTHD}{16}{subsubsection.5.8.1.1}%
-\contentsline {subsection}{\numberline {5.8.2}Typedef Documentation}{16}{subsection.5.8.2}%
-\contentsline {subsubsection}{\numberline {5.8.2.1}spthread\_meta\_t}{16}{subsubsection.5.8.2.1}%
-\contentsline {subsubsection}{\numberline {5.8.2.2}spthread\_t}{16}{subsubsection.5.8.2.2}%
-\contentsline {subsection}{\numberline {5.8.3}Function Documentation}{16}{subsection.5.8.3}%
-\contentsline {subsubsection}{\numberline {5.8.3.1}spthread\_cancel()}{16}{subsubsection.5.8.3.1}%
-\contentsline {subsubsection}{\numberline {5.8.3.2}spthread\_continue()}{16}{subsubsection.5.8.3.2}%
-\contentsline {subsubsection}{\numberline {5.8.3.3}spthread\_create()}{16}{subsubsection.5.8.3.3}%
-\contentsline {subsubsection}{\numberline {5.8.3.4}spthread\_exit()}{17}{subsubsection.5.8.3.4}%
-\contentsline {subsubsection}{\numberline {5.8.3.5}spthread\_join()}{17}{subsubsection.5.8.3.5}%
-\contentsline {subsubsection}{\numberline {5.8.3.6}spthread\_self()}{17}{subsubsection.5.8.3.6}%
-\contentsline {subsubsection}{\numberline {5.8.3.7}spthread\_suspend()}{17}{subsubsection.5.8.3.7}%
-\contentsline {subsubsection}{\numberline {5.8.3.8}spthread\_suspend\_self()}{17}{subsubsection.5.8.3.8}%
-\contentsline {section}{\numberline {5.9}spthread.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{17}{section.5.9}%
-\contentsline {section}{\numberline {5.10}src/util/sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.c File Reference}{20}{section.5.10}%
-\contentsline {section}{\numberline {5.11}src/util/sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.h File Reference}{20}{section.5.11}%
-\contentsline {subsection}{\numberline {5.11.1}Function Documentation}{20}{subsection.5.11.1}%
-\contentsline {subsubsection}{\numberline {5.11.1.1}s\_exit()}{20}{subsubsection.5.11.1.1}%
-\contentsline {subsubsection}{\numberline {5.11.1.2}s\_kill()}{20}{subsubsection.5.11.1.2}%
-\contentsline {subsubsection}{\numberline {5.11.1.3}s\_nice()}{21}{subsubsection.5.11.1.3}%
-\contentsline {subsubsection}{\numberline {5.11.1.4}s\_sleep()}{21}{subsubsection.5.11.1.4}%
-\contentsline {subsubsection}{\numberline {5.11.1.5}s\_spawn()}{21}{subsubsection.5.11.1.5}%
-\contentsline {subsubsection}{\numberline {5.11.1.6}s\_waitpid()}{22}{subsubsection.5.11.1.6}%
-\contentsline {section}{\numberline {5.12}sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{22}{section.5.12}%
-\contentsline {section}{\numberline {5.13}test/sched-\/demo.c File Reference}{22}{section.5.13}%
-\contentsline {subsection}{\numberline {5.13.1}Macro Definition Documentation}{23}{subsection.5.13.1}%
-\contentsline {subsubsection}{\numberline {5.13.1.1}BUF\_SIZE}{23}{subsubsection.5.13.1.1}%
-\contentsline {subsubsection}{\numberline {5.13.1.2}NUM\_THREADS}{23}{subsubsection.5.13.1.2}%
-\contentsline {subsection}{\numberline {5.13.2}Function Documentation}{23}{subsection.5.13.2}%
-\contentsline {subsubsection}{\numberline {5.13.2.1}cancel\_and\_join()}{23}{subsubsection.5.13.2.1}%
-\contentsline {subsubsection}{\numberline {5.13.2.2}main()}{23}{subsubsection.5.13.2.2}%
-\contentsline {chapter}{Index}{25}{section*.17}%
+\contentsline {subsection}{\numberline {5.5.1}Typedef Documentation}{12}{subsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.1.1}pcb\_t}{12}{subsubsection.5.5.1.1}%
+\contentsline {subsection}{\numberline {5.5.2}Enumeration Type Documentation}{12}{subsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.2.1}process\_state\_t}{12}{subsubsection.5.5.2.1}%
+\contentsline {subsection}{\numberline {5.5.3}Function Documentation}{12}{subsection.5.5.3}%
+\contentsline {subsubsection}{\numberline {5.5.3.1}k\_proc\_cleanup()}{12}{subsubsection.5.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.5.3.2}k\_proc\_create()}{13}{subsubsection.5.5.3.2}%
+\contentsline {section}{\numberline {5.6}kernel.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{13}{section.5.6}%
+\contentsline {section}{\numberline {5.7}src/util/spthread.c File Reference}{13}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Macro Definition Documentation}{14}{subsection.5.7.1}%
+\contentsline {subsubsection}{\numberline {5.7.1.1}\_GNU\_SOURCE}{14}{subsubsection.5.7.1.1}%
+\contentsline {subsubsection}{\numberline {5.7.1.2}\_XOPEN\_SOURCE}{14}{subsubsection.5.7.1.2}%
+\contentsline {subsubsection}{\numberline {5.7.1.3}MILISEC\_IN\_NANO}{14}{subsubsection.5.7.1.3}%
+\contentsline {subsubsection}{\numberline {5.7.1.4}SPTHREAD\_RUNNING\_STATE}{15}{subsubsection.5.7.1.4}%
+\contentsline {subsubsection}{\numberline {5.7.1.5}SPTHREAD\_SIG\_CONTINUE}{15}{subsubsection.5.7.1.5}%
+\contentsline {subsubsection}{\numberline {5.7.1.6}SPTHREAD\_SIG\_SUSPEND}{15}{subsubsection.5.7.1.6}%
+\contentsline {subsubsection}{\numberline {5.7.1.7}SPTHREAD\_SUSPENDED\_STATE}{15}{subsubsection.5.7.1.7}%
+\contentsline {subsubsection}{\numberline {5.7.1.8}SPTHREAD\_TERMINATED\_STATE}{15}{subsubsection.5.7.1.8}%
+\contentsline {subsection}{\numberline {5.7.2}Typedef Documentation}{15}{subsection.5.7.2}%
+\contentsline {subsubsection}{\numberline {5.7.2.1}pthread\_fn}{15}{subsubsection.5.7.2.1}%
+\contentsline {subsubsection}{\numberline {5.7.2.2}spthread\_fwd\_args}{15}{subsubsection.5.7.2.2}%
+\contentsline {subsubsection}{\numberline {5.7.2.3}spthread\_meta\_t}{15}{subsubsection.5.7.2.3}%
+\contentsline {subsubsection}{\numberline {5.7.2.4}spthread\_signal\_args}{15}{subsubsection.5.7.2.4}%
+\contentsline {subsection}{\numberline {5.7.3}Function Documentation}{16}{subsection.5.7.3}%
+\contentsline {subsubsection}{\numberline {5.7.3.1}spthread\_cancel()}{16}{subsubsection.5.7.3.1}%
+\contentsline {subsubsection}{\numberline {5.7.3.2}spthread\_continue()}{16}{subsubsection.5.7.3.2}%
+\contentsline {subsubsection}{\numberline {5.7.3.3}spthread\_create()}{16}{subsubsection.5.7.3.3}%
+\contentsline {subsubsection}{\numberline {5.7.3.4}spthread\_exit()}{16}{subsubsection.5.7.3.4}%
+\contentsline {subsubsection}{\numberline {5.7.3.5}spthread\_join()}{16}{subsubsection.5.7.3.5}%
+\contentsline {subsubsection}{\numberline {5.7.3.6}spthread\_self()}{16}{subsubsection.5.7.3.6}%
+\contentsline {subsubsection}{\numberline {5.7.3.7}spthread\_suspend()}{16}{subsubsection.5.7.3.7}%
+\contentsline {subsubsection}{\numberline {5.7.3.8}spthread\_suspend\_self()}{16}{subsubsection.5.7.3.8}%
+\contentsline {section}{\numberline {5.8}src/util/spthread.h File Reference}{17}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Macro Definition Documentation}{17}{subsection.5.8.1}%
+\contentsline {subsubsection}{\numberline {5.8.1.1}SIGPTHD}{17}{subsubsection.5.8.1.1}%
+\contentsline {subsection}{\numberline {5.8.2}Typedef Documentation}{17}{subsection.5.8.2}%
+\contentsline {subsubsection}{\numberline {5.8.2.1}spthread\_meta\_t}{17}{subsubsection.5.8.2.1}%
+\contentsline {subsubsection}{\numberline {5.8.2.2}spthread\_t}{17}{subsubsection.5.8.2.2}%
+\contentsline {subsection}{\numberline {5.8.3}Function Documentation}{18}{subsection.5.8.3}%
+\contentsline {subsubsection}{\numberline {5.8.3.1}spthread\_cancel()}{18}{subsubsection.5.8.3.1}%
+\contentsline {subsubsection}{\numberline {5.8.3.2}spthread\_continue()}{18}{subsubsection.5.8.3.2}%
+\contentsline {subsubsection}{\numberline {5.8.3.3}spthread\_create()}{18}{subsubsection.5.8.3.3}%
+\contentsline {subsubsection}{\numberline {5.8.3.4}spthread\_exit()}{18}{subsubsection.5.8.3.4}%
+\contentsline {subsubsection}{\numberline {5.8.3.5}spthread\_join()}{18}{subsubsection.5.8.3.5}%
+\contentsline {subsubsection}{\numberline {5.8.3.6}spthread\_self()}{18}{subsubsection.5.8.3.6}%
+\contentsline {subsubsection}{\numberline {5.8.3.7}spthread\_suspend()}{18}{subsubsection.5.8.3.7}%
+\contentsline {subsubsection}{\numberline {5.8.3.8}spthread\_suspend\_self()}{18}{subsubsection.5.8.3.8}%
+\contentsline {section}{\numberline {5.9}spthread.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{19}{section.5.9}%
+\contentsline {section}{\numberline {5.10}src/util/sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.c File Reference}{21}{section.5.10}%
+\contentsline {section}{\numberline {5.11}src/util/sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.h File Reference}{21}{section.5.11}%
+\contentsline {subsection}{\numberline {5.11.1}Function Documentation}{21}{subsection.5.11.1}%
+\contentsline {subsubsection}{\numberline {5.11.1.1}s\_exit()}{21}{subsubsection.5.11.1.1}%
+\contentsline {subsubsection}{\numberline {5.11.1.2}s\_kill()}{22}{subsubsection.5.11.1.2}%
+\contentsline {subsubsection}{\numberline {5.11.1.3}s\_nice()}{22}{subsubsection.5.11.1.3}%
+\contentsline {subsubsection}{\numberline {5.11.1.4}s\_sleep()}{22}{subsubsection.5.11.1.4}%
+\contentsline {subsubsection}{\numberline {5.11.1.5}s\_spawn()}{23}{subsubsection.5.11.1.5}%
+\contentsline {subsubsection}{\numberline {5.11.1.6}s\_waitpid()}{23}{subsubsection.5.11.1.6}%
+\contentsline {section}{\numberline {5.12}sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{23}{section.5.12}%
+\contentsline {section}{\numberline {5.13}test/sched-\/demo.c File Reference}{24}{section.5.13}%
+\contentsline {subsection}{\numberline {5.13.1}Macro Definition Documentation}{24}{subsection.5.13.1}%
+\contentsline {subsubsection}{\numberline {5.13.1.1}\_DEFAULT\_SOURCE}{24}{subsubsection.5.13.1.1}%
+\contentsline {subsubsection}{\numberline {5.13.1.2}\_POSIX\_C\_SOURCE}{24}{subsubsection.5.13.1.2}%
+\contentsline {subsubsection}{\numberline {5.13.1.3}BUF\_SIZE}{24}{subsubsection.5.13.1.3}%
+\contentsline {subsubsection}{\numberline {5.13.1.4}NUM\_THREADS}{25}{subsubsection.5.13.1.4}%
+\contentsline {subsection}{\numberline {5.13.2}Function Documentation}{25}{subsection.5.13.2}%
+\contentsline {subsubsection}{\numberline {5.13.2.1}cancel\_and\_join()}{25}{subsubsection.5.13.2.1}%
+\contentsline {subsubsection}{\numberline {5.13.2.2}main()}{25}{subsubsection.5.13.2.2}%
+\contentsline {chapter}{Index}{27}{section*.21}%

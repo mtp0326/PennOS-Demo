@@ -1,30 +1,36 @@
 \begin{theindex}
 
+  \item {\_DEFAULT\_SOURCE}
+    \subitem {sched-\/demo.c}, \hyperpage{24}
   \item {\_GNU\_SOURCE}
-    \subitem {spthread.c}, \hyperpage{13}
+    \subitem {spthread.c}, \hyperpage{14}
+  \item {\_POSIX\_C\_SOURCE}
+    \subitem {sched-\/demo.c}, \hyperpage{24}
   \item {\_XOPEN\_SOURCE}
-    \subitem {spthread.c}, \hyperpage{13}
+    \subitem {spthread.c}, \hyperpage{14}
 
   \indexspace
 
   \item {ack}
-    \subitem {spthread\_signal\_args\_st}, \hyperpage{9}
+    \subitem {spthread\_signal\_args\_st}, \hyperpage{10}
   \item {actual\_arg}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{7}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{8}
   \item {actual\_routine}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{7}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{8}
 
   \indexspace
 
+  \item {BLOCKED}
+    \subitem {kernel.h}, \hyperpage{12}
   \item {BUF\_SIZE}
-    \subitem {sched-\/demo.c}, \hyperpage{23}
+    \subitem {sched-\/demo.c}, \hyperpage{24}
 
   \indexspace
 
   \item {cancel\_and\_join}
-    \subitem {sched-\/demo.c}, \hyperpage{23}
+    \subitem {sched-\/demo.c}, \hyperpage{25}
   \item {child\_meta}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{7}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{8}
 
   \indexspace
 
@@ -32,188 +38,224 @@
 
   \indexspace
 
+  \item {handle}
+    \subitem {pcb\_t}, \hyperpage{7}
+
+  \indexspace
+
   \item {k\_proc\_cleanup}
-    \subitem {kernel.h}, \hyperpage{11}
+    \subitem {kernel.h}, \hyperpage{12}
   \item {k\_proc\_create}
-    \subitem {kernel.h}, \hyperpage{11}
+    \subitem {kernel.h}, \hyperpage{13}
   \item {kernel.h}
-    \subitem {k\_proc\_cleanup}, \hyperpage{11}
-    \subitem {k\_proc\_create}, \hyperpage{11}
+    \subitem {BLOCKED}, \hyperpage{12}
+    \subitem {k\_proc\_cleanup}, \hyperpage{12}
+    \subitem {k\_proc\_create}, \hyperpage{13}
+    \subitem {pcb\_t}, \hyperpage{12}
+    \subitem {process\_state\_t}, \hyperpage{12}
+    \subitem {RUNNING}, \hyperpage{12}
+    \subitem {STOPPED}, \hyperpage{12}
+    \subitem {ZOMBIED}, \hyperpage{12}
 
   \indexspace
 
   \item {main}
-    \subitem {sched-\/demo.c}, \hyperpage{23}
+    \subitem {sched-\/demo.c}, \hyperpage{25}
   \item {meta}
-    \subitem {spthread\_st}, \hyperpage{9}
+    \subitem {spthread\_st}, \hyperpage{10}
   \item {meta\_mutex}
-    \subitem {spthread\_meta\_st}, \hyperpage{8}
+    \subitem {spthread\_meta\_st}, \hyperpage{9}
   \item {MILISEC\_IN\_NANO}
-    \subitem {spthread.c}, \hyperpage{13}
+    \subitem {spthread.c}, \hyperpage{14}
 
   \indexspace
 
   \item {NUM\_THREADS}
-    \subitem {sched-\/demo.c}, \hyperpage{23}
+    \subitem {sched-\/demo.c}, \hyperpage{24}
 
   \indexspace
 
+  \item {pcb\_t}, \hyperpage{7}
+    \subitem {handle}, \hyperpage{7}
+    \subitem {kernel.h}, \hyperpage{12}
+    \subitem {pid}, \hyperpage{7}
+    \subitem {ppid}, \hyperpage{8}
+    \subitem {priority}, \hyperpage{8}
+  \item {pid}
+    \subitem {pcb\_t}, \hyperpage{7}
+  \item {ppid}
+    \subitem {pcb\_t}, \hyperpage{8}
+  \item {priority}
+    \subitem {pcb\_t}, \hyperpage{8}
+  \item {process\_state\_t}
+    \subitem {kernel.h}, \hyperpage{12}
   \item {pthread\_fn}
-    \subitem {spthread.c}, \hyperpage{14}
+    \subitem {spthread.c}, \hyperpage{15}
 
   \indexspace
 
   \item {README}, \hyperpage{1}
+  \item {RUNNING}
+    \subitem {kernel.h}, \hyperpage{12}
 
   \indexspace
 
   \item {s\_exit}
-    \subitem {sys\_call.h}, \hyperpage{20}
+    \subitem {sys\_call.h}, \hyperpage{21}
   \item {s\_kill}
-    \subitem {sys\_call.h}, \hyperpage{20}
+    \subitem {sys\_call.h}, \hyperpage{21}
   \item {s\_nice}
-    \subitem {sys\_call.h}, \hyperpage{21}
-  \item {s\_sleep}
-    \subitem {sys\_call.h}, \hyperpage{21}
-  \item {s\_spawn}
-    \subitem {sys\_call.h}, \hyperpage{21}
-  \item {s\_waitpid}
     \subitem {sys\_call.h}, \hyperpage{22}
+  \item {s\_sleep}
+    \subitem {sys\_call.h}, \hyperpage{22}
+  \item {s\_spawn}
+    \subitem {sys\_call.h}, \hyperpage{23}
+  \item {s\_waitpid}
+    \subitem {sys\_call.h}, \hyperpage{23}
   \item {sched-\/demo.c}
-    \subitem {BUF\_SIZE}, \hyperpage{23}
-    \subitem {cancel\_and\_join}, \hyperpage{23}
-    \subitem {main}, \hyperpage{23}
-    \subitem {NUM\_THREADS}, \hyperpage{23}
+    \subitem {\_DEFAULT\_SOURCE}, \hyperpage{24}
+    \subitem {\_POSIX\_C\_SOURCE}, \hyperpage{24}
+    \subitem {BUF\_SIZE}, \hyperpage{24}
+    \subitem {cancel\_and\_join}, \hyperpage{25}
+    \subitem {main}, \hyperpage{25}
+    \subitem {NUM\_THREADS}, \hyperpage{24}
   \item {setup\_cond}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{7}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{9}
   \item {setup\_done}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{7}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{9}
   \item {setup\_mutex}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{8}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{9}
   \item {shutup\_mutex}
-    \subitem {spthread\_signal\_args\_st}, \hyperpage{9}
+    \subitem {spthread\_signal\_args\_st}, \hyperpage{10}
   \item {signal}
-    \subitem {spthread\_signal\_args\_st}, \hyperpage{9}
+    \subitem {spthread\_signal\_args\_st}, \hyperpage{10}
   \item {SIGPTHD}
-    \subitem {spthread.h}, \hyperpage{16}
+    \subitem {spthread.h}, \hyperpage{17}
   \item {spthread.c}
-    \subitem {\_GNU\_SOURCE}, \hyperpage{13}
-    \subitem {\_XOPEN\_SOURCE}, \hyperpage{13}
-    \subitem {MILISEC\_IN\_NANO}, \hyperpage{13}
-    \subitem {pthread\_fn}, \hyperpage{14}
-    \subitem {spthread\_cancel}, \hyperpage{14}
-    \subitem {spthread\_continue}, \hyperpage{14}
-    \subitem {spthread\_create}, \hyperpage{14}
-    \subitem {spthread\_exit}, \hyperpage{14}
-    \subitem {spthread\_fwd\_args}, \hyperpage{14}
-    \subitem {spthread\_join}, \hyperpage{15}
-    \subitem {spthread\_meta\_t}, \hyperpage{14}
-    \subitem {SPTHREAD\_RUNNING\_STATE}, \hyperpage{13}
-    \subitem {spthread\_self}, \hyperpage{15}
-    \subitem {SPTHREAD\_SIG\_CONTINUE}, \hyperpage{13}
-    \subitem {SPTHREAD\_SIG\_SUSPEND}, \hyperpage{13}
-    \subitem {spthread\_signal\_args}, \hyperpage{14}
-    \subitem {spthread\_suspend}, \hyperpage{15}
-    \subitem {spthread\_suspend\_self}, \hyperpage{15}
-    \subitem {SPTHREAD\_SUSPENDED\_STATE}, \hyperpage{13}
-    \subitem {SPTHREAD\_TERMINATED\_STATE}, \hyperpage{14}
-  \item {spthread.h}
-    \subitem {SIGPTHD}, \hyperpage{16}
+    \subitem {\_GNU\_SOURCE}, \hyperpage{14}
+    \subitem {\_XOPEN\_SOURCE}, \hyperpage{14}
+    \subitem {MILISEC\_IN\_NANO}, \hyperpage{14}
+    \subitem {pthread\_fn}, \hyperpage{15}
     \subitem {spthread\_cancel}, \hyperpage{16}
     \subitem {spthread\_continue}, \hyperpage{16}
     \subitem {spthread\_create}, \hyperpage{16}
     \subitem {spthread\_exit}, \hyperpage{16}
-    \subitem {spthread\_join}, \hyperpage{17}
-    \subitem {spthread\_meta\_t}, \hyperpage{16}
-    \subitem {spthread\_self}, \hyperpage{17}
-    \subitem {spthread\_suspend}, \hyperpage{17}
-    \subitem {spthread\_suspend\_self}, \hyperpage{17}
-    \subitem {spthread\_t}, \hyperpage{16}
+    \subitem {spthread\_fwd\_args}, \hyperpage{15}
+    \subitem {spthread\_join}, \hyperpage{16}
+    \subitem {spthread\_meta\_t}, \hyperpage{15}
+    \subitem {SPTHREAD\_RUNNING\_STATE}, \hyperpage{14}
+    \subitem {spthread\_self}, \hyperpage{16}
+    \subitem {SPTHREAD\_SIG\_CONTINUE}, \hyperpage{15}
+    \subitem {SPTHREAD\_SIG\_SUSPEND}, \hyperpage{15}
+    \subitem {spthread\_signal\_args}, \hyperpage{15}
+    \subitem {spthread\_suspend}, \hyperpage{16}
+    \subitem {spthread\_suspend\_self}, \hyperpage{16}
+    \subitem {SPTHREAD\_SUSPENDED\_STATE}, \hyperpage{15}
+    \subitem {SPTHREAD\_TERMINATED\_STATE}, \hyperpage{15}
+  \item {spthread.h}
+    \subitem {SIGPTHD}, \hyperpage{17}
+    \subitem {spthread\_cancel}, \hyperpage{18}
+    \subitem {spthread\_continue}, \hyperpage{18}
+    \subitem {spthread\_create}, \hyperpage{18}
+    \subitem {spthread\_exit}, \hyperpage{18}
+    \subitem {spthread\_join}, \hyperpage{18}
+    \subitem {spthread\_meta\_t}, \hyperpage{17}
+    \subitem {spthread\_self}, \hyperpage{18}
+    \subitem {spthread\_suspend}, \hyperpage{18}
+    \subitem {spthread\_suspend\_self}, \hyperpage{18}
+    \subitem {spthread\_t}, \hyperpage{17}
   \item {spthread\_cancel}
-    \subitem {spthread.c}, \hyperpage{14}
-    \subitem {spthread.h}, \hyperpage{16}
+    \subitem {spthread.c}, \hyperpage{16}
+    \subitem {spthread.h}, \hyperpage{18}
   \item {spthread\_continue}
-    \subitem {spthread.c}, \hyperpage{14}
-    \subitem {spthread.h}, \hyperpage{16}
+    \subitem {spthread.c}, \hyperpage{16}
+    \subitem {spthread.h}, \hyperpage{18}
   \item {spthread\_create}
-    \subitem {spthread.c}, \hyperpage{14}
-    \subitem {spthread.h}, \hyperpage{16}
+    \subitem {spthread.c}, \hyperpage{16}
+    \subitem {spthread.h}, \hyperpage{18}
   \item {spthread\_exit}
-    \subitem {spthread.c}, \hyperpage{14}
-    \subitem {spthread.h}, \hyperpage{16}
+    \subitem {spthread.c}, \hyperpage{16}
+    \subitem {spthread.h}, \hyperpage{18}
   \item {spthread\_fwd\_args}
-    \subitem {spthread.c}, \hyperpage{14}
-  \item {spthread\_fwd\_args\_st}, \hyperpage{7}
-    \subitem {actual\_arg}, \hyperpage{7}
-    \subitem {actual\_routine}, \hyperpage{7}
-    \subitem {child\_meta}, \hyperpage{7}
-    \subitem {setup\_cond}, \hyperpage{7}
-    \subitem {setup\_done}, \hyperpage{7}
-    \subitem {setup\_mutex}, \hyperpage{8}
+    \subitem {spthread.c}, \hyperpage{15}
+  \item {spthread\_fwd\_args\_st}, \hyperpage{8}
+    \subitem {actual\_arg}, \hyperpage{8}
+    \subitem {actual\_routine}, \hyperpage{8}
+    \subitem {child\_meta}, \hyperpage{8}
+    \subitem {setup\_cond}, \hyperpage{9}
+    \subitem {setup\_done}, \hyperpage{9}
+    \subitem {setup\_mutex}, \hyperpage{9}
   \item {spthread\_join}
-    \subitem {spthread.c}, \hyperpage{15}
-    \subitem {spthread.h}, \hyperpage{17}
-  \item {spthread\_meta\_st}, \hyperpage{8}
-    \subitem {meta\_mutex}, \hyperpage{8}
-    \subitem {state}, \hyperpage{8}
-    \subitem {suspend\_set}, \hyperpage{8}
+    \subitem {spthread.c}, \hyperpage{16}
+    \subitem {spthread.h}, \hyperpage{18}
+  \item {spthread\_meta\_st}, \hyperpage{9}
+    \subitem {meta\_mutex}, \hyperpage{9}
+    \subitem {state}, \hyperpage{9}
+    \subitem {suspend\_set}, \hyperpage{9}
   \item {spthread\_meta\_t}
-    \subitem {spthread.c}, \hyperpage{14}
-    \subitem {spthread.h}, \hyperpage{16}
+    \subitem {spthread.c}, \hyperpage{15}
+    \subitem {spthread.h}, \hyperpage{17}
   \item {SPTHREAD\_RUNNING\_STATE}
-    \subitem {spthread.c}, \hyperpage{13}
+    \subitem {spthread.c}, \hyperpage{14}
   \item {spthread\_self}
-    \subitem {spthread.c}, \hyperpage{15}
-    \subitem {spthread.h}, \hyperpage{17}
+    \subitem {spthread.c}, \hyperpage{16}
+    \subitem {spthread.h}, \hyperpage{18}
   \item {SPTHREAD\_SIG\_CONTINUE}
-    \subitem {spthread.c}, \hyperpage{13}
+    \subitem {spthread.c}, \hyperpage{15}
   \item {SPTHREAD\_SIG\_SUSPEND}
-    \subitem {spthread.c}, \hyperpage{13}
+    \subitem {spthread.c}, \hyperpage{15}
   \item {spthread\_signal\_args}
-    \subitem {spthread.c}, \hyperpage{14}
-  \item {spthread\_signal\_args\_st}, \hyperpage{8}
-    \subitem {ack}, \hyperpage{9}
-    \subitem {shutup\_mutex}, \hyperpage{9}
-    \subitem {signal}, \hyperpage{9}
-  \item {spthread\_st}, \hyperpage{9}
-    \subitem {meta}, \hyperpage{9}
-    \subitem {thread}, \hyperpage{9}
+    \subitem {spthread.c}, \hyperpage{15}
+  \item {spthread\_signal\_args\_st}, \hyperpage{10}
+    \subitem {ack}, \hyperpage{10}
+    \subitem {shutup\_mutex}, \hyperpage{10}
+    \subitem {signal}, \hyperpage{10}
+  \item {spthread\_st}, \hyperpage{10}
+    \subitem {meta}, \hyperpage{10}
+    \subitem {thread}, \hyperpage{10}
   \item {spthread\_suspend}
-    \subitem {spthread.c}, \hyperpage{15}
-    \subitem {spthread.h}, \hyperpage{17}
+    \subitem {spthread.c}, \hyperpage{16}
+    \subitem {spthread.h}, \hyperpage{18}
   \item {spthread\_suspend\_self}
-    \subitem {spthread.c}, \hyperpage{15}
-    \subitem {spthread.h}, \hyperpage{17}
+    \subitem {spthread.c}, \hyperpage{16}
+    \subitem {spthread.h}, \hyperpage{18}
   \item {SPTHREAD\_SUSPENDED\_STATE}
-    \subitem {spthread.c}, \hyperpage{13}
+    \subitem {spthread.c}, \hyperpage{15}
   \item {spthread\_t}
-    \subitem {spthread.h}, \hyperpage{16}
+    \subitem {spthread.h}, \hyperpage{17}
   \item {SPTHREAD\_TERMINATED\_STATE}
-    \subitem {spthread.c}, \hyperpage{14}
+    \subitem {spthread.c}, \hyperpage{15}
   \item {src/pennfat.c}, \hyperpage{11}
   \item {src/pennos.c}, \hyperpage{11}
   \item {src/util/kernel.c}, \hyperpage{11}
-  \item {src/util/kernel.h}, \hyperpage{11, 12}
-  \item {src/util/spthread.c}, \hyperpage{12}
-  \item {src/util/spthread.h}, \hyperpage{15}, \hyperpage{17}
-  \item {src/util/sys\_call.c}, \hyperpage{20}
-  \item {src/util/sys\_call.h}, \hyperpage{20}, \hyperpage{22}
+  \item {src/util/kernel.h}, \hyperpage{11}, \hyperpage{13}
+  \item {src/util/spthread.c}, \hyperpage{13}
+  \item {src/util/spthread.h}, \hyperpage{17}, \hyperpage{19}
+  \item {src/util/sys\_call.c}, \hyperpage{21}
+  \item {src/util/sys\_call.h}, \hyperpage{21}, \hyperpage{23}
   \item {state}
-    \subitem {spthread\_meta\_st}, \hyperpage{8}
+    \subitem {spthread\_meta\_st}, \hyperpage{9}
+  \item {STOPPED}
+    \subitem {kernel.h}, \hyperpage{12}
   \item {suspend\_set}
-    \subitem {spthread\_meta\_st}, \hyperpage{8}
+    \subitem {spthread\_meta\_st}, \hyperpage{9}
   \item {sys\_call.h}
-    \subitem {s\_exit}, \hyperpage{20}
-    \subitem {s\_kill}, \hyperpage{20}
-    \subitem {s\_nice}, \hyperpage{21}
-    \subitem {s\_sleep}, \hyperpage{21}
-    \subitem {s\_spawn}, \hyperpage{21}
-    \subitem {s\_waitpid}, \hyperpage{22}
+    \subitem {s\_exit}, \hyperpage{21}
+    \subitem {s\_kill}, \hyperpage{21}
+    \subitem {s\_nice}, \hyperpage{22}
+    \subitem {s\_sleep}, \hyperpage{22}
+    \subitem {s\_spawn}, \hyperpage{23}
+    \subitem {s\_waitpid}, \hyperpage{23}
 
   \indexspace
 
-  \item {test/sched-\/demo.c}, \hyperpage{22}
+  \item {test/sched-\/demo.c}, \hyperpage{24}
   \item {thread}
-    \subitem {spthread\_st}, \hyperpage{9}
+    \subitem {spthread\_st}, \hyperpage{10}
+
+  \indexspace
+
+  \item {ZOMBIED}
+    \subitem {kernel.h}, \hyperpage{12}
 
 \end{theindex}

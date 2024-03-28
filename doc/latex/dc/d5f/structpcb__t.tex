@@ -1,0 +1,75 @@
+\doxysection{pcb\+\_\+t Struct Reference}
+\hypertarget{structpcb__t}{}\label{structpcb__t}\index{pcb\_t@{pcb\_t}}
+
+
+This structure stores all required information about a running process.  
+
+
+
+
+{\ttfamily \#include $<$kernel.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structspthread__st}{spthread\+\_\+st}} \mbox{\hyperlink{structpcb__t_a190c3857c9ed42aa1a0e967eb47e574a}{handle}}
+\begin{DoxyCompactList}\small\item\em This stores a handle to the spthread. ~\newline
+ \end{DoxyCompactList}\item 
+pid\+\_\+t \mbox{\hyperlink{structpcb__t_afa909915326969a57c5c1bd8b43954d4}{pid}}
+\begin{DoxyCompactList}\small\item\em This stores the PID of the process. \end{DoxyCompactList}\item 
+pid\+\_\+t \mbox{\hyperlink{structpcb__t_ab2289d15508ab3188ef4276b93270eb9}{ppid}}
+\begin{DoxyCompactList}\small\item\em This stores the PPID of the process. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structpcb__t_ad70cf1a6bd13085e99d0cce7eae3afc9}{priority}}
+\begin{DoxyCompactList}\small\item\em This the priority level of the process. (0, 1, or 2) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This structure stores all required information about a running process. 
+
+\doxysubsection{Field Documentation}
+\Hypertarget{structpcb__t_a190c3857c9ed42aa1a0e967eb47e574a}\label{structpcb__t_a190c3857c9ed42aa1a0e967eb47e574a} 
+\index{pcb\_t@{pcb\_t}!handle@{handle}}
+\index{handle@{handle}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{handle}{handle}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structspthread__st}{spthread\+\_\+st}} pcb\+\_\+t\+::handle}
+
+
+
+This stores a handle to the spthread. ~\newline
+ 
+
+\Hypertarget{structpcb__t_afa909915326969a57c5c1bd8b43954d4}\label{structpcb__t_afa909915326969a57c5c1bd8b43954d4} 
+\index{pcb\_t@{pcb\_t}!pid@{pid}}
+\index{pid@{pid}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{pid}{pid}}
+{\footnotesize\ttfamily pid\+\_\+t pcb\+\_\+t\+::pid}
+
+
+
+This stores the PID of the process. 
+
+\Hypertarget{structpcb__t_ab2289d15508ab3188ef4276b93270eb9}\label{structpcb__t_ab2289d15508ab3188ef4276b93270eb9} 
+\index{pcb\_t@{pcb\_t}!ppid@{ppid}}
+\index{ppid@{ppid}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{ppid}{ppid}}
+{\footnotesize\ttfamily pid\+\_\+t pcb\+\_\+t\+::ppid}
+
+
+
+This stores the PPID of the process. 
+
+\Hypertarget{structpcb__t_ad70cf1a6bd13085e99d0cce7eae3afc9}\label{structpcb__t_ad70cf1a6bd13085e99d0cce7eae3afc9} 
+\index{pcb\_t@{pcb\_t}!priority@{priority}}
+\index{priority@{priority}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{priority}{priority}}
+{\footnotesize\ttfamily int pcb\+\_\+t\+::priority}
+
+
+
+This the priority level of the process. (0, 1, or 2) 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/util/\mbox{\hyperlink{kernel_8h}{kernel.\+h}}\end{DoxyCompactItemize}

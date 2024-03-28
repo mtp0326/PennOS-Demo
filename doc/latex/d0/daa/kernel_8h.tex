@@ -1,12 +1,73 @@
 \doxysection{src/util/kernel.h File Reference}
 \hypertarget{kernel_8h}{}\label{kernel_8h}\index{src/util/kernel.h@{src/util/kernel.h}}
+{\ttfamily \#include "{}spthread.\+h"{}}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em This structure stores all required information about a running process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct pcb\+\_\+t \mbox{\hyperlink{kernel_8h_a71acfdbc74942780681d06efcc05a0a5}{pcb\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+state\+\_\+t}} \{ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304}{RUNNING}}
+, \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c}{STOPPED}}
+, \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61}{BLOCKED}}
+, \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512}{ZOMBIED}}
+ \}
+\begin{DoxyCompactList}\small\item\em Defines the possible states of a process in the system. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-pcb\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3}{k\+\_\+proc\+\_\+create}} (pcb\+\_\+t \texorpdfstring{$\ast$}{*}parent)
+\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3}{k\+\_\+proc\+\_\+create}} (\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}parent)
 \begin{DoxyCompactList}\small\item\em Create a new child process, inheriting applicable properties from the parent. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\+\_\+proc\+\_\+cleanup}} (pcb\+\_\+t \texorpdfstring{$\ast$}{*}proc)
+void \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\+\_\+proc\+\_\+cleanup}} (\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}proc)
 \begin{DoxyCompactList}\small\item\em Clean up a terminated/finished thread\textquotesingle{}s resources. This may include freeing the PCB, handling children, etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{kernel_8h_a71acfdbc74942780681d06efcc05a0a5}\label{kernel_8h_a71acfdbc74942780681d06efcc05a0a5} 
+\index{kernel.h@{kernel.h}!pcb\_t@{pcb\_t}}
+\index{pcb\_t@{pcb\_t}!kernel.h@{kernel.h}}
+\doxysubsubsection{\texorpdfstring{pcb\_t}{pcb\_t}}
+{\footnotesize\ttfamily typedef struct pcb\+\_\+t pcb\+\_\+t}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}\label{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854} 
+\index{kernel.h@{kernel.h}!process\_state\_t@{process\_state\_t}}
+\index{process\_state\_t@{process\_state\_t}!kernel.h@{kernel.h}}
+\doxysubsubsection{\texorpdfstring{process\_state\_t}{process\_state\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+state\+\_\+t}}}
+
+
+
+Defines the possible states of a process in the system. 
+
+This enumeration lists all the possible states that a process could be in at any given time. It is used within the \doxylink{structpcb__t}{pcb\+\_\+t} structure to track the current state of each process. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RUNNING@{RUNNING}!kernel.h@{kernel.h}}\index{kernel.h@{kernel.h}!RUNNING@{RUNNING}}}\Hypertarget{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304}\label{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304} 
+RUNNING&Process is currently executing. A process enters the RUNNING state when the scheduler selects it for execution, typically from the READY state. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STOPPED@{STOPPED}!kernel.h@{kernel.h}}\index{kernel.h@{kernel.h}!STOPPED@{STOPPED}}}\Hypertarget{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c}\label{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c} 
+STOPPED&Process is not executing, but can be resumed. A process should only become STOPPED if signaled by s\+\_\+kill, recieving the P\+\_\+\+SIGSTOP signal. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BLOCKED@{BLOCKED}!kernel.h@{kernel.h}}\index{kernel.h@{kernel.h}!BLOCKED@{BLOCKED}}}\Hypertarget{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61}\label{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61} 
+BLOCKED&Process is not executing, waiting for an event to occur. A process should only be blocked if it made a call to either s\+\_\+waitpid or s\+\_\+sleep. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ZOMBIED@{ZOMBIED}!kernel.h@{kernel.h}}\index{kernel.h@{kernel.h}!ZOMBIED@{ZOMBIED}}}\Hypertarget{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512}\label{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512} 
+ZOMBIED&Process has finished execution but awaits resource cleanup. A process enters the ZOMBIED state after it has finished its execution and is waiting for the parent process to read its exit status. If the parent process ever exits prior to reading exit status, this process should immediately cleaned up. ~\newline
+ \\
+\hline
+
+\end{DoxyEnumFields}
 
 
 \doxysubsection{Function Documentation}
@@ -14,22 +75,32 @@ void \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\+\_\+proc\+
 \index{kernel.h@{kernel.h}!k\_proc\_cleanup@{k\_proc\_cleanup}}
 \index{k\_proc\_cleanup@{k\_proc\_cleanup}!kernel.h@{kernel.h}}
 \doxysubsubsection{\texorpdfstring{k\_proc\_cleanup()}{k\_proc\_cleanup()}}
-{\footnotesize\ttfamily void k\+\_\+proc\+\_\+cleanup (\begin{DoxyParamCaption}\item[{pcb\+\_\+t \texorpdfstring{$\ast$}{*}}]{proc }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void k\+\_\+proc\+\_\+cleanup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proc }\end{DoxyParamCaption})}
 
 
 
 Clean up a terminated/finished thread\textquotesingle{}s resources. This may include freeing the PCB, handling children, etc. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em proc} & This is a pointer to the process control block of a process that has terminated. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3}\label{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3} 
 \index{kernel.h@{kernel.h}!k\_proc\_create@{k\_proc\_create}}
 \index{k\_proc\_create@{k\_proc\_create}!kernel.h@{kernel.h}}
 \doxysubsubsection{\texorpdfstring{k\_proc\_create()}{k\_proc\_create()}}
-{\footnotesize\ttfamily pcb\+\_\+t \texorpdfstring{$\ast$}{*} k\+\_\+proc\+\_\+create (\begin{DoxyParamCaption}\item[{pcb\+\_\+t \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} k\+\_\+proc\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
 
 
 
 Create a new child process, inheriting applicable properties from the parent. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & This is a pointer to the process control block of the parent, from which it inherits. \\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Reference to the child PCB. 
 \end{DoxyReturn}
