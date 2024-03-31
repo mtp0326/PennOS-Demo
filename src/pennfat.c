@@ -19,7 +19,7 @@ static int unmount();
 
 // global variables for the currently mounted fs
 uint16_t *fat = NULL;
-static int size = 0;
+int size = 0;
 
 void prompt() {
   // display the prompt to the user
@@ -66,50 +66,39 @@ void int_handler(int signo) {
 
 static void mkfs(const char *fs_name, int blocks_in_fat, int block_size_config) {
     // error handling if there is a currently mounted fs
-    
-
-
-    // case on block_size_config to get size of each block
-    int block_size = 0;
-    switch (block_size_config) {
-        case 0: block_size = 256; break;
-        case 1: block_size = 512; break;
-        case 2: block_size = 1024; break;
-        case 3: block_size = 2048; break;
-        case 4: block_size = 4096; break;
-        default: {
-            perror("invalid block size config");
-            exit(EXIT_FAILURE);
-        }
+    if (fat != NULL) {
+      perror("mkfs error: there is a currently mounted fs");
+      exit(EXIT_FAILURE);
     }
+    // call helper to get FAT size
+    int fat_size = get_fat_size(blocks_in_fat, block_size_config);
+
     int fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-    int fat_size = blocks_in_fat * block_size;
-    size = fat_size;
 
     // write metadata to fs (FAT[0])
     uint16_t metadata = (blocks_in_fat << 8) | block_size_config;
     if (write(fs_fd, &metadata, 2) != 2) {
-        perror("write error");
-        exit(EXIT_FAILURE);
+      perror("write error");
+      exit(EXIT_FAILURE);
     }
 
     // fs root dir (FAT[1])
     uint16_t root = 0xFFFF;
     if (write(fs_fd, &root, 2) != 2) {
-        perror("write error");
-        exit(EXIT_FAILURE);
+      perror("write error");
+      exit(EXIT_FAILURE);
     }
 
     // move fs_fd offset by fat_size - 1
     if (lseek(fs_fd, fat_size - 1, SEEK_SET) == -1) {
-        perror("lseek error");
-        exit(EXIT_FAILURE);
+      perror("lseek error");
+      exit(EXIT_FAILURE);
     }
 
     // write to fs_fd (empty string) to actually resize
     if (write(fs_fd, "", 1) != 1) {
-        perror("write error");
-        exit(EXIT_FAILURE);
+      perror("write error");
+      exit(EXIT_FAILURE);
     }
     close(fs_fd);
 }
@@ -117,14 +106,28 @@ static void mkfs(const char *fs_name, int blocks_in_fat, int block_size_config) 
 static int mount(const char *fs_name) {
     int fs_fd = open(fs_name, O_RDWR);
     if (fs_fd == -1) {
-        perror("fs_fd open error");
-        exit(EXIT_FAILURE);
+      perror("fs_fd open error");
+      exit(EXIT_FAILURE);
     }
-    // compute FAT size from # blocks x block size
-    fat = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fs_fd, 0);
+    // get blocks_in_fat and block_size_config from meta data
+    int num_blocks = 0;
+    int block_config = 0;
+
+    unsigned char buffer[1];
+    block_config = read(fs_fd, buffer, 1);
+
+    unsigned char buffer2[1];
+    num_blocks = read(fs_fd, buffer2, 1);
+
+    // call helper to get FAT size
+    int fat_size = get_fat_size(num_blocks, block_config);
+    size = fat_size;
+
+    // mmap FAT into memory
+    fat = mmap(NULL, fat_size, PROT_READ | PROT_WRITE, MAP_SHARED, fs_fd, 0);
     if (fat == MAP_FAILED) {
-        perror("FAT mmap error");
-        exit(EXIT_FAILURE);
+      perror("FAT mmap error");
+      exit(EXIT_FAILURE);
     }
     fprintf(stderr, "here: %x\n", fat[0]);
     return 0;
@@ -132,7 +135,11 @@ static int mount(const char *fs_name) {
 
 static int unmount() {
   // error handling if no currently mounted fs
-
+  if (fat == NULL) {
+    perror("no currently mounted fs");
+    exit(EXIT_FAILURE);
+  }
+  
   // munmap(2) to unmount
   if (munmap(fat, size) == -1) {
     perror("munmap failed");
@@ -141,6 +148,23 @@ static int unmount() {
   fat = NULL;
   size = 0; 
   return 0;
+}
+
+// helper function that gets the FAT size given # blocks and config
+int get_fat_size(int blocks_in_fat, int block_size_config) {
+  int block_size = 0;
+  switch (block_size_config) {
+      case 0: block_size = 256; break;
+      case 1: block_size = 512; break;
+      case 2: block_size = 1024; break;
+      case 3: block_size = 2048; break;
+      case 4: block_size = 4096; break;
+      default: {
+          perror("invalid block size config");
+          exit(EXIT_FAILURE);
+      }
+  }
+  return blocks_in_fat * block_size;
 }
 
 int main(int argc, char* argv[]) {
@@ -198,3 +222,4 @@ int main(int argc, char* argv[]) {
   }
   return EXIT_SUCCESS;
 }
+
