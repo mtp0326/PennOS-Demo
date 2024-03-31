@@ -18,7 +18,6 @@
 // to suspend and continue a spthread
 #define SIGPTHD SIGUSR1
 
-
 // declares a struct, but the internals of the
 // struct cannot be seen by functions outside of spthread.c
 typedef struct spthread_meta_st spthread_meta_t;
@@ -74,7 +73,6 @@ int spthread_create(spthread_t* thread,
 //   This thread must be created using the spthread_create() function,
 //   if created by some other function, the behaviour is undefined.
 //
-
 
 // returns:
 // - 0 on success

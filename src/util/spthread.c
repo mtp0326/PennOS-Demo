@@ -206,7 +206,6 @@ int spthread_suspend(spthread_t thread) {
     // wait for a mili second
     pthread_mutex_unlock(&args.shutup_mutex);
 
-
     nanosleep(&t, NULL);
 
     // fprintf(stderr, "susp checking...\n");
@@ -323,8 +322,8 @@ void spthread_exit(void* status) {
 ///////////////////////////////////////////////////////////////////////////////
 // helper definitions
 ///////////////////////////////////////////////////////////////////////////////
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
 static void sigpthd_handler(int signum,
                             siginfo_t* info,
@@ -343,7 +342,8 @@ static void sigpthd_handler(int signum,
 
   if (info->si_code != SI_QUEUE) {
     char* msg =
-        "ERROR: got a sigpthd signal that is not SI_QUEUE or SI_TKILL\nPLEASE CONTACT COURSE STAFF\n";
+        "ERROR: got a sigpthd signal that is not SI_QUEUE or SI_TKILL\nPLEASE "
+        "CONTACT COURSE STAFF\n";
     write(STDERR_FILENO, msg, strlen(msg));
     char buf[1024];
     snprintf(buf, 1024, "SI_TKILL %d\tSI_QUEUE %d\tACTUAL %d\n", SI_TKILL,

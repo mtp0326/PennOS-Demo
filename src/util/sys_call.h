@@ -55,7 +55,6 @@ void s_exit(void);
  */
 int s_nice(pid_t pid, int priority);
 
-
 /**
  * @brief Suspends execution of the calling proces for a specified number of
  * clock ticks.
