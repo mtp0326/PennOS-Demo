@@ -4,6 +4,8 @@
 
 #include <stdbool.h>
 
+extern uint16_t* fat;
+
 int main(int argc, char* argv[]);
 
 void prompt();

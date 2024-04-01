@@ -76,7 +76,7 @@ static void mkfs(const char* fs_name,
                  int block_size_config) {
   // error handling if there is a currently mounted fs
   if (fat != NULL) {
-    perror("mkfs error: there is a currently mounted fs");
+    perror("unexpected command");
     exit(EXIT_FAILURE);
   }
   // call helper to get FAT size
@@ -124,6 +124,10 @@ static void mkfs(const char* fs_name,
 }
 
 static int mount(const char* fs_name) {
+  if (fat != NULL) {
+    perror("unexpected command");
+    exit(EXIT_FAILURE);
+  }
   int fs_fd = open(fs_name, O_RDWR);
   if (fs_fd == -1) {
     perror("fs_fd open error");
@@ -157,7 +161,7 @@ static int mount(const char* fs_name) {
 static int unmount() {
   // error handling if no currently mounted fs
   if (fat == NULL) {
-    perror("no currently mounted fs");
+    perror("unexpected command");
     exit(EXIT_FAILURE);
   }
 
@@ -236,6 +240,7 @@ int main(int argc, char* argv[]) {
         mkfs(args[1], blocks_in_fat, block_size_config);
       } else if (strcmp(args[0], "mount") == 0) {
         mount(args[1]);
+        k_open(args[1], 0);
       } else if (strcmp(args[0], "unmount") == 0) {
         unmount();
       } else {
