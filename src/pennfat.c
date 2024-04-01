@@ -10,7 +10,7 @@
 
 #include "penn-parser.h"
 #include "pennfat.h"
-#include "util/kernel.h"
+#include "util/pennfat_kernel.h"
 
 #define MAX_LEN 4096
 #define MAX_FD_NUM 1024

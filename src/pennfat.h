@@ -1,4 +1,4 @@
-#ifndef PROMP
+#ifndef PROMPT
 #define PROMPT "penn-fat> "
 #endif
 
