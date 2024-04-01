@@ -11,7 +11,9 @@
 #include "penn-parser.h"
 #include "pennfat.h"
 #include "util/kernel.h"
+
 #define MAX_LEN 4096
+#define MAX_FD_NUM 1024
 
 // function declarations for special routines
 static void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config);
@@ -22,6 +24,10 @@ static int unmount();
 uint16_t* fat = NULL;
 int size = 0;
 
+// global file descriptor table
+// indexed by the fd
+struct file_descriptor_st* global_fd_table = NULL;
+
 struct directory_entries {
   char name[32];
   uint32_t size;
@@ -30,6 +36,13 @@ struct directory_entries {
   uint8_t perm;
   time_t mtime;
   uint8_t reserved[16];
+};
+
+struct file_descriptor_st {
+  int fd;
+  char* fname;
+  int mode;
+  int offset;
 };
 
 void prompt() {
@@ -208,6 +221,7 @@ int main(int argc, char* argv[]) {
     perror("error: can't handle sigint\n");
     exit(EXIT_FAILURE);
   }
+
   while (1) {
     prompt();
     char* cmd;
