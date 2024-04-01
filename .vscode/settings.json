@@ -1,5 +1,6 @@
 {
   "files.associations": {
-    "pennfat_kernel.h": "c"
+    "pennfat_kernel.h": "c",
+    "stdint.h": "c"
   }
 }

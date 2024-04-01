@@ -28,23 +28,6 @@ int size = 0;
 // indexed by the fd
 struct file_descriptor_st* global_fd_table = NULL;
 
-struct directory_entries {
-  char name[32];
-  uint32_t size;
-  uint16_t firstBlock;
-  uint8_t type;
-  uint8_t perm;
-  time_t mtime;
-  uint8_t reserved[16];
-};
-
-struct file_descriptor_st {
-  int fd;
-  char* fname;
-  int mode;
-  int offset;
-};
-
 void prompt() {
   // display the prompt to the user
   ssize_t prompt_res = write(STDERR_FILENO, PROMPT, strlen(PROMPT));

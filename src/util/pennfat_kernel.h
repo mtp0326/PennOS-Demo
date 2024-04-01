@@ -1,5 +1,23 @@
+#include <stdint.h>
 #include <sys/types.h>  //needed for ssize_t, if we use ints, can remove
 #include "spthread.h"
+
+struct directory_entries {
+  char name[32];
+  uint32_t size;
+  uint16_t firstBlock;
+  uint8_t type;
+  uint8_t perm;
+  time_t mtime;
+  uint8_t reserved[16];
+};
+
+struct file_descriptor_st {
+  int fd;
+  char* fname;
+  int mode;
+  int offset;
+};
 
 /************************************************
  *  PENNFAT KERNEL LEVEL FUNCTIONS
