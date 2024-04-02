@@ -2,6 +2,7 @@
   "files.associations": {
     "pennfat_kernel.h": "c",
     "stdint.h": "c",
-    "stdbool.h": "c"
+    "stdbool.h": "c",
+    "fcntl.h": "c"
   }
 }

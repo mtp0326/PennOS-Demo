@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <sys/types.h>  //needed for ssize_t, if we use ints, can remove
-#include "pennfat.h"
+#include "../pennfat.h"
 #include "spthread.h"
 
 struct directory_entries {
