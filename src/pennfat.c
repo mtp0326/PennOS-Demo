@@ -218,6 +218,16 @@ int get_offset_size(int block_size,
   return total_offset;
 }
 
+int get_first_empty_fat_index() {
+  int i = 0;
+  // until we find 0x0000
+  while (fat[i] != 0x0000) {
+    i++;
+  }
+
+  return i;
+}
+
 int main(int argc, char* argv[]) {
   // TODO: register signal handlers
   if (signal(SIGINT, int_handler) == SIG_ERR) {

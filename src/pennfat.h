@@ -18,5 +18,6 @@ int get_offset_size(int block_size,
                     int blocks_in_fat,
                     int block_num,
                     int offset);
+int get_first_empty_fat_index();
 
 #endif
