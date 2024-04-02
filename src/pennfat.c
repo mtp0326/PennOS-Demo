@@ -15,14 +15,14 @@
 #define MAX_LEN 4096
 #define MAX_FD_NUM 1024
 
-// function declarations for special routines
+// function d =eclarations for special routines
 static void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config);
 static int mount(const char* fs_name);
 static int unmount();
 
 // global variables for the currently mounted fs
-uint16_t* fat = NULL;
 int size = 0;
+uint16_t* fat = NULL;
 
 // global file descriptor table
 // indexed by the fd

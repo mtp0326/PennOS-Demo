@@ -1,5 +1,9 @@
+#ifndef PENNFAT_KERNEL_H
+#define PENNFAT_KERNEL_H
+
 #include <stdint.h>
 #include <sys/types.h>  //needed for ssize_t, if we use ints, can remove
+#include "pennfat.h"
 #include "spthread.h"
 
 struct directory_entries {
@@ -78,3 +82,5 @@ int k_unlink(const char* fname);
 off_t k_lseek(int fd, int offset, int whence);
 
 void k_ls(const char* filename);
+
+#endif

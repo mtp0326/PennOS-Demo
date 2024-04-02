@@ -8,13 +8,13 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "pennfat_kernel.h"
 #include "pennfat.h"
+#include "util/pennfat_kernel.h"
 
 int k_open(const char* fname, int mode) {
   // F_WRITE
   if (mode == 0) {
-    fprintf(stderr, "%d", fat[0]);
+    fat = NULL;
   } else if (mode == 1) {
     // F_APPEND
   } else if (mode == 2) {

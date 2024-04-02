@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "pennfat_kernel.h": "c",
-    "stdint.h": "c"
+    "stdint.h": "c",
+    "stdbool.h": "c"
   }
 }
