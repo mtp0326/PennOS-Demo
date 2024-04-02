@@ -4,6 +4,8 @@
     "stdint.h": "c",
     "stdbool.h": "c",
     "fcntl.h": "c",
-    "pennfat.h": "c"
+    "pennfat.h": "c",
+    "penn-parser.h": "c",
+    "stdlib.h": "c"
   }
 }

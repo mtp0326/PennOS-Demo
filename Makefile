@@ -28,7 +28,7 @@ TEST_MAINS = $(TESTS_DIR)/sched-demo.c
 # list all files with their own main() function here
 # for example:
 # MAIN_FILES = $(SRC_DIR)/stand_alone_pennfat.c $(SRC_DIR)/helloworld.c $(SRC_DIR)/pennos.c
-MAIN_FILES = $(SRC_DIR)/pennos.c $(SRC_DIR)/pennfat.c
+MAIN_FILES = $(SRC_DIR)/pennos.c $(SRC_DIR)/standalonefat.c
 
 # to get the executables, remove the .c from the filename and put 
 # it in the BIN_DIR

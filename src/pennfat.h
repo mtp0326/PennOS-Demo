@@ -1,11 +1,29 @@
 #ifndef PENNFAT_H
 #define PENNFAT_H
 
-#define PROMPT "penn-fat> "
+#include <fcntl.h>
+#include <signal.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/mman.h>
+#include <time.h>
+#include <unistd.h>
+
+#include "penn-parser.h"
+#include "util/pennfat_kernel.h"
+
+#define PROMPT "penn-fat> "
+#define MAX_LEN 4096
+#define MAX_FD_NUM 1024
 
 extern uint16_t* fat;
+
+void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config);
+int mount(const char* fs_name);
+int unmount();
 
 void prompt();
 void read_command();
