@@ -2,15 +2,16 @@
 #include "../pennfat.h"
 
 int k_open(const char* fname, int mode) {
-  // F_WRITE
+  // F_WRITES
+  int size = 0;
   if (mode == 0) {
-    fat = NULL;
+    size = get_block_size(4);
     // F_READ
   } else if (mode == 1) {
     // F_APPEND
   } else if (mode == 2) {
   }
-  return 0;
+  return size;
 }
 
 ssize_t k_read(int fd, int n, char* buf);
