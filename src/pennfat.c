@@ -3,7 +3,6 @@
 // global variables for the currently mounted fs
 int size = 0;
 int fs_fd;
-uint16_t* fat = NULL;
 
 // global file descriptor table
 // indexed by the fd

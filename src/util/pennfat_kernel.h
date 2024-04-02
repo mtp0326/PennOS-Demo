@@ -6,6 +6,8 @@
 #include "../pennfat.h"
 #include "spthread.h"
 
+extern uint16_t* fat;
+
 struct directory_entries {
   char name[32];
   uint32_t size;

@@ -17,9 +17,7 @@
 
 #define PROMPT "penn-fat> "
 #define MAX_LEN 4096
-#define MAX_FD_NUM 1024
-
-extern uint16_t* fat;
+#define MAX_FD_NUM 102
 
 void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config);
 int mount(const char* fs_name);
