@@ -207,6 +207,17 @@ int get_data_size(int block_size, int num_fat_entries) {
   return block_size * (num_fat_entries - 1);
 }
 
+int get_offset_size(int block_size,
+                    int blocks_in_fat,
+                    int block_num,
+                    int offset) {
+  int fat_size = get_fat_size(block_size, blocks_in_fat);
+  int block_offset = block_size * block_num;
+  int total_offset = fat_size + block_offset + offset;
+
+  return total_offset;
+}
+
 int main(int argc, char* argv[]) {
   // TODO: register signal handlers
   if (signal(SIGINT, int_handler) == SIG_ERR) {
