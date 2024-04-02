@@ -22,6 +22,7 @@ static int unmount();
 
 // global variables for the currently mounted fs
 int size = 0;
+int fs_fd;
 uint16_t* fat = NULL;
 
 // global file descriptor table
@@ -81,9 +82,24 @@ static void mkfs(const char* fs_name,
   }
   // call helper to get FAT size
   int block_size = get_block_size(block_size_config);
-  int fat_size = block_size * blocks_in_fat;
+  int fat_size = get_fat_size(block_size, blocks_in_fat);
 
-  int fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+  int num_fat_entries = get_num_fat_entries(block_size, blocks_in_fat);
+  int data_size = get_data_size(block_size, num_fat_entries);
+
+  // declared global
+  fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+
+  if (ftruncate(fs_fd, fat_size + data_size) != 0) {
+    perror("mkfs: truncate error");
+    exit(EXIT_FAILURE);
+  }
+
+  // move back to front
+  if (lseek(fs_fd, 0, SEEK_SET) == -1) {
+    perror("lseek error");
+    exit(EXIT_FAILURE);
+  }
 
   // write metadata to fs (FAT[0])
   uint16_t metadata = (blocks_in_fat << 8) | block_size_config;
@@ -98,29 +114,6 @@ static void mkfs(const char* fs_name,
     perror("write error");
     exit(EXIT_FAILURE);
   }
-
-  // initialize with 0 for all fat region
-  uint8_t padding = 0x00;
-  for (int i = 0; i < fat_size - 4; ++i) {
-    if (write(fs_fd, &padding, 1) != 1) {
-      perror("write error");
-      exit(EXIT_FAILURE);
-    }
-  }
-
-  // move fs_fd offset by fat_size
-  // joseph: I think we should move to fat_size instead of fat_size - 1 here
-  if (lseek(fs_fd, fat_size, SEEK_SET) == -1) {
-    perror("lseek error");
-    exit(EXIT_FAILURE);
-  }
-
-  // write to fs_fd (empty string) to actually resize
-  if (write(fs_fd, "", 1) != 1) {
-    perror("write error");
-    exit(EXIT_FAILURE);
-  }
-  close(fs_fd);
 }
 
 static int mount(const char* fs_name) {
@@ -200,6 +193,18 @@ int get_block_size(int block_size_config) {
     }
   }
   return block_size;
+}
+
+int get_fat_size(int block_size, int blocks_in_fat) {
+  return block_size * blocks_in_fat;
+}
+
+int get_num_fat_entries(int block_size, int blocks_in_fat) {
+  return get_fat_size(block_size, blocks_in_fat) / 2;
+}
+
+int get_data_size(int block_size, int num_fat_entries) {
+  return block_size * (num_fat_entries - 1);
 }
 
 int main(int argc, char* argv[]) {
