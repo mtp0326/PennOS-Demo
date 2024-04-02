@@ -1,11 +1,10 @@
 #include "pennfat_kernel.h"
-#include "../pennfat.h"
 
 int k_open(const char* fname, int mode) {
   // F_WRITES
   int size = 0;
   if (mode == 0) {
-    fat = NULL;
+    size = get_block_size(3);
     // F_READ
   } else if (mode == 1) {
     // F_APPEND
