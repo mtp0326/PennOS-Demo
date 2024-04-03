@@ -1,32 +1,7 @@
-#include <fcntl.h>
-#include <signal.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/mman.h>
-#include <time.h>
-#include <unistd.h>
-
-#include "penn-parser.h"
 #include "pennfat.h"
-#include "util/pennfat_kernel.h"
-
-#define MAX_LEN 4096
-#define MAX_FD_NUM 1024
-
-// function declarations for special routines
-static void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config);
-static int mount(const char* fs_name);
-static int unmount();
 
 // global variables for the currently mounted fs
-uint16_t* fat = NULL;
 int size = 0;
-
-// global file descriptor table
-// indexed by the fd
-struct file_descriptor_st* global_fd_table = NULL;
 
 void prompt() {
   // display the prompt to the user
@@ -71,19 +46,58 @@ void int_handler(int signo) {
   prompt();
 }
 
-static void mkfs(const char* fs_name,
-                 int blocks_in_fat,
-                 int block_size_config) {
+void initialize_global_fd_table() {
+  // create an array of file_descriptor_st
+  global_fd_table = malloc(sizeof(struct file_descriptor_st) * MAX_FD_NUM);
+
+  if (global_fd_table == NULL) {
+    fprintf(stderr, "Memory allocation failed\n");
+    return;
+  }
+
+  // stdin
+  struct file_descriptor_st* std_in = create_file_descriptor(0, "stdin", 1, 0);
+  global_fd_table[0] = *std_in;
+
+  // stdout
+  struct file_descriptor_st* std_out =
+      create_file_descriptor(1, "stdout", 0, 0);
+
+  global_fd_table[1] = *std_out;
+
+  // stderr
+  struct file_descriptor_st* std_err =
+      create_file_descriptor(2, "stdout", 0, 0);
+
+  global_fd_table[2] = *std_err;
+}
+
+void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   // error handling if there is a currently mounted fs
   if (fat != NULL) {
     perror("unexpected command");
     exit(EXIT_FAILURE);
   }
   // call helper to get FAT size
-  int block_size = get_block_size(block_size_config);
-  int fat_size = block_size * blocks_in_fat;
+  block_size = get_block_size(block_size_config);
+  fat_size = get_fat_size(block_size, blocks_in_fat);
 
-  int fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+  num_fat_entries = get_num_fat_entries(block_size, blocks_in_fat);
+  data_size = get_data_size(block_size, num_fat_entries);
+
+  // declared global
+  fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+
+  if (ftruncate(fs_fd, fat_size + data_size) != 0) {
+    perror("mkfs: truncate error");
+    exit(EXIT_FAILURE);
+  }
+
+  // move back to front
+  if (lseek(fs_fd, 0, SEEK_SET) == -1) {
+    perror("lseek error");
+    exit(EXIT_FAILURE);
+  }
 
   // write metadata to fs (FAT[0])
   uint16_t metadata = (blocks_in_fat << 8) | block_size_config;
@@ -98,32 +112,9 @@ static void mkfs(const char* fs_name,
     perror("write error");
     exit(EXIT_FAILURE);
   }
-
-  // initialize with 0 for all fat region
-  uint8_t padding = 0x00;
-  for (int i = 0; i < fat_size - 4; ++i) {
-    if (write(fs_fd, &padding, 1) != 1) {
-      perror("write error");
-      exit(EXIT_FAILURE);
-    }
-  }
-
-  // move fs_fd offset by fat_size
-  // joseph: I think we should move to fat_size instead of fat_size - 1 here
-  if (lseek(fs_fd, fat_size, SEEK_SET) == -1) {
-    perror("lseek error");
-    exit(EXIT_FAILURE);
-  }
-
-  // write to fs_fd (empty string) to actually resize
-  if (write(fs_fd, "", 1) != 1) {
-    perror("write error");
-    exit(EXIT_FAILURE);
-  }
-  close(fs_fd);
 }
 
-static int mount(const char* fs_name) {
+int mount(const char* fs_name) {
   if (fat != NULL) {
     perror("unexpected command");
     exit(EXIT_FAILURE);
@@ -158,7 +149,7 @@ static int mount(const char* fs_name) {
   return 0;
 }
 
-static int unmount() {
+int unmount() {
   // error handling if no currently mounted fs
   if (fat == NULL) {
     perror("unexpected command");
@@ -202,53 +193,25 @@ int get_block_size(int block_size_config) {
   return block_size;
 }
 
-int main(int argc, char* argv[]) {
-  // TODO: register signal handlers
-  if (signal(SIGINT, int_handler) == SIG_ERR) {
-    perror("error: can't handle sigint\n");
-    exit(EXIT_FAILURE);
-  }
+int get_fat_size(int block_size, int blocks_in_fat) {
+  return block_size * blocks_in_fat;
+}
 
-  while (1) {
-    prompt();
-    char* cmd;
-    read_command(&cmd);
-    if (cmd[0] != '\n') {
-      // for strtol
-      char* ptr;
-      const int base = 10;
-      // parse command
-      struct parsed_command* parsed;
-      if (parse_command(cmd, &parsed) != 0) {
-        free_parsed_command(parsed);
-        exit(EXIT_FAILURE);
-      }
+int get_num_fat_entries(int block_size, int blocks_in_fat) {
+  return get_fat_size(block_size, blocks_in_fat) / 2;
+}
 
-      char** args = parsed->commands[0];
-      // touch, mv, rm, cat, cp, chmod, ls (implement using k functions)
-      if (strcmp(args[0], "ls") == 0) {
-        // TODO: Call your implemented ls() function
-      } else if (strcmp(args[0], "touch") == 0) {
-        // TODO: Call your implemented touch() function
-      } else if (strcmp(args[0], "cat") == 0) {
-        // TODO: Call your implemented cat() function
-      } else if (strcmp(args[0], "chmod") == 0) {
-        // TODO: Call your implemented chmod() function
-      } else if (strcmp(args[0], "mkfs") == 0) {
-        int blocks_in_fat = strtol(args[2], &ptr, base);
-        int block_size_config = strtol(args[3], &ptr, base);
-        mkfs(args[1], blocks_in_fat, block_size_config);
-      } else if (strcmp(args[0], "mount") == 0) {
-        mount(args[1]);
-        k_open(args[1], 0);
-      } else if (strcmp(args[0], "unmount") == 0) {
-        unmount();
-      } else {
-        fprintf(stderr, "pennfat: command not found: %s\n", args[0]);
-      }
-      free_parsed_command(parsed);
-    }
-    free(cmd);
-  }
-  return EXIT_SUCCESS;
+int get_data_size(int block_size, int num_fat_entries) {
+  return block_size * (num_fat_entries - 1);
+}
+
+int get_offset_size(int block_size,
+                    int blocks_in_fat,
+                    int block_num,
+                    int offset) {
+  int fat_size = get_fat_size(block_size, blocks_in_fat);
+  int block_offset = block_size * block_num;
+  int total_offset = fat_size + block_offset + offset;
+
+  return total_offset;
 }

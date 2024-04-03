@@ -96,6 +96,8 @@ void cancel_and_join(spthread_t thread) {
   spthread_join(thread, NULL);
 }
 
+#include "pennfat.h"
+
 int main(int argc, char** argv) {
   // create the circular linked lists
   priorityzero = init_list();
