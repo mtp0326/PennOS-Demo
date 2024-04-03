@@ -63,6 +63,10 @@ void lseek_to_root_directory() {
   lseek(fs_fd, fat_size, SEEK_SET);
 }
 
+struct file_descriptor_st* get_file_descriptor(int fd) {
+  return (global_fd_table + fd);
+}
+
 struct file_descriptor_st* create_file_descriptor(int fd,
                                                   char* fname,
                                                   int mode,
@@ -83,19 +87,44 @@ struct file_descriptor_st* create_file_descriptor(int fd,
   return new_fd;
 }
 
-ssize_t k_read(int fd, int n, char* buf);
+ssize_t k_read(int fd, int n, char* buf) {
+  // check if fd is a valid open file descriptor
+  struct file_descriptor_st* curr = get_file_descriptor(fd);
+
+  if (curr == NULL) {
+    return -1;
+  }
+
+  // mode shouldn't matter here, since we can always read regardless of mode
+  char* fname = curr->fname;
+  int offset = curr->offset;
+
+  // go to root directory to find the first block of the file
+  lseek_to_root_directory();
+
+  // find the first block here
+
+  // go to the first block of the reading file + offset
+
+  // start reading
+
+  // while EOF (can be known using the size variable in directory entry) or read
+  // all n bytes need to update the offset accordingly
+
+  // read
+}
 
 ssize_t k_write(int fd, const char* str, int n);
 
 int k_close(int fd) {
-  struct file_descriptor_st* curr = (global_fd_table + fd);
+  struct file_descriptor_st* curr = get_file_descriptor(fd);
 
   // fd is not a valid open file descriptor
   if (curr == NULL) {
     return -1;
   }
 
-  // close it by turning it to null
+  // close it by freeing it and turning it to null
   free(curr);
   curr = NULL;
 
