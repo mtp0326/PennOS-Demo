@@ -1,7 +1,9 @@
 \doxysection{src/util/kernel.h File Reference}
 \hypertarget{kernel_8h}{}\label{kernel_8h}\index{src/util/kernel.h@{src/util/kernel.h}}
-{\ttfamily \#include "{}spthread.\+h"{}}\newline
 {\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include "{}array.\+h"{}}\newline
+{\ttfamily \#include "{}bitmap.\+h"{}}\newline
+{\ttfamily \#include "{}spthread.\+h"{}}\newline
 \doxysubsubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
@@ -27,21 +29,7 @@ enum \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+
 \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3}{k\+\_\+proc\+\_\+create}} (\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}parent)
 \begin{DoxyCompactList}\small\item\em Create a new child process, inheriting applicable properties from the parent. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\+\_\+proc\+\_\+cleanup}} (\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}proc)
-\begin{DoxyCompactList}\small\item\em Clean up a terminated/finished thread\textquotesingle{}s resources. This may include freeing the PCB, handling children, etc. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{kernel_8h_a4d2cf4232cddee738996ca9ad83ea56f}{k\+\_\+open}} (const char \texorpdfstring{$\ast$}{*}fname, int mode)
-\begin{DoxyCompactList}\small\item\em Open file name {\ttfamily fname} with the mode {\ttfamily mode}, and return a file descriptor to that file. \end{DoxyCompactList}\item 
-ssize\+\_\+t \mbox{\hyperlink{kernel_8h_a1951ec11865274b45144d6dd6f878692}{k\+\_\+read}} (int fd, int n, char \texorpdfstring{$\ast$}{*}buf)
-\item 
-ssize\+\_\+t \mbox{\hyperlink{kernel_8h_a79d2a9b65d0e04de358fe1a2cfa79baf}{k\+\_\+write}} (int fd, const char \texorpdfstring{$\ast$}{*}str, int n)
-\item 
-int \mbox{\hyperlink{kernel_8h_a9ecd38dc6f3a9721ab53ff9a815b5480}{k\+\_\+close}} (int fd)
-\item 
-int \mbox{\hyperlink{kernel_8h_ae8b44b3621ebb542bec49f73d19d2885}{k\+\_\+unlink}} (const char \texorpdfstring{$\ast$}{*}fname)
-\item 
-off\+\_\+t \mbox{\hyperlink{kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96}{k\+\_\+lseek}} (int fd, int offset, int whence)
-\item 
-void \mbox{\hyperlink{kernel_8h_a9317fe11a36bfc2d731bcbacc3a57728}{k\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Clean up a terminated/finished thread\textquotesingle{}s resources. This may include freeing the PCB, handling children, etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Typedef Documentation}
@@ -78,65 +66,14 @@ BLOCKED&Process is not executing, waiting for an event to occur. A process shoul
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{ZOMBIED@{ZOMBIED}!kernel.h@{kernel.h}}\index{kernel.h@{kernel.h}!ZOMBIED@{ZOMBIED}}}\Hypertarget{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512}\label{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512} 
-ZOMBIED&Process has finished execution but awaits resource cleanup. A process enters the ZOMBIED state after it has finished its execution and is waiting for the parent process to read its exit status. If the parent process ever exits prior to reading exit status, this process should immediately cleaned up. ~\newline
- \\
+ZOMBIED&Process has finished execution but awaits resource cleanup. A process enters the ZOMBIED state after it has finished its execution and is waiting for the parent process to read its exit status. If the parent process ever exits prior to reading exit status, this process should immediately cleaned up. \\
 \hline
 
 \end{DoxyEnumFields}
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{kernel_8h_a9ecd38dc6f3a9721ab53ff9a815b5480}\label{kernel_8h_a9ecd38dc6f3a9721ab53ff9a815b5480} 
-\index{kernel.h@{kernel.h}!k\_close@{k\_close}}
-\index{k\_close@{k\_close}!kernel.h@{kernel.h}}
-\doxysubsubsection{\texorpdfstring{k\_close()}{k\_close()}}
-{\footnotesize\ttfamily int k\+\_\+close (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})}
-
-\Hypertarget{kernel_8h_a9317fe11a36bfc2d731bcbacc3a57728}\label{kernel_8h_a9317fe11a36bfc2d731bcbacc3a57728} 
-\index{kernel.h@{kernel.h}!k\_ls@{k\_ls}}
-\index{k\_ls@{k\_ls}!kernel.h@{kernel.h}}
-\doxysubsubsection{\texorpdfstring{k\_ls()}{k\_ls()}}
-{\footnotesize\ttfamily void k\+\_\+ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
-
-\Hypertarget{kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96}\label{kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96} 
-\index{kernel.h@{kernel.h}!k\_lseek@{k\_lseek}}
-\index{k\_lseek@{k\_lseek}!kernel.h@{kernel.h}}
-\doxysubsubsection{\texorpdfstring{k\_lseek()}{k\_lseek()}}
-{\footnotesize\ttfamily off\+\_\+t k\+\_\+lseek (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{int}]{offset,  }\item[{int}]{whence }\end{DoxyParamCaption})}
-
-\Hypertarget{kernel_8h_a4d2cf4232cddee738996ca9ad83ea56f}\label{kernel_8h_a4d2cf4232cddee738996ca9ad83ea56f} 
-\index{kernel.h@{kernel.h}!k\_open@{k\_open}}
-\index{k\_open@{k\_open}!kernel.h@{kernel.h}}
-\doxysubsubsection{\texorpdfstring{k\_open()}{k\_open()}}
-{\footnotesize\ttfamily int k\+\_\+open (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fname,  }\item[{int}]{mode }\end{DoxyParamCaption})}
-
-
-
-Open file name {\ttfamily fname} with the mode {\ttfamily mode}, and return a file descriptor to that file. 
-
-This function opens a file specified by the file name {\ttfamily fname} in the mode specified by {\ttfamily mode} and returns a file descriptor associated with the open file that can be used for subsequent file operations.
-
-
-\begin{DoxyParams}{Parameters}
-{\em fname} & The name of the file to open. See POSIX standard for allowed names. \\
-\hline
-{\em mode} & The mode with which to open the file. This should specify the access mode (e.\+g., read, write) and other flags as defined by the operating system. Allowed modes are\+: write ({\ttfamily F\+\_\+\+WRITE}), read ({\ttfamily F\+\_\+\+READ}), and append ({\ttfamily F\+\_\+\+APPEND}).\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-int A non-\/negative file descriptor on success, or -\/1 on error and {\ttfamily errno} set.
-\end{DoxyReturn}
-\begin{DoxyNote}{Note}
-The {\ttfamily mode} parameter may only be {\ttfamily F\+\_\+\+WRITE}, {\ttfamily F\+\_\+\+READ}, or {\ttfamily F\+\_\+\+APPEND}. Note that despite their names, write and append support both reading and writing. {\ttfamily F\+\_\+\+APPEND}\textquotesingle{}s file pointer will point to the end of the file rather than the beginning. Both {\ttfamily F\+\_\+\+WRITE} and {\ttfamily F\+\_\+\+APPEND} will create the named file if it does not already exist.
-\end{DoxyNote}
-\begin{DoxySeeAlso}{See also}
-\href{https://www.ibm.com/docs/en/zos/3.1.0?topic=locales-posix-portable-file-name-character-set}{\texttt{ https\+://www.\+ibm.\+com/docs/en/zos/3.\+1.\+0?topic=locales-\/posix-\/portable-\/file-\/name-\/character-\/set}}
-\end{DoxySeeAlso}
-Possible values of {\ttfamily errno} are\+:
-\begin{DoxyItemize}
-\item {\ttfamily EACCES} \+: // need to fill these in, will expand as further progress
-\item {\ttfamily ENAMETOOLONG} \+: 
-\end{DoxyItemize}\Hypertarget{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}\label{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e} 
+\Hypertarget{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}\label{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e} 
 \index{kernel.h@{kernel.h}!k\_proc\_cleanup@{k\_proc\_cleanup}}
 \index{k\_proc\_cleanup@{k\_proc\_cleanup}!kernel.h@{kernel.h}}
 \doxysubsubsection{\texorpdfstring{k\_proc\_cleanup()}{k\_proc\_cleanup()}}
@@ -169,33 +106,3 @@ Create a new child process, inheriting applicable properties from the parent.
 \begin{DoxyReturn}{Returns}
 Reference to the child PCB. 
 \end{DoxyReturn}
-\Hypertarget{kernel_8h_a1951ec11865274b45144d6dd6f878692}\label{kernel_8h_a1951ec11865274b45144d6dd6f878692} 
-\index{kernel.h@{kernel.h}!k\_read@{k\_read}}
-\index{k\_read@{k\_read}!kernel.h@{kernel.h}}
-\doxysubsubsection{\texorpdfstring{k\_read()}{k\_read()}}
-{\footnotesize\ttfamily ssize\+\_\+t k\+\_\+read (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{int}]{n,  }\item[{char \texorpdfstring{$\ast$}{*}}]{buf }\end{DoxyParamCaption})}
-
-
-\begin{DoxyParams}{Parameters}
-{\em fd} & \\
-\hline
-{\em n} & \\
-\hline
-{\em buf} & \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-ssize\+\_\+t 
-\end{DoxyReturn}
-\Hypertarget{kernel_8h_ae8b44b3621ebb542bec49f73d19d2885}\label{kernel_8h_ae8b44b3621ebb542bec49f73d19d2885} 
-\index{kernel.h@{kernel.h}!k\_unlink@{k\_unlink}}
-\index{k\_unlink@{k\_unlink}!kernel.h@{kernel.h}}
-\doxysubsubsection{\texorpdfstring{k\_unlink()}{k\_unlink()}}
-{\footnotesize\ttfamily int k\+\_\+unlink (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fname }\end{DoxyParamCaption})}
-
-\Hypertarget{kernel_8h_a79d2a9b65d0e04de358fe1a2cfa79baf}\label{kernel_8h_a79d2a9b65d0e04de358fe1a2cfa79baf} 
-\index{kernel.h@{kernel.h}!k\_write@{k\_write}}
-\index{k\_write@{k\_write}!kernel.h@{kernel.h}}
-\doxysubsubsection{\texorpdfstring{k\_write()}{k\_write()}}
-{\footnotesize\ttfamily ssize\+\_\+t k\+\_\+write (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{str,  }\item[{int}]{n }\end{DoxyParamCaption})}
-

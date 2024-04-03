@@ -1,3 +1,46 @@
 \doxysection{src/util/kernel.c File Reference}
 \hypertarget{kernel_8c}{}\label{kernel_8c}\index{src/util/kernel.c@{src/util/kernel.c}}
 {\ttfamily \#include "{}kernel.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{kernel_8c_a736760f5a73bbd7d6c9e4607c49837a3}{k\+\_\+proc\+\_\+create}} (\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}parent)
+\begin{DoxyCompactList}\small\item\em Create a new child process, inheriting applicable properties from the parent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{kernel_8c_a87071d3f59ebc0d6f626c885eb27c27e}{k\+\_\+proc\+\_\+cleanup}} (\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}proc)
+\begin{DoxyCompactList}\small\item\em Clean up a terminated/finished thread\textquotesingle{}s resources. This may include freeing the PCB, handling children, etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{kernel_8c_a87071d3f59ebc0d6f626c885eb27c27e}\label{kernel_8c_a87071d3f59ebc0d6f626c885eb27c27e} 
+\index{kernel.c@{kernel.c}!k\_proc\_cleanup@{k\_proc\_cleanup}}
+\index{k\_proc\_cleanup@{k\_proc\_cleanup}!kernel.c@{kernel.c}}
+\doxysubsubsection{\texorpdfstring{k\_proc\_cleanup()}{k\_proc\_cleanup()}}
+{\footnotesize\ttfamily void k\+\_\+proc\+\_\+cleanup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proc }\end{DoxyParamCaption})}
+
+
+
+Clean up a terminated/finished thread\textquotesingle{}s resources. This may include freeing the PCB, handling children, etc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em proc} & This is a pointer to the process control block of a process that has terminated. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{kernel_8c_a736760f5a73bbd7d6c9e4607c49837a3}\label{kernel_8c_a736760f5a73bbd7d6c9e4607c49837a3} 
+\index{kernel.c@{kernel.c}!k\_proc\_create@{k\_proc\_create}}
+\index{k\_proc\_create@{k\_proc\_create}!kernel.c@{kernel.c}}
+\doxysubsubsection{\texorpdfstring{k\_proc\_create()}{k\_proc\_create()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} k\+\_\+proc\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
+
+
+
+Create a new child process, inheriting applicable properties from the parent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & This is a pointer to the process control block of the parent, from which it inherits. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the child PCB. 
+\end{DoxyReturn}

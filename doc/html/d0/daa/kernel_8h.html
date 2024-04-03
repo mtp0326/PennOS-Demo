@@ -86,8 +86,10 @@ $(function() {
   <div class="headertitle"><div class="title">kernel.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="../../dc/d15/spthread_8h_source.html">spthread.h</a>&quot;</code><br />
-<code>#include &lt;sys/types.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="../../db/d63/array_8h_source.html">array.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../da/dcb/bitmap_8h_source.html">bitmap.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../dc/d15/spthread_8h_source.html">spthread.h</a>&quot;</code><br />
 </div>
 <p><a href="../../d0/daa/kernel_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -120,21 +122,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a87071d3f59ebc0d6f626c885eb27c27e" id="r_a87071d3f59ebc0d6f626c885eb27c27e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87071d3f59ebc0d6f626c885eb27c27e">k_proc_cleanup</a> (<a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *proc)</td></tr>
 <tr class="memdesc:a87071d3f59ebc0d6f626c885eb27c27e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up a terminated/finished thread's resources. This may include freeing the PCB, handling children, etc.  <br /></td></tr>
 <tr class="separator:a87071d3f59ebc0d6f626c885eb27c27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d2cf4232cddee738996ca9ad83ea56f" id="r_a4d2cf4232cddee738996ca9ad83ea56f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d2cf4232cddee738996ca9ad83ea56f">k_open</a> (const char *fname, int mode)</td></tr>
-<tr class="memdesc:a4d2cf4232cddee738996ca9ad83ea56f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open file name <code>fname</code> with the mode <code>mode</code>, and return a file descriptor to that file.  <br /></td></tr>
-<tr class="separator:a4d2cf4232cddee738996ca9ad83ea56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1951ec11865274b45144d6dd6f878692" id="r_a1951ec11865274b45144d6dd6f878692"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1951ec11865274b45144d6dd6f878692">k_read</a> (int fd, int n, char *buf)</td></tr>
-<tr class="separator:a1951ec11865274b45144d6dd6f878692"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79d2a9b65d0e04de358fe1a2cfa79baf" id="r_a79d2a9b65d0e04de358fe1a2cfa79baf"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79d2a9b65d0e04de358fe1a2cfa79baf">k_write</a> (int fd, const char *str, int n)</td></tr>
-<tr class="separator:a79d2a9b65d0e04de358fe1a2cfa79baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ecd38dc6f3a9721ab53ff9a815b5480" id="r_a9ecd38dc6f3a9721ab53ff9a815b5480"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ecd38dc6f3a9721ab53ff9a815b5480">k_close</a> (int fd)</td></tr>
-<tr class="separator:a9ecd38dc6f3a9721ab53ff9a815b5480"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8b44b3621ebb542bec49f73d19d2885" id="r_ae8b44b3621ebb542bec49f73d19d2885"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8b44b3621ebb542bec49f73d19d2885">k_unlink</a> (const char *fname)</td></tr>
-<tr class="separator:ae8b44b3621ebb542bec49f73d19d2885"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a332b4729ef52b2a3132b1aea88fa5c96" id="r_a332b4729ef52b2a3132b1aea88fa5c96"><td class="memItemLeft" align="right" valign="top">off_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a332b4729ef52b2a3132b1aea88fa5c96">k_lseek</a> (int fd, int offset, int whence)</td></tr>
-<tr class="separator:a332b4729ef52b2a3132b1aea88fa5c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9317fe11a36bfc2d731bcbacc3a57728" id="r_a9317fe11a36bfc2d731bcbacc3a57728"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9317fe11a36bfc2d731bcbacc3a57728">k_ls</a> (const char *filename)</td></tr>
-<tr class="separator:a9317fe11a36bfc2d731bcbacc3a57728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a71acfdbc74942780681d06efcc05a0a5" name="a71acfdbc74942780681d06efcc05a0a5"></a>
@@ -173,112 +160,13 @@ Functions</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61" name="ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61"></a>BLOCKED&#160;</td><td class="fielddoc"><p>Process is not executing, waiting for an event to occur. A process should only be blocked if it made a call to either s_waitpid or s_sleep. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512" name="ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512"></a>ZOMBIED&#160;</td><td class="fielddoc"><p>Process has finished execution but awaits resource cleanup. A process enters the ZOMBIED state after it has finished its execution and is waiting for the parent process to read its exit status. If the parent process ever exits prior to reading exit status, this process should immediately cleaned up. <br  />
- </p>
+<tr><td class="fieldname"><a id="ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512" name="ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512"></a>ZOMBIED&#160;</td><td class="fielddoc"><p>Process has finished execution but awaits resource cleanup. A process enters the ZOMBIED state after it has finished its execution and is waiting for the parent process to read its exit status. If the parent process ever exits prior to reading exit status, this process should immediately cleaned up. </p>
 </td></tr>
 </table>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a9ecd38dc6f3a9721ab53ff9a815b5480" name="a9ecd38dc6f3a9721ab53ff9a815b5480"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ecd38dc6f3a9721ab53ff9a815b5480">&#9670;&#160;</a></span>k_close()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int k_close </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9317fe11a36bfc2d731bcbacc3a57728" name="a9317fe11a36bfc2d731bcbacc3a57728"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9317fe11a36bfc2d731bcbacc3a57728">&#9670;&#160;</a></span>k_ls()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void k_ls </td>
-          <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a332b4729ef52b2a3132b1aea88fa5c96" name="a332b4729ef52b2a3132b1aea88fa5c96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a332b4729ef52b2a3132b1aea88fa5c96">&#9670;&#160;</a></span>k_lseek()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">off_t k_lseek </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>whence</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4d2cf4232cddee738996ca9ad83ea56f" name="a4d2cf4232cddee738996ca9ad83ea56f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d2cf4232cddee738996ca9ad83ea56f">&#9670;&#160;</a></span>k_open()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int k_open </td>
-          <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fname</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Open file name <code>fname</code> with the mode <code>mode</code>, and return a file descriptor to that file. </p>
-<p>This function opens a file specified by the file name <code>fname</code> in the mode specified by <code>mode</code> and returns a file descriptor associated with the open file that can be used for subsequent file operations.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fname</td><td>The name of the file to open. See POSIX standard for allowed names. </td></tr>
-    <tr><td class="paramname">mode</td><td>The mode with which to open the file. This should specify the access mode (e.g., read, write) and other flags as defined by the operating system. Allowed modes are: write (<code>F_WRITE</code>), read (<code>F_READ</code>), and append (<code>F_APPEND</code>).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>int A non-negative file descriptor on success, or -1 on error and <code>errno</code> set.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The <code>mode</code> parameter may only be <code>F_WRITE</code>, <code>F_READ</code>, or <code>F_APPEND</code>. Note that despite their names, write and append support both reading and writing. <code>F_APPEND</code>'s file pointer will point to the end of the file rather than the beginning. Both <code>F_WRITE</code> and <code>F_APPEND</code> will create the named file if it does not already exist.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a href="https://www.ibm.com/docs/en/zos/3.1.0?topic=locales-posix-portable-file-name-character-set">https://www.ibm.com/docs/en/zos/3.1.0?topic=locales-posix-portable-file-name-character-set</a></dd></dl>
-<p>Possible values of <code>errno</code> are:</p><ul>
-<li><code>EACCES</code> : // need to fill these in, will expand as further progress</li>
-<li><code>ENAMETOOLONG</code> : </li>
-</ul>
-
-</div>
-</div>
 <a id="a87071d3f59ebc0d6f626c885eb27c27e" name="a87071d3f59ebc0d6f626c885eb27c27e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87071d3f59ebc0d6f626c885eb27c27e">&#9670;&#160;</a></span>k_proc_cleanup()</h2>
 
@@ -327,84 +215,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the child PCB. </dd></dl>
-
-</div>
-</div>
-<a id="a1951ec11865274b45144d6dd6f878692" name="a1951ec11865274b45144d6dd6f878692"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1951ec11865274b45144d6dd6f878692">&#9670;&#160;</a></span>k_read()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t k_read </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>buf</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fd</td><td></td></tr>
-    <tr><td class="paramname">n</td><td></td></tr>
-    <tr><td class="paramname">buf</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
-
-</div>
-</div>
-<a id="ae8b44b3621ebb542bec49f73d19d2885" name="ae8b44b3621ebb542bec49f73d19d2885"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8b44b3621ebb542bec49f73d19d2885">&#9670;&#160;</a></span>k_unlink()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int k_unlink </td>
-          <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fname</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a79d2a9b65d0e04de358fe1a2cfa79baf" name="a79d2a9b65d0e04de358fe1a2cfa79baf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79d2a9b65d0e04de358fe1a2cfa79baf">&#9670;&#160;</a></span>k_write()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t k_write </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>str</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>

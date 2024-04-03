@@ -88,22 +88,46 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a77c89dc39ec87e1fd4cd589e2e64cc67" id="r_a77c89dc39ec87e1fd4cd589e2e64cc67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d15/spthread_8h.html#ad5cf274963820ab3f4c332683445ca8d">spthread_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77c89dc39ec87e1fd4cd589e2e64cc67">handle</a></td></tr>
-<tr class="memdesc:a77c89dc39ec87e1fd4cd589e2e64cc67"><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores a handle to the spthread. <br  />
-  <br /></td></tr>
 <tr class="separator:a77c89dc39ec87e1fd4cd589e2e64cc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa909915326969a57c5c1bd8b43954d4" id="r_afa909915326969a57c5c1bd8b43954d4"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa909915326969a57c5c1bd8b43954d4">pid</a></td></tr>
-<tr class="memdesc:afa909915326969a57c5c1bd8b43954d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores the PID of the process.  <br /></td></tr>
+<tr class="memdesc:afa909915326969a57c5c1bd8b43954d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores a handle to the spthread. <br  />
+  <br /></td></tr>
 <tr class="separator:afa909915326969a57c5c1bd8b43954d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2289d15508ab3188ef4276b93270eb9" id="r_ab2289d15508ab3188ef4276b93270eb9"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2289d15508ab3188ef4276b93270eb9">ppid</a></td></tr>
-<tr class="memdesc:ab2289d15508ab3188ef4276b93270eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores the PPID of the process.  <br /></td></tr>
+<tr class="memdesc:ab2289d15508ab3188ef4276b93270eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores the PID of the process.  <br /></td></tr>
 <tr class="separator:ab2289d15508ab3188ef4276b93270eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad70cf1a6bd13085e99d0cce7eae3afc9" id="r_ad70cf1a6bd13085e99d0cce7eae3afc9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad70cf1a6bd13085e99d0cce7eae3afc9">priority</a></td></tr>
-<tr class="memdesc:ad70cf1a6bd13085e99d0cce7eae3afc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This the priority level of the process. (0, 1, or 2)  <br /></td></tr>
-<tr class="separator:ad70cf1a6bd13085e99d0cce7eae3afc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a905cc6faa7cf99a347e57bebcdf0da5e" id="r_a905cc6faa7cf99a347e57bebcdf0da5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/df6/structDynamicPIDArray.html">DynamicPIDArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a905cc6faa7cf99a347e57bebcdf0da5e">child_pids</a></td></tr>
+<tr class="memdesc:a905cc6faa7cf99a347e57bebcdf0da5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores the PPID of the process.  <br /></td></tr>
+<tr class="separator:a905cc6faa7cf99a347e57bebcdf0da5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a5d945da32720d61039f315ab64f527" id="r_a2a5d945da32720d61039f315ab64f527"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2a5d945da32720d61039f315ab64f527">priority</a>: 2</td></tr>
+<tr class="memdesc:a2a5d945da32720d61039f315ab64f527"><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores a pointer to a dynamically sized array of child pid_t's.  <br /></td></tr>
+<tr class="separator:a2a5d945da32720d61039f315ab64f527"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ef7954f8714e8157ea82a5063ecdfed" id="r_a3ef7954f8714e8157ea82a5063ecdfed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854">process_state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ef7954f8714e8157ea82a5063ecdfed">state</a></td></tr>
+<tr class="memdesc:a3ef7954f8714e8157ea82a5063ecdfed"><td class="mdescLeft">&#160;</td><td class="mdescRight">This the priority level of the process. (0, 1, or 2).  <br /></td></tr>
+<tr class="separator:a3ef7954f8714e8157ea82a5063ecdfed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53ab4c02de07bcca467dff05771554a0" id="r_a53ab4c02de07bcca467dff05771554a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/d26/structFD__Bitmap.html">FD_Bitmap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53ab4c02de07bcca467dff05771554a0">open_fds</a></td></tr>
+<tr class="memdesc:a53ab4c02de07bcca467dff05771554a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an enum storing the process's current state.  <br /></td></tr>
+<tr class="separator:a53ab4c02de07bcca467dff05771554a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This structure stores all required information about a running process. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="a905cc6faa7cf99a347e57bebcdf0da5e" name="a905cc6faa7cf99a347e57bebcdf0da5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a905cc6faa7cf99a347e57bebcdf0da5e">&#9670;&#160;</a></span>child_pids</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d1/df6/structDynamicPIDArray.html">DynamicPIDArray</a>* pcb_t::child_pids</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This stores the PPID of the process. </p>
+
+</div>
+</div>
 <a id="a77c89dc39ec87e1fd4cd589e2e64cc67" name="a77c89dc39ec87e1fd4cd589e2e64cc67"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77c89dc39ec87e1fd4cd589e2e64cc67">&#9670;&#160;</a></span>handle</h2>
 
@@ -116,8 +140,21 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This stores a handle to the spthread. <br  />
- </p>
+</div>
+</div>
+<a id="a53ab4c02de07bcca467dff05771554a0" name="a53ab4c02de07bcca467dff05771554a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53ab4c02de07bcca467dff05771554a0">&#9670;&#160;</a></span>open_fds</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../db/d26/structFD__Bitmap.html">FD_Bitmap</a>* pcb_t::open_fds</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This is an enum storing the process's current state. </p>
 
 </div>
 </div>
@@ -133,7 +170,8 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This stores the PID of the process. </p>
+<p>This stores a handle to the spthread. <br  />
+ </p>
 
 </div>
 </div>
@@ -149,23 +187,39 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This stores the PPID of the process. </p>
+<p>This stores the PID of the process. </p>
 
 </div>
 </div>
-<a id="ad70cf1a6bd13085e99d0cce7eae3afc9" name="ad70cf1a6bd13085e99d0cce7eae3afc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad70cf1a6bd13085e99d0cce7eae3afc9">&#9670;&#160;</a></span>priority</h2>
+<a id="a2a5d945da32720d61039f315ab64f527" name="a2a5d945da32720d61039f315ab64f527"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a5d945da32720d61039f315ab64f527">&#9670;&#160;</a></span>priority</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int pcb_t::priority</td>
+          <td class="memname">unsigned int pcb_t::priority</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>This the priority level of the process. (0, 1, or 2) </p>
+<p>This stores a pointer to a dynamically sized array of child pid_t's. </p>
+
+</div>
+</div>
+<a id="a3ef7954f8714e8157ea82a5063ecdfed" name="a3ef7954f8714e8157ea82a5063ecdfed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ef7954f8714e8157ea82a5063ecdfed">&#9670;&#160;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854">process_state_t</a> pcb_t::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This the priority level of the process. (0, 1, or 2). </p>
 
 </div>
 </div>

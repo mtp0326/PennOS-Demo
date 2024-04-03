@@ -13,30 +13,51 @@ This structure stores all required information about a running process.
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} \mbox{\hyperlink{structpcb__t_a77c89dc39ec87e1fd4cd589e2e64cc67}{handle}}
+\item 
+pid\+\_\+t \mbox{\hyperlink{structpcb__t_afa909915326969a57c5c1bd8b43954d4}{pid}}
 \begin{DoxyCompactList}\small\item\em This stores a handle to the spthread. ~\newline
  \end{DoxyCompactList}\item 
-pid\+\_\+t \mbox{\hyperlink{structpcb__t_afa909915326969a57c5c1bd8b43954d4}{pid}}
-\begin{DoxyCompactList}\small\item\em This stores the PID of the process. \end{DoxyCompactList}\item 
 pid\+\_\+t \mbox{\hyperlink{structpcb__t_ab2289d15508ab3188ef4276b93270eb9}{ppid}}
+\begin{DoxyCompactList}\small\item\em This stores the PID of the process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structpcb__t_a905cc6faa7cf99a347e57bebcdf0da5e}{child\+\_\+pids}}
 \begin{DoxyCompactList}\small\item\em This stores the PPID of the process. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{structpcb__t_ad70cf1a6bd13085e99d0cce7eae3afc9}{priority}}
-\begin{DoxyCompactList}\small\item\em This the priority level of the process. (0, 1, or 2) \end{DoxyCompactList}\end{DoxyCompactItemize}
+unsigned int \mbox{\hyperlink{structpcb__t_a2a5d945da32720d61039f315ab64f527}{priority}}\+: 2
+\begin{DoxyCompactList}\small\item\em This stores a pointer to a dynamically sized array of child pid\+\_\+t\textquotesingle{}s. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+state\+\_\+t}} \mbox{\hyperlink{structpcb__t_a3ef7954f8714e8157ea82a5063ecdfed}{state}}
+\begin{DoxyCompactList}\small\item\em This the priority level of the process. (0, 1, or 2). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structpcb__t_a53ab4c02de07bcca467dff05771554a0}{open\+\_\+fds}}
+\begin{DoxyCompactList}\small\item\em This is an enum storing the process\textquotesingle{}s current state. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 This structure stores all required information about a running process. 
 
 \doxysubsection{Field Documentation}
+\Hypertarget{structpcb__t_a905cc6faa7cf99a347e57bebcdf0da5e}\label{structpcb__t_a905cc6faa7cf99a347e57bebcdf0da5e} 
+\index{pcb\_t@{pcb\_t}!child\_pids@{child\_pids}}
+\index{child\_pids@{child\_pids}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{child\_pids}{child\_pids}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}}\texorpdfstring{$\ast$}{*} pcb\+\_\+t\+::child\+\_\+pids}
+
+
+
+This stores the PPID of the process. 
+
 \Hypertarget{structpcb__t_a77c89dc39ec87e1fd4cd589e2e64cc67}\label{structpcb__t_a77c89dc39ec87e1fd4cd589e2e64cc67} 
 \index{pcb\_t@{pcb\_t}!handle@{handle}}
 \index{handle@{handle}!pcb\_t@{pcb\_t}}
 \doxysubsubsection{\texorpdfstring{handle}{handle}}
 {\footnotesize\ttfamily \mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} pcb\+\_\+t\+::handle}
 
+\Hypertarget{structpcb__t_a53ab4c02de07bcca467dff05771554a0}\label{structpcb__t_a53ab4c02de07bcca467dff05771554a0} 
+\index{pcb\_t@{pcb\_t}!open\_fds@{open\_fds}}
+\index{open\_fds@{open\_fds}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{open\_fds}{open\_fds}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}}\texorpdfstring{$\ast$}{*} pcb\+\_\+t\+::open\+\_\+fds}
 
 
-This stores a handle to the spthread. ~\newline
- 
+
+This is an enum storing the process\textquotesingle{}s current state. 
 
 \Hypertarget{structpcb__t_afa909915326969a57c5c1bd8b43954d4}\label{structpcb__t_afa909915326969a57c5c1bd8b43954d4} 
 \index{pcb\_t@{pcb\_t}!pid@{pid}}
@@ -46,7 +67,8 @@ This stores a handle to the spthread. ~\newline
 
 
 
-This stores the PID of the process. 
+This stores a handle to the spthread. ~\newline
+ 
 
 \Hypertarget{structpcb__t_ab2289d15508ab3188ef4276b93270eb9}\label{structpcb__t_ab2289d15508ab3188ef4276b93270eb9} 
 \index{pcb\_t@{pcb\_t}!ppid@{ppid}}
@@ -56,17 +78,27 @@ This stores the PID of the process.
 
 
 
-This stores the PPID of the process. 
+This stores the PID of the process. 
 
-\Hypertarget{structpcb__t_ad70cf1a6bd13085e99d0cce7eae3afc9}\label{structpcb__t_ad70cf1a6bd13085e99d0cce7eae3afc9} 
+\Hypertarget{structpcb__t_a2a5d945da32720d61039f315ab64f527}\label{structpcb__t_a2a5d945da32720d61039f315ab64f527} 
 \index{pcb\_t@{pcb\_t}!priority@{priority}}
 \index{priority@{priority}!pcb\_t@{pcb\_t}}
 \doxysubsubsection{\texorpdfstring{priority}{priority}}
-{\footnotesize\ttfamily int pcb\+\_\+t\+::priority}
+{\footnotesize\ttfamily unsigned int pcb\+\_\+t\+::priority}
 
 
 
-This the priority level of the process. (0, 1, or 2) 
+This stores a pointer to a dynamically sized array of child pid\+\_\+t\textquotesingle{}s. 
+
+\Hypertarget{structpcb__t_a3ef7954f8714e8157ea82a5063ecdfed}\label{structpcb__t_a3ef7954f8714e8157ea82a5063ecdfed} 
+\index{pcb\_t@{pcb\_t}!state@{state}}
+\index{state@{state}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+state\+\_\+t}} pcb\+\_\+t\+::state}
+
+
+
+This the priority level of the process. (0, 1, or 2). 
 
 
 

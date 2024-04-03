@@ -1,0 +1,77 @@
+\doxysection{src/penn-\/parser.c File Reference}
+\hypertarget{penn-parser_8c}{}\label{penn-parser_8c}\index{src/penn-\/parser.c@{src/penn-\/parser.c}}
+{\ttfamily \#include "{}penn-\/parser.\+h"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{penn-parser_8c_a2d8d57eaf3a198d5a8ed0de454d4d570}{parse\+\_\+command}} (const char \texorpdfstring{$\ast$}{*}const str\+\_\+to\+\_\+parse, struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}const out\+\_\+cmd)
+\item 
+int \mbox{\hyperlink{penn-parser_8c_af3ee24f38040c3b902fbc4868987a153}{separate\+\_\+to\+\_\+commands}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}cmds, int \texorpdfstring{$\ast$}{*}n, char \texorpdfstring{$\ast$}{*}parse\+\_\+string)
+\item 
+int \mbox{\hyperlink{penn-parser_8c_ab1d966c25ed0686b74b5626fbd5fff6f}{separate\+\_\+to\+\_\+args}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}cmds2, char \texorpdfstring{$\ast$}{*}single\+\_\+command, int command\+\_\+counter\+\_\+copy, bool background)
+\item 
+int \mbox{\hyperlink{penn-parser_8c_aac8338bc0d4c57449b45f82fe1f90cb2}{check\+\_\+errors}} (char \texorpdfstring{$\ast$}{*}str, bool \texorpdfstring{$\ast$}{*}background)
+\item 
+int \mbox{\hyperlink{penn-parser_8c_ab11b7102ab462a06adab7d8eb9ac101c}{check\+\_\+error2}} (char \texorpdfstring{$\ast$}{*}str, bool \texorpdfstring{$\ast$}{*}amp)
+\item 
+bool \mbox{\hyperlink{penn-parser_8c_ad664ef01961279b954ad2573304cfac5}{not\+\_\+whitespace}} (const char \texorpdfstring{$\ast$}{*}str, unsigned long index)
+\item 
+void \mbox{\hyperlink{penn-parser_8c_a4b133257fe0c69225864f7111cc6e0c3}{print\+\_\+parsed\+\_\+command}} (const struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}const cmd)
+\item 
+bool \mbox{\hyperlink{penn-parser_8c_a1597de24f80ec6c9f9c910f73dd4908f}{free\+\_\+parsed\+\_\+command}} (struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}const cmd)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{penn-parser_8c_ab11b7102ab462a06adab7d8eb9ac101c}\label{penn-parser_8c_ab11b7102ab462a06adab7d8eb9ac101c} 
+\index{penn-\/parser.c@{penn-\/parser.c}!check\_error2@{check\_error2}}
+\index{check\_error2@{check\_error2}!penn-\/parser.c@{penn-\/parser.c}}
+\doxysubsubsection{\texorpdfstring{check\_error2()}{check\_error2()}}
+{\footnotesize\ttfamily int check\+\_\+error2 (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{str,  }\item[{bool \texorpdfstring{$\ast$}{*}}]{amp }\end{DoxyParamCaption})}
+
+\Hypertarget{penn-parser_8c_aac8338bc0d4c57449b45f82fe1f90cb2}\label{penn-parser_8c_aac8338bc0d4c57449b45f82fe1f90cb2} 
+\index{penn-\/parser.c@{penn-\/parser.c}!check\_errors@{check\_errors}}
+\index{check\_errors@{check\_errors}!penn-\/parser.c@{penn-\/parser.c}}
+\doxysubsubsection{\texorpdfstring{check\_errors()}{check\_errors()}}
+{\footnotesize\ttfamily int check\+\_\+errors (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{str,  }\item[{bool \texorpdfstring{$\ast$}{*}}]{background }\end{DoxyParamCaption})}
+
+\Hypertarget{penn-parser_8c_a1597de24f80ec6c9f9c910f73dd4908f}\label{penn-parser_8c_a1597de24f80ec6c9f9c910f73dd4908f} 
+\index{penn-\/parser.c@{penn-\/parser.c}!free\_parsed\_command@{free\_parsed\_command}}
+\index{free\_parsed\_command@{free\_parsed\_command}!penn-\/parser.c@{penn-\/parser.c}}
+\doxysubsubsection{\texorpdfstring{free\_parsed\_command()}{free\_parsed\_command()}}
+{\footnotesize\ttfamily bool free\+\_\+parsed\+\_\+command (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}const}]{cmd }\end{DoxyParamCaption})}
+
+\Hypertarget{penn-parser_8c_ad664ef01961279b954ad2573304cfac5}\label{penn-parser_8c_ad664ef01961279b954ad2573304cfac5} 
+\index{penn-\/parser.c@{penn-\/parser.c}!not\_whitespace@{not\_whitespace}}
+\index{not\_whitespace@{not\_whitespace}!penn-\/parser.c@{penn-\/parser.c}}
+\doxysubsubsection{\texorpdfstring{not\_whitespace()}{not\_whitespace()}}
+{\footnotesize\ttfamily bool not\+\_\+whitespace (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str,  }\item[{unsigned long}]{index }\end{DoxyParamCaption})}
+
+\Hypertarget{penn-parser_8c_a2d8d57eaf3a198d5a8ed0de454d4d570}\label{penn-parser_8c_a2d8d57eaf3a198d5a8ed0de454d4d570} 
+\index{penn-\/parser.c@{penn-\/parser.c}!parse\_command@{parse\_command}}
+\index{parse\_command@{parse\_command}!penn-\/parser.c@{penn-\/parser.c}}
+\doxysubsubsection{\texorpdfstring{parse\_command()}{parse\_command()}}
+{\footnotesize\ttfamily int parse\+\_\+command (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}const}]{str\+\_\+to\+\_\+parse,  }\item[{struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}const}]{out\+\_\+cmd }\end{DoxyParamCaption})}
+
+\Hypertarget{penn-parser_8c_a4b133257fe0c69225864f7111cc6e0c3}\label{penn-parser_8c_a4b133257fe0c69225864f7111cc6e0c3} 
+\index{penn-\/parser.c@{penn-\/parser.c}!print\_parsed\_command@{print\_parsed\_command}}
+\index{print\_parsed\_command@{print\_parsed\_command}!penn-\/parser.c@{penn-\/parser.c}}
+\doxysubsubsection{\texorpdfstring{print\_parsed\_command()}{print\_parsed\_command()}}
+{\footnotesize\ttfamily void print\+\_\+parsed\+\_\+command (\begin{DoxyParamCaption}\item[{const struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}const}]{cmd }\end{DoxyParamCaption})}
+
+\Hypertarget{penn-parser_8c_ab1d966c25ed0686b74b5626fbd5fff6f}\label{penn-parser_8c_ab1d966c25ed0686b74b5626fbd5fff6f} 
+\index{penn-\/parser.c@{penn-\/parser.c}!separate\_to\_args@{separate\_to\_args}}
+\index{separate\_to\_args@{separate\_to\_args}!penn-\/parser.c@{penn-\/parser.c}}
+\doxysubsubsection{\texorpdfstring{separate\_to\_args()}{separate\_to\_args()}}
+{\footnotesize\ttfamily int separate\+\_\+to\+\_\+args (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{cmds2,  }\item[{char \texorpdfstring{$\ast$}{*}}]{single\+\_\+command,  }\item[{int}]{command\+\_\+counter\+\_\+copy,  }\item[{bool}]{background }\end{DoxyParamCaption})}
+
+\Hypertarget{penn-parser_8c_af3ee24f38040c3b902fbc4868987a153}\label{penn-parser_8c_af3ee24f38040c3b902fbc4868987a153} 
+\index{penn-\/parser.c@{penn-\/parser.c}!separate\_to\_commands@{separate\_to\_commands}}
+\index{separate\_to\_commands@{separate\_to\_commands}!penn-\/parser.c@{penn-\/parser.c}}
+\doxysubsubsection{\texorpdfstring{separate\_to\_commands()}{separate\_to\_commands()}}
+{\footnotesize\ttfamily int separate\+\_\+to\+\_\+commands (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{cmds,  }\item[{int \texorpdfstring{$\ast$}{*}}]{n,  }\item[{char \texorpdfstring{$\ast$}{*}}]{parse\+\_\+string }\end{DoxyParamCaption})}
+

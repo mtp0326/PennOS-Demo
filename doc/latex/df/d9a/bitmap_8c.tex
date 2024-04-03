@@ -1,0 +1,93 @@
+\doxysection{src/util/bitmap.c File Reference}
+\hypertarget{bitmap_8c}{}\label{bitmap_8c}\index{src/util/bitmap.c@{src/util/bitmap.c}}
+{\ttfamily \#include "{}bitmap.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{bitmap_8c_ada21d254ae27ec7d99242a5c92701f6e}{fd\+\_\+bitmap\+\_\+initialize}} (\mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*}bitmap)
+\begin{DoxyCompactList}\small\item\em Initializes the bitmap to all zeros, indicating that no file descriptors are in use. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{bitmap_8c_a350f8931422024711787caaef3182024}{fd\+\_\+bitmap\+\_\+set}} (\mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*}bitmap, uint32\+\_\+t fd)
+\begin{DoxyCompactList}\small\item\em Sets the bit for a given file descriptor, indicating it is now in use. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{bitmap_8c_ae7892d97c10f0b09280785812d1dfbcf}{fd\+\_\+bitmap\+\_\+clear}} (\mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*}bitmap, uint32\+\_\+t fd)
+\begin{DoxyCompactList}\small\item\em Clears the bit for a given file descriptor, indicating it is no longer in use. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{bitmap_8c_a7de93385481501b068dec877a52afb32}{fd\+\_\+bitmap\+\_\+test}} (const \mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*}bitmap, uint32\+\_\+t fd)
+\begin{DoxyCompactList}\small\item\em Tests whether the bit for a given file descriptor is set, indicating whether it is in use. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{bitmap_8c_ae7892d97c10f0b09280785812d1dfbcf}\label{bitmap_8c_ae7892d97c10f0b09280785812d1dfbcf} 
+\index{bitmap.c@{bitmap.c}!fd\_bitmap\_clear@{fd\_bitmap\_clear}}
+\index{fd\_bitmap\_clear@{fd\_bitmap\_clear}!bitmap.c@{bitmap.c}}
+\doxysubsubsection{\texorpdfstring{fd\_bitmap\_clear()}{fd\_bitmap\_clear()}}
+{\footnotesize\ttfamily bool fd\+\_\+bitmap\+\_\+clear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*}}]{bitmap,  }\item[{uint32\+\_\+t}]{fd }\end{DoxyParamCaption})}
+
+
+
+Clears the bit for a given file descriptor, indicating it is no longer in use. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bitmap} & A pointer to the file descriptor bitmap. \\
+\hline
+{\em fd} & The file descriptor to mark as not in use. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True if the operation was successful, false if the fd is out of range. 
+\end{DoxyReturn}
+\Hypertarget{bitmap_8c_ada21d254ae27ec7d99242a5c92701f6e}\label{bitmap_8c_ada21d254ae27ec7d99242a5c92701f6e} 
+\index{bitmap.c@{bitmap.c}!fd\_bitmap\_initialize@{fd\_bitmap\_initialize}}
+\index{fd\_bitmap\_initialize@{fd\_bitmap\_initialize}!bitmap.c@{bitmap.c}}
+\doxysubsubsection{\texorpdfstring{fd\_bitmap\_initialize()}{fd\_bitmap\_initialize()}}
+{\footnotesize\ttfamily void fd\+\_\+bitmap\+\_\+initialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*}}]{bitmap }\end{DoxyParamCaption})}
+
+
+
+Initializes the bitmap to all zeros, indicating that no file descriptors are in use. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bitmap} & A pointer to the file descriptor bitmap to initialize. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{bitmap_8c_a350f8931422024711787caaef3182024}\label{bitmap_8c_a350f8931422024711787caaef3182024} 
+\index{bitmap.c@{bitmap.c}!fd\_bitmap\_set@{fd\_bitmap\_set}}
+\index{fd\_bitmap\_set@{fd\_bitmap\_set}!bitmap.c@{bitmap.c}}
+\doxysubsubsection{\texorpdfstring{fd\_bitmap\_set()}{fd\_bitmap\_set()}}
+{\footnotesize\ttfamily bool fd\+\_\+bitmap\+\_\+set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*}}]{bitmap,  }\item[{uint32\+\_\+t}]{fd }\end{DoxyParamCaption})}
+
+
+
+Sets the bit for a given file descriptor, indicating it is now in use. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bitmap} & A pointer to the file descriptor bitmap. \\
+\hline
+{\em fd} & The file descriptor to mark as in use. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True if the operation was successful, false if the fd is out of range. 
+\end{DoxyReturn}
+\Hypertarget{bitmap_8c_a7de93385481501b068dec877a52afb32}\label{bitmap_8c_a7de93385481501b068dec877a52afb32} 
+\index{bitmap.c@{bitmap.c}!fd\_bitmap\_test@{fd\_bitmap\_test}}
+\index{fd\_bitmap\_test@{fd\_bitmap\_test}!bitmap.c@{bitmap.c}}
+\doxysubsubsection{\texorpdfstring{fd\_bitmap\_test()}{fd\_bitmap\_test()}}
+{\footnotesize\ttfamily bool fd\+\_\+bitmap\+\_\+test (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*}}]{bitmap,  }\item[{uint32\+\_\+t}]{fd }\end{DoxyParamCaption})}
+
+
+
+Tests whether the bit for a given file descriptor is set, indicating whether it is in use. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bitmap} & A pointer to the file descriptor bitmap. \\
+\hline
+{\em fd} & The file descriptor to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool True if the file descriptor is in use, false otherwise. 
+\end{DoxyReturn}

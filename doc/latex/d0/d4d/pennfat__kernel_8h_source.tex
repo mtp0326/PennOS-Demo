@@ -1,0 +1,45 @@
+\doxysection{pennfat\+\_\+kernel.\+h}
+\hypertarget{pennfat__kernel_8h_source}{}\label{pennfat__kernel_8h_source}\index{src/util/pennfat\_kernel.h@{src/util/pennfat\_kernel.h}}
+\mbox{\hyperlink{pennfat__kernel_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <sys/types.h>}\ \ \textcolor{comment}{//needed\ for\ ssize\_t,\ if\ we\ use\ ints,\ can\ remove}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{spthread_8h}{spthread.h}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structdirectory__entries}{directory\_entries}}\ \{}
+\DoxyCodeLine{00006\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structdirectory__entries_a078107917c22fc5656a6952eb33285f1}{name}}[32];}
+\DoxyCodeLine{00007\ \ \ uint32\_t\ \mbox{\hyperlink{structdirectory__entries_a7cc97989b9026b7b89576f94fde2deb7}{size}};}
+\DoxyCodeLine{00008\ \ \ uint16\_t\ \mbox{\hyperlink{structdirectory__entries_a83126d6724bed8d40f5dd21023409ead}{firstBlock}};}
+\DoxyCodeLine{00009\ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a1251eec3f57db41af2e3f887b737939d}{type}};}
+\DoxyCodeLine{00010\ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a08438d395d69ac79c6af58e8b04e66c8}{perm}};}
+\DoxyCodeLine{00011\ \ \ time\_t\ \mbox{\hyperlink{structdirectory__entries_a768620b88c243e244beb86b44aa20466}{mtime}};}
+\DoxyCodeLine{00012\ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a13b872d6333f7887d812a93056a7c4a7}{reserved}}[16];}
+\DoxyCodeLine{00013\ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structfile__descriptor__st}{file\_descriptor\_st}}\ \{}
+\DoxyCodeLine{00016\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}};}
+\DoxyCodeLine{00017\ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structfile__descriptor__st_a25cb5acb6a5c6e546b04f04cc56ee2be}{fname}};}
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af4c53d9cd39f2efd92817d4605911fbf}{mode}};}
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af7e61caeb159b544e2467d9a56e340fa}{offset}};}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{/************************************************}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ \ PENNFAT\ KERNEL\ LEVEL\ FUNCTIONS}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ ***********************************************/}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00060\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a4d2cf4232cddee738996ca9ad83ea56f}{k\_open}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname,\ \textcolor{keywordtype}{int}\ mode);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00070\ ssize\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a1951ec11865274b45144d6dd6f878692}{k\_read}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{char}*\ buf);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00080\ ssize\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a79d2a9b65d0e04de358fe1a2cfa79baf}{k\_write}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ \textcolor{keywordtype}{int}\ n);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00088\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a9ecd38dc6f3a9721ab53ff9a815b5480}{k\_close}}(\textcolor{keywordtype}{int}\ fd);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00096\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_ae8b44b3621ebb542bec49f73d19d2885}{k\_unlink}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00107\ off\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96}{k\_lseek}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keywordtype}{int}\ offset,\ \textcolor{keywordtype}{int}\ whence);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00114\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat__kernel_8h_a9317fe11a36bfc2d731bcbacc3a57728}{k\_ls}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename);}
+
+\end{DoxyCode}

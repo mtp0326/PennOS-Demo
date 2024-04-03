@@ -1,6 +1,22 @@
 {
   "files.associations": {
     "pennfat_kernel.h": "c",
-    "stdint.h": "c"
+    "stdint.h": "c",
+    "string.h": "c",
+    "types.h": "c",
+    "stddef.h": "c",
+    "penn-parser.h": "c",
+    "pennfat.h": "c",
+    "stdlib.h": "c",
+    "pennos.h": "c",
+    "unistd.h": "c",
+    "kernel.h": "c",
+    "array.h": "c",
+    "stdbool.h": "c",
+    "clinkedlist.h": "c",
+    "spthread.h": "c",
+    "bitmap.h": "c",
+    "prioritylist.h": "c",
+    "sys_call.h": "c"
   }
 }

@@ -19,6 +19,8 @@ struct file_descriptor_st {
   int offset;
 };
 
+uint16_t* fat;
+
 /************************************************
  *  PENNFAT KERNEL LEVEL FUNCTIONS
  ***********************************************/
@@ -62,19 +64,52 @@ int k_open(const char* fname, int mode);
 /**
  * @brief
  *
- * @param fd
+ * @param fd A
  * @param n
  * @param buf
  * @return ssize_t
  */
 ssize_t k_read(int fd, int n, char* buf);
 
+/**
+ * @brief
+ *
+ * @param fd
+ * @param str
+ * @param n
+ * @return ssize_t
+ */
 ssize_t k_write(int fd, const char* str, int n);
 
+/**
+ * @brief
+ *
+ * @param fd
+ * @return int
+ */
 int k_close(int fd);
 
+/**
+ * @brief
+ *
+ * @param fname
+ * @return int
+ */
 int k_unlink(const char* fname);
 
+/**
+ * @brief
+ *
+ * @param fd
+ * @param offset
+ * @param whence
+ * @return off_t
+ */
 off_t k_lseek(int fd, int offset, int whence);
 
+/**
+ * @brief
+ *
+ * @param filename
+ */
 void k_ls(const char* filename);

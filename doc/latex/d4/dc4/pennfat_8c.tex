@@ -1,2 +1,112 @@
 \doxysection{src/pennfat.c File Reference}
 \hypertarget{pennfat_8c}{}\label{pennfat_8c}\index{src/pennfat.c@{src/pennfat.c}}
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$sys/mman.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include "{}penn-\/parser.\+h"{}}\newline
+{\ttfamily \#include "{}pennfat.\+h"{}}\newline
+{\ttfamily \#include "{}util/pennfat\+\_\+kernel.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pennfat_8c_aabf4f709c8199e41cf279c77112345fe}{MAX\+\_\+\+LEN}}~4096
+\item 
+\#define \mbox{\hyperlink{pennfat_8c_a42dd65bff5e0d98e3d17b523e65b9e06}{MAX\+\_\+\+FD\+\_\+\+NUM}}~1024
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{pennfat_8c_aa7e4fe1d0c843e02dfdba34edc69fe91}{prompt}} ()
+\item 
+void \mbox{\hyperlink{pennfat_8c_a16c44eadc8a5f1fbd168422e13eb6890}{read\+\_\+command}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}cmds)
+\item 
+void \mbox{\hyperlink{pennfat_8c_a95c1eedbf28e070d02d04fbbb832a3b8}{int\+\_\+handler}} (int signo)
+\item 
+int \mbox{\hyperlink{pennfat_8c_a1d5876a5f78107bed3847c8d5485b7c4}{get\+\_\+block\+\_\+size}} (int block\+\_\+size\+\_\+config)
+\item 
+int \mbox{\hyperlink{pennfat_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat_8c_a0e52a1a113ded7f4787290edc22ad954}{fat}} = NULL
+\item 
+int \mbox{\hyperlink{pennfat_8c_a439227feff9d7f55384e8780cfc2eb82}{size}} = 0
+\item 
+struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat_8c_aaa044c9a05adf7c4c653586036be5bd7}{global\+\_\+fd\+\_\+table}} = NULL
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pennfat_8c_a42dd65bff5e0d98e3d17b523e65b9e06}\label{pennfat_8c_a42dd65bff5e0d98e3d17b523e65b9e06} 
+\index{pennfat.c@{pennfat.c}!MAX\_FD\_NUM@{MAX\_FD\_NUM}}
+\index{MAX\_FD\_NUM@{MAX\_FD\_NUM}!pennfat.c@{pennfat.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_FD\_NUM}{MAX\_FD\_NUM}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+FD\+\_\+\+NUM~1024}
+
+\Hypertarget{pennfat_8c_aabf4f709c8199e41cf279c77112345fe}\label{pennfat_8c_aabf4f709c8199e41cf279c77112345fe} 
+\index{pennfat.c@{pennfat.c}!MAX\_LEN@{MAX\_LEN}}
+\index{MAX\_LEN@{MAX\_LEN}!pennfat.c@{pennfat.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_LEN}{MAX\_LEN}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+LEN~4096}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{pennfat_8c_a1d5876a5f78107bed3847c8d5485b7c4}\label{pennfat_8c_a1d5876a5f78107bed3847c8d5485b7c4} 
+\index{pennfat.c@{pennfat.c}!get\_block\_size@{get\_block\_size}}
+\index{get\_block\_size@{get\_block\_size}!pennfat.c@{pennfat.c}}
+\doxysubsubsection{\texorpdfstring{get\_block\_size()}{get\_block\_size()}}
+{\footnotesize\ttfamily int get\+\_\+block\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+size\+\_\+config }\end{DoxyParamCaption})}
+
+\Hypertarget{pennfat_8c_a95c1eedbf28e070d02d04fbbb832a3b8}\label{pennfat_8c_a95c1eedbf28e070d02d04fbbb832a3b8} 
+\index{pennfat.c@{pennfat.c}!int\_handler@{int\_handler}}
+\index{int\_handler@{int\_handler}!pennfat.c@{pennfat.c}}
+\doxysubsubsection{\texorpdfstring{int\_handler()}{int\_handler()}}
+{\footnotesize\ttfamily void int\+\_\+handler (\begin{DoxyParamCaption}\item[{int}]{signo }\end{DoxyParamCaption})}
+
+\Hypertarget{pennfat_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{pennfat_8c_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{pennfat.c@{pennfat.c}!main@{main}}
+\index{main@{main}!pennfat.c@{pennfat.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\Hypertarget{pennfat_8c_aa7e4fe1d0c843e02dfdba34edc69fe91}\label{pennfat_8c_aa7e4fe1d0c843e02dfdba34edc69fe91} 
+\index{pennfat.c@{pennfat.c}!prompt@{prompt}}
+\index{prompt@{prompt}!pennfat.c@{pennfat.c}}
+\doxysubsubsection{\texorpdfstring{prompt()}{prompt()}}
+{\footnotesize\ttfamily void prompt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{pennfat_8c_a16c44eadc8a5f1fbd168422e13eb6890}\label{pennfat_8c_a16c44eadc8a5f1fbd168422e13eb6890} 
+\index{pennfat.c@{pennfat.c}!read\_command@{read\_command}}
+\index{read\_command@{read\_command}!pennfat.c@{pennfat.c}}
+\doxysubsubsection{\texorpdfstring{read\_command()}{read\_command()}}
+{\footnotesize\ttfamily void read\+\_\+command (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{cmds }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{pennfat_8c_a0e52a1a113ded7f4787290edc22ad954}\label{pennfat_8c_a0e52a1a113ded7f4787290edc22ad954} 
+\index{pennfat.c@{pennfat.c}!fat@{fat}}
+\index{fat@{fat}!pennfat.c@{pennfat.c}}
+\doxysubsubsection{\texorpdfstring{fat}{fat}}
+{\footnotesize\ttfamily uint16\+\_\+t\texorpdfstring{$\ast$}{*} fat = NULL}
+
+\Hypertarget{pennfat_8c_aaa044c9a05adf7c4c653586036be5bd7}\label{pennfat_8c_aaa044c9a05adf7c4c653586036be5bd7} 
+\index{pennfat.c@{pennfat.c}!global\_fd\_table@{global\_fd\_table}}
+\index{global\_fd\_table@{global\_fd\_table}!pennfat.c@{pennfat.c}}
+\doxysubsubsection{\texorpdfstring{global\_fd\_table}{global\_fd\_table}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}}\texorpdfstring{$\ast$}{*} global\+\_\+fd\+\_\+table = NULL}
+
+\Hypertarget{pennfat_8c_a439227feff9d7f55384e8780cfc2eb82}\label{pennfat_8c_a439227feff9d7f55384e8780cfc2eb82} 
+\index{pennfat.c@{pennfat.c}!size@{size}}
+\index{size@{size}!pennfat.c@{pennfat.c}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily int size = 0}
+

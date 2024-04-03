@@ -78,9 +78,217 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">pennfat.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/mman.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="../../d7/da1/penn-parser_8h_source.html">penn-parser.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../dc/d3d/pennfat_8h_source.html">pennfat.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d0/d4d/pennfat__kernel_8h_source.html">util/pennfat_kernel.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aabf4f709c8199e41cf279c77112345fe" id="r_aabf4f709c8199e41cf279c77112345fe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabf4f709c8199e41cf279c77112345fe">MAX_LEN</a>&#160;&#160;&#160;4096</td></tr>
+<tr class="separator:aabf4f709c8199e41cf279c77112345fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42dd65bff5e0d98e3d17b523e65b9e06" id="r_a42dd65bff5e0d98e3d17b523e65b9e06"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42dd65bff5e0d98e3d17b523e65b9e06">MAX_FD_NUM</a>&#160;&#160;&#160;1024</td></tr>
+<tr class="separator:a42dd65bff5e0d98e3d17b523e65b9e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aa7e4fe1d0c843e02dfdba34edc69fe91" id="r_aa7e4fe1d0c843e02dfdba34edc69fe91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7e4fe1d0c843e02dfdba34edc69fe91">prompt</a> ()</td></tr>
+<tr class="separator:aa7e4fe1d0c843e02dfdba34edc69fe91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16c44eadc8a5f1fbd168422e13eb6890" id="r_a16c44eadc8a5f1fbd168422e13eb6890"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a16c44eadc8a5f1fbd168422e13eb6890">read_command</a> (char **cmds)</td></tr>
+<tr class="separator:a16c44eadc8a5f1fbd168422e13eb6890"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95c1eedbf28e070d02d04fbbb832a3b8" id="r_a95c1eedbf28e070d02d04fbbb832a3b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95c1eedbf28e070d02d04fbbb832a3b8">int_handler</a> (int signo)</td></tr>
+<tr class="separator:a95c1eedbf28e070d02d04fbbb832a3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d5876a5f78107bed3847c8d5485b7c4" id="r_a1d5876a5f78107bed3847c8d5485b7c4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d5876a5f78107bed3847c8d5485b7c4">get_block_size</a> (int block_size_config)</td></tr>
+<tr class="separator:a1d5876a5f78107bed3847c8d5485b7c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+<tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a0e52a1a113ded7f4787290edc22ad954" id="r_a0e52a1a113ded7f4787290edc22ad954"><td class="memItemLeft" align="right" valign="top">uint16_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e52a1a113ded7f4787290edc22ad954">fat</a> = NULL</td></tr>
+<tr class="separator:a0e52a1a113ded7f4787290edc22ad954"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a439227feff9d7f55384e8780cfc2eb82" id="r_a439227feff9d7f55384e8780cfc2eb82"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a439227feff9d7f55384e8780cfc2eb82">size</a> = 0</td></tr>
+<tr class="separator:a439227feff9d7f55384e8780cfc2eb82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa044c9a05adf7c4c653586036be5bd7" id="r_aaa044c9a05adf7c4c653586036be5bd7"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa044c9a05adf7c4c653586036be5bd7">global_fd_table</a> = NULL</td></tr>
+<tr class="separator:aaa044c9a05adf7c4c653586036be5bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a42dd65bff5e0d98e3d17b523e65b9e06" name="a42dd65bff5e0d98e3d17b523e65b9e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42dd65bff5e0d98e3d17b523e65b9e06">&#9670;&#160;</a></span>MAX_FD_NUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_FD_NUM&#160;&#160;&#160;1024</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aabf4f709c8199e41cf279c77112345fe" name="aabf4f709c8199e41cf279c77112345fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabf4f709c8199e41cf279c77112345fe">&#9670;&#160;</a></span>MAX_LEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_LEN&#160;&#160;&#160;4096</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a1d5876a5f78107bed3847c8d5485b7c4" name="a1d5876a5f78107bed3847c8d5485b7c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d5876a5f78107bed3847c8d5485b7c4">&#9670;&#160;</a></span>get_block_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_block_size </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>block_size_config</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a95c1eedbf28e070d02d04fbbb832a3b8" name="a95c1eedbf28e070d02d04fbbb832a3b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95c1eedbf28e070d02d04fbbb832a3b8">&#9670;&#160;</a></span>int_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void int_handler </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>signo</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>argv</em>[]</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7e4fe1d0c843e02dfdba34edc69fe91" name="aa7e4fe1d0c843e02dfdba34edc69fe91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7e4fe1d0c843e02dfdba34edc69fe91">&#9670;&#160;</a></span>prompt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void prompt </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a16c44eadc8a5f1fbd168422e13eb6890" name="a16c44eadc8a5f1fbd168422e13eb6890"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16c44eadc8a5f1fbd168422e13eb6890">&#9670;&#160;</a></span>read_command()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void read_command </td>
+          <td>(</td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>cmds</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a0e52a1a113ded7f4787290edc22ad954" name="a0e52a1a113ded7f4787290edc22ad954"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e52a1a113ded7f4787290edc22ad954">&#9670;&#160;</a></span>fat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t* fat = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa044c9a05adf7c4c653586036be5bd7" name="aaa044c9a05adf7c4c653586036be5bd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa044c9a05adf7c4c653586036be5bd7">&#9670;&#160;</a></span>global_fd_table</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a>* global_fd_table = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a439227feff9d7f55384e8780cfc2eb82" name="a439227feff9d7f55384e8780cfc2eb82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a439227feff9d7f55384e8780cfc2eb82">&#9670;&#160;</a></span>size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int size = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
