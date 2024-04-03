@@ -20,5 +20,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "penn-parser.h"
+#include "util/globals.h"
+#include "util/kernel.h"
 
 #endif

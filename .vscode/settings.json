@@ -17,6 +17,8 @@
     "spthread.h": "c",
     "bitmap.h": "c",
     "prioritylist.h": "c",
-    "sys_call.h": "c"
+    "sys_call.h": "c",
+    "signal.h": "c",
+    "globals.h": "c"
   }
 }

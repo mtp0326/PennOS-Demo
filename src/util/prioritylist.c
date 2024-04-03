@@ -30,11 +30,11 @@ void add_priority(PList* list, unsigned int priority) {
     list->head = newNode;
   } else {
     // Insert the new node at the end of the list
-    PNode* current = list->head;
-    while (current->next != list->head) {
-      current = current->next;
+    PNode* currentnode = list->head;
+    while (currentnode->next != list->head) {
+      currentnode = currentnode->next;
     }
-    current->next = newNode;
+    currentnode->next = newNode;
     newNode->next = list->head;  // Complete the circle
   }
   list->size++;
@@ -46,32 +46,32 @@ bool remove_priority(PList* list, unsigned int priority) {
     return false;  // List is empty or not initialized
   }
 
-  PNode *current = list->head, *prev = NULL;
+  PNode *currentnode = list->head, *prev = NULL;
   do {
-    if (current->priority == priority) {
-      if (prev == NULL) {                   // Removing the head
-        if (current->next == list->head) {  // Only one element
+    if (currentnode->priority == priority) {
+      if (prev == NULL) {                       // Removing the head
+        if (currentnode->next == list->head) {  // Only one element
           list->head = NULL;
         } else {
           prev = list->head;
           while (prev->next != list->head)
             prev = prev->next;
-          list->head = current->next;
+          list->head = currentnode->next;
           prev->next = list->head;
         }
       } else {  // Removing non-head
-        prev->next = current->next;
-        if (current == list->head) {
-          list->head = current->next;
+        prev->next = currentnode->next;
+        if (currentnode == list->head) {
+          list->head = currentnode->next;
         }
       }
-      free(current);
+      free(currentnode);
       list->size--;
       return true;
     }
-    prev = current;
-    current = current->next;
-  } while (current != list->head);
+    prev = currentnode;
+    currentnode = currentnode->next;
+  } while (currentnode != list->head);
 
   return false;  // Process not found
 }

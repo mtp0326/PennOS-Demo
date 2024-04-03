@@ -2,7 +2,10 @@
 #define SYSCALL_H
 
 #include <stdbool.h>
+#include <string.h>
 #include <unistd.h>
+#include "globals.h"
+#include "kernel.h"
 
 /*============================ system call functions for interacting with PennOS
  * process creation ===================================*/

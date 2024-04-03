@@ -22,12 +22,10 @@ var searchData=
   ['priority_19',['priority',['../dc/d5f/structpcb__t.html#a2a5d945da32720d61039f315ab64f527',1,'pcb_t::priority'],['../df/d3e/structPNode.html#ac15c687cddcb5d49fcf31384b9e6befe',1,'PNode::priority'],['../d8/d75/pennos_8c.html#a2e0cca4a43c21259b881d59c96c74fe0',1,'priority:&#160;pennos.c']]],
   ['prioritylist_2ec_20',['prioritylist.c',['../d8/deb/prioritylist_8c.html',1,'']]],
   ['prioritylist_2eh_21',['prioritylist.h',['../d6/dda/prioritylist_8h.html',1,'']]],
-  ['priorityone_22',['priorityone',['../d8/d75/pennos_8c.html#a1005ad0a39b160b03dde29ddf5d4f5c5',1,'pennos.c']]],
-  ['prioritytwo_23',['prioritytwo',['../d8/d75/pennos_8c.html#a2aee165dc0e989f3811176f7379c3240',1,'pennos.c']]],
-  ['priorityzero_24',['priorityzero',['../d8/d75/pennos_8c.html#af2c0006b0b241fed77f97d0ddb81b3f9',1,'pennos.c']]],
-  ['process_25',['process',['../d8/d49/structNode.html#adbf20bfd8d88beabfe71bfd053f61959',1,'Node']]],
-  ['process_5fstate_5ft_26',['process_state_t',['../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854',1,'kernel.h']]],
-  ['prompt_27',['prompt',['../d4/dc4/pennfat_8c.html#aa7e4fe1d0c843e02dfdba34edc69fe91',1,'prompt():&#160;pennfat.c'],['../dc/d3d/pennfat_8h.html#aa7e4fe1d0c843e02dfdba34edc69fe91',1,'prompt():&#160;pennfat.c']]],
-  ['prompt_28',['PROMPT',['../dc/d3d/pennfat_8h.html#accdbea14ea06c15e271784368bd993e8',1,'pennfat.h']]],
-  ['pthread_5ffn_29',['pthread_fn',['../de/d1c/spthread_8c.html#a6993ce178ebbd398c97b9cd8ea65b8cd',1,'spthread.c']]]
+  ['process_22',['process',['../d8/d49/structNode.html#adbf20bfd8d88beabfe71bfd053f61959',1,'Node']]],
+  ['process_5fstate_5ft_23',['process_state_t',['../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854',1,'kernel.h']]],
+  ['processes_24',['processes',['../db/d28/globals_8c.html#a02d81cd80b6c38b0ce741c9244fd9f17',1,'processes:&#160;globals.c'],['../d5/d87/globals_8h.html#a02d81cd80b6c38b0ce741c9244fd9f17',1,'processes:&#160;globals.c']]],
+  ['prompt_25',['PROMPT',['../dc/d3d/pennfat_8h.html#accdbea14ea06c15e271784368bd993e8',1,'pennfat.h']]],
+  ['prompt_26',['prompt',['../d4/dc4/pennfat_8c.html#aa7e4fe1d0c843e02dfdba34edc69fe91',1,'prompt():&#160;pennfat.c'],['../dc/d3d/pennfat_8h.html#aa7e4fe1d0c843e02dfdba34edc69fe91',1,'prompt():&#160;pennfat.c']]],
+  ['pthread_5ffn_27',['pthread_fn',['../de/d1c/spthread_8c.html#a6993ce178ebbd398c97b9cd8ea65b8cd',1,'spthread.c']]]
 ];

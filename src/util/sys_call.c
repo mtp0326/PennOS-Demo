@@ -1,6 +1,4 @@
 #include "sys_call.h"
-#include "kernel.h"
-#include "pennos.h"
 
 // Helper function to duplicate argv for the child process
 char** duplicate_argv(char* argv[]) {
@@ -52,43 +50,40 @@ void free_argv(char* argv[]) {
 }
 
 pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
-  // not yet working, trying to include pcb_t* current but not all of pennos.c
-  /*
-pcb_t* curr = current;
-pcb_t* child = k_proc_create(curr);
-if (child == NULL) {
-  return -1;
-}
+  pcb_t* child = k_proc_create(current);
+  if (child == NULL) {
+    return -1;
+  }
 
-char** child_argv = duplicate_argv(argv);
-if (child_argv == NULL) {
-  k_proc_cleanup(child);
-  return -1;
-}
+  char** child_argv = duplicate_argv(argv);
+  if (child_argv == NULL) {
+    k_proc_cleanup(child);
+    return -1;
+  }
 
-fd_bitmap_set(child->open_fds, fd0);
-fd_bitmap_set(child->open_fds, fd1);
+  fd_bitmap_set(child->open_fds, fd0);
+  fd_bitmap_set(child->open_fds, fd1);
 
-struct child_process_arg {
-  char** argv;
+  struct child_process_arg {
+    char** argv;
 
-}* arg = malloc(sizeof(struct child_process_arg));
+  }* arg = malloc(sizeof(struct child_process_arg));
 
-if (arg == NULL) {
-  k_proc_cleanup(child);
-  free(child_argv);
-  return -1;
-}
-arg->argv = child_argv;
-if (spthread_create(&child->handle, NULL, func, arg) != 0) {
-  k_proc_cleanup(child);
-  free_argv(argv);
-  free(arg);
-  return -1;
-}
-return (child->pid);
-*/
-  return 0;
+  if (arg == NULL) {
+    k_proc_cleanup(child);
+    free(child_argv);
+    return -1;
+  }
+  arg->argv = child_argv;
+
+  add_process(processes[child->priority], child);
+  if (spthread_create(&child->handle, NULL, func, arg) != 0) {
+    k_proc_cleanup(child);
+    free_argv(argv);
+    free(arg);
+    return -1;
+  }
+  return (child->pid);
 }
 
 pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang);

@@ -31,11 +31,11 @@ void add_process(CircularList* list, pcb_t* process) {
     list->head = newNode;
   } else {
     // Insert the new node at the end of the list
-    Node* current = list->head;
-    while (current->next != list->head) {
-      current = current->next;
+    Node* currentnode = list->head;
+    while (currentnode->next != list->head) {
+      currentnode = currentnode->next;
     }
-    current->next = newNode;
+    currentnode->next = newNode;
     newNode->next = list->head;  // Complete the circle
   }
   list->size++;
@@ -47,32 +47,32 @@ bool remove_process(CircularList* list, pid_t pid) {
     return false;  // List is empty or not initialized
   }
 
-  Node *current = list->head, *prev = NULL;
+  Node *currentnode = list->head, *prev = NULL;
   do {
-    if (current->process->pid == pid) {
-      if (prev == NULL) {                   // Removing the head
-        if (current->next == list->head) {  // Only one element
+    if (currentnode->process->pid == pid) {
+      if (prev == NULL) {                       // Removing the head
+        if (currentnode->next == list->head) {  // Only one element
           list->head = NULL;
         } else {
           prev = list->head;
           while (prev->next != list->head)
             prev = prev->next;
-          list->head = current->next;
+          list->head = currentnode->next;
           prev->next = list->head;
         }
       } else {  // Removing non-head
-        prev->next = current->next;
-        if (current == list->head) {
-          list->head = current->next;
+        prev->next = currentnode->next;
+        if (currentnode == list->head) {
+          list->head = currentnode->next;
         }
       }
-      free(current);
+      free(currentnode);
       list->size--;
       return true;
     }
-    prev = current;
-    current = current->next;
-  } while (current != list->head);
+    prev = currentnode;
+    currentnode = currentnode->next;
+  } while (currentnode != list->head);
 
   return false;  // Process not found
 }
@@ -83,13 +83,13 @@ pcb_t* find_process(CircularList* list, pid_t pid) {
     return NULL;  // List is empty or not initialized
   }
 
-  Node* current = list->head;
+  Node* currentnode = list->head;
   do {
-    if (current->process->pid == pid) {
-      return current->process;
+    if (currentnode->process->pid == pid) {
+      return currentnode->process;
     }
-    current = current->next;
-  } while (current != list->head);
+    currentnode = currentnode->next;
+  } while (currentnode != list->head);
 
   return NULL;  // Process not found
 }

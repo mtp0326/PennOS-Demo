@@ -1,8 +1,6 @@
 \doxysection{src/pennos.c File Reference}
 \hypertarget{pennos_8c}{}\label{pennos_8c}\index{src/pennos.c@{src/pennos.c}}
 {\ttfamily \#include "{}pennos.\+h"{}}\newline
-{\ttfamily \#include "{}util/array.\+h"{}}\newline
-{\ttfamily \#include "{}util/clinkedlist.\+h"{}}\newline
 {\ttfamily \#include "{}util/kernel.\+h"{}}\newline
 {\ttfamily \#include "{}util/prioritylist.\+h"{}}\newline
 {\ttfamily \#include "{}pennfat.\+h"{}}\newline
@@ -17,14 +15,6 @@ int \mbox{\hyperlink{pennos_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int ar
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
-\item 
-\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennos_8c_af2c0006b0b241fed77f97d0ddb81b3f9}{priorityzero}}
-\item 
-\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennos_8c_a1005ad0a39b160b03dde29ddf5d4f5c5}{priorityone}}
-\item 
-\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennos_8c_a2aee165dc0e989f3811176f7379c3240}{prioritytwo}}
-\item 
-\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennos_8c_aadfd9da35df54aa07940062a8b8326e2}{current}}
 \item 
 \mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}}
 \end{DoxyCompactItemize}
@@ -52,33 +42,9 @@ int \mbox{\hyperlink{pennos_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int ar
 
 
 \doxysubsection{Variable Documentation}
-\Hypertarget{pennos_8c_aadfd9da35df54aa07940062a8b8326e2}\label{pennos_8c_aadfd9da35df54aa07940062a8b8326e2} 
-\index{pennos.c@{pennos.c}!current@{current}}
-\index{current@{current}!pennos.c@{pennos.c}}
-\doxysubsubsection{\texorpdfstring{current}{current}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}}\texorpdfstring{$\ast$}{*} current}
-
 \Hypertarget{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}\label{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0} 
 \index{pennos.c@{pennos.c}!priority@{priority}}
 \index{priority@{priority}!pennos.c@{pennos.c}}
 \doxysubsubsection{\texorpdfstring{priority}{priority}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structPList}{PList}}\texorpdfstring{$\ast$}{*} priority}
-
-\Hypertarget{pennos_8c_a1005ad0a39b160b03dde29ddf5d4f5c5}\label{pennos_8c_a1005ad0a39b160b03dde29ddf5d4f5c5} 
-\index{pennos.c@{pennos.c}!priorityone@{priorityone}}
-\index{priorityone@{priorityone}!pennos.c@{pennos.c}}
-\doxysubsubsection{\texorpdfstring{priorityone}{priorityone}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structCircularList}{Circular\+List}}\texorpdfstring{$\ast$}{*} priorityone}
-
-\Hypertarget{pennos_8c_a2aee165dc0e989f3811176f7379c3240}\label{pennos_8c_a2aee165dc0e989f3811176f7379c3240} 
-\index{pennos.c@{pennos.c}!prioritytwo@{prioritytwo}}
-\index{prioritytwo@{prioritytwo}!pennos.c@{pennos.c}}
-\doxysubsubsection{\texorpdfstring{prioritytwo}{prioritytwo}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structCircularList}{Circular\+List}}\texorpdfstring{$\ast$}{*} prioritytwo}
-
-\Hypertarget{pennos_8c_af2c0006b0b241fed77f97d0ddb81b3f9}\label{pennos_8c_af2c0006b0b241fed77f97d0ddb81b3f9} 
-\index{pennos.c@{pennos.c}!priorityzero@{priorityzero}}
-\index{priorityzero@{priorityzero}!pennos.c@{pennos.c}}
-\doxysubsubsection{\texorpdfstring{priorityzero}{priorityzero}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structCircularList}{Circular\+List}}\texorpdfstring{$\ast$}{*} priorityzero}
 

@@ -1,6 +1,4 @@
 #include "pennos.h"
-#include "util/array.h"
-#include "util/clinkedlist.h"
 #include "util/kernel.h"
 #include "util/prioritylist.h"
 
@@ -9,12 +7,6 @@ static pthread_mutex_t done_lock;
 static bool done = false;
 
 static const int centisecond = 10000;  // 10 milliseconds
-
-CircularList* priorityzero;
-CircularList* priorityone;
-CircularList* prioritytwo;
-
-pcb_t* current;
 
 PList* priority;
 
@@ -64,23 +56,23 @@ void scheduler(void) {
     // need to add logic in case no processes of a given priority level for
     // future
     if (priority->head->priority == 0) {
-      priorityzero->head = priorityzero->head->next;
+      processes[0]->head = processes[0]->head->next;
     } else if (priority->head->priority == 1) {
-      priorityone->head = priorityone->head->next;
+      processes[1]->head = processes[1]->head->next;
     } else {
-      prioritytwo->head = prioritytwo->head->next;
+      processes[2]->head = processes[2]->head->next;
     }
     priority->head = priority->head->next;
 
     if (priority->head->priority == 0) {
-      current = priorityzero->head->process;
-      curr_thread = priorityzero->head->process->handle;
+      current = processes[0]->head->process;
+      curr_thread = processes[0]->head->process->handle;
     } else if (priority->head->priority == 1) {
-      current = priorityone->head->process;
-      curr_thread = priorityone->head->process->handle;
+      current = processes[1]->head->process;
+      curr_thread = processes[1]->head->process->handle;
     } else {
-      current = prioritytwo->head->process;
-      curr_thread = prioritytwo->head->process->handle;
+      current = processes[2]->head->process;
+      curr_thread = processes[2]->head->process->handle;
     }
     spthread_continue(curr_thread);
     sigsuspend(&suspend_set);
@@ -99,10 +91,11 @@ void cancel_and_join(spthread_t thread) {
 #include "pennfat.h"
 
 int main(int argc, char** argv) {
+  processes[0] = init_list();
+  processes[1] = init_list();
+  processes[2] = init_list();
   // create the circular linked lists
-  priorityzero = init_list();
-  priorityone = init_list();
-  prioritytwo = init_list();
+
   priority = init_priority();
   pthread_mutex_init(&done_lock, NULL);
   spthread_t temp;
@@ -134,7 +127,7 @@ int main(int argc, char** argv) {
     spthread_create(&temp, NULL, inc, arg);
     pcb_t* ahh = malloc(sizeof(pcb_t));
     ahh->handle = temp;
-    add_process(priorityzero, ahh);
+    add_process(processes[0], ahh);
   }
   for (int i = 2; i < 4; i++) {
     int* arg = malloc(sizeof(int));
@@ -142,7 +135,7 @@ int main(int argc, char** argv) {
     spthread_create(&temp, NULL, inc, arg);
     pcb_t* ahh = malloc(sizeof(pcb_t));
     ahh->handle = temp;
-    add_process(priorityone, ahh);
+    add_process(processes[1], ahh);
   }
   for (int i = 4; i < 6; i++) {
     int* arg = malloc(sizeof(int));
@@ -150,15 +143,15 @@ int main(int argc, char** argv) {
     spthread_create(&temp, NULL, inc, arg);
     pcb_t* ahh = malloc(sizeof(pcb_t));
     ahh->handle = temp;
-    add_process(prioritytwo, ahh);
+    add_process(processes[2], ahh);
   }
 
   scheduler();
 
   // cleanup
-  while (priorityzero->size != 0) {
-    cancel_and_join(priorityzero->head->process->handle);
-    remove_process(priorityzero, priorityzero->head->process->pid);
+  while (processes[0]->size != 0) {
+    cancel_and_join(processes[0]->head->process->handle);
+    remove_process(processes[0], processes[0]->head->process->pid);
   }
 
   pthread_mutex_destroy(&done_lock);
