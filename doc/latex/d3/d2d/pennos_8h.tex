@@ -1,15 +1,30 @@
 \doxysection{src/pennos.h File Reference}
 \hypertarget{pennos_8h}{}\label{pennos_8h}\index{src/pennos.h@{src/pennos.h}}
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include "{}penn-\/parser.\+h"{}}\newline
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{pennos_8h_a3024ccd4a9af5109d24e6c57565d74a1}{\+\_\+\+POSIX\+\_\+\+C\+\_\+\+SOURCE}}~200809L
 \item 
+\#define \mbox{\hyperlink{pennos_8h_a8fb447618db946a9e2a596d9ea18763f}{\+\_\+\+DEFAULT\+\_\+\+SOURCE}}~1
+\item 
 \#define \mbox{\hyperlink{pennos_8h_a78c99ffd76a7bb3c8c74db76207e9ab4}{\+\_\+\+XOPEN\+\_\+\+SOURCE}}~700
+\item 
+\#define \mbox{\hyperlink{pennos_8h_aabf4f709c8199e41cf279c77112345fe}{MAX\+\_\+\+LEN}}~4096
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
+\Hypertarget{pennos_8h_a8fb447618db946a9e2a596d9ea18763f}\label{pennos_8h_a8fb447618db946a9e2a596d9ea18763f} 
+\index{pennos.h@{pennos.h}!\_DEFAULT\_SOURCE@{\_DEFAULT\_SOURCE}}
+\index{\_DEFAULT\_SOURCE@{\_DEFAULT\_SOURCE}!pennos.h@{pennos.h}}
+\doxysubsubsection{\texorpdfstring{\_DEFAULT\_SOURCE}{\_DEFAULT\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+DEFAULT\+\_\+\+SOURCE~1}
+
 \Hypertarget{pennos_8h_a3024ccd4a9af5109d24e6c57565d74a1}\label{pennos_8h_a3024ccd4a9af5109d24e6c57565d74a1} 
 \index{pennos.h@{pennos.h}!\_POSIX\_C\_SOURCE@{\_POSIX\_C\_SOURCE}}
 \index{\_POSIX\_C\_SOURCE@{\_POSIX\_C\_SOURCE}!pennos.h@{pennos.h}}
@@ -21,4 +36,10 @@
 \index{\_XOPEN\_SOURCE@{\_XOPEN\_SOURCE}!pennos.h@{pennos.h}}
 \doxysubsubsection{\texorpdfstring{\_XOPEN\_SOURCE}{\_XOPEN\_SOURCE}}
 {\footnotesize\ttfamily \#define \+\_\+\+XOPEN\+\_\+\+SOURCE~700}
+
+\Hypertarget{pennos_8h_aabf4f709c8199e41cf279c77112345fe}\label{pennos_8h_aabf4f709c8199e41cf279c77112345fe} 
+\index{pennos.h@{pennos.h}!MAX\_LEN@{MAX\_LEN}}
+\index{MAX\_LEN@{MAX\_LEN}!pennos.h@{pennos.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_LEN}{MAX\_LEN}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+LEN~4096}
 

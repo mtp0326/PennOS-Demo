@@ -1,0 +1,54 @@
+\doxysection{src/util/prioritylist.c File Reference}
+\hypertarget{prioritylist_8c}{}\label{prioritylist_8c}\index{src/util/prioritylist.c@{src/util/prioritylist.c}}
+{\ttfamily \#include "{}prioritylist.\+h"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{prioritylist_8c_ac55c6aca6e9e03dc0c52ef4fff694e29}{init\+\_\+priority}} (void)
+\item 
+void \mbox{\hyperlink{prioritylist_8c_a00f10d8a58f009415a3ee62349834249}{add\+\_\+priority}} (\mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*}list, unsigned int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
+\item 
+bool \mbox{\hyperlink{prioritylist_8c_acf5ffc2a9a57d64a940360fe6151aafc}{remove\+\_\+priority}} (\mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*}list, unsigned int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{prioritylist_8c_a00f10d8a58f009415a3ee62349834249}\label{prioritylist_8c_a00f10d8a58f009415a3ee62349834249} 
+\index{prioritylist.c@{prioritylist.c}!add\_priority@{add\_priority}}
+\index{add\_priority@{add\_priority}!prioritylist.c@{prioritylist.c}}
+\doxysubsubsection{\texorpdfstring{add\_priority()}{add\_priority()}}
+{\footnotesize\ttfamily void add\+\_\+priority (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{unsigned int}]{priority }\end{DoxyParamCaption})}
+
+Adds a new process to the circular linked list. 
+\begin{DoxyParams}{Parameters}
+{\em list} & Pointer to the circular linked list. \\
+\hline
+{\em process} & Pointer to the process control block (\doxylink{structpcb__t}{pcb\+\_\+t}) to add. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{prioritylist_8c_ac55c6aca6e9e03dc0c52ef4fff694e29}\label{prioritylist_8c_ac55c6aca6e9e03dc0c52ef4fff694e29} 
+\index{prioritylist.c@{prioritylist.c}!init\_priority@{init\_priority}}
+\index{init\_priority@{init\_priority}!prioritylist.c@{prioritylist.c}}
+\doxysubsubsection{\texorpdfstring{init\_priority()}{init\_priority()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*} init\+\_\+priority (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Initializes a circular linked list. \begin{DoxyReturn}{Returns}
+Circular\+List\texorpdfstring{$\ast$}{*} Pointer to the newly initialized list. 
+\end{DoxyReturn}
+\Hypertarget{prioritylist_8c_acf5ffc2a9a57d64a940360fe6151aafc}\label{prioritylist_8c_acf5ffc2a9a57d64a940360fe6151aafc} 
+\index{prioritylist.c@{prioritylist.c}!remove\_priority@{remove\_priority}}
+\index{remove\_priority@{remove\_priority}!prioritylist.c@{prioritylist.c}}
+\doxysubsubsection{\texorpdfstring{remove\_priority()}{remove\_priority()}}
+{\footnotesize\ttfamily bool remove\+\_\+priority (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{unsigned int}]{priority }\end{DoxyParamCaption})}
+
+Removes a process from the circular linked list by its PID. 
+\begin{DoxyParams}{Parameters}
+{\em list} & Pointer to the circular linked list. \\
+\hline
+{\em pid} & PID of the process to remove. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool true if the process was successfully removed, false otherwise. 
+\end{DoxyReturn}

@@ -11,10 +11,6 @@
 
 #define _XOPEN_SOURCE 700
 
-#ifndef PROMPT
-#define PROMPT "penn-os> "
-#endif
-
 #ifndef MAX_LEN
 #define MAX_LEN 4096
 #endif

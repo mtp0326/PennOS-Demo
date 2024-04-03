@@ -2,23 +2,29 @@
 \hypertarget{sys__call_8h_source}{}\label{sys__call_8h_source}\index{src/util/sys\_call.h@{src/util/sys\_call.h}}
 \mbox{\hyperlink{sys__call_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
-\DoxyCodeLine{00002\ }
-\DoxyCodeLine{00003\ \textcolor{comment}{/*============================\ system\ call\ functions\ for\ interacting\ with\ PennOS}}
-\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ process\ creation\ ===================================*/}}
-\DoxyCodeLine{00015\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a43b789c710ba1501bcd8cf54e4382e50}{s\_spawn}}(\textcolor{keywordtype}{void}*\ (*func)(\textcolor{keywordtype}{void}*),\ \textcolor{keywordtype}{char}*\ argv[],\ \textcolor{keywordtype}{int}\ fd0,\ \textcolor{keywordtype}{int}\ fd1);}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00029\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}{s\_waitpid}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}*\ wstatus,\ \textcolor{keywordtype}{bool}\ nohang);}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00038\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\_kill}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ signal);}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}{s\_exit}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \textcolor{comment}{/*============================\ system\ calls\ for\ interacting\ with\ the\ scheduler}}
-\DoxyCodeLine{00046\ \textcolor{comment}{\ *\ ===================================*/}}
-\DoxyCodeLine{00047\ }
-\DoxyCodeLine{00055\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\_nice}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ priority);}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00069\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_aec37528a3c7935864924764d1911126c}{s\_sleep}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ticks);}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SYSCALL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SYSCALL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{/*============================\ system\ call\ functions\ for\ interacting\ with\ PennOS}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ process\ creation\ ===================================*/}}
+\DoxyCodeLine{00021\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a43b789c710ba1501bcd8cf54e4382e50}{s\_spawn}}(\textcolor{keywordtype}{void}*\ (*func)(\textcolor{keywordtype}{void}*),\ \textcolor{keywordtype}{char}*\ argv[],\ \textcolor{keywordtype}{int}\ fd0,\ \textcolor{keywordtype}{int}\ fd1);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00035\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}{s\_waitpid}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}*\ wstatus,\ \textcolor{keywordtype}{bool}\ nohang);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\_kill}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ signal);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}{s\_exit}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{/*============================\ system\ calls\ for\ interacting\ with\ the\ scheduler}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ *\ ===================================*/}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\_nice}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00075\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_aec37528a3c7935864924764d1911126c}{s\_sleep}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ticks);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

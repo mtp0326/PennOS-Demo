@@ -1,0 +1,101 @@
+\doxysection{src/util/clinkedlist.h File Reference}
+\hypertarget{clinkedlist_8h}{}\label{clinkedlist_8h}\index{src/util/clinkedlist.h@{src/util/clinkedlist.h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structNode}{Node}}
+\begin{DoxyCompactList}\small\item\em This structure represents a node in the circular linked list. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structCircularList}{Circular\+List}}
+\begin{DoxyCompactList}\small\item\em This structure represents a circular linked list for managing processes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct pcb\+\_\+t \mbox{\hyperlink{clinkedlist_8h_a71acfdbc74942780681d06efcc05a0a5}{pcb\+\_\+t}}
+\item 
+typedef struct Node \mbox{\hyperlink{clinkedlist_8h_a3b09f37e675bcd48a01bf22155996872}{Node}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{clinkedlist_8h_a40af759c666c8683b21e533eae304bd5}{init\+\_\+list}} (void)
+\item 
+void \mbox{\hyperlink{clinkedlist_8h_aeedee99ef47d460de79eebe5bcf19d83}{add\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}process)
+\item 
+bool \mbox{\hyperlink{clinkedlist_8h_a6d27d9f54d9189fe8149a2d8cb8baa24}{remove\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, pid\+\_\+t pid)
+\item 
+\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{clinkedlist_8h_a43d3a5a52f3e2c3d607e50ac257cb67b}{find\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, pid\+\_\+t pid)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{clinkedlist_8h_a3b09f37e675bcd48a01bf22155996872}\label{clinkedlist_8h_a3b09f37e675bcd48a01bf22155996872} 
+\index{clinkedlist.h@{clinkedlist.h}!Node@{Node}}
+\index{Node@{Node}!clinkedlist.h@{clinkedlist.h}}
+\doxysubsubsection{\texorpdfstring{Node}{Node}}
+{\footnotesize\ttfamily typedef struct Node Node}
+
+\Hypertarget{clinkedlist_8h_a71acfdbc74942780681d06efcc05a0a5}\label{clinkedlist_8h_a71acfdbc74942780681d06efcc05a0a5} 
+\index{clinkedlist.h@{clinkedlist.h}!pcb\_t@{pcb\_t}}
+\index{pcb\_t@{pcb\_t}!clinkedlist.h@{clinkedlist.h}}
+\doxysubsubsection{\texorpdfstring{pcb\_t}{pcb\_t}}
+{\footnotesize\ttfamily typedef struct pcb\+\_\+t pcb\+\_\+t}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{clinkedlist_8h_aeedee99ef47d460de79eebe5bcf19d83}\label{clinkedlist_8h_aeedee99ef47d460de79eebe5bcf19d83} 
+\index{clinkedlist.h@{clinkedlist.h}!add\_process@{add\_process}}
+\index{add\_process@{add\_process}!clinkedlist.h@{clinkedlist.h}}
+\doxysubsubsection{\texorpdfstring{add\_process()}{add\_process()}}
+{\footnotesize\ttfamily void add\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{process }\end{DoxyParamCaption})}
+
+Adds a new process to the circular linked list. 
+\begin{DoxyParams}{Parameters}
+{\em list} & Pointer to the circular linked list. \\
+\hline
+{\em process} & Pointer to the process control block (\doxylink{structpcb__t}{pcb\+\_\+t}) to add. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{clinkedlist_8h_a43d3a5a52f3e2c3d607e50ac257cb67b}\label{clinkedlist_8h_a43d3a5a52f3e2c3d607e50ac257cb67b} 
+\index{clinkedlist.h@{clinkedlist.h}!find\_process@{find\_process}}
+\index{find\_process@{find\_process}!clinkedlist.h@{clinkedlist.h}}
+\doxysubsubsection{\texorpdfstring{find\_process()}{find\_process()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} find\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
+Finds a process in the circular linked list by its PID. 
+\begin{DoxyParams}{Parameters}
+{\em list} & Pointer to the circular linked list. \\
+\hline
+{\em pid} & PID of the process to find. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pcb\+\_\+t\texorpdfstring{$\ast$}{*} Pointer to the found process control block, or NULL if not found. 
+\end{DoxyReturn}
+\Hypertarget{clinkedlist_8h_a40af759c666c8683b21e533eae304bd5}\label{clinkedlist_8h_a40af759c666c8683b21e533eae304bd5} 
+\index{clinkedlist.h@{clinkedlist.h}!init\_list@{init\_list}}
+\index{init\_list@{init\_list}!clinkedlist.h@{clinkedlist.h}}
+\doxysubsubsection{\texorpdfstring{init\_list()}{init\_list()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*} init\+\_\+list (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Initializes a circular linked list. \begin{DoxyReturn}{Returns}
+Circular\+List\texorpdfstring{$\ast$}{*} Pointer to the newly initialized list. 
+\end{DoxyReturn}
+\Hypertarget{clinkedlist_8h_a6d27d9f54d9189fe8149a2d8cb8baa24}\label{clinkedlist_8h_a6d27d9f54d9189fe8149a2d8cb8baa24} 
+\index{clinkedlist.h@{clinkedlist.h}!remove\_process@{remove\_process}}
+\index{remove\_process@{remove\_process}!clinkedlist.h@{clinkedlist.h}}
+\doxysubsubsection{\texorpdfstring{remove\_process()}{remove\_process()}}
+{\footnotesize\ttfamily bool remove\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
+Removes a process from the circular linked list by its PID. 
+\begin{DoxyParams}{Parameters}
+{\em list} & Pointer to the circular linked list. \\
+\hline
+{\em pid} & PID of the process to remove. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool true if the process was successfully removed, false otherwise. 
+\end{DoxyReturn}

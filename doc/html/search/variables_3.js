@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['fat_0',['fat',['../d4/dc4/pennfat_8c.html#a0e52a1a113ded7f4787290edc22ad954',1,'fat:&#160;pennfat.c'],['../dc/d3d/pennfat_8h.html#a0e52a1a113ded7f4787290edc22ad954',1,'fat:&#160;pennfat.c']]],
-  ['fd_1',['fd',['../d1/d06/structfile__descriptor__st.html#a2c4326771436651ee292d87a0bbf91ad',1,'file_descriptor_st']]],
-  ['firstblock_2',['firstBlock',['../d8/d68/structdirectory__entries.html#a83126d6724bed8d40f5dd21023409ead',1,'directory_entries']]],
-  ['fname_3',['fname',['../d1/d06/structfile__descriptor__st.html#a25cb5acb6a5c6e546b04f04cc56ee2be',1,'file_descriptor_st']]]
+  ['data_5fsize_0',['data_size',['../dc/dfb/pennfat__kernel_8c.html#af69e180c878a9c8f4e45ec7dc25a062f',1,'data_size:&#160;pennfat_kernel.c'],['../d0/d4d/pennfat__kernel_8h.html#af69e180c878a9c8f4e45ec7dc25a062f',1,'data_size:&#160;pennfat_kernel.c']]]
 ];

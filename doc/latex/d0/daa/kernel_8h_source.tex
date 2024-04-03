@@ -2,31 +2,38 @@
 \hypertarget{kernel_8h_source}{}\label{kernel_8h_source}\index{src/util/kernel.h@{src/util/kernel.h}}
 \mbox{\hyperlink{kernel_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <sys/types.h>}\ \ \textcolor{comment}{//needed\ for\ ssize\_t,\ if\ we\ use\ ints,\ can\ remove}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{array_8h}{array.h}}"{}}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bitmap_8h}{bitmap.h}}"{}}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{spthread_8h}{spthread.h}}"{}}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
-\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304}{RUNNING}},\ }
-\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c}{STOPPED}},\ }
-\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61}{BLOCKED}},\ }
-\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512}{ZOMBIED}}\ }
-\DoxyCodeLine{00035\ \}\ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\_state\_t}};}
-\DoxyCodeLine{00036\ }
-\DoxyCodeLine{00042\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpcb__t}{pcb\_t}}\ \{}
-\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{structspthread__st}{spthread\_t}}\ \mbox{\hyperlink{structpcb__t_a77c89dc39ec87e1fd4cd589e2e64cc67}{handle}};\ }
-\DoxyCodeLine{00044\ \ \ pid\_t\ \mbox{\hyperlink{structpcb__t_afa909915326969a57c5c1bd8b43954d4}{pid}};\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00045\ \ \ pid\_t\ \mbox{\hyperlink{structpcb__t_ab2289d15508ab3188ef4276b93270eb9}{ppid}};\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ \mbox{\hyperlink{structpcb__t_a905cc6faa7cf99a347e57bebcdf0da5e}{child\_pids}};\ }
-\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structpcb__t_a2a5d945da32720d61039f315ab64f527}{priority}}\ :\ 2;\ }
-\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\_state\_t}}}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \mbox{\hyperlink{structpcb__t_a3ef7954f8714e8157ea82a5063ecdfed}{state}};\ }
-\DoxyCodeLine{00052\ \ \ \mbox{\hyperlink{structFD__Bitmap}{FD\_Bitmap}}*\ \mbox{\hyperlink{structpcb__t_a53ab4c02de07bcca467dff05771554a0}{open\_fds}};\ }
-\DoxyCodeLine{00054\ \}\ \mbox{\hyperlink{kernel_8h_a71acfdbc74942780681d06efcc05a0a5}{pcb\_t}};}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00063\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ \mbox{\hyperlink{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3}{k\_proc\_create}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ parent);}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00071\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\_proc\_cleanup}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ proc);}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ KERNEL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ KERNEL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <sys/types.h>}\ \ \textcolor{comment}{//needed\ for\ ssize\_t,\ if\ we\ use\ ints,\ can\ remove}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{array_8h}{array.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bitmap_8h}{bitmap.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{clinkedlist_8h}{clinkedlist.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{spthread_8h}{spthread.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}stdlib.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304}{RUNNING}},\ }
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c}{STOPPED}},\ }
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61}{BLOCKED}},\ }
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512}{ZOMBIED}}\ }
+\DoxyCodeLine{00041\ \}\ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\_state\_t}};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpcb__t}{pcb\_t}}\ \{}
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{structspthread__st}{spthread\_t}}\ \mbox{\hyperlink{structpcb__t_a77c89dc39ec87e1fd4cd589e2e64cc67}{handle}};\ }
+\DoxyCodeLine{00050\ \ \ pid\_t\ \mbox{\hyperlink{structpcb__t_afa909915326969a57c5c1bd8b43954d4}{pid}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00051\ \ \ pid\_t\ \mbox{\hyperlink{structpcb__t_ab2289d15508ab3188ef4276b93270eb9}{ppid}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ \mbox{\hyperlink{structpcb__t_a905cc6faa7cf99a347e57bebcdf0da5e}{child\_pids}};\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structpcb__t_a2a5d945da32720d61039f315ab64f527}{priority}}\ :\ 2;\ }
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\_state\_t}}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \mbox{\hyperlink{structpcb__t_a3ef7954f8714e8157ea82a5063ecdfed}{state}};\ }
+\DoxyCodeLine{00058\ \ \ \mbox{\hyperlink{structFD__Bitmap}{FD\_Bitmap}}*\ \mbox{\hyperlink{structpcb__t_a53ab4c02de07bcca467dff05771554a0}{open\_fds}};\ }
+\DoxyCodeLine{00060\ \}\ \mbox{\hyperlink{kernel_8h_a71acfdbc74942780681d06efcc05a0a5}{pcb\_t}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00069\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ \mbox{\hyperlink{kernel_8h_a736760f5a73bbd7d6c9e4607c49837a3}{k\_proc\_create}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ parent);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00077\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\_proc\_cleanup}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ proc);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

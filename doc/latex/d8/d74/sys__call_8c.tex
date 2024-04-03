@@ -1,3 +1,93 @@
 \doxysection{src/util/sys\+\_\+call.c File Reference}
 \hypertarget{sys__call_8c}{}\label{sys__call_8c}\index{src/util/sys\_call.c@{src/util/sys\_call.c}}
+{\ttfamily \#include "{}sys\+\_\+call.\+h"{}}\newline
 {\ttfamily \#include "{}kernel.\+h"{}}\newline
+{\ttfamily \#include "{}pennos.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sys__call_8c_a628a3b2c1d461572974e97bea327519d}{duplicate\+\_\+argv}} (char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{sys__call_8c_a33d16eae921a526aeb277c961c6933fc}{free\+\_\+argv}} (char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\item 
+pid\+\_\+t \mbox{\hyperlink{sys__call_8c_a43b789c710ba1501bcd8cf54e4382e50}{s\+\_\+spawn}} (void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}func)(void \texorpdfstring{$\ast$}{*}), char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]}, int fd0, int fd1)
+\begin{DoxyCompactList}\small\item\em Create a child process that executes the function {\ttfamily func}. The child will retain some attributes of the parent. \end{DoxyCompactList}\item 
+pid\+\_\+t \mbox{\hyperlink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid}} (pid\+\_\+t pid, int \texorpdfstring{$\ast$}{*}wstatus, bool nohang)
+\item 
+int \mbox{\hyperlink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill}} (pid\+\_\+t pid, int signal)
+\item 
+void \mbox{\hyperlink{sys__call_8c_a53c8865d5bf1ca946e5b5405190f6690}{s\+\_\+exit}} (void)
+\item 
+int \mbox{\hyperlink{sys__call_8c_ac711d33fcf2573a590b224b6debab996}{s\+\_\+nice}} (pid\+\_\+t pid, int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
+\item 
+void \mbox{\hyperlink{sys__call_8c_aec37528a3c7935864924764d1911126c}{s\+\_\+sleep}} (unsigned int ticks)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{sys__call_8c_a628a3b2c1d461572974e97bea327519d}\label{sys__call_8c_a628a3b2c1d461572974e97bea327519d} 
+\index{sys\_call.c@{sys\_call.c}!duplicate\_argv@{duplicate\_argv}}
+\index{duplicate\_argv@{duplicate\_argv}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{duplicate\_argv()}{duplicate\_argv()}}
+{\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} duplicate\+\_\+argv (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\Hypertarget{sys__call_8c_a33d16eae921a526aeb277c961c6933fc}\label{sys__call_8c_a33d16eae921a526aeb277c961c6933fc} 
+\index{sys\_call.c@{sys\_call.c}!free\_argv@{free\_argv}}
+\index{free\_argv@{free\_argv}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{free\_argv()}{free\_argv()}}
+{\footnotesize\ttfamily void free\+\_\+argv (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\Hypertarget{sys__call_8c_a53c8865d5bf1ca946e5b5405190f6690}\label{sys__call_8c_a53c8865d5bf1ca946e5b5405190f6690} 
+\index{sys\_call.c@{sys\_call.c}!s\_exit@{s\_exit}}
+\index{s\_exit@{s\_exit}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_exit()}{s\_exit()}}
+{\footnotesize\ttfamily void s\+\_\+exit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}\label{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76} 
+\index{sys\_call.c@{sys\_call.c}!s\_kill@{s\_kill}}
+\index{s\_kill@{s\_kill}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_kill()}{s\_kill()}}
+{\footnotesize\ttfamily int s\+\_\+kill (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{int}]{signal }\end{DoxyParamCaption})}
+
+\Hypertarget{sys__call_8c_ac711d33fcf2573a590b224b6debab996}\label{sys__call_8c_ac711d33fcf2573a590b224b6debab996} 
+\index{sys\_call.c@{sys\_call.c}!s\_nice@{s\_nice}}
+\index{s\_nice@{s\_nice}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_nice()}{s\_nice()}}
+{\footnotesize\ttfamily int s\+\_\+nice (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{int}]{priority }\end{DoxyParamCaption})}
+
+\Hypertarget{sys__call_8c_aec37528a3c7935864924764d1911126c}\label{sys__call_8c_aec37528a3c7935864924764d1911126c} 
+\index{sys\_call.c@{sys\_call.c}!s\_sleep@{s\_sleep}}
+\index{s\_sleep@{s\_sleep}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_sleep()}{s\_sleep()}}
+{\footnotesize\ttfamily void s\+\_\+sleep (\begin{DoxyParamCaption}\item[{unsigned int}]{ticks }\end{DoxyParamCaption})}
+
+\Hypertarget{sys__call_8c_a43b789c710ba1501bcd8cf54e4382e50}\label{sys__call_8c_a43b789c710ba1501bcd8cf54e4382e50} 
+\index{sys\_call.c@{sys\_call.c}!s\_spawn@{s\_spawn}}
+\index{s\_spawn@{s\_spawn}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_spawn()}{s\_spawn()}}
+{\footnotesize\ttfamily pid\+\_\+t s\+\_\+spawn (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*})(void \texorpdfstring{$\ast$}{*})}]{func,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]},  }\item[{int}]{fd0,  }\item[{int}]{fd1 }\end{DoxyParamCaption})}
+
+
+
+Create a child process that executes the function {\ttfamily func}. The child will retain some attributes of the parent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Function to be executed by the child process. \\
+\hline
+{\em argv} & Null-\/terminated array of args, including the command name as argv\mbox{[}0\mbox{]}. \\
+\hline
+{\em fd0} & Input file descriptor. \\
+\hline
+{\em fd1} & Output file descriptor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pid\+\_\+t The process ID of the created child process. // need to define error output? 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}\label{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3} 
+\index{sys\_call.c@{sys\_call.c}!s\_waitpid@{s\_waitpid}}
+\index{s\_waitpid@{s\_waitpid}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_waitpid()}{s\_waitpid()}}
+{\footnotesize\ttfamily pid\+\_\+t s\+\_\+waitpid (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{int \texorpdfstring{$\ast$}{*}}]{wstatus,  }\item[{bool}]{nohang }\end{DoxyParamCaption})}
+

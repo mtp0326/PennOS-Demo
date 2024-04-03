@@ -1,6 +1,20 @@
+#ifndef PENNFAT_KERNEL_H
+#define PENNFAT_KERNEL_H
+
 #include <stdint.h>
 #include <sys/types.h>  //needed for ssize_t, if we use ints, can remove
+#include "../pennfat.h"
 #include "spthread.h"
+
+#define MAX_FD_NUM 1024
+
+extern uint16_t* fat;
+extern struct file_descriptor_st* global_fd_table;
+extern int fs_fd;
+extern int block_size;
+extern int fat_size;
+extern int num_fat_entries;
+extern int data_size;
 
 struct directory_entries {
   char name[32];
@@ -19,7 +33,13 @@ struct file_descriptor_st {
   int offset;
 };
 
-uint16_t* fat;
+// helper functions
+struct file_descriptor_st* create_file_descriptor(int fd,
+                                                  char* fname,
+                                                  int mode,
+                                                  int offset);
+void lseek_to_root_directory();
+int get_first_empty_fat_index();
 
 /************************************************
  *  PENNFAT KERNEL LEVEL FUNCTIONS
@@ -113,3 +133,5 @@ off_t k_lseek(int fd, int offset, int whence);
  * @param filename
  */
 void k_ls(const char* filename);
+
+#endif

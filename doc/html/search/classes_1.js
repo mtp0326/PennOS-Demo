@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['fd_5fbitmap_0',['FD_Bitmap',['../db/d26/structFD__Bitmap.html',1,'']]],
-  ['file_5fdescriptor_5fst_1',['file_descriptor_st',['../d1/d06/structfile__descriptor__st.html',1,'']]]
+  ['directory_5fentries_0',['directory_entries',['../d8/d68/structdirectory__entries.html',1,'']]],
+  ['dynamicpidarray_1',['DynamicPIDArray',['../d1/df6/structDynamicPIDArray.html',1,'']]]
 ];

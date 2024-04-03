@@ -1,15 +1,32 @@
 \doxysection{src/pennfat.h File Reference}
 \hypertarget{pennfat_8h}{}\label{pennfat_8h}\index{src/pennfat.h@{src/pennfat.h}}
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$sys/mman.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include "{}penn-\/parser.\+h"{}}\newline
+{\ttfamily \#include "{}util/pennfat\+\_\+kernel.\+h"{}}\newline
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{pennfat_8h_accdbea14ea06c15e271784368bd993e8}{PROMPT}}~"{}penn-\/\mbox{\hyperlink{pennfat_8c_a0e52a1a113ded7f4787290edc22ad954}{fat}}$>$ "{}
+\#define \mbox{\hyperlink{pennfat_8h_accdbea14ea06c15e271784368bd993e8}{PROMPT}}~"{}penn-\/\mbox{\hyperlink{pennfat__kernel_8c_a0e52a1a113ded7f4787290edc22ad954}{fat}}$>$ "{}
+\item 
+\#define \mbox{\hyperlink{pennfat_8h_aabf4f709c8199e41cf279c77112345fe}{MAX\+\_\+\+LEN}}~4096
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{pennfat_8h_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+void \mbox{\hyperlink{pennfat_8h_adf6e89b78280efda4b5c486c9697b513}{mkfs}} (const char \texorpdfstring{$\ast$}{*}fs\+\_\+name, int blocks\+\_\+in\+\_\+fat, int block\+\_\+size\+\_\+config)
+\item 
+int \mbox{\hyperlink{pennfat_8h_a2fe0ff1115fb73cfaef3441eb8d77426}{mount}} (const char \texorpdfstring{$\ast$}{*}fs\+\_\+name)
+\item 
+int \mbox{\hyperlink{pennfat_8h_a1db7f084483fe1bc09d688e3d3a69eb4}{unmount}} ()
 \item 
 void \mbox{\hyperlink{pennfat_8h_aa7e4fe1d0c843e02dfdba34edc69fe91}{prompt}} ()
 \item 
@@ -18,20 +35,31 @@ void \mbox{\hyperlink{pennfat_8h_a0e88341628612c36ea0998958540138b}{read\+\_\+co
 void \mbox{\hyperlink{pennfat_8h_a95c1eedbf28e070d02d04fbbb832a3b8}{int\+\_\+handler}} (int signo)
 \item 
 int \mbox{\hyperlink{pennfat_8h_a1d5876a5f78107bed3847c8d5485b7c4}{get\+\_\+block\+\_\+size}} (int block\+\_\+size\+\_\+config)
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
-\begin{DoxyCompactItemize}
 \item 
-uint16\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat_8h_a0e52a1a113ded7f4787290edc22ad954}{fat}}
+int \mbox{\hyperlink{pennfat_8h_ad9f7eae33584363000a4ef799b8a53bf}{get\+\_\+fat\+\_\+size}} (int \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\+\_\+size}}, int blocks\+\_\+in\+\_\+fat)
+\item 
+int \mbox{\hyperlink{pennfat_8h_a3c58e4046bc0fb7d042ae61a478b902f}{get\+\_\+num\+\_\+fat\+\_\+entries}} (int \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\+\_\+size}}, int blocks\+\_\+in\+\_\+fat)
+\item 
+int \mbox{\hyperlink{pennfat_8h_afe223c13a71e93bc31d9c453fd2fb856}{get\+\_\+data\+\_\+size}} (int \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\+\_\+size}}, int \mbox{\hyperlink{pennfat__kernel_8c_af866bcf6c2272c2f6b1b7e5ad3a2e127}{num\+\_\+fat\+\_\+entries}})
+\item 
+int \mbox{\hyperlink{pennfat_8h_a9e5e1b3f3323c919230e69b631fa8b79}{get\+\_\+offset\+\_\+size}} (int \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\+\_\+size}}, int blocks\+\_\+in\+\_\+fat, int block\+\_\+num, int offset)
+\item 
+void \mbox{\hyperlink{pennfat_8h_a7d5ac507ab09ed439fe59e6ba52e6374}{initialize\+\_\+global\+\_\+fd\+\_\+table}} ()
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
+\Hypertarget{pennfat_8h_aabf4f709c8199e41cf279c77112345fe}\label{pennfat_8h_aabf4f709c8199e41cf279c77112345fe} 
+\index{pennfat.h@{pennfat.h}!MAX\_LEN@{MAX\_LEN}}
+\index{MAX\_LEN@{MAX\_LEN}!pennfat.h@{pennfat.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_LEN}{MAX\_LEN}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+LEN~4096}
+
 \Hypertarget{pennfat_8h_accdbea14ea06c15e271784368bd993e8}\label{pennfat_8h_accdbea14ea06c15e271784368bd993e8} 
 \index{pennfat.h@{pennfat.h}!PROMPT@{PROMPT}}
 \index{PROMPT@{PROMPT}!pennfat.h@{pennfat.h}}
 \doxysubsubsection{\texorpdfstring{PROMPT}{PROMPT}}
-{\footnotesize\ttfamily \#define PROMPT~"{}penn-\/\mbox{\hyperlink{pennfat_8c_a0e52a1a113ded7f4787290edc22ad954}{fat}}$>$ "{}}
+{\footnotesize\ttfamily \#define PROMPT~"{}penn-\/\mbox{\hyperlink{pennfat__kernel_8c_a0e52a1a113ded7f4787290edc22ad954}{fat}}$>$ "{}}
 
 
 
@@ -42,17 +70,53 @@ uint16\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat_8h_a0e52a1a113
 \doxysubsubsection{\texorpdfstring{get\_block\_size()}{get\_block\_size()}}
 {\footnotesize\ttfamily int get\+\_\+block\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+size\+\_\+config }\end{DoxyParamCaption})}
 
+\Hypertarget{pennfat_8h_afe223c13a71e93bc31d9c453fd2fb856}\label{pennfat_8h_afe223c13a71e93bc31d9c453fd2fb856} 
+\index{pennfat.h@{pennfat.h}!get\_data\_size@{get\_data\_size}}
+\index{get\_data\_size@{get\_data\_size}!pennfat.h@{pennfat.h}}
+\doxysubsubsection{\texorpdfstring{get\_data\_size()}{get\_data\_size()}}
+{\footnotesize\ttfamily int get\+\_\+data\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+size,  }\item[{int}]{num\+\_\+fat\+\_\+entries }\end{DoxyParamCaption})}
+
+\Hypertarget{pennfat_8h_ad9f7eae33584363000a4ef799b8a53bf}\label{pennfat_8h_ad9f7eae33584363000a4ef799b8a53bf} 
+\index{pennfat.h@{pennfat.h}!get\_fat\_size@{get\_fat\_size}}
+\index{get\_fat\_size@{get\_fat\_size}!pennfat.h@{pennfat.h}}
+\doxysubsubsection{\texorpdfstring{get\_fat\_size()}{get\_fat\_size()}}
+{\footnotesize\ttfamily int get\+\_\+fat\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+size,  }\item[{int}]{blocks\+\_\+in\+\_\+fat }\end{DoxyParamCaption})}
+
+\Hypertarget{pennfat_8h_a3c58e4046bc0fb7d042ae61a478b902f}\label{pennfat_8h_a3c58e4046bc0fb7d042ae61a478b902f} 
+\index{pennfat.h@{pennfat.h}!get\_num\_fat\_entries@{get\_num\_fat\_entries}}
+\index{get\_num\_fat\_entries@{get\_num\_fat\_entries}!pennfat.h@{pennfat.h}}
+\doxysubsubsection{\texorpdfstring{get\_num\_fat\_entries()}{get\_num\_fat\_entries()}}
+{\footnotesize\ttfamily int get\+\_\+num\+\_\+fat\+\_\+entries (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+size,  }\item[{int}]{blocks\+\_\+in\+\_\+fat }\end{DoxyParamCaption})}
+
+\Hypertarget{pennfat_8h_a9e5e1b3f3323c919230e69b631fa8b79}\label{pennfat_8h_a9e5e1b3f3323c919230e69b631fa8b79} 
+\index{pennfat.h@{pennfat.h}!get\_offset\_size@{get\_offset\_size}}
+\index{get\_offset\_size@{get\_offset\_size}!pennfat.h@{pennfat.h}}
+\doxysubsubsection{\texorpdfstring{get\_offset\_size()}{get\_offset\_size()}}
+{\footnotesize\ttfamily int get\+\_\+offset\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+size,  }\item[{int}]{blocks\+\_\+in\+\_\+fat,  }\item[{int}]{block\+\_\+num,  }\item[{int}]{offset }\end{DoxyParamCaption})}
+
+\Hypertarget{pennfat_8h_a7d5ac507ab09ed439fe59e6ba52e6374}\label{pennfat_8h_a7d5ac507ab09ed439fe59e6ba52e6374} 
+\index{pennfat.h@{pennfat.h}!initialize\_global\_fd\_table@{initialize\_global\_fd\_table}}
+\index{initialize\_global\_fd\_table@{initialize\_global\_fd\_table}!pennfat.h@{pennfat.h}}
+\doxysubsubsection{\texorpdfstring{initialize\_global\_fd\_table()}{initialize\_global\_fd\_table()}}
+{\footnotesize\ttfamily void initialize\+\_\+global\+\_\+fd\+\_\+table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 \Hypertarget{pennfat_8h_a95c1eedbf28e070d02d04fbbb832a3b8}\label{pennfat_8h_a95c1eedbf28e070d02d04fbbb832a3b8} 
 \index{pennfat.h@{pennfat.h}!int\_handler@{int\_handler}}
 \index{int\_handler@{int\_handler}!pennfat.h@{pennfat.h}}
 \doxysubsubsection{\texorpdfstring{int\_handler()}{int\_handler()}}
 {\footnotesize\ttfamily void int\+\_\+handler (\begin{DoxyParamCaption}\item[{int}]{signo }\end{DoxyParamCaption})}
 
-\Hypertarget{pennfat_8h_a0ddf1224851353fc92bfbff6f499fa97}\label{pennfat_8h_a0ddf1224851353fc92bfbff6f499fa97} 
-\index{pennfat.h@{pennfat.h}!main@{main}}
-\index{main@{main}!pennfat.h@{pennfat.h}}
-\doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+\Hypertarget{pennfat_8h_adf6e89b78280efda4b5c486c9697b513}\label{pennfat_8h_adf6e89b78280efda4b5c486c9697b513} 
+\index{pennfat.h@{pennfat.h}!mkfs@{mkfs}}
+\index{mkfs@{mkfs}!pennfat.h@{pennfat.h}}
+\doxysubsubsection{\texorpdfstring{mkfs()}{mkfs()}}
+{\footnotesize\ttfamily void mkfs (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fs\+\_\+name,  }\item[{int}]{blocks\+\_\+in\+\_\+fat,  }\item[{int}]{block\+\_\+size\+\_\+config }\end{DoxyParamCaption})}
+
+\Hypertarget{pennfat_8h_a2fe0ff1115fb73cfaef3441eb8d77426}\label{pennfat_8h_a2fe0ff1115fb73cfaef3441eb8d77426} 
+\index{pennfat.h@{pennfat.h}!mount@{mount}}
+\index{mount@{mount}!pennfat.h@{pennfat.h}}
+\doxysubsubsection{\texorpdfstring{mount()}{mount()}}
+{\footnotesize\ttfamily int mount (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fs\+\_\+name }\end{DoxyParamCaption})}
 
 \Hypertarget{pennfat_8h_aa7e4fe1d0c843e02dfdba34edc69fe91}\label{pennfat_8h_aa7e4fe1d0c843e02dfdba34edc69fe91} 
 \index{pennfat.h@{pennfat.h}!prompt@{prompt}}
@@ -66,12 +130,9 @@ uint16\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat_8h_a0e52a1a113
 \doxysubsubsection{\texorpdfstring{read\_command()}{read\_command()}}
 {\footnotesize\ttfamily void read\+\_\+command (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-
-
-\doxysubsection{Variable Documentation}
-\Hypertarget{pennfat_8h_a0e52a1a113ded7f4787290edc22ad954}\label{pennfat_8h_a0e52a1a113ded7f4787290edc22ad954} 
-\index{pennfat.h@{pennfat.h}!fat@{fat}}
-\index{fat@{fat}!pennfat.h@{pennfat.h}}
-\doxysubsubsection{\texorpdfstring{fat}{fat}}
-{\footnotesize\ttfamily uint16\+\_\+t\texorpdfstring{$\ast$}{*} fat\hspace{0.3cm}{\ttfamily [extern]}}
+\Hypertarget{pennfat_8h_a1db7f084483fe1bc09d688e3d3a69eb4}\label{pennfat_8h_a1db7f084483fe1bc09d688e3d3a69eb4} 
+\index{pennfat.h@{pennfat.h}!unmount@{unmount}}
+\index{unmount@{unmount}!pennfat.h@{pennfat.h}}
+\doxysubsubsection{\texorpdfstring{unmount()}{unmount()}}
+{\footnotesize\ttfamily int unmount (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 

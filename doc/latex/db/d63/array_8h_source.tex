@@ -2,25 +2,29 @@
 \hypertarget{array_8h_source}{}\label{array_8h_source}\index{src/util/array.h@{src/util/array.h}}
 \mbox{\hyperlink{array_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ }
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <stdbool.h>}\ \ \ \ \textcolor{comment}{//\ For\ bool\ type}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stddef.h>}\ \ \ \ \ \textcolor{comment}{//\ For\ size\_t}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <sys/types.h>}\ \ \textcolor{comment}{//needed\ for\ ssize\_t,\ if\ we\ use\ ints,\ can\ remove}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00009\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00010\ \ \ pid\_t*\ \mbox{\hyperlink{structDynamicPIDArray_a109e5473cfba3b703a43df8c9710bc2f}{array}};\ }
-\DoxyCodeLine{00011\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structDynamicPIDArray_a7ddff3dfea399c17fd761b116a3aac4a}{used}};\ \ }
-\DoxyCodeLine{00012\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structDynamicPIDArray_acbb96c74b86398acad0647d509b6de81}{size}};\ \ }
-\DoxyCodeLine{00013\ \}\ \mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}};}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00022\ \mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ \mbox{\hyperlink{array_8h_a49c25f3f4533c1d022f5bed99d8b0c95}{dynamic\_pid\_array\_create}}(\textcolor{keywordtype}{size\_t}\ initial\_size);}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00029\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{array_8h_a4fe09b633a6575a679dfc91690641ecb}{dynamic\_pid\_array\_destroy}}(\mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ array);}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00038\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{array_8h_af3432cc505fbfe71c7dc284a5b7451a9}{dynamic\_pid\_array\_add}}(\mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ array,\ pid\_t\ pid);}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00048\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{array_8h_a40bde0506b0f79ee6d597a7f7eb9ceac}{dynamic\_pid\_array\_remove}}(\mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ array,\ pid\_t\ pid);}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00057\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{array_8h_a9214b8720cef664abf2805746ca854a9}{dynamic\_pid\_array\_contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ array,\ pid\_t\ pid);}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ARRAY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ARRAY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdbool.h>}\ \ \ \ \textcolor{comment}{//\ For\ bool\ type}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stddef.h>}\ \ \ \ \ \textcolor{comment}{//\ For\ size\_t}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <sys/types.h>}\ \ \textcolor{comment}{//needed\ for\ ssize\_t,\ if\ we\ use\ ints,\ can\ remove}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00012\ \ \ pid\_t*\ \mbox{\hyperlink{structDynamicPIDArray_a109e5473cfba3b703a43df8c9710bc2f}{array}};\ }
+\DoxyCodeLine{00013\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structDynamicPIDArray_a7ddff3dfea399c17fd761b116a3aac4a}{used}};\ \ }
+\DoxyCodeLine{00014\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structDynamicPIDArray_acbb96c74b86398acad0647d509b6de81}{size}};\ \ }
+\DoxyCodeLine{00015\ \}\ \mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00024\ \mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ \mbox{\hyperlink{array_8h_a49c25f3f4533c1d022f5bed99d8b0c95}{dynamic\_pid\_array\_create}}(\textcolor{keywordtype}{size\_t}\ initial\_size);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{array_8h_a4fe09b633a6575a679dfc91690641ecb}{dynamic\_pid\_array\_destroy}}(\mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ array);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{array_8h_af3432cc505fbfe71c7dc284a5b7451a9}{dynamic\_pid\_array\_add}}(\mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ array,\ pid\_t\ pid);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{array_8h_a40bde0506b0f79ee6d597a7f7eb9ceac}{dynamic\_pid\_array\_remove}}(\mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ array,\ pid\_t\ pid);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{array_8h_a9214b8720cef664abf2805746ca854a9}{dynamic\_pid\_array\_contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structDynamicPIDArray}{DynamicPIDArray}}*\ array,\ pid\_t\ pid);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
