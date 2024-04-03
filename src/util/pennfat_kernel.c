@@ -78,6 +78,7 @@ struct file_descriptor_st* create_file_descriptor(int fd,
   new_fd->fname = strdup(fname);
   new_fd->mode = mode;      // 1 for F_WRITE, but prob doesn't matter
   new_fd->offset = offset;  // init as 0
+  new_fd->ref_cnt = 1;
 
   return new_fd;
 }
@@ -86,7 +87,20 @@ ssize_t k_read(int fd, int n, char* buf);
 
 ssize_t k_write(int fd, const char* str, int n);
 
-int k_close(int fd);
+int k_close(int fd) {
+  struct file_descriptor_st* curr = (global_fd_table + fd);
+
+  // fd is not a valid open file descriptor
+  if (curr == NULL) {
+    return -1;
+  }
+
+  // close it by turning it to null
+  free(curr);
+  curr = NULL;
+
+  return 0;
+}
 
 int k_unlink(const char* fname);
 

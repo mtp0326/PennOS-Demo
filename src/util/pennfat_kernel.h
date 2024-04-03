@@ -31,6 +31,7 @@ struct file_descriptor_st {
   char* fname;
   int mode;
   int offset;
+  int ref_cnt;
 };
 
 // helper functions
