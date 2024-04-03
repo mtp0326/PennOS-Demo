@@ -21,32 +21,67 @@ int fd_counter = 3;
 int k_open(const char* fname, int mode) {
   int curr_fd = fd_counter;
   fd_counter++;
+  char *fname_copy = strdup(fname);
 
   // F_WRITES
   if (mode == 0) {
-    fat = NULL;
+    if (does_file_exist(fname)) {
 
-    // F_READ
-  } else if (mode == 1) {
-    // unmounted
-    if (fs_fd == -1) {
-      return -1;
+    } else { 
+      // create the "file": add directory entry in root directory
+      //int empty_fat_index = get_first_empty_fat_index();
+      fprintf(stderr, "hereeeee\n");
+
     }
+  } else if (mode == 1) {  // F_READ
+    if (does_file_exist(fname)) { // open file: add it to fd table
+      struct file_descriptor_st* opened_file = create_file_descriptor(curr_fd, fname_copy, 4, 0);
+      global_fd_table[curr_fd] = *opened_file;
+    } else {
+      perror("k_open: f_read: file does not exist");
+    }
+  } else if (mode == 2) {  // F_APPEND
 
-    // first check whether the file exists
-    // -> need to read through file directory
-    lseek_to_root_directory();
-
-    // we want to read the struct directory_entries from the data region
-    // until we either find the same file name or reach the end of the
-    // root_directory we know that there exists at maximum, block_size /
-    // sizeof(struct directory_entries) entries per block we need to move to the
-    // next block when we read the end of the block
-
-    // F_APPEND
-  } else if (mode == 2) {
   }
   return curr_fd;
+}
+
+// helper that traverses root directory block by block to check if fname file exists
+struct directory_entries* does_file_exist(const char* fname) {
+  lseek_to_root_directory(); // seek to root directory
+  // following links in the fat, for each block: get the offset, then check each directory name
+  int curr = 1;
+  int num_directories_per_block = block_size / 64; // each directory entry fixed size of 64 bytes
+  while (1) {
+    if (curr != 0xFFFF) { // check if we are at last block
+      int offset = get_offset_size(curr, 0);
+      lseek(fs_fd, offset, SEEK_SET);
+      for (int i = 0; i < num_directories_per_block; i++) { // check each directory in block
+        struct directory_entries* temp = malloc(sizeof(struct directory_entries));
+        read(fs_fd, &temp, sizeof(struct directory_entries));
+        if (strcmp(temp.name, fname) == 0){
+          return temp;
+        } else if (i == num_directories_per_block - 1) {
+          break;
+        }
+        lseek(fs_fd, 64, SEEK_SET); // move to the next directory entry in block
+      }
+    } else {
+      // last block case (still need to check, guaranteed to either return true or false)
+      for (int i = 0; i < num_directories_per_block; i++) { // check each directory in block
+        struct directory_entries* temp = malloc(sizeof(struct directory_entries));
+        read(fs_fd, &temp, sizeof(struct directory_entries));
+        if (strcmp(temp.name, fname) == 0){
+          return temp;
+        } else if (i == num_directories_per_block - 1) {
+          return NULL;
+        }
+        lseek(fs_fd, 64, SEEK_SET); // move to the next directory entry in block
+      }
+    }
+    curr = fat[curr]; // move to next block in fat link
+  }
+  return NULL;
 }
 
 int get_first_empty_fat_index() {

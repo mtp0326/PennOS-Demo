@@ -1,8 +1,5 @@
 #include "pennfat.h"
 
-// global variables for the currently mounted fs
-int size = 0;
-
 void prompt() {
   // display the prompt to the user
   ssize_t prompt_res = write(STDERR_FILENO, PROMPT, strlen(PROMPT));
@@ -119,7 +116,7 @@ int mount(const char* fs_name) {
     perror("unexpected command");
     exit(EXIT_FAILURE);
   }
-  int fs_fd = open(fs_name, O_RDWR);
+  fs_fd = open(fs_name, O_RDWR);
   if (fs_fd == -1) {
     perror("fs_fd open error");
     exit(EXIT_FAILURE);
@@ -134,10 +131,13 @@ int mount(const char* fs_name) {
   unsigned char buffer2[1];
   num_blocks = read(fs_fd, buffer2, 1);
 
-  // call helper to get FAT size
-  int block_size = get_block_size(block_config);
-  int fat_size = block_size * num_blocks;
-  size = fat_size;
+  // set externs
+  block_size = get_block_size(block_config);
+  fat_size = block_size * num_blocks;
+  num_fat_entries = get_num_fat_entries(block_size, num_blocks);
+  data_size = get_data_size(block_size, num_fat_entries);
+
+  // need to make a helper to re-create fd table
 
   // mmap FAT into memory
   fat = mmap(NULL, fat_size, PROT_READ | PROT_WRITE, MAP_SHARED, fs_fd, 0);
@@ -157,12 +157,11 @@ int unmount() {
   }
 
   // munmap(2) to unmount
-  if (munmap(fat, size) == -1) {
+  if (munmap(fat, fat_size) == -1) {
     perror("munmap failed");
     exit(EXIT_FAILURE);
   }
   fat = NULL;
-  size = 0;
   return 0;
 }
 
@@ -193,25 +192,24 @@ int get_block_size(int block_size_config) {
   return block_size;
 }
 
+// helper function that gets FAT table size
 int get_fat_size(int block_size, int blocks_in_fat) {
   return block_size * blocks_in_fat;
 }
 
+// helper function that gets number of possible FAT entries
 int get_num_fat_entries(int block_size, int blocks_in_fat) {
   return get_fat_size(block_size, blocks_in_fat) / 2;
 }
 
+// helper function that gets DATA region size
 int get_data_size(int block_size, int num_fat_entries) {
   return block_size * (num_fat_entries - 1);
 }
 
-int get_offset_size(int block_size,
-                    int blocks_in_fat,
-                    int block_num,
-                    int offset) {
-  int fat_size = get_fat_size(block_size, blocks_in_fat);
-  int block_offset = block_size * block_num;
+// helper function that gets total offset from beginning of FAT
+int get_offset_size(int block_num, int offset) {
+  int block_offset = block_size * (block_num - 1);
   int total_offset = fat_size + block_offset + offset;
-
   return total_offset;
 }
