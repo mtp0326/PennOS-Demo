@@ -25,7 +25,7 @@ int k_open(const char* fname, int mode) {
 
   // F_WRITES
   if (mode == 0) {
-    if (does_file_exist(fname)) {
+    if (does_file_exist(fname) != NULL) {
 
     } else { 
       // create the "file": add directory entry in root directory
@@ -34,7 +34,7 @@ int k_open(const char* fname, int mode) {
 
     }
   } else if (mode == 1) {  // F_READ
-    if (does_file_exist(fname)) { // open file: add it to fd table
+    if (does_file_exist(fname) != NULL) { // open file: add it to fd table
       struct file_descriptor_st* opened_file = create_file_descriptor(curr_fd, fname_copy, 4, 0);
       global_fd_table[curr_fd] = *opened_file;
     } else {
@@ -58,8 +58,8 @@ struct directory_entries* does_file_exist(const char* fname) {
       lseek(fs_fd, offset, SEEK_SET);
       for (int i = 0; i < num_directories_per_block; i++) { // check each directory in block
         struct directory_entries* temp = malloc(sizeof(struct directory_entries));
-        read(fs_fd, &temp, sizeof(struct directory_entries));
-        if (strcmp(temp.name, fname) == 0){
+        read(fs_fd, temp, sizeof(struct directory_entries));
+        if (strcmp(temp->name, fname) == 0){
           return temp;
         } else if (i == num_directories_per_block - 1) {
           break;
@@ -70,8 +70,8 @@ struct directory_entries* does_file_exist(const char* fname) {
       // last block case (still need to check, guaranteed to either return true or false)
       for (int i = 0; i < num_directories_per_block; i++) { // check each directory in block
         struct directory_entries* temp = malloc(sizeof(struct directory_entries));
-        read(fs_fd, &temp, sizeof(struct directory_entries));
-        if (strcmp(temp.name, fname) == 0){
+        read(fs_fd, temp, sizeof(struct directory_entries));
+        if (strcmp(temp->name, fname) == 0){
           return temp;
         } else if (i == num_directories_per_block - 1) {
           return NULL;
