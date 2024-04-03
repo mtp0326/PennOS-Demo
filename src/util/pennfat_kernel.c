@@ -95,9 +95,14 @@ ssize_t k_read(int fd, int n, char* buf) {
     return -1;
   }
 
-  // mode shouldn't matter here, since we can always read regardless of mode
+  int mode = curr->mode;
   char* fname = curr->fname;
   int offset = curr->offset;
+
+  // check if we can read the file or not
+  if (mode == 0 || mode == 2) {
+    return -1;
+  }
 
   // go to root directory to find the first block of the file
   lseek_to_root_directory();
