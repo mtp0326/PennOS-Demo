@@ -22,6 +22,9 @@ int main(int argc, char* argv[]) {
         exit(EXIT_FAILURE);
       }
 
+      // create fd_table
+      initialize_global_fd_table();
+
       char** args = parsed->commands[0];
       // touch, mv, rm, cat, cp, chmod, ls (implement using k functions)
       if (strcmp(args[0], "ls") == 0) {

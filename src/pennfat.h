@@ -17,7 +17,6 @@
 
 #define PROMPT "penn-fat> "
 #define MAX_LEN 4096
-#define MAX_FD_NUM 102
 
 void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config);
 int mount(const char* fs_name);
@@ -34,6 +33,6 @@ int get_offset_size(int block_size,
                     int blocks_in_fat,
                     int block_num,
                     int offset);
-int get_first_empty_fat_index();
 
+void initialize_global_fd_table();
 #endif

@@ -6,7 +6,15 @@
 #include "../pennfat.h"
 #include "spthread.h"
 
+#define MAX_FD_NUM 1024
+
 extern uint16_t* fat;
+extern struct file_descriptor_st* global_fd_table;
+extern int fs_fd;
+extern int block_size;
+extern int fat_size;
+extern int num_fat_entries;
+extern int data_size;
 
 struct directory_entries {
   char name[32];
@@ -24,6 +32,14 @@ struct file_descriptor_st {
   int mode;
   int offset;
 };
+
+// helper functions
+struct file_descriptor_st* create_file_descriptor(int fd,
+                                                  char* fname,
+                                                  int mode,
+                                                  int offset);
+void lseek_to_root_directory();
+int get_first_empty_fat_index();
 
 /************************************************
  *  PENNFAT KERNEL LEVEL FUNCTIONS

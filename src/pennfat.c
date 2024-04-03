@@ -2,11 +2,6 @@
 
 // global variables for the currently mounted fs
 int size = 0;
-int fs_fd;
-
-// global file descriptor table
-// indexed by the fd
-struct file_descriptor_st* global_fd_table = NULL;
 
 void prompt() {
   // display the prompt to the user
@@ -51,6 +46,32 @@ void int_handler(int signo) {
   prompt();
 }
 
+void initialize_global_fd_table() {
+  // create an array of file_descriptor_st
+  global_fd_table = malloc(sizeof(struct file_descriptor_st) * MAX_FD_NUM);
+
+  if (global_fd_table == NULL) {
+    fprintf(stderr, "Memory allocation failed\n");
+    return;
+  }
+
+  // stdin
+  struct file_descriptor_st* std_in = create_file_descriptor(0, "stdin", 1, 0);
+  global_fd_table[0] = *std_in;
+
+  // stdout
+  struct file_descriptor_st* std_out =
+      create_file_descriptor(1, "stdout", 0, 0);
+
+  global_fd_table[1] = *std_out;
+
+  // stderr
+  struct file_descriptor_st* std_err =
+      create_file_descriptor(2, "stdout", 0, 0);
+
+  global_fd_table[2] = *std_err;
+}
+
 void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   // error handling if there is a currently mounted fs
   if (fat != NULL) {
@@ -58,11 +79,11 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
     exit(EXIT_FAILURE);
   }
   // call helper to get FAT size
-  int block_size = get_block_size(block_size_config);
-  int fat_size = get_fat_size(block_size, blocks_in_fat);
+  block_size = get_block_size(block_size_config);
+  fat_size = get_fat_size(block_size, blocks_in_fat);
 
-  int num_fat_entries = get_num_fat_entries(block_size, blocks_in_fat);
-  int data_size = get_data_size(block_size, num_fat_entries);
+  num_fat_entries = get_num_fat_entries(block_size, blocks_in_fat);
+  data_size = get_data_size(block_size, num_fat_entries);
 
   // declared global
   fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
@@ -193,14 +214,4 @@ int get_offset_size(int block_size,
   int total_offset = fat_size + block_offset + offset;
 
   return total_offset;
-}
-
-int get_first_empty_fat_index() {
-  int i = 0;
-  // until we find 0x0000
-  while (fat[i] != 0x0000) {
-    i++;
-  }
-
-  return i;
 }
