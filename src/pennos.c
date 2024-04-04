@@ -11,13 +11,23 @@ static const int centisecond = 10000;  // 10 milliseconds
 PList* priority;
 
 static void* inc(void* arg) {
-  int thread_num = *(int*)arg;
-  free(arg);
+  char** argv = (char**)arg;
+
+  // Assuming the second argument is what you want
+  int thread_num = atoi(argv[1]);
+
   for (int i = 0;; i++) {
     dprintf(STDERR_FILENO, "%*cThread %d: i = %d\n", thread_num * 20, ' ',
             thread_num, i);
     usleep(centisecond);
   }
+
+  // Free the arguments here as before
+  for (int i = 0; argv[i] != NULL; i++) {
+    free(argv[i]);
+  }
+  free(argv);
+
   return NULL;
 }
 
@@ -55,13 +65,8 @@ void scheduler(void) {
     pthread_mutex_unlock(&done_lock);
     // need to add logic in case no processes of a given priority level for
     // future
-    if (priority->head->priority == 0) {
-      processes[0]->head = processes[0]->head->next;
-    } else if (priority->head->priority == 1) {
-      processes[1]->head = processes[1]->head->next;
-    } else {
-      processes[2]->head = processes[2]->head->next;
-    }
+    processes[priority->head->priority]->head =
+        processes[priority->head->priority]->head->next;
     priority->head = priority->head->next;
 
     if (priority->head->priority == 0) {
@@ -98,7 +103,7 @@ int main(int argc, char** argv) {
 
   priority = init_priority();
   pthread_mutex_init(&done_lock, NULL);
-  spthread_t temp;
+  // spthread_t temp;
 
   // 0201 0210 1020 1010 210
   add_priority(priority, 0);
@@ -121,29 +126,31 @@ int main(int argc, char** argv) {
   add_priority(priority, 1);
   add_priority(priority, 0);
 
+  pcb_t* place = malloc(sizeof(pcb_t));
+  place->priority = 0;
+  place->pid = 0;
+  place->child_pids = dynamic_pid_array_create(4);
+  current = place;
+
   for (int i = 0; i < 2; i++) {
-    int* arg = malloc(sizeof(int));
-    *arg = 0;
-    spthread_create(&temp, NULL, inc, arg);
-    pcb_t* ahh = malloc(sizeof(pcb_t));
-    ahh->handle = temp;
-    add_process(processes[0], ahh);
+    char** argv = malloc(3 * sizeof(char*));  // Space for 3 pointers
+    argv[0] = strdup("inc");  // strdup allocates new memory for the string
+    argv[1] = malloc(2);  // Enough for a single digit and the null terminator
+    sprintf(argv[1], "%d", 3);  // Set thread number, divides by 2 to mimic
+                                // your original grouping
+    argv[2] = NULL;             // Terminate the array
+    s_spawn(inc, argv, STDIN_FILENO, STDOUT_FILENO);
   }
-  for (int i = 2; i < 4; i++) {
-    int* arg = malloc(sizeof(int));
-    *arg = 1;
-    spthread_create(&temp, NULL, inc, arg);
-    pcb_t* ahh = malloc(sizeof(pcb_t));
-    ahh->handle = temp;
-    add_process(processes[1], ahh);
-  }
-  for (int i = 4; i < 6; i++) {
-    int* arg = malloc(sizeof(int));
-    *arg = 2;
-    spthread_create(&temp, NULL, inc, arg);
-    pcb_t* ahh = malloc(sizeof(pcb_t));
-    ahh->handle = temp;
-    add_process(processes[2], ahh);
+  for (int i = 0; i < 6; i++) {
+    // Dynamically allocate argv for each thread
+    char** argv = malloc(3 * sizeof(char*));  // Space for 3 pointers
+    argv[0] = strdup("inc");  // strdup allocates new memory for the string
+    argv[1] = malloc(2);  // Enough for a single digit and the null terminator
+    sprintf(argv[1], "%d", i / 2);  // Set thread number, divides by 2 to mimic
+                                    // your original grouping
+    argv[2] = NULL;                 // Terminate the array
+
+    s_spawn(inc, argv, STDIN_FILENO, STDOUT_FILENO);
   }
 
   scheduler();

@@ -1,4 +1,5 @@
 #include "sys_call.h"
+#include "stdio.h"
 
 // Helper function to duplicate argv for the child process
 char** duplicate_argv(char* argv[]) {
@@ -76,10 +77,10 @@ pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
   }
   arg->argv = child_argv;
 
-  add_process(processes[child->priority], child);
-  if (spthread_create(&child->handle, NULL, func, arg) != 0) {
+  add_process(processes[atoi(child_argv[1])], child);  // rpelace later
+  if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
     k_proc_cleanup(child);
-    free_argv(argv);
+    free_argv(child_argv);
     free(arg);
     return -1;
   }
