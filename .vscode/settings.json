@@ -6,6 +6,7 @@
     "fcntl.h": "c",
     "pennfat.h": "c",
     "penn-parser.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "types.h": "c"
   }
 }

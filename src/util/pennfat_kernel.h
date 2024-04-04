@@ -8,6 +8,8 @@
 
 #define MAX_FD_NUM 1024
 
+enum Whence { F_SEEK_SET, F_SEEK_CUR, F_SEEK_END };
+
 extern uint16_t* fat;
 extern struct file_descriptor_st* global_fd_table;
 extern int fs_fd;

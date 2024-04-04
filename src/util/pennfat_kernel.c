@@ -139,8 +139,8 @@ ssize_t k_read(int fd, int n, char* buf) {
   }
 
   int mode = curr->mode;
-  char* fname = curr->fname;
-  int offset = curr->offset;
+  // char* fname = curr->fname;
+  // int offset = curr->offset;
 
   // check if we can read the file or not
   if (mode == 0 || mode == 2) {
@@ -160,6 +160,7 @@ ssize_t k_read(int fd, int n, char* buf) {
   // all n bytes need to update the offset accordingly
 
   // read
+  return 0;
 }
 
 ssize_t k_write(int fd, const char* str, int n);
@@ -181,6 +182,35 @@ int k_close(int fd) {
 
 int k_unlink(const char* fname);
 
-off_t k_lseek(int fd, int offset, int whence);
+off_t k_lseek(int fd, int offset, int whence) {
+  struct file_descriptor_st* curr_fd = get_file_descriptor(fd);
+
+  if (curr_fd == NULL) {
+    return -1;
+  }
+
+  struct directory_entries* curr_de = does_file_exist(curr_fd->fname);
+
+  if (whence == F_SEEK_SET) {
+    // easy part: set the offset
+    curr_fd->offset = offset;
+
+    return 0;
+  }
+
+  if (whence == F_SEEK_CUR) {
+    // set the offset
+    curr_fd->offset += offset;
+
+    return 0;
+  }
+
+  if (whence == F_SEEK_END) {
+    // set the offset
+    curr_fd->offset = curr_de->size + offset;
+
+    return 0;
+  }
+}
 
 void k_ls(const char* filename);
