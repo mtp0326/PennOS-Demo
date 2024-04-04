@@ -136,6 +136,7 @@ struct directory_entries* does_file_exist(const char* fname) {
           } else if (i == num_directories_per_block - 1) {
             found = false;
           }
+          lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
         }
         lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
         // check if we are at the end of root directory (marked with name[0] =
@@ -153,6 +154,18 @@ struct directory_entries* does_file_exist(const char* fname) {
           fprintf(stderr, "here!\n");
           break;
         } else {
+          if (i ==
+              num_directories_per_block - 1) {  // at last directory entry of
+                                                // last block and still occupied
+            int next_fat_block = get_first_empty_fat_index();
+            int offset1 = get_offset_size(next_fat_block, 0);
+            lseek(fs_fd, offset1, SEEK_SET);  // position fs_fd at new block for
+                                              // extended root directory
+            // update fat
+            fat[curr] = next_fat_block;
+            fat[next_fat_block] = 0xFFFF;
+            break;
+          }
           fprintf(stderr, "hereeeee!\n");
           lseek(fs_fd, 64,
                 SEEK_CUR);  // move to the next directory entry in block

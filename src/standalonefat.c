@@ -42,8 +42,9 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "block size: %d\n", block_size);
       } else if (strcmp(args[0], "mount") == 0) {
         mount(args[1]);
-        k_open("f1", 1);
         k_open("f1", 0);
+        k_open("f1", 0);
+        k_open("f2", 0);
         fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
         fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
         fprintf(stderr, "fd table: %s\n", global_fd_table[4].fname);
