@@ -292,6 +292,9 @@ off_t k_lseek(int fd, int offset, int whence) {
 
     return curr_fd->offset;
   }
+
+  // invalid whence
+  return -1;
 }
 
 void k_ls(const char* filename);
