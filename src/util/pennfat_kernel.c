@@ -27,22 +27,46 @@ int k_open(const char* fname, int mode) {
   struct file_descriptor_st* opened_file;
   struct directory_entries* new_de;
 
-  // F_WRITES
+  // F_WRITE
   if (mode == 0) {
-    if (does_file_exist(fname) != NULL) {  // file already exists (truncate)
-      fprintf(stderr, "hereeeeeeeeeee: %s\n", does_file_exist(fname)->name);
+    struct directory_entries* dir_entry = does_file_exist(fname);
+    if (dir_entry != NULL) {  // file already exists (truncate)
+      if (dir_entry->perm == 6) {
+        fd_counter--;
+        perror(
+            "k_open: F_WRITE error: attempted to open a file in F_WRITE mode "
+            "more than once");
+        exit(EXIT_FAILURE);
+      } else {
+        fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
+        fprintf(stderr, "dir entry first block: %d\n", dir_entry->firstBlock);
+        // add to global fd table
+        opened_file = create_file_descriptor(curr_fd, fname_copy, 6, 0);
+        global_fd_table[curr_fd] = *opened_file;  // update fd table
+        // truncate
+        int start_fat_index = dir_entry->firstBlock;
+        int curr = start_fat_index;
+        while (fat[curr] != 0xFFFF) {
+          int next = fat[curr];
+          fat[curr] = 0x0000;
+          curr = next;
+        }
+        fat[curr] = 0x0000;
+        fat[start_fat_index] = 0xFFFF;
+      }
     } else {  // file doesn't exist
       // create the "file": add directory entry in root directory
       fprintf(stderr, "hereeeee\n");
       fat[empty_fat_index] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, 6, 0);
-      global_fd_table + curr_fd = opened_file;  // update fd table
+      global_fd_table[curr_fd] = *opened_file;  // update fd table
       new_de = create_directory_entry(fname_copy2, 0, empty_fat_index, 1, 6,
                                       time(NULL));
       // fs_fd should already be at next open location in root directory
       // (lseeked in does_file_exist())
       if (write(fs_fd, new_de, sizeof(struct directory_entries)) !=
           sizeof(struct directory_entries)) {
+        fd_counter--;
         perror("k_open: write error");
         exit(EXIT_FAILURE);
       }
@@ -52,6 +76,7 @@ int k_open(const char* fname, int mode) {
       opened_file = create_file_descriptor(curr_fd, fname_copy, 4, 0);
       global_fd_table[curr_fd] = *opened_file;
     } else {
+      fd_counter--;
       perror("k_open: f_read: file does not exist");
     }
   } else if (mode == 2) {  // F_APPEND
@@ -83,12 +108,14 @@ struct directory_entries* does_file_exist(const char* fname) {
       fprintf(stderr, "0xffffffff\n");
       for (int i = 0; i < num_directories_per_block;
            i++) {  // check each directory in block
-        temp = malloc(sizeof(struct directory_entries));
-        read(fs_fd, temp, sizeof(struct directory_entries));
-        if (strcmp(temp->name, fname) == 0) {
-          found = true;
-        } else if (i == num_directories_per_block - 1) {
-          break;
+        if (!found) {
+          temp = malloc(sizeof(struct directory_entries));
+          read(fs_fd, temp, sizeof(struct directory_entries));
+          if (strcmp(temp->name, fname) == 0) {
+            found = true;
+          } else if (i == num_directories_per_block - 1) {
+            break;
+          }
         }
         lseek(fs_fd, 64,
               SEEK_CUR);  // move to the next directory entry in block
@@ -98,14 +125,17 @@ struct directory_entries* does_file_exist(const char* fname) {
       // or false)
       for (int i = 0; i < num_directories_per_block;
            i++) {  // check each directory in block
-        temp = malloc(sizeof(struct directory_entries));
-        off_t current_offset3 = lseek(fs_fd, 0, SEEK_CUR);
-        fprintf(stderr, "offset3: %ld\n", current_offset3);
-        read(fs_fd, temp, sizeof(struct directory_entries));
-        if (strcmp(temp->name, fname) == 0) {
-          found = true;
-        } else if (i == num_directories_per_block - 1) {
-          found = false;
+        if (!found) {
+          temp = malloc(sizeof(struct directory_entries));
+          off_t current_offset3 = lseek(fs_fd, 0, SEEK_CUR);
+          fprintf(stderr, "offset3: %ld\n", current_offset3);
+          read(fs_fd, temp, sizeof(struct directory_entries));
+          if (strcmp(temp->name, fname) == 0) {
+            fprintf(stderr, "name: %s\n", temp->name);
+            found = true;
+          } else if (i == num_directories_per_block - 1) {
+            found = false;
+          }
         }
         lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
         // check if we are at the end of root directory (marked with name[0] =

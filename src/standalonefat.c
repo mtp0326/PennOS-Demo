@@ -7,6 +7,9 @@ int main(int argc, char* argv[]) {
     exit(EXIT_FAILURE);
   }
 
+  // create fd_table
+  initialize_global_fd_table();
+
   while (1) {
     prompt();
     char* cmd;
@@ -21,9 +24,6 @@ int main(int argc, char* argv[]) {
         free_parsed_command(parsed);
         exit(EXIT_FAILURE);
       }
-
-      // create fd_table
-      initialize_global_fd_table();
 
       char** args = parsed->commands[0];
       // touch, mv, rm, cat, cp, chmod, ls (implement using k functions)
@@ -42,8 +42,12 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "block size: %d\n", block_size);
       } else if (strcmp(args[0], "mount") == 0) {
         mount(args[1]);
+        k_open("f1", 1);
         k_open("f1", 0);
         fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
+        fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
+        fprintf(stderr, "fd table: %s\n", global_fd_table[4].fname);
+        fprintf(stderr, "fat table: %d\n", fat[2]);
       } else if (strcmp(args[0], "unmount") == 0) {
         unmount();
       } else if (strcmp(args[0], "write") == 0) {
