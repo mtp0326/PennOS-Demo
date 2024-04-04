@@ -322,25 +322,59 @@ off_t k_lseek(int fd, int offset, int whence) {
 
   struct directory_entries* curr_de = does_file_exist(curr_fd->fname);
 
+  int curr_size = curr_de->size;
+
+  if (curr_de == NULL) {
+    return -1;
+  }
+
   if (whence == F_SEEK_SET) {
     // easy part: set the offset
     curr_fd->offset = offset;
 
-    return 0;
+    // we have to expand the file
+    // if offset is larger than current file size
+    if (offset > curr_size) {
+      const char* str = calloc(sizeof(uint8_t), offset - curr_size);
+      ssize_t num_written = k_write(fd, str, offset - curr_size);
+      if (num_written < 0) {
+        return -1;
+      }
+    }
+
+    // resulting offset location
+    return curr_fd->offset;
   }
 
   if (whence == F_SEEK_CUR) {
     // set the offset
+    // we start from the current location plus offset bytes
     curr_fd->offset += offset;
 
-    return 0;
+    // if the changed offset is larger
+    if (curr_fd->offset > curr_size) {
+      const char* str = calloc(sizeof(uint8_t), curr_fd->offset - curr_size);
+      ssize_t num_written = k_write(fd, str, curr_fd->offset - curr_size);
+      if (num_written < 0) {
+        return -1;
+      }
+    }
+
+    return curr_fd->offset;
   }
 
   if (whence == F_SEEK_END) {
     // set the offset
-    curr_fd->offset = curr_de->size + offset;
+    curr_fd->offset = curr_size + offset;
 
-    return 0;
+    // in this case we will always write to the file
+    const char* str = calloc(sizeof(uint8_t), offset);
+    ssize_t num_written = k_write(fd, str, offset);
+    if (num_written < 0) {
+      return -1;
+    }
+
+    return curr_fd->offset;
   }
 }
 
