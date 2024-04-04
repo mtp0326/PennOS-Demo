@@ -85,6 +85,9 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   // declared global
   fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 
+  if (blocks_in_fat == 32 && block_size_config == 4) { // handle case of maxfs
+    data_size -= block_size;
+  }
   if (ftruncate(fs_fd, fat_size + data_size) != 0) {
     perror("mkfs: truncate error");
     exit(EXIT_FAILURE);
@@ -126,10 +129,18 @@ int mount(const char* fs_name) {
   int block_config = 0;
 
   unsigned char buffer[1];
-  block_config = read(fs_fd, buffer, 1);
+  if (read(fs_fd, buffer, 1) != 1) {
+    perror("mount: read error");
+    exit(EXIT_FAILURE);
+  }
+  block_config = buffer[0];
 
   unsigned char buffer2[1];
-  num_blocks = read(fs_fd, buffer2, 1);
+  if (read(fs_fd, buffer2, 1) != 1) {
+    perror("mount: read error");
+    exit(EXIT_FAILURE);
+  }
+  num_blocks = buffer2[0];
 
   // set externs
   block_size = get_block_size(block_config);
