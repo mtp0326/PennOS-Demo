@@ -39,9 +39,11 @@ int main(int argc, char* argv[]) {
         int blocks_in_fat = strtol(args[2], &ptr, base);
         int block_size_config = strtol(args[3], &ptr, base);
         mkfs(args[1], blocks_in_fat, block_size_config);
+        fprintf(stderr, "block size: %d\n", block_size);
       } else if (strcmp(args[0], "mount") == 0) {
         mount(args[1]);
-        k_open(args[1], 0);
+        k_open("f1", 0);
+        fprintf(stderr, "fd table: %s\n", global_fd_table[2].fname);
       } else if (strcmp(args[0], "unmount") == 0) {
         unmount();
       } else {
