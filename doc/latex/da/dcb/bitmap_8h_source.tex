@@ -1,0 +1,28 @@
+\doxysection{bitmap.\+h}
+\hypertarget{bitmap_8h_source}{}\label{bitmap_8h_source}\index{src/util/bitmap.h@{src/util/bitmap.h}}
+\mbox{\hyperlink{bitmap_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ OPENFD\_BITMAP\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ OPENFD\_BITMAP\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdbool.h>}\ \ \textcolor{comment}{//\ For\ bool\ type}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdint.h>}\ \ \ \textcolor{comment}{//\ For\ uint8\_t,\ uint32\_t\ types}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ FD\_BITMAP\_SIZE\ 1024\ \ }\textcolor{comment}{//\ Maximum\ number\ of\ file\ descriptors}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ FD\_BITMAP\_BYTES\ (FD\_BITMAP\_SIZE\ /\ 8)\ \ }\textcolor{comment}{//\ Number\ of\ bytes\ needed}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00014\ \ \ uint8\_t\ bits[\mbox{\hyperlink{bitmap_8h_a5ea771f21295b4207b0f6ecd833c7e19}{FD\_BITMAP\_BYTES}}];\ }
+\DoxyCodeLine{00015\ \}\ \mbox{\hyperlink{structFD__Bitmap}{FD\_Bitmap}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{bitmap_8h_ada21d254ae27ec7d99242a5c92701f6e}{fd\_bitmap\_initialize}}(\mbox{\hyperlink{structFD__Bitmap}{FD\_Bitmap}}*\ bitmap);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bitmap_8h_a350f8931422024711787caaef3182024}{fd\_bitmap\_set}}(\mbox{\hyperlink{structFD__Bitmap}{FD\_Bitmap}}*\ bitmap,\ uint32\_t\ fd);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bitmap_8h_ae7892d97c10f0b09280785812d1dfbcf}{fd\_bitmap\_clear}}(\mbox{\hyperlink{structFD__Bitmap}{FD\_Bitmap}}*\ bitmap,\ uint32\_t\ fd);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bitmap_8h_a7de93385481501b068dec877a52afb32}{fd\_bitmap\_test}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFD__Bitmap}{FD\_Bitmap}}*\ bitmap,\ uint32\_t\ fd);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

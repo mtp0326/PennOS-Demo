@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['meta_0',['meta',['../d6/dad/structspthread__st.html#aa9b951de39f02b3b4054f6da7f05ccfe',1,'spthread_st']]],
-  ['meta_5fmutex_1',['meta_mutex',['../d0/d22/structspthread__meta__st.html#ad773779046583b05bd265ae93bcf881e',1,'spthread_meta_st']]]
+  ['data_5fsize_0',['data_size',['../dc/dfb/pennfat__kernel_8c.html#af69e180c878a9c8f4e45ec7dc25a062f',1,'data_size:&#160;pennfat_kernel.c'],['../d0/d4d/pennfat__kernel_8h.html#af69e180c878a9c8f4e45ec7dc25a062f',1,'data_size:&#160;pennfat_kernel.c']]]
 ];

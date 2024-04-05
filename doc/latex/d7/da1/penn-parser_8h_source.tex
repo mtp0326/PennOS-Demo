@@ -1,0 +1,82 @@
+\doxysection{penn-\/parser.h}
+\hypertarget{penn-parser_8h_source}{}\label{penn-parser_8h_source}\index{src/penn-\/parser.h@{src/penn-\/parser.h}}
+\mbox{\hyperlink{penn-parser_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Penn-\/Parser}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Seungmin\ Han,\ 23fa}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Initial\ parser\ hanbangw,\ 21fa}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ PENN\_PARSER\_H\_}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ PENN\_PARSER\_H\_}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ Here\ defines\ all\ possible\ parser\ success/error\ codes\ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ parser\ encoutnered\ a\ system\ call\ error}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ SYSTEM\_ERROR\ (-\/1)}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ parse\ successful}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ PARSE\_SUCCESSFUL\ 0}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ parser\ encountered\ an\ unexpected\ pipeline\ token\ '|'}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ UNEXPECTED\_PIPELINE\ 3}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ parser\ encountered\ an\ unexpected\ ampersand\ token\ '\&'}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ UNEXPECTED\_BACKGROUND\ 4}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ parser\ didn't\ find\ any\ commands\ or\ arguments\ where\ it\ expects\ one}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ EXPECT\_COMMANDS\ 7}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structparsed__command}{parsed\_command}}\ \{}
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structparsed__command_aadb3fa66ab1542768beba9f19b075a94}{is\_background}};\ \ \textcolor{comment}{//\ indicates\ if\ the\ '\&'\ symbol\ exists\ at\ the\ end}}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structparsed__command_a0ac130a01c8e665db7749dc23b4e963d}{num\_commands}};\ \ \ \ \textcolor{comment}{//\ number\ of\ commands\ in\ the\ pipeline}}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{char}***\ \mbox{\hyperlink{structparsed__command_afd45348cd1dca492d433cea608455ba8}{commands}};\ \ \ \ \textcolor{comment}{//\ array\ for\ commands\ and\ its\ arguments}}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structparsed__command_a3957e4e35b995f018463727828f29017}{str\_parse}};\ \ \ \ \ \textcolor{comment}{//\ the\ string\ behind\ parsed\ in}}
+\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ would\ parse\ the\ command\ return\ a\ pointer\ to\ it\ or\ NULL\ via\ the\ output}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ parameter\ out\_cmd}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ Arguments:}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ -\/\ str\_to\_parse:\ the\ string\ to\ parse.\ Note:\ you\ are\ not\ allowed\ to\ modify\ the}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ input}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ -\/\ out\_cmd:\ the\ output\ parameter\ to\ return\ the\ struct\ parsed\_command*}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//}}
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ Returns:}}
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ -\/\ sets\ *out\_cmd\ to\ a\ pointer\ to\ a\ newly\ allocated\ parsed\_command\ struct\ that}}
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ \ \ contains\ the\ parsed\ output.\ or\ sets\ to\ NULL\ on\ error}}
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ -\/\ 0\ on\ success,\ or\ the\ corresponding\ error\ code\ (see\ above)\ on\ error}}
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{penn-parser_8h_a9d1082e01bef3bcc6b6c82b75cbd026d}{parse\_command}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str\_to\_parse,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structparsed__command}{parsed\_command}}**\ out\_cmd);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ print\ the\ parsed\ command.\ Used\ for\ testing\ and\ debugging}}
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ Assumes\ the\ cmd\ is\ well-\/formed\ and\ comes\ from\ parse\_command()}}
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{penn-parser_8h_abae00e09e61f219fb89725432ad44925}{print\_parsed\_command}}(\textcolor{keyword}{const}\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structparsed__command}{parsed\_command}}*\ cmd);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{comment}{//\ free\ the\ struct\ gotten\ from\ parse\_command.}}
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ Assumes\ the\ cmd\ is\ well-\/formed\ and\ comes\ from\ parse\_command()}}
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ returns\ bool\ for\ success/failure}}
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{penn-parser_8h_a7762c4ad49b1babc3ca36741c1a99648}{free\_parsed\_command}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structparsed__command}{parsed\_command}}*\ cmd);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{penn-parser_8h_af3ee24f38040c3b902fbc4868987a153}{separate\_to\_commands}}(\textcolor{keywordtype}{char}***\ cmds,\ \textcolor{keywordtype}{int}*\ n,\ \textcolor{keywordtype}{char}*\ parse\_string);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{penn-parser_8h_ab1d966c25ed0686b74b5626fbd5fff6f}{separate\_to\_args}}(\textcolor{keywordtype}{char}****\ cmds2,}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ single\_command,}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ command\_counter\_copy,}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ background);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ helper\ functions\ to\ check\ for\ input\ errors}}
+\DoxyCodeLine{00069\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{penn-parser_8h_aac8338bc0d4c57449b45f82fe1f90cb2}{check\_errors}}(\textcolor{keywordtype}{char}*\ str,\ \textcolor{keywordtype}{bool}*\ background);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ this\ one\ is\ for\ if\ there\ are\ multiple\ consecutive\ pipeline\ commands}}
+\DoxyCodeLine{00072\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{penn-parser_8h_ab11b7102ab462a06adab7d8eb9ac101c}{check\_error2}}(\textcolor{keywordtype}{char}*\ str,\ \textcolor{keywordtype}{bool}*\ amp);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{penn-parser_8h_ad664ef01961279b954ad2573304cfac5}{not\_whitespace}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ index);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

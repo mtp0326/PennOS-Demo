@@ -1,0 +1,33 @@
+\doxysection{clinkedlist.\+h}
+\hypertarget{clinkedlist_8h_source}{}\label{clinkedlist_8h_source}\index{src/util/clinkedlist.h@{src/util/clinkedlist.h}}
+\mbox{\hyperlink{clinkedlist_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SCHEDULER\_LIST\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SCHEDULER\_LIST\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <sys/types.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpcb__t}{pcb\_t}}\ \mbox{\hyperlink{structpcb__t}{pcb\_t}};}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structNode}{Node}}\ \{}
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ \mbox{\hyperlink{structNode_adbf20bfd8d88beabfe71bfd053f61959}{process}};\ \ \ \ }
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structNode}{Node}}*\ \mbox{\hyperlink{structNode_af67b110ca1a258b793bf69d306929b22}{next}};\ }
+\DoxyCodeLine{00016\ \}\ \mbox{\hyperlink{clinkedlist_8h_a3b09f37e675bcd48a01bf22155996872}{Node}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{structNode}{Node}}*\ \mbox{\hyperlink{structCircularList_aafe5473577e9735e5a874c9e85a7ee9e}{head}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structCircularList_a539564e372827a5e24044ce3c9397ada}{size}};\ }
+\DoxyCodeLine{00026\ \}\ \mbox{\hyperlink{structCircularList}{CircularList}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \mbox{\hyperlink{structCircularList}{CircularList}}*\ \mbox{\hyperlink{clinkedlist_8h_a40af759c666c8683b21e533eae304bd5}{init\_list}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{clinkedlist_8h_aeedee99ef47d460de79eebe5bcf19d83}{add\_process}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ list,\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ process);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{clinkedlist_8h_a6d27d9f54d9189fe8149a2d8cb8baa24}{remove\_process}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ list,\ pid\_t\ pid);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00056\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ \mbox{\hyperlink{clinkedlist_8h_a43d3a5a52f3e2c3d607e50ac257cb67b}{find\_process}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ list,\ pid\_t\ pid);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SCHEDULER\_LIST\_H}}
+
+\end{DoxyCode}

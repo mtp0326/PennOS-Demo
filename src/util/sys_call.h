@@ -1,4 +1,11 @@
+#ifndef SYSCALL_H
+#define SYSCALL_H
+
+#include <stdbool.h>
+#include <string.h>
 #include <unistd.h>
+#include "globals.h"
+#include "kernel.h"
 
 /*============================ system call functions for interacting with PennOS
  * process creation ===================================*/
@@ -12,6 +19,7 @@
  * @param fd0 Input file descriptor.
  * @param fd1 Output file descriptor.
  * @return pid_t The process ID of the created child process.
+ * // need to define error output?
  */
 pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1);
 
@@ -68,3 +76,5 @@ int s_nice(pid_t pid, int priority);
  * than 0.
  */
 void s_sleep(unsigned int ticks);
+
+#endif

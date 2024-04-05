@@ -1,0 +1,29 @@
+\doxysection{prioritylist.\+h}
+\hypertarget{prioritylist_8h_source}{}\label{prioritylist_8h_source}\index{src/util/prioritylist.h@{src/util/prioritylist.h}}
+\mbox{\hyperlink{prioritylist_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLIST\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLIST\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPNode}{PNode}}\ \{}
+\DoxyCodeLine{00011\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \mbox{\hyperlink{structPNode_ac15c687cddcb5d49fcf31384b9e6befe}{priority}}\ :\ 2;\ \ \ }
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPNode}{PNode}}*\ \mbox{\hyperlink{structPNode_ac539d6cd1752b6a2715a144264f361e8}{next}};\ }
+\DoxyCodeLine{00014\ \}\ \mbox{\hyperlink{prioritylist_8h_a2f668b1e28514742fc24defa9428a59c}{PNode}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{structPNode}{PNode}}*\ \mbox{\hyperlink{structPList_a01c53caacf826c1ca6477d1f3a08abb2}{head}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPList_a0e0dd9ca2fd526947247dbe1abdb70cb}{size}};\ }
+\DoxyCodeLine{00024\ \}\ \mbox{\hyperlink{structPList}{PList}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00030\ \mbox{\hyperlink{structPList}{PList}}*\ \mbox{\hyperlink{prioritylist_8h_ac55c6aca6e9e03dc0c52ef4fff694e29}{init\_priority}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{prioritylist_8h_a00f10d8a58f009415a3ee62349834249}{add\_priority}}(\mbox{\hyperlink{structPList}{PList}}*\ list,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{prioritylist_8h_acf5ffc2a9a57d64a940360fe6151aafc}{remove\_priority}}(\mbox{\hyperlink{structPList}{PList}}*\ list,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SCHEDULER\_LIST\_H}}
+
+\end{DoxyCode}

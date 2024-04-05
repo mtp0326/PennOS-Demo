@@ -1,6 +1,10 @@
 \doxysection{src/util/sys\+\_\+call.h File Reference}
 \hypertarget{sys__call_8h}{}\label{sys__call_8h}\index{src/util/sys\_call.h@{src/util/sys\_call.h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include "{}globals.\+h"{}}\newline
+{\ttfamily \#include "{}kernel.\+h"{}}\newline
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -12,7 +16,7 @@ int \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill
 \begin{DoxyCompactList}\small\item\em Send a signal to a particular process. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}{s\+\_\+exit}} (void)
 \begin{DoxyCompactList}\small\item\em Unconditionally exit the calling process. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\+\_\+nice}} (pid\+\_\+t pid, int priority)
+int \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\+\_\+nice}} (pid\+\_\+t pid, int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
 \begin{DoxyCompactList}\small\item\em Set the priority of the specified thread. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{sys__call_8h_aec37528a3c7935864924764d1911126c}{s\+\_\+sleep}} (unsigned int ticks)
 \begin{DoxyCompactList}\small\item\em Suspends execution of the calling proces for a specified number of clock ticks. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -108,7 +112,7 @@ Create a child process that executes the function {\ttfamily func}. The child wi
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-pid\+\_\+t The process ID of the created child process. 
+pid\+\_\+t The process ID of the created child process. // need to define error output? 
 \end{DoxyReturn}
 \Hypertarget{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}\label{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3} 
 \index{sys\_call.h@{sys\_call.h}!s\_waitpid@{s\_waitpid}}

@@ -47,6 +47,7 @@ all: $(EXECS) doxygen
 tests: $(TEST_EXECS)
 
 $(EXECS): $(BIN_DIR)/%: $(SRC_DIR)/%.c $(OBJS) $(HDRS)
+	$(info Linking $@ with $(OBJS) and $<)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $(OBJS) $<
 
 $(TEST_EXECS): $(BIN_DIR)/%: $(TESTS_DIR)/%.c $(OBJS) $(HDRS)

@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['k_5fclose_0',['k_close',['../d0/daa/kernel_8h.html#a9ecd38dc6f3a9721ab53ff9a815b5480',1,'kernel.h']]],
-  ['k_5fls_1',['k_ls',['../d0/daa/kernel_8h.html#a9317fe11a36bfc2d731bcbacc3a57728',1,'kernel.h']]],
-  ['k_5flseek_2',['k_lseek',['../d0/daa/kernel_8h.html#a332b4729ef52b2a3132b1aea88fa5c96',1,'kernel.h']]],
-  ['k_5fopen_3',['k_open',['../d0/daa/kernel_8h.html#a4d2cf4232cddee738996ca9ad83ea56f',1,'kernel.h']]],
-  ['k_5fproc_5fcleanup_4',['k_proc_cleanup',['../d0/daa/kernel_8h.html#a87071d3f59ebc0d6f626c885eb27c27e',1,'kernel.h']]],
-  ['k_5fproc_5fcreate_5',['k_proc_create',['../d0/daa/kernel_8h.html#a736760f5a73bbd7d6c9e4607c49837a3',1,'kernel.h']]],
-  ['k_5fread_6',['k_read',['../d0/daa/kernel_8h.html#a1951ec11865274b45144d6dd6f878692',1,'kernel.h']]],
-  ['k_5funlink_7',['k_unlink',['../d0/daa/kernel_8h.html#ae8b44b3621ebb542bec49f73d19d2885',1,'kernel.h']]],
-  ['k_5fwrite_8',['k_write',['../d0/daa/kernel_8h.html#a79d2a9b65d0e04de358fe1a2cfa79baf',1,'kernel.h']]]
+  ['cancel_5fand_5fjoin_0',['cancel_and_join',['../d8/d75/pennos_8c.html#a3aaa3b35330e32fa9b4f1150064c6579',1,'cancel_and_join(spthread_t thread):&#160;pennos.c'],['../d0/dd1/sched-demo_8c.html#a3aaa3b35330e32fa9b4f1150064c6579',1,'cancel_and_join(spthread_t thread):&#160;sched-demo.c']]],
+  ['check_5ferror2_1',['check_error2',['../d4/d1d/penn-parser_8c.html#ab11b7102ab462a06adab7d8eb9ac101c',1,'check_error2(char *str, bool *amp):&#160;penn-parser.c'],['../d7/da1/penn-parser_8h.html#ab11b7102ab462a06adab7d8eb9ac101c',1,'check_error2(char *str, bool *amp):&#160;penn-parser.c']]],
+  ['check_5ferrors_2',['check_errors',['../d4/d1d/penn-parser_8c.html#aac8338bc0d4c57449b45f82fe1f90cb2',1,'check_errors(char *str, bool *background):&#160;penn-parser.c'],['../d7/da1/penn-parser_8h.html#aac8338bc0d4c57449b45f82fe1f90cb2',1,'check_errors(char *str, bool *background):&#160;penn-parser.c']]],
+  ['create_5ffile_5fdescriptor_3',['create_file_descriptor',['../dc/dfb/pennfat__kernel_8c.html#a25ad4d01d5ade905b2bfce04910a5c0d',1,'create_file_descriptor(int fd, char *fname, int mode, int offset):&#160;pennfat_kernel.c'],['../d0/d4d/pennfat__kernel_8h.html#a25ad4d01d5ade905b2bfce04910a5c0d',1,'create_file_descriptor(int fd, char *fname, int mode, int offset):&#160;pennfat_kernel.c']]]
 ];

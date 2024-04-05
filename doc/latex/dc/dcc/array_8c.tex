@@ -1,0 +1,113 @@
+\doxysection{src/util/array.c File Reference}
+\hypertarget{array_8c}{}\label{array_8c}\index{src/util/array.c@{src/util/array.c}}
+{\ttfamily \#include "{}array.\+h"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{array_8c_a49c25f3f4533c1d022f5bed99d8b0c95}{dynamic\+\_\+pid\+\_\+array\+\_\+create}} (size\+\_\+t initial\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Initializes a new dynamic array for PIDs with an initial size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{array_8c_a4fe09b633a6575a679dfc91690641ecb}{dynamic\+\_\+pid\+\_\+array\+\_\+destroy}} (\mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*}array)
+\begin{DoxyCompactList}\small\item\em Destroys a dynamic PID array, freeing its resources. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{array_8c_af3432cc505fbfe71c7dc284a5b7451a9}{dynamic\+\_\+pid\+\_\+array\+\_\+add}} (\mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*}array, pid\+\_\+t pid)
+\begin{DoxyCompactList}\small\item\em Adds a PID to the dynamic array, resizing if necessary. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{array_8c_a40bde0506b0f79ee6d597a7f7eb9ceac}{dynamic\+\_\+pid\+\_\+array\+\_\+remove}} (\mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*}array, pid\+\_\+t pid)
+\begin{DoxyCompactList}\small\item\em Removes a PID from the dynamic array. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{array_8c_a9214b8720cef664abf2805746ca854a9}{dynamic\+\_\+pid\+\_\+array\+\_\+contains}} (const \mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*}array, pid\+\_\+t pid)
+\begin{DoxyCompactList}\small\item\em Checks if a PID exists in the dynamic array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{array_8c_af3432cc505fbfe71c7dc284a5b7451a9}\label{array_8c_af3432cc505fbfe71c7dc284a5b7451a9} 
+\index{array.c@{array.c}!dynamic\_pid\_array\_add@{dynamic\_pid\_array\_add}}
+\index{dynamic\_pid\_array\_add@{dynamic\_pid\_array\_add}!array.c@{array.c}}
+\doxysubsubsection{\texorpdfstring{dynamic\_pid\_array\_add()}{dynamic\_pid\_array\_add()}}
+{\footnotesize\ttfamily bool dynamic\+\_\+pid\+\_\+array\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*}}]{array,  }\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
+
+
+Adds a PID to the dynamic array, resizing if necessary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & A pointer to the dynamic PID array. \\
+\hline
+{\em pid} & The PID to add to the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success, false on failure (e.\+g., if memory allocation fails). 
+\end{DoxyReturn}
+\Hypertarget{array_8c_a9214b8720cef664abf2805746ca854a9}\label{array_8c_a9214b8720cef664abf2805746ca854a9} 
+\index{array.c@{array.c}!dynamic\_pid\_array\_contains@{dynamic\_pid\_array\_contains}}
+\index{dynamic\_pid\_array\_contains@{dynamic\_pid\_array\_contains}!array.c@{array.c}}
+\doxysubsubsection{\texorpdfstring{dynamic\_pid\_array\_contains()}{dynamic\_pid\_array\_contains()}}
+{\footnotesize\ttfamily bool dynamic\+\_\+pid\+\_\+array\+\_\+contains (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*}}]{array,  }\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
+
+
+Checks if a PID exists in the dynamic array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & A pointer to the dynamic PID array. \\
+\hline
+{\em pid} & The PID to check for in the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the PID exists in the array, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{array_8c_a49c25f3f4533c1d022f5bed99d8b0c95}\label{array_8c_a49c25f3f4533c1d022f5bed99d8b0c95} 
+\index{array.c@{array.c}!dynamic\_pid\_array\_create@{dynamic\_pid\_array\_create}}
+\index{dynamic\_pid\_array\_create@{dynamic\_pid\_array\_create}!array.c@{array.c}}
+\doxysubsubsection{\texorpdfstring{dynamic\_pid\_array\_create()}{dynamic\_pid\_array\_create()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*} dynamic\+\_\+pid\+\_\+array\+\_\+create (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{initial\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Initializes a new dynamic array for PIDs with an initial size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+\_\+size} & The initial size of the dynamic array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Dynamic\+PIDArray\texorpdfstring{$\ast$}{*} A pointer to the newly created dynamic array structure. 
+\end{DoxyReturn}
+\Hypertarget{array_8c_a4fe09b633a6575a679dfc91690641ecb}\label{array_8c_a4fe09b633a6575a679dfc91690641ecb} 
+\index{array.c@{array.c}!dynamic\_pid\_array\_destroy@{dynamic\_pid\_array\_destroy}}
+\index{dynamic\_pid\_array\_destroy@{dynamic\_pid\_array\_destroy}!array.c@{array.c}}
+\doxysubsubsection{\texorpdfstring{dynamic\_pid\_array\_destroy()}{dynamic\_pid\_array\_destroy()}}
+{\footnotesize\ttfamily void dynamic\+\_\+pid\+\_\+array\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*}}]{array }\end{DoxyParamCaption})}
+
+
+
+Destroys a dynamic PID array, freeing its resources. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & A pointer to the dynamic PID array to be destroyed. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{array_8c_a40bde0506b0f79ee6d597a7f7eb9ceac}\label{array_8c_a40bde0506b0f79ee6d597a7f7eb9ceac} 
+\index{array.c@{array.c}!dynamic\_pid\_array\_remove@{dynamic\_pid\_array\_remove}}
+\index{dynamic\_pid\_array\_remove@{dynamic\_pid\_array\_remove}!array.c@{array.c}}
+\doxysubsubsection{\texorpdfstring{dynamic\_pid\_array\_remove()}{dynamic\_pid\_array\_remove()}}
+{\footnotesize\ttfamily bool dynamic\+\_\+pid\+\_\+array\+\_\+remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamicPIDArray}{Dynamic\+PIDArray}} \texorpdfstring{$\ast$}{*}}]{array,  }\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
+
+
+Removes a PID from the dynamic array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & A pointer to the dynamic PID array. \\
+\hline
+{\em pid} & The PID to remove from the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the PID was successfully removed, false if the PID was not found. 
+\end{DoxyReturn}
