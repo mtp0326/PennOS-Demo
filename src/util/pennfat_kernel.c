@@ -305,8 +305,6 @@ ssize_t k_write(int fd, const char* str, int n) {
       offset -= block_size;
     }
 
-    // we need to make sure when writing, we didn't fill up the current block
-
     // we have the correct block number and the offset
     // we should lseek to this offset
     lseek(fs_fd, fat_size + block_size * (curr_block - 1) + offset, SEEK_SET);
@@ -315,6 +313,7 @@ ssize_t k_write(int fd, const char* str, int n) {
     int bytes_written = 0;
     int current_offset = offset;
 
+    // we need to make sure when writing, we didn't fill up the current block
     while (1) {
       // finished writing all data from str
       if (bytes_left <= 0) {
@@ -344,9 +343,22 @@ ssize_t k_write(int fd, const char* str, int n) {
       bytes_written += 1;
       current_offset += 1;
     }
+
+    // modify the directory entry accordingly
+    curr_de->size += bytes_written;
+    curr_de->mtime = time(NULL);
+
+    // modify the file descriptor accordingly
+    curr->offset += bytes_written;
+
+    // output how much we wrote into the file
     return bytes_written;
-  }
-  return -1;
+  }  // end of mode == 0 (F_WRITE)
+
+  // F_APPEND
+  if (mode == 3)
+
+    return -1;
 }
 
 int k_close(int fd) {
