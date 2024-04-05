@@ -49,6 +49,7 @@ struct file_descriptor_st* create_file_descriptor(int fd,
                                                   int offset);
 struct directory_entries* create_directory_entry(const char* name, uint32_t size, uint16_t firstBlock, uint8_t type, uint8_t perm, time_t mtime);
 void lseek_to_root_directory();
+void extend_fat(int start_index, int empty_fat_index);
 int get_first_empty_fat_index();
 struct directory_entries* does_file_exist(const char* fname);
 struct file_descriptor_st* get_file_descriptor(int fd);

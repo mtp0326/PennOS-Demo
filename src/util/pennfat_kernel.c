@@ -31,7 +31,8 @@ int k_open(const char* fname, int mode) {
   if (mode == 0) {
     if (dir_entry != NULL) {  // file already exists (truncate)
       for (int i = 0; i < curr_fd - 1; i++) {
-        if (global_fd_table[i].mode == WRITE && (strcmp(global_fd_table[i].fname, fname) == 0)) {
+        if (global_fd_table[i].mode == WRITE &&
+            (strcmp(global_fd_table[i].fname, fname) == 0)) {
           fd_counter--;
           perror(
               "k_open: F_WRITE error: attempted to open a file in F_WRITE mode "
@@ -77,7 +78,7 @@ int k_open(const char* fname, int mode) {
         exit(EXIT_FAILURE);
       }
     }
-  } else if (mode == 1) {                  // F_READ
+  } else if (mode == 1) {     // F_READ
     if (dir_entry != NULL) {  // open file: add it to fd table
       if (dir_entry->perm == 2) {
         perror("k_open: F_READ: attempting to open file that is write only");
@@ -89,12 +90,14 @@ int k_open(const char* fname, int mode) {
       fd_counter--;
       perror("k_open: f_read: file does not exist");
     }
-  } else if (mode == 2) {  // F_APPEND 
-    if (dir_entry != NULL) { // file exists, add to fd table in APPEND mode
+  } else if (mode == 2) {     // F_APPEND
+    if (dir_entry != NULL) {  // file exists, add to fd table in APPEND mode
       // file offset is at end of the file
-      opened_file = create_file_descriptor(curr_fd, fname_copy, APPEND, dir_entry->size);
+      opened_file =
+          create_file_descriptor(curr_fd, fname_copy, APPEND, dir_entry->size);
       global_fd_table[curr_fd] = *opened_file;
-    } else { // file doesn't exist, create it in root dir with read/write perm, add to fd table in APPEND mode
+    } else {  // file doesn't exist, create it in root dir with read/write perm,
+              // add to fd table in APPEND mode
       fat[empty_fat_index] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, APPEND, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
@@ -274,7 +277,48 @@ struct directory_entries* create_directory_entry(const char* name,
   return new_de;
 }
 
-ssize_t k_read(int fd, int n, char* buf);
+ssize_t k_read(int fd, int n, char* buf) {
+  // returns number of bytes on success, 0 if EOF is reached, -1 on error
+  struct file_descriptor_st* curr = get_file_descriptor(fd);
+  // fd is not a valid open file descriptor
+  if (curr == NULL) {
+    return -1;
+  }
+
+  int mode = curr->mode;
+  int offset = curr->offset;
+  char* fname = curr->fname;
+
+  // WRITE_ONLY (F_WRITE)
+  if (mode == WRITE) {
+    return -1;
+  }
+
+  struct directory_entries* curr_de = does_file_exist(fname);
+  uint8_t perm = curr_de->perm;
+  uint16_t firstBlock = curr_de->firstBlock;
+
+  // file permission is write only
+  if (perm == 2) {
+    return -1;
+  }
+
+  uint16_t curr_block = firstBlock;
+  // move to the correct block
+  while (offset > block_size && curr_block != 0xFFFF) {
+    curr_block = fat[curr_block];
+    offset -= block_size;
+  }
+
+  // we have the correct block number and the offset
+  // we should lseek to this offset
+
+  lseek(fs_fd, fat_size + block_size * (curr_block) + offset, SEEK_SET);
+
+  read(fs_fd, buf, n);
+
+  return n;
+}
 
 void extend_fat(int start_index, int empty_fat_index) {
   while (fat[start_index] != 0xFFFF) {
@@ -300,7 +344,7 @@ ssize_t k_write(int fd, const char* str, int n) {
   char* fname = curr->fname;
 
   // READ_ONLY (F_READ)
-  if (mode == READ) {
+  if (mode == 1) {
     return -1;
   }
 
@@ -328,6 +372,8 @@ ssize_t k_write(int fd, const char* str, int n) {
       curr_block = fat[curr_block];
       offset -= block_size;
     }
+
+    // we need to make sure when writing, we didn't fill up the current block
 
     // we have the correct block number and the offset
     // we should lseek to this offset
