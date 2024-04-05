@@ -1,8 +1,5 @@
 #include "pennfat.h"
 
-// global variables for the currently mounted fs
-int size = 0;
-
 void prompt() {
   // display the prompt to the user
   ssize_t prompt_res = write(STDERR_FILENO, PROMPT, strlen(PROMPT));
@@ -56,18 +53,18 @@ void initialize_global_fd_table() {
   }
 
   // stdin
-  struct file_descriptor_st* std_in = create_file_descriptor(0, "stdin", 1, 0);
+  struct file_descriptor_st* std_in = create_file_descriptor(0, "stdin", 4, 0);
   global_fd_table[0] = *std_in;
 
   // stdout
   struct file_descriptor_st* std_out =
-      create_file_descriptor(1, "stdout", 0, 0);
+      create_file_descriptor(1, "stdout", 2, 0);
 
   global_fd_table[1] = *std_out;
 
   // stderr
   struct file_descriptor_st* std_err =
-      create_file_descriptor(2, "stdout", 0, 0);
+      create_file_descriptor(2, "stdout", 2, 0);
 
   global_fd_table[2] = *std_err;
 }
@@ -88,6 +85,9 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   // declared global
   fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 
+  if (blocks_in_fat == 32 && block_size_config == 4) { // handle case of maxfs
+    data_size -= block_size;
+  }
   if (ftruncate(fs_fd, fat_size + data_size) != 0) {
     perror("mkfs: truncate error");
     exit(EXIT_FAILURE);
@@ -119,7 +119,7 @@ int mount(const char* fs_name) {
     perror("unexpected command");
     exit(EXIT_FAILURE);
   }
-  int fs_fd = open(fs_name, O_RDWR);
+  fs_fd = open(fs_name, O_RDWR);
   if (fs_fd == -1) {
     perror("fs_fd open error");
     exit(EXIT_FAILURE);
@@ -129,15 +129,26 @@ int mount(const char* fs_name) {
   int block_config = 0;
 
   unsigned char buffer[1];
-  block_config = read(fs_fd, buffer, 1);
+  if (read(fs_fd, buffer, 1) != 1) {
+    perror("mount: read error");
+    exit(EXIT_FAILURE);
+  }
+  block_config = buffer[0];
 
   unsigned char buffer2[1];
-  num_blocks = read(fs_fd, buffer2, 1);
+  if (read(fs_fd, buffer2, 1) != 1) {
+    perror("mount: read error");
+    exit(EXIT_FAILURE);
+  }
+  num_blocks = buffer2[0];
 
-  // call helper to get FAT size
-  int block_size = get_block_size(block_config);
-  int fat_size = block_size * num_blocks;
-  size = fat_size;
+  // set externs
+  block_size = get_block_size(block_config);
+  fat_size = block_size * num_blocks;
+  num_fat_entries = get_num_fat_entries(block_size, num_blocks);
+  data_size = get_data_size(block_size, num_fat_entries);
+
+  // need to make a helper to re-create fd table
 
   // mmap FAT into memory
   fat = mmap(NULL, fat_size, PROT_READ | PROT_WRITE, MAP_SHARED, fs_fd, 0);
@@ -157,12 +168,11 @@ int unmount() {
   }
 
   // munmap(2) to unmount
-  if (munmap(fat, size) == -1) {
+  if (munmap(fat, fat_size) == -1) {
     perror("munmap failed");
     exit(EXIT_FAILURE);
   }
   fat = NULL;
-  size = 0;
   return 0;
 }
 
@@ -193,25 +203,24 @@ int get_block_size(int block_size_config) {
   return block_size;
 }
 
+// helper function that gets FAT table size
 int get_fat_size(int block_size, int blocks_in_fat) {
   return block_size * blocks_in_fat;
 }
 
+// helper function that gets number of possible FAT entries
 int get_num_fat_entries(int block_size, int blocks_in_fat) {
   return get_fat_size(block_size, blocks_in_fat) / 2;
 }
 
+// helper function that gets DATA region size
 int get_data_size(int block_size, int num_fat_entries) {
   return block_size * (num_fat_entries - 1);
 }
 
-int get_offset_size(int block_size,
-                    int blocks_in_fat,
-                    int block_num,
-                    int offset) {
-  int fat_size = get_fat_size(block_size, blocks_in_fat);
-  int block_offset = block_size * block_num;
+// helper function that gets total offset from beginning of FAT
+int get_offset_size(int block_num, int offset) {
+  int block_offset = block_size * (block_num - 1);
   int total_offset = fat_size + block_offset + offset;
-
   return total_offset;
 }

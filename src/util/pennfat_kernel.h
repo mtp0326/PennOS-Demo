@@ -8,6 +8,8 @@
 
 #define MAX_FD_NUM 1024
 
+enum Whence { F_SEEK_SET, F_SEEK_CUR, F_SEEK_END };
+
 extern uint16_t* fat;
 extern struct file_descriptor_st* global_fd_table;
 extern int fs_fd;
@@ -31,6 +33,7 @@ struct file_descriptor_st {
   char* fname;
   int mode;
   int offset;
+  int ref_cnt;
 };
 
 // helper functions
@@ -38,8 +41,11 @@ struct file_descriptor_st* create_file_descriptor(int fd,
                                                   char* fname,
                                                   int mode,
                                                   int offset);
+struct directory_entries* create_directory_entry(const char* name, uint32_t size, uint16_t firstBlock, uint8_t type, uint8_t perm, time_t mtime);
 void lseek_to_root_directory();
 int get_first_empty_fat_index();
+struct directory_entries* does_file_exist(const char* fname);
+struct file_descriptor_st* get_file_descriptor(int fd);
 
 /************************************************
  *  PENNFAT KERNEL LEVEL FUNCTIONS
@@ -49,33 +55,34 @@ int get_first_empty_fat_index();
  * @brief Open file name \p fname with the mode \p mode, and return a file
  * descriptor to that file.
  *
- * This function opens a file specified by the file name \p fname in the mode
- * specified by \p mode and returns a file descriptor associated with the open
- * file that can be used for subsequent file operations.
+ * This function opens a file specified by the file name \p fname in the
+ * mode specified by \p mode and returns a file descriptor associated with
+ * the open file that can be used for subsequent file operations.
  *
  * @param fname The name of the file to open. See POSIX standard for allowed
  * names.
  * @param mode The mode with which to open the file. This should specify the
- * access mode (e.g., read, write) and other flags as defined by the operating
- * system. Allowed modes are: write (`F_WRITE`), read (`F_READ`), and append
+ * access mode (e.g., read, write) and other flags as defined by the
+ * operating system. Allowed modes are: write (`F_WRITE`), read (`F_READ`),
+ * and append
  * (`F_APPEND`).
  *
  *
  *
- * @return int A non-negative file descriptor on success, or -1 on error and \p
- * errno set.
+ * @return int A non-negative file descriptor on success, or -1 on error and
+ * \p errno set.
  *
- * @note The \p mode parameter may only be `F_WRITE`, `F_READ`, or `F_APPEND`.
- * Note that despite their names, write and append support both reading and
- * writing. `F_APPEND`'s file pointer will point to the end of the file rather
- * than the beginning. Both `F_WRITE` and `F_APPEND` will create the named file
- * if it does not already exist.
+ * @note The \p mode parameter may only be `F_WRITE`, `F_READ`, or
+ * `F_APPEND`. Note that despite their names, write and append support both
+ * reading and writing. `F_APPEND`'s file pointer will point to the end of
+ * the file rather than the beginning. Both `F_WRITE` and `F_APPEND` will
+ * create the named file if it does not already exist.
  *
  * @sa
  * https://www.ibm.com/docs/en/zos/3.1.0?topic=locales-posix-portable-file-name-character-set
  * @details Possible values of \p errno are:
- *              - `EACCES` : // need to fill these in, will expand as further
- * progress
+ *              - `EACCES` : // need to fill these in, will expand as
+ * further progress
  *              - `ENAMETOOLONG` :
  *
  */
