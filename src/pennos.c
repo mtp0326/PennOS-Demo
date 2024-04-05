@@ -1,4 +1,5 @@
 #include "pennos.h"
+#include "pennfat.h"
 #include "util/kernel.h"
 #include "util/prioritylist.h"
 
@@ -10,24 +11,13 @@ static const int centisecond = 10000;  // 10 milliseconds
 
 PList* priority;
 
-static void* inc(void* arg) {
-  char** argv = (char**)arg;
-
-  // Assuming the second argument is what you want
-  int thread_num = atoi(argv[1]);
-
-  for (int i = 0;; i++) {
-    dprintf(STDERR_FILENO, "%*cThread %d: i = %d\n", thread_num * 20, ' ',
-            thread_num, i);
-    usleep(centisecond);
+static void* shell(void* arg) {
+  while (1) {
+    prompt();
+    char* cmd;
+    read_command(&cmd);
+    // s_spawn(cmd, &cmd, STDIN_FILENO, STDOUT_FILENO);
   }
-
-  // Free the arguments here as before
-  for (int i = 0; argv[i] != NULL; i++) {
-    free(argv[i]);
-  }
-  free(argv);
-
   return NULL;
 }
 
@@ -37,6 +27,9 @@ void scheduler(void) {
   sigset_t suspend_set;
   sigfillset(&suspend_set);
   sigdelset(&suspend_set, SIGALRM);
+
+  sigset_t idle_set;
+  sigemptyset(&idle_set);
 
   // just to make sure that
   // sigalrm doesn't terminate the process
@@ -65,24 +58,37 @@ void scheduler(void) {
     pthread_mutex_unlock(&done_lock);
     // need to add logic in case no processes of a given priority level for
     // future
-    processes[priority->head->priority]->head =
-        processes[priority->head->priority]->head->next;
-    priority->head = priority->head->next;
+    int allBlockedOrEmpty = 1;
 
-    if (priority->head->priority == 0) {
-      current = processes[0]->head->process;
-      curr_thread = processes[0]->head->process->handle;
-    } else if (priority->head->priority == 1) {
-      current = processes[1]->head->process;
-      curr_thread = processes[1]->head->process->handle;
-    } else {
-      current = processes[2]->head->process;
-      curr_thread = processes[2]->head->process->handle;
+    // Check if all queues are empty or all processes are blocked.
+    for (int i = 0; i < 3; i++) {
+      if (processes[i]->size > 0) {
+        allBlockedOrEmpty = 0;
+        break;
+      }
     }
-    spthread_continue(curr_thread);
-    sigsuspend(&suspend_set);
-    spthread_suspend(curr_thread);
-    pthread_mutex_lock(&done_lock);
+
+    if (allBlockedOrEmpty) {
+      // All processes are blocked or queues are empty, so idle.
+      // sigsuspend will atomically unblock signals and put the process to
+      // sleep.
+      sigsuspend(&idle_set);
+    } else {
+      while (processes[priority->head->priority]->size == 0) {
+        priority->head = priority->head->next;
+      }
+
+      CircularList* current_priority = processes[priority->head->priority];
+      current = current_priority->head->process;
+      curr_thread = current->handle;
+
+      spthread_continue(curr_thread);
+      sigsuspend(&suspend_set);
+      spthread_suspend(curr_thread);
+
+      current_priority->head = current_priority->head->next;
+      pthread_mutex_lock(&done_lock);
+    }
   }
   pthread_mutex_unlock(&done_lock);
 }
@@ -131,27 +137,11 @@ int main(int argc, char** argv) {
   place->pid = 0;
   place->child_pids = dynamic_pid_array_create(4);
   current = place;
+  char** arg = malloc(2 * sizeof(char*));  // Space for 3 pointers
+  arg[0] = strdup("shell");  // strdup allocates new memory for the string
+  arg[1] = NULL;             // Terminate the array
 
-  for (int i = 0; i < 2; i++) {
-    char** argv = malloc(3 * sizeof(char*));  // Space for 3 pointers
-    argv[0] = strdup("inc");  // strdup allocates new memory for the string
-    argv[1] = malloc(2);  // Enough for a single digit and the null terminator
-    sprintf(argv[1], "%d", 3);  // Set thread number, divides by 2 to mimic
-                                // your original grouping
-    argv[2] = NULL;             // Terminate the array
-    s_spawn(inc, argv, STDIN_FILENO, STDOUT_FILENO);
-  }
-  for (int i = 0; i < 6; i++) {
-    // Dynamically allocate argv for each thread
-    char** argv = malloc(3 * sizeof(char*));  // Space for 3 pointers
-    argv[0] = strdup("inc");  // strdup allocates new memory for the string
-    argv[1] = malloc(2);  // Enough for a single digit and the null terminator
-    sprintf(argv[1], "%d", i / 2);  // Set thread number, divides by 2 to mimic
-                                    // your original grouping
-    argv[2] = NULL;                 // Terminate the array
-
-    s_spawn(inc, argv, STDIN_FILENO, STDOUT_FILENO);
-  }
+  s_spawn(shell, arg, STDIN_FILENO, STDOUT_FILENO);
 
   scheduler();
 

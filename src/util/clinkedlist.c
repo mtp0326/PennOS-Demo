@@ -38,7 +38,9 @@ void add_process(CircularList* list, pcb_t* process) {
     currentnode->next = newNode;
     newNode->next = list->head;  // Complete the circle
   }
-  list->size++;
+  if (newNode->process->state == RUNNING) {
+    list->size++;
+  }
 }
 
 // Removes a process from the circular linked list by its PID

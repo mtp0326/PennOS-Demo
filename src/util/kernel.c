@@ -9,9 +9,8 @@ pcb_t* k_proc_create(pcb_t* parent) {
   }
   child->pid = 0;             // code here to generate pids
   child->ppid = parent->pid;  // inherit
-  child->priority =
-      parent->priority;  // default value // AHHH CHANGE TO 1 after test
-  child->state = STOPPED;
+  child->priority = 1;        // default value // AHHH CHANGE TO 1 after test
+  child->state = RUNNING;
   child->child_pids = dynamic_pid_array_create(4);
   if (child->child_pids == NULL) {
     free(child);

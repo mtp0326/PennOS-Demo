@@ -77,7 +77,7 @@ pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
   }
   arg->argv = child_argv;
 
-  add_process(processes[atoi(child_argv[1])], child);  // rpelace later
+  add_process(processes[1], child);  // rpelace later
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
     k_proc_cleanup(child);
     free_argv(child_argv);
