@@ -138,7 +138,6 @@ struct directory_entries* does_file_exist(const char* fname) {
           }
           lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
         }
-        lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
         // check if we are at the end of root directory (marked with name[0] =
         // 0)
         off_t current_offset4 = lseek(fs_fd, 0, SEEK_CUR);
@@ -273,6 +272,11 @@ ssize_t k_write(int fd, const char* str, int n) {
   }
 
   struct directory_entries* curr_de = does_file_exist(fname);
+
+  if (curr_de == NULL) {
+    fprintf(stderr, "the file doesn't exist?\n");
+  }
+
   fprintf(stderr, "check3\n");
   uint8_t perm = curr_de->perm;
   uint16_t firstBlock = curr_de->firstBlock;
@@ -292,10 +296,11 @@ ssize_t k_write(int fd, const char* str, int n) {
       offset -= block_size;
     }
 
+    // we need to make sure when writing, we didn't fill up the current block
+
     // we have the correct block number and the offset
     // we should lseek to this offset
-
-    lseek(fs_fd, fat_size + block_size * (curr_block) + offset, SEEK_SET);
+    lseek(fs_fd, fat_size + block_size * (curr_block - 1) + offset, SEEK_SET);
 
     write(fs_fd, str, n);
 
