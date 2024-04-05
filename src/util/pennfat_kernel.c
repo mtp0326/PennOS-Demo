@@ -252,6 +252,15 @@ struct directory_entries* create_directory_entry(const char* name,
 
 ssize_t k_read(int fd, int n, char* buf);
 
+void extend_fat(int start_index, int empty_fat_index) {
+  while (fat[start_index] != 0xFFFF) {
+    start_index = fat[start_index];
+  }
+
+  fat[start_index] = empty_fat_index;
+  fat[empty_fat_index] = 0xFFFF;
+}
+
 ssize_t k_write(int fd, const char* str, int n) {
   // 0 for READ/WRITE, 1 for READ, and 2 for WRITE, 3 for APPEND
   fprintf(stderr, "check1\n");
@@ -302,9 +311,40 @@ ssize_t k_write(int fd, const char* str, int n) {
     // we should lseek to this offset
     lseek(fs_fd, fat_size + block_size * (curr_block - 1) + offset, SEEK_SET);
 
-    write(fs_fd, str, n);
+    int bytes_left = n;
+    int bytes_written = 0;
+    int current_offset = offset;
 
-    return n;
+    while (1) {
+      // finished writing all data from str
+      if (bytes_left <= 0) {
+        break;
+      }
+
+      // we need to create a new block for this file
+      if (current_offset >= block_size) {
+        int empty_fat_index = get_first_empty_fat_index();
+
+        // extend the fat to the empty_fat_index
+        extend_fat(firstBlock, empty_fat_index);
+
+        // move the offset so that we can write immediately
+        lseek(fs_fd, fat_size + block_size * (empty_fat_index - 1), SEEK_SET);
+
+        // reset
+        current_offset = 0;
+      }
+
+      write(fs_fd, str + bytes_written, 1);
+
+      // increase the size by one
+      curr_de->size += 1;
+
+      bytes_left -= 1;
+      bytes_written += 1;
+      current_offset += 1;
+    }
+    return bytes_written;
   }
   return -1;
 }

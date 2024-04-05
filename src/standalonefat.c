@@ -48,7 +48,13 @@ int main(int argc, char* argv[]) {
       } else if (strcmp(args[0], "unmount") == 0) {
         unmount();
       } else if (strcmp(args[0], "write") == 0) {
-        k_write(3, "hello", 6);
+        char* overview =
+            "In this assignment you will implement PennOS, your own UNIX-like "
+            "operating system. PennOS is designed around subsystems that model "
+            "those of standard UNIX. This will include programming a basic "
+            "priority scheduler, FAT file system, and user shell "
+            "interactions. hahahahahaha";
+        k_write(3, overview, strlen(overview) + 1);
 
       } else {
         fprintf(stderr, "pennfat: command not found: %s\n", args[0]);
