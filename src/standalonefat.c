@@ -43,12 +43,8 @@ int main(int argc, char* argv[]) {
       } else if (strcmp(args[0], "mount") == 0) {
         mount(args[1]);
         k_open("f1", 0);
-        k_open("f1", 0);
-        k_open("f2", 0);
         fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
         fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
-        fprintf(stderr, "fd table: %s\n", global_fd_table[4].fname);
-        fprintf(stderr, "fat table: %d\n", fat[2]);
       } else if (strcmp(args[0], "unmount") == 0) {
         unmount();
       } else if (strcmp(args[0], "write") == 0) {
