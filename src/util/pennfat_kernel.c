@@ -255,9 +255,9 @@ ssize_t k_read(int fd, int n, char* buf);
 
 ssize_t k_write(int fd, const char* str, int n) {
   // 0 for READ/WRITE, 1 for READ, and 2 for WRITE, 3 for APPEND
-  fprintf(stderr, "check1");
+  fprintf(stderr, "check1\n");
   struct file_descriptor_st* curr = get_file_descriptor(fd);
-  fprintf(stderr, "check2");
+  fprintf(stderr, "check2\n");
   // fd is not a valid open file descriptor
   if (curr == NULL) {
     return -1;
@@ -273,7 +273,7 @@ ssize_t k_write(int fd, const char* str, int n) {
   }
 
   struct directory_entries* curr_de = does_file_exist(fname);
-  fprintf(stderr, "check3");
+  fprintf(stderr, "check3\n");
   uint8_t perm = curr_de->perm;
   uint16_t firstBlock = curr_de->firstBlock;
 
@@ -283,7 +283,7 @@ ssize_t k_write(int fd, const char* str, int n) {
   }
 
   // this is opened with F_WRITE
-  if (mode == 0) {
+  if (mode == 6) {
     // we need to lseek to where we want to write
     uint16_t curr_block = firstBlock;
     // move to the correct block
