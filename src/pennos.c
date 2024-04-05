@@ -46,10 +46,10 @@ void scheduler(void) {
   sigaddset(&alarm_set, SIGALRM);
   pthread_sigmask(SIG_UNBLOCK, &alarm_set, NULL);
 
-  struct itimerval it;
-  it.it_interval = (struct timeval){.tv_usec = centisecond * 10};
-  it.it_value = it.it_interval;
-  setitimer(ITIMER_REAL, &it, NULL);
+  // struct itimerval it;
+  // it.it_interval = (struct timeval){.tv_usec = centisecond * 10};
+  // it.it_value = it.it_interval;
+  // setitimer(ITIMER_REAL, &it, NULL);
 
   spthread_t curr_thread;
   // locks to check the global value done
