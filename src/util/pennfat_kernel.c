@@ -356,9 +356,69 @@ ssize_t k_write(int fd, const char* str, int n) {
   }  // end of mode == 0 (F_WRITE)
 
   // F_APPEND
-  if (mode == 3)
+  if (mode == 3) {
+    // we need to move the offset to the eof if this is in F_APPEND mode
+    // the offset in the fd doesn't matter here
+    uint32_t append_offset = curr_de->size;
 
-    return -1;
+    // we need to lseek to where we want to write
+    uint16_t curr_block = firstBlock;
+    // move to the correct block
+    while (append_offset > block_size && curr_block != 0xFFFF) {
+      curr_block = fat[curr_block];
+      append_offset -= block_size;
+    }
+
+    // set to the end of the file
+    lseek(fs_fd, fat_size + block_size * (curr_block - 1) + offset, SEEK_SET);
+
+    int bytes_left = n;
+    int bytes_written = 0;
+    int current_offset = offset;
+
+    // we need to make sure when writing, we didn't fill up the current block
+    while (1) {
+      // finished writing all data from str
+      if (bytes_left <= 0) {
+        break;
+      }
+
+      // we need to create a new block for this file
+      if (current_offset >= block_size) {
+        int empty_fat_index = get_first_empty_fat_index();
+
+        // extend the fat to the empty_fat_index
+        extend_fat(firstBlock, empty_fat_index);
+
+        // move the offset so that we can write immediately
+        lseek(fs_fd, fat_size + block_size * (empty_fat_index - 1), SEEK_SET);
+
+        // reset
+        current_offset = 0;
+      }
+
+      write(fs_fd, str + bytes_written, 1);
+
+      // increase the size by one
+      curr_de->size += 1;
+
+      bytes_left -= 1;
+      bytes_written += 1;
+      current_offset += 1;
+    }
+
+    // modify the directory entry accordingly
+    curr_de->size += bytes_written;
+    curr_de->mtime = time(NULL);
+
+    // modify the file descriptor accordingly
+    curr->offset += bytes_written;
+
+    // output how much we wrote into the file
+    return bytes_written;
+  }
+
+  return -1;
 }
 
 int k_close(int fd) {
