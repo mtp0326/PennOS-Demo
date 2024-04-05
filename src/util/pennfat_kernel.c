@@ -26,39 +26,45 @@ int k_open(const char* fname, int mode) {
   int empty_fat_index = get_first_empty_fat_index();
   struct file_descriptor_st* opened_file;
   struct directory_entries* new_de;
-
+  struct directory_entries* dir_entry = does_file_exist(fname);
   // F_WRITE
   if (mode == 0) {
-    struct directory_entries* dir_entry = does_file_exist(fname);
     if (dir_entry != NULL) {  // file already exists (truncate)
-      if (dir_entry->perm == 6) {
-        fd_counter--;
-        perror(
-            "k_open: F_WRITE error: attempted to open a file in F_WRITE mode "
-            "more than once");
-        exit(EXIT_FAILURE);
-      } else {
-        fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
-        fprintf(stderr, "dir entry first block: %d\n", dir_entry->firstBlock);
-        // add to global fd table
-        opened_file = create_file_descriptor(curr_fd, fname_copy, 0, 0);
-        global_fd_table[curr_fd] = *opened_file;  // update fd table
-        // truncate
-        int start_fat_index = dir_entry->firstBlock;
-        int curr = start_fat_index;
-        while (fat[curr] != 0xFFFF) {
-          int next = fat[curr];
-          fat[curr] = 0x0000;
-          curr = next;
+      for (int i = 0; i < curr_fd - 1; i++) {
+        if (global_fd_table[i].mode == WRITE && (strcmp(global_fd_table[i].fname, fname) == 0)) {
+          fd_counter--;
+          perror(
+              "k_open: F_WRITE error: attempted to open a file in F_WRITE mode "
+              "more than once");
+          exit(EXIT_FAILURE);
         }
-        fat[curr] = 0x0000;
-        fat[start_fat_index] = 0xFFFF;
       }
+      if (dir_entry->perm == 4) {
+        perror("k_open: F_WRITE: attempting to open file that is read only");
+        exit(EXIT_FAILURE);
+      }
+      fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
+      fprintf(stderr, "dir entry first block: %d\n", dir_entry->firstBlock);
+      // add to global fd table
+      opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
+      global_fd_table[curr_fd] = *opened_file;  // update fd table
+      // truncate
+      int start_fat_index = dir_entry->firstBlock;
+      int curr = start_fat_index;
+      while (fat[curr] != 0xFFFF) {
+        int next = fat[curr];
+        fat[curr] = 0x0000;
+        curr = next;
+      }
+      fat[curr] = 0x0000;
+      fat[start_fat_index] = 0xFFFF;
+      // set directory entry size to 0 since truncated
+      dir_entry->size = 0;
     } else {  // file doesn't exist
       // create the "file": add directory entry in root directory
       fprintf(stderr, "hereeeee\n");
       fat[empty_fat_index] = 0xFFFF;
-      opened_file = create_file_descriptor(curr_fd, fname_copy, 0, 0);
+      opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
       new_de = create_directory_entry(fname_copy2, 0, empty_fat_index, 1, 6,
                                       time(NULL));
@@ -72,22 +78,40 @@ int k_open(const char* fname, int mode) {
       }
     }
   } else if (mode == 1) {                  // F_READ
-    if (does_file_exist(fname) != NULL) {  // open file: add it to fd table
-      opened_file = create_file_descriptor(curr_fd, fname_copy, 1, 0);
+    if (dir_entry != NULL) {  // open file: add it to fd table
+      if (dir_entry->perm == 2) {
+        perror("k_open: F_READ: attempting to open file that is write only");
+        exit(EXIT_FAILURE);
+      }
+      opened_file = create_file_descriptor(curr_fd, fname_copy, READ, 0);
       global_fd_table[curr_fd] = *opened_file;
     } else {
       fd_counter--;
       perror("k_open: f_read: file does not exist");
     }
-  } else if (mode == 2) {  // F_APPEND
+  } else if (mode == 2) {  // F_APPEND 
+    if (dir_entry != NULL) { // file exists, add to fd table in APPEND mode
+      // file offset is at end of the file
+      opened_file = create_file_descriptor(curr_fd, fname_copy, APPEND, dir_entry->size);
+      global_fd_table[curr_fd] = *opened_file;
+    } else { // file doesn't exist, create it in root dir with read/write perm, add to fd table in APPEND mode
+      fat[empty_fat_index] = 0xFFFF;
+      opened_file = create_file_descriptor(curr_fd, fname_copy, APPEND, 0);
+      global_fd_table[curr_fd] = *opened_file;  // update fd table
+      new_de = create_directory_entry(fname_copy2, 0, empty_fat_index, 1, 6,
+                                      time(NULL));
+      // fs_fd should already be at next open location in root directory
+      // (lseeked in does_file_exist())
+      if (write(fs_fd, new_de, sizeof(struct directory_entries)) !=
+          sizeof(struct directory_entries)) {
+        fd_counter--;
+        perror("k_open: write error");
+        exit(EXIT_FAILURE);
+      }
+    }
   }
   return curr_fd;
 }
-
-// // helper that determines if a file is already opened in F_WRITE mode
-// bool file_already_write() {
-//   return false;
-// }
 
 // helper that traverses root directory block by block to check if fname file
 // exists return: the directory entry struct with name fname (NULL if not found)
@@ -276,7 +300,7 @@ ssize_t k_write(int fd, const char* str, int n) {
   char* fname = curr->fname;
 
   // READ_ONLY (F_READ)
-  if (mode == 1) {
+  if (mode == READ) {
     return -1;
   }
 

@@ -53,18 +53,18 @@ void initialize_global_fd_table() {
   }
 
   // stdin
-  struct file_descriptor_st* std_in = create_file_descriptor(0, "stdin", 4, 0);
+  struct file_descriptor_st* std_in = create_file_descriptor(0, "stdin", READ, 0);
   global_fd_table[0] = *std_in;
 
   // stdout
   struct file_descriptor_st* std_out =
-      create_file_descriptor(1, "stdout", 2, 0);
+      create_file_descriptor(1, "stdout", WRITE, 0);
 
   global_fd_table[1] = *std_out;
 
   // stderr
   struct file_descriptor_st* std_err =
-      create_file_descriptor(2, "stdout", 2, 0);
+      create_file_descriptor(2, "stdout", WRITE, 0);
 
   global_fd_table[2] = *std_err;
 }

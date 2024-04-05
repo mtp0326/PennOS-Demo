@@ -6,6 +6,12 @@
 #include "../pennfat.h"
 #include "spthread.h"
 
+#define READ_WRITE 0
+#define READ 1
+#define WRITE 2
+#define APPEND 3
+
+
 #define MAX_FD_NUM 1024
 
 enum Whence { F_SEEK_SET, F_SEEK_CUR, F_SEEK_END };
