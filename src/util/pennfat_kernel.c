@@ -41,7 +41,7 @@ int k_open(const char* fname, int mode) {
         fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
         fprintf(stderr, "dir entry first block: %d\n", dir_entry->firstBlock);
         // add to global fd table
-        opened_file = create_file_descriptor(curr_fd, fname_copy, 6, 0);
+        opened_file = create_file_descriptor(curr_fd, fname_copy, 0, 0);
         global_fd_table[curr_fd] = *opened_file;  // update fd table
         // truncate
         int start_fat_index = dir_entry->firstBlock;
@@ -58,7 +58,7 @@ int k_open(const char* fname, int mode) {
       // create the "file": add directory entry in root directory
       fprintf(stderr, "hereeeee\n");
       fat[empty_fat_index] = 0xFFFF;
-      opened_file = create_file_descriptor(curr_fd, fname_copy, 6, 0);
+      opened_file = create_file_descriptor(curr_fd, fname_copy, 0, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
       new_de = create_directory_entry(fname_copy2, 0, empty_fat_index, 1, 6,
                                       time(NULL));
@@ -73,7 +73,7 @@ int k_open(const char* fname, int mode) {
     }
   } else if (mode == 1) {                  // F_READ
     if (does_file_exist(fname) != NULL) {  // open file: add it to fd table
-      opened_file = create_file_descriptor(curr_fd, fname_copy, 4, 0);
+      opened_file = create_file_descriptor(curr_fd, fname_copy, 1, 0);
       global_fd_table[curr_fd] = *opened_file;
     } else {
       fd_counter--;
@@ -283,7 +283,7 @@ ssize_t k_write(int fd, const char* str, int n) {
   }
 
   // this is opened with F_WRITE
-  if (mode == 6) {
+  if (mode == 0) {
     // we need to lseek to where we want to write
     uint16_t curr_block = firstBlock;
     // move to the correct block
