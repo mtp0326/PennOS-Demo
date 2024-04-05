@@ -36,7 +36,7 @@ int k_open(const char* fname, int mode) {
       fprintf(stderr, "hereeeee\n");
       fat[empty_fat_index] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, 6, 0);
-      global_fd_table[curr_fd] = *opened_file;  // update fd table
+      global_fd_table + curr_fd = opened_file;  // update fd table
       new_de = create_directory_entry(fname_copy2, 0, empty_fat_index, 1, 6,
                                       time(NULL));
       // fs_fd should already be at next open location in root directory
@@ -210,7 +210,56 @@ struct directory_entries* create_directory_entry(const char* name,
 
 ssize_t k_read(int fd, int n, char* buf);
 
-ssize_t k_write(int fd, const char* str, int n);
+ssize_t k_write(int fd, const char* str, int n) {
+  // 0 for READ/WRITE, 1 for READ, and 2 for WRITE, 3 for APPEND
+  fprintf(stderr, "check1");
+  struct file_descriptor_st* curr = get_file_descriptor(fd);
+  fprintf(stderr, "check2");
+  // fd is not a valid open file descriptor
+  if (curr == NULL) {
+    return -1;
+  }
+
+  int mode = curr->mode;
+  int offset = curr->offset;
+  char* fname = curr->fname;
+
+  // READ_ONLY (F_READ)
+  if (mode == 1) {
+    return -1;
+  }
+
+  struct directory_entries* curr_de = does_file_exist(fname);
+  fprintf(stderr, "check3");
+  uint8_t perm = curr_de->perm;
+  uint16_t firstBlock = curr_de->firstBlock;
+
+  // file permission is read only
+  if (perm == 4) {
+    return -1;
+  }
+
+  // this is opened with F_WRITE
+  if (mode == 0) {
+    // we need to lseek to where we want to write
+    uint16_t curr_block = firstBlock;
+    // move to the correct block
+    while (offset > block_size && curr_block != 0xFFFF) {
+      curr_block = fat[curr_block];
+      offset -= block_size;
+    }
+
+    // we have the correct block number and the offset
+    // we should lseek to this offset
+
+    lseek(fs_fd, fat_size + block_size * (curr_block) + offset, SEEK_SET);
+
+    write(fs_fd, str, n);
+
+    return n;
+  }
+  return -1;
+}
 
 int k_close(int fd) {
   struct file_descriptor_st* curr = get_file_descriptor(fd);

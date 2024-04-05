@@ -43,9 +43,12 @@ int main(int argc, char* argv[]) {
       } else if (strcmp(args[0], "mount") == 0) {
         mount(args[1]);
         k_open("f1", 0);
-        fprintf(stderr, "fd table: %s\n", global_fd_table[2].fname);
+        fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
       } else if (strcmp(args[0], "unmount") == 0) {
         unmount();
+      } else if (strcmp(args[0], "write") == 0) {
+        k_write(3, "hello", 6);
+
       } else {
         fprintf(stderr, "pennfat: command not found: %s\n", args[0]);
       }
