@@ -59,8 +59,16 @@ int k_open(const char* fname, int mode) {
       }
       fat[curr] = 0x0000;
       fat[start_fat_index] = 0xFFFF;
-      // set directory entry size to 0 since truncated
-      dir_entry->size = 0;
+      // set directory entry size to 0 since truncated and write to fs_fd to
+      // update
+      off_t dir_entry_offset =
+          does_file_exist2(fname);               // should be lseeked there
+      lseek(fs_fd, dir_entry_offset, SEEK_SET);  // get to found directory entry
+      struct directory_entries* updated_de =
+          create_directory_entry(dir_entry->name, 0, dir_entry->firstBlock,
+                                 dir_entry->type, dir_entry->perm, time(NULL));
+
+      write(fs_fd, updated_de, 64);
     } else {  // file doesn't exist
       // create the "file": add directory entry in root directory
       fprintf(stderr, "file doesn't exist: hereeeee\n");
@@ -179,9 +187,10 @@ struct directory_entries* does_file_exist(const char* fname) {
           exit(EXIT_FAILURE);
         }
         lseek(fs_fd, -1, SEEK_CUR);
-        // fprintf(stderr, "here1!\n");
-        if (buffer[0] == 0) {
-          // fprintf(stderr, "here!\n");
+        fprintf(stderr, "here1!\n");
+        if (buffer[0] == 0 ||
+            buffer[0] == 1) {  // look for first open or deleted entry
+          fprintf(stderr, "here!\n");
           break;
         } else {
           if (i ==

@@ -52,6 +52,7 @@ void lseek_to_root_directory();
 void extend_fat(int start_index, int empty_fat_index);
 int get_first_empty_fat_index();
 struct directory_entries* does_file_exist(const char* fname);
+off_t does_file_exist2(const char* fname);
 struct file_descriptor_st* get_file_descriptor(int fd);
 
 /************************************************
