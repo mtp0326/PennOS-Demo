@@ -458,9 +458,6 @@ ssize_t k_write(int fd, const char* str, int n) {
 
       write(fs_fd, str + bytes_written, 1);
 
-      // increase the size by one
-      curr_de->size += 1;
-
       bytes_left -= 1;
       bytes_written += 1;
       current_offset += 1;
@@ -474,9 +471,12 @@ ssize_t k_write(int fd, const char* str, int n) {
 
     off_t de_offset = does_file_exist2(fname);
 
+    off_t current_offset2 = lseek(fs_fd, 0, SEEK_CUR);
+    fprintf(stderr, "offset2: %ld\n", current_offset2);
+
     lseek(fs_fd, de_offset, SEEK_SET);
 
-    write(fs_fd, updated_de, sizeof(updated_de));
+    write(fs_fd, updated_de, sizeof(struct directory_entries));
 
     // modify the file descriptor accordingly
     curr->offset += bytes_written;
@@ -544,7 +544,7 @@ ssize_t k_write(int fd, const char* str, int n) {
 
     lseek(fs_fd, de_offset, SEEK_SET);
 
-    write(fs_fd, updated_de, sizeof(updated_de));
+    write(fs_fd, updated_de, 64);
 
     // modify the file descriptor accordingly
     curr->offset += bytes_written;
