@@ -63,12 +63,13 @@ int k_open(const char* fname, int mode) {
       dir_entry->size = 0;
     } else {  // file doesn't exist
       // create the "file": add directory entry in root directory
-      fprintf(stderr, "hereeeee\n");
-      fat[empty_fat_index] = 0xFFFF;
+      fprintf(stderr, "fiel doesn't exist: hereeeee\n");
+      int efi = get_first_empty_fat_index();  // in case needed to allocate new
+                                              // block for root dir
+      fat[efi] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
-      new_de = create_directory_entry(fname_copy2, 0, empty_fat_index, 1, 6,
-                                      time(NULL));
+      new_de = create_directory_entry(fname_copy2, 0, efi, 1, 6, time(NULL));
       // fs_fd should already be at next open location in root directory
       // (lseeked in does_file_exist())
       if (write(fs_fd, new_de, sizeof(struct directory_entries)) !=
@@ -138,11 +139,13 @@ struct directory_entries* does_file_exist(const char* fname) {
         if (!found) {
           temp = malloc(sizeof(struct directory_entries));
           read(fs_fd, temp, sizeof(struct directory_entries));
+          fprintf(stderr, "temp name: %s\n", temp->name);
           if (strcmp(temp->name, fname) == 0) {
             found = true;
           } else if (i == num_directories_per_block - 1) {
             break;
           }
+          lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
         }
         lseek(fs_fd, 64,
               SEEK_CUR);  // move to the next directory entry in block
@@ -157,6 +160,7 @@ struct directory_entries* does_file_exist(const char* fname) {
           off_t current_offset3 = lseek(fs_fd, 0, SEEK_CUR);
           fprintf(stderr, "offset3: %ld\n", current_offset3);
           read(fs_fd, temp, sizeof(struct directory_entries));
+          fprintf(stderr, "temp name LAST BLCOK: %s\n", temp->name);
           if (strcmp(temp->name, fname) == 0) {
             fprintf(stderr, "name: %s\n", temp->name);
             found = true;
@@ -476,7 +480,7 @@ ssize_t k_write(int fd, const char* str, int n) {
 
     lseek(fs_fd, de_offset, SEEK_SET);
 
-    write(fs_fd, updated_de, sizeof(struct directory_entries));
+    write(fs_fd, updated_de, 64);
 
     // modify the file descriptor accordingly
     curr->offset += bytes_written;

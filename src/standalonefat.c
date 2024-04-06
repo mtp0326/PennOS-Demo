@@ -52,6 +52,9 @@ int main(int argc, char* argv[]) {
       } else if (strcmp(args[0], "open") == 0) {
         int mode = strtol(args[2], &ptr, base);
         k_open(args[1], mode);
+      } else if (strcmp(args[0], "read") == 0) {
+        int mode = strtol(args[2], &ptr, base);
+        k_open(args[1], mode);
       } else {
         fprintf(stderr, "pennfat: command not found: %s\n", args[0]);
       }
