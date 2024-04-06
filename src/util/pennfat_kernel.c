@@ -213,6 +213,100 @@ struct directory_entries* does_file_exist(const char* fname) {
   }
 }
 
+struct directory_entries* does_file_exist2(const char* fname) {
+  bool found = false;
+  struct directory_entries* temp;
+  lseek_to_root_directory();  // seek to root directory
+  off_t current_offset = lseek(fs_fd, 0, SEEK_CUR);
+  fprintf(stderr, "offset: %ld\n", current_offset);
+  // following links in the fat, for each block: get the offset, then check each
+  // directory name
+  int curr = 1;
+  int num_directories_per_block =
+      block_size / 64;  // each directory entry fixed size of 64 bytes
+  while (1) {
+    if (fat[curr] != 0xFFFF) {  // check if we are at last block
+      fprintf(stderr, "0xffffffff\n");
+      for (int i = 0; i < num_directories_per_block;
+           i++) {  // check each directory in block
+        if (!found) {
+          temp = malloc(sizeof(struct directory_entries));
+          read(fs_fd, temp, sizeof(struct directory_entries));
+          if (strcmp(temp->name, fname) == 0) {
+            found = true;
+          } else if (i == num_directories_per_block - 1) {
+            break;
+          }
+        }
+        lseek(fs_fd, 64,
+              SEEK_CUR);  // move to the next directory entry in block
+      }
+    } else {
+      // last block case (still need to check, guaranteed to either return true
+      // or false)
+      for (int i = 0; i < num_directories_per_block;
+           i++) {  // check each directory in block
+        if (!found) {
+          temp = malloc(sizeof(struct directory_entries));
+          off_t current_offset3 = lseek(fs_fd, 0, SEEK_CUR);
+          fprintf(stderr, "offset3: %ld\n", current_offset3);
+          read(fs_fd, temp, sizeof(struct directory_entries));
+          if (strcmp(temp->name, fname) == 0) {
+            fprintf(stderr, "name: %s\n", temp->name);
+            found = true;
+          } else if (i == num_directories_per_block - 1) {
+            found = false;
+          }
+          lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
+        }
+        // check if we are at the end of root directory (marked with name[0] =
+        // 0)
+        off_t current_offset4 = lseek(fs_fd, 0, SEEK_CUR);
+        fprintf(stderr, "offset4: %ld\n", current_offset4);
+        unsigned char buffer[1];
+        if (read(fs_fd, buffer, 1) != 1) {
+          perror("does file exist: read error");
+          exit(EXIT_FAILURE);
+        }
+        lseek(fs_fd, -1, SEEK_CUR);
+        fprintf(stderr, "here1!\n");
+        if (buffer[0] == 0) {
+          fprintf(stderr, "here!\n");
+          break;
+        } else {
+          if (i ==
+              num_directories_per_block - 1) {  // at last directory entry of
+                                                // last block and still occupied
+            int next_fat_block = get_first_empty_fat_index();
+            int offset1 = get_offset_size(next_fat_block, 0);
+            lseek(fs_fd, offset1, SEEK_SET);  // position fs_fd at new block for
+                                              // extended root directory
+            // update fat
+            fat[curr] = next_fat_block;
+            fat[next_fat_block] = 0xFFFF;
+            break;
+          }
+          fprintf(stderr, "hereeeee!\n");
+          lseek(fs_fd, 64,
+                SEEK_CUR);  // move to the next directory entry in block
+        }
+      }
+      break;
+    }
+    curr = fat[curr];  // move to next block in fat link
+    int offset = get_offset_size(curr, 0);
+    lseek(fs_fd, offset, SEEK_SET);
+  }
+  off_t current_offset2 = lseek(fs_fd, 0, SEEK_CUR);
+  fprintf(stderr, "offset2: %ld\n", current_offset2);
+  if (found) {
+    return temp;
+  } else {
+    free(temp);
+    return NULL;
+  }
+}
+
 int get_first_empty_fat_index() {
   int i = 0;
   // until we find 0x0000
@@ -414,9 +508,13 @@ ssize_t k_write(int fd, const char* str, int n) {
       current_offset += 1;
     }
 
-    // modify the directory entry accordingly
-    curr_de->size += bytes_written;
-    curr_de->mtime = time(NULL);
+    // we need to actually write into the file descriptor here
+    // create a new file directory
+    struct directory_entries* updated_de = create_directory_entry(
+        curr_de->name, curr_de->size + bytes_written, curr_de->firstBlock,
+        curr_de->type, curr_de->perm, time(NULL));
+
+    lseek_to_root_directory();
 
     // modify the file descriptor accordingly
     curr->offset += bytes_written;
@@ -426,7 +524,7 @@ ssize_t k_write(int fd, const char* str, int n) {
   }  // end of mode == 0 (F_WRITE)
 
   // F_APPEND
-  if (mode == 3) {
+  if (mode == APPEND) {
     // we need to move the offset to the eof if this is in F_APPEND mode
     // the offset in the fd doesn't matter here
     uint32_t append_offset = curr_de->size;
@@ -478,6 +576,7 @@ ssize_t k_write(int fd, const char* str, int n) {
     }
 
     // modify the directory entry accordingly
+
     curr_de->size += bytes_written;
     curr_de->mtime = time(NULL);
 

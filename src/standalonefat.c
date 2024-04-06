@@ -42,36 +42,16 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "block size: %d\n", block_size);
       } else if (strcmp(args[0], "mount") == 0) {
         mount(args[1]);
-        k_open("f1", 0);
         fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
         fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
-        // mount(args[1]);
-        // int fd = k_open("f1", 2);
-        // char buff[20];
-        // buff[19] = '\0';
-        // k_write(3, "hello", 6);
-        // k_read(fd, 10, buff);
-        // fprintf(stderr, "output: %s\n", buff);
-        // fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
-        // fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
-        // fprintf(stderr, "fd table: %s\n", global_fd_table[4].fname);
-        // fprintf(stderr, "mode: %d\n", global_fd_table[4].mode);
-        // fprintf(stderr, "fd table: %s\n", global_fd_table[5].fname);
-        // fprintf(stderr, "mode: %d\n", global_fd_table[5].mode);
       } else if (strcmp(args[0], "unmount") == 0) {
         unmount();
       } else if (strcmp(args[0], "write") == 0) {
-        char* overview =
-            "In this assignment you will implement PennOS, your own UNIX-like "
-            "operating system. PennOS is designed around subsystems that model "
-            "those of standard UNIX. This will include programming a basic "
-            "priority scheduler, FAT file system, and user shell "
-            "interactions. hahahahahaha";
-        k_write(3, overview, strlen(overview) + 1);
-        char buff[20];
-        buff[19] = '\0';
-        k_read(3, 10, buff);
-        fprintf(stderr, "output: %s\n", buff);
+        int fd = strtol(args[1], &ptr, base);
+        k_write(fd, args[2], strlen(args[2]) + 1);
+      } else if (strcmp(args[0], "open") == 0) {
+        int mode = strtol(args[2], &ptr, base);
+        k_open(args[1], mode);
       } else {
         fprintf(stderr, "pennfat: command not found: %s\n", args[0]);
       }
