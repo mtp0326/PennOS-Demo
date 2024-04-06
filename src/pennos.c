@@ -7,7 +7,7 @@ static pthread_mutex_t done_lock;
 
 static bool done = false;
 
-static const int centisecond = 10000;  // 10 milliseconds
+// static const int centisecond = 10000;  // 10 milliseconds
 
 PList* priority;
 

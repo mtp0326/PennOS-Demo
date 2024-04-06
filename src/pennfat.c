@@ -53,7 +53,8 @@ void initialize_global_fd_table() {
   }
 
   // stdin
-  struct file_descriptor_st* std_in = create_file_descriptor(0, "stdin", READ, 0);
+  struct file_descriptor_st* std_in =
+      create_file_descriptor(0, "stdin", READ, 0);
   global_fd_table[0] = *std_in;
 
   // stdout
@@ -85,7 +86,7 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   // declared global
   fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 
-  if (blocks_in_fat == 32 && block_size_config == 4) { // handle case of maxfs
+  if (blocks_in_fat == 32 && block_size_config == 4) {  // handle case of maxfs
     data_size -= block_size;
   }
   if (ftruncate(fs_fd, fat_size + data_size) != 0) {

@@ -281,8 +281,8 @@ int get_first_empty_fat_index() {
 
 void lseek_to_root_directory() {
   lseek(fs_fd, fat_size, SEEK_SET);
-  fprintf(stderr, "fat size: %d\n", fat_size);
-  fprintf(stderr, "fsfd: %d\n", fs_fd);
+  // fprintf(stderr, "fat size: %d\n", fat_size);
+  // fprintf(stderr, "fsfd: %d\n", fs_fd);
 }
 
 struct file_descriptor_st* get_file_descriptor(int fd) {
@@ -645,4 +645,95 @@ off_t k_lseek(int fd, int offset, int whence) {
   return -1;
 }
 
-void k_ls(const char* filename);
+void generate_permission(uint8_t perm, char** permissions) {
+  if (perm == 0) {
+    *permissions = "----";
+  } else if (perm == 2) {
+    *permissions = "--w-";
+  } else if (perm == 4) {
+    *permissions = "-r--";
+  } else if (perm == 5) {
+    *permissions = "-r-x";
+  } else if (perm == 6) {
+    *permissions = "-rw-";
+  } else if (perm == 7) {
+    *permissions = "-rwx";
+  }
+}
+
+void k_ls(const char* filename) {
+  struct directory_entries* temp = malloc(sizeof(struct directory_entries));
+  if (filename == NULL) {
+    fprintf(stderr, "k_ls: the param is NULL here\n");
+
+    // we need to list everything in the current directory
+    lseek_to_root_directory();
+    int curr_root_block = 1;
+    int num_directories_per_block = block_size / 64;
+    int read_cnt = 0;
+
+    while (1) {
+      // moving to the next root directory block
+      if (read_cnt >= num_directories_per_block) {
+        // this is the end!
+        if (fat[curr_root_block] == 0xFFFF) {
+          break;
+        }
+
+        curr_root_block = fat[curr_root_block];
+
+        // to the start of that block!
+        lseek(fs_fd, get_offset_size(curr_root_block, 0), SEEK_SET);
+
+        read_cnt = 0;
+      }
+
+      read(fs_fd, temp, sizeof(struct directory_entries));
+
+      // end of the directory
+      if (temp->name[0] == 0) {
+        break;
+      }
+
+      // deleted files we don't want!
+      if (temp->name[0] == 1 || temp->name[0] == 2) {
+        continue;
+      }
+
+      char* permissions = "";
+      generate_permission(temp->perm, &permissions);
+
+      // first_block permissions file_size last_touched_timestamp file_name
+      fprintf(stderr, "%u %s %d %s %s\n", temp->firstBlock, permissions,
+              temp->size, "time", temp->name);
+
+      read_cnt += 1;
+    }
+    return;
+  }  // end of if
+
+  // here we have a specific file we want to ls
+  fprintf(stderr, "k_ls: the param is %s here\n", filename);
+
+  does_file_exist2(filename);
+
+  read(fs_fd, temp, sizeof(struct directory_entries));
+
+  if (temp->name[0] == 0) {
+    return;
+  }
+
+  // deleted files we don't want!
+  if (temp->name[0] == 1 || temp->name[0] == 2) {
+    return;
+  }
+
+  char* permissions = "";
+  generate_permission(temp->perm, &permissions);
+
+  // first_block permissions file_size last_touched_timestamp file_name
+  fprintf(stderr, "%u %s %d %s %s\n", temp->firstBlock, permissions, temp->size,
+          "time", temp->name);
+
+  return;
+}
