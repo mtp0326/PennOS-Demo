@@ -408,7 +408,7 @@ ssize_t k_write(int fd, const char* str, int n) {
     fprintf(stderr, "k_write: the file doesn't exist?\n");
   }
 
-  if (curr_de->name[0] == 1 || curr_de->name[1]) {
+  if (curr_de->name[0] == 1 || curr_de->name[1] == 2) {
     fprintf(stderr,
             "k_write: trying to write into a file that has been deleted\n");
     return -1;
