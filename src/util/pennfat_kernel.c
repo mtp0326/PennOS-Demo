@@ -387,9 +387,7 @@ void extend_fat(int start_index, int empty_fat_index) {
 
 ssize_t k_write(int fd, const char* str, int n) {
   // 0 for READ/WRITE, 1 for READ, and 2 for WRITE, 3 for APPEND
-  fprintf(stderr, "check1\n");
   struct file_descriptor_st* curr = get_file_descriptor(fd);
-  fprintf(stderr, "check2\n");
   // fd is not a valid open file descriptor
   if (curr == NULL) {
     return -1;
@@ -407,10 +405,15 @@ ssize_t k_write(int fd, const char* str, int n) {
   struct directory_entries* curr_de = does_file_exist(fname);
 
   if (curr_de == NULL) {
-    fprintf(stderr, "the file doesn't exist?\n");
+    fprintf(stderr, "k_write: the file doesn't exist?\n");
   }
 
-  fprintf(stderr, "check3\n");
+  if (curr_de->name[0] == 1 || curr_de->name[1]) {
+    fprintf(stderr,
+            "k_write: trying to write into a file that has been deleted\n");
+    return -1;
+  }
+
   uint8_t perm = curr_de->perm;
   uint16_t firstBlock = curr_de->firstBlock;
 
@@ -474,9 +477,6 @@ ssize_t k_write(int fd, const char* str, int n) {
         curr_de->type, curr_de->perm, time(NULL));
 
     off_t de_offset = does_file_exist2(fname);
-
-    off_t current_offset2 = lseek(fs_fd, 0, SEEK_CUR);
-    fprintf(stderr, "offset2: %ld\n", current_offset2);
 
     lseek(fs_fd, de_offset, SEEK_SET);
 
@@ -600,6 +600,7 @@ off_t k_lseek(int fd, int offset, int whence) {
     // if offset is larger than current file size
     if (offset > curr_size) {
       const char* str = calloc(sizeof(uint8_t), offset - curr_size);
+
       ssize_t num_written = k_write(fd, str, offset - curr_size);
       if (num_written < 0) {
         return -1;
