@@ -60,6 +60,8 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "READ OUTPUT: %s\n", buffer);
       } else if (strcmp(args[0], "kls") == 0) {
         k_ls(args[1]);
+      } else if (strcmp(args[0], "kunlink") == 0) {
+        k_unlink(args[1]);
       } else {
         fprintf(stderr, "pennfat: command not found: %s\n", args[0]);
       }

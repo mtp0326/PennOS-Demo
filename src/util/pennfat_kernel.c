@@ -389,13 +389,12 @@ ssize_t k_read(int fd, int n, char* buf) {
 
   // move to where we want to read
   uint16_t curr_block = firstBlock;
-  int offset_copy = offset;
   // move to the correct block
-  while (offset_copy > block_size && curr_block != 0xFFFF) {
+  while (current_offset > block_size && curr_block != 0xFFFF) {
     curr_block = fat[curr_block];
-    offset_copy -= block_size;
+    current_offset -= block_size;
   }
-  int total_offset = fat_size + block_size * (curr_block - 1) + offset_copy;
+  int total_offset = fat_size + block_size * (curr_block - 1) + current_offset;
 
   lseek(fs_fd, total_offset, SEEK_SET);
 
@@ -633,7 +632,47 @@ int k_close(int fd) {
   return 0;
 }
 
-int k_unlink(const char* fname);
+int k_unlink(const char* fname) {
+  // check if other processes have this file fname open
+  struct directory_entries* curr_de = does_file_exist(fname);
+  does_file_exist2(fname); // lseeks to fname position
+  if (curr_de == NULL) {
+    perror("unlink error: file fname not found");
+    return -1;
+  }
+  // struct file_descriptor_st curr_fd;
+  // search for fd with same fname to get num processes
+  // for (int i = 0; i < MAX_FD_NUM; i++) {
+  //   curr_fd = global_fd_table[i];
+  //   if (strcmp(curr_fd.fname, fname) == 0) {
+  //     break;
+  //   }
+  // }
+  // for multiple processes (shouldn't be used in standalone fat)
+  // if (curr_fd.ref_cnt > 1) { 
+  //   (curr_de->name)[0] = 2;
+  // } else {
+    // mark name[0] with 1
+    (curr_de->name)[0] = 1;
+  // }
+
+  struct directory_entries* new_de = create_directory_entry(
+        curr_de->name, curr_de->size, curr_de->firstBlock,
+        curr_de->type, curr_de->perm, time(NULL));
+
+  // update dir entry to mark name with 1 (mark as free to be overwritten with another open)
+  write(fs_fd, new_de, 64);
+
+  // update the FAT as well (free all blocks)
+  int curr = curr_de->firstBlock;
+  while (fat[curr] != 0xFFFF) {
+    int next = fat[curr];
+    fat[curr] = 0x0000;
+    curr = next;
+  }
+  fat[curr] = 0x0000;
+  return 1;
+}
 
 off_t k_lseek(int fd, int offset, int whence) {
   struct file_descriptor_st* curr_fd = get_file_descriptor(fd);
