@@ -661,6 +661,19 @@ void generate_permission(uint8_t perm, char** permissions) {
   }
 }
 
+char* formatTime(time_t t) {
+  static char buffer[30];  // Static buffer to hold formatted string
+  struct tm* tm_info;
+
+  // Convert time_t to a tm struct
+  tm_info = localtime(&t);
+
+  // Format the time into the buffer
+  strftime(buffer, 30, "%b %d %H:%M:%S %Y", tm_info);
+
+  return buffer;
+}
+
 void k_ls(const char* filename) {
   struct directory_entries* temp = malloc(sizeof(struct directory_entries));
   if (filename == NULL) {
@@ -705,7 +718,7 @@ void k_ls(const char* filename) {
 
       // first_block permissions file_size last_touched_timestamp file_name
       fprintf(stderr, "%u %s %d %s %s\n", temp->firstBlock, permissions,
-              temp->size, "time", temp->name);
+              temp->size, formatTime(temp->mtime), temp->name);
 
       read_cnt += 1;
     }
