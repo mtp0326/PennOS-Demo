@@ -379,11 +379,11 @@ ssize_t k_read(int fd, int n, char* buf) {
     return -1;
   }
 
-  if (offset >= size) { // already starting at EOF condition
+  if (offset >= size) {  // already starting at EOF condition
     return 0;
   }
 
-  int total_bytes_read = 0; // counter for total bytes to see if we hit EOF
+  int total_bytes_read = 0;  // counter for total bytes to see if we hit EOF
   int bytes_left = n;
   int current_offset = offset;
 
@@ -404,11 +404,11 @@ ssize_t k_read(int fd, int n, char* buf) {
     if (bytes_left <= 0) {
       break;
     }
-    
+
     if (offset + total_bytes_read > size) {
       return 0;
     }
-    
+
     // we need to move to the next block of the file
     if (current_offset >= block_size) {
       int next_block = fat[curr_block];
@@ -805,7 +805,7 @@ void k_ls(const char* filename) {
 
   // first_block permissions file_size last_touched_timestamp file_name
   fprintf(stderr, "%u %s %d %s %s\n", temp->firstBlock, permissions, temp->size,
-          "time", temp->name);
+          formatTime(temp->mtime), temp->name);
 
   return;
 }
