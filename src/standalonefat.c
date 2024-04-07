@@ -53,8 +53,11 @@ int main(int argc, char* argv[]) {
         int mode = strtol(args[2], &ptr, base);
         k_open(args[1], mode);
       } else if (strcmp(args[0], "read") == 0) {
-        int mode = strtol(args[2], &ptr, base);
-        k_open(args[1], mode);
+        int fd = strtol(args[1], &ptr, base);
+        char buffer[1000];
+        buffer[999] = '\0';
+        k_read(fd, 1000, buffer);
+        fprintf(stderr, "READ OUTPUT: %s\n", buffer);
       } else if (strcmp(args[0], "kls") == 0) {
         k_ls(args[1]);
       } else {

@@ -347,6 +347,7 @@ ssize_t k_read(int fd, int n, char* buf) {
   struct file_descriptor_st* curr = get_file_descriptor(fd);
   // fd is not a valid open file descriptor
   if (curr == NULL) {
+    perror("k_read error: could not find file descriptor");
     return -1;
   }
 
@@ -354,35 +355,82 @@ ssize_t k_read(int fd, int n, char* buf) {
   int offset = curr->offset;
   char* fname = curr->fname;
 
+  if (fname[0] == 1) {
+    perror("k_read error: attempting to read into a deleted file");
+    return -1;
+  }
+
   // WRITE_ONLY (F_WRITE)
   if (mode == WRITE) {
     return -1;
   }
-
+  // find the directory entry from the fd name
   struct directory_entries* curr_de = does_file_exist(fname);
   uint8_t perm = curr_de->perm;
   uint16_t firstBlock = curr_de->firstBlock;
+  uint32_t size = curr_de->size;
+  if (curr_de == NULL) {
+    perror("k_read error: could not find directory entry");
+    return -1;
+  }
 
   // file permission is write only
   if (perm == 2) {
     return -1;
   }
 
-  uint16_t curr_block = firstBlock;
-  // move to the correct block
-  while (offset > block_size && curr_block != 0xFFFF) {
-    curr_block = fat[curr_block];
-    offset -= block_size;
+  if (offset >= size) { // already starting at EOF condition
+    return 0;
   }
 
-  // we have the correct block number and the offset
-  // we should lseek to this offset
+  int total_bytes_read = 0; // counter for total bytes to see if we hit EOF
+  int bytes_left = n;
+  int current_offset = offset;
 
-  lseek(fs_fd, fat_size + block_size * (curr_block) + offset, SEEK_SET);
+  // move to where we want to read
+  uint16_t curr_block = firstBlock;
+  int offset_copy = offset;
+  // move to the correct block
+  while (offset_copy > block_size && curr_block != 0xFFFF) {
+    curr_block = fat[curr_block];
+    offset_copy -= block_size;
+  }
+  int total_offset = fat_size + block_size * (curr_block - 1) + offset_copy;
 
-  read(fs_fd, buf, n);
+  lseek(fs_fd, total_offset, SEEK_SET);
 
-  return n;
+  while (1) {
+    // finished reading
+    if (bytes_left <= 0) {
+      break;
+    }
+    
+    if (offset + total_bytes_read > size) {
+      return 0;
+    }
+    
+    // we need to move to the next block of the file
+    if (current_offset >= block_size) {
+      int next_block = fat[curr_block];
+      curr_block = next_block;
+      fprintf(stderr, "entered\n");
+
+      // move the offset so that we can write immediately
+      lseek(fs_fd, fat_size + block_size * (curr_block - 1), SEEK_SET);
+
+      // reset
+      current_offset = 0;
+    }
+    char buffer[1];
+    read(fs_fd, buffer, 1);
+    buf[total_bytes_read] = buffer[0];
+
+    bytes_left -= 1;
+    total_bytes_read += 1;
+    current_offset += 1;
+  }
+
+  return total_bytes_read;
 }
 
 void extend_fat(int start_index, int empty_fat_index) {
