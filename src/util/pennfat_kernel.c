@@ -52,7 +52,7 @@ int k_open(const char* fname, int mode) {
       // truncate
       int start_fat_index = dir_entry->firstBlock;
       if (start_fat_index != 0xFFFF) {
-         int curr = start_fat_index;
+        int curr = start_fat_index;
         while (fat[curr] != 0xFFFF) {
           int next = fat[curr];
           fat[curr] = 0x0000;
@@ -74,7 +74,8 @@ int k_open(const char* fname, int mode) {
     } else {  // file doesn't exist
       // create the "file": add directory entry in root directory
       fprintf(stderr, "file doesn't exist: hereeeee\n");
-      // int efi = get_first_empty_fat_index();  // in case needed to allocate new
+      // int efi = get_first_empty_fat_index();  // in case needed to allocate
+      // new
       //                                         // block for root dir
       // fat[efi] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
@@ -195,9 +196,9 @@ struct directory_entries* does_file_exist(const char* fname) {
           fprintf(stderr, "here!\n");
           break;
         } else {
-          if (i ==
-              num_directories_per_block - 1 && !found) {  // at last directory entry of
-                                                // last block and still occupied
+          if (i == num_directories_per_block - 1 &&
+              !found) {  // at last directory entry of
+                         // last block and still occupied
             int next_fat_block = get_first_empty_fat_index();
             int offset1 = get_offset_size(next_fat_block, 0);
             lseek(fs_fd, offset1, SEEK_SET);  // position fs_fd at new block for
@@ -432,7 +433,7 @@ ssize_t k_read(int fd, int n, char* buf) {
   }
 
   // modify the file descriptor accordingly
-    curr->offset += total_bytes_read;
+  curr->offset += total_bytes_read;
 
   return total_bytes_read;
 }
@@ -444,6 +445,55 @@ void extend_fat(int start_index, int empty_fat_index) {
 
   fat[start_index] = empty_fat_index;
   fat[empty_fat_index] = 0xFFFF;
+}
+
+void write_one_byte_in_while(int bytes_left,
+                             int* bytes_written,
+                             int* current_offset,
+                             const char* str,
+                             uint16_t firstBlock) {
+  while (1) {
+    // finished writing all data from str
+    if (bytes_left <= 0) {
+      break;
+    }
+
+    // we need to create a new block for this file
+    if (*current_offset >= block_size) {
+      int empty_fat_index = get_first_empty_fat_index();
+
+      // extend the fat to the empty_fat_index
+      extend_fat(firstBlock, empty_fat_index);
+
+      // move the offset so that we can write immediately
+      lseek(fs_fd, fat_size + block_size * (empty_fat_index - 1), SEEK_SET);
+
+      // reset
+      current_offset = 0;
+    }
+
+    write(fs_fd, str + *bytes_written, 1);
+
+    bytes_left -= 1;
+    *bytes_written += 1;
+    *current_offset += 1;
+  }
+}
+
+void update_directory_entry_after_write(struct directory_entries* curr_de,
+                                        char* fname,
+                                        int bytes_written) {
+  // we need to actually write into the file descriptor here
+  // create a new file directory
+  struct directory_entries* updated_de = create_directory_entry(
+      curr_de->name, curr_de->size + bytes_written, curr_de->firstBlock,
+      curr_de->type, curr_de->perm, time(NULL));
+
+  off_t de_offset = does_file_exist2(fname);
+
+  lseek(fs_fd, de_offset, SEEK_SET);
+
+  write(fs_fd, updated_de, 64);
 }
 
 ssize_t k_write(int fd, const char* str, int n) {
@@ -509,45 +559,12 @@ ssize_t k_write(int fd, const char* str, int n) {
     int bytes_written = 0;
     int current_offset = offset;
 
-    // we need to make sure when writing, we didn't fill up the current block
-    while (1) {
-      // finished writing all data from str
-      if (bytes_left <= 0) {
-        break;
-      }
+    // for bytes_written and current_offset, we send in a pointer to the
+    // variable so that we modify it during writing
+    write_one_byte_in_while(bytes_left, &bytes_written, &current_offset, str,
+                            firstBlock);
 
-      // we need to create a new block for this file
-      if (current_offset >= block_size) {
-        int empty_fat_index = get_first_empty_fat_index();
-
-        // extend the fat to the empty_fat_index
-        extend_fat(firstBlock, empty_fat_index);
-
-        // move the offset so that we can write immediately
-        lseek(fs_fd, fat_size + block_size * (empty_fat_index - 1), SEEK_SET);
-
-        // reset
-        current_offset = 0;
-      }
-
-      write(fs_fd, str + bytes_written, 1);
-
-      bytes_left -= 1;
-      bytes_written += 1;
-      current_offset += 1;
-    }
-
-    // we need to actually write into the file descriptor here
-    // create a new file directory
-    struct directory_entries* updated_de = create_directory_entry(
-        curr_de->name, curr_de->size + bytes_written, curr_de->firstBlock,
-        curr_de->type, curr_de->perm, time(NULL));
-
-    off_t de_offset = does_file_exist2(fname);
-
-    lseek(fs_fd, de_offset, SEEK_SET);
-
-    write(fs_fd, updated_de, 64);
+    update_directory_entry_after_write(curr_de, fname, bytes_written);
 
     // modify the file descriptor accordingly
     curr->offset += bytes_written;
@@ -564,6 +581,7 @@ ssize_t k_write(int fd, const char* str, int n) {
 
     // we need to lseek to where we want to write
     uint16_t curr_block = firstBlock;
+
     // move to the correct block
     while (append_offset > block_size && curr_block != 0xFFFF) {
       curr_block = fat[curr_block];
@@ -578,45 +596,12 @@ ssize_t k_write(int fd, const char* str, int n) {
     int bytes_written = 0;
     int current_offset = append_offset;
 
-    // we need to make sure when writing, we didn't fill up the current block
-    while (1) {
-      // finished writing all data from str
-      if (bytes_left <= 0) {
-        break;
-      }
+    // for bytes_written and current_offset, we send in a pointer to the
+    // variable so that we modify it during writing
+    write_one_byte_in_while(bytes_left, &bytes_written, &current_offset, str,
+                            firstBlock);
 
-      // we need to create a new block for this file
-      if (current_offset >= block_size) {
-        int empty_fat_index = get_first_empty_fat_index();
-
-        // extend the fat to the empty_fat_index
-        extend_fat(firstBlock, empty_fat_index);
-
-        // move the offset so that we can write immediately
-        lseek(fs_fd, fat_size + block_size * (empty_fat_index - 1), SEEK_SET);
-
-        // reset
-        current_offset = 0;
-      }
-
-      write(fs_fd, str + bytes_written, 1);
-
-      bytes_left -= 1;
-      bytes_written += 1;
-      current_offset += 1;
-    }
-
-    // we need to actually write into the file descriptor here
-    // create a new file directory
-    struct directory_entries* updated_de = create_directory_entry(
-        curr_de->name, curr_de->size + bytes_written, curr_de->firstBlock,
-        curr_de->type, curr_de->perm, time(NULL));
-
-    off_t de_offset = does_file_exist2(fname);
-
-    lseek(fs_fd, de_offset, SEEK_SET);
-
-    write(fs_fd, updated_de, 64);
+    update_directory_entry_after_write(curr_de, fname, bytes_written);
 
     // modify the file descriptor accordingly
     curr->offset += bytes_written;
@@ -646,7 +631,7 @@ int k_close(int fd) {
 int k_unlink(const char* fname) {
   // check if other processes have this file fname open
   struct directory_entries* curr_de = does_file_exist(fname);
-  does_file_exist2(fname); // lseeks to fname position
+  does_file_exist2(fname);  // lseeks to fname position
   if (curr_de == NULL) {
     perror("unlink error: file fname not found");
     return -1;
@@ -660,18 +645,19 @@ int k_unlink(const char* fname) {
   //   }
   // }
   // for multiple processes (shouldn't be used in standalone fat)
-  // if (curr_fd.ref_cnt > 1) { 
+  // if (curr_fd.ref_cnt > 1) {
   //   (curr_de->name)[0] = 2;
   // } else {
-    // mark name[0] with 1
-    (curr_de->name)[0] = 1;
+  // mark name[0] with 1
+  (curr_de->name)[0] = 1;
   // }
 
-  struct directory_entries* new_de = create_directory_entry(
-        curr_de->name, curr_de->size, curr_de->firstBlock,
-        curr_de->type, curr_de->perm, time(NULL));
+  struct directory_entries* new_de =
+      create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
+                             curr_de->type, curr_de->perm, time(NULL));
 
-  // update dir entry to mark name with 1 (mark as free to be overwritten with another open)
+  // update dir entry to mark name with 1 (mark as free to be overwritten with
+  // another open)
   write(fs_fd, new_de, 64);
 
   // update the FAT as well (free all blocks)
@@ -701,8 +687,10 @@ off_t k_lseek(int fd, int offset, int whence) {
   }
 
   if (curr_de->firstBlock == 0xFFFF) {
-    // we need to create and assign a new block for this file directory
-    // will use helper here
+    int firstBlock = get_first_empty_fat_index();
+    curr_de->firstBlock = firstBlock;
+    fat[firstBlock] = 0xFFFF;
+    fprintf(stderr, "first block: %d\n", firstBlock);
   }
 
   if (whence == F_SEEK_SET) {
