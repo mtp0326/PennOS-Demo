@@ -9,7 +9,6 @@ int main(int argc, char* argv[]) {
 
   // create fd_table
   initialize_global_fd_table();
-
   while (1) {
     prompt();
     char* cmd;
@@ -27,15 +26,30 @@ int main(int argc, char* argv[]) {
 
       char** args = parsed->commands[0];
       // touch, mv, rm, cat, cp, chmod, ls (implement using k functions)
-      if (strcmp(args[0], "ls") == 0) {
-        // TODO: Call your implemented ls() function
-      } else if (strcmp(args[0], "touch") == 0) {
-        // TODO: Call your implemented touch() function
+      if (strcmp(args[0], "touch") == 0) {
+        // int i = 1;
+        // while (args[i] != NULL) {
+        //   k_open
+        // }
+
+
+
+
+      } else if (strcmp(args[0], "mv") == 0) {
+      } else if (strcmp(args[0], "rm") == 0) {
       } else if (strcmp(args[0], "cat") == 0) {
-        // TODO: Call your implemented cat() function
+      } else if (strcmp(args[0], "cp") == 0) {
       } else if (strcmp(args[0], "chmod") == 0) {
-        // TODO: Call your implemented chmod() function
-      } else if (strcmp(args[0], "mkfs") == 0) {
+      } else if (strcmp(args[0], "ls") == 0) {
+        k_ls(args[1]);
+      } 
+      
+      
+      
+      // other test stuff
+      
+      
+      else if (strcmp(args[0], "mkfs") == 0) {
         int blocks_in_fat = strtol(args[2], &ptr, base);
         int block_size_config = strtol(args[3], &ptr, base);
         mkfs(args[1], blocks_in_fat, block_size_config);
