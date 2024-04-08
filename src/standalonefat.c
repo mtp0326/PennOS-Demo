@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
       char** args = parsed->commands[0];
       // touch, mv, rm, cat, cp, chmod, ls (implement using k functions)
       if (strcmp(args[0], "touch") == 0) {
+<<<<<<< HEAD
         // int i = 1;
         // while (args[i] != NULL) {
         //   k_open
@@ -37,6 +38,20 @@ int main(int argc, char* argv[]) {
 
       } else if (strcmp(args[0], "mv") == 0) {
       } else if (strcmp(args[0], "rm") == 0) {
+=======
+        int i = 1;
+        while (args[i] != NULL) {
+          k_open(args[i], 0);
+          i += 1;
+        }
+      } else if (strcmp(args[0], "mv") == 0) {
+      } else if (strcmp(args[0], "rm") == 0) {
+        int i = 1;
+        while (args[i] != NULL) {
+          k_unlink(args[i]);
+          i += 1;
+        }
+>>>>>>> origin/aaron-unlink
       } else if (strcmp(args[0], "cat") == 0) {
       } else if (strcmp(args[0], "cp") == 0) {
       } else if (strcmp(args[0], "chmod") == 0) {
