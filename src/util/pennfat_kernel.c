@@ -650,6 +650,11 @@ off_t k_lseek(int fd, int offset, int whence) {
     return -1;
   }
 
+  if (curr_de->firstBlock == 0xFFFF) {
+    // we need to create and assign a new block for this file directory
+    // will use helper here
+  }
+
   if (whence == F_SEEK_SET) {
     // easy part: set the offset
     curr_fd->offset = offset;
