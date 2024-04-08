@@ -687,6 +687,12 @@ off_t k_lseek(int fd, int offset, int whence) {
     return -1;
   }
 
+  if (curr_de->name[0] == 1 || curr_de->name[1] == 2) {
+    fprintf(stderr,
+            "k_lseek: trying to klseek into a file that has been deleted\n");
+    return -1;
+  }
+
   if (curr_de->firstBlock == 0xFFFF) {
     int firstBlock = get_first_empty_fat_index();
     curr_de->firstBlock = firstBlock;
@@ -694,6 +700,7 @@ off_t k_lseek(int fd, int offset, int whence) {
     fprintf(stderr, "first block: %d\n", firstBlock);
   }
 
+  // The file offset is set to offset bytes.
   if (whence == F_SEEK_SET) {
     // easy part: set the offset
     curr_fd->offset = offset;
@@ -701,30 +708,75 @@ off_t k_lseek(int fd, int offset, int whence) {
     // we have to expand the file
     // if offset is larger than current file size
     if (offset > curr_size) {
+      // it's like appending offset - curr_size to this file
+
+      uint32_t append_offset = curr_de->size;
+
+      uint16_t curr_block = curr_de->firstBlock;
+
+      while (append_offset > block_size && curr_block != 0xFFFF) {
+        curr_block = fat[curr_block];
+        append_offset -= block_size;
+      }
+
+      // set to the end of the file
+      lseek(fs_fd, fat_size + block_size * (curr_block - 1) + append_offset,
+            SEEK_SET);
+
+      int bytes_left = offset - curr_size;
+      int bytes_written = 0;
+      int current_offset = append_offset;
       const char* str = calloc(sizeof(uint8_t), offset - curr_size);
 
-      ssize_t num_written = k_write(fd, str, offset - curr_size);
-      if (num_written < 0) {
-        return -1;
-      }
+      // for bytes_written and current_offset, we send in a pointer to the
+      // variable so that we modify it during writing
+      write_one_byte_in_while(bytes_left, &bytes_written, &current_offset, str,
+                              curr_de->firstBlock);
+
+      update_directory_entry_after_write(curr_de, curr_fd->fname,
+                                         bytes_written);
     }
 
     // resulting offset location
     return curr_fd->offset;
   }
 
+  // The file offset is set to its current location plus offset bytes.
   if (whence == F_SEEK_CUR) {
     // set the offset
     // we start from the current location plus offset bytes
-    curr_fd->offset += offset;
+
+    int new_offset = curr_fd->offset + offset;
+
+    curr_fd->offset = new_offset;
 
     // if the changed offset is larger
-    if (curr_fd->offset > curr_size) {
-      const char* str = calloc(sizeof(uint8_t), curr_fd->offset - curr_size);
-      ssize_t num_written = k_write(fd, str, curr_fd->offset - curr_size);
-      if (num_written < 0) {
-        return -1;
+    if (new_offset > curr_size) {
+      uint32_t append_offset = curr_de->size;
+
+      uint16_t curr_block = curr_de->firstBlock;
+
+      while (append_offset > block_size && curr_block != 0xFFFF) {
+        curr_block = fat[curr_block];
+        append_offset -= block_size;
       }
+
+      // set to the end of the file
+      lseek(fs_fd, fat_size + block_size * (curr_block - 1) + append_offset,
+            SEEK_SET);
+
+      int bytes_left = offset - curr_size;
+      int bytes_written = 0;
+      int current_offset = append_offset;
+      const char* str = calloc(sizeof(uint8_t), new_offset - curr_size);
+
+      // for bytes_written and current_offset, we send in a pointer to the
+      // variable so that we modify it during writing
+      write_one_byte_in_while(bytes_left, &bytes_written, &current_offset, str,
+                              curr_de->firstBlock);
+
+      update_directory_entry_after_write(curr_de, curr_fd->fname,
+                                         bytes_written);
     }
 
     return curr_fd->offset;
@@ -734,14 +786,32 @@ off_t k_lseek(int fd, int offset, int whence) {
     // set the offset
     curr_fd->offset = curr_size + offset;
 
-    // in this case we will always write to the file
-    const char* str = calloc(sizeof(uint8_t), offset);
-    ssize_t num_written = k_write(fd, str, offset);
-    if (num_written < 0) {
-      return -1;
+    // we always need to extend this file
+    // it's like appending "offset" to this file
+    uint32_t append_offset = curr_de->size;
+
+    uint16_t curr_block = curr_de->firstBlock;
+
+    while (append_offset > block_size && curr_block != 0xFFFF) {
+      curr_block = fat[curr_block];
+      append_offset -= block_size;
     }
 
-    return curr_fd->offset;
+    // set to the end of the file
+    lseek(fs_fd, fat_size + block_size * (curr_block - 1) + append_offset,
+          SEEK_SET);
+
+    int bytes_left = offset;
+    int bytes_written = 0;
+    int current_offset = append_offset;
+    const char* str = calloc(sizeof(uint8_t), offset);
+
+    // for bytes_written and current_offset, we send in a pointer to the
+    // variable so that we modify it during writing
+    write_one_byte_in_while(bytes_left, &bytes_written, &current_offset, str,
+                            curr_de->firstBlock);
+
+    update_directory_entry_after_write(curr_de, curr_fd->fname, bytes_written);
   }
 
   // invalid whence

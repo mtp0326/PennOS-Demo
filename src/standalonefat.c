@@ -27,18 +27,6 @@ int main(int argc, char* argv[]) {
       char** args = parsed->commands[0];
       // touch, mv, rm, cat, cp, chmod, ls (implement using k functions)
       if (strcmp(args[0], "touch") == 0) {
-<<<<<<< HEAD
-        // int i = 1;
-        // while (args[i] != NULL) {
-        //   k_open
-        // }
-
-
-
-
-      } else if (strcmp(args[0], "mv") == 0) {
-      } else if (strcmp(args[0], "rm") == 0) {
-=======
         int i = 1;
         while (args[i] != NULL) {
           k_open(args[i], 0);
@@ -51,19 +39,15 @@ int main(int argc, char* argv[]) {
           k_unlink(args[i]);
           i += 1;
         }
->>>>>>> origin/aaron-unlink
       } else if (strcmp(args[0], "cat") == 0) {
       } else if (strcmp(args[0], "cp") == 0) {
       } else if (strcmp(args[0], "chmod") == 0) {
       } else if (strcmp(args[0], "ls") == 0) {
         k_ls(args[1]);
-      } 
-      
-      
-      
+      }
+
       // other test stuff
-      
-      
+
       else if (strcmp(args[0], "mkfs") == 0) {
         int blocks_in_fat = strtol(args[2], &ptr, base);
         int block_size_config = strtol(args[3], &ptr, base);
@@ -91,6 +75,11 @@ int main(int argc, char* argv[]) {
         k_ls(args[1]);
       } else if (strcmp(args[0], "kunlink") == 0) {
         k_unlink(args[1]);
+      } else if (strcmp(args[0], "klseek") == 0) {
+        int fd = strtol(args[1], &ptr, base);
+        int offset = strtol(args[2], &ptr, base);
+        int whence = strtol(args[3], &ptr, base);
+        k_lseek(fd, offset, whence);
       } else {
         fprintf(stderr, "pennfat: command not found: %s\n", args[0]);
       }
