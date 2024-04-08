@@ -51,14 +51,16 @@ int k_open(const char* fname, int mode) {
       global_fd_table[curr_fd] = *opened_file;  // update fd table
       // truncate
       int start_fat_index = dir_entry->firstBlock;
-      int curr = start_fat_index;
-      while (fat[curr] != 0xFFFF) {
-        int next = fat[curr];
+      if (start_fat_index != 0xFFFF) {
+         int curr = start_fat_index;
+        while (fat[curr] != 0xFFFF) {
+          int next = fat[curr];
+          fat[curr] = 0x0000;
+          curr = next;
+        }
         fat[curr] = 0x0000;
-        curr = next;
+        fat[start_fat_index] = 0xFFFF;
       }
-      fat[curr] = 0x0000;
-      fat[start_fat_index] = 0xFFFF;
       // set directory entry size to 0 since truncated and write to fs_fd to
       // update
       off_t dir_entry_offset =
@@ -72,12 +74,12 @@ int k_open(const char* fname, int mode) {
     } else {  // file doesn't exist
       // create the "file": add directory entry in root directory
       fprintf(stderr, "file doesn't exist: hereeeee\n");
-      int efi = get_first_empty_fat_index();  // in case needed to allocate new
-                                              // block for root dir
-      fat[efi] = 0xFFFF;
+      // int efi = get_first_empty_fat_index();  // in case needed to allocate new
+      //                                         // block for root dir
+      // fat[efi] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
-      new_de = create_directory_entry(fname_copy2, 0, efi, 1, 6, time(NULL));
+      new_de = create_directory_entry(fname_copy2, 0, 0xFFFF, 1, 6, time(NULL));
       // fs_fd should already be at next open location in root directory
       // (lseeked in does_file_exist())
       if (write(fs_fd, new_de, sizeof(struct directory_entries)) !=
@@ -194,7 +196,7 @@ struct directory_entries* does_file_exist(const char* fname) {
           break;
         } else {
           if (i ==
-              num_directories_per_block - 1) {  // at last directory entry of
+              num_directories_per_block - 1 && !found) {  // at last directory entry of
                                                 // last block and still occupied
             int next_fat_block = get_first_empty_fat_index();
             int offset1 = get_offset_size(next_fat_block, 0);
@@ -429,6 +431,9 @@ ssize_t k_read(int fd, int n, char* buf) {
     current_offset += 1;
   }
 
+  // modify the file descriptor accordingly
+    curr->offset += total_bytes_read;
+
   return total_bytes_read;
 }
 
@@ -472,6 +477,12 @@ ssize_t k_write(int fd, const char* str, int n) {
 
   uint8_t perm = curr_de->perm;
   uint16_t firstBlock = curr_de->firstBlock;
+  if (firstBlock == 0xFFFF) {
+    firstBlock = get_first_empty_fat_index();
+    curr_de->firstBlock = firstBlock;
+    fat[firstBlock] = 0xFFFF;
+    fprintf(stderr, "first block: %d\n", firstBlock);
+  }
 
   // file permission is read only
   if (perm == 4) {
