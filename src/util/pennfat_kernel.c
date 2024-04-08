@@ -27,6 +27,11 @@ int k_open(const char* fname, int mode) {
   struct file_descriptor_st* opened_file;
   struct directory_entries* new_de;
   struct directory_entries* dir_entry = does_file_exist(fname);
+  if (dir_entry == NULL) {
+    move_to_open_de(false);
+  } else {
+    move_to_open_de(true);
+  }
   // F_WRITE
   if (mode == 0) {
     if (dir_entry != NULL) {  // file already exists (truncate)
@@ -134,10 +139,10 @@ struct directory_entries* does_file_exist(const char* fname) {
   bool found = false;
   struct directory_entries* temp;
   lseek_to_root_directory();  // seek to root directory
-  lseek(fs_fd, 0, SEEK_CUR);
-  // fprintf(stderr, "offset: %ld\n", current_offset);
-  // following links in the fat, for each block: get the offset, then check each
-  // directory name
+  // lseek(fs_fd, 0, SEEK_CUR);
+  //  fprintf(stderr, "offset: %ld\n", current_offset);
+  //  following links in the fat, for each block: get the offset, then check
+  //  each directory name
   int curr = 1;
   int num_directories_per_block =
       block_size / 64;  // each directory entry fixed size of 64 bytes
@@ -155,10 +160,8 @@ struct directory_entries* does_file_exist(const char* fname) {
           } else if (i == num_directories_per_block - 1) {
             break;
           }
-          lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
+          // lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
         }
-        lseek(fs_fd, 64,
-              SEEK_CUR);  // move to the next directory entry in block
       }
     } else {
       // last block case (still need to check, guaranteed to either return true
@@ -177,12 +180,50 @@ struct directory_entries* does_file_exist(const char* fname) {
           } else if (i == num_directories_per_block - 1) {
             found = false;
           }
-          lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
+          // lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
         }
-        // check if we are at the end of root directory (marked with name[0] =
-        // 0)
-        lseek(fs_fd, 0, SEEK_CUR);
-        // fprintf(stderr, "offset4: %ld\n", current_offset4);
+      }
+    }
+    curr = fat[curr];  // move to next block in fat link
+    if (curr == 0xFFFF) {
+      break;
+    }
+    int offset = get_offset_size(curr, 0);
+    lseek(fs_fd, offset, SEEK_SET);
+  }
+  if (found) {
+    return temp;
+  } else {
+    free(temp);
+    return NULL;
+  }
+}
+
+void move_to_open_de(bool found) {
+  lseek_to_root_directory();  // seek to root directory
+  int curr = 1;
+  int num_directories_per_block =
+      block_size / 64;  // each directory entry fixed size of 64 bytes
+  while (1) {
+    if (fat[curr] != 0xFFFF) {
+      for (int i = 0; i < num_directories_per_block; i++) {
+        unsigned char buffer[1];
+        if (read(fs_fd, buffer, 1) != 1) {
+          perror("move to open de: read error");
+          exit(EXIT_FAILURE);
+        }
+        lseek(fs_fd, -1, SEEK_CUR);
+        fprintf(stderr, "here1!\n");
+        if (buffer[0] == 0 ||
+            buffer[0] == 1) {  // look for first open or deleted entry
+          fprintf(stderr, "here!\n");
+          break;
+        }
+        lseek(fs_fd, 64, SEEK_CUR);
+      }
+      break;
+    } else {
+      for (int i = 0; i < num_directories_per_block; i++) {
         unsigned char buffer[1];
         if (read(fs_fd, buffer, 1) != 1) {
           perror("does file exist: read error");
@@ -212,19 +253,13 @@ struct directory_entries* does_file_exist(const char* fname) {
                 SEEK_CUR);  // move to the next directory entry in block
         }
       }
-      break;
     }
     curr = fat[curr];  // move to next block in fat link
+    if (curr == 0xFFFF) {
+      break;
+    }
     int offset = get_offset_size(curr, 0);
     lseek(fs_fd, offset, SEEK_SET);
-  }
-  lseek(fs_fd, 0, SEEK_CUR);
-  // fprintf(stderr, "offset2: %ld\n", current_offset2);
-  if (found) {
-    return temp;
-  } else {
-    free(temp);
-    return NULL;
   }
 }
 
