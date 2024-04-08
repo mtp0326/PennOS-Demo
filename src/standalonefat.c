@@ -44,13 +44,10 @@ int main(int argc, char* argv[]) {
       } else if (strcmp(args[0], "chmod") == 0) {
       } else if (strcmp(args[0], "ls") == 0) {
         k_ls(args[1]);
-      } 
-      
-      
-      
+      }
+
       // other test stuff
-      
-      
+
       else if (strcmp(args[0], "mkfs") == 0) {
         int blocks_in_fat = strtol(args[2], &ptr, base);
         int block_size_config = strtol(args[3], &ptr, base);

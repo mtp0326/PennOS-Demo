@@ -27,6 +27,11 @@ int k_open(const char* fname, int mode) {
   struct file_descriptor_st* opened_file;
   struct directory_entries* new_de;
   struct directory_entries* dir_entry = does_file_exist(fname);
+  if (dir_entry == NULL) {
+    move_to_open_de(false);
+  } else {
+    move_to_open_de(true);
+  }
   // F_WRITE
   if (mode == 0) {
     if (dir_entry != NULL) {  // file already exists (truncate)
@@ -52,7 +57,7 @@ int k_open(const char* fname, int mode) {
       // truncate
       int start_fat_index = dir_entry->firstBlock;
       if (start_fat_index != 0xFFFF) {
-         int curr = start_fat_index;
+        int curr = start_fat_index;
         while (fat[curr] != 0xFFFF) {
           int next = fat[curr];
           fat[curr] = 0x0000;
@@ -74,7 +79,8 @@ int k_open(const char* fname, int mode) {
     } else {  // file doesn't exist
       // create the "file": add directory entry in root directory
       fprintf(stderr, "file doesn't exist: hereeeee\n");
-      // int efi = get_first_empty_fat_index();  // in case needed to allocate new
+      // int efi = get_first_empty_fat_index();  // in case needed to allocate
+      // new
       //                                         // block for root dir
       // fat[efi] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
@@ -112,8 +118,7 @@ int k_open(const char* fname, int mode) {
       // fat[empty_fat_index] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, APPEND, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
-      new_de = create_directory_entry(fname_copy2, 0, 0xFFFF, 1, 6,
-                                      time(NULL));
+      new_de = create_directory_entry(fname_copy2, 0, 0xFFFF, 1, 6, time(NULL));
       // fs_fd should already be at next open location in root directory
       // (lseeked in does_file_exist())
       if (write(fs_fd, new_de, sizeof(struct directory_entries)) !=
@@ -134,10 +139,10 @@ struct directory_entries* does_file_exist(const char* fname) {
   bool found = false;
   struct directory_entries* temp;
   lseek_to_root_directory();  // seek to root directory
-  lseek(fs_fd, 0, SEEK_CUR);
-  // fprintf(stderr, "offset: %ld\n", current_offset);
-  // following links in the fat, for each block: get the offset, then check each
-  // directory name
+  // lseek(fs_fd, 0, SEEK_CUR);
+  //  fprintf(stderr, "offset: %ld\n", current_offset);
+  //  following links in the fat, for each block: get the offset, then check
+  //  each directory name
   int curr = 1;
   int num_directories_per_block =
       block_size / 64;  // each directory entry fixed size of 64 bytes
@@ -155,10 +160,8 @@ struct directory_entries* does_file_exist(const char* fname) {
           } else if (i == num_directories_per_block - 1) {
             break;
           }
-          lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
+          // lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
         }
-        lseek(fs_fd, 64,
-              SEEK_CUR);  // move to the next directory entry in block
       }
     } else {
       // last block case (still need to check, guaranteed to either return true
@@ -177,12 +180,50 @@ struct directory_entries* does_file_exist(const char* fname) {
           } else if (i == num_directories_per_block - 1) {
             found = false;
           }
-          lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
+          // lseek(fs_fd, -(sizeof(struct directory_entries)), SEEK_CUR);
         }
-        // check if we are at the end of root directory (marked with name[0] =
-        // 0)
-        lseek(fs_fd, 0, SEEK_CUR);
-        // fprintf(stderr, "offset4: %ld\n", current_offset4);
+      }
+    }
+    curr = fat[curr];  // move to next block in fat link
+    if (curr == 0xFFFF) {
+      break;
+    }
+    int offset = get_offset_size(curr, 0);
+    lseek(fs_fd, offset, SEEK_SET);
+  }
+  if (found) {
+    return temp;
+  } else {
+    free(temp);
+    return NULL;
+  }
+}
+
+void move_to_open_de(bool found) {
+  lseek_to_root_directory();  // seek to root directory
+  int curr = 1;
+  int num_directories_per_block =
+      block_size / 64;  // each directory entry fixed size of 64 bytes
+  while (1) {
+    if (fat[curr] != 0xFFFF) {
+      for (int i = 0; i < num_directories_per_block; i++) {
+        unsigned char buffer[1];
+        if (read(fs_fd, buffer, 1) != 1) {
+          perror("move to open de: read error");
+          exit(EXIT_FAILURE);
+        }
+        lseek(fs_fd, -1, SEEK_CUR);
+        fprintf(stderr, "here1!\n");
+        if (buffer[0] == 0 ||
+            buffer[0] == 1) {  // look for first open or deleted entry
+          fprintf(stderr, "here!\n");
+          break;
+        }
+        lseek(fs_fd, 64, SEEK_CUR);
+      }
+      break;
+    } else {
+      for (int i = 0; i < num_directories_per_block; i++) {
         unsigned char buffer[1];
         if (read(fs_fd, buffer, 1) != 1) {
           perror("does file exist: read error");
@@ -195,9 +236,9 @@ struct directory_entries* does_file_exist(const char* fname) {
           fprintf(stderr, "here!\n");
           break;
         } else {
-          if (i ==
-              num_directories_per_block - 1 && !found) {  // at last directory entry of
-                                                // last block and still occupied
+          if (i == num_directories_per_block - 1 &&
+              !found) {  // at last directory entry of
+                         // last block and still occupied
             int next_fat_block = get_first_empty_fat_index();
             int offset1 = get_offset_size(next_fat_block, 0);
             lseek(fs_fd, offset1, SEEK_SET);  // position fs_fd at new block for
@@ -212,19 +253,13 @@ struct directory_entries* does_file_exist(const char* fname) {
                 SEEK_CUR);  // move to the next directory entry in block
         }
       }
-      break;
     }
     curr = fat[curr];  // move to next block in fat link
+    if (curr == 0xFFFF) {
+      break;
+    }
     int offset = get_offset_size(curr, 0);
     lseek(fs_fd, offset, SEEK_SET);
-  }
-  lseek(fs_fd, 0, SEEK_CUR);
-  // fprintf(stderr, "offset2: %ld\n", current_offset2);
-  if (found) {
-    return temp;
-  } else {
-    free(temp);
-    return NULL;
   }
 }
 
@@ -381,11 +416,11 @@ ssize_t k_read(int fd, int n, char* buf) {
     return -1;
   }
 
-  if (offset >= size) { // already starting at EOF condition
+  if (offset >= size) {  // already starting at EOF condition
     return 0;
   }
 
-  int total_bytes_read = 0; // counter for total bytes to see if we hit EOF
+  int total_bytes_read = 0;  // counter for total bytes to see if we hit EOF
   int bytes_left = n;
   int current_offset = offset;
 
@@ -405,11 +440,11 @@ ssize_t k_read(int fd, int n, char* buf) {
     if (bytes_left <= 0) {
       break;
     }
-    
+
     if (offset + total_bytes_read > size) {
       return 0;
     }
-    
+
     // we need to move to the next block of the file
     if (current_offset >= block_size) {
       int next_block = fat[curr_block];
@@ -432,7 +467,7 @@ ssize_t k_read(int fd, int n, char* buf) {
   }
 
   // modify the file descriptor accordingly
-    curr->offset += total_bytes_read;
+  curr->offset += total_bytes_read;
 
   return total_bytes_read;
 }
@@ -646,7 +681,7 @@ int k_close(int fd) {
 int k_unlink(const char* fname) {
   // check if other processes have this file fname open
   struct directory_entries* curr_de = does_file_exist(fname);
-  does_file_exist2(fname); // lseeks to fname position
+  does_file_exist2(fname);  // lseeks to fname position
   if (curr_de == NULL) {
     perror("unlink error: file fname not found");
     return -1;
@@ -660,27 +695,28 @@ int k_unlink(const char* fname) {
   //   }
   // }
   // for multiple processes (shouldn't be used in standalone fat)
-  // if (curr_fd.ref_cnt > 1) { 
+  // if (curr_fd.ref_cnt > 1) {
   //   (curr_de->name)[0] = 2;
   // } else {
-    // mark name[0] with 1
-    (curr_de->name)[0] = 1;
+  // mark name[0] with 1
+  (curr_de->name)[0] = 1;
   // }
 
-  struct directory_entries* new_de = create_directory_entry(
-        curr_de->name, curr_de->size, curr_de->firstBlock,
-        curr_de->type, curr_de->perm, time(NULL));
+  struct directory_entries* new_de =
+      create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
+                             curr_de->type, curr_de->perm, time(NULL));
 
-  // update dir entry to mark name with 1 (mark as free to be overwritten with another open)
+  // update dir entry to mark name with 1 (mark as free to be overwritten with
+  // another open)
   write(fs_fd, new_de, 64);
 
   // update the FAT as well (free all blocks)
   int curr = curr_de->firstBlock;
   if (curr != 0xFFFF) {
     while (fat[curr] != 0xFFFF) {
-    int next = fat[curr];
-    fat[curr] = 0x0000;
-    curr = next;
+      int next = fat[curr];
+      fat[curr] = 0x0000;
+      curr = next;
     }
     fat[curr] = 0x0000;
   }

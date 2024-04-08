@@ -11,7 +11,6 @@
 #define WRITE 2
 #define APPEND 3
 
-
 #define MAX_FD_NUM 1024
 
 enum Whence { F_SEEK_SET, F_SEEK_CUR, F_SEEK_END };
@@ -47,10 +46,16 @@ struct file_descriptor_st* create_file_descriptor(int fd,
                                                   char* fname,
                                                   int mode,
                                                   int offset);
-struct directory_entries* create_directory_entry(const char* name, uint32_t size, uint16_t firstBlock, uint8_t type, uint8_t perm, time_t mtime);
+struct directory_entries* create_directory_entry(const char* name,
+                                                 uint32_t size,
+                                                 uint16_t firstBlock,
+                                                 uint8_t type,
+                                                 uint8_t perm,
+                                                 time_t mtime);
 void lseek_to_root_directory();
 void extend_fat(int start_index, int empty_fat_index);
 int get_first_empty_fat_index();
+void move_to_open_de(bool found);
 struct directory_entries* does_file_exist(const char* fname);
 off_t does_file_exist2(const char* fname);
 struct file_descriptor_st* get_file_descriptor(int fd);
