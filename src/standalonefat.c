@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
         unmount();
       } else if (strcmp(args[0], "write") == 0) {
         int fd = strtol(args[1], &ptr, base);
-        k_write(fd, args[2], strlen(args[2]) + 1);
+        k_write(fd, args[2], strlen(args[2]));
       } else if (strcmp(args[0], "open") == 0) {
         int mode = strtol(args[2], &ptr, base);
         k_open(args[1], mode);
