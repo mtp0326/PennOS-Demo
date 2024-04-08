@@ -23,7 +23,7 @@ int k_open(const char* fname, int mode) {
   fd_counter++;
   char* fname_copy = strdup(fname);
   char* fname_copy2 = strdup(fname);
-  int empty_fat_index = get_first_empty_fat_index();
+  // int empty_fat_index = get_first_empty_fat_index();
   struct file_descriptor_st* opened_file;
   struct directory_entries* new_de;
   struct directory_entries* dir_entry = does_file_exist(fname);
@@ -109,10 +109,10 @@ int k_open(const char* fname, int mode) {
       global_fd_table[curr_fd] = *opened_file;
     } else {  // file doesn't exist, create it in root dir with read/write perm,
               // add to fd table in APPEND mode
-      fat[empty_fat_index] = 0xFFFF;
+      // fat[empty_fat_index] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, APPEND, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
-      new_de = create_directory_entry(fname_copy2, 0, empty_fat_index, 1, 6,
+      new_de = create_directory_entry(fname_copy2, 0, 0xFFFF, 1, 6,
                                       time(NULL));
       // fs_fd should already be at next open location in root directory
       // (lseeked in does_file_exist())
@@ -676,12 +676,14 @@ int k_unlink(const char* fname) {
 
   // update the FAT as well (free all blocks)
   int curr = curr_de->firstBlock;
-  while (fat[curr] != 0xFFFF) {
+  if (curr != 0xFFFF) {
+    while (fat[curr] != 0xFFFF) {
     int next = fat[curr];
     fat[curr] = 0x0000;
     curr = next;
+    }
+    fat[curr] = 0x0000;
   }
-  fat[curr] = 0x0000;
   return 1;
 }
 
