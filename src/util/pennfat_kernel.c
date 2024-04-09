@@ -32,6 +32,8 @@ int k_open(const char* fname, int mode) {
   } else {
     move_to_open_de(true);
   }
+  off_t current_offset = lseek(fs_fd, 0, SEEK_CUR);
+  fprintf(stderr, "offset: %ld\n", current_offset);
   // F_WRITE
   if (mode == 0) {
     if (dir_entry != NULL) {  // file already exists (truncate)
@@ -233,7 +235,6 @@ void move_to_open_de(bool found) {
         }
         lseek(fs_fd, 64, SEEK_CUR);
       }
-      break;
     } else {
       for (int i = 0; i < num_directories_per_block; i++) {
         unsigned char buffer[1];
@@ -270,6 +271,7 @@ void move_to_open_de(bool found) {
     if (curr == 0xFFFF) {
       break;
     }
+    fprintf(stderr, "curr block now: %d\n", curr);
     int offset = get_offset_size(curr, 0);
     lseek(fs_fd, offset, SEEK_SET);
   }
@@ -1105,4 +1107,21 @@ void k_change_mode(const char* change, const char* filename) {
       create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
                              curr_de->type, curr_de->perm, time(NULL));
   write(fs_fd, new_de, 64);
+}
+
+char* k_read_all(const char* filename) {
+  struct directory_entries* curr_de = does_file_exist(filename);
+  if (curr_de == NULL) {
+    perror("error: filename not found");
+    return NULL;
+  }
+  uint32_t file_size = curr_de->size;
+  int fd = k_open(filename, 1);
+  char* contents = (char*) malloc(file_size);
+  int ret = k_read(fd, file_size, contents);
+  // k_close(fd);
+  if (ret == -1) {
+    return NULL;
+  }
+  return contents;
 }

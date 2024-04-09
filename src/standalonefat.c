@@ -32,6 +32,7 @@ int main(int argc, char* argv[]) {
       } else if (strcmp(args[0], "rm") == 0) {
         rm(args);
       } else if (strcmp(args[0], "cat") == 0) {
+        cat_file_wa(args);
       } else if (strcmp(args[0], "cp") == 0) {
       } else if (strcmp(args[0], "chmod") == 0) {
         chmod(args);
@@ -45,11 +46,11 @@ int main(int argc, char* argv[]) {
         int blocks_in_fat = strtol(args[2], &ptr, base);
         int block_size_config = strtol(args[3], &ptr, base);
         mkfs(args[1], blocks_in_fat, block_size_config);
-        fprintf(stderr, "block size: %d\n", block_size);
+        // fprintf(stderr, "block size: %d\n", block_size);
       } else if (strcmp(args[0], "mount") == 0) {
         mount(args[1]);
-        fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
-        fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
+        // fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
+        // fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
       } else if (strcmp(args[0], "unmount") == 0) {
         unmount();
       } else if (strcmp(args[0], "write") == 0) {

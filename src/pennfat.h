@@ -38,6 +38,7 @@ void touch(char** args);
 void rm(char** args);
 void mv(char** args);
 void chmod(char** args);
+void cat_file_wa(char** args);
 
 void ls();
 #endif
