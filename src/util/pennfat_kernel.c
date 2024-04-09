@@ -44,7 +44,8 @@ int k_open(const char* fname, int mode) {
           perror(
               "k_open: F_WRITE error: attempted to open a file in F_WRITE mode "
               "more than once");
-          exit(EXIT_FAILURE);
+              return -1;
+          // exit(EXIT_FAILURE);
         }
       }
       if (dir_entry->perm == 4 || dir_entry->perm == 5 ||
@@ -52,7 +53,8 @@ int k_open(const char* fname, int mode) {
         perror(
             "k_open: F_WRITE: attempting to open file without write "
             "permission");
-        exit(EXIT_FAILURE);
+            return -1;
+        // exit(EXIT_FAILURE);
       }
       fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
       fprintf(stderr, "dir entry first block: %d\n", dir_entry->firstBlock);
@@ -97,7 +99,8 @@ int k_open(const char* fname, int mode) {
           sizeof(struct directory_entries)) {
         fd_counter--;
         perror("k_open: write error");
-        exit(EXIT_FAILURE);
+        return -1;
+        // exit(EXIT_FAILURE);
       }
     }
   } else if (mode == 1) {     // F_READ
@@ -106,7 +109,8 @@ int k_open(const char* fname, int mode) {
         perror(
             "k_open: F_READ: attempting to open file that doesn't have read "
             "permission");
-        exit(EXIT_FAILURE);
+            return -1;
+        // exit(EXIT_FAILURE);
       }
       opened_file = create_file_descriptor(curr_fd, fname_copy, READ, 0);
       global_fd_table[curr_fd] = *opened_file;
@@ -122,7 +126,8 @@ int k_open(const char* fname, int mode) {
         perror(
             "k_open: F_READ: attempting to open file that doesn't have write "
             "permission");
-        exit(EXIT_FAILURE);
+            return -1;
+        // exit(EXIT_FAILURE);
       }
       opened_file =
           create_file_descriptor(curr_fd, fname_copy, APPEND, dir_entry->size);
@@ -139,7 +144,8 @@ int k_open(const char* fname, int mode) {
           sizeof(struct directory_entries)) {
         fd_counter--;
         perror("k_open: write error");
-        exit(EXIT_FAILURE);
+        return -1;
+        // exit(EXIT_FAILURE);
       }
     }
   }
@@ -224,7 +230,8 @@ void move_to_open_de(bool found) {
         unsigned char buffer[1];
         if (read(fs_fd, buffer, 1) != 1) {
           perror("move to open de: read error");
-          exit(EXIT_FAILURE);
+          return;
+          // exit(EXIT_FAILURE);
         }
         lseek(fs_fd, -1, SEEK_CUR);
         fprintf(stderr, "here1!\n");
@@ -240,7 +247,8 @@ void move_to_open_de(bool found) {
         unsigned char buffer[1];
         if (read(fs_fd, buffer, 1) != 1) {
           perror("does file exist: read error");
-          exit(EXIT_FAILURE);
+          return;
+          // exit(EXIT_FAILURE);
         }
         lseek(fs_fd, -1, SEEK_CUR);
         fprintf(stderr, "here1!\n");

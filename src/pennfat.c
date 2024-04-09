@@ -75,7 +75,7 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   // error handling if there is a currently mounted fs
   if (fat != NULL) {
     perror("unexpected command");
-    exit(EXIT_FAILURE);
+    // exit(EXIT_FAILURE);
   }
   // call helper to get FAT size
   block_size = get_block_size(block_size_config);
@@ -92,39 +92,41 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   }
   if (ftruncate(fs_fd, fat_size + data_size) != 0) {
     perror("mkfs: truncate error");
-    exit(EXIT_FAILURE);
+    // exit(EXIT_FAILURE);
   }
 
   // move back to front
   if (lseek(fs_fd, 0, SEEK_SET) == -1) {
     perror("lseek error");
-    exit(EXIT_FAILURE);
+    // exit(EXIT_FAILURE);
   }
 
   // write metadata to fs (FAT[0])
   uint16_t metadata = (blocks_in_fat << 8) | block_size_config;
   if (write(fs_fd, &metadata, 2) != 2) {
     perror("write error");
-    exit(EXIT_FAILURE);
+    // exit(EXIT_FAILURE);
   }
 
   // fs root dir (FAT[1])
   uint16_t root = 0xFFFF;
   if (write(fs_fd, &root, 2) != 2) {
     perror("write error");
-    exit(EXIT_FAILURE);
+    // exit(EXIT_FAILURE);
   }
 }
 
 int mount(const char* fs_name) {
   if (fat != NULL) {
     perror("unexpected command");
-    exit(EXIT_FAILURE);
+    return -1;
+    // exit(EXIT_FAILURE);
   }
   fs_fd = open(fs_name, O_RDWR);
   if (fs_fd == -1) {
     perror("fs_fd open error");
-    exit(EXIT_FAILURE);
+    return -1;
+    // exit(EXIT_FAILURE);
   }
   // get blocks_in_fat and block_size_config from meta data
   int num_blocks = 0;
@@ -133,14 +135,16 @@ int mount(const char* fs_name) {
   unsigned char buffer[1];
   if (read(fs_fd, buffer, 1) != 1) {
     perror("mount: read error");
-    exit(EXIT_FAILURE);
+    return -1;
+    // exit(EXIT_FAILURE);
   }
   block_config = buffer[0];
 
   unsigned char buffer2[1];
   if (read(fs_fd, buffer2, 1) != 1) {
     perror("mount: read error");
-    exit(EXIT_FAILURE);
+    return -1;
+    // exit(EXIT_FAILURE);
   }
   num_blocks = buffer2[0];
 
@@ -156,7 +160,8 @@ int mount(const char* fs_name) {
   fat = mmap(NULL, fat_size, PROT_READ | PROT_WRITE, MAP_SHARED, fs_fd, 0);
   if (fat == MAP_FAILED) {
     perror("FAT mmap error");
-    exit(EXIT_FAILURE);
+    return -1;
+    // exit(EXIT_FAILURE);
   }
   fprintf(stderr, "here: %x\n", fat[0]);
   return 0;
@@ -166,13 +171,15 @@ int unmount() {
   // error handling if no currently mounted fs
   if (fat == NULL) {
     perror("unexpected command");
-    exit(EXIT_FAILURE);
+    return -1;
+    // exit(EXIT_FAILURE);
   }
 
   // munmap(2) to unmount
   if (munmap(fat, fat_size) == -1) {
     perror("munmap failed");
-    exit(EXIT_FAILURE);
+    return -1;
+    // exit(EXIT_FAILURE);
   }
   fat = NULL;
   return 0;
@@ -199,7 +206,8 @@ int get_block_size(int block_size_config) {
       break;
     default: {
       perror("invalid block size config");
-      exit(EXIT_FAILURE);
+      return -1;
+      // exit(EXIT_FAILURE);
     }
   }
   return block_size;
@@ -275,11 +283,9 @@ void cat_file_wa(char** args) {
   i = 1;
   if (!file_flag) {
     while (args[i] != NULL) {
-      int fd = k_open(args[i], 1);
-      char buffer[1000];
-      buffer[999] = '\0';
-      k_read(fd, 1000, buffer);
-      fprintf(stdout, "%s", buffer);
+      char* contents = k_read_all(args[i]);
+      fprintf(stdout, "%s", contents);
+      free(contents);
       i += 1;
     }
   } else {
