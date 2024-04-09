@@ -3,6 +3,7 @@
 
 #include <fcntl.h>
 #include <signal.h>
+#include <stdarg.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -32,6 +33,11 @@ int get_data_size(int block_size, int num_fat_entries);
 int get_offset_size(int block_num, int offset);
 
 void initialize_global_fd_table();
+
+void touch(char** args);
+void rm(char** args);
+void mv(char** args);
+void chmod(char** args);
 
 void ls();
 #endif

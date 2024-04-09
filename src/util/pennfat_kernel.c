@@ -45,8 +45,11 @@ int k_open(const char* fname, int mode) {
           exit(EXIT_FAILURE);
         }
       }
-      if (dir_entry->perm == 4) {
-        perror("k_open: F_WRITE: attempting to open file that is read only");
+      if (dir_entry->perm == 4 || dir_entry->perm == 5 ||
+          dir_entry->perm == 0) {
+        perror(
+            "k_open: F_WRITE: attempting to open file without write "
+            "permission");
         exit(EXIT_FAILURE);
       }
       fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
@@ -97,8 +100,10 @@ int k_open(const char* fname, int mode) {
     }
   } else if (mode == 1) {     // F_READ
     if (dir_entry != NULL) {  // open file: add it to fd table
-      if (dir_entry->perm == 2) {
-        perror("k_open: F_READ: attempting to open file that is write only");
+      if (dir_entry->perm == 2 || dir_entry->perm == 0) {
+        perror(
+            "k_open: F_READ: attempting to open file that doesn't have read "
+            "permission");
         exit(EXIT_FAILURE);
       }
       opened_file = create_file_descriptor(curr_fd, fname_copy, READ, 0);
@@ -110,6 +115,13 @@ int k_open(const char* fname, int mode) {
   } else if (mode == 2) {     // F_APPEND
     if (dir_entry != NULL) {  // file exists, add to fd table in APPEND mode
       // file offset is at end of the file
+      if (dir_entry->perm == 4 || dir_entry->perm == 5 ||
+          dir_entry->perm == 0) {
+        perror(
+            "k_open: F_READ: attempting to open file that doesn't have write "
+            "permission");
+        exit(EXIT_FAILURE);
+      }
       opened_file =
           create_file_descriptor(curr_fd, fname_copy, APPEND, dir_entry->size);
       global_fd_table[curr_fd] = *opened_file;
@@ -972,4 +984,125 @@ void k_ls(const char* filename) {
           formatTime(temp->mtime), temp->name);
 
   return;
+}
+
+void k_rename(const char* source, const char* dest) {
+  struct directory_entries* curr_de = does_file_exist(source);
+  if (curr_de == NULL) {
+    perror("k_rename error: source file not found");
+    return;
+  }
+  does_file_exist2(source);
+  char* dest_copy = strdup(dest);
+  strncpy(curr_de->name, dest_copy, 31);
+  (curr_de->name)[31] = '\0';
+  struct directory_entries* new_de =
+      create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
+                             curr_de->type, curr_de->perm, time(NULL));
+  write(fs_fd, new_de, 64);
+}
+
+void k_change_mode(const char* change, const char* filename) {
+  struct directory_entries* curr_de = does_file_exist(filename);
+  if (curr_de == NULL) {
+    perror("k_rename error: source file not found");
+    return;
+  }
+  does_file_exist2(filename);
+  int perm = curr_de->perm;
+
+  if (strcmp(change, "-r") == 0) {
+    if (perm == 2 || perm == 5 || perm == 7 || perm == 0) {
+      perror("chmod error invalid command");
+    } else if (perm == 6) {
+      perm = 2;
+    } else if (perm == 4) {
+      perm = 0;
+    }
+  } else if (strcmp(change, "+r") == 0) {
+    if (perm == 0) {
+      perm = 4;
+    } else if (perm == 2) {
+      perm = 6;
+    }
+  } else if (strcmp(change, "-w") == 0) {
+    if (perm == 4 || perm == 5 || perm == 0) {
+      perror("chmod error invalid command");
+    } else if (perm == 6) {
+      perm = 4;
+    } else if (perm == 7) {
+      perm = 5;
+    } else if (perm == 2) {
+      perm = 0;
+    }
+  } else if (strcmp(change, "+w") == 0) {
+    if (perm == 5) {
+      perm = 7;
+    } else if (perm == 0) {
+      perm = 2;
+    } else if (perm == 4) {
+      perm = 6;
+    }
+  } else if (strcmp(change, "-x") == 0) {
+    if (perm == 0 || perm == 2 || perm == 4 || perm == 7) {
+      perror("chmod error invalid command");
+    } else if (perm == 5) {
+      perm = 4;
+    } else if (perm == 7) {
+      perm = 6;
+    }
+  } else if (strcmp(change, "+x") == 0) {
+    if (perm == 0 || perm == 2) {
+      perror("chmod error invalid command");
+    } else if (perm == 4) {
+      perm = 5;
+    } else if (perm == 6) {
+      perm = 7;
+    }
+  } else if (strcmp(change, "+rw") == 0) {
+    if (perm == 0 || perm == 2 || perm == 4) {
+      perm = 6;
+    } else if (perm == 5) {
+      perm = 7;
+    }
+  } else if (strcmp(change, "-rw") == 0) {
+    if (perm == 0 || perm == 5 || perm == 7) {
+      perror("chmod error invalid command");
+    } else if (perm == 6 || perm == 2 || perm == 4) {
+      perm = 0;
+    }
+  } else if (strcmp(change, "+wx") == 0) {
+    if (perm == 0 || perm == 5) {
+      perror("chmod error invalid command");
+    } else if (perm == 4 || perm == 5 || perm == 6) {
+      perm = 7;
+    }
+  } else if (strcmp(change, "-wx") == 0) {
+    if (perm == 0 || perm == 2 || perm == 4 || perm == 5 || perm == 6) {
+      perror("chmod error invalid command");
+    } else if (perm == 7) {
+      perm = 4;
+    }
+  } else if (strcmp(change, "+rx") == 0) {
+    if (perm == 2 || perm == 6) {
+      perm = 7;
+    } else if (perm == 4 || perm == 5) {
+      perm = 5;
+    }
+  } else if (strcmp(change, "-rx") == 0) {
+    if (perm == 0 || perm == 2 || perm == 4 || perm == 6 || perm == 7) {
+      perror("chmod error invalid command");
+    } else if (perm == 5) {
+      perm = 0;
+    }
+  } else {
+    perror("chmod error invalid command");
+    return;
+  }
+
+  curr_de->perm = perm;
+  struct directory_entries* new_de =
+      create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
+                             curr_de->type, curr_de->perm, time(NULL));
+  write(fs_fd, new_de, 64);
 }
