@@ -225,3 +225,7 @@ int get_offset_size(int block_num, int offset) {
   int total_offset = fat_size + block_offset + offset;
   return total_offset;
 }
+
+void ls() {
+  k_ls(NULL);
+}

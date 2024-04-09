@@ -505,7 +505,7 @@ void write_one_byte_in_while(int bytes_left,
       lseek(fs_fd, fat_size + block_size * (empty_fat_index - 1), SEEK_SET);
 
       // reset
-      current_offset = 0;
+      *current_offset = 0;
     }
 
     write(fs_fd, str + *bytes_written, 1);
@@ -933,9 +933,15 @@ void k_ls(const char* filename) {
       char* permissions = "";
       generate_permission(temp->perm, &permissions);
 
+      int firstBlock = temp->firstBlock;
+
+      if (firstBlock == 0xFFFF) {
+        firstBlock = 0;
+      }
+
       // first_block permissions file_size last_touched_timestamp file_name
-      fprintf(stderr, "%u %s %d %s %s\n", temp->firstBlock, permissions,
-              temp->size, formatTime(temp->mtime), temp->name);
+      fprintf(stderr, "%u %s %d %s %s\n", firstBlock, permissions, temp->size,
+              formatTime(temp->mtime), temp->name);
 
       read_cnt += 1;
     }

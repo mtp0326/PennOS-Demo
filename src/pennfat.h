@@ -32,4 +32,6 @@ int get_data_size(int block_size, int num_fat_entries);
 int get_offset_size(int block_num, int offset);
 
 void initialize_global_fd_table();
+
+void ls();
 #endif

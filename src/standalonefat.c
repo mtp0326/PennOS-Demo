@@ -71,8 +71,8 @@ int main(int argc, char* argv[]) {
         buffer[999] = '\0';
         k_read(fd, 1000, buffer);
         fprintf(stderr, "READ OUTPUT: %s\n", buffer);
-      } else if (strcmp(args[0], "kls") == 0) {
-        k_ls(args[1]);
+      } else if (strcmp(args[0], "ls") == 0) {
+        ls();
       } else if (strcmp(args[0], "kunlink") == 0) {
         k_unlink(args[1]);
       } else if (strcmp(args[0], "klseek") == 0) {
