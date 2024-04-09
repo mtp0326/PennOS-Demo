@@ -9,19 +9,29 @@
 #define _DEFAULT_SOURCE 1
 #endif
 
+#ifndef PROMPT
+#define PROMPT "penn-os> "
+#endif
+
 #define _XOPEN_SOURCE 700
 
 #ifndef MAX_LEN
 #define MAX_LEN 4096
 #endif
 
-#include <signal.h>
+#define STDIN_FILENO 0
+#define STDOUT_FILENO 1
+#define STDERR_FILENO 2
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include "penn-parser.h"
+#include "parser.h"
+#include "pennfat.h"
 #include "util/globals.h"
 #include "util/kernel.h"
+#include "util/shellbuiltins.h"
 #include "util/sys_call.h"
+
+void* function_from_string(char* program);
 
 #endif

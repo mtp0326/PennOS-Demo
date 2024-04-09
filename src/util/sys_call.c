@@ -1,4 +1,5 @@
 #include "sys_call.h"
+#include <unistd.h>
 #include "stdio.h"
 
 // Helper function to duplicate argv for the child process
@@ -77,7 +78,49 @@ pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
   }
   arg->argv = child_argv;
 
-  add_process(processes[1], child);  // rpelace later
+  add_process(processes[1], child);  // 1 is default priority
+  if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
+    k_proc_cleanup(child);
+    free_argv(child_argv);
+    free(arg);
+    return -1;
+  }
+  return (child->pid);
+}
+
+pid_t s_spawn_priority(void* (*func)(void*),
+                       char* argv[],
+                       int fd0,
+                       int fd1,
+                       unsigned int priority) {
+  pcb_t* child = k_proc_create(current);
+  if (child == NULL) {
+    return -1;
+  }
+
+  char** child_argv = duplicate_argv(argv);
+  if (child_argv == NULL) {
+    k_proc_cleanup(child);
+    return -1;
+  }
+
+  fd_bitmap_set(child->open_fds, fd0);
+  fd_bitmap_set(child->open_fds, fd1);
+
+  struct child_process_arg {
+    char** argv;
+
+  }* arg = malloc(sizeof(struct child_process_arg));
+
+  if (arg == NULL) {
+    k_proc_cleanup(child);
+    free(child_argv);
+    return -1;
+  }
+  arg->argv = child_argv;
+  child->priority = priority;
+
+  add_process(processes[priority], child);
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
     k_proc_cleanup(child);
     free_argv(child_argv);

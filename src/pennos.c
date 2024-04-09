@@ -1,4 +1,5 @@
 #include "pennos.h"
+#include <signal.h>
 #include "pennfat.h"
 #include "util/kernel.h"
 #include "util/prioritylist.h"
@@ -7,18 +8,110 @@ static pthread_mutex_t done_lock;
 
 static bool done = false;
 
-// static const int centisecond = 10000;  // 10 milliseconds
+static const int centisecond = 10000;  // 10 milliseconds
 
 PList* priority;
+
+void* function_from_string(char* program) {
+  if (strcmp(program, "cat") == 0) {
+    return cat;
+  } else if (strcmp(program, "sleep") == 0) {
+    return sleep;
+  } else if (strcmp(program, "busy") == 0) {
+    return busy;
+  } else if (strcmp(program, "echo") == 0) {
+    return echo;
+  } else if (strcmp(program, "ls") == 0) {
+    return ls;
+  } else if (strcmp(program, "touch") == 0) {
+    return touch;
+  } else if (strcmp(program, "mv") == 0) {
+    return mv;
+  } else if (strcmp(program, "cp") == 0) {
+    return cp;
+  } else if (strcmp(program, "rm") == 0) {
+    return rm;
+  } else if (strcmp(program, "chmod") == 0) {
+    return chmod;
+  } else if (strcmp(program, "ps") == 0) {
+    return ps;
+  } else if (strcmp(program, "kill") == 0) {
+    return kill;
+  } else if (strcmp(program, "zombify") == 0) {
+    return zombify;
+  } else if (strcmp(program, "orphanify") == 0) {
+    return orphanify;
+  } else {
+    return NULL;
+  }
+}
 
 static void* shell(void* arg) {
   while (1) {
     prompt();
     char* cmd;
     read_command(&cmd);
-    // s_spawn(cmd, &cmd, STDIN_FILENO, STDOUT_FILENO);
+    if (cmd[0] != '\n') {
+      // parse command
+      struct parsed_command* parsed;
+      if (parse_command(cmd, &parsed) != 0) {
+        free_parsed_command(parsed);
+        exit(EXIT_FAILURE);
+      }
+
+      char** args = parsed->commands[0];
+      // Unfortunate canonical way to switch based on string in C.
+      // Shell built-ins that are implemented using user or system calls only.
+      if (strcmp(args[0], "cat") == 0) {
+        // TODO: Call your implemented cat() function
+      } else if (strcmp(args[0], "sleep") == 0) {
+        // TODO: Call your implemented sleep() function
+      } else if (strcmp(args[0], "busy") == 0) {
+        // TODO: Call your implemented busy() function
+      } else if (strcmp(args[0], "echo") == 0) {
+        // TODO: Call your implemented echo() function
+      } else if (strcmp(args[0], "ls") == 0) {
+        // TODO: Call your implemented ls() function
+      } else if (strcmp(args[0], "touch") == 0) {
+        // TODO: Call your implemented touch() function
+      } else if (strcmp(args[0], "mv") == 0) {
+        // TODO: Call your implemented mv() function
+      } else if (strcmp(args[0], "cp") == 0) {
+        // TODO: Call your implemented cp() function
+      } else if (strcmp(args[0], "rm") == 0) {
+        // TODO: Call your implemented rm() function
+      } else if (strcmp(args[0], "chmod") == 0) {
+        // TODO: Call your implemented chmod() function
+      } else if (strcmp(args[0], "ps") == 0) {
+        // TODO: Call your implemented ps() function
+      } else if (strcmp(args[0], "kill") == 0) {
+        // TODO: Call your implemented kill() function
+      } else if (strcmp(args[0], "zombify") == 0) {
+        // TODO: Call your implemented zombify() function
+      } else if (strcmp(args[0], "orphanify") == 0) {
+        // TODO: Call your implemented orphanify() function
+      } else if (strcmp(args[0], "nice") == 0) {
+        nice(cmd);
+      } else if (strcmp(args[0], "nice_pid") == 0) {
+        // TODO: Call your implemented nice_pid() function
+      } else if (strcmp(args[0], "man") == 0) {
+        // TODO: Call your implemented man() function
+      } else if (strcmp(args[0], "bg") == 0) {
+        // TODO: Call your implemented bg() function
+      } else if (strcmp(args[0], "fg") == 0) {
+        // TODO: Call your implemented fg() function
+      } else if (strcmp(args[0], "jobs") == 0) {
+        // TODO: Call your implemented jobs() function
+      } else if (strcmp(args[0], "logout") == 0) {
+        // TODO: Call your implemented logout() function
+      } else {
+        fprintf(stderr, "pennos: command not found: %s\n", args[0]);
+      }
+      free_parsed_command(parsed);
+    }
+    free(cmd);
   }
-  return NULL;
+  return EXIT_SUCCESS;
 }
 
 static void alarm_handler(int signum) {}
@@ -46,10 +139,10 @@ void scheduler(void) {
   sigaddset(&alarm_set, SIGALRM);
   pthread_sigmask(SIG_UNBLOCK, &alarm_set, NULL);
 
-  // struct itimerval it;
-  // it.it_interval = (struct timeval){.tv_usec = centisecond * 10};
-  // it.it_value = it.it_interval;
-  // setitimer(ITIMER_REAL, &it, NULL);
+  struct itimerval it;
+  it.it_interval = (struct timeval){.tv_usec = centisecond * 10};
+  it.it_value = it.it_interval;
+  setitimer(ITIMER_REAL, &it, NULL);
 
   spthread_t curr_thread;
   // locks to check the global value done

@@ -5,8 +5,10 @@
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
 {\ttfamily \#include "{}penn-\/parser.\+h"{}}\newline
+{\ttfamily \#include "{}pennfat.\+h"{}}\newline
 {\ttfamily \#include "{}util/globals.\+h"{}}\newline
 {\ttfamily \#include "{}util/kernel.\+h"{}}\newline
+{\ttfamily \#include "{}util/shellbuiltins.\+h"{}}\newline
 {\ttfamily \#include "{}util/sys\+\_\+call.\+h"{}}\newline
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
@@ -14,6 +16,8 @@
 \#define \mbox{\hyperlink{pennos_8h_a3024ccd4a9af5109d24e6c57565d74a1}{\+\_\+\+POSIX\+\_\+\+C\+\_\+\+SOURCE}}~200809L
 \item 
 \#define \mbox{\hyperlink{pennos_8h_a8fb447618db946a9e2a596d9ea18763f}{\+\_\+\+DEFAULT\+\_\+\+SOURCE}}~1
+\item 
+\#define \mbox{\hyperlink{pennos_8h_accdbea14ea06c15e271784368bd993e8}{PROMPT}}~"{}penn-\/os$>$ "{}
 \item 
 \#define \mbox{\hyperlink{pennos_8h_a78c99ffd76a7bb3c8c74db76207e9ab4}{\+\_\+\+XOPEN\+\_\+\+SOURCE}}~700
 \item 
@@ -45,4 +49,10 @@
 \index{MAX\_LEN@{MAX\_LEN}!pennos.h@{pennos.h}}
 \doxysubsubsection{\texorpdfstring{MAX\_LEN}{MAX\_LEN}}
 {\footnotesize\ttfamily \#define MAX\+\_\+\+LEN~4096}
+
+\Hypertarget{pennos_8h_accdbea14ea06c15e271784368bd993e8}\label{pennos_8h_accdbea14ea06c15e271784368bd993e8} 
+\index{pennos.h@{pennos.h}!PROMPT@{PROMPT}}
+\index{PROMPT@{PROMPT}!pennos.h@{pennos.h}}
+\doxysubsubsection{\texorpdfstring{PROMPT}{PROMPT}}
+{\footnotesize\ttfamily \#define PROMPT~"{}penn-\/os$>$ "{}}
 

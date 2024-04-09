@@ -91,14 +91,24 @@ Functions</h2></td></tr>
 <tr class="memitem:a4d2cf4232cddee738996ca9ad83ea56f" id="r_a4d2cf4232cddee738996ca9ad83ea56f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d2cf4232cddee738996ca9ad83ea56f">k_open</a> (const char *fname, int mode)</td></tr>
 <tr class="memdesc:a4d2cf4232cddee738996ca9ad83ea56f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open file name <code>fname</code> with the mode <code>mode</code>, and return a file descriptor to that file.  <br /></td></tr>
 <tr class="separator:a4d2cf4232cddee738996ca9ad83ea56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78d95341bbd2b21ed69dd341ff47669f" id="r_a78d95341bbd2b21ed69dd341ff47669f"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d8/d68/structdirectory__entries.html">directory_entries</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78d95341bbd2b21ed69dd341ff47669f">does_file_exist</a> (const char *fname)</td></tr>
+<tr class="separator:a78d95341bbd2b21ed69dd341ff47669f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8434cdce67b1512300f44ed38497c22a" id="r_a8434cdce67b1512300f44ed38497c22a"><td class="memItemLeft" align="right" valign="top">off_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8434cdce67b1512300f44ed38497c22a">does_file_exist2</a> (const char *fname)</td></tr>
+<tr class="separator:a8434cdce67b1512300f44ed38497c22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addbc36d23ce41b02cb1508bf85ca24e2" id="r_addbc36d23ce41b02cb1508bf85ca24e2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addbc36d23ce41b02cb1508bf85ca24e2">get_first_empty_fat_index</a> ()</td></tr>
 <tr class="separator:addbc36d23ce41b02cb1508bf85ca24e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d501c304eeba5035c83c1e2a4aec4fb" id="r_a2d501c304eeba5035c83c1e2a4aec4fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d501c304eeba5035c83c1e2a4aec4fb">lseek_to_root_directory</a> ()</td></tr>
 <tr class="separator:a2d501c304eeba5035c83c1e2a4aec4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe5ffc180d9fc063efc7127d14378b54" id="r_abe5ffc180d9fc063efc7127d14378b54"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe5ffc180d9fc063efc7127d14378b54">get_file_descriptor</a> (int fd)</td></tr>
+<tr class="separator:abe5ffc180d9fc063efc7127d14378b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25ad4d01d5ade905b2bfce04910a5c0d" id="r_a25ad4d01d5ade905b2bfce04910a5c0d"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25ad4d01d5ade905b2bfce04910a5c0d">create_file_descriptor</a> (int fd, char *fname, int mode, int offset)</td></tr>
 <tr class="separator:a25ad4d01d5ade905b2bfce04910a5c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fd2d5dba8f5f42be13d549b0e08a3ad" id="r_a3fd2d5dba8f5f42be13d549b0e08a3ad"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d8/d68/structdirectory__entries.html">directory_entries</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fd2d5dba8f5f42be13d549b0e08a3ad">create_directory_entry</a> (const char *name, uint32_t size, uint16_t firstBlock, uint8_t type, uint8_t perm, time_t mtime)</td></tr>
+<tr class="separator:a3fd2d5dba8f5f42be13d549b0e08a3ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1951ec11865274b45144d6dd6f878692" id="r_a1951ec11865274b45144d6dd6f878692"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1951ec11865274b45144d6dd6f878692">k_read</a> (int fd, int n, char *buf)</td></tr>
 <tr class="separator:a1951ec11865274b45144d6dd6f878692"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a580177591867f52c90932219a6c29e71" id="r_a580177591867f52c90932219a6c29e71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a580177591867f52c90932219a6c29e71">extend_fat</a> (int start_index, int empty_fat_index)</td></tr>
+<tr class="separator:a580177591867f52c90932219a6c29e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79d2a9b65d0e04de358fe1a2cfa79baf" id="r_a79d2a9b65d0e04de358fe1a2cfa79baf"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79d2a9b65d0e04de358fe1a2cfa79baf">k_write</a> (int fd, const char *str, int n)</td></tr>
 <tr class="separator:a79d2a9b65d0e04de358fe1a2cfa79baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ecd38dc6f3a9721ab53ff9a815b5480" id="r_a9ecd38dc6f3a9721ab53ff9a815b5480"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ecd38dc6f3a9721ab53ff9a815b5480">k_close</a> (int fd)</td></tr>
@@ -107,6 +117,10 @@ Functions</h2></td></tr>
 <tr class="separator:ae8b44b3621ebb542bec49f73d19d2885"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a332b4729ef52b2a3132b1aea88fa5c96" id="r_a332b4729ef52b2a3132b1aea88fa5c96"><td class="memItemLeft" align="right" valign="top">off_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a332b4729ef52b2a3132b1aea88fa5c96">k_lseek</a> (int fd, int offset, int whence)</td></tr>
 <tr class="separator:a332b4729ef52b2a3132b1aea88fa5c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4760215b7653953e799d8489ca88be8e" id="r_a4760215b7653953e799d8489ca88be8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4760215b7653953e799d8489ca88be8e">generate_permission</a> (uint8_t perm, char **permissions)</td></tr>
+<tr class="separator:a4760215b7653953e799d8489ca88be8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2e67755671ac41b267522c63e52a7ba" id="r_af2e67755671ac41b267522c63e52a7ba"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2e67755671ac41b267522c63e52a7ba">formatTime</a> (time_t t)</td></tr>
+<tr class="separator:af2e67755671ac41b267522c63e52a7ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9317fe11a36bfc2d731bcbacc3a57728" id="r_a9317fe11a36bfc2d731bcbacc3a57728"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9317fe11a36bfc2d731bcbacc3a57728">k_ls</a> (const char *filename)</td></tr>
 <tr class="separator:a9317fe11a36bfc2d731bcbacc3a57728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -130,6 +144,47 @@ Variables</h2></td></tr>
 <tr class="separator:ab5dda65dc446f15f9c0449ca2d9e82b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a3fd2d5dba8f5f42be13d549b0e08a3ad" name="a3fd2d5dba8f5f42be13d549b0e08a3ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fd2d5dba8f5f42be13d549b0e08a3ad">&#9670;&#160;</a></span>create_directory_entry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d8/d68/structdirectory__entries.html">directory_entries</a> * create_directory_entry </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>name</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>size</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>firstBlock</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>type</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>perm</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">time_t</td>          <td class="paramname"><span class="paramname"><em>mtime</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a25ad4d01d5ade905b2bfce04910a5c0d" name="a25ad4d01d5ade905b2bfce04910a5c0d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a25ad4d01d5ade905b2bfce04910a5c0d">&#9670;&#160;</a></span>create_file_descriptor()</h2>
 
@@ -155,6 +210,116 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>offset</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a78d95341bbd2b21ed69dd341ff47669f" name="a78d95341bbd2b21ed69dd341ff47669f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78d95341bbd2b21ed69dd341ff47669f">&#9670;&#160;</a></span>does_file_exist()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d8/d68/structdirectory__entries.html">directory_entries</a> * does_file_exist </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fname</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8434cdce67b1512300f44ed38497c22a" name="a8434cdce67b1512300f44ed38497c22a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8434cdce67b1512300f44ed38497c22a">&#9670;&#160;</a></span>does_file_exist2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">off_t does_file_exist2 </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fname</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a580177591867f52c90932219a6c29e71" name="a580177591867f52c90932219a6c29e71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a580177591867f52c90932219a6c29e71">&#9670;&#160;</a></span>extend_fat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void extend_fat </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>start_index</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>empty_fat_index</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2e67755671ac41b267522c63e52a7ba" name="af2e67755671ac41b267522c63e52a7ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2e67755671ac41b267522c63e52a7ba">&#9670;&#160;</a></span>formatTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * formatTime </td>
+          <td>(</td>
+          <td class="paramtype">time_t</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4760215b7653953e799d8489ca88be8e" name="a4760215b7653953e799d8489ca88be8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4760215b7653953e799d8489ca88be8e">&#9670;&#160;</a></span>generate_permission()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void generate_permission </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>perm</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>permissions</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe5ffc180d9fc063efc7127d14378b54" name="abe5ffc180d9fc063efc7127d14378b54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe5ffc180d9fc063efc7127d14378b54">&#9670;&#160;</a></span>get_file_descriptor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a> * get_file_descriptor </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -192,6 +357,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 </div>
 </div>
@@ -209,6 +381,12 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -235,6 +413,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">offset</td><td></td></tr>
+    <tr><td class="paramname">whence</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>off_t </dd></dl>
 
 </div>
 </div>
@@ -299,6 +486,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>A </td></tr>
+    <tr><td class="paramname">n</td><td></td></tr>
+    <tr><td class="paramname">buf</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
 
 </div>
 </div>
@@ -342,6 +538,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">str</td><td></td></tr>
+    <tr><td class="paramname">n</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
 
 </div>
 </div>

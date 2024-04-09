@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['parse_5fsuccessful_0',['PARSE_SUCCESSFUL',['../d7/da1/penn-parser_8h.html#a2baa7f9de9c78e3e2f25c51a57607cf6',1,'penn-parser.h']]],
-  ['prompt_1',['PROMPT',['../dc/d3d/pennfat_8h.html#accdbea14ea06c15e271784368bd993e8',1,'pennfat.h']]]
+  ['num_5fthreads_0',['NUM_THREADS',['../d0/dd1/sched-demo_8c.html#a7735206bdfad487588bba2126b806ab7',1,'sched-demo.c']]]
 ];

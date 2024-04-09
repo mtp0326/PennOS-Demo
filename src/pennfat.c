@@ -1,4 +1,5 @@
 #include "pennfat.h"
+#include <unistd.h>
 
 void prompt() {
   // display the prompt to the user

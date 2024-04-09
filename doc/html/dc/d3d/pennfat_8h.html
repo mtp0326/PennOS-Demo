@@ -101,8 +101,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:accdbea14ea06c15e271784368bd993e8" id="r_accdbea14ea06c15e271784368bd993e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accdbea14ea06c15e271784368bd993e8">PROMPT</a>&#160;&#160;&#160;&quot;penn-<a class="el" href="../../dc/dfb/pennfat__kernel_8c.html#a0e52a1a113ded7f4787290edc22ad954">fat</a>&gt; &quot;</td></tr>
-<tr class="separator:accdbea14ea06c15e271784368bd993e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabf4f709c8199e41cf279c77112345fe" id="r_aabf4f709c8199e41cf279c77112345fe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabf4f709c8199e41cf279c77112345fe">MAX_LEN</a>&#160;&#160;&#160;4096</td></tr>
 <tr class="separator:aabf4f709c8199e41cf279c77112345fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -128,8 +126,8 @@ Functions</h2></td></tr>
 <tr class="separator:a3c58e4046bc0fb7d042ae61a478b902f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe223c13a71e93bc31d9c453fd2fb856" id="r_afe223c13a71e93bc31d9c453fd2fb856"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe223c13a71e93bc31d9c453fd2fb856">get_data_size</a> (int <a class="el" href="../../dc/dfb/pennfat__kernel_8c.html#a70b27761c7d0bd5cd90f4fe47e569b94">block_size</a>, int <a class="el" href="../../dc/dfb/pennfat__kernel_8c.html#af866bcf6c2272c2f6b1b7e5ad3a2e127">num_fat_entries</a>)</td></tr>
 <tr class="separator:afe223c13a71e93bc31d9c453fd2fb856"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e5e1b3f3323c919230e69b631fa8b79" id="r_a9e5e1b3f3323c919230e69b631fa8b79"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e5e1b3f3323c919230e69b631fa8b79">get_offset_size</a> (int <a class="el" href="../../dc/dfb/pennfat__kernel_8c.html#a70b27761c7d0bd5cd90f4fe47e569b94">block_size</a>, int blocks_in_fat, int block_num, int offset)</td></tr>
-<tr class="separator:a9e5e1b3f3323c919230e69b631fa8b79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af81db977c099887a61b6c74f0893cb4a" id="r_af81db977c099887a61b6c74f0893cb4a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af81db977c099887a61b6c74f0893cb4a">get_offset_size</a> (int block_num, int offset)</td></tr>
+<tr class="separator:af81db977c099887a61b6c74f0893cb4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d5ac507ab09ed439fe59e6ba52e6374" id="r_a7d5ac507ab09ed439fe59e6ba52e6374"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d5ac507ab09ed439fe59e6ba52e6374">initialize_global_fd_table</a> ()</td></tr>
 <tr class="separator:a7d5ac507ab09ed439fe59e6ba52e6374"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -142,20 +140,6 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define MAX_LEN&#160;&#160;&#160;4096</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="accdbea14ea06c15e271784368bd993e8" name="accdbea14ea06c15e271784368bd993e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accdbea14ea06c15e271784368bd993e8">&#9670;&#160;</a></span>PROMPT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PROMPT&#160;&#160;&#160;&quot;penn-<a class="el" href="../../dc/dfb/pennfat__kernel_8c.html#a0e52a1a113ded7f4787290edc22ad954">fat</a>&gt; &quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -243,8 +227,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9e5e1b3f3323c919230e69b631fa8b79" name="a9e5e1b3f3323c919230e69b631fa8b79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e5e1b3f3323c919230e69b631fa8b79">&#9670;&#160;</a></span>get_offset_size()</h2>
+<a id="af81db977c099887a61b6c74f0893cb4a" name="af81db977c099887a61b6c74f0893cb4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af81db977c099887a61b6c74f0893cb4a">&#9670;&#160;</a></span>get_offset_size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,16 +236,6 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int get_offset_size </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>block_size</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>blocks_in_fat</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>block_num</em>, </span></td>
         </tr>
         <tr>

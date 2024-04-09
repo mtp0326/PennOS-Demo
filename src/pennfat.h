@@ -10,12 +10,12 @@
 #include <string.h>
 #include <sys/mman.h>
 #include <time.h>
-#include <unistd.h>
 
-#include "penn-parser.h"
+#include "parser.h"
 #include "util/pennfat_kernel.h"
-
+#ifndef PROMPT
 #define PROMPT "penn-fat> "
+#endif
 #define MAX_LEN 4096
 
 void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config);

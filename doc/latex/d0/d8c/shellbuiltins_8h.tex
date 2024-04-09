@@ -1,0 +1,174 @@
+\doxysection{src/util/shellbuiltins.h File Reference}
+\hypertarget{shellbuiltins_8h}{}\label{shellbuiltins_8h}\index{src/util/shellbuiltins.h@{src/util/shellbuiltins.h}}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{shellbuiltins_8h_a7c3c61b74d282ad16dde41697d849968}{PENNFAT\+\_\+H}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a0c190c5db53ba8d6a773610c628f7ade}{cat}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em The ususal {\ttfamily cat} program. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a9afe3108d99ddd2ba581cc7ebbf2a8b8}{busy}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Sleep for {\ttfamily n} seconds. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_afb7e6ef3589544d60d392c450dd1e5af}{echo}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Echo back an input string. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a505f3b315d7a75325e855567e7fcd07c}{ls}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Lists all files in the working directory. For extra credit, it should support relative and absolute file paths. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a8cd9eba4290506b4c1c3887ff5ddaccd}{touch}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em For each file, create an empty file if it doesn\textquotesingle{}t exist, else update its timestamp. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a8c31963de92d6dd77eaee0de52c8d129}{mv}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Rename a file. If the {\ttfamily dst\+\_\+file} file already exists, overwrite it. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a49b83228de5e6206ae67342010e3e4d5}{cp}} (void \texorpdfstring{$\ast$}{*}arg)
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_abe142d1213d8770742c6b15239eb17f6}{rm}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Remove a list of files. Treat each file in the list as a separate transaction. (i.\+e. if removing file1 fails, still attempt to remove file2, file3, etc.) \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_acb477aeae79bbfe8e011e676beb14b59}{chmod}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Change permissions of a file. There\textquotesingle{}s no need to error if a permission being added already exists, or if a permission being removed is already not granted. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_aca3df72c3570cfcc00bda4e0c174aaf5}{ps}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em List all processes on Penn\+OS, displaying PID, PPID, priority, status, and command name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{shellbuiltins_8h_a7c3c61b74d282ad16dde41697d849968}\label{shellbuiltins_8h_a7c3c61b74d282ad16dde41697d849968} 
+\index{shellbuiltins.h@{shellbuiltins.h}!PENNFAT\_H@{PENNFAT\_H}}
+\index{PENNFAT\_H@{PENNFAT\_H}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{PENNFAT\_H}{PENNFAT\_H}}
+{\footnotesize\ttfamily \#define PENNFAT\+\_\+H}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{shellbuiltins_8h_a9afe3108d99ddd2ba581cc7ebbf2a8b8}\label{shellbuiltins_8h_a9afe3108d99ddd2ba581cc7ebbf2a8b8} 
+\index{shellbuiltins.h@{shellbuiltins.h}!busy@{busy}}
+\index{busy@{busy}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{busy()}{busy()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} busy (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Sleep for {\ttfamily n} seconds. 
+
+Note that you\textquotesingle{}ll have to convert the number of seconds to the correct number of ticks.
+
+Example Usage\+: sleep 10
+
+Busy wait indefinitely. It can only be interrupted via signals.
+
+Example Usage\+: busy \Hypertarget{shellbuiltins_8h_a0c190c5db53ba8d6a773610c628f7ade}\label{shellbuiltins_8h_a0c190c5db53ba8d6a773610c628f7ade} 
+\index{shellbuiltins.h@{shellbuiltins.h}!cat@{cat}}
+\index{cat@{cat}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{cat()}{cat()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} cat (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+The ususal {\ttfamily cat} program. 
+
+If {\ttfamily files} arg is provided, concatenate these files and print to stdout If {\ttfamily files} arg is {\itshape not} provided, read from stdin and print back to stdout
+
+Example Usage\+: cat f1 f2 (concatenates f1 and f2 and print to stdout) Example Usage\+: cat f1 f2 \texorpdfstring{$<$}{<} f3 (concatenates f1 and f2 and prints to stdout, ignores f3) Example Usage\+: cat \texorpdfstring{$<$}{<} f3 (concatenates f3, prints to stdout) \Hypertarget{shellbuiltins_8h_acb477aeae79bbfe8e011e676beb14b59}\label{shellbuiltins_8h_acb477aeae79bbfe8e011e676beb14b59} 
+\index{shellbuiltins.h@{shellbuiltins.h}!chmod@{chmod}}
+\index{chmod@{chmod}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{chmod()}{chmod()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} chmod (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Change permissions of a file. There\textquotesingle{}s no need to error if a permission being added already exists, or if a permission being removed is already not granted. 
+
+Print appropriate error message if\+:
+\begin{DoxyItemize}
+\item {\ttfamily file} is not a file that exists
+\item {\ttfamily perms} is invalid
+\end{DoxyItemize}
+
+Example Usage\+: chmod +x file (adds executable permission to file) Example Usage\+: chmod +rw file (adds read + write permissions to file) Example Usage\+: chmod -\/wx file (removes write + executable permissions from file) \Hypertarget{shellbuiltins_8h_a49b83228de5e6206ae67342010e3e4d5}\label{shellbuiltins_8h_a49b83228de5e6206ae67342010e3e4d5} 
+\index{shellbuiltins.h@{shellbuiltins.h}!cp@{cp}}
+\index{cp@{cp}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{cp()}{cp()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} cp (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+Copy a file. If the {\ttfamily dst\+\_\+file} file already exists, overwrite it.
+
+Print appropriate error message if\+:
+\begin{DoxyItemize}
+\item {\ttfamily src\+\_\+file} is not a file that exists
+\item {\ttfamily src\+\_\+file} does not have read permissions
+\item {\ttfamily dst\+\_\+file} file already exists but does not have write permissions
+\end{DoxyItemize}
+
+Example Usage\+: cp src\+\_\+file dst\+\_\+file \Hypertarget{shellbuiltins_8h_afb7e6ef3589544d60d392c450dd1e5af}\label{shellbuiltins_8h_afb7e6ef3589544d60d392c450dd1e5af} 
+\index{shellbuiltins.h@{shellbuiltins.h}!echo@{echo}}
+\index{echo@{echo}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{echo()}{echo()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} echo (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Echo back an input string. 
+
+Example Usage\+: echo Hello World \Hypertarget{shellbuiltins_8h_a505f3b315d7a75325e855567e7fcd07c}\label{shellbuiltins_8h_a505f3b315d7a75325e855567e7fcd07c} 
+\index{shellbuiltins.h@{shellbuiltins.h}!ls@{ls}}
+\index{ls@{ls}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{ls()}{ls()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} ls (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Lists all files in the working directory. For extra credit, it should support relative and absolute file paths. 
+
+Example Usage\+: ls (regular credit) Example Usage\+: ls ../../foo/./bar/sample (only for EC) \Hypertarget{shellbuiltins_8h_a8c31963de92d6dd77eaee0de52c8d129}\label{shellbuiltins_8h_a8c31963de92d6dd77eaee0de52c8d129} 
+\index{shellbuiltins.h@{shellbuiltins.h}!mv@{mv}}
+\index{mv@{mv}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{mv()}{mv()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} mv (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Rename a file. If the {\ttfamily dst\+\_\+file} file already exists, overwrite it. 
+
+Print appropriate error message if\+:
+\begin{DoxyItemize}
+\item {\ttfamily src\+\_\+file} is not a file that exists
+\item {\ttfamily src\+\_\+file} does not have read permissions
+\item {\ttfamily dst\+\_\+file} file already exists but does not have write permissions
+\end{DoxyItemize}
+
+Example Usage\+: mv src\+\_\+file dst\+\_\+file \Hypertarget{shellbuiltins_8h_aca3df72c3570cfcc00bda4e0c174aaf5}\label{shellbuiltins_8h_aca3df72c3570cfcc00bda4e0c174aaf5} 
+\index{shellbuiltins.h@{shellbuiltins.h}!ps@{ps}}
+\index{ps@{ps}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{ps()}{ps()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} ps (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+List all processes on Penn\+OS, displaying PID, PPID, priority, status, and command name. 
+
+Example Usage\+: ps \Hypertarget{shellbuiltins_8h_abe142d1213d8770742c6b15239eb17f6}\label{shellbuiltins_8h_abe142d1213d8770742c6b15239eb17f6} 
+\index{shellbuiltins.h@{shellbuiltins.h}!rm@{rm}}
+\index{rm@{rm}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{rm()}{rm()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} rm (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Remove a list of files. Treat each file in the list as a separate transaction. (i.\+e. if removing file1 fails, still attempt to remove file2, file3, etc.) 
+
+Print appropriate error message if\+:
+\begin{DoxyItemize}
+\item {\ttfamily file} is not a file that exists
+\end{DoxyItemize}
+
+Example Usage\+: rm f1 f2 f3 f4 f5 \Hypertarget{shellbuiltins_8h_a8cd9eba4290506b4c1c3887ff5ddaccd}\label{shellbuiltins_8h_a8cd9eba4290506b4c1c3887ff5ddaccd} 
+\index{shellbuiltins.h@{shellbuiltins.h}!touch@{touch}}
+\index{touch@{touch}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{touch()}{touch()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} touch (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+For each file, create an empty file if it doesn\textquotesingle{}t exist, else update its timestamp. 
+
+Example Usage\+: touch f1 f2 f3 f4 f5 

@@ -3,12 +3,10 @@
 
 #include <stdbool.h>
 #include <string.h>
-#include <unistd.h>
 #include "globals.h"
 #include "kernel.h"
 
-/*============================ system call functions for interacting with PennOS
- * process creation ===================================*/
+/*== system call functions for interacting with PennOS process creation==*/
 /**
  * @brief Create a child process that executes the function `func`.
  * The child will retain some attributes of the parent.
@@ -22,6 +20,12 @@
  * // need to define error output?
  */
 pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1);
+
+pid_t s_spawn_nice(void* (*func)(void*),
+                   char* argv[],
+                   int fd0,
+                   int fd1,
+                   unsigned int priority);
 
 /**
  * @brief Wait on a child of the calling process, until it changes state.
@@ -76,5 +80,67 @@ int s_nice(pid_t pid, int priority);
  * than 0.
  */
 void s_sleep(unsigned int ticks);
+
+/*== system call functions for interacting with PennOS filesystem ==*/
+/**
+ * @brief
+ *
+ * @param fname
+ * @param mode
+ * @return int
+ */
+int s_open(const char* fname, int mode);
+
+/**
+ * @brief
+ *
+ * @param fd
+ * @param n
+ * @param buf
+ * @return ssize_t
+ */
+ssize_t s_read(int fd, int n, char* buf);
+
+/**
+ * @brief
+ *
+ * @param fd
+ * @param str
+ * @param n
+ * @return ssize_t
+ */
+ssize_t s_write(int fd, const char* str, int n);
+
+/**
+ * @brief
+ *
+ * @param fd
+ * @return int
+ */
+int s_close(int fd);
+
+/**
+ * @brief
+ *
+ * @param fname
+ * @return int
+ */
+int s_unlink(const char* fname);
+
+/**
+ * @brief Construct a new s lseek object
+ *
+ * @param fd
+ * @param offset
+ * @param whence
+ */
+off_t s_lseek(int fd, int offset, int whence);
+
+/**
+ * @brief Construct a new s ls object
+ *
+ * @param filename
+ */
+int s_ls(const char* filename);
 
 #endif

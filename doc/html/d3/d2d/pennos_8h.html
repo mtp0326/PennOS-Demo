@@ -88,8 +88,10 @@ $(function() {
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="../../d7/da1/penn-parser_8h_source.html">penn-parser.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../dc/d3d/pennfat_8h_source.html">pennfat.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d5/d87/globals_8h_source.html">util/globals.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d0/daa/kernel_8h_source.html">util/kernel.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d0/d8c/shellbuiltins_8h_source.html">util/shellbuiltins.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../db/d80/sys__call_8h_source.html">util/sys_call.h</a>&quot;</code><br />
 </div>
 <p><a href="../../d3/d2d/pennos_8h_source.html">Go to the source code of this file.</a></p>
@@ -100,6 +102,8 @@ Macros</h2></td></tr>
 <tr class="separator:a3024ccd4a9af5109d24e6c57565d74a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fb447618db946a9e2a596d9ea18763f" id="r_a8fb447618db946a9e2a596d9ea18763f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fb447618db946a9e2a596d9ea18763f">_DEFAULT_SOURCE</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a8fb447618db946a9e2a596d9ea18763f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accdbea14ea06c15e271784368bd993e8" id="r_accdbea14ea06c15e271784368bd993e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accdbea14ea06c15e271784368bd993e8">PROMPT</a>&#160;&#160;&#160;&quot;penn-os&gt; &quot;</td></tr>
+<tr class="separator:accdbea14ea06c15e271784368bd993e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78c99ffd76a7bb3c8c74db76207e9ab4" id="r_a78c99ffd76a7bb3c8c74db76207e9ab4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78c99ffd76a7bb3c8c74db76207e9ab4">_XOPEN_SOURCE</a>&#160;&#160;&#160;700</td></tr>
 <tr class="separator:a78c99ffd76a7bb3c8c74db76207e9ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabf4f709c8199e41cf279c77112345fe" id="r_aabf4f709c8199e41cf279c77112345fe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabf4f709c8199e41cf279c77112345fe">MAX_LEN</a>&#160;&#160;&#160;4096</td></tr>
@@ -156,6 +160,20 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define MAX_LEN&#160;&#160;&#160;4096</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="accdbea14ea06c15e271784368bd993e8" name="accdbea14ea06c15e271784368bd993e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accdbea14ea06c15e271784368bd993e8">&#9670;&#160;</a></span>PROMPT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROMPT&#160;&#160;&#160;&quot;penn-os&gt; &quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
