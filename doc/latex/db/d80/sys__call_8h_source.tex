@@ -7,27 +7,46 @@
 \DoxyCodeLine{00003\ }
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string.h>}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{globals_8h}{globals.h}}"{}}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{kernel_8h}{kernel.h}}"{}}}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{comment}{/*============================\ system\ call\ functions\ for\ interacting\ with\ PennOS}}
-\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ process\ creation\ ===================================*/}}
-\DoxyCodeLine{00024\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a43b789c710ba1501bcd8cf54e4382e50}{s\_spawn}}(\textcolor{keywordtype}{void}*\ (*func)(\textcolor{keywordtype}{void}*),\ \textcolor{keywordtype}{char}*\ argv[],\ \textcolor{keywordtype}{int}\ fd0,\ \textcolor{keywordtype}{int}\ fd1);}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00038\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}{s\_waitpid}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}*\ wstatus,\ \textcolor{keywordtype}{bool}\ nohang);}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00047\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\_kill}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ signal);}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00052\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}{s\_exit}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \textcolor{comment}{/*============================\ system\ calls\ for\ interacting\ with\ the\ scheduler}}
-\DoxyCodeLine{00055\ \textcolor{comment}{\ *\ ===================================*/}}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00064\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\_nice}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00078\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_aec37528a3c7935864924764d1911126c}{s\_sleep}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ticks);}
-\DoxyCodeLine{00079\ }
-\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{globals_8h}{globals.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{kernel_8h}{kernel.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{/*==\ system\ call\ functions\ for\ interacting\ with\ PennOS\ process\ creation==*/}}
+\DoxyCodeLine{00022\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a43b789c710ba1501bcd8cf54e4382e50}{s\_spawn}}(\textcolor{keywordtype}{void}*\ (*func)(\textcolor{keywordtype}{void}*),\ \textcolor{keywordtype}{char}*\ argv[],\ \textcolor{keywordtype}{int}\ fd0,\ \textcolor{keywordtype}{int}\ fd1);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a62b97025761b7f8ad7e59b641cad08d6}{s\_spawn\_nice}}(\textcolor{keywordtype}{void}*\ (*func)(\textcolor{keywordtype}{void}*),}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ argv[],}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd0,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd1,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00042\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}{s\_waitpid}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}*\ wstatus,\ \textcolor{keywordtype}{bool}\ nohang);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\_kill}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ signal);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00056\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}{s\_exit}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{/*============================\ system\ calls\ for\ interacting\ with\ the\ scheduler}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ *\ ===================================*/}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\_nice}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00082\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_aec37528a3c7935864924764d1911126c}{s\_sleep}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ticks);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{/*==\ system\ call\ functions\ for\ interacting\ with\ PennOS\ filesystem\ ==*/}}
+\DoxyCodeLine{00092\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_afec6e61720e05918efefeab347e950f3}{s\_open}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname,\ \textcolor{keywordtype}{int}\ mode);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00102\ ssize\_t\ \mbox{\hyperlink{sys__call_8h_afdcf52e63af8002a5d7c02774ee0578f}{s\_read}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{char}*\ buf);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00112\ ssize\_t\ \mbox{\hyperlink{sys__call_8h_ad3317435b4bd7309160538fc5d730eb9}{s\_write}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ \textcolor{keywordtype}{int}\ n);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00120\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1ee856dbd0706f79a440d1e98b42d32d}{s\_close}}(\textcolor{keywordtype}{int}\ fd);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00128\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a395873f1de0b89a686d438580ba5dcf7}{s\_unlink}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00137\ off\_t\ \mbox{\hyperlink{sys__call_8h_ac21f611f4fb486935d9ad2915a529d3b}{s\_lseek}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keywordtype}{int}\ offset,\ \textcolor{keywordtype}{int}\ whence);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00144\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a6a6a25a8e0071c5e76fe05ee72587f0d}{s\_ls}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

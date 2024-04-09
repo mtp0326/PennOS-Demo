@@ -2,27 +2,34 @@
 \hypertarget{structparsed__command}{}\label{structparsed__command}\index{parsed\_command@{parsed\_command}}
 
 
-{\ttfamily \#include $<$penn-\/parser.\+h$>$}
+{\ttfamily \#include $<$parser.\+h$>$}
 
 \doxysubsubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{structparsed__command_aadb3fa66ab1542768beba9f19b075a94}{is\+\_\+background}}
 \item 
-int \mbox{\hyperlink{structparsed__command_a0ac130a01c8e665db7749dc23b4e963d}{num\+\_\+commands}}
+bool \mbox{\hyperlink{structparsed__command_a1b74dd94f9acc82ef0d0da23123fb01c}{is\+\_\+file\+\_\+append}}
 \item 
-char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structparsed__command_afd45348cd1dca492d433cea608455ba8}{commands}}
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structparsed__command_a90160f37d600aa2385770a50f887ece0}{stdin\+\_\+file}}
 \item 
-char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structparsed__command_a3957e4e35b995f018463727828f29017}{str\+\_\+parse}}
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structparsed__command_a9f6c41e84a32eaac9fadc00784a6861c}{stdout\+\_\+file}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structparsed__command_a9b6e369dd64a06a873d1527d9624bd6b}{num\+\_\+commands}}
+\item 
+char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structparsed__command_a36c4ed49d6d1b4fc42b6b024f6cb2ff0}{commands}} \mbox{[}$\,$\mbox{]}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+struct \doxylink{structparsed__command}{parsed\+\_\+command} stored all necessary information needed for penn-\/shell. 
+
 \doxysubsection{Field Documentation}
-\Hypertarget{structparsed__command_afd45348cd1dca492d433cea608455ba8}\label{structparsed__command_afd45348cd1dca492d433cea608455ba8} 
+\Hypertarget{structparsed__command_a36c4ed49d6d1b4fc42b6b024f6cb2ff0}\label{structparsed__command_a36c4ed49d6d1b4fc42b6b024f6cb2ff0} 
 \index{parsed\_command@{parsed\_command}!commands@{commands}}
 \index{commands@{commands}!parsed\_command@{parsed\_command}}
 \doxysubsubsection{\texorpdfstring{commands}{commands}}
-{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} parsed\+\_\+command\+::commands}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} parsed\+\_\+command\+::commands\mbox{[}$\,$\mbox{]}}
 
 \Hypertarget{structparsed__command_aadb3fa66ab1542768beba9f19b075a94}\label{structparsed__command_aadb3fa66ab1542768beba9f19b075a94} 
 \index{parsed\_command@{parsed\_command}!is\_background@{is\_background}}
@@ -30,20 +37,32 @@ char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structparsed__command_a3957e4e3
 \doxysubsubsection{\texorpdfstring{is\_background}{is\_background}}
 {\footnotesize\ttfamily bool parsed\+\_\+command\+::is\+\_\+background}
 
-\Hypertarget{structparsed__command_a0ac130a01c8e665db7749dc23b4e963d}\label{structparsed__command_a0ac130a01c8e665db7749dc23b4e963d} 
+\Hypertarget{structparsed__command_a1b74dd94f9acc82ef0d0da23123fb01c}\label{structparsed__command_a1b74dd94f9acc82ef0d0da23123fb01c} 
+\index{parsed\_command@{parsed\_command}!is\_file\_append@{is\_file\_append}}
+\index{is\_file\_append@{is\_file\_append}!parsed\_command@{parsed\_command}}
+\doxysubsubsection{\texorpdfstring{is\_file\_append}{is\_file\_append}}
+{\footnotesize\ttfamily bool parsed\+\_\+command\+::is\+\_\+file\+\_\+append}
+
+\Hypertarget{structparsed__command_a9b6e369dd64a06a873d1527d9624bd6b}\label{structparsed__command_a9b6e369dd64a06a873d1527d9624bd6b} 
 \index{parsed\_command@{parsed\_command}!num\_commands@{num\_commands}}
 \index{num\_commands@{num\_commands}!parsed\_command@{parsed\_command}}
 \doxysubsubsection{\texorpdfstring{num\_commands}{num\_commands}}
-{\footnotesize\ttfamily int parsed\+\_\+command\+::num\+\_\+commands}
+{\footnotesize\ttfamily size\+\_\+t parsed\+\_\+command\+::num\+\_\+commands}
 
-\Hypertarget{structparsed__command_a3957e4e35b995f018463727828f29017}\label{structparsed__command_a3957e4e35b995f018463727828f29017} 
-\index{parsed\_command@{parsed\_command}!str\_parse@{str\_parse}}
-\index{str\_parse@{str\_parse}!parsed\_command@{parsed\_command}}
-\doxysubsubsection{\texorpdfstring{str\_parse}{str\_parse}}
-{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} parsed\+\_\+command\+::str\+\_\+parse}
+\Hypertarget{structparsed__command_a90160f37d600aa2385770a50f887ece0}\label{structparsed__command_a90160f37d600aa2385770a50f887ece0} 
+\index{parsed\_command@{parsed\_command}!stdin\_file@{stdin\_file}}
+\index{stdin\_file@{stdin\_file}!parsed\_command@{parsed\_command}}
+\doxysubsubsection{\texorpdfstring{stdin\_file}{stdin\_file}}
+{\footnotesize\ttfamily const char\texorpdfstring{$\ast$}{*} parsed\+\_\+command\+::stdin\+\_\+file}
+
+\Hypertarget{structparsed__command_a9f6c41e84a32eaac9fadc00784a6861c}\label{structparsed__command_a9f6c41e84a32eaac9fadc00784a6861c} 
+\index{parsed\_command@{parsed\_command}!stdout\_file@{stdout\_file}}
+\index{stdout\_file@{stdout\_file}!parsed\_command@{parsed\_command}}
+\doxysubsubsection{\texorpdfstring{stdout\_file}{stdout\_file}}
+{\footnotesize\ttfamily const char\texorpdfstring{$\ast$}{*} parsed\+\_\+command\+::stdout\+\_\+file}
 
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/\mbox{\hyperlink{penn-parser_8h}{penn-\/parser.\+h}}\end{DoxyCompactItemize}
+src/\mbox{\hyperlink{parser_8h}{parser.\+h}}\end{DoxyCompactItemize}

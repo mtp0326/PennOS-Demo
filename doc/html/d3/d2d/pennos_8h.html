@@ -79,15 +79,14 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">pennos.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;signal.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="../../d7/da1/penn-parser_8h_source.html">penn-parser.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d5/d36/parser_8h_source.html">parser.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../dc/d3d/pennfat_8h_source.html">pennfat.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d5/d87/globals_8h_source.html">util/globals.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d0/daa/kernel_8h_source.html">util/kernel.h</a>&quot;</code><br />
@@ -108,6 +107,17 @@ Macros</h2></td></tr>
 <tr class="separator:a78c99ffd76a7bb3c8c74db76207e9ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabf4f709c8199e41cf279c77112345fe" id="r_aabf4f709c8199e41cf279c77112345fe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabf4f709c8199e41cf279c77112345fe">MAX_LEN</a>&#160;&#160;&#160;4096</td></tr>
 <tr class="separator:aabf4f709c8199e41cf279c77112345fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcf80a6d91178952d107ad00b165752b" id="r_afcf80a6d91178952d107ad00b165752b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afcf80a6d91178952d107ad00b165752b">STDIN_FILENO</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:afcf80a6d91178952d107ad00b165752b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd165ee6474b5b75bf075842fff13a04" id="r_abd165ee6474b5b75bf075842fff13a04"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd165ee6474b5b75bf075842fff13a04">STDOUT_FILENO</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:abd165ee6474b5b75bf075842fff13a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2fe1725bb5e9823d089c46b9ed5266e" id="r_ae2fe1725bb5e9823d089c46b9ed5266e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2fe1725bb5e9823d089c46b9ed5266e">STDERR_FILENO</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ae2fe1725bb5e9823d089c46b9ed5266e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae8407b38c34512de0d26e126cd7ada44" id="r_ae8407b38c34512de0d26e126cd7ada44"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8407b38c34512de0d26e126cd7ada44">function_from_string</a> (char *program)</td></tr>
+<tr class="separator:ae8407b38c34512de0d26e126cd7ada44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a8fb447618db946a9e2a596d9ea18763f" name="a8fb447618db946a9e2a596d9ea18763f"></a>
@@ -174,6 +184,66 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define PROMPT&#160;&#160;&#160;&quot;penn-os&gt; &quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae2fe1725bb5e9823d089c46b9ed5266e" name="ae2fe1725bb5e9823d089c46b9ed5266e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2fe1725bb5e9823d089c46b9ed5266e">&#9670;&#160;</a></span>STDERR_FILENO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STDERR_FILENO&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afcf80a6d91178952d107ad00b165752b" name="afcf80a6d91178952d107ad00b165752b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcf80a6d91178952d107ad00b165752b">&#9670;&#160;</a></span>STDIN_FILENO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STDIN_FILENO&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abd165ee6474b5b75bf075842fff13a04" name="abd165ee6474b5b75bf075842fff13a04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd165ee6474b5b75bf075842fff13a04">&#9670;&#160;</a></span>STDOUT_FILENO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STDOUT_FILENO&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ae8407b38c34512de0d26e126cd7ada44" name="ae8407b38c34512de0d26e126cd7ada44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8407b38c34512de0d26e126cd7ada44">&#9670;&#160;</a></span>function_from_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * function_from_string </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>program</em></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

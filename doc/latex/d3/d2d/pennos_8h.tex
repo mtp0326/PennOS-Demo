@@ -1,10 +1,8 @@
 \doxysection{src/pennos.h File Reference}
 \hypertarget{pennos_8h}{}\label{pennos_8h}\index{src/pennos.h@{src/pennos.h}}
-{\ttfamily \#include $<$signal.\+h$>$}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
-{\ttfamily \#include $<$unistd.\+h$>$}\newline
-{\ttfamily \#include "{}penn-\/parser.\+h"{}}\newline
+{\ttfamily \#include "{}parser.\+h"{}}\newline
 {\ttfamily \#include "{}pennfat.\+h"{}}\newline
 {\ttfamily \#include "{}util/globals.\+h"{}}\newline
 {\ttfamily \#include "{}util/kernel.\+h"{}}\newline
@@ -22,6 +20,17 @@
 \#define \mbox{\hyperlink{pennos_8h_a78c99ffd76a7bb3c8c74db76207e9ab4}{\+\_\+\+XOPEN\+\_\+\+SOURCE}}~700
 \item 
 \#define \mbox{\hyperlink{pennos_8h_aabf4f709c8199e41cf279c77112345fe}{MAX\+\_\+\+LEN}}~4096
+\item 
+\#define \mbox{\hyperlink{pennos_8h_afcf80a6d91178952d107ad00b165752b}{STDIN\+\_\+\+FILENO}}~0
+\item 
+\#define \mbox{\hyperlink{pennos_8h_abd165ee6474b5b75bf075842fff13a04}{STDOUT\+\_\+\+FILENO}}~1
+\item 
+\#define \mbox{\hyperlink{pennos_8h_ae2fe1725bb5e9823d089c46b9ed5266e}{STDERR\+\_\+\+FILENO}}~2
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennos_8h_ae8407b38c34512de0d26e126cd7ada44}{function\+\_\+from\+\_\+string}} (char \texorpdfstring{$\ast$}{*}program)
 \end{DoxyCompactItemize}
 
 
@@ -55,4 +64,31 @@
 \index{PROMPT@{PROMPT}!pennos.h@{pennos.h}}
 \doxysubsubsection{\texorpdfstring{PROMPT}{PROMPT}}
 {\footnotesize\ttfamily \#define PROMPT~"{}penn-\/os$>$ "{}}
+
+\Hypertarget{pennos_8h_ae2fe1725bb5e9823d089c46b9ed5266e}\label{pennos_8h_ae2fe1725bb5e9823d089c46b9ed5266e} 
+\index{pennos.h@{pennos.h}!STDERR\_FILENO@{STDERR\_FILENO}}
+\index{STDERR\_FILENO@{STDERR\_FILENO}!pennos.h@{pennos.h}}
+\doxysubsubsection{\texorpdfstring{STDERR\_FILENO}{STDERR\_FILENO}}
+{\footnotesize\ttfamily \#define STDERR\+\_\+\+FILENO~2}
+
+\Hypertarget{pennos_8h_afcf80a6d91178952d107ad00b165752b}\label{pennos_8h_afcf80a6d91178952d107ad00b165752b} 
+\index{pennos.h@{pennos.h}!STDIN\_FILENO@{STDIN\_FILENO}}
+\index{STDIN\_FILENO@{STDIN\_FILENO}!pennos.h@{pennos.h}}
+\doxysubsubsection{\texorpdfstring{STDIN\_FILENO}{STDIN\_FILENO}}
+{\footnotesize\ttfamily \#define STDIN\+\_\+\+FILENO~0}
+
+\Hypertarget{pennos_8h_abd165ee6474b5b75bf075842fff13a04}\label{pennos_8h_abd165ee6474b5b75bf075842fff13a04} 
+\index{pennos.h@{pennos.h}!STDOUT\_FILENO@{STDOUT\_FILENO}}
+\index{STDOUT\_FILENO@{STDOUT\_FILENO}!pennos.h@{pennos.h}}
+\doxysubsubsection{\texorpdfstring{STDOUT\_FILENO}{STDOUT\_FILENO}}
+{\footnotesize\ttfamily \#define STDOUT\+\_\+\+FILENO~1}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{pennos_8h_ae8407b38c34512de0d26e126cd7ada44}\label{pennos_8h_ae8407b38c34512de0d26e126cd7ada44} 
+\index{pennos.h@{pennos.h}!function\_from\_string@{function\_from\_string}}
+\index{function\_from\_string@{function\_from\_string}!pennos.h@{pennos.h}}
+\doxysubsubsection{\texorpdfstring{function\_from\_string()}{function\_from\_string()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} function\+\_\+from\+\_\+string (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{program }\end{DoxyParamCaption})}
 

@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
       // parse command
       struct parsed_command* parsed;
       if (parse_command(cmd, &parsed) != 0) {
-        free_parsed_command(parsed);
+        free(parsed);
         exit(EXIT_FAILURE);
       }
 
@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
       } else {
         fprintf(stderr, "pennfat: command not found: %s\n", args[0]);
       }
-      free_parsed_command(parsed);
+      free(parsed);
     }
     free(cmd);
   }

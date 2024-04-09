@@ -1,0 +1,112 @@
+\doxysection{src/parser.h File Reference}
+\hypertarget{parser_8h}{}\label{parser_8h}\index{src/parser.h@{src/parser.h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{parser_8h_abc727f8c8ab8f98492e9dd7952410937}{UNEXPECTED\+\_\+\+FILE\+\_\+\+INPUT}}~1
+\item 
+\#define \mbox{\hyperlink{parser_8h_ae156d843ba76f0638a6ddf776bdb6faf}{UNEXPECTED\+\_\+\+FILE\+\_\+\+OUTPUT}}~2
+\item 
+\#define \mbox{\hyperlink{parser_8h_ab3c318a91e33f7660d5a4a00636b34c2}{UNEXPECTED\+\_\+\+PIPELINE}}~3
+\item 
+\#define \mbox{\hyperlink{parser_8h_a4e1b81a40303e0d9bc97fc44149e2363}{UNEXPECTED\+\_\+\+AMPERSAND}}~4
+\item 
+\#define \mbox{\hyperlink{parser_8h_a5654e1303438d46fcc600f94aa681f45}{EXPECT\+\_\+\+INPUT\+\_\+\+FILENAME}}~5
+\item 
+\#define \mbox{\hyperlink{parser_8h_aa33cd9843f13363dd95aaf586832c9a4}{EXPECT\+\_\+\+OUTPUT\+\_\+\+FILENAME}}~6
+\item 
+\#define \mbox{\hyperlink{parser_8h_a7f090bd55b7e8ec40b7d2122418b1a34}{EXPECT\+\_\+\+COMMANDS}}~7
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{parser_8h_a9b637eb675122a284266deba4e56e39f}{parse\+\_\+command}} (const char \texorpdfstring{$\ast$}{*}cmd\+\_\+line, struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}result)
+\item 
+void \mbox{\hyperlink{parser_8h_a0efb2747a5e20879807d782a83a21a36}{print\+\_\+parsed\+\_\+command}} (FILE \texorpdfstring{$\ast$}{*}output, const struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}cmd)
+\item 
+void \mbox{\hyperlink{parser_8h_a5f19bed42fed865baae8315c4780a32e}{print\+\_\+parser\+\_\+errcode}} (FILE \texorpdfstring{$\ast$}{*}output, int err\+\_\+code)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{parser_8h_a7f090bd55b7e8ec40b7d2122418b1a34}\label{parser_8h_a7f090bd55b7e8ec40b7d2122418b1a34} 
+\index{parser.h@{parser.h}!EXPECT\_COMMANDS@{EXPECT\_COMMANDS}}
+\index{EXPECT\_COMMANDS@{EXPECT\_COMMANDS}!parser.h@{parser.h}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_COMMANDS}{EXPECT\_COMMANDS}}
+{\footnotesize\ttfamily \#define EXPECT\+\_\+\+COMMANDS~7}
+
+\Hypertarget{parser_8h_a5654e1303438d46fcc600f94aa681f45}\label{parser_8h_a5654e1303438d46fcc600f94aa681f45} 
+\index{parser.h@{parser.h}!EXPECT\_INPUT\_FILENAME@{EXPECT\_INPUT\_FILENAME}}
+\index{EXPECT\_INPUT\_FILENAME@{EXPECT\_INPUT\_FILENAME}!parser.h@{parser.h}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_INPUT\_FILENAME}{EXPECT\_INPUT\_FILENAME}}
+{\footnotesize\ttfamily \#define EXPECT\+\_\+\+INPUT\+\_\+\+FILENAME~5}
+
+\Hypertarget{parser_8h_aa33cd9843f13363dd95aaf586832c9a4}\label{parser_8h_aa33cd9843f13363dd95aaf586832c9a4} 
+\index{parser.h@{parser.h}!EXPECT\_OUTPUT\_FILENAME@{EXPECT\_OUTPUT\_FILENAME}}
+\index{EXPECT\_OUTPUT\_FILENAME@{EXPECT\_OUTPUT\_FILENAME}!parser.h@{parser.h}}
+\doxysubsubsection{\texorpdfstring{EXPECT\_OUTPUT\_FILENAME}{EXPECT\_OUTPUT\_FILENAME}}
+{\footnotesize\ttfamily \#define EXPECT\+\_\+\+OUTPUT\+\_\+\+FILENAME~6}
+
+\Hypertarget{parser_8h_a4e1b81a40303e0d9bc97fc44149e2363}\label{parser_8h_a4e1b81a40303e0d9bc97fc44149e2363} 
+\index{parser.h@{parser.h}!UNEXPECTED\_AMPERSAND@{UNEXPECTED\_AMPERSAND}}
+\index{UNEXPECTED\_AMPERSAND@{UNEXPECTED\_AMPERSAND}!parser.h@{parser.h}}
+\doxysubsubsection{\texorpdfstring{UNEXPECTED\_AMPERSAND}{UNEXPECTED\_AMPERSAND}}
+{\footnotesize\ttfamily \#define UNEXPECTED\+\_\+\+AMPERSAND~4}
+
+\Hypertarget{parser_8h_abc727f8c8ab8f98492e9dd7952410937}\label{parser_8h_abc727f8c8ab8f98492e9dd7952410937} 
+\index{parser.h@{parser.h}!UNEXPECTED\_FILE\_INPUT@{UNEXPECTED\_FILE\_INPUT}}
+\index{UNEXPECTED\_FILE\_INPUT@{UNEXPECTED\_FILE\_INPUT}!parser.h@{parser.h}}
+\doxysubsubsection{\texorpdfstring{UNEXPECTED\_FILE\_INPUT}{UNEXPECTED\_FILE\_INPUT}}
+{\footnotesize\ttfamily \#define UNEXPECTED\+\_\+\+FILE\+\_\+\+INPUT~1}
+
+\Hypertarget{parser_8h_ae156d843ba76f0638a6ddf776bdb6faf}\label{parser_8h_ae156d843ba76f0638a6ddf776bdb6faf} 
+\index{parser.h@{parser.h}!UNEXPECTED\_FILE\_OUTPUT@{UNEXPECTED\_FILE\_OUTPUT}}
+\index{UNEXPECTED\_FILE\_OUTPUT@{UNEXPECTED\_FILE\_OUTPUT}!parser.h@{parser.h}}
+\doxysubsubsection{\texorpdfstring{UNEXPECTED\_FILE\_OUTPUT}{UNEXPECTED\_FILE\_OUTPUT}}
+{\footnotesize\ttfamily \#define UNEXPECTED\+\_\+\+FILE\+\_\+\+OUTPUT~2}
+
+\Hypertarget{parser_8h_ab3c318a91e33f7660d5a4a00636b34c2}\label{parser_8h_ab3c318a91e33f7660d5a4a00636b34c2} 
+\index{parser.h@{parser.h}!UNEXPECTED\_PIPELINE@{UNEXPECTED\_PIPELINE}}
+\index{UNEXPECTED\_PIPELINE@{UNEXPECTED\_PIPELINE}!parser.h@{parser.h}}
+\doxysubsubsection{\texorpdfstring{UNEXPECTED\_PIPELINE}{UNEXPECTED\_PIPELINE}}
+{\footnotesize\ttfamily \#define UNEXPECTED\+\_\+\+PIPELINE~3}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{parser_8h_a9b637eb675122a284266deba4e56e39f}\label{parser_8h_a9b637eb675122a284266deba4e56e39f} 
+\index{parser.h@{parser.h}!parse\_command@{parse\_command}}
+\index{parse\_command@{parse\_command}!parser.h@{parser.h}}
+\doxysubsubsection{\texorpdfstring{parse\_command()}{parse\_command()}}
+{\footnotesize\ttfamily int parse\+\_\+command (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{cmd\+\_\+line,  }\item[{struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{result }\end{DoxyParamCaption})}
+
+Arguments\+: cmd\+\_\+line\+: a null-\/terminated string that is the command line result\+: a non-\/null pointer to a {\ttfamily struct \doxylink{structparsed__command}{parsed\+\_\+command} \texorpdfstring{$\ast$}{*}}
+
+Return value (int)\+: an error code which can be, 0\+: parser finished succesfully -\/1\+: parser encountered a system call error 1-\/7\+: parser specific error, see error type above
+
+This function will parse the given {\ttfamily cmd\+\_\+line} and store the parsed information into a {\ttfamily struct \doxylink{structparsed__command}{parsed\+\_\+command}}. The memory needed for the struct will be allocated by this function, and the pointer to the memory will be stored into the given {\ttfamily \texorpdfstring{$\ast$}{*}result}.
+
+You can directly use the result in system calls. See demo for more information.
+
+If the function returns a successful value (0), a {\ttfamily struct \doxylink{structparsed__command}{parsed\+\_\+command}} is guareenteed to be allocated and stored in the given {\ttfamily \texorpdfstring{$\ast$}{*}result}. It is the caller\textquotesingle{}s responsibility to free the given pointer using {\ttfamily free(3)}.
+
+Otherwise, no {\ttfamily struct \doxylink{structparsed__command}{parsed\+\_\+command}} is allocated and {\ttfamily \texorpdfstring{$\ast$}{*}result} is unchanged. If a system call error (-\/1) is returned, the caller can use {\ttfamily errno(3)} or {\ttfamily perror(3)} to gain more information about the error. \Hypertarget{parser_8h_a0efb2747a5e20879807d782a83a21a36}\label{parser_8h_a0efb2747a5e20879807d782a83a21a36} 
+\index{parser.h@{parser.h}!print\_parsed\_command@{print\_parsed\_command}}
+\index{print\_parsed\_command@{print\_parsed\_command}!parser.h@{parser.h}}
+\doxysubsubsection{\texorpdfstring{print\_parsed\_command()}{print\_parsed\_command()}}
+{\footnotesize\ttfamily void print\+\_\+parsed\+\_\+command (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{output,  }\item[{const struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}}]{cmd }\end{DoxyParamCaption})}
+
+\Hypertarget{parser_8h_a5f19bed42fed865baae8315c4780a32e}\label{parser_8h_a5f19bed42fed865baae8315c4780a32e} 
+\index{parser.h@{parser.h}!print\_parser\_errcode@{print\_parser\_errcode}}
+\index{print\_parser\_errcode@{print\_parser\_errcode}!parser.h@{parser.h}}
+\doxysubsubsection{\texorpdfstring{print\_parser\_errcode()}{print\_parser\_errcode()}}
+{\footnotesize\ttfamily void print\+\_\+parser\+\_\+errcode (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{output,  }\item[{int}]{err\+\_\+code }\end{DoxyParamCaption})}
+

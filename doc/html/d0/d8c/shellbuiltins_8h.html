@@ -97,8 +97,11 @@ Functions</h2></td></tr>
 <tr class="memitem:a0c190c5db53ba8d6a773610c628f7ade" id="r_a0c190c5db53ba8d6a773610c628f7ade"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c190c5db53ba8d6a773610c628f7ade">cat</a> (void *arg)</td></tr>
 <tr class="memdesc:a0c190c5db53ba8d6a773610c628f7ade"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ususal <code>cat</code> program.  <br /></td></tr>
 <tr class="separator:a0c190c5db53ba8d6a773610c628f7ade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b4a63ab4858560b332caaffbe33b9c1" id="r_a3b4a63ab4858560b332caaffbe33b9c1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b4a63ab4858560b332caaffbe33b9c1">sleep</a> (void *arg)</td></tr>
+<tr class="memdesc:a3b4a63ab4858560b332caaffbe33b9c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleep for <code>n</code> seconds.  <br /></td></tr>
+<tr class="separator:a3b4a63ab4858560b332caaffbe33b9c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9afe3108d99ddd2ba581cc7ebbf2a8b8" id="r_a9afe3108d99ddd2ba581cc7ebbf2a8b8"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9afe3108d99ddd2ba581cc7ebbf2a8b8">busy</a> (void *arg)</td></tr>
-<tr class="memdesc:a9afe3108d99ddd2ba581cc7ebbf2a8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleep for <code>n</code> seconds.  <br /></td></tr>
+<tr class="memdesc:a9afe3108d99ddd2ba581cc7ebbf2a8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busy wait indefinitely. It can only be interrupted via signals.  <br /></td></tr>
 <tr class="separator:a9afe3108d99ddd2ba581cc7ebbf2a8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb7e6ef3589544d60d392c450dd1e5af" id="r_afb7e6ef3589544d60d392c450dd1e5af"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb7e6ef3589544d60d392c450dd1e5af">echo</a> (void *arg)</td></tr>
 <tr class="memdesc:afb7e6ef3589544d60d392c450dd1e5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Echo back an input string.  <br /></td></tr>
@@ -123,6 +126,39 @@ Functions</h2></td></tr>
 <tr class="memitem:aca3df72c3570cfcc00bda4e0c174aaf5" id="r_aca3df72c3570cfcc00bda4e0c174aaf5"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca3df72c3570cfcc00bda4e0c174aaf5">ps</a> (void *arg)</td></tr>
 <tr class="memdesc:aca3df72c3570cfcc00bda4e0c174aaf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">List all processes on PennOS, displaying PID, PPID, priority, status, and command name.  <br /></td></tr>
 <tr class="separator:aca3df72c3570cfcc00bda4e0c174aaf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada41809d029abe71d8e1fee0c1695fbe" id="r_ada41809d029abe71d8e1fee0c1695fbe"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada41809d029abe71d8e1fee0c1695fbe">nice</a> (void *arg)</td></tr>
+<tr class="memdesc:ada41809d029abe71d8e1fee0c1695fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a specified signal to a list of processes. If a signal name is not specified, default to "term". Valid signals are -term, -stop, and -cont.  <br /></td></tr>
+<tr class="separator:ada41809d029abe71d8e1fee0c1695fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9651ae070e9d50a2c6564f3cd39b64fe" id="r_a9651ae070e9d50a2c6564f3cd39b64fe"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9651ae070e9d50a2c6564f3cd39b64fe">nice_pid</a> (void *arg)</td></tr>
+<tr class="memdesc:a9651ae070e9d50a2c6564f3cd39b64fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjust the priority level of an existing process.  <br /></td></tr>
+<tr class="separator:a9651ae070e9d50a2c6564f3cd39b64fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb6814d0815a8ae7cb660fc650a8d9b9" id="r_afb6814d0815a8ae7cb660fc650a8d9b9"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb6814d0815a8ae7cb660fc650a8d9b9">man</a> (void *arg)</td></tr>
+<tr class="memdesc:afb6814d0815a8ae7cb660fc650a8d9b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lists all available commands.  <br /></td></tr>
+<tr class="separator:afb6814d0815a8ae7cb660fc650a8d9b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae03fa263a3c005f17e62ec9c6cadaaeb" id="r_ae03fa263a3c005f17e62ec9c6cadaaeb"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae03fa263a3c005f17e62ec9c6cadaaeb">bg</a> (void *arg)</td></tr>
+<tr class="memdesc:ae03fa263a3c005f17e62ec9c6cadaaeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resumes the most recently stopped job in the background, or the job specified by job_id.  <br /></td></tr>
+<tr class="separator:ae03fa263a3c005f17e62ec9c6cadaaeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46449f0c9629d9db463b9e52c7dab346" id="r_a46449f0c9629d9db463b9e52c7dab346"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46449f0c9629d9db463b9e52c7dab346">fg</a> (void *arg)</td></tr>
+<tr class="memdesc:a46449f0c9629d9db463b9e52c7dab346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brings the most recently stopped or background job to the foreground, or the job specified by job_id.  <br /></td></tr>
+<tr class="separator:a46449f0c9629d9db463b9e52c7dab346"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922be9cb889a058b36f77dc8baacea3a" id="r_a922be9cb889a058b36f77dc8baacea3a"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a922be9cb889a058b36f77dc8baacea3a">jobs</a> (void *arg)</td></tr>
+<tr class="memdesc:a922be9cb889a058b36f77dc8baacea3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lists all jobs.  <br /></td></tr>
+<tr class="separator:a922be9cb889a058b36f77dc8baacea3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad0e34f6faccea9bf13355c9d707064f" id="r_aad0e34f6faccea9bf13355c9d707064f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad0e34f6faccea9bf13355c9d707064f">logout</a> (void *arg)</td></tr>
+<tr class="memdesc:aad0e34f6faccea9bf13355c9d707064f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exits the shell and shutsdown PennOS.  <br /></td></tr>
+<tr class="separator:aad0e34f6faccea9bf13355c9d707064f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f9edec3be0cf72eb5defc5e64b0782e" id="r_a3f9edec3be0cf72eb5defc5e64b0782e"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f9edec3be0cf72eb5defc5e64b0782e">zombify</a> (void *arg)</td></tr>
+<tr class="memdesc:a3f9edec3be0cf72eb5defc5e64b0782e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to test zombifying functionality of your kernel.  <br /></td></tr>
+<tr class="separator:a3f9edec3be0cf72eb5defc5e64b0782e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b87d4c37532ee634cec2c33281cea1f" id="r_a0b87d4c37532ee634cec2c33281cea1f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b87d4c37532ee634cec2c33281cea1f">zombie_child</a> (void *arg)</td></tr>
+<tr class="memdesc:a0b87d4c37532ee634cec2c33281cea1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for zombify.  <br /></td></tr>
+<tr class="separator:a0b87d4c37532ee634cec2c33281cea1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a829fbd254f571c34a86e50114d43975b" id="r_a829fbd254f571c34a86e50114d43975b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a829fbd254f571c34a86e50114d43975b">orphanify</a> (void *arg)</td></tr>
+<tr class="memdesc:a829fbd254f571c34a86e50114d43975b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to test orphanifying functionality of your kernel.  <br /></td></tr>
+<tr class="separator:a829fbd254f571c34a86e50114d43975b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa40e1f17d78b5fe53a8f1cc09d125110" id="r_aa40e1f17d78b5fe53a8f1cc09d125110"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa40e1f17d78b5fe53a8f1cc09d125110">orphan_child</a> (void *arg)</td></tr>
+<tr class="memdesc:aa40e1f17d78b5fe53a8f1cc09d125110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for orphanify.  <br /></td></tr>
+<tr class="separator:aa40e1f17d78b5fe53a8f1cc09d125110"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a7c3c61b74d282ad16dde41697d849968" name="a7c3c61b74d282ad16dde41697d849968"></a>
@@ -140,6 +176,26 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ae03fa263a3c005f17e62ec9c6cadaaeb" name="ae03fa263a3c005f17e62ec9c6cadaaeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae03fa263a3c005f17e62ec9c6cadaaeb">&#9670;&#160;</a></span>bg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * bg </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resumes the most recently stopped job in the background, or the job specified by job_id. </p>
+<p>Example Usage: bg Example Usage: bg 2 (job_id is 2) </p>
+
+</div>
+</div>
 <a id="a9afe3108d99ddd2ba581cc7ebbf2a8b8" name="a9afe3108d99ddd2ba581cc7ebbf2a8b8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9afe3108d99ddd2ba581cc7ebbf2a8b8">&#9670;&#160;</a></span>busy()</h2>
 
@@ -155,10 +211,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sleep for <code>n</code> seconds. </p>
-<p>Note that you'll have to convert the number of seconds to the correct number of ticks.</p>
-<p>Example Usage: sleep 10</p>
-<p>Busy wait indefinitely. It can only be interrupted via signals.</p>
+<p>Busy wait indefinitely. It can only be interrupted via signals. </p>
 <p>Example Usage: busy </p>
 
 </div>
@@ -252,6 +305,66 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a46449f0c9629d9db463b9e52c7dab346" name="a46449f0c9629d9db463b9e52c7dab346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46449f0c9629d9db463b9e52c7dab346">&#9670;&#160;</a></span>fg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * fg </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Brings the most recently stopped or background job to the foreground, or the job specified by job_id. </p>
+<p>Example Usage: fg Example Usage: fg 2 (job_id is 2) </p>
+
+</div>
+</div>
+<a id="a922be9cb889a058b36f77dc8baacea3a" name="a922be9cb889a058b36f77dc8baacea3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a922be9cb889a058b36f77dc8baacea3a">&#9670;&#160;</a></span>jobs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * jobs </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lists all jobs. </p>
+<p>Example Usage: jobs </p>
+
+</div>
+</div>
+<a id="aad0e34f6faccea9bf13355c9d707064f" name="aad0e34f6faccea9bf13355c9d707064f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad0e34f6faccea9bf13355c9d707064f">&#9670;&#160;</a></span>logout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * logout </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exits the shell and shutsdown PennOS. </p>
+<p>Example Usage: logout </p>
+
+</div>
+</div>
 <a id="a505f3b315d7a75325e855567e7fcd07c" name="a505f3b315d7a75325e855567e7fcd07c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a505f3b315d7a75325e855567e7fcd07c">&#9670;&#160;</a></span>ls()</h2>
 
@@ -269,6 +382,26 @@ Functions</h2></td></tr>
 
 <p>Lists all files in the working directory. For extra credit, it should support relative and absolute file paths. </p>
 <p>Example Usage: ls (regular credit) Example Usage: ls ../../foo/./bar/sample (only for EC) </p>
+
+</div>
+</div>
+<a id="afb6814d0815a8ae7cb660fc650a8d9b9" name="afb6814d0815a8ae7cb660fc650a8d9b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb6814d0815a8ae7cb660fc650a8d9b9">&#9670;&#160;</a></span>man()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * man </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lists all available commands. </p>
+<p>Example Usage: man </p>
 
 </div>
 </div>
@@ -294,6 +427,89 @@ Functions</h2></td></tr>
 <li><code>dst_file</code> file already exists but does not have write permissions</li>
 </ul>
 <p>Example Usage: mv src_file dst_file </p>
+
+</div>
+</div>
+<a id="ada41809d029abe71d8e1fee0c1695fbe" name="ada41809d029abe71d8e1fee0c1695fbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada41809d029abe71d8e1fee0c1695fbe">&#9670;&#160;</a></span>nice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * nice </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sends a specified signal to a list of processes. If a signal name is not specified, default to "term". Valid signals are -term, -stop, and -cont. </p>
+<p>Example Usage: kill 1 2 3 (sends term to processes 1, 2, and 3) Example Usage: kill -term 1 2 (sends term to processes 1 and 2) Example Usage: kill -stop 1 2 (sends stop to processes 1 and 2) Example Usage: kill -cont 1 (sends cont to process 1)</p>
+<p>Spawn a new process for <code>command</code> and set its priority to <code>priority</code>.</p><ol type="1">
+<li>Adjust the priority level of an existing process.</li>
+</ol>
+<p>Example Usage: nice 2 cat f1 f2 f3 (spawns cat with priority 2) </p>
+
+</div>
+</div>
+<a id="a9651ae070e9d50a2c6564f3cd39b64fe" name="a9651ae070e9d50a2c6564f3cd39b64fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9651ae070e9d50a2c6564f3cd39b64fe">&#9670;&#160;</a></span>nice_pid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * nice_pid </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adjust the priority level of an existing process. </p>
+<p>Example Usage: nice_pid 0 123 (sets priority 0 to PID 123) </p>
+
+</div>
+</div>
+<a id="aa40e1f17d78b5fe53a8f1cc09d125110" name="aa40e1f17d78b5fe53a8f1cc09d125110"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa40e1f17d78b5fe53a8f1cc09d125110">&#9670;&#160;</a></span>orphan_child()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * orphan_child </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper for orphanify. </p>
+
+</div>
+</div>
+<a id="a829fbd254f571c34a86e50114d43975b" name="a829fbd254f571c34a86e50114d43975b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a829fbd254f571c34a86e50114d43975b">&#9670;&#160;</a></span>orphanify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * orphanify </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Used to test orphanifying functionality of your kernel. </p>
+<p>Example Usage: orphanify </p>
 
 </div>
 </div>
@@ -340,6 +556,27 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a3b4a63ab4858560b332caaffbe33b9c1" name="a3b4a63ab4858560b332caaffbe33b9c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b4a63ab4858560b332caaffbe33b9c1">&#9670;&#160;</a></span>sleep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * sleep </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sleep for <code>n</code> seconds. </p>
+<p>Note that you'll have to convert the number of seconds to the correct number of ticks.</p>
+<p>Example Usage: sleep 10 </p>
+
+</div>
+</div>
 <a id="a8cd9eba4290506b4c1c3887ff5ddaccd" name="a8cd9eba4290506b4c1c3887ff5ddaccd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8cd9eba4290506b4c1c3887ff5ddaccd">&#9670;&#160;</a></span>touch()</h2>
 
@@ -357,6 +594,45 @@ Functions</h2></td></tr>
 
 <p>For each file, create an empty file if it doesn't exist, else update its timestamp. </p>
 <p>Example Usage: touch f1 f2 f3 f4 f5 </p>
+
+</div>
+</div>
+<a id="a0b87d4c37532ee634cec2c33281cea1f" name="a0b87d4c37532ee634cec2c33281cea1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b87d4c37532ee634cec2c33281cea1f">&#9670;&#160;</a></span>zombie_child()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * zombie_child </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper for zombify. </p>
+
+</div>
+</div>
+<a id="a3f9edec3be0cf72eb5defc5e64b0782e" name="a3f9edec3be0cf72eb5defc5e64b0782e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f9edec3be0cf72eb5defc5e64b0782e">&#9670;&#160;</a></span>zombify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * zombify </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Used to test zombifying functionality of your kernel. </p>
+<p>Example Usage: zombify </p>
 
 </div>
 </div>

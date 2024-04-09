@@ -1,9 +1,9 @@
 #include "pennos.h"
 #include <signal.h>
+#include "parser.h"
 #include "pennfat.h"
 #include "util/kernel.h"
 #include "util/prioritylist.h"
-
 static pthread_mutex_t done_lock;
 
 static bool done = false;
@@ -12,39 +12,40 @@ static const int centisecond = 10000;  // 10 milliseconds
 
 PList* priority;
 
-void* function_from_string(char* program) {
-  if (strcmp(program, "cat") == 0) {
-    return cat;
-  } else if (strcmp(program, "sleep") == 0) {
-    return sleep;
-  } else if (strcmp(program, "busy") == 0) {
-    return busy;
-  } else if (strcmp(program, "echo") == 0) {
-    return echo;
-  } else if (strcmp(program, "ls") == 0) {
-    return ls;
-  } else if (strcmp(program, "touch") == 0) {
-    return touch;
-  } else if (strcmp(program, "mv") == 0) {
-    return mv;
-  } else if (strcmp(program, "cp") == 0) {
-    return cp;
-  } else if (strcmp(program, "rm") == 0) {
-    return rm;
-  } else if (strcmp(program, "chmod") == 0) {
-    return chmod;
-  } else if (strcmp(program, "ps") == 0) {
-    return ps;
-  } else if (strcmp(program, "kill") == 0) {
-    return kill;
-  } else if (strcmp(program, "zombify") == 0) {
-    return zombify;
-  } else if (strcmp(program, "orphanify") == 0) {
-    return orphanify;
-  } else {
-    return NULL;
-  }
-}
+// will be used for nice later maybe
+// void* function_from_string(char* program) {
+//   if (strcmp(program, "cat") == 0) {
+//     return cat;
+//   } else if (strcmp(program, "sleep") == 0) {
+//     return sleep;
+//   } else if (strcmp(program, "busy") == 0) {
+//     return busy;
+//   } else if (strcmp(program, "echo") == 0) {
+//     return echo;
+//   } else if (strcmp(program, "ls") == 0) {
+//     return ls;
+//   } else if (strcmp(program, "touch") == 0) {
+//     return touch;
+//   } else if (strcmp(program, "mv") == 0) {
+//     return mv;
+//   } else if (strcmp(program, "cp") == 0) {
+//     return cp;
+//   } else if (strcmp(program, "rm") == 0) {
+//     return rm;
+//   } else if (strcmp(program, "chmod") == 0) {
+//     return chmod;
+//   } else if (strcmp(program, "ps") == 0) {
+//     return ps;
+//   } else if (strcmp(program, "kill") == 0) {
+//     return kill;
+//   } else if (strcmp(program, "zombify") == 0) {
+//     return zombify;
+//   } else if (strcmp(program, "orphanify") == 0) {
+//     return orphanify;
+//   } else {
+//     return NULL;
+//   }
+// }
 
 static void* shell(void* arg) {
   while (1) {
@@ -55,7 +56,7 @@ static void* shell(void* arg) {
       // parse command
       struct parsed_command* parsed;
       if (parse_command(cmd, &parsed) != 0) {
-        free_parsed_command(parsed);
+        free(parsed);
         exit(EXIT_FAILURE);
       }
 
@@ -91,7 +92,7 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "orphanify") == 0) {
         // TODO: Call your implemented orphanify() function
       } else if (strcmp(args[0], "nice") == 0) {
-        nice(cmd);
+        // TODO;
       } else if (strcmp(args[0], "nice_pid") == 0) {
         // TODO: Call your implemented nice_pid() function
       } else if (strcmp(args[0], "man") == 0) {
@@ -107,7 +108,7 @@ static void* shell(void* arg) {
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
       }
-      free_parsed_command(parsed);
+      free(parsed);
     }
     free(cmd);
   }

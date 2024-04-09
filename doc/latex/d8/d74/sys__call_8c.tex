@@ -1,6 +1,7 @@
 \doxysection{src/util/sys\+\_\+call.c File Reference}
 \hypertarget{sys__call_8c}{}\label{sys__call_8c}\index{src/util/sys\_call.c@{src/util/sys\_call.c}}
 {\ttfamily \#include "{}sys\+\_\+call.\+h"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
 {\ttfamily \#include "{}stdio.\+h"{}}\newline
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -11,6 +12,8 @@ void \mbox{\hyperlink{sys__call_8c_a33d16eae921a526aeb277c961c6933fc}{free\+\_\+
 \item 
 pid\+\_\+t \mbox{\hyperlink{sys__call_8c_a43b789c710ba1501bcd8cf54e4382e50}{s\+\_\+spawn}} (void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}func)(void \texorpdfstring{$\ast$}{*}), char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]}, int fd0, int fd1)
 \begin{DoxyCompactList}\small\item\em Create a child process that executes the function {\ttfamily func}. The child will retain some attributes of the parent. \end{DoxyCompactList}\item 
+pid\+\_\+t \mbox{\hyperlink{sys__call_8c_ac2ec784264fde0c203b00c563600c259}{s\+\_\+spawn\+\_\+priority}} (void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}func)(void \texorpdfstring{$\ast$}{*}), char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]}, int fd0, int fd1, unsigned int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
+\item 
 pid\+\_\+t \mbox{\hyperlink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid}} (pid\+\_\+t pid, int \texorpdfstring{$\ast$}{*}wstatus, bool nohang)
 \item 
 int \mbox{\hyperlink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill}} (pid\+\_\+t pid, int signal)
@@ -84,6 +87,12 @@ Create a child process that executes the function {\ttfamily func}. The child wi
 \begin{DoxyReturn}{Returns}
 pid\+\_\+t The process ID of the created child process. // need to define error output? 
 \end{DoxyReturn}
+\Hypertarget{sys__call_8c_ac2ec784264fde0c203b00c563600c259}\label{sys__call_8c_ac2ec784264fde0c203b00c563600c259} 
+\index{sys\_call.c@{sys\_call.c}!s\_spawn\_priority@{s\_spawn\_priority}}
+\index{s\_spawn\_priority@{s\_spawn\_priority}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_spawn\_priority()}{s\_spawn\_priority()}}
+{\footnotesize\ttfamily pid\+\_\+t s\+\_\+spawn\+\_\+priority (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*})(void \texorpdfstring{$\ast$}{*})}]{func,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]},  }\item[{int}]{fd0,  }\item[{int}]{fd1,  }\item[{unsigned int}]{priority }\end{DoxyParamCaption})}
+
 \Hypertarget{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}\label{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3} 
 \index{sys\_call.c@{sys\_call.c}!s\_waitpid@{s\_waitpid}}
 \index{s\_waitpid@{s\_waitpid}!sys\_call.c@{sys\_call.c}}

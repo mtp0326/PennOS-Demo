@@ -85,6 +85,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d0/d4d/pennfat__kernel_8h_source.html">pennfat_kernel.h</a>&quot;</code><br />
+<code>#include &quot;unistd.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -93,6 +94,8 @@ Functions</h2></td></tr>
 <tr class="separator:a4d2cf4232cddee738996ca9ad83ea56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78d95341bbd2b21ed69dd341ff47669f" id="r_a78d95341bbd2b21ed69dd341ff47669f"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d8/d68/structdirectory__entries.html">directory_entries</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78d95341bbd2b21ed69dd341ff47669f">does_file_exist</a> (const char *fname)</td></tr>
 <tr class="separator:a78d95341bbd2b21ed69dd341ff47669f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6532ad36b852dd09d641bcaac2642b9b" id="r_a6532ad36b852dd09d641bcaac2642b9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6532ad36b852dd09d641bcaac2642b9b">move_to_open_de</a> (bool found)</td></tr>
+<tr class="separator:a6532ad36b852dd09d641bcaac2642b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8434cdce67b1512300f44ed38497c22a" id="r_a8434cdce67b1512300f44ed38497c22a"><td class="memItemLeft" align="right" valign="top">off_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8434cdce67b1512300f44ed38497c22a">does_file_exist2</a> (const char *fname)</td></tr>
 <tr class="separator:a8434cdce67b1512300f44ed38497c22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addbc36d23ce41b02cb1508bf85ca24e2" id="r_addbc36d23ce41b02cb1508bf85ca24e2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addbc36d23ce41b02cb1508bf85ca24e2">get_first_empty_fat_index</a> ()</td></tr>
@@ -109,6 +112,10 @@ Functions</h2></td></tr>
 <tr class="separator:a1951ec11865274b45144d6dd6f878692"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a580177591867f52c90932219a6c29e71" id="r_a580177591867f52c90932219a6c29e71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a580177591867f52c90932219a6c29e71">extend_fat</a> (int start_index, int empty_fat_index)</td></tr>
 <tr class="separator:a580177591867f52c90932219a6c29e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e07233051c139f0ae786e839ea36b03" id="r_a9e07233051c139f0ae786e839ea36b03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e07233051c139f0ae786e839ea36b03">write_one_byte_in_while</a> (int bytes_left, int size, int *size_increment, int *bytes_written, int *current_offset, const char *str, uint16_t firstBlock)</td></tr>
+<tr class="separator:a9e07233051c139f0ae786e839ea36b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07773059737a331913ba55c458fbaccd" id="r_a07773059737a331913ba55c458fbaccd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07773059737a331913ba55c458fbaccd">update_directory_entry_after_write</a> (struct <a class="el" href="../../d8/d68/structdirectory__entries.html">directory_entries</a> *curr_de, char *fname, int bytes_written)</td></tr>
+<tr class="separator:a07773059737a331913ba55c458fbaccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79d2a9b65d0e04de358fe1a2cfa79baf" id="r_a79d2a9b65d0e04de358fe1a2cfa79baf"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79d2a9b65d0e04de358fe1a2cfa79baf">k_write</a> (int fd, const char *str, int n)</td></tr>
 <tr class="separator:a79d2a9b65d0e04de358fe1a2cfa79baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ecd38dc6f3a9721ab53ff9a815b5480" id="r_a9ecd38dc6f3a9721ab53ff9a815b5480"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ecd38dc6f3a9721ab53ff9a815b5480">k_close</a> (int fd)</td></tr>
@@ -512,6 +519,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fname</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 </div>
 </div>
@@ -561,6 +575,95 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6532ad36b852dd09d641bcaac2642b9b" name="a6532ad36b852dd09d641bcaac2642b9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6532ad36b852dd09d641bcaac2642b9b">&#9670;&#160;</a></span>move_to_open_de()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void move_to_open_de </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>found</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a07773059737a331913ba55c458fbaccd" name="a07773059737a331913ba55c458fbaccd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07773059737a331913ba55c458fbaccd">&#9670;&#160;</a></span>update_directory_entry_after_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_directory_entry_after_write </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="../../d8/d68/structdirectory__entries.html">directory_entries</a> *</td>          <td class="paramname"><span class="paramname"><em>curr_de</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>fname</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>bytes_written</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e07233051c139f0ae786e839ea36b03" name="a9e07233051c139f0ae786e839ea36b03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e07233051c139f0ae786e839ea36b03">&#9670;&#160;</a></span>write_one_byte_in_while()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void write_one_byte_in_while </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>bytes_left</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>size</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>size_increment</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>bytes_written</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>current_offset</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>str</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>firstBlock</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">

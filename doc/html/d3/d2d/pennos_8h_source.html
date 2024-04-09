@@ -107,22 +107,27 @@ $(function() { codefold.init(1); });
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="../../d3/d2d/pennos_8h.html#aabf4f709c8199e41cf279c77112345fe">   19</a></span><span class="preprocessor">#define MAX_LEN 4096</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;signal.h&gt;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="../../d7/da1/penn-parser_8h.html">penn-parser.h</a>&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="../../dc/d3d/pennfat_8h.html">pennfat.h</a>&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="../../d5/d87/globals_8h.html">util/globals.h</a>&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="../../d0/daa/kernel_8h.html">util/kernel.h</a>&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="../../d0/d8c/shellbuiltins_8h.html">util/shellbuiltins.h</a>&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/d80/sys__call_8h.html">util/sys_call.h</a>&quot;</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="../../d3/d2d/pennos_8h.html#afcf80a6d91178952d107ad00b165752b">   22</a></span><span class="preprocessor">#define STDIN_FILENO 0</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="../../d3/d2d/pennos_8h.html#abd165ee6474b5b75bf075842fff13a04">   23</a></span><span class="preprocessor">#define STDOUT_FILENO 1</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="../../d3/d2d/pennos_8h.html#ae2fe1725bb5e9823d089c46b9ed5266e">   24</a></span><span class="preprocessor">#define STDERR_FILENO 2</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="../../d5/d36/parser_8h.html">parser.h</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="../../dc/d3d/pennfat_8h.html">pennfat.h</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="../../d5/d87/globals_8h.html">util/globals.h</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="../../d0/daa/kernel_8h.html">util/kernel.h</a>&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="../../d0/d8c/shellbuiltins_8h.html">util/shellbuiltins.h</a>&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/d80/sys__call_8h.html">util/sys_call.h</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="../../d3/d2d/pennos_8h.html#ae8407b38c34512de0d26e126cd7ada44">   35</a></span><span class="keywordtype">void</span>* <a class="code hl_function" href="../../d3/d2d/pennos_8h.html#ae8407b38c34512de0d26e126cd7ada44">function_from_string</a>(<span class="keywordtype">char</span>* program);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aglobals_8h_html"><div class="ttname"><a href="../../d5/d87/globals_8h.html">globals.h</a></div></div>
 <div class="ttc" id="akernel_8h_html"><div class="ttname"><a href="../../d0/daa/kernel_8h.html">kernel.h</a></div></div>
-<div class="ttc" id="apenn-parser_8h_html"><div class="ttname"><a href="../../d7/da1/penn-parser_8h.html">penn-parser.h</a></div></div>
+<div class="ttc" id="aparser_8h_html"><div class="ttname"><a href="../../d5/d36/parser_8h.html">parser.h</a></div></div>
 <div class="ttc" id="apennfat_8h_html"><div class="ttname"><a href="../../dc/d3d/pennfat_8h.html">pennfat.h</a></div></div>
+<div class="ttc" id="apennos_8h_html_ae8407b38c34512de0d26e126cd7ada44"><div class="ttname"><a href="../../d3/d2d/pennos_8h.html#ae8407b38c34512de0d26e126cd7ada44">function_from_string</a></div><div class="ttdeci">void * function_from_string(char *program)</div></div>
 <div class="ttc" id="ashellbuiltins_8h_html"><div class="ttname"><a href="../../d0/d8c/shellbuiltins_8h.html">shellbuiltins.h</a></div></div>
 <div class="ttc" id="asys__call_8h_html"><div class="ttname"><a href="../../db/d80/sys__call_8h.html">sys_call.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

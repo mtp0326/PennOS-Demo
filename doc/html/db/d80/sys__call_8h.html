@@ -85,7 +85,6 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="../../d5/d87/globals_8h_source.html">globals.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d0/daa/kernel_8h_source.html">kernel.h</a>&quot;</code><br />
 </div>
@@ -96,6 +95,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a43b789c710ba1501bcd8cf54e4382e50" id="r_a43b789c710ba1501bcd8cf54e4382e50"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43b789c710ba1501bcd8cf54e4382e50">s_spawn</a> (void *(*func)(void *), char *argv[], int fd0, int fd1)</td></tr>
 <tr class="memdesc:a43b789c710ba1501bcd8cf54e4382e50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a child process that executes the function <code>func</code>. The child will retain some attributes of the parent.  <br /></td></tr>
 <tr class="separator:a43b789c710ba1501bcd8cf54e4382e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62b97025761b7f8ad7e59b641cad08d6" id="r_a62b97025761b7f8ad7e59b641cad08d6"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62b97025761b7f8ad7e59b641cad08d6">s_spawn_nice</a> (void *(*func)(void *), char *argv[], int fd0, int fd1, unsigned int <a class="el" href="../../d8/d75/pennos_8c.html#a2e0cca4a43c21259b881d59c96c74fe0">priority</a>)</td></tr>
+<tr class="separator:a62b97025761b7f8ad7e59b641cad08d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c0c6c4ae69799354d707ff57ac925d3" id="r_a3c0c6c4ae69799354d707ff57ac925d3"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c0c6c4ae69799354d707ff57ac925d3">s_waitpid</a> (pid_t pid, int *wstatus, bool nohang)</td></tr>
 <tr class="memdesc:a3c0c6c4ae69799354d707ff57ac925d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait on a child of the calling process, until it changes state. If <code>nohang</code> is true, this will not block the calling process and return immediately.  <br /></td></tr>
 <tr class="separator:a3c0c6c4ae69799354d707ff57ac925d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,8 +112,48 @@ Functions</h2></td></tr>
 <tr class="memitem:aec37528a3c7935864924764d1911126c" id="r_aec37528a3c7935864924764d1911126c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec37528a3c7935864924764d1911126c">s_sleep</a> (unsigned int ticks)</td></tr>
 <tr class="memdesc:aec37528a3c7935864924764d1911126c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suspends execution of the calling proces for a specified number of clock ticks.  <br /></td></tr>
 <tr class="separator:aec37528a3c7935864924764d1911126c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afec6e61720e05918efefeab347e950f3" id="r_afec6e61720e05918efefeab347e950f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afec6e61720e05918efefeab347e950f3">s_open</a> (const char *fname, int mode)</td></tr>
+<tr class="separator:afec6e61720e05918efefeab347e950f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdcf52e63af8002a5d7c02774ee0578f" id="r_afdcf52e63af8002a5d7c02774ee0578f"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdcf52e63af8002a5d7c02774ee0578f">s_read</a> (int fd, int n, char *buf)</td></tr>
+<tr class="separator:afdcf52e63af8002a5d7c02774ee0578f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3317435b4bd7309160538fc5d730eb9" id="r_ad3317435b4bd7309160538fc5d730eb9"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3317435b4bd7309160538fc5d730eb9">s_write</a> (int fd, const char *str, int n)</td></tr>
+<tr class="separator:ad3317435b4bd7309160538fc5d730eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ee856dbd0706f79a440d1e98b42d32d" id="r_a1ee856dbd0706f79a440d1e98b42d32d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1ee856dbd0706f79a440d1e98b42d32d">s_close</a> (int fd)</td></tr>
+<tr class="separator:a1ee856dbd0706f79a440d1e98b42d32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395873f1de0b89a686d438580ba5dcf7" id="r_a395873f1de0b89a686d438580ba5dcf7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a395873f1de0b89a686d438580ba5dcf7">s_unlink</a> (const char *fname)</td></tr>
+<tr class="separator:a395873f1de0b89a686d438580ba5dcf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac21f611f4fb486935d9ad2915a529d3b" id="r_ac21f611f4fb486935d9ad2915a529d3b"><td class="memItemLeft" align="right" valign="top">off_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac21f611f4fb486935d9ad2915a529d3b">s_lseek</a> (int fd, int offset, int whence)</td></tr>
+<tr class="memdesc:ac21f611f4fb486935d9ad2915a529d3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new s lseek object.  <br /></td></tr>
+<tr class="separator:ac21f611f4fb486935d9ad2915a529d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a6a25a8e0071c5e76fe05ee72587f0d" id="r_a6a6a25a8e0071c5e76fe05ee72587f0d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a6a25a8e0071c5e76fe05ee72587f0d">s_ls</a> (const char *filename)</td></tr>
+<tr class="memdesc:a6a6a25a8e0071c5e76fe05ee72587f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new s ls object.  <br /></td></tr>
+<tr class="separator:a6a6a25a8e0071c5e76fe05ee72587f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a1ee856dbd0706f79a440d1e98b42d32d" name="a1ee856dbd0706f79a440d1e98b42d32d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ee856dbd0706f79a440d1e98b42d32d">&#9670;&#160;</a></span>s_close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_close </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
 <a id="a53c8865d5bf1ca946e5b5405190f6690" name="a53c8865d5bf1ca946e5b5405190f6690"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53c8865d5bf1ca946e5b5405190f6690">&#9670;&#160;</a></span>s_exit()</h2>
 
@@ -163,6 +204,67 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a6a6a25a8e0071c5e76fe05ee72587f0d" name="a6a6a25a8e0071c5e76fe05ee72587f0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a6a25a8e0071c5e76fe05ee72587f0d">&#9670;&#160;</a></span>s_ls()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_ls </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new s ls object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac21f611f4fb486935d9ad2915a529d3b" name="ac21f611f4fb486935d9ad2915a529d3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac21f611f4fb486935d9ad2915a529d3b">&#9670;&#160;</a></span>s_lseek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">off_t s_lseek </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>whence</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new s lseek object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">offset</td><td></td></tr>
+    <tr><td class="paramname">whence</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac711d33fcf2573a590b224b6debab996" name="ac711d33fcf2573a590b224b6debab996"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac711d33fcf2573a590b224b6debab996">&#9670;&#160;</a></span>s_nice()</h2>
 
@@ -191,6 +293,70 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure. </dd></dl>
+
+</div>
+</div>
+<a id="afec6e61720e05918efefeab347e950f3" name="afec6e61720e05918efefeab347e950f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afec6e61720e05918efefeab347e950f3">&#9670;&#160;</a></span>s_open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_open </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fname</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fname</td><td></td></tr>
+    <tr><td class="paramname">mode</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="afdcf52e63af8002a5d7c02774ee0578f" name="afdcf52e63af8002a5d7c02774ee0578f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdcf52e63af8002a5d7c02774ee0578f">&#9670;&#160;</a></span>s_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t s_read </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>buf</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">n</td><td></td></tr>
+    <tr><td class="paramname">buf</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
 
 </div>
 </div>
@@ -263,6 +429,66 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a62b97025761b7f8ad7e59b641cad08d6" name="a62b97025761b7f8ad7e59b641cad08d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b97025761b7f8ad7e59b641cad08d6">&#9670;&#160;</a></span>s_spawn_nice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pid_t s_spawn_nice </td>
+          <td>(</td>
+          <td class="paramtype">void *(*)(void *)</td>          <td class="paramname"><span class="paramname"><em>func</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>argv</em>[], </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd0</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd1</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>priority</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a395873f1de0b89a686d438580ba5dcf7" name="a395873f1de0b89a686d438580ba5dcf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a395873f1de0b89a686d438580ba5dcf7">&#9670;&#160;</a></span>s_unlink()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_unlink </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fname</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fname</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
 <a id="a3c0c6c4ae69799354d707ff57ac925d3" name="a3c0c6c4ae69799354d707ff57ac925d3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c0c6c4ae69799354d707ff57ac925d3">&#9670;&#160;</a></span>s_waitpid()</h2>
 
@@ -297,6 +523,41 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pid_t The process ID of the child which has changed state on success, -1 on error. </dd></dl>
+
+</div>
+</div>
+<a id="ad3317435b4bd7309160538fc5d730eb9" name="ad3317435b4bd7309160538fc5d730eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3317435b4bd7309160538fc5d730eb9">&#9670;&#160;</a></span>s_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t s_write </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>str</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">str</td><td></td></tr>
+    <tr><td class="paramname">n</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
 
 </div>
 </div>

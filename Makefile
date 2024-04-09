@@ -40,18 +40,20 @@ SRCS = $(filter-out $(MAIN_FILES), $(shell find $(SRC_DIR) -type f -name '*.c'))
 HDRS = $(shell find src -type f -name '*.h')
 OBJS = $(SRCS:.c=.o)
 
+PARSER_OBJ = $(SRC_DIR)/parser.o
+
 TEST_OBJS = $($(wildcard $(TESTS_DIR)/*.c):.c=.o)
 
 all: $(EXECS) doxygen
 
 tests: $(TEST_EXECS)
 
-$(EXECS): $(BIN_DIR)/%: $(SRC_DIR)/%.c $(OBJS) $(HDRS)
-	$(info Linking $@ with $(OBJS) and $<)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $(OBJS) $<
+$(EXECS): $(BIN_DIR)/%: $(SRC_DIR)/%.c $(OBJS) $(HDRS) $(PARSER_OBJ)
+	$(info Linking $@ with $(OBJS), $(PARSER_OBJ) and $<)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $(OBJS) $(PARSER_OBJ) $<
 
-$(TEST_EXECS): $(BIN_DIR)/%: $(TESTS_DIR)/%.c $(OBJS) $(HDRS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $(OBJS) $(subst $(BIN_DIR)/,$(TESTS_DIR)/,$@).c
+$(TEST_EXECS): $(BIN_DIR)/%: $(TESTS_DIR)/%.c $(OBJS) $(HDRS) $(PARSER_OBJ)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $(OBJS) $(PARSER_OBJ) $(subst $(BIN_DIR)/,$(TESTS_DIR)/,$@).c
 
 %.o: %.c $(HDRS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<

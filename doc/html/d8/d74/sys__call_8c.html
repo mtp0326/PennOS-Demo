@@ -84,6 +84,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="../../db/d80/sys__call_8h_source.html">sys_call.h</a>&quot;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &quot;stdio.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -95,6 +96,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a43b789c710ba1501bcd8cf54e4382e50" id="r_a43b789c710ba1501bcd8cf54e4382e50"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43b789c710ba1501bcd8cf54e4382e50">s_spawn</a> (void *(*func)(void *), char *argv[], int fd0, int fd1)</td></tr>
 <tr class="memdesc:a43b789c710ba1501bcd8cf54e4382e50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a child process that executes the function <code>func</code>. The child will retain some attributes of the parent.  <br /></td></tr>
 <tr class="separator:a43b789c710ba1501bcd8cf54e4382e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ec784264fde0c203b00c563600c259" id="r_ac2ec784264fde0c203b00c563600c259"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2ec784264fde0c203b00c563600c259">s_spawn_priority</a> (void *(*func)(void *), char *argv[], int fd0, int fd1, unsigned int <a class="el" href="../../d8/d75/pennos_8c.html#a2e0cca4a43c21259b881d59c96c74fe0">priority</a>)</td></tr>
+<tr class="separator:ac2ec784264fde0c203b00c563600c259"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c0c6c4ae69799354d707ff57ac925d3" id="r_a3c0c6c4ae69799354d707ff57ac925d3"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c0c6c4ae69799354d707ff57ac925d3">s_waitpid</a> (pid_t pid, int *wstatus, bool nohang)</td></tr>
 <tr class="separator:a3c0c6c4ae69799354d707ff57ac925d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18e6794b108eea25459bd7fe31de4e76" id="r_a18e6794b108eea25459bd7fe31de4e76"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18e6794b108eea25459bd7fe31de4e76">s_kill</a> (pid_t pid, int signal)</td></tr>
@@ -257,6 +260,42 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pid_t The process ID of the created child process. // need to define error output? </dd></dl>
+
+</div>
+</div>
+<a id="ac2ec784264fde0c203b00c563600c259" name="ac2ec784264fde0c203b00c563600c259"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2ec784264fde0c203b00c563600c259">&#9670;&#160;</a></span>s_spawn_priority()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pid_t s_spawn_priority </td>
+          <td>(</td>
+          <td class="paramtype">void *(*)(void *)</td>          <td class="paramname"><span class="paramname"><em>func</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>argv</em>[], </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd0</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd1</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>priority</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
