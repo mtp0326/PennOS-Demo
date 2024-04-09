@@ -44,7 +44,7 @@ int k_open(const char* fname, int mode) {
           perror(
               "k_open: F_WRITE error: attempted to open a file in F_WRITE mode "
               "more than once");
-              return -1;
+          return -1;
           // exit(EXIT_FAILURE);
         }
       }
@@ -53,7 +53,7 @@ int k_open(const char* fname, int mode) {
         perror(
             "k_open: F_WRITE: attempting to open file without write "
             "permission");
-            return -1;
+        return -1;
         // exit(EXIT_FAILURE);
       }
       fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
@@ -109,7 +109,7 @@ int k_open(const char* fname, int mode) {
         perror(
             "k_open: F_READ: attempting to open file that doesn't have read "
             "permission");
-            return -1;
+        return -1;
         // exit(EXIT_FAILURE);
       }
       opened_file = create_file_descriptor(curr_fd, fname_copy, READ, 0);
@@ -126,7 +126,7 @@ int k_open(const char* fname, int mode) {
         perror(
             "k_open: F_READ: attempting to open file that doesn't have write "
             "permission");
-            return -1;
+        return -1;
         // exit(EXIT_FAILURE);
       }
       opened_file =
@@ -1125,7 +1125,7 @@ char* k_read_all(const char* filename) {
   }
   uint32_t file_size = curr_de->size;
   int fd = k_open(filename, 1);
-  char* contents = (char*) malloc(file_size);
+  char* contents = (char*)malloc(file_size);
   int ret = k_read(fd, file_size, contents);
   // k_close(fd);
   if (ret == -1) {
