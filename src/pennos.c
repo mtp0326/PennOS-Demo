@@ -1,9 +1,12 @@
 #include "pennos.h"
 #include <signal.h>
+#include "fcntl.h"
 #include "parser.h"
 #include "pennfat.h"
+#include "unistd.h"
 #include "util/kernel.h"
 #include "util/prioritylist.h"
+
 static pthread_mutex_t done_lock;
 
 static bool done = false;
@@ -117,7 +120,11 @@ static void* shell(void* arg) {
 
 static void alarm_handler(int signum) {}
 
-void scheduler(void) {
+void scheduler(char* logfile) {
+  unsigned int tick = 0;
+
+  char buf[100];
+
   sigset_t suspend_set;
   sigfillset(&suspend_set);
   sigdelset(&suspend_set, SIGALRM);
@@ -179,7 +186,11 @@ void scheduler(void) {
       spthread_continue(curr_thread);
       sigsuspend(&suspend_set);
       spthread_suspend(curr_thread);
-
+      tick++;
+      sprintf(buf, "[%4u]\t CREATE\n", tick);
+      int file = open(logfile, O_CREAT | O_TRUNC | O_RDWR, 0666);
+      write(file, buf, strlen(buf));
+      close(file);
       current_priority->head = current_priority->head->next;
       pthread_mutex_lock(&done_lock);
     }
@@ -196,6 +207,19 @@ void cancel_and_join(spthread_t thread) {
 #include "pennfat.h"
 
 int main(int argc, char** argv) {
+  if (argc < 2) {
+    fprintf(stderr, "pennos: filesystem not specified");
+    return -1;
+  } else if (argc > 3) {
+    fprintf(stderr, "pennos: too many arguments");
+    return -1;
+  }
+
+  char* log = "log.txt";
+  if (argc == 3) {
+    log = argv[2];
+  }
+
   processes[0] = init_list();
   processes[1] = init_list();
   processes[2] = init_list();
@@ -237,7 +261,7 @@ int main(int argc, char** argv) {
 
   s_spawn(shell, arg, STDIN_FILENO, STDOUT_FILENO);
 
-  scheduler();
+  scheduler(log);
 
   // cleanup
   while (processes[0]->size != 0) {

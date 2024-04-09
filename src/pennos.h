@@ -23,6 +23,7 @@
 #define STDOUT_FILENO 1
 #define STDERR_FILENO 2
 
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "parser.h"

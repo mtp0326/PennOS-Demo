@@ -1,6 +1,12 @@
 #ifndef SHELL_BUILTINS
 #define PENNFAT_H
 
+#define sleep std_sleep
+#define nice std_nice
+#include <unistd.h>
+#undef sleep
+#undef nice
+
 // SHELL BUILTINS: Implemented using user and system level functions only!
 
 /**
@@ -23,7 +29,7 @@ void* cat(void* arg);
  *
  * Example Usage: sleep 10
  */
-void* sleep(void* arg);
+// void* sleep(void* arg);
 
 /**
  * @brief Busy wait indefinitely.

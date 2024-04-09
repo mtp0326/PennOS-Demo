@@ -1,19 +1,22 @@
 \doxysection{src/util/shellbuiltins.h File Reference}
 \hypertarget{shellbuiltins_8h}{}\label{shellbuiltins_8h}\index{src/util/shellbuiltins.h@{src/util/shellbuiltins.h}}
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{shellbuiltins_8h_a7c3c61b74d282ad16dde41697d849968}{PENNFAT\+\_\+H}}
+\item 
+\#define \mbox{\hyperlink{shellbuiltins_8h_acc8612feeec5f569b1e096e3110d0dca}{sleep}}~std\+\_\+sleep
+\item 
+\#define \mbox{\hyperlink{shellbuiltins_8h_a85998366f4bf37b8cfbee98369752d63}{nice}}~std\+\_\+nice
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a0c190c5db53ba8d6a773610c628f7ade}{cat}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em The ususal {\ttfamily cat} program. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a3b4a63ab4858560b332caaffbe33b9c1}{sleep}} (void \texorpdfstring{$\ast$}{*}arg)
-\begin{DoxyCompactList}\small\item\em Sleep for {\ttfamily n} seconds. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a9afe3108d99ddd2ba581cc7ebbf2a8b8}{busy}} (void \texorpdfstring{$\ast$}{*}arg)
-\begin{DoxyCompactList}\small\item\em Busy wait indefinitely. It can only be interrupted via signals. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Sleep for {\ttfamily n} seconds. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_afb7e6ef3589544d60d392c450dd1e5af}{echo}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Echo back an input string. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a505f3b315d7a75325e855567e7fcd07c}{ls}} (void \texorpdfstring{$\ast$}{*}arg)
@@ -55,11 +58,23 @@ void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_aa40e1f17d78b5
 
 
 \doxysubsection{Macro Definition Documentation}
+\Hypertarget{shellbuiltins_8h_a85998366f4bf37b8cfbee98369752d63}\label{shellbuiltins_8h_a85998366f4bf37b8cfbee98369752d63} 
+\index{shellbuiltins.h@{shellbuiltins.h}!nice@{nice}}
+\index{nice@{nice}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{nice}{nice}}
+{\footnotesize\ttfamily \#define nice~std\+\_\+nice}
+
 \Hypertarget{shellbuiltins_8h_a7c3c61b74d282ad16dde41697d849968}\label{shellbuiltins_8h_a7c3c61b74d282ad16dde41697d849968} 
 \index{shellbuiltins.h@{shellbuiltins.h}!PENNFAT\_H@{PENNFAT\_H}}
 \index{PENNFAT\_H@{PENNFAT\_H}!shellbuiltins.h@{shellbuiltins.h}}
 \doxysubsubsection{\texorpdfstring{PENNFAT\_H}{PENNFAT\_H}}
 {\footnotesize\ttfamily \#define PENNFAT\+\_\+H}
+
+\Hypertarget{shellbuiltins_8h_acc8612feeec5f569b1e096e3110d0dca}\label{shellbuiltins_8h_acc8612feeec5f569b1e096e3110d0dca} 
+\index{shellbuiltins.h@{shellbuiltins.h}!sleep@{sleep}}
+\index{sleep@{sleep}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{sleep}{sleep}}
+{\footnotesize\ttfamily \#define sleep~std\+\_\+sleep}
 
 
 
@@ -82,7 +97,13 @@ Example Usage\+: bg Example Usage\+: bg 2 (job\+\_\+id is 2) \Hypertarget{shellb
 
 
 
-Busy wait indefinitely. It can only be interrupted via signals. 
+Sleep for {\ttfamily n} seconds. 
+
+Note that you\textquotesingle{}ll have to convert the number of seconds to the correct number of ticks.
+
+Example Usage\+: sleep 10
+
+Busy wait indefinitely. It can only be interrupted via signals.
 
 Example Usage\+: busy \Hypertarget{shellbuiltins_8h_a0c190c5db53ba8d6a773610c628f7ade}\label{shellbuiltins_8h_a0c190c5db53ba8d6a773610c628f7ade} 
 \index{shellbuiltins.h@{shellbuiltins.h}!cat@{cat}}
@@ -276,19 +297,7 @@ Print appropriate error message if\+:
 \item {\ttfamily file} is not a file that exists
 \end{DoxyItemize}
 
-Example Usage\+: rm f1 f2 f3 f4 f5 \Hypertarget{shellbuiltins_8h_a3b4a63ab4858560b332caaffbe33b9c1}\label{shellbuiltins_8h_a3b4a63ab4858560b332caaffbe33b9c1} 
-\index{shellbuiltins.h@{shellbuiltins.h}!sleep@{sleep}}
-\index{sleep@{sleep}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{sleep()}{sleep()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} sleep (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
-
-
-
-Sleep for {\ttfamily n} seconds. 
-
-Note that you\textquotesingle{}ll have to convert the number of seconds to the correct number of ticks.
-
-Example Usage\+: sleep 10 \Hypertarget{shellbuiltins_8h_a8cd9eba4290506b4c1c3887ff5ddaccd}\label{shellbuiltins_8h_a8cd9eba4290506b4c1c3887ff5ddaccd} 
+Example Usage\+: rm f1 f2 f3 f4 f5 \Hypertarget{shellbuiltins_8h_a8cd9eba4290506b4c1c3887ff5ddaccd}\label{shellbuiltins_8h_a8cd9eba4290506b4c1c3887ff5ddaccd} 
 \index{shellbuiltins.h@{shellbuiltins.h}!touch@{touch}}
 \index{touch@{touch}!shellbuiltins.h@{shellbuiltins.h}}
 \doxysubsubsection{\texorpdfstring{touch()}{touch()}}

@@ -84,24 +84,26 @@ $(function() {
   <div class="headertitle"><div class="title">shellbuiltins.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &lt;unistd.h&gt;</code><br />
+</div>
 <p><a href="../../d0/d8c/shellbuiltins_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a7c3c61b74d282ad16dde41697d849968" id="r_a7c3c61b74d282ad16dde41697d849968"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c3c61b74d282ad16dde41697d849968">PENNFAT_H</a></td></tr>
 <tr class="separator:a7c3c61b74d282ad16dde41697d849968"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc8612feeec5f569b1e096e3110d0dca" id="r_acc8612feeec5f569b1e096e3110d0dca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc8612feeec5f569b1e096e3110d0dca">sleep</a>&#160;&#160;&#160;std_sleep</td></tr>
+<tr class="separator:acc8612feeec5f569b1e096e3110d0dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85998366f4bf37b8cfbee98369752d63" id="r_a85998366f4bf37b8cfbee98369752d63"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85998366f4bf37b8cfbee98369752d63">nice</a>&#160;&#160;&#160;std_nice</td></tr>
+<tr class="separator:a85998366f4bf37b8cfbee98369752d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a0c190c5db53ba8d6a773610c628f7ade" id="r_a0c190c5db53ba8d6a773610c628f7ade"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c190c5db53ba8d6a773610c628f7ade">cat</a> (void *arg)</td></tr>
 <tr class="memdesc:a0c190c5db53ba8d6a773610c628f7ade"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ususal <code>cat</code> program.  <br /></td></tr>
 <tr class="separator:a0c190c5db53ba8d6a773610c628f7ade"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b4a63ab4858560b332caaffbe33b9c1" id="r_a3b4a63ab4858560b332caaffbe33b9c1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b4a63ab4858560b332caaffbe33b9c1">sleep</a> (void *arg)</td></tr>
-<tr class="memdesc:a3b4a63ab4858560b332caaffbe33b9c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleep for <code>n</code> seconds.  <br /></td></tr>
-<tr class="separator:a3b4a63ab4858560b332caaffbe33b9c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9afe3108d99ddd2ba581cc7ebbf2a8b8" id="r_a9afe3108d99ddd2ba581cc7ebbf2a8b8"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9afe3108d99ddd2ba581cc7ebbf2a8b8">busy</a> (void *arg)</td></tr>
-<tr class="memdesc:a9afe3108d99ddd2ba581cc7ebbf2a8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busy wait indefinitely. It can only be interrupted via signals.  <br /></td></tr>
+<tr class="memdesc:a9afe3108d99ddd2ba581cc7ebbf2a8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleep for <code>n</code> seconds.  <br /></td></tr>
 <tr class="separator:a9afe3108d99ddd2ba581cc7ebbf2a8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb7e6ef3589544d60d392c450dd1e5af" id="r_afb7e6ef3589544d60d392c450dd1e5af"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb7e6ef3589544d60d392c450dd1e5af">echo</a> (void *arg)</td></tr>
 <tr class="memdesc:afb7e6ef3589544d60d392c450dd1e5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Echo back an input string.  <br /></td></tr>
@@ -161,6 +163,20 @@ Functions</h2></td></tr>
 <tr class="separator:aa40e1f17d78b5fe53a8f1cc09d125110"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a85998366f4bf37b8cfbee98369752d63" name="a85998366f4bf37b8cfbee98369752d63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85998366f4bf37b8cfbee98369752d63">&#9670;&#160;</a></span>nice</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define nice&#160;&#160;&#160;std_nice</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7c3c61b74d282ad16dde41697d849968" name="a7c3c61b74d282ad16dde41697d849968"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7c3c61b74d282ad16dde41697d849968">&#9670;&#160;</a></span>PENNFAT_H</h2>
 
@@ -169,6 +185,20 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define PENNFAT_H</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc8612feeec5f569b1e096e3110d0dca" name="acc8612feeec5f569b1e096e3110d0dca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc8612feeec5f569b1e096e3110d0dca">&#9670;&#160;</a></span>sleep</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sleep&#160;&#160;&#160;std_sleep</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -211,7 +241,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Busy wait indefinitely. It can only be interrupted via signals. </p>
+<p>Sleep for <code>n</code> seconds. </p>
+<p>Note that you'll have to convert the number of seconds to the correct number of ticks.</p>
+<p>Example Usage: sleep 10</p>
+<p>Busy wait indefinitely. It can only be interrupted via signals.</p>
 <p>Example Usage: busy </p>
 
 </div>
@@ -553,27 +586,6 @@ Functions</h2></td></tr>
 <li><code>file</code> is not a file that exists</li>
 </ul>
 <p>Example Usage: rm f1 f2 f3 f4 f5 </p>
-
-</div>
-</div>
-<a id="a3b4a63ab4858560b332caaffbe33b9c1" name="a3b4a63ab4858560b332caaffbe33b9c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b4a63ab4858560b332caaffbe33b9c1">&#9670;&#160;</a></span>sleep()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void * sleep </td>
-          <td>(</td>
-          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sleep for <code>n</code> seconds. </p>
-<p>Note that you'll have to convert the number of seconds to the correct number of ticks.</p>
-<p>Example Usage: sleep 10 </p>
 
 </div>
 </div>

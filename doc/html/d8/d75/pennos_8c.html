@@ -86,15 +86,17 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d3/d2d/pennos_8h_source.html">pennos.h</a>&quot;</code><br />
 <code>#include &lt;signal.h&gt;</code><br />
+<code>#include &quot;fcntl.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d5/d36/parser_8h_source.html">parser.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../dc/d3d/pennfat_8h_source.html">pennfat.h</a>&quot;</code><br />
+<code>#include &quot;unistd.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d0/daa/kernel_8h_source.html">util/kernel.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d6/dda/prioritylist_8h_source.html">util/prioritylist.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9fa00b0be5d3c4781048861e2506eb63" id="r_a9fa00b0be5d3c4781048861e2506eb63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9fa00b0be5d3c4781048861e2506eb63">scheduler</a> (void)</td></tr>
-<tr class="separator:a9fa00b0be5d3c4781048861e2506eb63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e5f6827ba0dd8849e892ef8f2187386" id="r_a9e5f6827ba0dd8849e892ef8f2187386"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e5f6827ba0dd8849e892ef8f2187386">scheduler</a> (char *logfile)</td></tr>
+<tr class="separator:a9e5f6827ba0dd8849e892ef8f2187386"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aaa3b35330e32fa9b4f1150064c6579" id="r_a3aaa3b35330e32fa9b4f1150064c6579"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3aaa3b35330e32fa9b4f1150064c6579">cancel_and_join</a> (<a class="el" href="../../dc/d15/spthread_8h.html#ad5cf274963820ab3f4c332683445ca8d">spthread_t</a> thread)</td></tr>
 <tr class="separator:a3aaa3b35330e32fa9b4f1150064c6579"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
@@ -144,8 +146,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a9fa00b0be5d3c4781048861e2506eb63" name="a9fa00b0be5d3c4781048861e2506eb63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9fa00b0be5d3c4781048861e2506eb63">&#9670;&#160;</a></span>scheduler()</h2>
+<a id="a9e5f6827ba0dd8849e892ef8f2187386" name="a9e5f6827ba0dd8849e892ef8f2187386"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e5f6827ba0dd8849e892ef8f2187386">&#9670;&#160;</a></span>scheduler()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -153,7 +155,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void scheduler </td>
           <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>logfile</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
