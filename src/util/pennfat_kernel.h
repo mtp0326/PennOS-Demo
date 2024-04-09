@@ -154,4 +154,8 @@ off_t k_lseek(int fd, int offset, int whence);
  */
 void k_ls(const char* filename);
 
+void k_rename(const char* source, const char* dest);
+
+void k_change_mode(const char* change, const char* filename);
+
 #endif

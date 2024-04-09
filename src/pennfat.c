@@ -226,6 +226,54 @@ int get_offset_size(int block_num, int offset) {
   return total_offset;
 }
 
+void touch(char** args) {
+  int i = 1;
+  while (args[i] != NULL) {
+    k_open(args[i], 0);
+    i += 1;
+  }
+}
+
+void rm(char** args) {
+  int i = 1;
+  while (args[i] != NULL) {
+    k_unlink(args[i]);
+    i += 1;
+  }
+}
+
+void mv(char** args) {
+  k_rename(args[1], args[2]);
+}
+
+void chmod(char** args) {
+  k_change_mode(args[1], args[2]);
+}
+
+void touch(char** args) {
+  int i = 1;
+  while (args[i] != NULL) {
+    k_open(args[i], 0);
+    i += 1;
+  }
+}
+
+void rm(char** args) {
+  int i = 1;
+  while (args[i] != NULL) {
+    k_unlink(args[i]);
+    i += 1;
+  }
+}
+
+void mv(char** args) {
+  k_rename(args[1], args[2]);
+}
+
+void chmod(char** args) {
+  k_change_mode(args[1], args[2]);
+}
+
 void ls() {
   k_ls(NULL);
 }
