@@ -1,115 +1,82 @@
 \doxysection{src/util/shellbuiltins.h File Reference}
 \hypertarget{shellbuiltins_8h}{}\label{shellbuiltins_8h}\index{src/util/shellbuiltins.h@{src/util/shellbuiltins.h}}
-{\ttfamily \#include $<$unistd.\+h$>$}\newline
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\#define \mbox{\hyperlink{shellbuiltins_8h_a7c3c61b74d282ad16dde41697d849968}{PENNFAT\+\_\+H}}
-\item 
-\#define \mbox{\hyperlink{shellbuiltins_8h_acc8612feeec5f569b1e096e3110d0dca}{sleep}}~std\+\_\+sleep
-\item 
-\#define \mbox{\hyperlink{shellbuiltins_8h_a85998366f4bf37b8cfbee98369752d63}{nice}}~std\+\_\+nice
-\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a0c190c5db53ba8d6a773610c628f7ade}{cat}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a12d3c2e9ad69506dfe091ed1467cde0c}{b\+\_\+cat}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em The ususal {\ttfamily cat} program. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a9afe3108d99ddd2ba581cc7ebbf2a8b8}{busy}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a8caa9d892fd52ba7fbaf212e3bcdae06}{b\+\_\+sleep}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Sleep for {\ttfamily n} seconds. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_afb7e6ef3589544d60d392c450dd1e5af}{echo}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a522b7a9dcadf792f7d79b3211f8bba9f}{b\+\_\+busy}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Busy wait indefinitely. It can only be interrupted via signals. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_af01e6b67f01ef538abcc03c9aff00aba}{b\+\_\+echo}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Echo back an input string. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a505f3b315d7a75325e855567e7fcd07c}{ls}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a8705f3b70f67031e5aac30c27866998d}{b\+\_\+ls}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Lists all files in the working directory. For extra credit, it should support relative and absolute file paths. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a8cd9eba4290506b4c1c3887ff5ddaccd}{touch}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a65b90b6bb0ac5b9c681bf586f71cbac7}{b\+\_\+touch}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em For each file, create an empty file if it doesn\textquotesingle{}t exist, else update its timestamp. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a8c31963de92d6dd77eaee0de52c8d129}{mv}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_ae7826fb0ca0dfd26303f175febb14f48}{b\+\_\+mv}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Rename a file. If the {\ttfamily dst\+\_\+file} file already exists, overwrite it. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a49b83228de5e6206ae67342010e3e4d5}{cp}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a9cba475b009648053432d0cc0ec4bbbf}{b\+\_\+cp}} (void \texorpdfstring{$\ast$}{*}arg)
 \item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_abe142d1213d8770742c6b15239eb17f6}{rm}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_aa583bdf1b3a5fbfb577ad5a7230fe054}{b\+\_\+rm}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Remove a list of files. Treat each file in the list as a separate transaction. (i.\+e. if removing file1 fails, still attempt to remove file2, file3, etc.) \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_acb477aeae79bbfe8e011e676beb14b59}{chmod}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a3eddaabc7eca841fc9a71e9bb814d2a5}{b\+\_\+chmod}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Change permissions of a file. There\textquotesingle{}s no need to error if a permission being added already exists, or if a permission being removed is already not granted. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_aca3df72c3570cfcc00bda4e0c174aaf5}{ps}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a18df407e357bc44721dd39f95369843b}{b\+\_\+ps}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em List all processes on Penn\+OS, displaying PID, PPID, priority, status, and command name. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_ada41809d029abe71d8e1fee0c1695fbe}{nice}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a371b3588a8f8a231c10f75b0ea84926f}{b\+\_\+kill}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Sends a specified signal to a list of processes. If a signal name is not specified, default to "{}term"{}. Valid signals are -\/term, -\/stop, and -\/cont. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a9651ae070e9d50a2c6564f3cd39b64fe}{nice\+\_\+pid}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a5c9d672a604065d43cc83893febc188a}{b\+\_\+nice}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Spawn a new process for {\ttfamily command} and set its priority to {\ttfamily priority}. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a9f61e992d66c53f4383b37699dab6ef3}{b\+\_\+nice\+\_\+pid}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Adjust the priority level of an existing process. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_afb6814d0815a8ae7cb660fc650a8d9b9}{man}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_aeb7266201350c6e4da06c851afbffded}{b\+\_\+man}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Lists all available commands. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_ae03fa263a3c005f17e62ec9c6cadaaeb}{bg}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a0b70bfb624f4ae16efbcbfa9b433c191}{b\+\_\+bg}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Resumes the most recently stopped job in the background, or the job specified by job\+\_\+id. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a46449f0c9629d9db463b9e52c7dab346}{fg}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_ad11ad4f83749953ddc5d36dd093bc797}{b\+\_\+fg}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Brings the most recently stopped or background job to the foreground, or the job specified by job\+\_\+id. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a922be9cb889a058b36f77dc8baacea3a}{jobs}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_add6abae88d55c1b8ee57843799af9730}{b\+\_\+jobs}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Lists all jobs. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_aad0e34f6faccea9bf13355c9d707064f}{logout}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a184a1be3455442bda9bbd0789e438481}{b\+\_\+logout}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Exits the shell and shutsdown Penn\+OS. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a3f9edec3be0cf72eb5defc5e64b0782e}{zombify}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_ac6f1b11929c2509c8c73d232643f2ae3}{b\+\_\+zombify}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Used to test zombifying functionality of your kernel. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a0b87d4c37532ee634cec2c33281cea1f}{zombie\+\_\+child}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_af7a3b6e724d8044a194e1c23e5499304}{b\+\_\+zombie\+\_\+child}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Helper for zombify. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a829fbd254f571c34a86e50114d43975b}{orphanify}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_ac0ab5e22f55a4f660a54973379d1722d}{b\+\_\+orphanify}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Used to test orphanifying functionality of your kernel. \end{DoxyCompactList}\item 
-void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_aa40e1f17d78b5fe53a8f1cc09d125110}{orphan\+\_\+child}} (void \texorpdfstring{$\ast$}{*}arg)
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a8ffcfc65c56806d110fbb3eb2ac9238f}{b\+\_\+orphan\+\_\+child}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Helper for orphanify. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Macro Definition Documentation}
-\Hypertarget{shellbuiltins_8h_a85998366f4bf37b8cfbee98369752d63}\label{shellbuiltins_8h_a85998366f4bf37b8cfbee98369752d63} 
-\index{shellbuiltins.h@{shellbuiltins.h}!nice@{nice}}
-\index{nice@{nice}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{nice}{nice}}
-{\footnotesize\ttfamily \#define nice~std\+\_\+nice}
-
-\Hypertarget{shellbuiltins_8h_a7c3c61b74d282ad16dde41697d849968}\label{shellbuiltins_8h_a7c3c61b74d282ad16dde41697d849968} 
-\index{shellbuiltins.h@{shellbuiltins.h}!PENNFAT\_H@{PENNFAT\_H}}
-\index{PENNFAT\_H@{PENNFAT\_H}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{PENNFAT\_H}{PENNFAT\_H}}
-{\footnotesize\ttfamily \#define PENNFAT\+\_\+H}
-
-\Hypertarget{shellbuiltins_8h_acc8612feeec5f569b1e096e3110d0dca}\label{shellbuiltins_8h_acc8612feeec5f569b1e096e3110d0dca} 
-\index{shellbuiltins.h@{shellbuiltins.h}!sleep@{sleep}}
-\index{sleep@{sleep}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{sleep}{sleep}}
-{\footnotesize\ttfamily \#define sleep~std\+\_\+sleep}
-
-
-
 \doxysubsection{Function Documentation}
-\Hypertarget{shellbuiltins_8h_ae03fa263a3c005f17e62ec9c6cadaaeb}\label{shellbuiltins_8h_ae03fa263a3c005f17e62ec9c6cadaaeb} 
-\index{shellbuiltins.h@{shellbuiltins.h}!bg@{bg}}
-\index{bg@{bg}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{bg()}{bg()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} bg (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+\Hypertarget{shellbuiltins_8h_a0b70bfb624f4ae16efbcbfa9b433c191}\label{shellbuiltins_8h_a0b70bfb624f4ae16efbcbfa9b433c191} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_bg@{b\_bg}}
+\index{b\_bg@{b\_bg}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_bg()}{b\_bg()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+bg (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Resumes the most recently stopped job in the background, or the job specified by job\+\_\+id. 
 
-Example Usage\+: bg Example Usage\+: bg 2 (job\+\_\+id is 2) \Hypertarget{shellbuiltins_8h_a9afe3108d99ddd2ba581cc7ebbf2a8b8}\label{shellbuiltins_8h_a9afe3108d99ddd2ba581cc7ebbf2a8b8} 
-\index{shellbuiltins.h@{shellbuiltins.h}!busy@{busy}}
-\index{busy@{busy}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{busy()}{busy()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} busy (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: bg Example Usage\+: bg 2 (job\+\_\+id is 2) \Hypertarget{shellbuiltins_8h_a522b7a9dcadf792f7d79b3211f8bba9f}\label{shellbuiltins_8h_a522b7a9dcadf792f7d79b3211f8bba9f} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_busy@{b\_busy}}
+\index{b\_busy@{b\_busy}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_busy()}{b\_busy()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+busy (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
-Sleep for {\ttfamily n} seconds. 
+Busy wait indefinitely. It can only be interrupted via signals. 
 
-Note that you\textquotesingle{}ll have to convert the number of seconds to the correct number of ticks.
-
-Example Usage\+: sleep 10
-
-Busy wait indefinitely. It can only be interrupted via signals.
-
-Example Usage\+: busy \Hypertarget{shellbuiltins_8h_a0c190c5db53ba8d6a773610c628f7ade}\label{shellbuiltins_8h_a0c190c5db53ba8d6a773610c628f7ade} 
-\index{shellbuiltins.h@{shellbuiltins.h}!cat@{cat}}
-\index{cat@{cat}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{cat()}{cat()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} cat (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: busy \Hypertarget{shellbuiltins_8h_a12d3c2e9ad69506dfe091ed1467cde0c}\label{shellbuiltins_8h_a12d3c2e9ad69506dfe091ed1467cde0c} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_cat@{b\_cat}}
+\index{b\_cat@{b\_cat}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_cat()}{b\_cat()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+cat (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
@@ -117,11 +84,11 @@ The ususal {\ttfamily cat} program.
 
 If {\ttfamily files} arg is provided, concatenate these files and print to stdout If {\ttfamily files} arg is {\itshape not} provided, read from stdin and print back to stdout
 
-Example Usage\+: cat f1 f2 (concatenates f1 and f2 and print to stdout) Example Usage\+: cat f1 f2 \texorpdfstring{$<$}{<} f3 (concatenates f1 and f2 and prints to stdout, ignores f3) Example Usage\+: cat \texorpdfstring{$<$}{<} f3 (concatenates f3, prints to stdout) \Hypertarget{shellbuiltins_8h_acb477aeae79bbfe8e011e676beb14b59}\label{shellbuiltins_8h_acb477aeae79bbfe8e011e676beb14b59} 
-\index{shellbuiltins.h@{shellbuiltins.h}!chmod@{chmod}}
-\index{chmod@{chmod}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{chmod()}{chmod()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} chmod (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: cat f1 f2 (concatenates f1 and f2 and print to stdout) Example Usage\+: cat f1 f2 \texorpdfstring{$<$}{<} f3 (concatenates f1 and f2 and prints to stdout, ignores f3) Example Usage\+: cat \texorpdfstring{$<$}{<} f3 (concatenates f3, prints to stdout) \Hypertarget{shellbuiltins_8h_a3eddaabc7eca841fc9a71e9bb814d2a5}\label{shellbuiltins_8h_a3eddaabc7eca841fc9a71e9bb814d2a5} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_chmod@{b\_chmod}}
+\index{b\_chmod@{b\_chmod}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_chmod()}{b\_chmod()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+chmod (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
@@ -133,11 +100,11 @@ Print appropriate error message if\+:
 \item {\ttfamily perms} is invalid
 \end{DoxyItemize}
 
-Example Usage\+: chmod +x file (adds executable permission to file) Example Usage\+: chmod +rw file (adds read + write permissions to file) Example Usage\+: chmod -\/wx file (removes write + executable permissions from file) \Hypertarget{shellbuiltins_8h_a49b83228de5e6206ae67342010e3e4d5}\label{shellbuiltins_8h_a49b83228de5e6206ae67342010e3e4d5} 
-\index{shellbuiltins.h@{shellbuiltins.h}!cp@{cp}}
-\index{cp@{cp}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{cp()}{cp()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} cp (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: chmod +x file (adds executable permission to file) Example Usage\+: chmod +rw file (adds read + write permissions to file) Example Usage\+: chmod -\/wx file (removes write + executable permissions from file) \Hypertarget{shellbuiltins_8h_a9cba475b009648053432d0cc0ec4bbbf}\label{shellbuiltins_8h_a9cba475b009648053432d0cc0ec4bbbf} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_cp@{b\_cp}}
+\index{b\_cp@{b\_cp}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_cp()}{b\_cp()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+cp (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 Copy a file. If the {\ttfamily dst\+\_\+file} file already exists, overwrite it.
 
@@ -148,71 +115,81 @@ Print appropriate error message if\+:
 \item {\ttfamily dst\+\_\+file} file already exists but does not have write permissions
 \end{DoxyItemize}
 
-Example Usage\+: cp src\+\_\+file dst\+\_\+file \Hypertarget{shellbuiltins_8h_afb7e6ef3589544d60d392c450dd1e5af}\label{shellbuiltins_8h_afb7e6ef3589544d60d392c450dd1e5af} 
-\index{shellbuiltins.h@{shellbuiltins.h}!echo@{echo}}
-\index{echo@{echo}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{echo()}{echo()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} echo (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: cp src\+\_\+file dst\+\_\+file \Hypertarget{shellbuiltins_8h_af01e6b67f01ef538abcc03c9aff00aba}\label{shellbuiltins_8h_af01e6b67f01ef538abcc03c9aff00aba} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_echo@{b\_echo}}
+\index{b\_echo@{b\_echo}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_echo()}{b\_echo()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+echo (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Echo back an input string. 
 
-Example Usage\+: echo Hello World \Hypertarget{shellbuiltins_8h_a46449f0c9629d9db463b9e52c7dab346}\label{shellbuiltins_8h_a46449f0c9629d9db463b9e52c7dab346} 
-\index{shellbuiltins.h@{shellbuiltins.h}!fg@{fg}}
-\index{fg@{fg}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{fg()}{fg()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} fg (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: echo Hello World \Hypertarget{shellbuiltins_8h_ad11ad4f83749953ddc5d36dd093bc797}\label{shellbuiltins_8h_ad11ad4f83749953ddc5d36dd093bc797} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_fg@{b\_fg}}
+\index{b\_fg@{b\_fg}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_fg()}{b\_fg()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+fg (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Brings the most recently stopped or background job to the foreground, or the job specified by job\+\_\+id. 
 
-Example Usage\+: fg Example Usage\+: fg 2 (job\+\_\+id is 2) \Hypertarget{shellbuiltins_8h_a922be9cb889a058b36f77dc8baacea3a}\label{shellbuiltins_8h_a922be9cb889a058b36f77dc8baacea3a} 
-\index{shellbuiltins.h@{shellbuiltins.h}!jobs@{jobs}}
-\index{jobs@{jobs}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{jobs()}{jobs()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} jobs (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: fg Example Usage\+: fg 2 (job\+\_\+id is 2) \Hypertarget{shellbuiltins_8h_add6abae88d55c1b8ee57843799af9730}\label{shellbuiltins_8h_add6abae88d55c1b8ee57843799af9730} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_jobs@{b\_jobs}}
+\index{b\_jobs@{b\_jobs}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_jobs()}{b\_jobs()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+jobs (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Lists all jobs. 
 
-Example Usage\+: jobs \Hypertarget{shellbuiltins_8h_aad0e34f6faccea9bf13355c9d707064f}\label{shellbuiltins_8h_aad0e34f6faccea9bf13355c9d707064f} 
-\index{shellbuiltins.h@{shellbuiltins.h}!logout@{logout}}
-\index{logout@{logout}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{logout()}{logout()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} logout (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: jobs \Hypertarget{shellbuiltins_8h_a371b3588a8f8a231c10f75b0ea84926f}\label{shellbuiltins_8h_a371b3588a8f8a231c10f75b0ea84926f} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_kill@{b\_kill}}
+\index{b\_kill@{b\_kill}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_kill()}{b\_kill()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+kill (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Sends a specified signal to a list of processes. If a signal name is not specified, default to "{}term"{}. Valid signals are -\/term, -\/stop, and -\/cont. 
+
+Example Usage\+: kill 1 2 3 (sends term to processes 1, 2, and 3) Example Usage\+: kill -\/term 1 2 (sends term to processes 1 and 2) Example Usage\+: kill -\/stop 1 2 (sends stop to processes 1 and 2) Example Usage\+: kill -\/cont 1 (sends cont to process 1) \Hypertarget{shellbuiltins_8h_a184a1be3455442bda9bbd0789e438481}\label{shellbuiltins_8h_a184a1be3455442bda9bbd0789e438481} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_logout@{b\_logout}}
+\index{b\_logout@{b\_logout}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_logout()}{b\_logout()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+logout (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Exits the shell and shutsdown Penn\+OS. 
 
-Example Usage\+: logout \Hypertarget{shellbuiltins_8h_a505f3b315d7a75325e855567e7fcd07c}\label{shellbuiltins_8h_a505f3b315d7a75325e855567e7fcd07c} 
-\index{shellbuiltins.h@{shellbuiltins.h}!ls@{ls}}
-\index{ls@{ls}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{ls()}{ls()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} ls (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: logout \Hypertarget{shellbuiltins_8h_a8705f3b70f67031e5aac30c27866998d}\label{shellbuiltins_8h_a8705f3b70f67031e5aac30c27866998d} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_ls@{b\_ls}}
+\index{b\_ls@{b\_ls}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_ls()}{b\_ls()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+ls (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Lists all files in the working directory. For extra credit, it should support relative and absolute file paths. 
 
-Example Usage\+: ls (regular credit) Example Usage\+: ls ../../foo/./bar/sample (only for EC) \Hypertarget{shellbuiltins_8h_afb6814d0815a8ae7cb660fc650a8d9b9}\label{shellbuiltins_8h_afb6814d0815a8ae7cb660fc650a8d9b9} 
-\index{shellbuiltins.h@{shellbuiltins.h}!man@{man}}
-\index{man@{man}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{man()}{man()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} man (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: ls (regular credit) Example Usage\+: ls ../../foo/./bar/sample (only for EC) \Hypertarget{shellbuiltins_8h_aeb7266201350c6e4da06c851afbffded}\label{shellbuiltins_8h_aeb7266201350c6e4da06c851afbffded} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_man@{b\_man}}
+\index{b\_man@{b\_man}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_man()}{b\_man()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+man (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Lists all available commands. 
 
-Example Usage\+: man \Hypertarget{shellbuiltins_8h_a8c31963de92d6dd77eaee0de52c8d129}\label{shellbuiltins_8h_a8c31963de92d6dd77eaee0de52c8d129} 
-\index{shellbuiltins.h@{shellbuiltins.h}!mv@{mv}}
-\index{mv@{mv}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{mv()}{mv()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} mv (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: man \Hypertarget{shellbuiltins_8h_ae7826fb0ca0dfd26303f175febb14f48}\label{shellbuiltins_8h_ae7826fb0ca0dfd26303f175febb14f48} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_mv@{b\_mv}}
+\index{b\_mv@{b\_mv}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_mv()}{b\_mv()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+mv (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
@@ -225,68 +202,66 @@ Print appropriate error message if\+:
 \item {\ttfamily dst\+\_\+file} file already exists but does not have write permissions
 \end{DoxyItemize}
 
-Example Usage\+: mv src\+\_\+file dst\+\_\+file \Hypertarget{shellbuiltins_8h_ada41809d029abe71d8e1fee0c1695fbe}\label{shellbuiltins_8h_ada41809d029abe71d8e1fee0c1695fbe} 
-\index{shellbuiltins.h@{shellbuiltins.h}!nice@{nice}}
-\index{nice@{nice}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{nice()}{nice()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} nice (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: mv src\+\_\+file dst\+\_\+file \Hypertarget{shellbuiltins_8h_a5c9d672a604065d43cc83893febc188a}\label{shellbuiltins_8h_a5c9d672a604065d43cc83893febc188a} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_nice@{b\_nice}}
+\index{b\_nice@{b\_nice}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_nice()}{b\_nice()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+nice (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
-Sends a specified signal to a list of processes. If a signal name is not specified, default to "{}term"{}. Valid signals are -\/term, -\/stop, and -\/cont. 
+Spawn a new process for {\ttfamily command} and set its priority to {\ttfamily priority}. 
 
-Example Usage\+: kill 1 2 3 (sends term to processes 1, 2, and 3) Example Usage\+: kill -\/term 1 2 (sends term to processes 1 and 2) Example Usage\+: kill -\/stop 1 2 (sends stop to processes 1 and 2) Example Usage\+: kill -\/cont 1 (sends cont to process 1)
 
-Spawn a new process for {\ttfamily command} and set its priority to {\ttfamily priority}.
 \begin{DoxyEnumerate}
 \item Adjust the priority level of an existing process.
 \end{DoxyEnumerate}
 
-Example Usage\+: nice 2 cat f1 f2 f3 (spawns cat with priority 2) \Hypertarget{shellbuiltins_8h_a9651ae070e9d50a2c6564f3cd39b64fe}\label{shellbuiltins_8h_a9651ae070e9d50a2c6564f3cd39b64fe} 
-\index{shellbuiltins.h@{shellbuiltins.h}!nice\_pid@{nice\_pid}}
-\index{nice\_pid@{nice\_pid}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{nice\_pid()}{nice\_pid()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} nice\+\_\+pid (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: nice 2 cat f1 f2 f3 (spawns cat with priority 2) \Hypertarget{shellbuiltins_8h_a9f61e992d66c53f4383b37699dab6ef3}\label{shellbuiltins_8h_a9f61e992d66c53f4383b37699dab6ef3} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_nice\_pid@{b\_nice\_pid}}
+\index{b\_nice\_pid@{b\_nice\_pid}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_nice\_pid()}{b\_nice\_pid()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+nice\+\_\+pid (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Adjust the priority level of an existing process. 
 
-Example Usage\+: nice\+\_\+pid 0 123 (sets priority 0 to PID 123) \Hypertarget{shellbuiltins_8h_aa40e1f17d78b5fe53a8f1cc09d125110}\label{shellbuiltins_8h_aa40e1f17d78b5fe53a8f1cc09d125110} 
-\index{shellbuiltins.h@{shellbuiltins.h}!orphan\_child@{orphan\_child}}
-\index{orphan\_child@{orphan\_child}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{orphan\_child()}{orphan\_child()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} orphan\+\_\+child (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: nice\+\_\+pid 0 123 (sets priority 0 to PID 123) \Hypertarget{shellbuiltins_8h_a8ffcfc65c56806d110fbb3eb2ac9238f}\label{shellbuiltins_8h_a8ffcfc65c56806d110fbb3eb2ac9238f} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_orphan\_child@{b\_orphan\_child}}
+\index{b\_orphan\_child@{b\_orphan\_child}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_orphan\_child()}{b\_orphan\_child()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+orphan\+\_\+child (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Helper for orphanify. 
 
-\Hypertarget{shellbuiltins_8h_a829fbd254f571c34a86e50114d43975b}\label{shellbuiltins_8h_a829fbd254f571c34a86e50114d43975b} 
-\index{shellbuiltins.h@{shellbuiltins.h}!orphanify@{orphanify}}
-\index{orphanify@{orphanify}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{orphanify()}{orphanify()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} orphanify (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+\Hypertarget{shellbuiltins_8h_ac0ab5e22f55a4f660a54973379d1722d}\label{shellbuiltins_8h_ac0ab5e22f55a4f660a54973379d1722d} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_orphanify@{b\_orphanify}}
+\index{b\_orphanify@{b\_orphanify}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_orphanify()}{b\_orphanify()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+orphanify (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Used to test orphanifying functionality of your kernel. 
 
-Example Usage\+: orphanify \Hypertarget{shellbuiltins_8h_aca3df72c3570cfcc00bda4e0c174aaf5}\label{shellbuiltins_8h_aca3df72c3570cfcc00bda4e0c174aaf5} 
-\index{shellbuiltins.h@{shellbuiltins.h}!ps@{ps}}
-\index{ps@{ps}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{ps()}{ps()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} ps (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: orphanify \Hypertarget{shellbuiltins_8h_a18df407e357bc44721dd39f95369843b}\label{shellbuiltins_8h_a18df407e357bc44721dd39f95369843b} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_ps@{b\_ps}}
+\index{b\_ps@{b\_ps}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_ps()}{b\_ps()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+ps (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 List all processes on Penn\+OS, displaying PID, PPID, priority, status, and command name. 
 
-Example Usage\+: ps \Hypertarget{shellbuiltins_8h_abe142d1213d8770742c6b15239eb17f6}\label{shellbuiltins_8h_abe142d1213d8770742c6b15239eb17f6} 
-\index{shellbuiltins.h@{shellbuiltins.h}!rm@{rm}}
-\index{rm@{rm}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{rm()}{rm()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} rm (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: ps \Hypertarget{shellbuiltins_8h_aa583bdf1b3a5fbfb577ad5a7230fe054}\label{shellbuiltins_8h_aa583bdf1b3a5fbfb577ad5a7230fe054} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_rm@{b\_rm}}
+\index{b\_rm@{b\_rm}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_rm()}{b\_rm()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+rm (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
@@ -297,31 +272,43 @@ Print appropriate error message if\+:
 \item {\ttfamily file} is not a file that exists
 \end{DoxyItemize}
 
-Example Usage\+: rm f1 f2 f3 f4 f5 \Hypertarget{shellbuiltins_8h_a8cd9eba4290506b4c1c3887ff5ddaccd}\label{shellbuiltins_8h_a8cd9eba4290506b4c1c3887ff5ddaccd} 
-\index{shellbuiltins.h@{shellbuiltins.h}!touch@{touch}}
-\index{touch@{touch}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{touch()}{touch()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} touch (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: rm f1 f2 f3 f4 f5 \Hypertarget{shellbuiltins_8h_a8caa9d892fd52ba7fbaf212e3bcdae06}\label{shellbuiltins_8h_a8caa9d892fd52ba7fbaf212e3bcdae06} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_sleep@{b\_sleep}}
+\index{b\_sleep@{b\_sleep}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_sleep()}{b\_sleep()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+sleep (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Sleep for {\ttfamily n} seconds. 
+
+Note that you\textquotesingle{}ll have to convert the number of seconds to the correct number of ticks.
+
+Example Usage\+: sleep 10 \Hypertarget{shellbuiltins_8h_a65b90b6bb0ac5b9c681bf586f71cbac7}\label{shellbuiltins_8h_a65b90b6bb0ac5b9c681bf586f71cbac7} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_touch@{b\_touch}}
+\index{b\_touch@{b\_touch}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_touch()}{b\_touch()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+touch (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 For each file, create an empty file if it doesn\textquotesingle{}t exist, else update its timestamp. 
 
-Example Usage\+: touch f1 f2 f3 f4 f5 \Hypertarget{shellbuiltins_8h_a0b87d4c37532ee634cec2c33281cea1f}\label{shellbuiltins_8h_a0b87d4c37532ee634cec2c33281cea1f} 
-\index{shellbuiltins.h@{shellbuiltins.h}!zombie\_child@{zombie\_child}}
-\index{zombie\_child@{zombie\_child}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{zombie\_child()}{zombie\_child()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} zombie\+\_\+child (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+Example Usage\+: touch f1 f2 f3 f4 f5 \Hypertarget{shellbuiltins_8h_af7a3b6e724d8044a194e1c23e5499304}\label{shellbuiltins_8h_af7a3b6e724d8044a194e1c23e5499304} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_zombie\_child@{b\_zombie\_child}}
+\index{b\_zombie\_child@{b\_zombie\_child}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_zombie\_child()}{b\_zombie\_child()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+zombie\+\_\+child (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 
 Helper for zombify. 
 
-\Hypertarget{shellbuiltins_8h_a3f9edec3be0cf72eb5defc5e64b0782e}\label{shellbuiltins_8h_a3f9edec3be0cf72eb5defc5e64b0782e} 
-\index{shellbuiltins.h@{shellbuiltins.h}!zombify@{zombify}}
-\index{zombify@{zombify}!shellbuiltins.h@{shellbuiltins.h}}
-\doxysubsubsection{\texorpdfstring{zombify()}{zombify()}}
-{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} zombify (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+\Hypertarget{shellbuiltins_8h_ac6f1b11929c2509c8c73d232643f2ae3}\label{shellbuiltins_8h_ac6f1b11929c2509c8c73d232643f2ae3} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_zombify@{b\_zombify}}
+\index{b\_zombify@{b\_zombify}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_zombify()}{b\_zombify()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+zombify (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
 
 
 

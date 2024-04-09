@@ -1,11 +1,5 @@
 #ifndef SHELL_BUILTINS
-#define PENNFAT_H
-
-#define sleep std_sleep
-#define nice std_nice
-#include <unistd.h>
-#undef sleep
-#undef nice
+#define SHELL_BUILTINS
 
 // SHELL BUILTINS: Implemented using user and system level functions only!
 
@@ -19,7 +13,7 @@
  * Example Usage: cat f1 f2 < f3 (concatenates f1 and f2 and prints to stdout,
  * ignores f3) Example Usage: cat < f3 (concatenates f3, prints to stdout)
  */
-void* cat(void* arg);
+void* b_cat(void* arg);
 
 /**
  * @brief Sleep for `n` seconds.
@@ -29,7 +23,7 @@ void* cat(void* arg);
  *
  * Example Usage: sleep 10
  */
-// void* sleep(void* arg);
+void* b_sleep(void* arg);
 
 /**
  * @brief Busy wait indefinitely.
@@ -37,14 +31,14 @@ void* cat(void* arg);
  *
  * Example Usage: busy
  */
-void* busy(void* arg);
+void* b_busy(void* arg);
 
 /**
  * @brief Echo back an input string.
  *
  * Example Usage: echo Hello World
  */
-void* echo(void* arg);
+void* b_echo(void* arg);
 
 /**
  * @brief Lists all files in the working directory.
@@ -53,7 +47,7 @@ void* echo(void* arg);
  * Example Usage: ls (regular credit)
  * Example Usage: ls ../../foo/./bar/sample (only for EC)
  */
-void* ls(void* arg);
+void* b_ls(void* arg);
 
 /**
  * @brief For each file, create an empty file if it doesn't exist, else update
@@ -61,7 +55,7 @@ void* ls(void* arg);
  *
  * Example Usage: touch f1 f2 f3 f4 f5
  */
-void* touch(void* arg);
+void* b_touch(void* arg);
 
 /**
  * @brief Rename a file. If the `dst_file` file already exists, overwrite it.
@@ -73,7 +67,7 @@ void* touch(void* arg);
  *
  * Example Usage: mv src_file dst_file
  */
-void* mv(void* arg);
+void* b_mv(void* arg);
 
 /**
  * Copy a file. If the `dst_file` file already exists, overwrite it.
@@ -85,7 +79,7 @@ void* mv(void* arg);
  *
  * Example Usage: cp src_file dst_file
  */
-void* cp(void* arg);
+void* b_cp(void* arg);
 
 /**
  * @brief Remove a list of files.
@@ -97,7 +91,7 @@ void* cp(void* arg);
  *
  * Example Usage: rm f1 f2 f3 f4 f5
  */
-void* rm(void* arg);
+void* b_rm(void* arg);
 
 /**
  * @brief Change permissions of a file.
@@ -113,7 +107,7 @@ void* rm(void* arg);
  * Example Usage: chmod -wx file (removes write + executable permissions from
  * file)
  */
-void* chmod(void* arg);
+void* b_chmod(void* arg);
 
 /**
  * @brief List all processes on PennOS, displaying PID, PPID, priority, status,
@@ -121,7 +115,7 @@ void* chmod(void* arg);
  *
  * Example Usage: ps
  */
-void* ps(void* arg);
+void* b_ps(void* arg);
 
 /**
  * @brief Sends a specified signal to a list of processes.
@@ -133,7 +127,7 @@ void* ps(void* arg);
  * Example Usage: kill -stop 1 2 (sends stop to processes 1 and 2)
  * Example Usage: kill -cont 1 (sends cont to process 1)
  */
-// void* kill(void* arg);
+void* b_kill(void* arg);
 
 // SHELL BUILTINS THAT DON'T SPAWN PROCESSES
 
@@ -144,21 +138,21 @@ void* ps(void* arg);
  *
  * Example Usage: nice 2 cat f1 f2 f3 (spawns cat with priority 2)
  */
-void* nice(void* arg);
+void* b_nice(void* arg);
 
 /**
  * @brief Adjust the priority level of an existing process.
  *
  * Example Usage: nice_pid 0 123 (sets priority 0 to PID 123)
  */
-void* nice_pid(void* arg);
+void* b_nice_pid(void* arg);
 
 /**
  * @brief Lists all available commands.
  *
  * Example Usage: man
  */
-void* man(void* arg);
+void* b_man(void* arg);
 
 /**
  * @brief Resumes the most recently stopped job in the background, or the job
@@ -167,7 +161,7 @@ void* man(void* arg);
  * Example Usage: bg
  * Example Usage: bg 2 (job_id is 2)
  */
-void* bg(void* arg);
+void* b_bg(void* arg);
 
 /**
  * @brief Brings the most recently stopped or background job to the foreground,
@@ -176,21 +170,21 @@ void* bg(void* arg);
  * Example Usage: fg
  * Example Usage: fg 2 (job_id is 2)
  */
-void* fg(void* arg);
+void* b_fg(void* arg);
 
 /**
  * @brief Lists all jobs.
  *
  * Example Usage: jobs
  */
-void* jobs(void* arg);
+void* b_jobs(void* arg);
 
 /**
  * @brief Exits the shell and shutsdown PennOS.
  *
  * Example Usage: logout
  */
-void* logout(void* arg);
+void* b_logout(void* arg);
 
 // SHELL BUILTINS TO TEST ZOMBIE + ORPHANS
 /**
@@ -198,23 +192,23 @@ void* logout(void* arg);
  *
  * Example Usage: zombify
  */
-void* zombify(void* arg);
+void* b_zombify(void* arg);
 
 /**
  * @brief Helper for zombify.
  */
-void* zombie_child(void* arg);
+void* b_zombie_child(void* arg);
 
 /**
  * @brief Used to test orphanifying functionality of your kernel.
  *
  * Example Usage: orphanify
  */
-void* orphanify(void* arg);
+void* b_orphanify(void* arg);
 
 /**
  * @brief Helper for orphanify.
  */
-void* orphan_child(void* arg);
+void* b_orphan_child(void* arg);
 
 #endif

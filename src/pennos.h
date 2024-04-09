@@ -9,6 +9,8 @@
 #define _DEFAULT_SOURCE 1
 #endif
 
+#undef PROMPT
+
 #ifndef PROMPT
 #define PROMPT "penn-os> "
 #endif
@@ -33,6 +35,7 @@
 #include "util/shellbuiltins.h"
 #include "util/sys_call.h"
 
+static bool done = false;
 void* function_from_string(char* program);
 
 #endif

@@ -9,8 +9,6 @@
 
 static pthread_mutex_t done_lock;
 
-static bool done = false;
-
 static const int centisecond = 10000;  // 10 milliseconds
 
 PList* priority;
@@ -107,7 +105,7 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "jobs") == 0) {
         // TODO: Call your implemented jobs() function
       } else if (strcmp(args[0], "logout") == 0) {
-        // TODO: Call your implemented logout() function
+        b_logout(NULL);
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
       }
@@ -154,6 +152,8 @@ void scheduler(char* logfile) {
 
   spthread_t curr_thread;
   // locks to check the global value done
+  int file = open(logfile, O_CREAT | O_TRUNC | O_RDWR, 0666);
+
   pthread_mutex_lock(&done_lock);
   while (!done) {
     pthread_mutex_unlock(&done_lock);
@@ -188,13 +188,12 @@ void scheduler(char* logfile) {
       spthread_suspend(curr_thread);
       tick++;
       sprintf(buf, "[%4u]\t CREATE\n", tick);
-      int file = open(logfile, O_CREAT | O_TRUNC | O_RDWR, 0666);
       write(file, buf, strlen(buf));
-      close(file);
       current_priority->head = current_priority->head->next;
       pthread_mutex_lock(&done_lock);
     }
   }
+  close(file);
   pthread_mutex_unlock(&done_lock);
 }
 
