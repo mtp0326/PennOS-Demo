@@ -50,6 +50,19 @@ int main(int argc, char* argv[]) {
           cat_file_wa(args);
         }
       } else if (strcmp(args[0], "cp") == 0) {
+        if (!mounted) {
+          perror("error: needs to mount fs");
+        } else {
+          if (strcmp(args[1], "-h") == 0) {
+            // cp -h SOURCE DEST
+          } else {
+            if (strcmp(args[2], "-h") == 0) {
+              // cp SOURCE -h DEST
+            } else {
+              // cp SOURCE DEST
+            }
+          }
+        }
       } else if (strcmp(args[0], "chmod") == 0) {
         if (!mounted) {
           perror("error: needs to mount fs");
