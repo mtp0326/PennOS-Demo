@@ -6,7 +6,7 @@ int main(int argc, char* argv[]) {
     perror("error: can't handle sigint\n");
     exit(EXIT_FAILURE);
   }
-
+  bool mounted = false;
   // create fd_table
   initialize_global_fd_table();
   while (1) {
@@ -26,18 +26,37 @@ int main(int argc, char* argv[]) {
       char** args = parsed->commands[0];
       // touch, mv, rm, cat, cp, chmod, ls (implement using k functions)
       if (strcmp(args[0], "touch") == 0) {
-        touch(args);
+        if (!mounted) {
+          perror("error: needs to mount fs");
+        } else {
+          touch(args);
+        }
       } else if (strcmp(args[0], "mv") == 0) {
-        mv(args);
+        if (!mounted) {
+          perror("error: needs to mount fs");
+        } else {
+          mv(args);
+        }
       } else if (strcmp(args[0], "rm") == 0) {
-        rm(args);
+        if (!mounted) {
+          perror("error: needs to mount fs");
+        } else {
+          rm(args);
+        }
       } else if (strcmp(args[0], "cat") == 0) {
-        cat_file_wa(args);
+        if (!mounted) {
+          perror("error: needs to mount fs");
+        } else {
+          cat_file_wa(args);
+        }
       } else if (strcmp(args[0], "cp") == 0) {
       } else if (strcmp(args[0], "chmod") == 0) {
-        chmod(args);
+        if (!mounted) {
+          perror("error: needs to mount fs");
+        } else {
+          chmod(args);
+        }
       } else if (strcmp(args[0], "ls") == 0) {
-        k_ls(args[1]);
       }
 
       // other test stuff
@@ -48,11 +67,19 @@ int main(int argc, char* argv[]) {
         mkfs(args[1], blocks_in_fat, block_size_config);
         // fprintf(stderr, "block size: %d\n", block_size);
       } else if (strcmp(args[0], "mount") == 0) {
-        mount(args[1]);
+        if (mount(args[1]) != 0) {
+          perror("mount error");
+        } else {
+          mounted = true;
+        }
         // fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
         // fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
       } else if (strcmp(args[0], "unmount") == 0) {
-        unmount();
+        if (unmount() != 0) {
+          perror("unmount error");
+        } else {
+          mounted = false;
+        }
       } else if (strcmp(args[0], "write") == 0) {
         int fd = strtol(args[1], &ptr, base);
         k_write(fd, args[2], strlen(args[2]));
