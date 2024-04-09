@@ -251,6 +251,102 @@ void chmod(char** args) {
   k_change_mode(args[1], args[2]);
 }
 
+void cat_file_wa(char** args) {
+  int i = 1;
+  bool file_flag = false;
+  bool name_flag = false;
+  bool w = false;
+  char* filename;
+  while (args[i] != NULL) {
+    if (name_flag) {
+      filename = args[i];
+      name_flag = false;
+    }
+    if (strcmp(args[i], "-w") == 0) {
+      file_flag = true;
+      name_flag = true;
+      w = true;
+    } else if (strcmp(args[i], "-a") == 0) {
+      file_flag = true;
+      name_flag = true;
+    }
+    i += 1;
+  }
+  i = 1;
+  if (!file_flag) {
+    while (args[i] != NULL) {
+      int fd = k_open(args[i], 1);
+      char buffer[1000];
+      buffer[999] = '\0';
+      k_read(fd, 1000, buffer);
+      fprintf(stdout, "%s", buffer);
+      i += 1;
+    }
+  } else {
+    int fd;
+    if (w) {
+      fd = k_open(filename, 0);
+    } else {
+      fd = k_open(filename, 2);
+    }
+    while (args[i] != NULL && (strcmp(args[i], "-a") != 0) &&
+           (strcmp(args[i], "-w") != 0)) {
+      char* contents = k_read_all(args[i]);
+      k_write(fd, (char*)contents, strlen(contents));
+      free(contents);
+      i += 1;
+    }
+  }
+}
+
+void cat_file_wa(char** args) {
+  int i = 1;
+  bool file_flag = false;
+  bool name_flag = false;
+  bool w = false;
+  char* filename;
+  while (args[i] != NULL) {
+    if (name_flag) {
+      filename = args[i];
+      name_flag = false;
+    }
+    if (strcmp(args[i], "-w") == 0) {
+      file_flag = true;
+      name_flag = true;
+      w = true;
+    } else if (strcmp(args[i], "-a") == 0) {
+      file_flag = true;
+      name_flag = true;
+    }
+    i += 1;
+  }
+  i = 1;
+  if (!file_flag) {
+    while (args[i] != NULL) {
+      int fd = k_open(args[i], 1);
+      char buffer[1000];
+      buffer[999] = '\0';
+      k_read(fd, 1000, buffer);
+      fprintf(stdout, "%s", buffer);
+      i += 1;
+    }
+  } else {
+    int fd;
+    if (w) {
+      fd = k_open(filename, 0);
+    } else {
+      fd = k_open(filename, 2);
+    }
+    while (args[i] != NULL && (strcmp(args[i], "-a") != 0) &&
+           (strcmp(args[i], "-w") != 0)) {
+      char* contents = k_read_all(args[i]);
+      k_write(fd, (char*)contents, strlen(contents));
+      free(contents);
+      i += 1;
+    }
+  }
+}
+
 void touch(char** args) {
   int i = 1;
   while (args[i] != NULL) {
