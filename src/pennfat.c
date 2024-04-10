@@ -163,7 +163,7 @@ int mount(const char* fs_name) {
     return -1;
     // exit(EXIT_FAILURE);
   }
-  fprintf(stderr, "here: %x\n", fat[0]);
+  // fprintf(stderr, "here: %x\n", fat[0]);
   return 0;
 }
 
@@ -287,7 +287,7 @@ void cat_file_wa(char** args) {
       char buffer[1000];
       buffer[999] = '\0';
       k_read(fd, 1000, buffer);
-      fprintf(stdout, "%s", buffer);
+      fprintf(stdout, "%s\n", buffer);
       i += 1;
     }
   } else {
@@ -309,4 +309,63 @@ void cat_file_wa(char** args) {
 
 void ls() {
   k_ls(NULL);
+}
+
+void cp_within_fat(char* source, char* dest) {
+  // source file must exist
+
+  if (does_file_exist2(source) == -1) {
+    perror("error: source does not exist");
+    return;
+  }
+
+  int dest_fd = k_open(dest, WRITE);
+  int source_fd = k_open(source, READ);
+
+  char* contents = k_read_all(source);
+
+  k_write(dest_fd, contents, strlen(contents));
+
+  k_close(dest_fd);
+  k_close(source_fd);
+}
+
+void cp_to_host(char* source, char* host_dest) {
+  if (does_file_exist2(source) == -1) {
+    perror("error: source does not exist");
+    return;
+  }
+  int source_fd = k_open(source, READ);
+
+  char* contents = k_read_all(source);
+
+  int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+
+  fprintf(stderr, "host_fd: %d\n", host_fd);
+
+  if (write(host_fd, contents, strlen(contents)) == -1) {
+    perror("error: write to host file failed\n");
+  }
+
+  close(host_fd);
+  k_close(source_fd);
+}
+
+void cp_from_host(char* host_source, char* dest) {
+  int host_fd = open(host_source, O_RDWR, S_IRUSR | S_IWUSR);
+
+  if (host_fd == -1) {
+    perror("error: host source does not exist or is invalid\n");
+    return;
+  }
+
+  char buffer[1];
+  int dest_fd = k_open(dest, 0);
+
+  while (read(host_fd, buffer, 1) > 0) {
+    k_write(dest_fd, buffer, 1);
+  }
+
+  close(host_fd);
+  k_close(dest_fd);
 }
