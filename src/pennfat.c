@@ -282,11 +282,10 @@ void cat_file_wa(char** args) {
   i = 1;
   if (!file_flag) {
     while (args[i] != NULL) {
-      int fd = k_open(args[i], 1);
-      char buffer[1000];
-      buffer[999] = '\0';
-      k_read(fd, 1000, buffer);
-      fprintf(stdout, "%s\n", buffer);
+      int read_num;
+      char* contents = k_read_all(args[i], &read_num);
+      fprintf(stdout, "%s\n", contents);
+      free(contents);
       i += 1;
     }
   } else {
