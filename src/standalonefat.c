@@ -55,11 +55,14 @@ int main(int argc, char* argv[]) {
         } else {
           if (strcmp(args[1], "-h") == 0) {
             // cp -h SOURCE DEST
+            cp_from_host(args[2], args[3]);
           } else {
             if (strcmp(args[2], "-h") == 0) {
               // cp SOURCE -h DEST
+              cp_to_host(args[1], args[3]);
             } else {
               // cp SOURCE DEST
+              cp_within_fat(args[1], args[2]);
             }
           }
         }
@@ -70,6 +73,7 @@ int main(int argc, char* argv[]) {
           chmod(args);
         }
       } else if (strcmp(args[0], "ls") == 0) {
+        ls();
       }
 
       // other test stuff
@@ -105,8 +109,6 @@ int main(int argc, char* argv[]) {
         buffer[999] = '\0';
         k_read(fd, 1000, buffer);
         fprintf(stderr, "READ OUTPUT: %s\n", buffer);
-      } else if (strcmp(args[0], "ls") == 0) {
-        ls();
       } else if (strcmp(args[0], "kunlink") == 0) {
         k_unlink(args[1]);
       } else if (strcmp(args[0], "klseek") == 0) {

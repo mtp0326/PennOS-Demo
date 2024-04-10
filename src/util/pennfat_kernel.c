@@ -32,8 +32,7 @@ int k_open(const char* fname, int mode) {
   } else {
     move_to_open_de(true);
   }
-  off_t current_offset = lseek(fs_fd, 0, SEEK_CUR);
-  fprintf(stderr, "offset: %ld\n", current_offset);
+  lseek(fs_fd, 0, SEEK_CUR);
   // F_WRITE
   if (mode == 0) {
     if (dir_entry != NULL) {  // file already exists (truncate)
@@ -56,8 +55,8 @@ int k_open(const char* fname, int mode) {
         return -1;
         // exit(EXIT_FAILURE);
       }
-      fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
-      fprintf(stderr, "dir entry first block: %d\n", dir_entry->firstBlock);
+      // fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
+      // fprintf(stderr, "dir entry first block: %d\n", dir_entry->firstBlock);
       // add to global fd table
       opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
@@ -85,7 +84,7 @@ int k_open(const char* fname, int mode) {
       write(fs_fd, updated_de, 64);
     } else {  // file doesn't exist
       // create the "file": add directory entry in root directory
-      fprintf(stderr, "file doesn't exist: hereeeee\n");
+      // fprintf(stderr, "file doesn't exist: hereeeee\n");
       // int efi = get_first_empty_fat_index();  // in case needed to allocate
       // new
       //                                         // block for root dir
@@ -193,9 +192,9 @@ struct directory_entries* does_file_exist(const char* fname) {
           lseek(fs_fd, 0, SEEK_CUR);
           // fprintf(stderr, "offset3: %ld\n", current_offset3);
           read(fs_fd, temp, sizeof(struct directory_entries));
-          fprintf(stderr, "temp name LAST BLCOK: %s\n", temp->name);
+          // fprintf(stderr, "temp name LAST BLCOK: %s\n", temp->name);
           if (strcmp(temp->name, fname) == 0) {
-            fprintf(stderr, "name: %s\n", temp->name);
+            // fprintf(stderr, "name: %s\n", temp->name);
             found = true;
           } else if (i == num_directories_per_block - 1) {
             found = false;
@@ -234,10 +233,10 @@ void move_to_open_de(bool found) {
           // exit(EXIT_FAILURE);
         }
         lseek(fs_fd, -1, SEEK_CUR);
-        fprintf(stderr, "here1!\n");
+        // fprintf(stderr, "here1!\n");
         if (buffer[0] == 0 ||
             buffer[0] == 1) {  // look for first open or deleted entry
-          fprintf(stderr, "here!\n");
+          // fprintf(stderr, "here!\n");
           break;
         }
         lseek(fs_fd, 64, SEEK_CUR);
@@ -251,10 +250,10 @@ void move_to_open_de(bool found) {
           // exit(EXIT_FAILURE);
         }
         lseek(fs_fd, -1, SEEK_CUR);
-        fprintf(stderr, "here1!\n");
+        // fprintf(stderr, "here1!\n");
         if (buffer[0] == 0 ||
             buffer[0] == 1) {  // look for first open or deleted entry
-          fprintf(stderr, "here!\n");
+          // fprintf(stderr, "here!\n");
           break;
         } else {
           if (i == num_directories_per_block - 1 &&
@@ -279,7 +278,7 @@ void move_to_open_de(bool found) {
     if (curr == 0xFFFF) {
       break;
     }
-    fprintf(stderr, "curr block now: %d\n", curr);
+    // fprintf(stderr, "curr block now: %d\n", curr);
     int offset = get_offset_size(curr, 0);
     lseek(fs_fd, offset, SEEK_SET);
   }
@@ -364,7 +363,7 @@ struct file_descriptor_st* create_file_descriptor(int fd,
   struct file_descriptor_st* new_fd = malloc(sizeof(struct file_descriptor_st));
 
   if (new_fd == NULL) {
-    fprintf(stderr, "Memory allocation failed\n");
+    perror("Memory allocation failed\n");
     return NULL;
   }
 
@@ -386,7 +385,7 @@ struct directory_entries* create_directory_entry(const char* name,
   struct directory_entries* new_de = malloc(sizeof(struct directory_entries));
 
   if (new_de == NULL) {
-    fprintf(stderr, "Memory allocation failed\n");
+    perror("Memory allocation failed\n");
     return NULL;
   }
 
@@ -471,7 +470,7 @@ ssize_t k_read(int fd, int n, char* buf) {
     if (current_offset >= block_size) {
       int next_block = fat[curr_block];
       curr_block = next_block;
-      fprintf(stderr, "entered\n");
+      // fprintf(stderr, "entered\n");
 
       // move the offset so that we can write immediately
       lseek(fs_fd, fat_size + block_size * (curr_block - 1), SEEK_SET);
@@ -578,12 +577,12 @@ ssize_t k_write(int fd, const char* str, int n) {
   struct directory_entries* curr_de = does_file_exist(fname);
 
   if (curr_de == NULL) {
-    fprintf(stderr, "k_write: the file doesn't exist?\n");
+    perror("error: k_write: the file doesn't exist?\n");
   }
 
   if (curr_de->name[0] == 1 || curr_de->name[1] == 2) {
-    fprintf(stderr,
-            "k_write: trying to write into a file that has been deleted\n");
+    perror(
+        "error: k_write: trying to write into a file that has been deleted\n");
     return -1;
   }
 
@@ -593,7 +592,7 @@ ssize_t k_write(int fd, const char* str, int n) {
     firstBlock = get_first_empty_fat_index();
     curr_de->firstBlock = firstBlock;
     fat[firstBlock] = 0xFFFF;
-    fprintf(stderr, "first block: %d\n", firstBlock);
+    // fprintf(stderr, "first block: %d\n", firstBlock);
   }
 
   // file permission is read only
@@ -684,7 +683,7 @@ int k_close(int fd) {
   }
 
   // close it by freeing it and turning it to null
-  free(curr);
+  // free(curr);
   curr = NULL;
 
   return 0;
@@ -760,7 +759,7 @@ off_t k_lseek(int fd, int offset, int whence) {
     int firstBlock = get_first_empty_fat_index();
     curr_de->firstBlock = firstBlock;
     fat[firstBlock] = 0xFFFF;
-    fprintf(stderr, "first block: %d\n", firstBlock);
+    // fprintf(stderr, "first block: %d\n", firstBlock);
   }
 
   // The file offset is set to offset bytes.
@@ -916,7 +915,7 @@ char* formatTime(time_t t) {
 void k_ls(const char* filename) {
   struct directory_entries* temp = malloc(sizeof(struct directory_entries));
   if (filename == NULL) {
-    fprintf(stderr, "k_ls: the param is NULL here\n");
+    // fprintf(stderr, "k_ls: the param is NULL here\n");
 
     // we need to list everything in the current directory
     lseek_to_root_directory();
@@ -971,7 +970,7 @@ void k_ls(const char* filename) {
   }  // end of if
 
   // here we have a specific file we want to ls
-  fprintf(stderr, "k_ls: the param is %s here\n", filename);
+  // fprintf(stderr, "k_ls: the param is %s here\n", filename);
 
   does_file_exist2(filename);
 
