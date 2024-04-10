@@ -382,7 +382,8 @@ struct directory_entries* create_directory_entry(const char* name,
                                                  uint8_t type,
                                                  uint8_t perm,
                                                  time_t mtime) {
-  struct directory_entries* new_de = malloc(sizeof(struct directory_entries));
+  struct directory_entries* new_de =
+      calloc(1, sizeof(struct directory_entries));
 
   if (new_de == NULL) {
     perror("Memory allocation failed\n");
