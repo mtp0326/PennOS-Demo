@@ -381,7 +381,7 @@ void cp_to_host(char* source, char* host_dest) {
 
   char* contents = k_read_all(source, &read_num);
 
-  int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+  int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC);
 
   if (write(host_fd, contents, read_num) == -1) {
     perror("error: write to host file failed\n");
@@ -392,7 +392,7 @@ void cp_to_host(char* source, char* host_dest) {
 }
 
 void cp_from_host(char* host_source, char* dest) {
-  int host_fd = open(host_source, O_RDWR, S_IRUSR | S_IWUSR);
+  int host_fd = open(host_source, O_RDWR);
 
   if (host_fd == -1) {
     perror("error: host source does not exist or is invalid\n");
