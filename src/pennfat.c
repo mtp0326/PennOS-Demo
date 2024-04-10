@@ -84,7 +84,7 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   data_size = get_data_size(block_size, num_fat_entries);
 
   // declared global
-  fs_fd = open(fs_name, O_RDWR | O_CREAT, 0777);
+  fs_fd = open(fs_name, O_RDWR | O_CREAT, 0666);
 
   if (blocks_in_fat == 32 && block_size_config == 4) {  // handle case of maxfs
     data_size -= block_size;
@@ -113,6 +113,7 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
     perror("write error");
     // exit(EXIT_FAILURE);
   }
+  close(fs_fd);
 }
 
 int mount(const char* fs_name) {
@@ -180,6 +181,7 @@ int unmount() {
     return -1;
     // exit(EXIT_FAILURE);
   }
+  close(fs_fd);
   fat = NULL;
   return 0;
 }
@@ -282,11 +284,10 @@ void cat_file_wa(char** args) {
   i = 1;
   if (!file_flag) {
     while (args[i] != NULL) {
-      int fd = k_open(args[i], 1);
-      char buffer[1000];
-      buffer[999] = '\0';
-      k_read(fd, 1000, buffer);
-      fprintf(stdout, "%s\n", buffer);
+      int read_num;
+      char* contents = k_read_all(args[i], &read_num);
+      fprintf(stdout, "%s\n", contents);
+      free(contents);
       i += 1;
     }
   } else {

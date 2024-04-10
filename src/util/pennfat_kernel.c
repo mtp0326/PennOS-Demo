@@ -696,7 +696,7 @@ int k_unlink(const char* fname) {
   does_file_exist2(fname);  // lseeks to fname position
 
   if (curr_de == NULL) {
-    perror("unlink error: file fname not found");
+    fprintf(stdout, "unlink error: file fname not found\n");
     return -1;
   }
   // struct file_descriptor_st curr_fd;
@@ -999,9 +999,17 @@ void k_ls(const char* filename) {
 
 void k_rename(const char* source, const char* dest) {
   struct directory_entries* curr_de = does_file_exist(source);
+  struct directory_entries* curr_de2 = does_file_exist(dest);
   if (curr_de == NULL) {
     perror("k_rename error: source file not found");
     return;
+  }
+  if (curr_de2 == NULL) {
+    perror("k_rename error: dest file not found");
+    return;
+  }
+  if (curr_de2 != NULL && curr_de != NULL) {
+    k_unlink(curr_de2->name);
   }
   does_file_exist2(source);
   char* dest_copy = strdup(dest);
