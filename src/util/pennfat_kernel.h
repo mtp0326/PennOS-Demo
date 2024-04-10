@@ -158,6 +158,6 @@ void k_rename(const char* source, const char* dest);
 
 void k_change_mode(const char* change, const char* filename);
 
-char* k_read_all(const char* filename);
+char* k_read_all(const char* filename, int* read_num);
 
 #endif

@@ -693,6 +693,7 @@ int k_unlink(const char* fname) {
   // check if other processes have this file fname open
   struct directory_entries* curr_de = does_file_exist(fname);
   does_file_exist2(fname);  // lseeks to fname position
+
   if (curr_de == NULL) {
     perror("unlink error: file fname not found");
     return -1;
@@ -1116,7 +1117,7 @@ void k_change_mode(const char* change, const char* filename) {
   write(fs_fd, new_de, 64);
 }
 
-char* k_read_all(const char* filename) {
+char* k_read_all(const char* filename, int* read_num) {
   struct directory_entries* curr_de = does_file_exist(filename);
   if (curr_de == NULL) {
     perror("error: filename not found");
@@ -1130,5 +1131,8 @@ char* k_read_all(const char* filename) {
   if (ret == -1) {
     return NULL;
   }
+
+  *read_num = ret;
+
   return contents;
 }
