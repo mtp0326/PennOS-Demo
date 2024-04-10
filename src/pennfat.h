@@ -45,4 +45,7 @@ void cp_within_fat(char* source, char* dest);
 void cp_to_host(char* source, char* host_dest);
 void cp_from_host(char* host_source, char* dest);
 
+void cat_w(char* output);
+void cat_a(char* output);
+
 #endif
