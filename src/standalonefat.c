@@ -47,7 +47,13 @@ int main(int argc, char* argv[]) {
         if (!mounted) {
           perror("error: needs to mount fs");
         } else {
-          cat_file_wa(args);
+          if (strcmp(args[1], "-w") == 0) {
+            cat_w(args[2]);
+          } else if (strcmp(args[1], "-a") == 0) {
+            cat_a(args[2]);
+          } else {
+            cat_file_wa(args);
+          }
         }
       } else if (strcmp(args[0], "cp") == 0) {
         if (!mounted) {
@@ -73,7 +79,12 @@ int main(int argc, char* argv[]) {
           chmod(args);
         }
       } else if (strcmp(args[0], "ls") == 0) {
-        ls();
+        if (!mounted) {
+          perror("error: needs to mount fs");
+        } else {
+          ls();
+        }
+
       }
 
       // other test stuff

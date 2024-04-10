@@ -307,6 +307,44 @@ void cat_file_wa(char** args) {
   }
 }
 
+void cat_w(char* output) {
+  int fd = k_open(output, 0);
+  int BUF_SIZE = 4096;
+  ssize_t bytesRead;      // Number of bytes read
+  char buffer[BUF_SIZE];  // Buffer to store terminal input
+  while ((bytesRead = read(STDIN_FILENO, buffer, BUF_SIZE)) > 0) {
+    k_write(fd, buffer, bytesRead);
+  }
+
+  // Check for read error
+  if (bytesRead == -1) {
+    perror("Error reading from terminal");
+    close(fd);
+    return;
+  }
+
+  k_close(fd);
+}
+
+void cat_a(char* output) {
+  int fd = k_open(output, 2);
+  int BUF_SIZE = 4096;
+  ssize_t bytesRead;      // Number of bytes read
+  char buffer[BUF_SIZE];  // Buffer to store terminal input
+  while ((bytesRead = read(STDIN_FILENO, buffer, BUF_SIZE)) > 0) {
+    k_write(fd, buffer, bytesRead);
+  }
+
+  // Check for read error
+  if (bytesRead == -1) {
+    perror("Error reading from terminal");
+    close(fd);
+    return;
+  }
+
+  k_close(fd);
+}
+
 void ls() {
   k_ls(NULL);
 }
