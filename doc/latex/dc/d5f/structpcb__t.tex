@@ -26,7 +26,9 @@ unsigned int \mbox{\hyperlink{structpcb__t_a2a5d945da32720d61039f315ab64f527}{pr
 \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+state\+\_\+t}} \mbox{\hyperlink{structpcb__t_a3ef7954f8714e8157ea82a5063ecdfed}{state}}
 \begin{DoxyCompactList}\small\item\em This the priority level of the process. (0, 1, or 2). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structpcb__t_a53ab4c02de07bcca467dff05771554a0}{open\+\_\+fds}}
-\begin{DoxyCompactList}\small\item\em This is an enum storing the process\textquotesingle{}s current state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This is an enum storing the process\textquotesingle{}s current state. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structpcb__t_a09cd01a482977b7d568726b57e3adeda}{statechanged}}
+\begin{DoxyCompactList}\small\item\em This stores a bitmap containg all open file descriptors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -99,6 +101,16 @@ This stores a pointer to a dynamically sized array of child pid\+\_\+t\textquote
 
 
 This the priority level of the process. (0, 1, or 2). 
+
+\Hypertarget{structpcb__t_a09cd01a482977b7d568726b57e3adeda}\label{structpcb__t_a09cd01a482977b7d568726b57e3adeda} 
+\index{pcb\_t@{pcb\_t}!statechanged@{statechanged}}
+\index{statechanged@{statechanged}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{statechanged}{statechanged}}
+{\footnotesize\ttfamily bool pcb\+\_\+t\+::statechanged}
+
+
+
+This stores a bitmap containg all open file descriptors. 
 
 
 

@@ -7,6 +7,12 @@
 
 extern CircularList* processes[3];
 
+extern CircularList* blocked;
+
+extern CircularList* stopped;
+
+extern CircularList* zombied;
+
 extern pcb_t* current;
 
 #endif

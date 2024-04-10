@@ -39,7 +39,7 @@ pid_t s_spawn_nice(void* (*func)(void*),
  * @return pid_t The process ID of the child which has changed state on success,
  * -1 on error.
  */
-pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang);
+pid_t s_waitpid(pid_t pid, process_state_t* wstatus, bool nohang);
 
 /**
  * @brief Send a signal to a particular process.

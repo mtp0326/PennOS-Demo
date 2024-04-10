@@ -11,7 +11,7 @@ pid\+\_\+t \mbox{\hyperlink{sys__call_8h_a43b789c710ba1501bcd8cf54e4382e50}{s\+\
 \begin{DoxyCompactList}\small\item\em Create a child process that executes the function {\ttfamily func}. The child will retain some attributes of the parent. \end{DoxyCompactList}\item 
 pid\+\_\+t \mbox{\hyperlink{sys__call_8h_a62b97025761b7f8ad7e59b641cad08d6}{s\+\_\+spawn\+\_\+nice}} (void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}func)(void \texorpdfstring{$\ast$}{*}), char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]}, int fd0, int fd1, unsigned int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
 \item 
-pid\+\_\+t \mbox{\hyperlink{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid}} (pid\+\_\+t pid, int \texorpdfstring{$\ast$}{*}wstatus, bool nohang)
+pid\+\_\+t \mbox{\hyperlink{sys__call_8h_ae073b5d4f1fae198ea259cd56b9d74d0}{s\+\_\+waitpid}} (pid\+\_\+t pid, \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+state\+\_\+t}} \texorpdfstring{$\ast$}{*}wstatus, bool nohang)
 \begin{DoxyCompactList}\small\item\em Wait on a child of the calling process, until it changes state. If {\ttfamily nohang} is true, this will not block the calling process and return immediately. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill}} (pid\+\_\+t pid, int signal)
 \begin{DoxyCompactList}\small\item\em Send a signal to a particular process. \end{DoxyCompactList}\item 
@@ -231,11 +231,11 @@ pid\+\_\+t The process ID of the created child process. // need to define error 
 \begin{DoxyReturn}{Returns}
 int 
 \end{DoxyReturn}
-\Hypertarget{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}\label{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3} 
+\Hypertarget{sys__call_8h_ae073b5d4f1fae198ea259cd56b9d74d0}\label{sys__call_8h_ae073b5d4f1fae198ea259cd56b9d74d0} 
 \index{sys\_call.h@{sys\_call.h}!s\_waitpid@{s\_waitpid}}
 \index{s\_waitpid@{s\_waitpid}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_waitpid()}{s\_waitpid()}}
-{\footnotesize\ttfamily pid\+\_\+t s\+\_\+waitpid (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{int \texorpdfstring{$\ast$}{*}}]{wstatus,  }\item[{bool}]{nohang }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily pid\+\_\+t s\+\_\+waitpid (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{\mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+state\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{wstatus,  }\item[{bool}]{nohang }\end{DoxyParamCaption})}
 
 
 

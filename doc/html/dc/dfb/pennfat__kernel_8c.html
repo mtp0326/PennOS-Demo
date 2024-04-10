@@ -130,6 +130,12 @@ Functions</h2></td></tr>
 <tr class="separator:af2e67755671ac41b267522c63e52a7ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9317fe11a36bfc2d731bcbacc3a57728" id="r_a9317fe11a36bfc2d731bcbacc3a57728"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9317fe11a36bfc2d731bcbacc3a57728">k_ls</a> (const char *filename)</td></tr>
 <tr class="separator:a9317fe11a36bfc2d731bcbacc3a57728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac41ad0b4fad0417ca8009c0475a8fb45" id="r_ac41ad0b4fad0417ca8009c0475a8fb45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac41ad0b4fad0417ca8009c0475a8fb45">k_rename</a> (const char *source, const char *dest)</td></tr>
+<tr class="separator:ac41ad0b4fad0417ca8009c0475a8fb45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a244379d41a5f93e98ab32fb999982696" id="r_a244379d41a5f93e98ab32fb999982696"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a244379d41a5f93e98ab32fb999982696">k_change_mode</a> (const char *change, const char *filename)</td></tr>
+<tr class="separator:a244379d41a5f93e98ab32fb999982696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08194e0542962e4d980cd9278f33c7f5" id="r_a08194e0542962e4d980cd9278f33c7f5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08194e0542962e4d980cd9278f33c7f5">k_read_all</a> (const char *filename, int *read_num)</td></tr>
+<tr class="separator:a08194e0542962e4d980cd9278f33c7f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -350,6 +356,27 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a244379d41a5f93e98ab32fb999982696" name="a244379d41a5f93e98ab32fb999982696"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a244379d41a5f93e98ab32fb999982696">&#9670;&#160;</a></span>k_change_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void k_change_mode </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>change</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9ecd38dc6f3a9721ab53ff9a815b5480" name="a9ecd38dc6f3a9721ab53ff9a815b5480"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9ecd38dc6f3a9721ab53ff9a815b5480">&#9670;&#160;</a></span>k_close()</h2>
 
@@ -502,6 +529,48 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
+
+</div>
+</div>
+<a id="a08194e0542962e4d980cd9278f33c7f5" name="a08194e0542962e4d980cd9278f33c7f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08194e0542962e4d980cd9278f33c7f5">&#9670;&#160;</a></span>k_read_all()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * k_read_all </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>read_num</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac41ad0b4fad0417ca8009c0475a8fb45" name="ac41ad0b4fad0417ca8009c0475a8fb45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac41ad0b4fad0417ca8009c0475a8fb45">&#9670;&#160;</a></span>k_rename()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void k_rename </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>source</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

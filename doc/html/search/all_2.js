@@ -28,5 +28,6 @@ var searchData=
   ['bits_25',['bits',['../db/d26/structFD__Bitmap.html#ab11c3e90cab966f3b5c161cd57b9471a',1,'FD_Bitmap']]],
   ['block_5fsize_26',['block_size',['../dc/dfb/pennfat__kernel_8c.html#a70b27761c7d0bd5cd90f4fe47e569b94',1,'block_size:&#160;pennfat_kernel.c'],['../d0/d4d/pennfat__kernel_8h.html#a70b27761c7d0bd5cd90f4fe47e569b94',1,'block_size:&#160;pennfat_kernel.c']]],
   ['blocked_27',['BLOCKED',['../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61',1,'kernel.h']]],
-  ['buf_5fsize_28',['BUF_SIZE',['../d0/dd1/sched-demo_8c.html#a6821bafc3c88dfb2e433a095df9940c6',1,'sched-demo.c']]]
+  ['blocked_28',['blocked',['../db/d28/globals_8c.html#a4a5bf3e2ca112a01dc3029503e3e80e4',1,'blocked:&#160;globals.c'],['../d5/d87/globals_8h.html#a4a5bf3e2ca112a01dc3029503e3e80e4',1,'blocked:&#160;globals.c']]],
+  ['buf_5fsize_29',['BUF_SIZE',['../d0/dd1/sched-demo_8c.html#a6821bafc3c88dfb2e433a095df9940c6',1,'sched-demo.c']]]
 ];

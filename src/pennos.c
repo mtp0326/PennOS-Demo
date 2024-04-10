@@ -214,7 +214,7 @@ int main(int argc, char** argv) {
     return -1;
   }
 
-  char* log = "log.txt";
+  char* log = "log/log.txt";
   if (argc == 3) {
     log = argv[2];
   }
@@ -223,6 +223,10 @@ int main(int argc, char** argv) {
   processes[1] = init_list();
   processes[2] = init_list();
   // create the circular linked lists
+
+  stopped = init_list();
+  blocked = init_list();
+  zombied = init_list();
 
   priority = init_priority();
   pthread_mutex_init(&done_lock, NULL);
@@ -258,7 +262,7 @@ int main(int argc, char** argv) {
   arg[0] = strdup("shell");  // strdup allocates new memory for the string
   arg[1] = NULL;             // Terminate the array
 
-  s_spawn(shell, arg, STDIN_FILENO, STDOUT_FILENO);
+  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, 0);
 
   scheduler(log);
 

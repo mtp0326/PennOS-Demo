@@ -12,6 +12,7 @@ pcb_t* k_proc_create(pcb_t* parent) {
   child->priority = 1;        // default value // AHHH CHANGE TO 1 after test
   child->state = RUNNING;
   child->child_pids = dynamic_pid_array_create(4);
+  child->statechanged = false;
   if (child->child_pids == NULL) {
     free(child);
     return NULL;

@@ -10,5 +10,6 @@ var searchData=
   ['mode_7',['mode',['../d1/d06/structfile__descriptor__st.html#af4c53d9cd39f2efd92817d4605911fbf',1,'file_descriptor_st']]],
   ['mount_8',['mount',['../d4/dc4/pennfat_8c.html#a2fe0ff1115fb73cfaef3441eb8d77426',1,'mount(const char *fs_name):&#160;pennfat.c'],['../dc/d3d/pennfat_8h.html#a2fe0ff1115fb73cfaef3441eb8d77426',1,'mount(const char *fs_name):&#160;pennfat.c']]],
   ['move_5fto_5fopen_5fde_9',['move_to_open_de',['../dc/dfb/pennfat__kernel_8c.html#a6532ad36b852dd09d641bcaac2642b9b',1,'move_to_open_de(bool found):&#160;pennfat_kernel.c'],['../d0/d4d/pennfat__kernel_8h.html#a6532ad36b852dd09d641bcaac2642b9b',1,'move_to_open_de(bool found):&#160;pennfat_kernel.c']]],
-  ['mtime_10',['mtime',['../d8/d68/structdirectory__entries.html#a768620b88c243e244beb86b44aa20466',1,'directory_entries']]]
+  ['mtime_10',['mtime',['../d8/d68/structdirectory__entries.html#a768620b88c243e244beb86b44aa20466',1,'directory_entries']]],
+  ['mv_11',['mv',['../d4/dc4/pennfat_8c.html#af3c595e77dc267c7748160ff5070eb12',1,'mv(char **args):&#160;pennfat.c'],['../dc/d3d/pennfat_8h.html#af3c595e77dc267c7748160ff5070eb12',1,'mv(char **args):&#160;pennfat.c']]]
 ];
