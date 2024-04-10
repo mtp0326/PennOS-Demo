@@ -84,7 +84,7 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   data_size = get_data_size(block_size, num_fat_entries);
 
   // declared global
-  fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+  fs_fd = open(fs_name, O_RDWR | O_CREAT, 0666);
 
   if (blocks_in_fat == 32 && block_size_config == 4) {  // handle case of maxfs
     data_size -= block_size;
