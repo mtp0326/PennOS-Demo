@@ -299,8 +299,9 @@ void cat_file_wa(char** args) {
     }
     while (args[i] != NULL && (strcmp(args[i], "-a") != 0) &&
            (strcmp(args[i], "-w") != 0)) {
-      char* contents = k_read_all(args[i]);
-      k_write(fd, (char*)contents, strlen(contents));
+      int read_num;
+      char* contents = k_read_all(args[i], &read_num);
+      k_write(fd, (char*)contents, read_num);
       free(contents);
       i += 1;
     }
@@ -322,9 +323,11 @@ void cp_within_fat(char* source, char* dest) {
   int dest_fd = k_open(dest, WRITE);
   int source_fd = k_open(source, READ);
 
-  char* contents = k_read_all(source);
+  int read_num;
 
-  k_write(dest_fd, contents, strlen(contents));
+  char* contents = k_read_all(source, &read_num);
+
+  k_write(dest_fd, contents, read_num);
 
   k_close(dest_fd);
   k_close(source_fd);
@@ -337,13 +340,13 @@ void cp_to_host(char* source, char* host_dest) {
   }
   int source_fd = k_open(source, READ);
 
-  char* contents = k_read_all(source);
+  int read_num;
+
+  char* contents = k_read_all(source, &read_num);
 
   int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 
-  fprintf(stderr, "host_fd: %d\n", host_fd);
-
-  if (write(host_fd, contents, strlen(contents)) == -1) {
+  if (write(host_fd, contents, read_num) == -1) {
     perror("error: write to host file failed\n");
   }
 
