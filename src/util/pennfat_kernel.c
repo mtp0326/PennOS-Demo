@@ -695,7 +695,7 @@ int k_unlink(const char* fname) {
   does_file_exist2(fname);  // lseeks to fname position
 
   if (curr_de == NULL) {
-    perror("unlink error: file fname not found");
+    fprintf(stdout, "unlink error: file fname not found\n");
     return -1;
   }
   // struct file_descriptor_st curr_fd;
