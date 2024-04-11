@@ -160,4 +160,6 @@ void k_change_mode(const char* change, const char* filename);
 
 char* k_read_all(const char* filename, int* read_num);
 
+bool is_file_name_valid(char* name);
+
 #endif
