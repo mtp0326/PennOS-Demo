@@ -23,6 +23,13 @@ int k_open(const char* fname, int mode) {
   fd_counter++;
   char* fname_copy = strdup(fname);
   char* fname_copy2 = strdup(fname);
+  char* fname_copy3 = strdup(fname);
+  // using fname_copy3 check if the fname is a valid name (unix)
+  if (!is_file_name_valid(fname_copy3)) {
+    perror("error: invalid filename please follow POSIX standard");
+    return -1;
+  }
+
   // int empty_fat_index = get_first_empty_fat_index();
   struct file_descriptor_st* opened_file;
   struct directory_entries* new_de;
@@ -149,6 +156,21 @@ int k_open(const char* fname, int mode) {
     }
   }
   return curr_fd;
+}
+
+bool is_file_name_valid(char* name) {
+  if (name == NULL) {
+    return false;
+  }
+  while (*name != '\0') {
+    char c = *name;
+    if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
+          (c >= '0' && c <= '9') || c == '.' || c == '_' || c == '-')) {
+      return false;
+    }
+    name++;
+  }
+  return true;
 }
 
 // helper that traverses root directory block by block to check if fname file
