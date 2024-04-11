@@ -1026,10 +1026,6 @@ void k_rename(const char* source, const char* dest) {
     perror("k_rename error: source file not found");
     return;
   }
-  if (curr_de2 == NULL) {
-    perror("k_rename error: dest file not found");
-    return;
-  }
   if (curr_de2 != NULL && curr_de != NULL) {
     k_unlink(curr_de2->name);
   }
