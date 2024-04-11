@@ -5,6 +5,7 @@ void prompt() {
   // display the prompt to the user
   ssize_t prompt_res = write(STDERR_FILENO, PROMPT, strlen(PROMPT));
   // error catching for write
+
   if (prompt_res < 0) {
     perror("error: prompting");
     exit(EXIT_FAILURE);

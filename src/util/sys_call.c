@@ -177,9 +177,7 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
                  current->pid);   // remove process from running processes
   add_process(blocked, current);  // add process to list of blocked processes
 
-  while (current->state == BLOCKED) {
-    ;  // loop infintely (for remainder of quantum)
-  }
+  spthread_suspend_self();
 
   child_pcb->statechanged = false;
   if (child_pcb->state == ZOMBIED) {
@@ -199,7 +197,10 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
 
 int s_kill(pid_t pid, int signal);
 
-void s_exit(void);
+void s_exit(void) {
+  current->state = ZOMBIED;
+  current->statechanged = true;
+}
 
 int s_nice(pid_t pid, int priority) {
   pcb_t* pcb;
@@ -229,8 +230,8 @@ void s_sleep(unsigned int ticks) {
   current->state = BLOCKED;
   remove_process(processes[current->priority], current->pid);
   add_process(blocked, current);
-  while (current->state == BLOCKED) {
-    ;  // do nothing for rest of quantum
-  }
+  spthread_suspend_self();
+
+  s_exit();
   return;
 }

@@ -52,12 +52,15 @@ static void* shell(void* arg) {
   while (1) {
     prompt();
     char* cmd;
+
     read_command(&cmd);
+
     if (cmd[0] != '\n') {
       // parse command
       struct parsed_command* parsed;
       if (parse_command(cmd, &parsed) != 0) {
         free(parsed);
+
         exit(EXIT_FAILURE);
       }
 
@@ -70,8 +73,14 @@ static void* shell(void* arg) {
         pid_t child = s_spawn(b_sleep, args, STDIN_FILENO, STDOUT_FILENO);
         // NOTE: add code later here to use stdin and stdout from parsed
         // command, need to convert char* to file descriptor though.
-        int* wstatus = 0;
-        s_waitpid(child, wstatus, false);
+        int wstatus = 0;
+        s_waitpid(child, &wstatus, false);
+
+        // add logic to check wstatus and make sure it exited correctly
+        pcb_t* child_pcb = find_process(zombied, child);
+        remove_process(zombied, child);
+        k_proc_cleanup(child_pcb);
+
       } else if (strcmp(args[0], "busy") == 0) {
         // TODO: Call your implemented busy() function
       } else if (strcmp(args[0], "echo") == 0) {
@@ -117,6 +126,7 @@ static void* shell(void* arg) {
     }
     free(cmd);
   }
+
   return EXIT_SUCCESS;
 }
 
@@ -170,10 +180,10 @@ void scheduler(char* logfile) {
       pcb_t* block = blocked->head->process;
       if (block->ticks_to_wait > 0) {
         if (block->ticks_to_wait == 1) {
-          block->state = RUNNING;
+          block->state = ZOMBIED;
           block->statechanged = true;
           remove_process(blocked, block->pid);
-          add_process(processes[block->priority], block);
+          add_process(zombied, block);
         }
 
         block->ticks_to_wait--;
@@ -205,7 +215,6 @@ void scheduler(char* logfile) {
         block->state = RUNNING;
         remove_process(blocked, block->pid);
         add_process(processes[block->priority], block);
-        fprintf(stderr, "added shell back to running?\n");
       }
       if (blocked->size != 0) {
         blocked->head = blocked->head->next;
@@ -214,20 +223,19 @@ void scheduler(char* logfile) {
       }
     }
 
-    bool allBlockedOrEmpty = true;
+    bool noRunningProcesses = true;
     // Check if all queues are empty or all processes are blocked.
     for (int i = 0; i < 3; i++) {
       if (processes[i]->size > 0) {
-        allBlockedOrEmpty = false;
+        noRunningProcesses = false;
         break;
       }
     }
-
-    if (allBlockedOrEmpty) {  // remove and false later, debugging AHHHHHHH
+    if (noRunningProcesses) {  // remove and false later, debugging AHHHHHHH
       // All processes are blocked or queues are empty, so idle.
       // sigsuspend will atomically unblock signals and put the process to
       // sleep.
-      // sigsuspend(&idle_set);
+      sigsuspend(&suspend_set);
 
     } else {
       while (processes[priority->head->priority]->size == 0) {

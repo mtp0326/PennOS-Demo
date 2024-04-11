@@ -19,7 +19,7 @@ pid\+\_\+t \mbox{\hyperlink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\
 int \mbox{\hyperlink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill}} (pid\+\_\+t pid, int signal)
 \item 
 void \mbox{\hyperlink{sys__call_8c_a53c8865d5bf1ca946e5b5405190f6690}{s\+\_\+exit}} (void)
-\item 
+\begin{DoxyCompactList}\small\item\em Unconditionally exit the calling process. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8c_ac711d33fcf2573a590b224b6debab996}{s\+\_\+nice}} (pid\+\_\+t pid, int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
 \begin{DoxyCompactList}\small\item\em Set the priority of the specified thread. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{sys__call_8c_aec37528a3c7935864924764d1911126c}{s\+\_\+sleep}} (unsigned int ticks)
@@ -44,6 +44,10 @@ void \mbox{\hyperlink{sys__call_8c_aec37528a3c7935864924764d1911126c}{s\+\_\+sle
 \index{s\_exit@{s\_exit}!sys\_call.c@{sys\_call.c}}
 \doxysubsubsection{\texorpdfstring{s\_exit()}{s\_exit()}}
 {\footnotesize\ttfamily void s\+\_\+exit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Unconditionally exit the calling process. 
 
 \Hypertarget{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}\label{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76} 
 \index{sys\_call.c@{sys\_call.c}!s\_kill@{s\_kill}}

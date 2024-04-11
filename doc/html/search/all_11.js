@@ -1,7 +1,7 @@
 var searchData=
 [
   ['s_5fclose_0',['s_close',['../db/d80/sys__call_8h.html#a1ee856dbd0706f79a440d1e98b42d32d',1,'sys_call.h']]],
-  ['s_5fexit_1',['s_exit',['../d8/d74/sys__call_8c.html#a53c8865d5bf1ca946e5b5405190f6690',1,'s_exit(void):&#160;sys_call.c'],['../db/d80/sys__call_8h.html#a53c8865d5bf1ca946e5b5405190f6690',1,'s_exit(void):&#160;sys_call.h']]],
+  ['s_5fexit_1',['s_exit',['../d8/d74/sys__call_8c.html#a53c8865d5bf1ca946e5b5405190f6690',1,'s_exit(void):&#160;sys_call.c'],['../db/d80/sys__call_8h.html#a53c8865d5bf1ca946e5b5405190f6690',1,'s_exit(void):&#160;sys_call.c']]],
   ['s_5fkill_2',['s_kill',['../d8/d74/sys__call_8c.html#a18e6794b108eea25459bd7fe31de4e76',1,'s_kill(pid_t pid, int signal):&#160;sys_call.c'],['../db/d80/sys__call_8h.html#a18e6794b108eea25459bd7fe31de4e76',1,'s_kill(pid_t pid, int signal):&#160;sys_call.h']]],
   ['s_5fls_3',['s_ls',['../db/d80/sys__call_8h.html#a6a6a25a8e0071c5e76fe05ee72587f0d',1,'sys_call.h']]],
   ['s_5flseek_4',['s_lseek',['../db/d80/sys__call_8h.html#ac21f611f4fb486935d9ad2915a529d3b',1,'sys_call.h']]],
