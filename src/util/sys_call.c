@@ -188,6 +188,11 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
     return pid;
   }
 
+  char buf[100];
+  sprintf(buf, "[%4u]\tBLOCKED\t%4u\t%4u\t%s\n", tick, current->pid,
+          current->priority, current->processname);
+  write(logfiledescriptor, buf, strlen(buf));
+
   // else, block self until state change
   current->state = BLOCKED;
   current->waiting_for_change = true;
@@ -197,6 +202,10 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
   add_process(blocked, current);  // add process to list of blocked processes
 
   spthread_suspend_self();
+
+  sprintf(buf, "[%4u]\tUNBLOCKED\t%4u\t%4u\t%s\n", tick, current->pid,
+          current->priority, current->processname);
+  write(logfiledescriptor, buf, strlen(buf));
 
   child_pcb->statechanged = false;
   if (child_pcb->state == ZOMBIED) {
@@ -211,7 +220,6 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
     // became blocked? edstem #730 will define spec
   }
 
-  char buf[100];
   sprintf(buf, "[%4u]\tWAITED\t%4u\t%4u\t%s\n", tick, child_pcb->pid,
           child_pcb->priority, child_pcb->processname);
   write(logfiledescriptor, buf, strlen(buf));
@@ -279,6 +287,8 @@ void s_exit(void) {
   sprintf(buf, "[%4u]\tEXITED\t%4u\t%4u\t%s\n", tick, current->pid,
           current->priority, current->processname);
   write(logfiledescriptor, buf, strlen(buf));
+
+  // TODO: need to kill all children
 }
 
 int s_nice(pid_t pid, int priority) {

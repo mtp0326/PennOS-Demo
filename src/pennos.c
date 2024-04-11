@@ -229,6 +229,10 @@ void scheduler(char* logfile) {
         block->state = RUNNING;
         remove_process(blocked, block->pid);
         add_process(processes[block->priority], block);
+
+        sprintf(buf, "[%4u]\tUNBLOCKED\t%4u\t%4u\t%s\n", tick, block->pid,
+                block->priority, block->processname);
+        write(logfiledescriptor, buf, strlen(buf));
       }
       if (blocked->size != 0) {
         blocked->head = blocked->head->next;
