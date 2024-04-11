@@ -12,12 +12,24 @@
 \item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06}{b\+\_\+sleep}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Sleep for {\ttfamily n} seconds. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a371b3588a8f8a231c10f75b0ea84926f}{b\+\_\+kill}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Sends a specified signal to a list of processes. If a signal name is not specified, default to "{}term"{}. Valid signals are -\/term, -\/stop, and -\/cont. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a184a1be3455442bda9bbd0789e438481}{b\+\_\+logout}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Exits the shell and shutsdown Penn\+OS. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{shellbuiltins_8c_a184a1be3455442bda9bbd0789e438481}\label{shellbuiltins_8c_a184a1be3455442bda9bbd0789e438481} 
+\Hypertarget{shellbuiltins_8c_a371b3588a8f8a231c10f75b0ea84926f}\label{shellbuiltins_8c_a371b3588a8f8a231c10f75b0ea84926f} 
+\index{shellbuiltins.c@{shellbuiltins.c}!b\_kill@{b\_kill}}
+\index{b\_kill@{b\_kill}!shellbuiltins.c@{shellbuiltins.c}}
+\doxysubsubsection{\texorpdfstring{b\_kill()}{b\_kill()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+kill (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Sends a specified signal to a list of processes. If a signal name is not specified, default to "{}term"{}. Valid signals are -\/term, -\/stop, and -\/cont. 
+
+Example Usage\+: kill 1 2 3 (sends term to processes 1, 2, and 3) Example Usage\+: kill -\/term 1 2 (sends term to processes 1 and 2) Example Usage\+: kill -\/stop 1 2 (sends stop to processes 1 and 2) Example Usage\+: kill -\/cont 1 (sends cont to process 1) \Hypertarget{shellbuiltins_8c_a184a1be3455442bda9bbd0789e438481}\label{shellbuiltins_8c_a184a1be3455442bda9bbd0789e438481} 
 \index{shellbuiltins.c@{shellbuiltins.c}!b\_logout@{b\_logout}}
 \index{b\_logout@{b\_logout}!shellbuiltins.c@{shellbuiltins.c}}
 \doxysubsubsection{\texorpdfstring{b\_logout()}{b\_logout()}}

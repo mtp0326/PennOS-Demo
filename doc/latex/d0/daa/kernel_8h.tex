@@ -12,6 +12,15 @@
 \item 
 struct \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em This structure stores all required information about a running process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{kernel_8h_ac5c325b088ff67236e4fc6616da63bb7}{P\+\_\+\+SIGSTOP}}~0
+\item 
+\#define \mbox{\hyperlink{kernel_8h_a3e7774a26af9a341045a1cc0d34070da}{P\+\_\+\+SIGCONT}}~1
+\item 
+\#define \mbox{\hyperlink{kernel_8h_a608288786200cfdad154e66b4cd578ae}{P\+\_\+\+SIGTER}}~2
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -33,6 +42,27 @@ enum \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+
 \begin{DoxyCompactList}\small\item\em Create a new child process, inheriting applicable properties from the parent. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\+\_\+proc\+\_\+cleanup}} (\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}proc)
 \begin{DoxyCompactList}\small\item\em Clean up a terminated/finished thread\textquotesingle{}s resources. This may include freeing the PCB, handling children, etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{kernel_8h_a3e7774a26af9a341045a1cc0d34070da}\label{kernel_8h_a3e7774a26af9a341045a1cc0d34070da} 
+\index{kernel.h@{kernel.h}!P\_SIGCONT@{P\_SIGCONT}}
+\index{P\_SIGCONT@{P\_SIGCONT}!kernel.h@{kernel.h}}
+\doxysubsubsection{\texorpdfstring{P\_SIGCONT}{P\_SIGCONT}}
+{\footnotesize\ttfamily \#define P\+\_\+\+SIGCONT~1}
+
+\Hypertarget{kernel_8h_ac5c325b088ff67236e4fc6616da63bb7}\label{kernel_8h_ac5c325b088ff67236e4fc6616da63bb7} 
+\index{kernel.h@{kernel.h}!P\_SIGSTOP@{P\_SIGSTOP}}
+\index{P\_SIGSTOP@{P\_SIGSTOP}!kernel.h@{kernel.h}}
+\doxysubsubsection{\texorpdfstring{P\_SIGSTOP}{P\_SIGSTOP}}
+{\footnotesize\ttfamily \#define P\+\_\+\+SIGSTOP~0}
+
+\Hypertarget{kernel_8h_a608288786200cfdad154e66b4cd578ae}\label{kernel_8h_a608288786200cfdad154e66b4cd578ae} 
+\index{kernel.h@{kernel.h}!P\_SIGTER@{P\_SIGTER}}
+\index{P\_SIGTER@{P\_SIGTER}!kernel.h@{kernel.h}}
+\doxysubsubsection{\texorpdfstring{P\_SIGTER}{P\_SIGTER}}
+{\footnotesize\ttfamily \#define P\+\_\+\+SIGTER~2}
+
 
 
 \doxysubsection{Typedef Documentation}

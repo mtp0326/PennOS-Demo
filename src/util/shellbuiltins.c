@@ -22,6 +22,34 @@ void* b_sleep(void* arg) {
   return NULL;
 }
 
+void* b_kill(void* arg) {
+  char** argv = (char**)arg;
+  int signal;
+  int i = 1;
+  if (strlen(argv[1]) == 1) {
+    signal = P_SIGTER;
+  } else {
+    if (strcmp(argv[1], "-term") == 0) {
+      signal = P_SIGTER;
+    } else if (strcmp(argv[1], "-stop") == 0) {
+      signal = P_SIGSTOP;
+
+    } else if (strcmp(argv[1], "-cont") == 0) {
+      signal = P_SIGCONT;
+
+    } else {
+      return NULL;
+    }
+    i = 2;
+  }
+  for (; argv[i] != NULL; i++) {
+    s_kill(atoi(argv[i]), signal);
+  }
+
+  s_exit();
+  return NULL;
+}
+
 void* b_logout(void* arg) {
   done = true;
   return NULL;

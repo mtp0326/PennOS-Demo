@@ -219,11 +219,66 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
   return pid;
 }
 
-int s_kill(pid_t pid, int signal);
+int s_kill(pid_t pid, int signal) {
+  pcb_t* process;
+  if (find_process(processes[0], pid) != NULL) {
+    process = find_process(processes[0], pid);
+  } else if (find_process(processes[1], pid) != NULL) {
+    process = find_process(processes[1], pid);
+  } else if (find_process(processes[2], pid) != NULL) {
+    process = find_process(processes[2], pid);
+  } else if (find_process(blocked, pid) != NULL) {
+    process = find_process(blocked, pid);
+
+  } else if (find_process(zombied, pid) != NULL) {
+    process = find_process(zombied, pid);
+  } else if (find_process(stopped, pid) != NULL) {
+    process = find_process(stopped, pid);
+  } else {
+    return -1;  // process not found
+  }
+
+  if (signal == P_SIGSTOP) {
+    process->state = STOPPED;
+    process->statechanged = true;
+    remove_process(processes[process->priority], pid);
+    add_process(stopped, process);
+  } else if (signal == P_SIGCONT) {
+    if (!(process->state == STOPPED)) {
+      return -1;  // invalid? do nothing?
+    }
+    process->state = RUNNING;
+    process->statechanged = true;
+    remove_process(processes[process->priority], pid);
+    add_process(stopped, process);
+  } else if (signal == P_SIGTER) {
+    process->state = ZOMBIED;
+    process->statechanged = true;
+    process->term_signal = P_SIGTER;
+    process->exit_status = 0;
+    remove_process(processes[process->priority],
+                   pid);  // need to define more here based on edstem #738
+    add_process(zombied, process);
+    char buf[100];
+    sprintf(buf, "[%4u]\tSIGNALED\t%4u\t%4u\t%s\n", tick, process->pid,
+            process->priority, process->processname);
+    write(logfiledescriptor, buf, strlen(buf));
+  } else {
+    ;
+  }
+  return 0;
+}
 
 void s_exit(void) {
+  remove_process(processes[current->priority], current->pid);
+  add_process(zombied, current);
   current->state = ZOMBIED;
   current->statechanged = true;
+
+  char buf[100];
+  sprintf(buf, "[%4u]\tEXITED\t%4u\t%4u\t%s\n", tick, current->pid,
+          current->priority, current->processname);
+  write(logfiledescriptor, buf, strlen(buf));
 }
 
 int s_nice(pid_t pid, int priority) {

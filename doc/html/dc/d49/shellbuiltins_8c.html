@@ -96,11 +96,34 @@ Functions</h2></td></tr>
 <tr class="memitem:a8caa9d892fd52ba7fbaf212e3bcdae06" id="r_a8caa9d892fd52ba7fbaf212e3bcdae06"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8caa9d892fd52ba7fbaf212e3bcdae06">b_sleep</a> (void *arg)</td></tr>
 <tr class="memdesc:a8caa9d892fd52ba7fbaf212e3bcdae06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleep for <code>n</code> seconds.  <br /></td></tr>
 <tr class="separator:a8caa9d892fd52ba7fbaf212e3bcdae06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a371b3588a8f8a231c10f75b0ea84926f" id="r_a371b3588a8f8a231c10f75b0ea84926f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a371b3588a8f8a231c10f75b0ea84926f">b_kill</a> (void *arg)</td></tr>
+<tr class="memdesc:a371b3588a8f8a231c10f75b0ea84926f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a specified signal to a list of processes. If a signal name is not specified, default to "term". Valid signals are -term, -stop, and -cont.  <br /></td></tr>
+<tr class="separator:a371b3588a8f8a231c10f75b0ea84926f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a184a1be3455442bda9bbd0789e438481" id="r_a184a1be3455442bda9bbd0789e438481"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a184a1be3455442bda9bbd0789e438481">b_logout</a> (void *arg)</td></tr>
 <tr class="memdesc:a184a1be3455442bda9bbd0789e438481"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exits the shell and shutsdown PennOS.  <br /></td></tr>
 <tr class="separator:a184a1be3455442bda9bbd0789e438481"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a371b3588a8f8a231c10f75b0ea84926f" name="a371b3588a8f8a231c10f75b0ea84926f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a371b3588a8f8a231c10f75b0ea84926f">&#9670;&#160;</a></span>b_kill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * b_kill </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sends a specified signal to a list of processes. If a signal name is not specified, default to "term". Valid signals are -term, -stop, and -cont. </p>
+<p>Example Usage: kill 1 2 3 (sends term to processes 1, 2, and 3) Example Usage: kill -term 1 2 (sends term to processes 1 and 2) Example Usage: kill -stop 1 2 (sends stop to processes 1 and 2) Example Usage: kill -cont 1 (sends cont to process 1) </p>
+
+</div>
+</div>
 <a id="a184a1be3455442bda9bbd0789e438481" name="a184a1be3455442bda9bbd0789e438481"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a184a1be3455442bda9bbd0789e438481">&#9670;&#160;</a></span>b_logout()</h2>
 

@@ -74,7 +74,7 @@ static void* shell(void* arg) {
         // NOTE: add code later here to use stdin and stdout from parsed
         // command, need to convert char* to file descriptor though.
         int wstatus = 0;
-        s_waitpid(child, &wstatus, false);
+        s_waitpid(child, &wstatus, parsed->is_background);
 
         // add logic to check wstatus and make sure it exited correctly
         pcb_t* child_pcb = find_process(zombied, child);
@@ -100,7 +100,12 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "ps") == 0) {
         // TODO: Call your implemented ps() function
       } else if (strcmp(args[0], "kill") == 0) {
-        // TODO: Call your implemented kill() function
+        pid_t child = s_spawn(b_kill, args, STDIN_FILENO, STDOUT_FILENO);
+        int wstatus = 0;
+        s_waitpid(child, &wstatus, false);
+        pcb_t* child_pcb = find_process(zombied, child);
+        remove_process(zombied, child);
+        k_proc_cleanup(child_pcb);
       } else if (strcmp(args[0], "zombify") == 0) {
         // TODO: Call your implemented zombify() function
       } else if (strcmp(args[0], "orphanify") == 0) {
@@ -254,14 +259,19 @@ void scheduler(char* logfile) {
       CircularList* current_priority = processes[priority->head->priority];
       current = current_priority->head->process;
       curr_thread = current->handle;
+
+      // LOGGING OF SCHEDULE // make into helper later
       sprintf(buf, "[%4u]\tSCHEDULE\t%4u\t%4u\t%s\n", tick, current->pid,
               current->priority, current->processname);
       write(logfiledescriptor, buf, strlen(buf));
+
+      //
       spthread_continue(curr_thread);
       sigsuspend(&suspend_set);
       spthread_suspend(curr_thread);
       tick++;
 
+      // move head to next
       if (current_priority->size != 0) {
         current_priority->head = current_priority->head->next;
       }

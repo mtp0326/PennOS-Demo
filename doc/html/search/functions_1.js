@@ -8,7 +8,7 @@ var searchData=
   ['b_5fecho_5',['b_echo',['../d0/d8c/shellbuiltins_8h.html#af01e6b67f01ef538abcc03c9aff00aba',1,'shellbuiltins.h']]],
   ['b_5ffg_6',['b_fg',['../d0/d8c/shellbuiltins_8h.html#ad11ad4f83749953ddc5d36dd093bc797',1,'shellbuiltins.h']]],
   ['b_5fjobs_7',['b_jobs',['../d0/d8c/shellbuiltins_8h.html#add6abae88d55c1b8ee57843799af9730',1,'shellbuiltins.h']]],
-  ['b_5fkill_8',['b_kill',['../d0/d8c/shellbuiltins_8h.html#a371b3588a8f8a231c10f75b0ea84926f',1,'shellbuiltins.h']]],
+  ['b_5fkill_8',['b_kill',['../dc/d49/shellbuiltins_8c.html#a371b3588a8f8a231c10f75b0ea84926f',1,'b_kill(void *arg):&#160;shellbuiltins.c'],['../d0/d8c/shellbuiltins_8h.html#a371b3588a8f8a231c10f75b0ea84926f',1,'b_kill(void *arg):&#160;shellbuiltins.c']]],
   ['b_5flogout_9',['b_logout',['../dc/d49/shellbuiltins_8c.html#a184a1be3455442bda9bbd0789e438481',1,'b_logout(void *arg):&#160;shellbuiltins.c'],['../d0/d8c/shellbuiltins_8h.html#a184a1be3455442bda9bbd0789e438481',1,'b_logout(void *arg):&#160;shellbuiltins.c']]],
   ['b_5fls_10',['b_ls',['../d0/d8c/shellbuiltins_8h.html#a8705f3b70f67031e5aac30c27866998d',1,'shellbuiltins.h']]],
   ['b_5fman_11',['b_man',['../d0/d8c/shellbuiltins_8h.html#aeb7266201350c6e4da06c851afbffded',1,'shellbuiltins.h']]],

@@ -17,7 +17,7 @@ pid\+\_\+t \mbox{\hyperlink{sys__call_8c_a62b97025761b7f8ad7e59b641cad08d6}{s\+\
 pid\+\_\+t \mbox{\hyperlink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid}} (pid\+\_\+t pid, int \texorpdfstring{$\ast$}{*}wstatus, bool nohang)
 \begin{DoxyCompactList}\small\item\em Wait on a child of the calling process, until it changes state. If {\ttfamily nohang} is true, this will not block the calling process and return immediately. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill}} (pid\+\_\+t pid, int signal)
-\item 
+\begin{DoxyCompactList}\small\item\em Send a signal to a particular process. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{sys__call_8c_a53c8865d5bf1ca946e5b5405190f6690}{s\+\_\+exit}} (void)
 \begin{DoxyCompactList}\small\item\em Unconditionally exit the calling process. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8c_ac711d33fcf2573a590b224b6debab996}{s\+\_\+nice}} (pid\+\_\+t pid, int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
@@ -55,6 +55,20 @@ Unconditionally exit the calling process.
 \doxysubsubsection{\texorpdfstring{s\_kill()}{s\_kill()}}
 {\footnotesize\ttfamily int s\+\_\+kill (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{int}]{signal }\end{DoxyParamCaption})}
 
+
+
+Send a signal to a particular process. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & Process ID of the target proces. \\
+\hline
+{\em signal} & Signal number to be sent. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on error. 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8c_ac711d33fcf2573a590b224b6debab996}\label{sys__call_8c_ac711d33fcf2573a590b224b6debab996} 
 \index{sys\_call.c@{sys\_call.c}!s\_nice@{s\_nice}}
 \index{s\_nice@{s\_nice}!sys\_call.c@{sys\_call.c}}

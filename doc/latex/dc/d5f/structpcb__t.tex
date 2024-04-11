@@ -32,7 +32,7 @@ bool \mbox{\hyperlink{structpcb__t_a09cd01a482977b7d568726b57e3adeda}{statechang
 int \mbox{\hyperlink{structpcb__t_a649db56ea039615cb6e9a2c9ac0a5059}{exit\+\_\+status}}
 \begin{DoxyCompactList}\small\item\em This contains a bool that keeps track of whether or not the process state has changed. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{structpcb__t_a4e5283318d9e2dd1ab7913420044e65e}{term\+\_\+signal}}
-\begin{DoxyCompactList}\small\item\em Exit status of process, if exited normally, -\/1 if not exited. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Exit status of process, 0 if exited , -\/1 if not exited. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{structpcb__t_afe6d29b30076d8ce910611fba812ccb5}{waiting\+\_\+for\+\_\+change}}
 \begin{DoxyCompactList}\small\item\em Signal number that caused process to terminate, -\/1 if not terminated. \end{DoxyCompactList}\item 
 pid\+\_\+t \mbox{\hyperlink{structpcb__t_ae5e37dd9ae11e9c941410b719ec2e41d}{waiting\+\_\+on\+\_\+pid}}
@@ -152,7 +152,7 @@ This stores a bitmap containg all open file descriptors.
 
 
 
-Exit status of process, if exited normally, -\/1 if not exited. 
+Exit status of process, 0 if exited , -\/1 if not exited. 
 
 \Hypertarget{structpcb__t_a1a470d3da5aa9e6d87d2849d3228239c}\label{structpcb__t_a1a470d3da5aa9e6d87d2849d3228239c} 
 \index{pcb\_t@{pcb\_t}!ticks\_to\_wait@{ticks\_to\_wait}}

@@ -41,6 +41,10 @@ typedef enum {
            */
 } process_state_t;
 
+#define P_SIGSTOP 0
+#define P_SIGCONT 1
+#define P_SIGTER 2
+
 /**
  * @struct pcb_t
  * @brief This structure stores all required information about a running
@@ -61,8 +65,8 @@ typedef struct pcb_t {
   bool statechanged; /** @brief This contains a bool that keeps track of whether
                         or not the process state has changed.*/
 
-  int exit_status; /** @brief Exit status of process, if exited normally, -1 if
-                      not exited.*/
+  int exit_status; /** @brief Exit status of process, 0 if exited , -1 if
+                      not exited*/
   int term_signal; /** @brief Signal number that caused process to terminate, -1
                       if not terminated */
   bool waiting_for_change; /** @brief Bool describing whether or not the process
