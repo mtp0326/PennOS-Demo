@@ -79,6 +79,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">sys_call.h File Reference</div></div>
 </div><!--header-->
@@ -90,6 +91,21 @@ $(function() {
 </div>
 <p><a href="../../db/d80/sys__call_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a0985baf467c640978def72b6e0edc8bb" id="r_a0985baf467c640978def72b6e0edc8bb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0985baf467c640978def72b6e0edc8bb">STATUS_EXITED</a>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:a0985baf467c640978def72b6e0edc8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab26f0e851d5dd46ecec084f5b941acfd" id="r_ab26f0e851d5dd46ecec084f5b941acfd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab26f0e851d5dd46ecec084f5b941acfd">STATUS_STOPPED</a>&#160;&#160;&#160;0x01</td></tr>
+<tr class="separator:ab26f0e851d5dd46ecec084f5b941acfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad5f3b0332fe998d13d886e4d5969b19" id="r_aad5f3b0332fe998d13d886e4d5969b19"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad5f3b0332fe998d13d886e4d5969b19">STATUS_SIGNALED</a>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:aad5f3b0332fe998d13d886e4d5969b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1406bee782fa878df64c30b6a77c1e1" id="r_ad1406bee782fa878df64c30b6a77c1e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1406bee782fa878df64c30b6a77c1e1">P_WIFEXITED</a>(status)&#160;&#160;&#160;(((status) &amp; 0xFF) == <a class="el" href="#a0985baf467c640978def72b6e0edc8bb">STATUS_EXITED</a>)</td></tr>
+<tr class="separator:ad1406bee782fa878df64c30b6a77c1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ab1ade32fa50a6b4ce169bfd5a1aa53" id="r_a4ab1ade32fa50a6b4ce169bfd5a1aa53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ab1ade32fa50a6b4ce169bfd5a1aa53">P_WIFSTOPPED</a>(status)&#160;&#160;&#160;(((status) &amp; 0xFF) == <a class="el" href="#ab26f0e851d5dd46ecec084f5b941acfd">STATUS_STOPPED</a>)</td></tr>
+<tr class="separator:a4ab1ade32fa50a6b4ce169bfd5a1aa53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd24dcb672da49b7fef53824f098693" id="r_a7dd24dcb672da49b7fef53824f098693"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7dd24dcb672da49b7fef53824f098693">P_WIFSIGNALED</a>(status)&#160;&#160;&#160;(((status) &amp; 0xFF) == <a class="el" href="#aad5f3b0332fe998d13d886e4d5969b19">STATUS_SIGNALED</a>)</td></tr>
+<tr class="separator:a7dd24dcb672da49b7fef53824f098693"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a43b789c710ba1501bcd8cf54e4382e50" id="r_a43b789c710ba1501bcd8cf54e4382e50"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43b789c710ba1501bcd8cf54e4382e50">s_spawn</a> (void *(*func)(void *), char *argv[], int fd0, int fd1)</td></tr>
@@ -97,9 +113,9 @@ Functions</h2></td></tr>
 <tr class="separator:a43b789c710ba1501bcd8cf54e4382e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62b97025761b7f8ad7e59b641cad08d6" id="r_a62b97025761b7f8ad7e59b641cad08d6"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62b97025761b7f8ad7e59b641cad08d6">s_spawn_nice</a> (void *(*func)(void *), char *argv[], int fd0, int fd1, unsigned int <a class="el" href="../../d8/d75/pennos_8c.html#a2e0cca4a43c21259b881d59c96c74fe0">priority</a>)</td></tr>
 <tr class="separator:a62b97025761b7f8ad7e59b641cad08d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae073b5d4f1fae198ea259cd56b9d74d0" id="r_ae073b5d4f1fae198ea259cd56b9d74d0"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae073b5d4f1fae198ea259cd56b9d74d0">s_waitpid</a> (pid_t pid, <a class="el" href="../../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854">process_state_t</a> *wstatus, bool nohang)</td></tr>
-<tr class="memdesc:ae073b5d4f1fae198ea259cd56b9d74d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait on a child of the calling process, until it changes state. If <code>nohang</code> is true, this will not block the calling process and return immediately.  <br /></td></tr>
-<tr class="separator:ae073b5d4f1fae198ea259cd56b9d74d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c0c6c4ae69799354d707ff57ac925d3" id="r_a3c0c6c4ae69799354d707ff57ac925d3"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c0c6c4ae69799354d707ff57ac925d3">s_waitpid</a> (pid_t pid, int *wstatus, bool nohang)</td></tr>
+<tr class="memdesc:a3c0c6c4ae69799354d707ff57ac925d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait on a child of the calling process, until it changes state. If <code>nohang</code> is true, this will not block the calling process and return immediately.  <br /></td></tr>
+<tr class="separator:a3c0c6c4ae69799354d707ff57ac925d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18e6794b108eea25459bd7fe31de4e76" id="r_a18e6794b108eea25459bd7fe31de4e76"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18e6794b108eea25459bd7fe31de4e76">s_kill</a> (pid_t pid, int signal)</td></tr>
 <tr class="memdesc:a18e6794b108eea25459bd7fe31de4e76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a signal to a particular process.  <br /></td></tr>
 <tr class="separator:a18e6794b108eea25459bd7fe31de4e76"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,6 +145,100 @@ Functions</h2></td></tr>
 <tr class="memdesc:a6a6a25a8e0071c5e76fe05ee72587f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new s ls object.  <br /></td></tr>
 <tr class="separator:a6a6a25a8e0071c5e76fe05ee72587f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ad1406bee782fa878df64c30b6a77c1e1" name="ad1406bee782fa878df64c30b6a77c1e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1406bee782fa878df64c30b6a77c1e1">&#9670;&#160;</a></span>P_WIFEXITED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define P_WIFEXITED</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">status</span></td><td>)</td>
+          <td>&#160;&#160;&#160;(((status) &amp; 0xFF) == <a class="el" href="#a0985baf467c640978def72b6e0edc8bb">STATUS_EXITED</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7dd24dcb672da49b7fef53824f098693" name="a7dd24dcb672da49b7fef53824f098693"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd24dcb672da49b7fef53824f098693">&#9670;&#160;</a></span>P_WIFSIGNALED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define P_WIFSIGNALED</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">status</span></td><td>)</td>
+          <td>&#160;&#160;&#160;(((status) &amp; 0xFF) == <a class="el" href="#aad5f3b0332fe998d13d886e4d5969b19">STATUS_SIGNALED</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4ab1ade32fa50a6b4ce169bfd5a1aa53" name="a4ab1ade32fa50a6b4ce169bfd5a1aa53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ab1ade32fa50a6b4ce169bfd5a1aa53">&#9670;&#160;</a></span>P_WIFSTOPPED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define P_WIFSTOPPED</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">status</span></td><td>)</td>
+          <td>&#160;&#160;&#160;(((status) &amp; 0xFF) == <a class="el" href="#ab26f0e851d5dd46ecec084f5b941acfd">STATUS_STOPPED</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0985baf467c640978def72b6e0edc8bb" name="a0985baf467c640978def72b6e0edc8bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0985baf467c640978def72b6e0edc8bb">&#9670;&#160;</a></span>STATUS_EXITED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_EXITED&#160;&#160;&#160;0x00</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aad5f3b0332fe998d13d886e4d5969b19" name="aad5f3b0332fe998d13d886e4d5969b19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad5f3b0332fe998d13d886e4d5969b19">&#9670;&#160;</a></span>STATUS_SIGNALED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_SIGNALED&#160;&#160;&#160;0x02</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab26f0e851d5dd46ecec084f5b941acfd" name="ab26f0e851d5dd46ecec084f5b941acfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab26f0e851d5dd46ecec084f5b941acfd">&#9670;&#160;</a></span>STATUS_STOPPED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_STOPPED&#160;&#160;&#160;0x01</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a1ee856dbd0706f79a440d1e98b42d32d" name="a1ee856dbd0706f79a440d1e98b42d32d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ee856dbd0706f79a440d1e98b42d32d">&#9670;&#160;</a></span>s_close()</h2>
@@ -489,8 +599,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae073b5d4f1fae198ea259cd56b9d74d0" name="ae073b5d4f1fae198ea259cd56b9d74d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae073b5d4f1fae198ea259cd56b9d74d0">&#9670;&#160;</a></span>s_waitpid()</h2>
+<a id="a3c0c6c4ae69799354d707ff57ac925d3" name="a3c0c6c4ae69799354d707ff57ac925d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c0c6c4ae69799354d707ff57ac925d3">&#9670;&#160;</a></span>s_waitpid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -503,7 +613,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854">process_state_t</a> *</td>          <td class="paramname"><span class="paramname"><em>wstatus</em>, </span></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>wstatus</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>

@@ -4,6 +4,21 @@
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include "{}globals.\+h"{}}\newline
 {\ttfamily \#include "{}kernel.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{sys__call_8h_a0985baf467c640978def72b6e0edc8bb}{STATUS\+\_\+\+EXITED}}~0x00
+\item 
+\#define \mbox{\hyperlink{sys__call_8h_ab26f0e851d5dd46ecec084f5b941acfd}{STATUS\+\_\+\+STOPPED}}~0x01
+\item 
+\#define \mbox{\hyperlink{sys__call_8h_aad5f3b0332fe998d13d886e4d5969b19}{STATUS\+\_\+\+SIGNALED}}~0x02
+\item 
+\#define \mbox{\hyperlink{sys__call_8h_ad1406bee782fa878df64c30b6a77c1e1}{P\+\_\+\+WIFEXITED}}(status)~(((status) \& 0x\+FF) == \mbox{\hyperlink{sys__call_8h_a0985baf467c640978def72b6e0edc8bb}{STATUS\+\_\+\+EXITED}})
+\item 
+\#define \mbox{\hyperlink{sys__call_8h_a4ab1ade32fa50a6b4ce169bfd5a1aa53}{P\+\_\+\+WIFSTOPPED}}(status)~(((status) \& 0x\+FF) == \mbox{\hyperlink{sys__call_8h_ab26f0e851d5dd46ecec084f5b941acfd}{STATUS\+\_\+\+STOPPED}})
+\item 
+\#define \mbox{\hyperlink{sys__call_8h_a7dd24dcb672da49b7fef53824f098693}{P\+\_\+\+WIFSIGNALED}}(status)~(((status) \& 0x\+FF) == \mbox{\hyperlink{sys__call_8h_aad5f3b0332fe998d13d886e4d5969b19}{STATUS\+\_\+\+SIGNALED}})
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -11,7 +26,7 @@ pid\+\_\+t \mbox{\hyperlink{sys__call_8h_a43b789c710ba1501bcd8cf54e4382e50}{s\+\
 \begin{DoxyCompactList}\small\item\em Create a child process that executes the function {\ttfamily func}. The child will retain some attributes of the parent. \end{DoxyCompactList}\item 
 pid\+\_\+t \mbox{\hyperlink{sys__call_8h_a62b97025761b7f8ad7e59b641cad08d6}{s\+\_\+spawn\+\_\+nice}} (void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}func)(void \texorpdfstring{$\ast$}{*}), char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]}, int fd0, int fd1, unsigned int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
 \item 
-pid\+\_\+t \mbox{\hyperlink{sys__call_8h_ae073b5d4f1fae198ea259cd56b9d74d0}{s\+\_\+waitpid}} (pid\+\_\+t pid, \mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+state\+\_\+t}} \texorpdfstring{$\ast$}{*}wstatus, bool nohang)
+pid\+\_\+t \mbox{\hyperlink{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid}} (pid\+\_\+t pid, int \texorpdfstring{$\ast$}{*}wstatus, bool nohang)
 \begin{DoxyCompactList}\small\item\em Wait on a child of the calling process, until it changes state. If {\ttfamily nohang} is true, this will not block the calling process and return immediately. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill}} (pid\+\_\+t pid, int signal)
 \begin{DoxyCompactList}\small\item\em Send a signal to a particular process. \end{DoxyCompactList}\item 
@@ -35,6 +50,45 @@ off\+\_\+t \mbox{\hyperlink{sys__call_8h_ac21f611f4fb486935d9ad2915a529d3b}{s\+\
 \begin{DoxyCompactList}\small\item\em Construct a new s lseek object. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a6a6a25a8e0071c5e76fe05ee72587f0d}{s\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename)
 \begin{DoxyCompactList}\small\item\em Construct a new s ls object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{sys__call_8h_ad1406bee782fa878df64c30b6a77c1e1}\label{sys__call_8h_ad1406bee782fa878df64c30b6a77c1e1} 
+\index{sys\_call.h@{sys\_call.h}!P\_WIFEXITED@{P\_WIFEXITED}}
+\index{P\_WIFEXITED@{P\_WIFEXITED}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{P\_WIFEXITED}{P\_WIFEXITED}}
+{\footnotesize\ttfamily \#define P\+\_\+\+WIFEXITED(\begin{DoxyParamCaption}\item[{}]{status }\end{DoxyParamCaption})~(((status) \& 0x\+FF) == \mbox{\hyperlink{sys__call_8h_a0985baf467c640978def72b6e0edc8bb}{STATUS\+\_\+\+EXITED}})}
+
+\Hypertarget{sys__call_8h_a7dd24dcb672da49b7fef53824f098693}\label{sys__call_8h_a7dd24dcb672da49b7fef53824f098693} 
+\index{sys\_call.h@{sys\_call.h}!P\_WIFSIGNALED@{P\_WIFSIGNALED}}
+\index{P\_WIFSIGNALED@{P\_WIFSIGNALED}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{P\_WIFSIGNALED}{P\_WIFSIGNALED}}
+{\footnotesize\ttfamily \#define P\+\_\+\+WIFSIGNALED(\begin{DoxyParamCaption}\item[{}]{status }\end{DoxyParamCaption})~(((status) \& 0x\+FF) == \mbox{\hyperlink{sys__call_8h_aad5f3b0332fe998d13d886e4d5969b19}{STATUS\+\_\+\+SIGNALED}})}
+
+\Hypertarget{sys__call_8h_a4ab1ade32fa50a6b4ce169bfd5a1aa53}\label{sys__call_8h_a4ab1ade32fa50a6b4ce169bfd5a1aa53} 
+\index{sys\_call.h@{sys\_call.h}!P\_WIFSTOPPED@{P\_WIFSTOPPED}}
+\index{P\_WIFSTOPPED@{P\_WIFSTOPPED}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{P\_WIFSTOPPED}{P\_WIFSTOPPED}}
+{\footnotesize\ttfamily \#define P\+\_\+\+WIFSTOPPED(\begin{DoxyParamCaption}\item[{}]{status }\end{DoxyParamCaption})~(((status) \& 0x\+FF) == \mbox{\hyperlink{sys__call_8h_ab26f0e851d5dd46ecec084f5b941acfd}{STATUS\+\_\+\+STOPPED}})}
+
+\Hypertarget{sys__call_8h_a0985baf467c640978def72b6e0edc8bb}\label{sys__call_8h_a0985baf467c640978def72b6e0edc8bb} 
+\index{sys\_call.h@{sys\_call.h}!STATUS\_EXITED@{STATUS\_EXITED}}
+\index{STATUS\_EXITED@{STATUS\_EXITED}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{STATUS\_EXITED}{STATUS\_EXITED}}
+{\footnotesize\ttfamily \#define STATUS\+\_\+\+EXITED~0x00}
+
+\Hypertarget{sys__call_8h_aad5f3b0332fe998d13d886e4d5969b19}\label{sys__call_8h_aad5f3b0332fe998d13d886e4d5969b19} 
+\index{sys\_call.h@{sys\_call.h}!STATUS\_SIGNALED@{STATUS\_SIGNALED}}
+\index{STATUS\_SIGNALED@{STATUS\_SIGNALED}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{STATUS\_SIGNALED}{STATUS\_SIGNALED}}
+{\footnotesize\ttfamily \#define STATUS\+\_\+\+SIGNALED~0x02}
+
+\Hypertarget{sys__call_8h_ab26f0e851d5dd46ecec084f5b941acfd}\label{sys__call_8h_ab26f0e851d5dd46ecec084f5b941acfd} 
+\index{sys\_call.h@{sys\_call.h}!STATUS\_STOPPED@{STATUS\_STOPPED}}
+\index{STATUS\_STOPPED@{STATUS\_STOPPED}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{STATUS\_STOPPED}{STATUS\_STOPPED}}
+{\footnotesize\ttfamily \#define STATUS\+\_\+\+STOPPED~0x01}
+
 
 
 \doxysubsection{Function Documentation}
@@ -231,11 +285,11 @@ pid\+\_\+t The process ID of the created child process. // need to define error 
 \begin{DoxyReturn}{Returns}
 int 
 \end{DoxyReturn}
-\Hypertarget{sys__call_8h_ae073b5d4f1fae198ea259cd56b9d74d0}\label{sys__call_8h_ae073b5d4f1fae198ea259cd56b9d74d0} 
+\Hypertarget{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}\label{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3} 
 \index{sys\_call.h@{sys\_call.h}!s\_waitpid@{s\_waitpid}}
 \index{s\_waitpid@{s\_waitpid}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_waitpid()}{s\_waitpid()}}
-{\footnotesize\ttfamily pid\+\_\+t s\+\_\+waitpid (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{\mbox{\hyperlink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854}{process\+\_\+state\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{wstatus,  }\item[{bool}]{nohang }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily pid\+\_\+t s\+\_\+waitpid (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid,  }\item[{int \texorpdfstring{$\ast$}{*}}]{wstatus,  }\item[{bool}]{nohang }\end{DoxyParamCaption})}
 
 
 

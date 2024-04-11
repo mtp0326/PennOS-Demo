@@ -19,7 +19,7 @@ var searchData=
   ['b_5forphanify_16',['b_orphanify',['../d0/d8c/shellbuiltins_8h.html#ac0ab5e22f55a4f660a54973379d1722d',1,'shellbuiltins.h']]],
   ['b_5fps_17',['b_ps',['../d0/d8c/shellbuiltins_8h.html#a18df407e357bc44721dd39f95369843b',1,'shellbuiltins.h']]],
   ['b_5frm_18',['b_rm',['../d0/d8c/shellbuiltins_8h.html#aa583bdf1b3a5fbfb577ad5a7230fe054',1,'shellbuiltins.h']]],
-  ['b_5fsleep_19',['b_sleep',['../d0/d8c/shellbuiltins_8h.html#a8caa9d892fd52ba7fbaf212e3bcdae06',1,'shellbuiltins.h']]],
+  ['b_5fsleep_19',['b_sleep',['../dc/d49/shellbuiltins_8c.html#a8caa9d892fd52ba7fbaf212e3bcdae06',1,'b_sleep(void *arg):&#160;shellbuiltins.c'],['../d0/d8c/shellbuiltins_8h.html#a8caa9d892fd52ba7fbaf212e3bcdae06',1,'b_sleep(void *arg):&#160;shellbuiltins.c']]],
   ['b_5ftouch_20',['b_touch',['../d0/d8c/shellbuiltins_8h.html#a65b90b6bb0ac5b9c681bf586f71cbac7',1,'shellbuiltins.h']]],
   ['b_5fzombie_5fchild_21',['b_zombie_child',['../d0/d8c/shellbuiltins_8h.html#af7a3b6e724d8044a194e1c23e5499304',1,'shellbuiltins.h']]],
   ['b_5fzombify_22',['b_zombify',['../d0/d8c/shellbuiltins_8h.html#ac6f1b11929c2509c8c73d232643f2ae3',1,'shellbuiltins.h']]],
@@ -27,7 +27,7 @@ var searchData=
   ['bitmap_2eh_24',['bitmap.h',['../da/dcb/bitmap_8h.html',1,'']]],
   ['bits_25',['bits',['../db/d26/structFD__Bitmap.html#ab11c3e90cab966f3b5c161cd57b9471a',1,'FD_Bitmap']]],
   ['block_5fsize_26',['block_size',['../dc/dfb/pennfat__kernel_8c.html#a70b27761c7d0bd5cd90f4fe47e569b94',1,'block_size:&#160;pennfat_kernel.c'],['../d0/d4d/pennfat__kernel_8h.html#a70b27761c7d0bd5cd90f4fe47e569b94',1,'block_size:&#160;pennfat_kernel.c']]],
-  ['blocked_27',['BLOCKED',['../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61',1,'kernel.h']]],
-  ['blocked_28',['blocked',['../db/d28/globals_8c.html#a4a5bf3e2ca112a01dc3029503e3e80e4',1,'blocked:&#160;globals.c'],['../d5/d87/globals_8h.html#a4a5bf3e2ca112a01dc3029503e3e80e4',1,'blocked:&#160;globals.c']]],
+  ['blocked_27',['blocked',['../db/d28/globals_8c.html#a4a5bf3e2ca112a01dc3029503e3e80e4',1,'blocked:&#160;globals.c'],['../d5/d87/globals_8h.html#a4a5bf3e2ca112a01dc3029503e3e80e4',1,'blocked:&#160;globals.c']]],
+  ['blocked_28',['BLOCKED',['../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61',1,'kernel.h']]],
   ['buf_5fsize_29',['BUF_SIZE',['../d0/dd1/sched-demo_8c.html#a6821bafc3c88dfb2e433a095df9940c6',1,'sched-demo.c']]]
 ];

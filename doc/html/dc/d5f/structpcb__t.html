@@ -111,6 +111,21 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a09cd01a482977b7d568726b57e3adeda" id="r_a09cd01a482977b7d568726b57e3adeda"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09cd01a482977b7d568726b57e3adeda">statechanged</a></td></tr>
 <tr class="memdesc:a09cd01a482977b7d568726b57e3adeda"><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores a bitmap containg all open file descriptors.  <br /></td></tr>
 <tr class="separator:a09cd01a482977b7d568726b57e3adeda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a649db56ea039615cb6e9a2c9ac0a5059" id="r_a649db56ea039615cb6e9a2c9ac0a5059"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a649db56ea039615cb6e9a2c9ac0a5059">exit_status</a></td></tr>
+<tr class="memdesc:a649db56ea039615cb6e9a2c9ac0a5059"><td class="mdescLeft">&#160;</td><td class="mdescRight">This contains a bool that keeps track of whether or not the process state has changed.  <br /></td></tr>
+<tr class="separator:a649db56ea039615cb6e9a2c9ac0a5059"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e5283318d9e2dd1ab7913420044e65e" id="r_a4e5283318d9e2dd1ab7913420044e65e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e5283318d9e2dd1ab7913420044e65e">term_signal</a></td></tr>
+<tr class="memdesc:a4e5283318d9e2dd1ab7913420044e65e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exit status of process, if exited normally, -1 if not exited.  <br /></td></tr>
+<tr class="separator:a4e5283318d9e2dd1ab7913420044e65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6d29b30076d8ce910611fba812ccb5" id="r_afe6d29b30076d8ce910611fba812ccb5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe6d29b30076d8ce910611fba812ccb5">waiting_for_change</a></td></tr>
+<tr class="memdesc:afe6d29b30076d8ce910611fba812ccb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal number that caused process to terminate, -1 if not terminated.  <br /></td></tr>
+<tr class="separator:afe6d29b30076d8ce910611fba812ccb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5e37dd9ae11e9c941410b719ec2e41d" id="r_ae5e37dd9ae11e9c941410b719ec2e41d"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5e37dd9ae11e9c941410b719ec2e41d">waiting_on_pid</a></td></tr>
+<tr class="memdesc:ae5e37dd9ae11e9c941410b719ec2e41d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool describing whether or not the process is currently waiting on a process.  <br /></td></tr>
+<tr class="separator:ae5e37dd9ae11e9c941410b719ec2e41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a470d3da5aa9e6d87d2849d3228239c" id="r_a1a470d3da5aa9e6d87d2849d3228239c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a470d3da5aa9e6d87d2849d3228239c">ticks_to_wait</a></td></tr>
+<tr class="memdesc:a1a470d3da5aa9e6d87d2849d3228239c"><td class="mdescLeft">&#160;</td><td class="mdescRight">PID of the child the process is currently waiting on, or -1 if none.  <br /></td></tr>
+<tr class="separator:a1a470d3da5aa9e6d87d2849d3228239c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This structure stores all required information about a running process. </p>
@@ -128,6 +143,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This stores the PPID of the process. </p>
+
+</div>
+</div>
+<a id="a649db56ea039615cb6e9a2c9ac0a5059" name="a649db56ea039615cb6e9a2c9ac0a5059"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a649db56ea039615cb6e9a2c9ac0a5059">&#9670;&#160;</a></span>exit_status</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int pcb_t::exit_status</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This contains a bool that keeps track of whether or not the process state has changed. </p>
 
 </div>
 </div>
@@ -239,6 +270,70 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This stores a bitmap containg all open file descriptors. </p>
+
+</div>
+</div>
+<a id="a4e5283318d9e2dd1ab7913420044e65e" name="a4e5283318d9e2dd1ab7913420044e65e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e5283318d9e2dd1ab7913420044e65e">&#9670;&#160;</a></span>term_signal</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int pcb_t::term_signal</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exit status of process, if exited normally, -1 if not exited. </p>
+
+</div>
+</div>
+<a id="a1a470d3da5aa9e6d87d2849d3228239c" name="a1a470d3da5aa9e6d87d2849d3228239c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a470d3da5aa9e6d87d2849d3228239c">&#9670;&#160;</a></span>ticks_to_wait</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int pcb_t::ticks_to_wait</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>PID of the child the process is currently waiting on, or -1 if none. </p>
+
+</div>
+</div>
+<a id="afe6d29b30076d8ce910611fba812ccb5" name="afe6d29b30076d8ce910611fba812ccb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe6d29b30076d8ce910611fba812ccb5">&#9670;&#160;</a></span>waiting_for_change</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pcb_t::waiting_for_change</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Signal number that caused process to terminate, -1 if not terminated. </p>
+
+</div>
+</div>
+<a id="ae5e37dd9ae11e9c941410b719ec2e41d" name="ae5e37dd9ae11e9c941410b719ec2e41d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5e37dd9ae11e9c941410b719ec2e41d">&#9670;&#160;</a></span>waiting_on_pid</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pid_t pcb_t::waiting_on_pid</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Bool describing whether or not the process is currently waiting on a process. </p>
 
 </div>
 </div>

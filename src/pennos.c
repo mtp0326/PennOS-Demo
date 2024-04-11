@@ -67,7 +67,11 @@ static void* shell(void* arg) {
       if (strcmp(args[0], "cat") == 0) {
         // TODO: Call your implemented cat() function
       } else if (strcmp(args[0], "sleep") == 0) {
-        // TODO: Call your implemented sleep() function
+        pid_t child = s_spawn(b_sleep, args, STDIN_FILENO, STDOUT_FILENO);
+        // NOTE: add code later here to use stdin and stdout from parsed
+        // command, need to convert char* to file descriptor though.
+        int* wstatus = 0;
+        s_waitpid(child, wstatus, false);
       } else if (strcmp(args[0], "busy") == 0) {
         // TODO: Call your implemented busy() function
       } else if (strcmp(args[0], "echo") == 0) {
@@ -155,25 +159,76 @@ void scheduler(char* logfile) {
   int file = open(logfile, O_CREAT | O_TRUNC | O_RDWR, 0666);
 
   pthread_mutex_lock(&done_lock);
+
+  // main loop
   while (!done) {
     pthread_mutex_unlock(&done_lock);
     // need to add logic in case no processes of a given priority level for
     // future
-    int allBlockedOrEmpty = 1;
 
+    for (unsigned int i = 0; i < blocked->size; i++) {
+      pcb_t* block = blocked->head->process;
+      if (block->ticks_to_wait > 0) {
+        if (block->ticks_to_wait == 1) {
+          block->state = RUNNING;
+          block->statechanged = true;
+          remove_process(blocked, block->pid);
+          add_process(processes[block->priority], block);
+        }
+
+        block->ticks_to_wait--;
+        blocked->head = blocked->head->next;
+        continue;
+      }
+      pcb_t* child_pcb;
+      if (block->waiting_on_pid !=
+          -1) {  // if this process is currently s_waitpiding on a child
+        if (find_process(processes[0], block->waiting_on_pid) != NULL) {
+          child_pcb = find_process(processes[0], block->waiting_on_pid);
+        } else if (find_process(processes[1], block->waiting_on_pid) != NULL) {
+          child_pcb = find_process(processes[1], block->waiting_on_pid);
+        } else if (find_process(processes[2], block->waiting_on_pid) != NULL) {
+          child_pcb = find_process(processes[2], block->waiting_on_pid);
+        } else if (find_process(blocked, block->waiting_on_pid) != NULL) {
+          child_pcb = find_process(blocked, block->waiting_on_pid);
+        } else if (find_process(stopped, block->waiting_on_pid) != NULL) {
+          child_pcb = find_process(stopped, block->waiting_on_pid);
+        } else if (find_process(zombied, block->waiting_on_pid) != NULL) {
+          child_pcb = find_process(zombied, block->waiting_on_pid);
+        } else {
+          blocked->head = blocked->head->next;
+          continue;
+        }
+      }
+
+      if (child_pcb->statechanged) {
+        block->state = RUNNING;
+        remove_process(blocked, block->pid);
+        add_process(processes[block->priority], block);
+        fprintf(stderr, "added shell back to running?\n");
+      }
+      if (blocked->size != 0) {
+        blocked->head = blocked->head->next;
+      } else {
+        blocked->head = NULL;
+      }
+    }
+
+    bool allBlockedOrEmpty = true;
     // Check if all queues are empty or all processes are blocked.
     for (int i = 0; i < 3; i++) {
       if (processes[i]->size > 0) {
-        allBlockedOrEmpty = 0;
+        allBlockedOrEmpty = false;
         break;
       }
     }
 
-    if (allBlockedOrEmpty) {
+    if (allBlockedOrEmpty) {  // remove and false later, debugging AHHHHHHH
       // All processes are blocked or queues are empty, so idle.
       // sigsuspend will atomically unblock signals and put the process to
       // sleep.
-      sigsuspend(&idle_set);
+      // sigsuspend(&idle_set);
+
     } else {
       while (processes[priority->head->priority]->size == 0) {
         priority->head = priority->head->next;
@@ -189,7 +244,9 @@ void scheduler(char* logfile) {
       tick++;
       sprintf(buf, "[%4u]\t CREATE\n", tick);
       write(file, buf, strlen(buf));
-      current_priority->head = current_priority->head->next;
+      if (current_priority->size != 0) {
+        current_priority->head = current_priority->head->next;
+      }
       pthread_mutex_lock(&done_lock);
     }
   }

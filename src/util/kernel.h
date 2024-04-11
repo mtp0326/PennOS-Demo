@@ -5,6 +5,7 @@
 #include "array.h"
 #include "bitmap.h"
 #include "clinkedlist.h"
+#include "globals.h"
 #include "spthread.h"
 #include "stdlib.h"
 
@@ -59,6 +60,17 @@ typedef struct pcb_t {
                           descriptors.*/
   bool statechanged; /** @brief This contains a bool that keeps track of whether
                         or not the process state has changed.*/
+
+  int exit_status; /** @brief Exit status of process, if exited normally, -1 if
+                      not exited.*/
+  int term_signal; /** @brief Signal number that caused process to terminate, -1
+                      if not terminated */
+  bool waiting_for_change; /** @brief Bool describing whether or not the process
+                              is currently waiting on a process.*/
+  pid_t waiting_on_pid;    /** @brief PID of the child the process is currently
+                              waiting on, or -1 if none */
+  unsigned int ticks_to_wait; /** @brief Ticks remaining to wait, used only for
+                                 s_sleep calls */
 } pcb_t;
 
 /**

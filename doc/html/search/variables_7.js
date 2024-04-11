@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['is_5fbackground_0',['is_background',['../dd/d3e/structparsed__command.html#aadb3fa66ab1542768beba9f19b075a94',1,'parsed_command']]],
-  ['is_5ffile_5fappend_1',['is_file_append',['../dd/d3e/structparsed__command.html#a1b74dd94f9acc82ef0d0da23123fb01c',1,'parsed_command']]]
+  ['handle_0',['handle',['../dc/d5f/structpcb__t.html#a77c89dc39ec87e1fd4cd589e2e64cc67',1,'pcb_t']]],
+  ['head_1',['head',['../de/d82/structCircularList.html#aafe5473577e9735e5a874c9e85a7ee9e',1,'CircularList::head'],['../dd/d6c/structPList.html#a01c53caacf826c1ca6477d1f3a08abb2',1,'PList::head']]]
 ];

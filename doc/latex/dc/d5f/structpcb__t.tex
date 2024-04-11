@@ -28,7 +28,17 @@ unsigned int \mbox{\hyperlink{structpcb__t_a2a5d945da32720d61039f315ab64f527}{pr
 \mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structpcb__t_a53ab4c02de07bcca467dff05771554a0}{open\+\_\+fds}}
 \begin{DoxyCompactList}\small\item\em This is an enum storing the process\textquotesingle{}s current state. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{structpcb__t_a09cd01a482977b7d568726b57e3adeda}{statechanged}}
-\begin{DoxyCompactList}\small\item\em This stores a bitmap containg all open file descriptors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This stores a bitmap containg all open file descriptors. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structpcb__t_a649db56ea039615cb6e9a2c9ac0a5059}{exit\+\_\+status}}
+\begin{DoxyCompactList}\small\item\em This contains a bool that keeps track of whether or not the process state has changed. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structpcb__t_a4e5283318d9e2dd1ab7913420044e65e}{term\+\_\+signal}}
+\begin{DoxyCompactList}\small\item\em Exit status of process, if exited normally, -\/1 if not exited. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structpcb__t_afe6d29b30076d8ce910611fba812ccb5}{waiting\+\_\+for\+\_\+change}}
+\begin{DoxyCompactList}\small\item\em Signal number that caused process to terminate, -\/1 if not terminated. \end{DoxyCompactList}\item 
+pid\+\_\+t \mbox{\hyperlink{structpcb__t_ae5e37dd9ae11e9c941410b719ec2e41d}{waiting\+\_\+on\+\_\+pid}}
+\begin{DoxyCompactList}\small\item\em Bool describing whether or not the process is currently waiting on a process. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structpcb__t_a1a470d3da5aa9e6d87d2849d3228239c}{ticks\+\_\+to\+\_\+wait}}
+\begin{DoxyCompactList}\small\item\em PID of the child the process is currently waiting on, or -\/1 if none. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -44,6 +54,16 @@ This structure stores all required information about a running process.
 
 
 This stores the PPID of the process. 
+
+\Hypertarget{structpcb__t_a649db56ea039615cb6e9a2c9ac0a5059}\label{structpcb__t_a649db56ea039615cb6e9a2c9ac0a5059} 
+\index{pcb\_t@{pcb\_t}!exit\_status@{exit\_status}}
+\index{exit\_status@{exit\_status}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{exit\_status}{exit\_status}}
+{\footnotesize\ttfamily int pcb\+\_\+t\+::exit\+\_\+status}
+
+
+
+This contains a bool that keeps track of whether or not the process state has changed. 
 
 \Hypertarget{structpcb__t_a77c89dc39ec87e1fd4cd589e2e64cc67}\label{structpcb__t_a77c89dc39ec87e1fd4cd589e2e64cc67} 
 \index{pcb\_t@{pcb\_t}!handle@{handle}}
@@ -111,6 +131,46 @@ This the priority level of the process. (0, 1, or 2).
 
 
 This stores a bitmap containg all open file descriptors. 
+
+\Hypertarget{structpcb__t_a4e5283318d9e2dd1ab7913420044e65e}\label{structpcb__t_a4e5283318d9e2dd1ab7913420044e65e} 
+\index{pcb\_t@{pcb\_t}!term\_signal@{term\_signal}}
+\index{term\_signal@{term\_signal}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{term\_signal}{term\_signal}}
+{\footnotesize\ttfamily int pcb\+\_\+t\+::term\+\_\+signal}
+
+
+
+Exit status of process, if exited normally, -\/1 if not exited. 
+
+\Hypertarget{structpcb__t_a1a470d3da5aa9e6d87d2849d3228239c}\label{structpcb__t_a1a470d3da5aa9e6d87d2849d3228239c} 
+\index{pcb\_t@{pcb\_t}!ticks\_to\_wait@{ticks\_to\_wait}}
+\index{ticks\_to\_wait@{ticks\_to\_wait}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{ticks\_to\_wait}{ticks\_to\_wait}}
+{\footnotesize\ttfamily unsigned int pcb\+\_\+t\+::ticks\+\_\+to\+\_\+wait}
+
+
+
+PID of the child the process is currently waiting on, or -\/1 if none. 
+
+\Hypertarget{structpcb__t_afe6d29b30076d8ce910611fba812ccb5}\label{structpcb__t_afe6d29b30076d8ce910611fba812ccb5} 
+\index{pcb\_t@{pcb\_t}!waiting\_for\_change@{waiting\_for\_change}}
+\index{waiting\_for\_change@{waiting\_for\_change}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{waiting\_for\_change}{waiting\_for\_change}}
+{\footnotesize\ttfamily bool pcb\+\_\+t\+::waiting\+\_\+for\+\_\+change}
+
+
+
+Signal number that caused process to terminate, -\/1 if not terminated. 
+
+\Hypertarget{structpcb__t_ae5e37dd9ae11e9c941410b719ec2e41d}\label{structpcb__t_ae5e37dd9ae11e9c941410b719ec2e41d} 
+\index{pcb\_t@{pcb\_t}!waiting\_on\_pid@{waiting\_on\_pid}}
+\index{waiting\_on\_pid@{waiting\_on\_pid}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{waiting\_on\_pid}{waiting\_on\_pid}}
+{\footnotesize\ttfamily pid\+\_\+t pcb\+\_\+t\+::waiting\+\_\+on\+\_\+pid}
+
+
+
+Bool describing whether or not the process is currently waiting on a process. 
 
 
 

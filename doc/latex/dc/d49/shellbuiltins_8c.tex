@@ -10,6 +10,8 @@
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06}{b\+\_\+sleep}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Sleep for {\ttfamily n} seconds. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a184a1be3455442bda9bbd0789e438481}{b\+\_\+logout}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Exits the shell and shutsdown Penn\+OS. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -25,4 +27,16 @@ void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a184a1be345544
 
 Exits the shell and shutsdown Penn\+OS. 
 
-Example Usage\+: logout 
+Example Usage\+: logout \Hypertarget{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06}\label{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06} 
+\index{shellbuiltins.c@{shellbuiltins.c}!b\_sleep@{b\_sleep}}
+\index{b\_sleep@{b\_sleep}!shellbuiltins.c@{shellbuiltins.c}}
+\doxysubsubsection{\texorpdfstring{b\_sleep()}{b\_sleep()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+sleep (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Sleep for {\ttfamily n} seconds. 
+
+Note that you\textquotesingle{}ll have to convert the number of seconds to the correct number of ticks.
+
+Example Usage\+: sleep 10 

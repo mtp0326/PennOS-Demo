@@ -85,6 +85,7 @@ pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
     free(arg);
     return -1;
   }
+
   return (child->pid);
 }
 
@@ -130,7 +131,7 @@ pid_t s_spawn_nice(void* (*func)(void*),
   return (child->pid);
 }
 
-pid_t s_waitpid(pid_t pid, process_state_t* wstatus, bool nohang) {
+pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
   pcb_t* child_pcb;
   if (find_process(processes[0], pid) != NULL) {
     child_pcb = find_process(processes[0], pid);
@@ -142,10 +143,10 @@ pid_t s_waitpid(pid_t pid, process_state_t* wstatus, bool nohang) {
     return -1;
   }
 
-  // if nohange, return immediately
+  // if nohang, return immediately
   if (nohang) {
     if (child_pcb->state == ZOMBIED) {
-      *wstatus = ZOMBIED;
+      *wstatus = 0;
       return pid;
     } else {
       return -1;
@@ -154,17 +155,44 @@ pid_t s_waitpid(pid_t pid, process_state_t* wstatus, bool nohang) {
 
   // if child already changed state
   if (child_pcb->statechanged) {
-    *wstatus = child_pcb->state;
+    if (child_pcb->state == ZOMBIED) {
+      if (child_pcb->term_signal != -1) {
+        *wstatus = STATUS_SIGNALED;
+      } else {
+        *wstatus = STATUS_EXITED;
+      }
+    } else if (child_pcb->state == STOPPED) {
+      *wstatus = STATUS_STOPPED;
+    } else {
+      // became blocked? edstem #730 will define spec
+    }
     return pid;
   }
 
   // else, block self until state change
   current->state = BLOCKED;
+  current->waiting_for_change = true;
+  current->waiting_on_pid = child_pcb->pid;
   remove_process(processes[current->priority],
                  current->pid);   // remove process from running processes
   add_process(blocked, current);  // add process to list of blocked processes
 
-  // INCOMPLETE
+  while (current->state == BLOCKED) {
+    ;  // loop infintely (for remainder of quantum)
+  }
+
+  child_pcb->statechanged = false;
+  if (child_pcb->state == ZOMBIED) {
+    if (child_pcb->term_signal != -1) {
+      *wstatus = STATUS_SIGNALED;
+    } else {
+      *wstatus = STATUS_EXITED;
+    }
+  } else if (child_pcb->state == STOPPED) {
+    *wstatus = STATUS_STOPPED;
+  } else {
+    // became blocked? edstem #730 will define spec
+  }
 
   return pid;
 }
@@ -191,4 +219,18 @@ int s_nice(pid_t pid, int priority) {
   return 0;
 }
 
-void s_sleep(unsigned int ticks);
+void s_sleep(unsigned int ticks) {
+  if (ticks <= 0) {
+    return;
+  }
+
+  current->ticks_to_wait = ticks;
+
+  current->state = BLOCKED;
+  remove_process(processes[current->priority], current->pid);
+  add_process(blocked, current);
+  while (current->state == BLOCKED) {
+    ;  // do nothing for rest of quantum
+  }
+  return;
+}

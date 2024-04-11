@@ -98,9 +98,9 @@ Functions</h2></td></tr>
 <tr class="separator:a43b789c710ba1501bcd8cf54e4382e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62b97025761b7f8ad7e59b641cad08d6" id="r_a62b97025761b7f8ad7e59b641cad08d6"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62b97025761b7f8ad7e59b641cad08d6">s_spawn_nice</a> (void *(*func)(void *), char *argv[], int fd0, int fd1, unsigned int <a class="el" href="../../d8/d75/pennos_8c.html#a2e0cca4a43c21259b881d59c96c74fe0">priority</a>)</td></tr>
 <tr class="separator:a62b97025761b7f8ad7e59b641cad08d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae073b5d4f1fae198ea259cd56b9d74d0" id="r_ae073b5d4f1fae198ea259cd56b9d74d0"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae073b5d4f1fae198ea259cd56b9d74d0">s_waitpid</a> (pid_t pid, <a class="el" href="../../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854">process_state_t</a> *wstatus, bool nohang)</td></tr>
-<tr class="memdesc:ae073b5d4f1fae198ea259cd56b9d74d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait on a child of the calling process, until it changes state. If <code>nohang</code> is true, this will not block the calling process and return immediately.  <br /></td></tr>
-<tr class="separator:ae073b5d4f1fae198ea259cd56b9d74d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c0c6c4ae69799354d707ff57ac925d3" id="r_a3c0c6c4ae69799354d707ff57ac925d3"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c0c6c4ae69799354d707ff57ac925d3">s_waitpid</a> (pid_t pid, int *wstatus, bool nohang)</td></tr>
+<tr class="memdesc:a3c0c6c4ae69799354d707ff57ac925d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait on a child of the calling process, until it changes state. If <code>nohang</code> is true, this will not block the calling process and return immediately.  <br /></td></tr>
+<tr class="separator:a3c0c6c4ae69799354d707ff57ac925d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18e6794b108eea25459bd7fe31de4e76" id="r_a18e6794b108eea25459bd7fe31de4e76"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18e6794b108eea25459bd7fe31de4e76">s_kill</a> (pid_t pid, int signal)</td></tr>
 <tr class="separator:a18e6794b108eea25459bd7fe31de4e76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53c8865d5bf1ca946e5b5405190f6690" id="r_a53c8865d5bf1ca946e5b5405190f6690"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53c8865d5bf1ca946e5b5405190f6690">s_exit</a> (void)</td></tr>
@@ -109,6 +109,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ac711d33fcf2573a590b224b6debab996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the priority of the specified thread.  <br /></td></tr>
 <tr class="separator:ac711d33fcf2573a590b224b6debab996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec37528a3c7935864924764d1911126c" id="r_aec37528a3c7935864924764d1911126c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec37528a3c7935864924764d1911126c">s_sleep</a> (unsigned int ticks)</td></tr>
+<tr class="memdesc:aec37528a3c7935864924764d1911126c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suspends execution of the calling proces for a specified number of clock ticks.  <br /></td></tr>
 <tr class="separator:aec37528a3c7935864924764d1911126c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -230,6 +231,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Suspends execution of the calling proces for a specified number of clock ticks. </p>
+<p>This function is analogous to <code>sleep(3)</code> in Linux, with the behavior that the system clock continues to tick even if the call is interrupted. The sleep can be interrupted by a P_SIGTERM signal, after which the function will return prematurely.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ticks</td><td>Duration of the sleep in system clock ticks. Must be greater than 0. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a43b789c710ba1501bcd8cf54e4382e50" name="a43b789c710ba1501bcd8cf54e4382e50"></a>
@@ -311,8 +321,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae073b5d4f1fae198ea259cd56b9d74d0" name="ae073b5d4f1fae198ea259cd56b9d74d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae073b5d4f1fae198ea259cd56b9d74d0">&#9670;&#160;</a></span>s_waitpid()</h2>
+<a id="a3c0c6c4ae69799354d707ff57ac925d3" name="a3c0c6c4ae69799354d707ff57ac925d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c0c6c4ae69799354d707ff57ac925d3">&#9670;&#160;</a></span>s_waitpid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -325,7 +335,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854">process_state_t</a> *</td>          <td class="paramname"><span class="paramname"><em>wstatus</em>, </span></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>wstatus</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
