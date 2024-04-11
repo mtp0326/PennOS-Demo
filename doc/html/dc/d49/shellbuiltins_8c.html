@@ -99,6 +99,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a371b3588a8f8a231c10f75b0ea84926f" id="r_a371b3588a8f8a231c10f75b0ea84926f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a371b3588a8f8a231c10f75b0ea84926f">b_kill</a> (void *arg)</td></tr>
 <tr class="memdesc:a371b3588a8f8a231c10f75b0ea84926f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a specified signal to a list of processes. If a signal name is not specified, default to "term". Valid signals are -term, -stop, and -cont.  <br /></td></tr>
 <tr class="separator:a371b3588a8f8a231c10f75b0ea84926f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f61e992d66c53f4383b37699dab6ef3" id="r_a9f61e992d66c53f4383b37699dab6ef3"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f61e992d66c53f4383b37699dab6ef3">b_nice_pid</a> (void *arg)</td></tr>
+<tr class="memdesc:a9f61e992d66c53f4383b37699dab6ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjust the priority level of an existing process.  <br /></td></tr>
+<tr class="separator:a9f61e992d66c53f4383b37699dab6ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a184a1be3455442bda9bbd0789e438481" id="r_a184a1be3455442bda9bbd0789e438481"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a184a1be3455442bda9bbd0789e438481">b_logout</a> (void *arg)</td></tr>
 <tr class="memdesc:a184a1be3455442bda9bbd0789e438481"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exits the shell and shutsdown PennOS.  <br /></td></tr>
 <tr class="separator:a184a1be3455442bda9bbd0789e438481"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,6 +144,26 @@ Functions</h2></td></tr>
 
 <p>Exits the shell and shutsdown PennOS. </p>
 <p>Example Usage: logout </p>
+
+</div>
+</div>
+<a id="a9f61e992d66c53f4383b37699dab6ef3" name="a9f61e992d66c53f4383b37699dab6ef3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f61e992d66c53f4383b37699dab6ef3">&#9670;&#160;</a></span>b_nice_pid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * b_nice_pid </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adjust the priority level of an existing process. </p>
+<p>Example Usage: nice_pid 0 123 (sets priority 0 to PID 123) </p>
 
 </div>
 </div>

@@ -113,7 +113,12 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "nice") == 0) {
         // TODO;
       } else if (strcmp(args[0], "nice_pid") == 0) {
-        // TODO: Call your implemented nice_pid() function
+        pid_t child = s_spawn(b_nice_pid, args, STDIN_FILENO, STDOUT_FILENO);
+        int wstatus = 0;
+        pcb_t* child_pcb = find_process(zombied, child);
+        s_waitpid(child, &wstatus, false);
+        remove_process(zombied, child);
+        k_proc_cleanup(child_pcb);
       } else if (strcmp(args[0], "man") == 0) {
         // TODO: Call your implemented man() function
       } else if (strcmp(args[0], "bg") == 0) {

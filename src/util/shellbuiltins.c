@@ -50,6 +50,13 @@ void* b_kill(void* arg) {
   return NULL;
 }
 
+void* b_nice_pid(void* arg) {
+  char** argv = (char**)arg;
+  s_nice(atoi(argv[2]), atoi(argv[1]));
+  s_exit();
+  return NULL;
+}
+
 void* b_logout(void* arg) {
   done = true;
   return NULL;

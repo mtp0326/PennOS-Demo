@@ -203,10 +203,6 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
 
   spthread_suspend_self();
 
-  sprintf(buf, "[%4u]\tUNBLOCKED\t%4u\t%4u\t%s\n", tick, current->pid,
-          current->priority, current->processname);
-  write(logfiledescriptor, buf, strlen(buf));
-
   child_pcb->statechanged = false;
   if (child_pcb->state == ZOMBIED) {
     if (child_pcb->term_signal != -1) {
@@ -295,16 +291,26 @@ int s_nice(pid_t pid, int priority) {
   pcb_t* pcb;
   if (find_process(processes[0], pid) != NULL) {
     pcb = find_process(processes[0], pid);
+    remove_process(processes[pcb->priority], pid);
+    add_process(processes[priority], pcb);
   } else if (find_process(processes[1], pid) != NULL) {
     pcb = find_process(processes[1], pid);
+    remove_process(processes[pcb->priority], pid);
+    add_process(processes[priority], pcb);
   } else if (find_process(processes[2], pid) != NULL) {
     pcb = find_process(processes[2], pid);
-  } else {
-    return -1;
+    remove_process(processes[pcb->priority], pid);
+    add_process(processes[priority], pcb);
+  } else if (find_process(blocked, pid) != NULL) {
+    pcb = find_process(blocked, pid);
+    pcb->priority = priority;
+  } else if (find_process(stopped, pid) != NULL) {
+    pcb = find_process(stopped, pid);
+    pcb->priority = priority;
+  } else if (find_process(zombied, pid) != NULL) {
+    pcb = find_process(zombied, pid);
+    pcb->priority = priority;
   }
-
-  remove_process(processes[pcb->priority], pid);
-  add_process(processes[priority], pcb);
 
   return 0;
 }

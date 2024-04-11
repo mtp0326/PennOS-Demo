@@ -14,6 +14,8 @@ void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a8caa9d892fd52
 \begin{DoxyCompactList}\small\item\em Sleep for {\ttfamily n} seconds. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a371b3588a8f8a231c10f75b0ea84926f}{b\+\_\+kill}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Sends a specified signal to a list of processes. If a signal name is not specified, default to "{}term"{}. Valid signals are -\/term, -\/stop, and -\/cont. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a9f61e992d66c53f4383b37699dab6ef3}{b\+\_\+nice\+\_\+pid}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Adjust the priority level of an existing process. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a184a1be3455442bda9bbd0789e438481}{b\+\_\+logout}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Exits the shell and shutsdown Penn\+OS. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -39,7 +41,17 @@ Example Usage\+: kill 1 2 3 (sends term to processes 1, 2, and 3) Example Usage\
 
 Exits the shell and shutsdown Penn\+OS. 
 
-Example Usage\+: logout \Hypertarget{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06}\label{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06} 
+Example Usage\+: logout \Hypertarget{shellbuiltins_8c_a9f61e992d66c53f4383b37699dab6ef3}\label{shellbuiltins_8c_a9f61e992d66c53f4383b37699dab6ef3} 
+\index{shellbuiltins.c@{shellbuiltins.c}!b\_nice\_pid@{b\_nice\_pid}}
+\index{b\_nice\_pid@{b\_nice\_pid}!shellbuiltins.c@{shellbuiltins.c}}
+\doxysubsubsection{\texorpdfstring{b\_nice\_pid()}{b\_nice\_pid()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+nice\+\_\+pid (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Adjust the priority level of an existing process. 
+
+Example Usage\+: nice\+\_\+pid 0 123 (sets priority 0 to PID 123) \Hypertarget{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06}\label{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06} 
 \index{shellbuiltins.c@{shellbuiltins.c}!b\_sleep@{b\_sleep}}
 \index{b\_sleep@{b\_sleep}!shellbuiltins.c@{shellbuiltins.c}}
 \doxysubsubsection{\texorpdfstring{b\_sleep()}{b\_sleep()}}
