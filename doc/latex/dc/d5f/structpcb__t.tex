@@ -38,7 +38,9 @@ bool \mbox{\hyperlink{structpcb__t_afe6d29b30076d8ce910611fba812ccb5}{waiting\+\
 pid\+\_\+t \mbox{\hyperlink{structpcb__t_ae5e37dd9ae11e9c941410b719ec2e41d}{waiting\+\_\+on\+\_\+pid}}
 \begin{DoxyCompactList}\small\item\em Bool describing whether or not the process is currently waiting on a process. \end{DoxyCompactList}\item 
 unsigned int \mbox{\hyperlink{structpcb__t_a1a470d3da5aa9e6d87d2849d3228239c}{ticks\+\_\+to\+\_\+wait}}
-\begin{DoxyCompactList}\small\item\em PID of the child the process is currently waiting on, or -\/1 if none. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em PID of the child the process is currently waiting on, or -\/1 if none. \end{DoxyCompactList}\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structpcb__t_abc136142080bdf5d6d5f430851e6d052}{processname}}
+\begin{DoxyCompactList}\small\item\em Ticks remaining to wait, used only for s\+\_\+sleep calls. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -111,6 +113,16 @@ This stores the PID of the process.
 
 
 This stores a pointer to a dynamically sized array of child pid\+\_\+t\textquotesingle{}s. 
+
+\Hypertarget{structpcb__t_abc136142080bdf5d6d5f430851e6d052}\label{structpcb__t_abc136142080bdf5d6d5f430851e6d052} 
+\index{pcb\_t@{pcb\_t}!processname@{processname}}
+\index{processname@{processname}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{processname}{processname}}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} pcb\+\_\+t\+::processname}
+
+
+
+Ticks remaining to wait, used only for s\+\_\+sleep calls. 
 
 \Hypertarget{structpcb__t_a3ef7954f8714e8157ea82a5063ecdfed}\label{structpcb__t_a3ef7954f8714e8157ea82a5063ecdfed} 
 \index{pcb\_t@{pcb\_t}!state@{state}}

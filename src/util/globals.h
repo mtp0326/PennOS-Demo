@@ -16,6 +16,10 @@ extern CircularList* zombied;
 extern pcb_t* current;
 
 extern pid_t next_pid;  // idk, i guess redefine this if you want to reuse pcbs?
-                        // i have no strong urge to write that function
+// i have no strong urge to write that function
+
+extern int logfiledescriptor;
+
+extern unsigned int tick;
 
 #endif

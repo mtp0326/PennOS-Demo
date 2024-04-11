@@ -71,6 +71,8 @@ typedef struct pcb_t {
                               waiting on, or -1 if none */
   unsigned int ticks_to_wait; /** @brief Ticks remaining to wait, used only for
                                  s_sleep calls */
+
+  char* processname;
 } pcb_t;
 
 /**

@@ -86,6 +86,15 @@ pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
     return -1;
   }
 
+  child->processname =
+      (char*)malloc(sizeof(char) * (strlen(child_argv[0]) + 1));
+  strcpy(child->processname, child_argv[0]);
+
+  char buf[100];
+  sprintf(buf, "[%4u]\tCREATE\t%4u\t%4u\t%s\n", tick, child->pid,
+          child->priority, child_argv[0]);
+  write(logfiledescriptor, buf, strlen(buf));
+
   return (child->pid);
 }
 
@@ -128,6 +137,16 @@ pid_t s_spawn_nice(void* (*func)(void*),
     free(arg);
     return -1;
   }
+
+  child->processname =
+      (char*)malloc(sizeof(char) * (strlen(child_argv[0]) + 1));
+  strcpy(child->processname, child_argv[0]);
+
+  char buf[100];
+  sprintf(buf, "[%4u]\tCREATE\t%4u\t%4u\t%s\n", tick, child->pid,
+          child->priority, child_argv[0]);
+  write(logfiledescriptor, buf, strlen(buf));
+
   return (child->pid);
 }
 
@@ -191,6 +210,11 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
   } else {
     // became blocked? edstem #730 will define spec
   }
+
+  char buf[100];
+  sprintf(buf, "[%4u]\tWAITED\t%4u\t%4u\t%s\n", tick, child_pcb->pid,
+          child_pcb->priority, child_pcb->processname);
+  write(logfiledescriptor, buf, strlen(buf));
 
   return pid;
 }

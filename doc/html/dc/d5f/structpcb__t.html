@@ -126,6 +126,9 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a1a470d3da5aa9e6d87d2849d3228239c" id="r_a1a470d3da5aa9e6d87d2849d3228239c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a470d3da5aa9e6d87d2849d3228239c">ticks_to_wait</a></td></tr>
 <tr class="memdesc:a1a470d3da5aa9e6d87d2849d3228239c"><td class="mdescLeft">&#160;</td><td class="mdescRight">PID of the child the process is currently waiting on, or -1 if none.  <br /></td></tr>
 <tr class="separator:a1a470d3da5aa9e6d87d2849d3228239c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc136142080bdf5d6d5f430851e6d052" id="r_abc136142080bdf5d6d5f430851e6d052"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc136142080bdf5d6d5f430851e6d052">processname</a></td></tr>
+<tr class="memdesc:abc136142080bdf5d6d5f430851e6d052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ticks remaining to wait, used only for s_sleep calls.  <br /></td></tr>
+<tr class="separator:abc136142080bdf5d6d5f430851e6d052"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This structure stores all required information about a running process. </p>
@@ -238,6 +241,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This stores a pointer to a dynamically sized array of child pid_t's. </p>
+
+</div>
+</div>
+<a id="abc136142080bdf5d6d5f430851e6d052" name="abc136142080bdf5d6d5f430851e6d052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc136142080bdf5d6d5f430851e6d052">&#9670;&#160;</a></span>processname</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* pcb_t::processname</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ticks remaining to wait, used only for s_sleep calls. </p>
 
 </div>
 </div>

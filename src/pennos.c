@@ -133,8 +133,6 @@ static void* shell(void* arg) {
 static void alarm_handler(int signum) {}
 
 void scheduler(char* logfile) {
-  unsigned int tick = 0;
-
   char buf[100];
 
   sigset_t suspend_set;
@@ -167,8 +165,19 @@ void scheduler(char* logfile) {
   spthread_t curr_thread;
   // locks to check the global value done
   int file = open(logfile, O_CREAT | O_TRUNC | O_RDWR, 0666);
-
+  logfiledescriptor = file;
   pthread_mutex_lock(&done_lock);
+
+  pcb_t* place = malloc(sizeof(pcb_t));
+  place->priority = 0;
+  place->pid = 0;
+  place->child_pids = dynamic_pid_array_create(4);
+  current = place;
+  char** arg = malloc(2 * sizeof(char*));  // Space for 3 pointers
+  arg[0] = strdup("shell");  // strdup allocates new memory for the string
+  arg[1] = NULL;             // Terminate the array
+
+  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, 0);
 
   // main loop
   while (!done) {
@@ -245,13 +254,14 @@ void scheduler(char* logfile) {
       CircularList* current_priority = processes[priority->head->priority];
       current = current_priority->head->process;
       curr_thread = current->handle;
-
+      sprintf(buf, "[%4u]\tSCHEDULE\t%4u\t%4u\t%s\n", tick, current->pid,
+              current->priority, current->processname);
+      write(logfiledescriptor, buf, strlen(buf));
       spthread_continue(curr_thread);
       sigsuspend(&suspend_set);
       spthread_suspend(curr_thread);
       tick++;
-      sprintf(buf, "[%4u]\t CREATE\n", tick);
-      write(file, buf, strlen(buf));
+
       if (current_priority->size != 0) {
         current_priority->head = current_priority->head->next;
       }
@@ -317,17 +327,6 @@ int main(int argc, char** argv) {
   add_priority(priority, 2);
   add_priority(priority, 1);
   add_priority(priority, 0);
-
-  pcb_t* place = malloc(sizeof(pcb_t));
-  place->priority = 0;
-  place->pid = 0;
-  place->child_pids = dynamic_pid_array_create(4);
-  current = place;
-  char** arg = malloc(2 * sizeof(char*));  // Space for 3 pointers
-  arg[0] = strdup("shell");  // strdup allocates new memory for the string
-  arg[1] = NULL;             // Terminate the array
-
-  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, 0);
 
   scheduler(log);
 
