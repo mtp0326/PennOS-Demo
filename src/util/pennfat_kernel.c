@@ -528,6 +528,7 @@ void extend_fat(int start_index, int empty_fat_index) {
 
 void write_one_byte_in_while(int bytes_left,
                              int size,
+                             int true_offset,
                              int* size_increment,
                              int* bytes_written,
                              int* current_offset,
@@ -555,12 +556,12 @@ void write_one_byte_in_while(int bytes_left,
 
     write(fs_fd, str + *bytes_written, 1);
 
-    if (*current_offset >= size) {
+    if (true_offset >= size) {
       *size_increment += 1;
     }
     *bytes_written += 1;
     bytes_left -= 1;
-
+    true_offset += 1;
     *current_offset += 1;
   }
 }
@@ -628,6 +629,9 @@ ssize_t k_write(int fd, const char* str, int n) {
   if (mode == 0) {
     // we need to lseek to where we want to write
     uint16_t curr_block = firstBlock;
+
+    int true_offset = offset;
+
     // move to the correct block
     while (offset > block_size && curr_block != 0xFFFF) {
       curr_block = fat[curr_block];
@@ -646,8 +650,9 @@ ssize_t k_write(int fd, const char* str, int n) {
     int size_increment = 0;
     // for bytes_written and current_offset, we send in a pointer to the
     // variable so that we modify it during writing
-    write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                            &bytes_written, &current_offset, str, firstBlock);
+    write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                            &size_increment, &bytes_written, &current_offset,
+                            str, firstBlock);
 
     update_directory_entry_after_write(curr_de, fname, size_increment);
 
@@ -663,6 +668,8 @@ ssize_t k_write(int fd, const char* str, int n) {
     // we need to move the offset to the eof if this is in F_APPEND mode
     // the offset in the fd doesn't matter here
     uint32_t append_offset = curr_de->size;
+
+    int true_offset = curr_de->size;
 
     // we need to lseek to where we want to write
     uint16_t curr_block = firstBlock;
@@ -683,8 +690,9 @@ ssize_t k_write(int fd, const char* str, int n) {
     int size_increment = 0;
     // for bytes_written and current_offset, we send in a pointer to the
     // variable so that we modify it during writing
-    write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                            &bytes_written, &current_offset, str, firstBlock);
+    write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                            &size_increment, &bytes_written, &current_offset,
+                            str, firstBlock);
 
     update_directory_entry_after_write(curr_de, fname, size_increment);
 
@@ -799,6 +807,8 @@ off_t k_lseek(int fd, int offset, int whence) {
 
       uint32_t append_offset = curr_de->size;
 
+      int true_offset = curr_de->size;
+
       uint16_t curr_block = curr_de->firstBlock;
 
       while (append_offset > block_size && curr_block != 0xFFFF) {
@@ -817,9 +827,9 @@ off_t k_lseek(int fd, int offset, int whence) {
       int size_increment = 0;
       // for bytes_written and current_offset, we send in a pointer to the
       // variable so that we modify it during writing
-      write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                              &bytes_written, &current_offset, str,
-                              curr_de->firstBlock);
+      write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                              &size_increment, &bytes_written, &current_offset,
+                              str, curr_de->firstBlock);
 
       update_directory_entry_after_write(curr_de, curr_fd->fname,
                                          size_increment);
@@ -842,6 +852,8 @@ off_t k_lseek(int fd, int offset, int whence) {
     if (new_offset > curr_size) {
       uint32_t append_offset = curr_de->size;
 
+      int true_offset = curr_de->size;
+
       uint16_t curr_block = curr_de->firstBlock;
 
       while (append_offset > block_size && curr_block != 0xFFFF) {
@@ -860,9 +872,9 @@ off_t k_lseek(int fd, int offset, int whence) {
       int size_increment = 0;
       // for bytes_written and current_offset, we send in a pointer to the
       // variable so that we modify it during writing
-      write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                              &bytes_written, &current_offset, str,
-                              curr_de->firstBlock);
+      write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                              &size_increment, &bytes_written, &current_offset,
+                              str, curr_de->firstBlock);
 
       update_directory_entry_after_write(curr_de, curr_fd->fname,
                                          size_increment);
@@ -878,6 +890,8 @@ off_t k_lseek(int fd, int offset, int whence) {
     // we always need to extend this file
     // it's like appending "offset" to this file
     uint32_t append_offset = curr_de->size;
+
+    int true_offset = curr_de->size;
 
     uint16_t curr_block = curr_de->firstBlock;
 
@@ -897,9 +911,9 @@ off_t k_lseek(int fd, int offset, int whence) {
     int size_increment = 0;
     // for bytes_written and current_offset, we send in a pointer to the
     // variable so that we modify it during writing
-    write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                            &bytes_written, &current_offset, str,
-                            curr_de->firstBlock);
+    write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                            &size_increment, &bytes_written, &current_offset,
+                            str, curr_de->firstBlock);
 
     update_directory_entry_after_write(curr_de, curr_fd->fname, size_increment);
   }
