@@ -45,7 +45,7 @@ void int_handler(int signo) {
 
 void initialize_global_fd_table() {
   // create an array of file_descriptor_st
-  global_fd_table = malloc(sizeof(struct file_descriptor_st) * MAX_FD_NUM);
+  global_fd_table = calloc(1, sizeof(struct file_descriptor_st) * MAX_FD_NUM);
 
   if (global_fd_table == NULL) {
     fprintf(stderr, "Memory allocation failed\n");

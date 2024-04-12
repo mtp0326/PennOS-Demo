@@ -193,7 +193,7 @@ struct directory_entries* does_file_exist(const char* fname) {
       for (int i = 0; i < num_directories_per_block;
            i++) {  // check each directory in block
         if (!found) {
-          temp = malloc(sizeof(struct directory_entries));
+          temp = calloc(1, sizeof(struct directory_entries));
           read(fs_fd, temp, sizeof(struct directory_entries));
           // fprintf(stderr, "temp name: %s\n", temp->name);
           if (strcmp(temp->name, fname) == 0) {
@@ -210,7 +210,7 @@ struct directory_entries* does_file_exist(const char* fname) {
       for (int i = 0; i < num_directories_per_block;
            i++) {  // check each directory in block
         if (!found) {
-          temp = malloc(sizeof(struct directory_entries));
+          temp = calloc(1, sizeof(struct directory_entries));
           lseek(fs_fd, 0, SEEK_CUR);
           // fprintf(stderr, "offset3: %ld\n", current_offset3);
           read(fs_fd, temp, sizeof(struct directory_entries));
@@ -341,7 +341,7 @@ off_t does_file_exist2(const char* fname) {
 
     // we should be at the correct offset for fs_fd to read the next directory
     // entry
-    temp = malloc(sizeof(struct directory_entries));
+    temp = calloc(1, sizeof(struct directory_entries));
     read(fs_fd, temp, sizeof(struct directory_entries));
     if (strcmp(temp->name, fname) == 0) {
       found = true;
@@ -382,7 +382,8 @@ struct file_descriptor_st* create_file_descriptor(int fd,
                                                   char* fname,
                                                   int mode,
                                                   int offset) {
-  struct file_descriptor_st* new_fd = malloc(sizeof(struct file_descriptor_st));
+  struct file_descriptor_st* new_fd =
+      calloc(1, sizeof(struct file_descriptor_st));
 
   if (new_fd == NULL) {
     perror("Memory allocation failed\n");
@@ -937,7 +938,7 @@ char* formatTime(time_t t) {
 }
 
 void k_ls(const char* filename) {
-  struct directory_entries* temp = malloc(sizeof(struct directory_entries));
+  struct directory_entries* temp = calloc(1, sizeof(struct directory_entries));
   if (filename == NULL) {
     // fprintf(stderr, "k_ls: the param is NULL here\n");
 
@@ -1152,7 +1153,7 @@ char* k_read_all(const char* filename, int* read_num) {
   }
   uint32_t file_size = curr_de->size;
   int fd = k_open(filename, 1);
-  char* contents = (char*)malloc(file_size);
+  char* contents = (char*)calloc(1, file_size);
   int ret = k_read(fd, file_size, contents);
   // k_close(fd);
   if (ret == -1) {
