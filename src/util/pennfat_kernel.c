@@ -1040,7 +1040,7 @@ void k_rename(const char* source, const char* dest) {
     perror("k_rename error: source file not found");
     return;
   }
-  if (curr_de2 != NULL && curr_de != NULL) {
+  if (curr_de2 != NULL) {
     k_unlink(curr_de2->name);
   }
   does_file_exist2(source);
@@ -1095,7 +1095,7 @@ void k_change_mode(const char* change, const char* filename) {
       perm = 6;
     }
   } else if (strcmp(change, "-x") == 0) {
-    if (perm == 0 || perm == 2 || perm == 4 || perm == 7) {
+    if (perm == 0 || perm == 2 || perm == 4 || perm == 6) {
       perror("chmod error invalid command");
     } else if (perm == 5) {
       perm = 4;
