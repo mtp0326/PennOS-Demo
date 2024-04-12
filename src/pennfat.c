@@ -173,14 +173,14 @@ int mount(const char* fs_name) {
 int unmount() {
   // error handling if no currently mounted fs
   if (fat == NULL) {
-    perror("unexpected command");
+    perror("error: no file system mounted");
     return -1;
     // exit(EXIT_FAILURE);
   }
 
   // munmap(2) to unmount
   if (munmap(fat, fat_size) == -1) {
-    perror("munmap failed");
+    perror("error: munmap failed");
     return -1;
     // exit(EXIT_FAILURE);
   }
@@ -242,7 +242,12 @@ int get_offset_size(int block_num, int offset) {
 void touch(char** args) {
   int i = 1;
   while (args[i] != NULL) {
-    k_open(args[i], 0);
+    if (does_file_exist2(args[i]) != -1) {
+      k_update_timestamp(args[i]);
+    } else {
+      k_open(args[i], 0);
+    }
+
     i += 1;
   }
 }

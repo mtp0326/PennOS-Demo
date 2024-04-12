@@ -1020,6 +1020,19 @@ void k_ls(const char* filename) {
   return;
 }
 
+void k_update_timestamp(const char* source) {
+  struct directory_entries* curr_de = does_file_exist(source);
+  if (curr_de == NULL) {
+    perror("k_update_timestamp error: source file not found");
+    return;
+  }
+  struct directory_entries* new_de =
+      create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
+                             curr_de->type, curr_de->perm, time(NULL));
+  does_file_exist2(source);
+  write(fs_fd, new_de, 64);
+}
+
 void k_rename(const char* source, const char* dest) {
   struct directory_entries* curr_de = does_file_exist(source);
   struct directory_entries* curr_de2 = does_file_exist(dest);
