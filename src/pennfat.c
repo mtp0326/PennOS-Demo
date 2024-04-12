@@ -121,7 +121,7 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
 
 int mount(const char* fs_name) {
   if (fat != NULL) {
-    perror("unexpected command");
+    perror("error: exists an already mounted file system");
     return -1;
     // exit(EXIT_FAILURE);
   }

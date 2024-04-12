@@ -116,6 +116,10 @@ int main(int argc, char* argv[]) {
         mkfs(args[1], blocks_in_fat, block_size_config);
         // fprintf(stderr, "block size: %d\n", block_size);
       } else if (strcmp(args[0], "mount") == 0) {
+        if (args[1] == NULL) {
+          perror("error: mount requires an argument");
+          continue;
+        }
         if (mount(args[1]) != 0) {
           perror("mount error");
         } else {
@@ -124,6 +128,10 @@ int main(int argc, char* argv[]) {
         // fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
         // fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
       } else if (strcmp(args[0], "unmount") == 0) {
+        if (!mounted) {
+          perror("error: unexpected command");
+          continue;
+        }
         if (unmount() != 0) {
           perror("unmount error");
         } else {
