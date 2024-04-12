@@ -261,7 +261,7 @@ void move_to_open_de(bool found) {
         if (buffer[0] == 0 ||
             buffer[0] == 1) {  // look for first open or deleted entry
           // fprintf(stderr, "here!\n");
-          break;
+          return;
         }
         lseek(fs_fd, 64, SEEK_CUR);
       }
@@ -290,8 +290,7 @@ void move_to_open_de(bool found) {
             // update fat
             fat[curr] = next_fat_block;
             fat[next_fat_block] = 0xFFFF;
-            msync(fat, fat_size, MS_SYNC);
-            break;
+            return;
           }
           // fprintf(stderr, "hereeeee!\n");
           lseek(fs_fd, 64,

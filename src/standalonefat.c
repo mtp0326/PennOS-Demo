@@ -139,26 +139,26 @@ int main(int argc, char* argv[]) {
         }
       }
 
-      // else if (strcmp(args[0], "write") == 0) {
-      //   int fd = strtol(args[1], &ptr, base);
-      //   k_write(fd, args[2], strlen(args[2]));
-      // } else if (strcmp(args[0], "open") == 0) {
-      //   int mode = strtol(args[2], &ptr, base);
-      //   k_open(args[1], mode);
-      // } else if (strcmp(args[0], "read") == 0) {
-      //   int fd = strtol(args[1], &ptr, base);
-      //   char buffer[1000];
-      //   buffer[999] = '\0';
-      //   k_read(fd, 1000, buffer);
-      //   fprintf(stderr, "READ OUTPUT: %s\n", buffer);
-      // } else if (strcmp(args[0], "kunlink") == 0) {
-      //   k_unlink(args[1]);
-      // } else if (strcmp(args[0], "klseek") == 0) {
-      //   int fd = strtol(args[1], &ptr, base);
-      //   int offset = strtol(args[2], &ptr, base);
-      //   int whence = strtol(args[3], &ptr, base);
-      //   k_lseek(fd, offset, whence);
-      // }
+      else if (strcmp(args[0], "write") == 0) {
+        int fd = strtol(args[1], &ptr, base);
+        k_write(fd, args[2], strlen(args[2]));
+      } else if (strcmp(args[0], "open") == 0) {
+        int mode = strtol(args[2], &ptr, base);
+        k_open(args[1], mode);
+      } else if (strcmp(args[0], "read") == 0) {
+        int fd = strtol(args[1], &ptr, base);
+        char buffer[1000];
+        buffer[999] = '\0';
+        k_read(fd, 1000, buffer);
+        fprintf(stderr, "READ OUTPUT: %s\n", buffer);
+      } else if (strcmp(args[0], "kunlink") == 0) {
+        k_unlink(args[1]);
+      } else if (strcmp(args[0], "klseek") == 0) {
+        int fd = strtol(args[1], &ptr, base);
+        int offset = strtol(args[2], &ptr, base);
+        int whence = strtol(args[3], &ptr, base);
+        k_lseek(fd, offset, whence);
+      }
 
       else {
         fprintf(stderr, "pennfat: command not found: %s\n", args[0]);
@@ -167,5 +167,6 @@ int main(int argc, char* argv[]) {
     }
     free(cmd);
   }
+  unmount();
   return EXIT_SUCCESS;
 }

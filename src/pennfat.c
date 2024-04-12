@@ -116,7 +116,7 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
     perror("write error");
     // exit(EXIT_FAILURE);
   }
-  close(fs_fd);
+  // close(fs_fd);
 }
 
 int mount(const char* fs_name) {
@@ -186,7 +186,7 @@ int unmount() {
     return -1;
     // exit(EXIT_FAILURE);
   }
-  close(fs_fd);
+  // close(fs_fd);
   fat = NULL;
   return 0;
 }
