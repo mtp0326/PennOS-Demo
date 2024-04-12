@@ -78,6 +78,9 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   }
   // call helper to get FAT size
   block_size = get_block_size(block_size_config);
+  if (block_size == -1) {
+    return;
+  }
   fat_size = get_fat_size(block_size, blocks_in_fat);
 
   num_fat_entries = get_num_fat_entries(block_size, blocks_in_fat);

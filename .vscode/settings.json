@@ -20,6 +20,7 @@
     "sys_call.h": "c",
     "signal.h": "c",
     "globals.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "functional": "c"
   }
 }
