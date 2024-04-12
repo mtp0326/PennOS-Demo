@@ -18,6 +18,14 @@ int data_size = 0;
 // we increment it afterwards
 int fd_counter = 3;
 
+void zero_out_helper(int curr) {
+  lseek(fs_fd, fat_size + block_size * (curr - 1), SEEK_SET);
+
+  char* zero_out = calloc(1, block_size);
+
+  write(fs_fd, zero_out, block_size);
+}
+
 int k_open(const char* fname, int mode) {
   int curr_fd = fd_counter;
   fd_counter++;
@@ -74,17 +82,24 @@ int k_open(const char* fname, int mode) {
         while (fat[curr] != 0xFFFF) {
           int next = fat[curr];
           fat[curr] = 0x0000;
+
+          zero_out_helper(curr);
+
           curr = next;
-          msync(fat, fat_size, MS_SYNC);
         }
         fat[curr] = 0x0000;
+
+        zero_out_helper(curr);
+
         fat[start_fat_index] = 0xFFFF;
-        msync(fat, fat_size, MS_SYNC);
+      } else {
+        zero_out_helper(start_fat_index);
       }
       // set directory entry size to 0 since truncated and write to fs_fd to
       // update
-      off_t dir_entry_offset =
-          does_file_exist2(fname);               // should be lseeked there
+
+      // should be lseeked there
+      off_t dir_entry_offset = does_file_exist2(fname);
       lseek(fs_fd, dir_entry_offset, SEEK_SET);  // get to found directory entry
       struct directory_entries* updated_de =
           create_directory_entry(dir_entry->name, 0, dir_entry->firstBlock,
@@ -765,11 +780,15 @@ int k_unlink(const char* fname) {
     while (fat[curr] != 0xFFFF) {
       int next = fat[curr];
       fat[curr] = 0x0000;
+      zero_out_helper(curr);
       curr = next;
       msync(fat, fat_size, MS_SYNC);
     }
+    zero_out_helper(curr);
     fat[curr] = 0x0000;
     msync(fat, fat_size, MS_SYNC);
+  } else {
+    zero_out_helper(curr);
   }
   return 1;
 }
@@ -962,8 +981,6 @@ char* formatTime(time_t t) {
 void k_ls(const char* filename) {
   struct directory_entries* temp = calloc(1, sizeof(struct directory_entries));
   if (filename == NULL) {
-    // fprintf(stderr, "k_ls: the param is NULL here\n");
-
     // we need to list everything in the current directory
     lseek_to_root_directory();
     int curr_root_block = 1;
