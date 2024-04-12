@@ -1063,7 +1063,7 @@ void k_ls(const char* filename) {
 void k_update_timestamp(const char* source) {
   struct directory_entries* curr_de = does_file_exist(source);
   if (curr_de == NULL) {
-    perror("k_update_timestamp error: source file not found");
+    perror("k_update_timestamp error Error: source file not found");
     return;
   }
   struct directory_entries* new_de =
@@ -1077,7 +1077,7 @@ void k_rename(const char* source, const char* dest) {
   struct directory_entries* curr_de = does_file_exist(source);
   struct directory_entries* curr_de2 = does_file_exist(dest);
   if (curr_de == NULL) {
-    perror("k_rename error: source file not found");
+    perror("k_rename error Error: source file not found");
     return;
   }
   if (curr_de2 != NULL) {
@@ -1096,7 +1096,7 @@ void k_rename(const char* source, const char* dest) {
 void k_change_mode(const char* change, const char* filename) {
   struct directory_entries* curr_de = does_file_exist(filename);
   if (curr_de == NULL) {
-    perror("k_rename error: source file not found");
+    perror("k_rename error Error: source file not found");
     return;
   }
   does_file_exist2(filename);
@@ -1104,7 +1104,7 @@ void k_change_mode(const char* change, const char* filename) {
 
   if (strcmp(change, "-r") == 0) {
     if (perm == 2 || perm == 5 || perm == 7 || perm == 0) {
-      perror("chmod error invalid command");
+      perror("chmod error Error invalid command");
     } else if (perm == 6) {
       perm = 2;
     } else if (perm == 4) {
