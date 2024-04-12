@@ -178,6 +178,8 @@ int unmount() {
     // exit(EXIT_FAILURE);
   }
 
+  msync(fat, fat_size, MS_SYNC);
+
   // munmap(2) to unmount
   if (munmap(fat, fat_size) == -1) {
     perror("error: munmap failed");

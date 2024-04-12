@@ -75,9 +75,11 @@ int k_open(const char* fname, int mode) {
           int next = fat[curr];
           fat[curr] = 0x0000;
           curr = next;
+          msync(fat, fat_size, MS_SYNC);
         }
         fat[curr] = 0x0000;
         fat[start_fat_index] = 0xFFFF;
+        msync(fat, fat_size, MS_SYNC);
       }
       // set directory entry size to 0 since truncated and write to fs_fd to
       // update
@@ -273,21 +275,22 @@ void move_to_open_de(bool found) {
         }
         lseek(fs_fd, -1, SEEK_CUR);
         // fprintf(stderr, "here1!\n");
-        if (buffer[0] == 0 ||
-            buffer[0] == 1) {  // look for first open or deleted entry
+        if (buffer[0] == 0 || buffer[0] == 1) {
+          // look for first open or deleted entry
           // fprintf(stderr, "here!\n");
           break;
         } else {
-          if (i == num_directories_per_block - 1 &&
-              !found) {  // at last directory entry of
-                         // last block and still occupied
+          if (i == num_directories_per_block - 1 && !found) {
+            // at last directory entry of
+            // last block and still occupied
             int next_fat_block = get_first_empty_fat_index();
             int offset1 = get_offset_size(next_fat_block, 0);
-            lseek(fs_fd, offset1, SEEK_SET);  // position fs_fd at new block for
-                                              // extended root directory
+            // position fs_fd at new block for extended root directory
+            lseek(fs_fd, offset1, SEEK_SET);
             // update fat
             fat[curr] = next_fat_block;
             fat[next_fat_block] = 0xFFFF;
+            msync(fat, fat_size, MS_SYNC);
             break;
           }
           // fprintf(stderr, "hereeeee!\n");
@@ -297,6 +300,7 @@ void move_to_open_de(bool found) {
       }
     }
     curr = fat[curr];  // move to next block in fat link
+
     if (curr == 0xFFFF) {
       break;
     }
@@ -524,6 +528,7 @@ void extend_fat(int start_index, int empty_fat_index) {
 
   fat[start_index] = empty_fat_index;
   fat[empty_fat_index] = 0xFFFF;
+  msync(fat, fat_size, MS_SYNC);
 }
 
 void write_one_byte_in_while(int bytes_left,
@@ -617,6 +622,7 @@ ssize_t k_write(int fd, const char* str, int n) {
     firstBlock = get_first_empty_fat_index();
     curr_de->firstBlock = firstBlock;
     fat[firstBlock] = 0xFFFF;
+    msync(fat, fat_size, MS_SYNC);
     // fprintf(stderr, "first block: %d\n", firstBlock);
   }
 
@@ -761,8 +767,10 @@ int k_unlink(const char* fname) {
       int next = fat[curr];
       fat[curr] = 0x0000;
       curr = next;
+      msync(fat, fat_size, MS_SYNC);
     }
     fat[curr] = 0x0000;
+    msync(fat, fat_size, MS_SYNC);
   }
   return 1;
 }
@@ -792,6 +800,7 @@ off_t k_lseek(int fd, int offset, int whence) {
     int firstBlock = get_first_empty_fat_index();
     curr_de->firstBlock = firstBlock;
     fat[firstBlock] = 0xFFFF;
+    msync(fat, fat_size, MS_SYNC);
     // fprintf(stderr, "first block: %d\n", firstBlock);
   }
 
