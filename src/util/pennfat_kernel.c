@@ -1012,6 +1012,7 @@ void k_ls(const char* filename) {
 
       // deleted files we don't want!
       if (temp->name[0] == 1 || temp->name[0] == 2) {
+        read_cnt += 1;
         continue;
       }
 
