@@ -245,7 +245,7 @@ Functions</h2></td></tr>
 <p>This function will parse the given <code>cmd_line</code> and store the parsed information into a <code>struct <a class="el" href="../../dd/d3e/structparsed__command.html">parsed_command</a></code>. The memory needed for the struct will be allocated by this function, and the pointer to the memory will be stored into the given <code>*result</code>.</p>
 <p>You can directly use the result in system calls. See demo for more information.</p>
 <p>If the function returns a successful value (0), a <code>struct <a class="el" href="../../dd/d3e/structparsed__command.html">parsed_command</a></code> is guareenteed to be allocated and stored in the given <code>*result</code>. It is the caller's responsibility to free the given pointer using <code>free(3)</code>.</p>
-<p>Otherwise, no <code>struct <a class="el" href="../../dd/d3e/structparsed__command.html">parsed_command</a></code> is allocated and <code>*result</code> is unchanged. If a system call error (-1) is returned, the caller can use <code>errno(3)</code> or <code>perror(3)</code> to gain more information about the error. </p>
+<p>Otherwise, no <code>struct <a class="el" href="../../dd/d3e/structparsed__command.html">parsed_command</a></code> is allocated and <code>*result</code> is unchanged. If a system call error (-1) is returned, the caller can use <code><a class="el" href="../../da/d41/error_8h.html#ad65a8842cc674e3ddf69355898c0ecbf">errno(3)</a></code> or <code>perror(3)</code> to gain more information about the error. </p>
 
 </div>
 </div>

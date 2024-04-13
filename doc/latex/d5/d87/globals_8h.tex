@@ -31,45 +31,46 @@ unsigned int \mbox{\hyperlink{globals_8h_a6c17b5754a836f005f69312ee0080106}{tick
 \doxysubsubsection{\texorpdfstring{blocked}{blocked}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structCircularList}{Circular\+List}}\texorpdfstring{$\ast$}{*} blocked\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{globals_8h_aadfd9da35df54aa07940062a8b8326e2}\label{globals_8h_aadfd9da35df54aa07940062a8b8326e2} 
+A global pointer to the process list of blocked processes. Processes enter this list via \doxylink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid()} or \doxylink{sys__call_8c_aec37528a3c7935864924764d1911126c}{s\+\_\+sleep()}. \Hypertarget{globals_8h_aadfd9da35df54aa07940062a8b8326e2}\label{globals_8h_aadfd9da35df54aa07940062a8b8326e2} 
 \index{globals.h@{globals.h}!current@{current}}
 \index{current@{current}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{current}{current}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}}\texorpdfstring{$\ast$}{*} current\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{globals_8h_abfb6a5b45038dfab7134f82adad169d7}\label{globals_8h_abfb6a5b45038dfab7134f82adad169d7} 
+This is the currently scheduled process. It can be accessed by any method to easily access the current method. \Hypertarget{globals_8h_abfb6a5b45038dfab7134f82adad169d7}\label{globals_8h_abfb6a5b45038dfab7134f82adad169d7} 
 \index{globals.h@{globals.h}!logfiledescriptor@{logfiledescriptor}}
 \index{logfiledescriptor@{logfiledescriptor}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{logfiledescriptor}{logfiledescriptor}}
 {\footnotesize\ttfamily int logfiledescriptor\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{globals_8h_a54a60f61f4b468b7e6ef164c4b5ba60b}\label{globals_8h_a54a60f61f4b468b7e6ef164c4b5ba60b} 
+This is the int representing the file descriptor of the log file, to be used for writing purposes for the logging of events. \Hypertarget{globals_8h_a54a60f61f4b468b7e6ef164c4b5ba60b}\label{globals_8h_a54a60f61f4b468b7e6ef164c4b5ba60b} 
 \index{globals.h@{globals.h}!next\_pid@{next\_pid}}
 \index{next\_pid@{next\_pid}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{next\_pid}{next\_pid}}
 {\footnotesize\ttfamily pid\+\_\+t next\+\_\+pid\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{globals_8h_a02d81cd80b6c38b0ce741c9244fd9f17}\label{globals_8h_a02d81cd80b6c38b0ce741c9244fd9f17} 
+This the next pid to be used, by \doxylink{kernel_8c_a736760f5a73bbd7d6c9e4607c49837a3}{k\+\_\+proc\+\_\+create()}, to ensure that PIDs are not duplicated. This may be rewritten later to reuse/reallocate old processes that have been exited/terminated. I have no strong desire to do so, but do so if you wish. \Hypertarget{globals_8h_a02d81cd80b6c38b0ce741c9244fd9f17}\label{globals_8h_a02d81cd80b6c38b0ce741c9244fd9f17} 
 \index{globals.h@{globals.h}!processes@{processes}}
 \index{processes@{processes}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{processes}{processes}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structCircularList}{Circular\+List}}\texorpdfstring{$\ast$}{*} processes\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{globals_8h_aa733d308e782d6ef693944928ff7d3d1}\label{globals_8h_aa733d308e782d6ef693944928ff7d3d1} 
+A global array of pointers to the process lists. Each priority level can be accessed via processes\mbox{[}priority\mbox{]}. Processes enter this list after creation or via s\+\_\+kill after receiving P\+\_\+\+SIGCONT when stopped. \Hypertarget{globals_8h_aa733d308e782d6ef693944928ff7d3d1}\label{globals_8h_aa733d308e782d6ef693944928ff7d3d1} 
 \index{globals.h@{globals.h}!stopped@{stopped}}
 \index{stopped@{stopped}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{stopped}{stopped}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structCircularList}{Circular\+List}}\texorpdfstring{$\ast$}{*} stopped\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{globals_8h_a6c17b5754a836f005f69312ee0080106}\label{globals_8h_a6c17b5754a836f005f69312ee0080106} 
+A global pointer to the process list of stopped processes. Processes enter this list via \doxylink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill()} after receiving a P\+\_\+\+SIGTERM signal. \Hypertarget{globals_8h_a6c17b5754a836f005f69312ee0080106}\label{globals_8h_a6c17b5754a836f005f69312ee0080106} 
 \index{globals.h@{globals.h}!tick@{tick}}
 \index{tick@{tick}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{tick}{tick}}
 {\footnotesize\ttfamily unsigned int tick\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{globals_8h_a5e7aa369c6421b8cf905e838507cc70a}\label{globals_8h_a5e7aa369c6421b8cf905e838507cc70a} 
+This is an int representing the current tick of pennos, to be used for logging purposes. \Hypertarget{globals_8h_a5e7aa369c6421b8cf905e838507cc70a}\label{globals_8h_a5e7aa369c6421b8cf905e838507cc70a} 
 \index{globals.h@{globals.h}!zombied@{zombied}}
 \index{zombied@{zombied}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{zombied}{zombied}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structCircularList}{Circular\+List}}\texorpdfstring{$\ast$}{*} zombied\hspace{0.3cm}{\ttfamily [extern]}}
 
+A global pointer to the process list of zombied/terminated processes. These processes enter this list via \doxylink{sys__call_8c_a53c8865d5bf1ca946e5b5405190f6690}{s\+\_\+exit()} or \doxylink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill()}, with the P\+\_\+\+SIGTERM signal. 

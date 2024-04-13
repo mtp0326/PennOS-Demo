@@ -59,8 +59,8 @@ var searchData=
   ['stdin_5ffileno_56',['STDIN_FILENO',['../d3/d2d/pennos_8h.html#afcf80a6d91178952d107ad00b165752b',1,'pennos.h']]],
   ['stdout_5ffile_57',['stdout_file',['../dd/d3e/structparsed__command.html#a9f6c41e84a32eaac9fadc00784a6861c',1,'parsed_command']]],
   ['stdout_5ffileno_58',['STDOUT_FILENO',['../d3/d2d/pennos_8h.html#abd165ee6474b5b75bf075842fff13a04',1,'pennos.h']]],
-  ['stopped_59',['stopped',['../db/d28/globals_8c.html#aa733d308e782d6ef693944928ff7d3d1',1,'stopped:&#160;globals.c'],['../d5/d87/globals_8h.html#aa733d308e782d6ef693944928ff7d3d1',1,'stopped:&#160;globals.c']]],
-  ['stopped_60',['STOPPED',['../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c',1,'kernel.h']]],
+  ['stopped_59',['STOPPED',['../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c',1,'kernel.h']]],
+  ['stopped_60',['stopped',['../db/d28/globals_8c.html#aa733d308e782d6ef693944928ff7d3d1',1,'stopped:&#160;globals.c'],['../d5/d87/globals_8h.html#aa733d308e782d6ef693944928ff7d3d1',1,'stopped:&#160;globals.c']]],
   ['suspend_5fset_61',['suspend_set',['../d0/d22/structspthread__meta__st.html#a4ba32a3c57dbe44d90e14b4cc084186f',1,'spthread_meta_st']]],
   ['sys_5fcall_2ec_62',['sys_call.c',['../d8/d74/sys__call_8c.html',1,'']]],
   ['sys_5fcall_2eh_63',['sys_call.h',['../db/d80/sys__call_8h.html',1,'']]]

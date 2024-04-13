@@ -41,8 +41,32 @@ typedef enum {
            */
 } process_state_t;
 
+/**
+ * @brief This is the STOP signal definition to be used by s_kill(). Running
+ * processes (ONLY) that receive the P_SIGSTOP signal will become stopped and
+ * have their state and process list adjusted accordingly. Note that
+ * statechanged will NOT be changed, as this state transition does NOT cause
+ * s_waitpid() to return/unblock.
+ */
+
 #define P_SIGSTOP 0
+
+/**
+ * @brief This is the CONTINUE signal definition to be used by s_kill(). Stopped
+ * processes (ONLY) that receive the P_SIGCONT signal will become running and
+ * have their state and process list adjusted accordingly. Note that
+ * statechanged will NOT be changed, as this state transition does NOT cause
+ * s_waitpid() to return/unblock.
+ */
 #define P_SIGCONT 1
+
+/**
+ * @brief This is the TERMINATE signal definition to be used by s_kill(). Any
+ * process that receives the P_SIGTER signal will become zombied and
+ * have their state and process list adjusted accordingly. Note that
+ * statechanged WILL be changed, as this state transition DOES cause
+ * s_waitpid() to return/unblock.
+ */
 #define P_SIGTER 2
 
 /**

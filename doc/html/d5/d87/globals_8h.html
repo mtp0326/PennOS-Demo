@@ -128,6 +128,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>A global pointer to the process list of blocked processes. Processes enter this list via <a class="el" href="../../d8/d74/sys__call_8c.html#a3c0c6c4ae69799354d707ff57ac925d3" title="Wait on a child of the calling process, until it changes state. If nohang is true,...">s_waitpid()</a> or <a class="el" href="../../d8/d74/sys__call_8c.html#aec37528a3c7935864924764d1911126c" title="Suspends execution of the calling proces for a specified number of clock ticks.">s_sleep()</a>. </p>
 
 </div>
 </div>
@@ -150,6 +151,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>This is the currently scheduled process. It can be accessed by any method to easily access the current method. </p>
 
 </div>
 </div>
@@ -172,6 +174,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>This is the int representing the file descriptor of the log file, to be used for writing purposes for the logging of events. </p>
 
 </div>
 </div>
@@ -194,6 +197,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>This the next pid to be used, by <a class="el" href="../../d9/d26/kernel_8c.html#a736760f5a73bbd7d6c9e4607c49837a3" title="Create a new child process, inheriting applicable properties from the parent.">k_proc_create()</a>, to ensure that PIDs are not duplicated. This may be rewritten later to reuse/reallocate old processes that have been exited/terminated. I have no strong desire to do so, but do so if you wish. </p>
 
 </div>
 </div>
@@ -216,6 +220,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>A global array of pointers to the process lists. Each priority level can be accessed via processes[priority]. Processes enter this list after creation or via s_kill after receiving P_SIGCONT when stopped. </p>
 
 </div>
 </div>
@@ -238,6 +243,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>A global pointer to the process list of stopped processes. Processes enter this list via <a class="el" href="../../d8/d74/sys__call_8c.html#a18e6794b108eea25459bd7fe31de4e76" title="Send a signal to a particular process.">s_kill()</a> after receiving a P_SIGTERM signal. </p>
 
 </div>
 </div>
@@ -260,6 +266,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>This is an int representing the current tick of pennos, to be used for logging purposes. </p>
 
 </div>
 </div>
@@ -282,6 +289,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>A global pointer to the process list of zombied/terminated processes. These processes enter this list via <a class="el" href="../../d8/d74/sys__call_8c.html#a53c8865d5bf1ca946e5b5405190f6690" title="Unconditionally exit the calling process.">s_exit()</a> or <a class="el" href="../../d8/d74/sys__call_8c.html#a18e6794b108eea25459bd7fe31de4e76" title="Send a signal to a particular process.">s_kill()</a>, with the P_SIGTERM signal. </p>
 
 </div>
 </div>

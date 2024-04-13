@@ -106,10 +106,13 @@ Data Structures</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ac5c325b088ff67236e4fc6616da63bb7" id="r_ac5c325b088ff67236e4fc6616da63bb7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5c325b088ff67236e4fc6616da63bb7">P_SIGSTOP</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:ac5c325b088ff67236e4fc6616da63bb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the STOP signal definition to be used by <a class="el" href="../../d8/d74/sys__call_8c.html#a18e6794b108eea25459bd7fe31de4e76" title="Send a signal to a particular process.">s_kill()</a>. Running processes (ONLY) that receive the P_SIGSTOP signal will become stopped and have their state and process list adjusted accordingly. Note that statechanged will NOT be changed, as this state transition does NOT cause <a class="el" href="../../d8/d74/sys__call_8c.html#a3c0c6c4ae69799354d707ff57ac925d3" title="Wait on a child of the calling process, until it changes state. If nohang is true,...">s_waitpid()</a> to return/unblock.  <br /></td></tr>
 <tr class="separator:ac5c325b088ff67236e4fc6616da63bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e7774a26af9a341045a1cc0d34070da" id="r_a3e7774a26af9a341045a1cc0d34070da"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e7774a26af9a341045a1cc0d34070da">P_SIGCONT</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:a3e7774a26af9a341045a1cc0d34070da"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the CONTINUE signal definition to be used by <a class="el" href="../../d8/d74/sys__call_8c.html#a18e6794b108eea25459bd7fe31de4e76" title="Send a signal to a particular process.">s_kill()</a>. Stopped processes (ONLY) that receive the P_SIGCONT signal will become running and have their state and process list adjusted accordingly. Note that statechanged will NOT be changed, as this state transition does NOT cause <a class="el" href="../../d8/d74/sys__call_8c.html#a3c0c6c4ae69799354d707ff57ac925d3" title="Wait on a child of the calling process, until it changes state. If nohang is true,...">s_waitpid()</a> to return/unblock.  <br /></td></tr>
 <tr class="separator:a3e7774a26af9a341045a1cc0d34070da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a608288786200cfdad154e66b4cd578ae" id="r_a608288786200cfdad154e66b4cd578ae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a608288786200cfdad154e66b4cd578ae">P_SIGTER</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:a608288786200cfdad154e66b4cd578ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the TERMINATE signal definition to be used by <a class="el" href="../../d8/d74/sys__call_8c.html#a18e6794b108eea25459bd7fe31de4e76" title="Send a signal to a particular process.">s_kill()</a>. Any process that receives the P_SIGTER signal will become zombied and have their state and process list adjusted accordingly. Note that statechanged WILL be changed, as this state transition DOES cause <a class="el" href="../../d8/d74/sys__call_8c.html#a3c0c6c4ae69799354d707ff57ac925d3" title="Wait on a child of the calling process, until it changes state. If nohang is true,...">s_waitpid()</a> to return/unblock.  <br /></td></tr>
 <tr class="separator:a608288786200cfdad154e66b4cd578ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
@@ -149,6 +152,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>This is the CONTINUE signal definition to be used by <a class="el" href="../../d8/d74/sys__call_8c.html#a18e6794b108eea25459bd7fe31de4e76" title="Send a signal to a particular process.">s_kill()</a>. Stopped processes (ONLY) that receive the P_SIGCONT signal will become running and have their state and process list adjusted accordingly. Note that statechanged will NOT be changed, as this state transition does NOT cause <a class="el" href="../../d8/d74/sys__call_8c.html#a3c0c6c4ae69799354d707ff57ac925d3" title="Wait on a child of the calling process, until it changes state. If nohang is true,...">s_waitpid()</a> to return/unblock. </p>
+
 </div>
 </div>
 <a id="ac5c325b088ff67236e4fc6616da63bb7" name="ac5c325b088ff67236e4fc6616da63bb7"></a>
@@ -163,6 +168,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>This is the STOP signal definition to be used by <a class="el" href="../../d8/d74/sys__call_8c.html#a18e6794b108eea25459bd7fe31de4e76" title="Send a signal to a particular process.">s_kill()</a>. Running processes (ONLY) that receive the P_SIGSTOP signal will become stopped and have their state and process list adjusted accordingly. Note that statechanged will NOT be changed, as this state transition does NOT cause <a class="el" href="../../d8/d74/sys__call_8c.html#a3c0c6c4ae69799354d707ff57ac925d3" title="Wait on a child of the calling process, until it changes state. If nohang is true,...">s_waitpid()</a> to return/unblock. </p>
+
 </div>
 </div>
 <a id="a608288786200cfdad154e66b4cd578ae" name="a608288786200cfdad154e66b4cd578ae"></a>
@@ -176,6 +183,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This is the TERMINATE signal definition to be used by <a class="el" href="../../d8/d74/sys__call_8c.html#a18e6794b108eea25459bd7fe31de4e76" title="Send a signal to a particular process.">s_kill()</a>. Any process that receives the P_SIGTER signal will become zombied and have their state and process list adjusted accordingly. Note that statechanged WILL be changed, as this state transition DOES cause <a class="el" href="../../d8/d74/sys__call_8c.html#a3c0c6c4ae69799354d707ff57ac925d3" title="Wait on a child of the calling process, until it changes state. If nohang is true,...">s_waitpid()</a> to return/unblock. </p>
 
 </div>
 </div>

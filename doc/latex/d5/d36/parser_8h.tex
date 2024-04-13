@@ -98,7 +98,7 @@ You can directly use the result in system calls. See demo for more information.
 
 If the function returns a successful value (0), a {\ttfamily struct \doxylink{structparsed__command}{parsed\+\_\+command}} is guareenteed to be allocated and stored in the given {\ttfamily \texorpdfstring{$\ast$}{*}result}. It is the caller\textquotesingle{}s responsibility to free the given pointer using {\ttfamily free(3)}.
 
-Otherwise, no {\ttfamily struct \doxylink{structparsed__command}{parsed\+\_\+command}} is allocated and {\ttfamily \texorpdfstring{$\ast$}{*}result} is unchanged. If a system call error (-\/1) is returned, the caller can use {\ttfamily errno(3)} or {\ttfamily perror(3)} to gain more information about the error. \Hypertarget{parser_8h_a0efb2747a5e20879807d782a83a21a36}\label{parser_8h_a0efb2747a5e20879807d782a83a21a36} 
+Otherwise, no {\ttfamily struct \doxylink{structparsed__command}{parsed\+\_\+command}} is allocated and {\ttfamily \texorpdfstring{$\ast$}{*}result} is unchanged. If a system call error (-\/1) is returned, the caller can use {\ttfamily \doxylink{error_8h_ad65a8842cc674e3ddf69355898c0ecbf}{errno(3)}} or {\ttfamily perror(3)} to gain more information about the error. \Hypertarget{parser_8h_a0efb2747a5e20879807d782a83a21a36}\label{parser_8h_a0efb2747a5e20879807d782a83a21a36} 
 \index{parser.h@{parser.h}!print\_parsed\_command@{print\_parsed\_command}}
 \index{print\_parsed\_command@{print\_parsed\_command}!parser.h@{parser.h}}
 \doxysubsubsection{\texorpdfstring{print\_parsed\_command()}{print\_parsed\_command()}}

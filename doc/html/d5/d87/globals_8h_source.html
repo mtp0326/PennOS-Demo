@@ -93,24 +93,23 @@ $(function() { codefold.init(1); });
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="../../d0/daa/kernel_8h.html">kernel.h</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="../../d6/dda/prioritylist_8h.html">prioritylist.h</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">extern</span> <a class="code hl_struct" href="../../de/d82/structCircularList.html">CircularList</a>* <a class="code hl_variable" href="../../d5/d87/globals_8h.html#a02d81cd80b6c38b0ce741c9244fd9f17">processes</a>[3];</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">extern</span> <a class="code hl_struct" href="../../de/d82/structCircularList.html">CircularList</a>* <a class="code hl_variable" href="../../d5/d87/globals_8h.html#a4a5bf3e2ca112a01dc3029503e3e80e4">blocked</a>;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">extern</span> <a class="code hl_struct" href="../../de/d82/structCircularList.html">CircularList</a>* <a class="code hl_variable" href="../../d5/d87/globals_8h.html#aa733d308e782d6ef693944928ff7d3d1">stopped</a>;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">extern</span> <a class="code hl_struct" href="../../de/d82/structCircularList.html">CircularList</a>* <a class="code hl_variable" href="../../d5/d87/globals_8h.html#a5e7aa369c6421b8cf905e838507cc70a">zombied</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">extern</span> <a class="code hl_struct" href="../../de/d82/structCircularList.html">CircularList</a>* <a class="code hl_variable" href="../../d5/d87/globals_8h.html#a02d81cd80b6c38b0ce741c9244fd9f17">processes</a>[3];</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">extern</span> <a class="code hl_struct" href="../../dc/d5f/structpcb__t.html">pcb_t</a>* <a class="code hl_variable" href="../../d5/d87/globals_8h.html#aadfd9da35df54aa07940062a8b8326e2">current</a>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">extern</span> pid_t <a class="code hl_variable" href="../../d5/d87/globals_8h.html#a54a60f61f4b468b7e6ef164c4b5ba60b">next_pid</a>;  <span class="comment">// idk, i guess redefine this if you want to reuse pcbs?</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// i have no strong urge to write that function</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="../../d5/d87/globals_8h.html#abfb6a5b45038dfab7134f82adad169d7">logfiledescriptor</a>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="../../d5/d87/globals_8h.html#a6c17b5754a836f005f69312ee0080106">tick</a>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">extern</span> <a class="code hl_struct" href="../../de/d82/structCircularList.html">CircularList</a>* <a class="code hl_variable" href="../../d5/d87/globals_8h.html#a4a5bf3e2ca112a01dc3029503e3e80e4">blocked</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">extern</span> <a class="code hl_struct" href="../../de/d82/structCircularList.html">CircularList</a>* <a class="code hl_variable" href="../../d5/d87/globals_8h.html#aa733d308e782d6ef693944928ff7d3d1">stopped</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">extern</span> <a class="code hl_struct" href="../../de/d82/structCircularList.html">CircularList</a>* <a class="code hl_variable" href="../../d5/d87/globals_8h.html#a5e7aa369c6421b8cf905e838507cc70a">zombied</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">extern</span> <a class="code hl_struct" href="../../dc/d5f/structpcb__t.html">pcb_t</a>* <a class="code hl_variable" href="../../d5/d87/globals_8h.html#aadfd9da35df54aa07940062a8b8326e2">current</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">extern</span> pid_t <a class="code hl_variable" href="../../d5/d87/globals_8h.html#a54a60f61f4b468b7e6ef164c4b5ba60b">next_pid</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="../../d5/d87/globals_8h.html#abfb6a5b45038dfab7134f82adad169d7">logfiledescriptor</a>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="../../d5/d87/globals_8h.html#a6c17b5754a836f005f69312ee0080106">tick</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclinkedlist_8h_html"><div class="ttname"><a href="../../d7/d12/clinkedlist_8h.html">clinkedlist.h</a></div></div>
 <div class="ttc" id="aglobals_8h_html_a02d81cd80b6c38b0ce741c9244fd9f17"><div class="ttname"><a href="../../d5/d87/globals_8h.html#a02d81cd80b6c38b0ce741c9244fd9f17">processes</a></div><div class="ttdeci">CircularList * processes[3]</div><div class="ttdef"><b>Definition</b> globals.c:3</div></div>
 <div class="ttc" id="aglobals_8h_html_a4a5bf3e2ca112a01dc3029503e3e80e4"><div class="ttname"><a href="../../d5/d87/globals_8h.html#a4a5bf3e2ca112a01dc3029503e3e80e4">blocked</a></div><div class="ttdeci">CircularList * blocked</div><div class="ttdef"><b>Definition</b> globals.c:5</div></div>
@@ -123,7 +122,7 @@ $(function() { codefold.init(1); });
 <div class="ttc" id="akernel_8h_html"><div class="ttname"><a href="../../d0/daa/kernel_8h.html">kernel.h</a></div></div>
 <div class="ttc" id="aprioritylist_8h_html"><div class="ttname"><a href="../../d6/dda/prioritylist_8h.html">prioritylist.h</a></div></div>
 <div class="ttc" id="astructCircularList_html"><div class="ttname"><a href="../../de/d82/structCircularList.html">CircularList</a></div><div class="ttdoc">This structure represents a circular linked list for managing processes.</div><div class="ttdef"><b>Definition</b> clinkedlist.h:23</div></div>
-<div class="ttc" id="astructpcb__t_html"><div class="ttname"><a href="../../dc/d5f/structpcb__t.html">pcb_t</a></div><div class="ttdoc">This structure stores all required information about a running process.</div><div class="ttdef"><b>Definition</b> kernel.h:53</div></div>
+<div class="ttc" id="astructpcb__t_html"><div class="ttname"><a href="../../dc/d5f/structpcb__t.html">pcb_t</a></div><div class="ttdoc">This structure stores all required information about a running process.</div><div class="ttdef"><b>Definition</b> kernel.h:77</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

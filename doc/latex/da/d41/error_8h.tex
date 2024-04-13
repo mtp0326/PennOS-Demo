@@ -1,0 +1,40 @@
+\doxysection{src/util/error.h File Reference}
+\hypertarget{error_8h}{}\label{error_8h}\index{src/util/error.h@{src/util/error.h}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{error_8h_ab2e01b83bcc336abdcc77b088661cdfd}{u\+\_\+perror}} (char \texorpdfstring{$\ast$}{*}message)
+\begin{DoxyCompactList}\small\item\em This is an analogue of the perror(3) function. This allows the shell or other function to pass in a message describing what error occured, which the function then concatenates to the default error message based on your errno value. The filesystem and kernel will both set errno and return -\/1 on system calls if they fail, after which \doxylink{error_8h_ab2e01b83bcc336abdcc77b088661cdfd}{u\+\_\+perror()} can be called. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{error_8h_ad65a8842cc674e3ddf69355898c0ecbf}{errno}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{error_8h_ab2e01b83bcc336abdcc77b088661cdfd}\label{error_8h_ab2e01b83bcc336abdcc77b088661cdfd} 
+\index{error.h@{error.h}!u\_perror@{u\_perror}}
+\index{u\_perror@{u\_perror}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{u\_perror()}{u\_perror()}}
+{\footnotesize\ttfamily void u\+\_\+perror (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{message }\end{DoxyParamCaption})}
+
+
+
+This is an analogue of the perror(3) function. This allows the shell or other function to pass in a message describing what error occured, which the function then concatenates to the default error message based on your errno value. The filesystem and kernel will both set errno and return -\/1 on system calls if they fail, after which \doxylink{error_8h_ab2e01b83bcc336abdcc77b088661cdfd}{u\+\_\+perror()} can be called. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & This is the message that will be concatenated to the default error message. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{error_8h_ad65a8842cc674e3ddf69355898c0ecbf}\label{error_8h_ad65a8842cc674e3ddf69355898c0ecbf} 
+\index{error.h@{error.h}!errno@{errno}}
+\index{errno@{errno}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{errno}{errno}}
+{\footnotesize\ttfamily int errno\hspace{0.3cm}{\ttfamily [extern]}}
+
+This is an integer that can be set by various functions to denote the kind of error that occurred. This is similar to that defined by errno.\+h, except that it is a custom definition. 

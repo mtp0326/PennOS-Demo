@@ -16,11 +16,11 @@ struct \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{kernel_8h_ac5c325b088ff67236e4fc6616da63bb7}{P\+\_\+\+SIGSTOP}}~0
-\item 
+\begin{DoxyCompactList}\small\item\em This is the STOP signal definition to be used by \doxylink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill()}. Running processes (ONLY) that receive the P\+\_\+\+SIGSTOP signal will become stopped and have their state and process list adjusted accordingly. Note that statechanged will NOT be changed, as this state transition does NOT cause \doxylink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid()} to return/unblock. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{kernel_8h_a3e7774a26af9a341045a1cc0d34070da}{P\+\_\+\+SIGCONT}}~1
-\item 
+\begin{DoxyCompactList}\small\item\em This is the CONTINUE signal definition to be used by \doxylink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill()}. Stopped processes (ONLY) that receive the P\+\_\+\+SIGCONT signal will become running and have their state and process list adjusted accordingly. Note that statechanged will NOT be changed, as this state transition does NOT cause \doxylink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid()} to return/unblock. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{kernel_8h_a608288786200cfdad154e66b4cd578ae}{P\+\_\+\+SIGTER}}~2
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This is the TERMINATE signal definition to be used by \doxylink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill()}. Any process that receives the P\+\_\+\+SIGTER signal will become zombied and have their state and process list adjusted accordingly. Note that statechanged WILL be changed, as this state transition DOES cause \doxylink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid()} to return/unblock. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -51,17 +51,29 @@ void \mbox{\hyperlink{kernel_8h_a87071d3f59ebc0d6f626c885eb27c27e}{k\+\_\+proc\+
 \doxysubsubsection{\texorpdfstring{P\_SIGCONT}{P\_SIGCONT}}
 {\footnotesize\ttfamily \#define P\+\_\+\+SIGCONT~1}
 
+
+
+This is the CONTINUE signal definition to be used by \doxylink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill()}. Stopped processes (ONLY) that receive the P\+\_\+\+SIGCONT signal will become running and have their state and process list adjusted accordingly. Note that statechanged will NOT be changed, as this state transition does NOT cause \doxylink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid()} to return/unblock. 
+
 \Hypertarget{kernel_8h_ac5c325b088ff67236e4fc6616da63bb7}\label{kernel_8h_ac5c325b088ff67236e4fc6616da63bb7} 
 \index{kernel.h@{kernel.h}!P\_SIGSTOP@{P\_SIGSTOP}}
 \index{P\_SIGSTOP@{P\_SIGSTOP}!kernel.h@{kernel.h}}
 \doxysubsubsection{\texorpdfstring{P\_SIGSTOP}{P\_SIGSTOP}}
 {\footnotesize\ttfamily \#define P\+\_\+\+SIGSTOP~0}
 
+
+
+This is the STOP signal definition to be used by \doxylink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill()}. Running processes (ONLY) that receive the P\+\_\+\+SIGSTOP signal will become stopped and have their state and process list adjusted accordingly. Note that statechanged will NOT be changed, as this state transition does NOT cause \doxylink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid()} to return/unblock. 
+
 \Hypertarget{kernel_8h_a608288786200cfdad154e66b4cd578ae}\label{kernel_8h_a608288786200cfdad154e66b4cd578ae} 
 \index{kernel.h@{kernel.h}!P\_SIGTER@{P\_SIGTER}}
 \index{P\_SIGTER@{P\_SIGTER}!kernel.h@{kernel.h}}
 \doxysubsubsection{\texorpdfstring{P\_SIGTER}{P\_SIGTER}}
 {\footnotesize\ttfamily \#define P\+\_\+\+SIGTER~2}
+
+
+
+This is the TERMINATE signal definition to be used by \doxylink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill()}. Any process that receives the P\+\_\+\+SIGTER signal will become zombied and have their state and process list adjusted accordingly. Note that statechanged WILL be changed, as this state transition DOES cause \doxylink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid()} to return/unblock. 
 
 
 
