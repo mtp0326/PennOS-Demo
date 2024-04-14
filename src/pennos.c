@@ -3,6 +3,7 @@
 #include "fcntl.h"
 #include "parser.h"
 #include "pennfat.h"
+#include "sys/time.h"
 #include "unistd.h"
 #include "util/kernel.h"
 #include "util/prioritylist.h"
