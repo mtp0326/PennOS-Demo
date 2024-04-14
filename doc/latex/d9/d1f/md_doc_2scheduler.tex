@@ -1,0 +1,7 @@
+\chapter{scheduler}
+\hypertarget{md_doc_2scheduler}{}\label{md_doc_2scheduler}\index{scheduler@{scheduler}}
+The scheduler is the main function in charge of mediating processes. The scheduler works in terms of quanta, of which each quantum lasts 100 ms. The general structure/timeline of a quantum looks like this.
+
+The start of a new quantum is triggered by the scheduler receiving a SIGALRM signal, which it receives every 100 ms as set by a timer.
+
+After receiving the alarm, the scheduler will suspend the currenly running process. It then will check the state and status of all blocked processes, unblocking, or updating them as needed. This may include unblocking a parent whose child has exited, or reducing the number of ticks to sleep for a process that called sleep. These events will be logged if necessary. After that, the process will determine the next process to run by checking the next priority to be run, that has a schedulable (read\+: running) process available. It will log this, and then unsuspend the processes spthread until the next SIGALRM at the end of the quantum, at which point this cycle will repeat. 

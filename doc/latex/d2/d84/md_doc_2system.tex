@@ -1,0 +1,13 @@
+\chapter{system}
+\hypertarget{md_doc_2system}{}\label{md_doc_2system}\index{system@{system}}
+For the system/kernel of Penn\+OS, the most important notion is that of the process control block (PCB).
+
+This can be seen in more detail here\+: \doxylink{structpcb__t}{pcb\+\_\+t}.
+
+The main idea of the process control block it represents a process, or thread, that can be in several states. Processes can be running, stopped, blocked, or zombied.
+
+The transitions between processes are mediated via signals sent via \doxylink{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill}, \doxylink{sys__call_8c_a53c8865d5bf1ca946e5b5405190f6690}{s\+\_\+exit}, and \doxylink{sys__call_8c_aec37528a3c7935864924764d1911126c}{s\+\_\+sleep}.
+
+The kernel maintains circular linked lists \doxylink{structCircularList}{Circular\+List}\textquotesingle{}s of processes in each state. There are 6 in total, one for each state\+: \doxylink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512}{ZOMBIED}, \doxylink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c}{STOPPED}, \doxylink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61}{BLOCKED}, and 3 for \doxylink{kernel_8h_ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304}{RUNNING}, one for each priority level.
+
+As a rule, user level functions should not need to and should not mediate process state transitions, as these will be handled by the scheduler or by system calls. 

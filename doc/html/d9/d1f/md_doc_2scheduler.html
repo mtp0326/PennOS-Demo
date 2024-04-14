@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PennOS: kernel</title>
+<title>PennOS: scheduler</title>
 <link rel="icon" href="../../icons8-document-50.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
@@ -74,14 +74,12 @@ $(function() {
 
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title">kernel</div></div>
+  <div class="headertitle"><div class="title">scheduler</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The kernel side of PennOS consists of three main aspects. They are described in more details on their own subpages below.</p><ol type="1">
-<li><a class="el" href="../../d2/d84/md_doc_2system.html"><b>The Kernel</b></a>: The kernel refers to the collection of system calls, as well as the overall datastructures and control mechanisms used by the scheduler.</li>
-<li><a class="el" href="../../d9/d1f/md_doc_2scheduler.html"><b>The Scheduler</b></a>: The scheduler is the main function that is in charge of deciding which process to schedule/run based on priorities, blocking and unblocking processes, and idling.</li>
-<li><a class="el" href="../../d1/d57/md_doc_2shell.html"><b>The Shell</b></a>: The shell is simply a priority zero process that is instantiated at start, and continuously checks for user input to spawn new processes, or modify existing ones. </li>
-</ol>
+<div class="textblock"><p>The scheduler is the main function in charge of mediating processes. The scheduler works in terms of quanta, of which each quantum lasts 100 ms. The general structure/timeline of a quantum looks like this.</p>
+<p>The start of a new quantum is triggered by the scheduler receiving a SIGALRM signal, which it receives every 100 ms as set by a timer.</p>
+<p>After receiving the alarm, the scheduler will suspend the currenly running process. It then will check the state and status of all blocked processes, unblocking, or updating them as needed. This may include unblocking a parent whose child has exited, or reducing the number of ticks to sleep for a process that called sleep. These events will be logged if necessary. After that, the process will determine the next process to run by checking the next priority to be run, that has a schedulable (read: running) process available. It will log this, and then unsuspend the processes spthread until the next SIGALRM at the end of the quantum, at which point this cycle will repeat. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

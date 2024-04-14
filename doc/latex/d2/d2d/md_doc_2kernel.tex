@@ -1,8 +1,8 @@
 \chapter{kernel}
 \hypertarget{md_doc_2kernel}{}\label{md_doc_2kernel}\index{kernel@{kernel}}
-The kernel consists of three main aspects.
+The kernel side of Penn\+OS consists of three main aspects. They are described in more details on their own subpages below.
 \begin{DoxyEnumerate}
-\item The Kernel
-\item The Schduler
-\item The Shell 
+\item \doxysectlink{md_doc_2system}{{\bfseries{The Kernel}}}{0}\+: The kernel refers to the collection of system calls, as well as the overall datastructures and control mechanisms used by the scheduler.
+\item \doxysectlink{md_doc_2scheduler}{{\bfseries{The Scheduler}}}{0}\+: The scheduler is the main function that is in charge of deciding which process to schedule/run based on priorities, blocking and unblocking processes, and idling.
+\item \doxysectlink{md_doc_2shell}{{\bfseries{The Shell}}}{0}\+: The shell is simply a priority zero process that is instantiated at start, and continuously checks for user input to spawn new processes, or modify existing ones. 
 \end{DoxyEnumerate}

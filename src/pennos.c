@@ -187,17 +187,21 @@ void scheduler(char* logfile) {
   arg[0] = strdup("shell");  // strdup allocates new memory for the string
   arg[1] = NULL;             // Terminate the array
 
+  // spawn in the shell process at priority 0
   s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, 0);
 
   // main loop
   while (!done) {
+    // unlock done lock so that other processes can lock it if they are not
+    // reenttrant or are executing a non-reentrant part of code
     pthread_mutex_unlock(&done_lock);
-    // need to add logic in case no processes of a given priority level for
-    // future
 
+    // iterates over all blocked processes
     for (unsigned int i = 0; i < blocked->size; i++) {
       pcb_t* block = blocked->head->process;
+      // checks if process is executing s_sleep, and decrements ticks to wait
       if (block->ticks_to_wait > 0) {
+        // if last decrement, move process to zombied.
         if (block->ticks_to_wait == 1) {
           block->state = ZOMBIED;
           block->statechanged = true;

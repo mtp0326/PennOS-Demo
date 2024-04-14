@@ -9,7 +9,7 @@ var indexSectionsWithContent =
   6: "pw",
   7: "bfrsz",
   8: "_abefmnprsuw",
-  9: "fkp"
+  9: "fkps"
 };
 
 var indexSectionNames =

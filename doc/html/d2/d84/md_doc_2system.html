@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PennOS: kernel</title>
+<title>PennOS: system</title>
 <link rel="icon" href="../../icons8-document-50.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
@@ -74,14 +74,15 @@ $(function() {
 
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title">kernel</div></div>
+  <div class="headertitle"><div class="title">system</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The kernel side of PennOS consists of three main aspects. They are described in more details on their own subpages below.</p><ol type="1">
-<li><a class="el" href="../../d2/d84/md_doc_2system.html"><b>The Kernel</b></a>: The kernel refers to the collection of system calls, as well as the overall datastructures and control mechanisms used by the scheduler.</li>
-<li><a class="el" href="../../d9/d1f/md_doc_2scheduler.html"><b>The Scheduler</b></a>: The scheduler is the main function that is in charge of deciding which process to schedule/run based on priorities, blocking and unblocking processes, and idling.</li>
-<li><a class="el" href="../../d1/d57/md_doc_2shell.html"><b>The Shell</b></a>: The shell is simply a priority zero process that is instantiated at start, and continuously checks for user input to spawn new processes, or modify existing ones. </li>
-</ol>
+<div class="textblock"><p>For the system/kernel of PennOS, the most important notion is that of the process control block (PCB).</p>
+<p>This can be seen in more detail here: <a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a>.</p>
+<p>The main idea of the process control block it represents a process, or thread, that can be in several states. Processes can be running, stopped, blocked, or zombied.</p>
+<p>The transitions between processes are mediated via signals sent via <a class="el" href="../../d8/d74/sys__call_8c.html#a18e6794b108eea25459bd7fe31de4e76">s_kill</a>, <a class="el" href="../../d8/d74/sys__call_8c.html#a53c8865d5bf1ca946e5b5405190f6690">s_exit</a>, and <a class="el" href="../../d8/d74/sys__call_8c.html#aec37528a3c7935864924764d1911126c">s_sleep</a>.</p>
+<p>The kernel maintains circular linked lists <a class="el" href="../../de/d82/structCircularList.html">CircularList</a>'s of processes in each state. There are 6 in total, one for each state: <a class="el" href="../../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854acfa05d5a2f18cf6a5976178d9949c512">ZOMBIED</a>, <a class="el" href="../../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854a948b2aee15f52b421fa4770c47bcfe8c">STOPPED</a>, <a class="el" href="../../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854a376c1b6a3f75d283a2efacf737438d61">BLOCKED</a>, and 3 for <a class="el" href="../../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854a1061be6c3fb88d32829cba6f6b2be304">RUNNING</a>, one for each priority level.</p>
+<p>As a rule, user level functions should not need to and should not mediate process state transitions, as these will be handled by the scheduler or by system calls. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

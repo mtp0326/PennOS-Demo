@@ -6,5 +6,5 @@ PennOS is a UNIX-like operating system that runs as a guest OS within a single p
 
 ## Documentation
 
-- [**Kernel Documentation**](kernel.md): Here is an overview of the kernel and the kernel funcationality. 
+- [**Kernel Documentation**](kernel.md): Here is an overview of the Kernel, Scheduler, and Shell, and its related functions and structure. 
 - [**FAT Documentation**](fat.md): Here is an overview of the structure of the filesystem, and its related functions.
