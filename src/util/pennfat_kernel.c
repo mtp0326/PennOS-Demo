@@ -443,6 +443,20 @@ struct directory_entries* create_directory_entry(const char* name,
 }
 
 ssize_t k_read(int fd, int n, char* buf) {
+  // special case for STDIN, STDOUT, STDERR
+
+  if (fd == STDIN_FILENO) {
+    return read(STDIN_FILENO, buf, n);
+  }
+
+  if (fd == STDOUT_FILENO) {
+    perror("Cannot read from STDOUT");
+  }
+
+  if (fd == STDERR_FILENO) {
+    perror("Cannot read from STDERR");
+  }
+
   // returns number of bytes on success, 0 if EOF is reached, -1 on error
   struct file_descriptor_st* curr = get_file_descriptor(fd);
   // fd is not a valid open file descriptor
