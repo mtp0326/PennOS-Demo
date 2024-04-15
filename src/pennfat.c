@@ -48,7 +48,7 @@ void initialize_global_fd_table() {
   global_fd_table = calloc(1, sizeof(struct file_descriptor_st) * MAX_FD_NUM);
 
   if (global_fd_table == NULL) {
-    fprintf(stderr, "Memory allocation failed\n");
+    perror("Memory allocation failed\n");
     return;
   }
 
@@ -296,7 +296,8 @@ void cat_file_wa(char** args) {
     while (args[i] != NULL) {
       int read_num;
       char* contents = k_read_all(args[i], &read_num);
-      fprintf(stdout, "%s\n", contents);
+      k_write(STDOUT_FILENO, contents, read_num);
+      // fprintf(stdout, "%s\n", contents);
       free(contents);
       i += 1;
     }
