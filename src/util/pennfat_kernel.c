@@ -602,6 +602,20 @@ void update_directory_entry_after_write(struct directory_entries* curr_de,
 }
 
 ssize_t k_write(int fd, const char* str, int n) {
+  // special cases for 0, 1, 2
+  if (fd == STDIN_FILENO) {
+    perror("Cannot write into STDIN");
+    return -1;
+  }
+
+  if (fd == STDOUT_FILENO) {
+    return write(STDOUT_FILENO, str, n);
+  }
+
+  if (fd == STDERR_FILENO) {
+    return write(STDERR_FILENO, str, n);
+  }
+
   // 0 for READ/WRITE, 1 for READ, and 2 for WRITE, 3 for APPEND
   struct file_descriptor_st* curr = get_file_descriptor(fd);
   // fd is not a valid open file descriptor
