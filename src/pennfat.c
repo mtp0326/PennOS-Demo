@@ -18,7 +18,7 @@ void read_command(char** cmds) {
     exit(EXIT_FAILURE);
   }
   // read in the user input
-  ssize_t read_res = read(STDIN_FILENO, cmd_temp, MAX_LEN);
+  ssize_t read_res = k_read(STDIN_FILENO, MAX_LEN, cmd_temp);
   // error catching for read
   if (read_res < 0) {
     perror("error: reading input");
@@ -324,7 +324,7 @@ void cat_w(char* output) {
   int BUF_SIZE = 4096;
   ssize_t bytesRead;      // Number of bytes read
   char buffer[BUF_SIZE];  // Buffer to store terminal input
-  while ((bytesRead = read(STDIN_FILENO, buffer, BUF_SIZE)) > 0) {
+  while ((bytesRead = k_read(STDIN_FILENO, BUF_SIZE, buffer)) > 0) {
     k_write(fd, buffer, bytesRead);
   }
 
@@ -343,7 +343,7 @@ void cat_a(char* output) {
   int BUF_SIZE = 4096;
   ssize_t bytesRead;      // Number of bytes read
   char buffer[BUF_SIZE];  // Buffer to store terminal input
-  while ((bytesRead = read(STDIN_FILENO, buffer, BUF_SIZE)) > 0) {
+  while ((bytesRead = k_read(STDIN_FILENO, BUF_SIZE, buffer)) > 0) {
     k_write(fd, buffer, bytesRead);
   }
 
