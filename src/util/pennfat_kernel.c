@@ -18,11 +18,26 @@ int data_size = 0;
 // we increment it afterwards
 int fd_counter = 3;
 
+void zero_out_helper(int curr) {
+  lseek(fs_fd, fat_size + block_size * (curr - 1), SEEK_SET);
+
+  char* zero_out = calloc(1, block_size);
+
+  write(fs_fd, zero_out, block_size);
+}
+
 int k_open(const char* fname, int mode) {
   int curr_fd = fd_counter;
   fd_counter++;
   char* fname_copy = strdup(fname);
   char* fname_copy2 = strdup(fname);
+  char* fname_copy3 = strdup(fname);
+  // using fname_copy3 check if the fname is a valid name (unix)
+  if (!is_file_name_valid(fname_copy3)) {
+    perror("error: invalid filename please follow POSIX standard");
+    return -1;
+  }
+
   // int empty_fat_index = get_first_empty_fat_index();
   struct file_descriptor_st* opened_file;
   struct directory_entries* new_de;
@@ -67,15 +82,24 @@ int k_open(const char* fname, int mode) {
         while (fat[curr] != 0xFFFF) {
           int next = fat[curr];
           fat[curr] = 0x0000;
+
+          zero_out_helper(curr);
+
           curr = next;
         }
         fat[curr] = 0x0000;
+
+        zero_out_helper(curr);
+
         fat[start_fat_index] = 0xFFFF;
+      } else {
+        zero_out_helper(start_fat_index);
       }
       // set directory entry size to 0 since truncated and write to fs_fd to
       // update
-      off_t dir_entry_offset =
-          does_file_exist2(fname);               // should be lseeked there
+
+      // should be lseeked there
+      off_t dir_entry_offset = does_file_exist2(fname);
       lseek(fs_fd, dir_entry_offset, SEEK_SET);  // get to found directory entry
       struct directory_entries* updated_de =
           create_directory_entry(dir_entry->name, 0, dir_entry->firstBlock,
@@ -151,6 +175,21 @@ int k_open(const char* fname, int mode) {
   return curr_fd;
 }
 
+bool is_file_name_valid(char* name) {
+  if (name == NULL) {
+    return false;
+  }
+  while (*name != '\0') {
+    char c = *name;
+    if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
+          (c >= '0' && c <= '9') || c == '.' || c == '_' || c == '-')) {
+      return false;
+    }
+    name++;
+  }
+  return true;
+}
+
 // helper that traverses root directory block by block to check if fname file
 // exists return: the directory entry struct with name fname (NULL if not found)
 // also moves fs_fd to the end of the root directory
@@ -171,7 +210,7 @@ struct directory_entries* does_file_exist(const char* fname) {
       for (int i = 0; i < num_directories_per_block;
            i++) {  // check each directory in block
         if (!found) {
-          temp = malloc(sizeof(struct directory_entries));
+          temp = calloc(1, sizeof(struct directory_entries));
           read(fs_fd, temp, sizeof(struct directory_entries));
           // fprintf(stderr, "temp name: %s\n", temp->name);
           if (strcmp(temp->name, fname) == 0) {
@@ -188,7 +227,7 @@ struct directory_entries* does_file_exist(const char* fname) {
       for (int i = 0; i < num_directories_per_block;
            i++) {  // check each directory in block
         if (!found) {
-          temp = malloc(sizeof(struct directory_entries));
+          temp = calloc(1, sizeof(struct directory_entries));
           lseek(fs_fd, 0, SEEK_CUR);
           // fprintf(stderr, "offset3: %ld\n", current_offset3);
           read(fs_fd, temp, sizeof(struct directory_entries));
@@ -237,7 +276,7 @@ void move_to_open_de(bool found) {
         if (buffer[0] == 0 ||
             buffer[0] == 1) {  // look for first open or deleted entry
           // fprintf(stderr, "here!\n");
-          break;
+          return;
         }
         lseek(fs_fd, 64, SEEK_CUR);
       }
@@ -251,22 +290,22 @@ void move_to_open_de(bool found) {
         }
         lseek(fs_fd, -1, SEEK_CUR);
         // fprintf(stderr, "here1!\n");
-        if (buffer[0] == 0 ||
-            buffer[0] == 1) {  // look for first open or deleted entry
+        if (buffer[0] == 0 || buffer[0] == 1) {
+          // look for first open or deleted entry
           // fprintf(stderr, "here!\n");
           break;
         } else {
-          if (i == num_directories_per_block - 1 &&
-              !found) {  // at last directory entry of
-                         // last block and still occupied
+          if (i == num_directories_per_block - 1 && !found) {
+            // at last directory entry of
+            // last block and still occupied
             int next_fat_block = get_first_empty_fat_index();
             int offset1 = get_offset_size(next_fat_block, 0);
-            lseek(fs_fd, offset1, SEEK_SET);  // position fs_fd at new block for
-                                              // extended root directory
+            // position fs_fd at new block for extended root directory
+            lseek(fs_fd, offset1, SEEK_SET);
             // update fat
             fat[curr] = next_fat_block;
             fat[next_fat_block] = 0xFFFF;
-            break;
+            return;
           }
           // fprintf(stderr, "hereeeee!\n");
           lseek(fs_fd, 64,
@@ -275,6 +314,7 @@ void move_to_open_de(bool found) {
       }
     }
     curr = fat[curr];  // move to next block in fat link
+
     if (curr == 0xFFFF) {
       break;
     }
@@ -319,7 +359,7 @@ off_t does_file_exist2(const char* fname) {
 
     // we should be at the correct offset for fs_fd to read the next directory
     // entry
-    temp = malloc(sizeof(struct directory_entries));
+    temp = calloc(1, sizeof(struct directory_entries));
     read(fs_fd, temp, sizeof(struct directory_entries));
     if (strcmp(temp->name, fname) == 0) {
       found = true;
@@ -360,7 +400,8 @@ struct file_descriptor_st* create_file_descriptor(int fd,
                                                   char* fname,
                                                   int mode,
                                                   int offset) {
-  struct file_descriptor_st* new_fd = malloc(sizeof(struct file_descriptor_st));
+  struct file_descriptor_st* new_fd =
+      calloc(1, sizeof(struct file_descriptor_st));
 
   if (new_fd == NULL) {
     perror("Memory allocation failed\n");
@@ -382,7 +423,8 @@ struct directory_entries* create_directory_entry(const char* name,
                                                  uint8_t type,
                                                  uint8_t perm,
                                                  time_t mtime) {
-  struct directory_entries* new_de = malloc(sizeof(struct directory_entries));
+  struct directory_entries* new_de =
+      calloc(1, sizeof(struct directory_entries));
 
   if (new_de == NULL) {
     perror("Memory allocation failed\n");
@@ -401,6 +443,20 @@ struct directory_entries* create_directory_entry(const char* name,
 }
 
 ssize_t k_read(int fd, int n, char* buf) {
+  // special case for STDIN, STDOUT, STDERR
+
+  if (fd == STDIN_FILENO) {
+    return read(STDIN_FILENO, buf, n);
+  }
+
+  if (fd == STDOUT_FILENO) {
+    perror("Cannot read from STDOUT");
+  }
+
+  if (fd == STDERR_FILENO) {
+    perror("Cannot read from STDERR");
+  }
+
   // returns number of bytes on success, 0 if EOF is reached, -1 on error
   struct file_descriptor_st* curr = get_file_descriptor(fd);
   // fd is not a valid open file descriptor
@@ -500,10 +556,12 @@ void extend_fat(int start_index, int empty_fat_index) {
 
   fat[start_index] = empty_fat_index;
   fat[empty_fat_index] = 0xFFFF;
+  msync(fat, fat_size, MS_SYNC);
 }
 
 void write_one_byte_in_while(int bytes_left,
                              int size,
+                             int true_offset,
                              int* size_increment,
                              int* bytes_written,
                              int* current_offset,
@@ -531,12 +589,12 @@ void write_one_byte_in_while(int bytes_left,
 
     write(fs_fd, str + *bytes_written, 1);
 
-    if (*current_offset >= size) {
+    if (true_offset >= size) {
       *size_increment += 1;
     }
     *bytes_written += 1;
     bytes_left -= 1;
-
+    true_offset += 1;
     *current_offset += 1;
   }
 }
@@ -558,6 +616,20 @@ void update_directory_entry_after_write(struct directory_entries* curr_de,
 }
 
 ssize_t k_write(int fd, const char* str, int n) {
+  // special cases for 0, 1, 2
+  if (fd == STDIN_FILENO) {
+    perror("Cannot write into STDIN");
+    return -1;
+  }
+
+  if (fd == STDOUT_FILENO) {
+    return write(STDOUT_FILENO, str, n);
+  }
+
+  if (fd == STDERR_FILENO) {
+    return write(STDERR_FILENO, str, n);
+  }
+
   // 0 for READ/WRITE, 1 for READ, and 2 for WRITE, 3 for APPEND
   struct file_descriptor_st* curr = get_file_descriptor(fd);
   // fd is not a valid open file descriptor
@@ -592,6 +664,7 @@ ssize_t k_write(int fd, const char* str, int n) {
     firstBlock = get_first_empty_fat_index();
     curr_de->firstBlock = firstBlock;
     fat[firstBlock] = 0xFFFF;
+    msync(fat, fat_size, MS_SYNC);
     // fprintf(stderr, "first block: %d\n", firstBlock);
   }
 
@@ -604,6 +677,9 @@ ssize_t k_write(int fd, const char* str, int n) {
   if (mode == 0) {
     // we need to lseek to where we want to write
     uint16_t curr_block = firstBlock;
+
+    int true_offset = offset;
+
     // move to the correct block
     while (offset > block_size && curr_block != 0xFFFF) {
       curr_block = fat[curr_block];
@@ -622,8 +698,9 @@ ssize_t k_write(int fd, const char* str, int n) {
     int size_increment = 0;
     // for bytes_written and current_offset, we send in a pointer to the
     // variable so that we modify it during writing
-    write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                            &bytes_written, &current_offset, str, firstBlock);
+    write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                            &size_increment, &bytes_written, &current_offset,
+                            str, firstBlock);
 
     update_directory_entry_after_write(curr_de, fname, size_increment);
 
@@ -639,6 +716,8 @@ ssize_t k_write(int fd, const char* str, int n) {
     // we need to move the offset to the eof if this is in F_APPEND mode
     // the offset in the fd doesn't matter here
     uint32_t append_offset = curr_de->size;
+
+    int true_offset = curr_de->size;
 
     // we need to lseek to where we want to write
     uint16_t curr_block = firstBlock;
@@ -659,8 +738,9 @@ ssize_t k_write(int fd, const char* str, int n) {
     int size_increment = 0;
     // for bytes_written and current_offset, we send in a pointer to the
     // variable so that we modify it during writing
-    write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                            &bytes_written, &current_offset, str, firstBlock);
+    write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                            &size_increment, &bytes_written, &current_offset,
+                            str, firstBlock);
 
     update_directory_entry_after_write(curr_de, fname, size_increment);
 
@@ -695,7 +775,7 @@ int k_unlink(const char* fname) {
   does_file_exist2(fname);  // lseeks to fname position
 
   if (curr_de == NULL) {
-    perror("unlink error: file fname not found");
+    fprintf(stdout, "unlink error: file fname not found\n");
     return -1;
   }
   // struct file_descriptor_st curr_fd;
@@ -728,9 +808,15 @@ int k_unlink(const char* fname) {
     while (fat[curr] != 0xFFFF) {
       int next = fat[curr];
       fat[curr] = 0x0000;
+      zero_out_helper(curr);
       curr = next;
+      msync(fat, fat_size, MS_SYNC);
     }
+    zero_out_helper(curr);
     fat[curr] = 0x0000;
+    msync(fat, fat_size, MS_SYNC);
+  } else {
+    zero_out_helper(curr);
   }
   return 1;
 }
@@ -760,6 +846,7 @@ off_t k_lseek(int fd, int offset, int whence) {
     int firstBlock = get_first_empty_fat_index();
     curr_de->firstBlock = firstBlock;
     fat[firstBlock] = 0xFFFF;
+    msync(fat, fat_size, MS_SYNC);
     // fprintf(stderr, "first block: %d\n", firstBlock);
   }
 
@@ -774,6 +861,8 @@ off_t k_lseek(int fd, int offset, int whence) {
       // it's like appending offset - curr_size to this file
 
       uint32_t append_offset = curr_de->size;
+
+      int true_offset = curr_de->size;
 
       uint16_t curr_block = curr_de->firstBlock;
 
@@ -793,9 +882,9 @@ off_t k_lseek(int fd, int offset, int whence) {
       int size_increment = 0;
       // for bytes_written and current_offset, we send in a pointer to the
       // variable so that we modify it during writing
-      write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                              &bytes_written, &current_offset, str,
-                              curr_de->firstBlock);
+      write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                              &size_increment, &bytes_written, &current_offset,
+                              str, curr_de->firstBlock);
 
       update_directory_entry_after_write(curr_de, curr_fd->fname,
                                          size_increment);
@@ -818,6 +907,8 @@ off_t k_lseek(int fd, int offset, int whence) {
     if (new_offset > curr_size) {
       uint32_t append_offset = curr_de->size;
 
+      int true_offset = curr_de->size;
+
       uint16_t curr_block = curr_de->firstBlock;
 
       while (append_offset > block_size && curr_block != 0xFFFF) {
@@ -836,9 +927,9 @@ off_t k_lseek(int fd, int offset, int whence) {
       int size_increment = 0;
       // for bytes_written and current_offset, we send in a pointer to the
       // variable so that we modify it during writing
-      write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                              &bytes_written, &current_offset, str,
-                              curr_de->firstBlock);
+      write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                              &size_increment, &bytes_written, &current_offset,
+                              str, curr_de->firstBlock);
 
       update_directory_entry_after_write(curr_de, curr_fd->fname,
                                          size_increment);
@@ -854,6 +945,8 @@ off_t k_lseek(int fd, int offset, int whence) {
     // we always need to extend this file
     // it's like appending "offset" to this file
     uint32_t append_offset = curr_de->size;
+
+    int true_offset = curr_de->size;
 
     uint16_t curr_block = curr_de->firstBlock;
 
@@ -873,9 +966,9 @@ off_t k_lseek(int fd, int offset, int whence) {
     int size_increment = 0;
     // for bytes_written and current_offset, we send in a pointer to the
     // variable so that we modify it during writing
-    write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                            &bytes_written, &current_offset, str,
-                            curr_de->firstBlock);
+    write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                            &size_increment, &bytes_written, &current_offset,
+                            str, curr_de->firstBlock);
 
     update_directory_entry_after_write(curr_de, curr_fd->fname, size_increment);
   }
@@ -914,10 +1007,8 @@ char* formatTime(time_t t) {
 }
 
 void k_ls(const char* filename) {
-  struct directory_entries* temp = malloc(sizeof(struct directory_entries));
+  struct directory_entries* temp = calloc(1, sizeof(struct directory_entries));
   if (filename == NULL) {
-    // fprintf(stderr, "k_ls: the param is NULL here\n");
-
     // we need to list everything in the current directory
     lseek_to_root_directory();
     int curr_root_block = 1;
@@ -949,6 +1040,7 @@ void k_ls(const char* filename) {
 
       // deleted files we don't want!
       if (temp->name[0] == 1 || temp->name[0] == 2) {
+        read_cnt += 1;
         continue;
       }
 
@@ -996,11 +1088,28 @@ void k_ls(const char* filename) {
   return;
 }
 
-void k_rename(const char* source, const char* dest) {
+void k_update_timestamp(const char* source) {
   struct directory_entries* curr_de = does_file_exist(source);
   if (curr_de == NULL) {
-    perror("k_rename error: source file not found");
+    perror("k_update_timestamp error Error: source file not found");
     return;
+  }
+  struct directory_entries* new_de =
+      create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
+                             curr_de->type, curr_de->perm, time(NULL));
+  does_file_exist2(source);
+  write(fs_fd, new_de, 64);
+}
+
+void k_rename(const char* source, const char* dest) {
+  struct directory_entries* curr_de = does_file_exist(source);
+  struct directory_entries* curr_de2 = does_file_exist(dest);
+  if (curr_de == NULL) {
+    perror("k_rename error Error: source file not found");
+    return;
+  }
+  if (curr_de2 != NULL) {
+    k_unlink(curr_de2->name);
   }
   does_file_exist2(source);
   char* dest_copy = strdup(dest);
@@ -1015,7 +1124,7 @@ void k_rename(const char* source, const char* dest) {
 void k_change_mode(const char* change, const char* filename) {
   struct directory_entries* curr_de = does_file_exist(filename);
   if (curr_de == NULL) {
-    perror("k_rename error: source file not found");
+    perror("k_rename error Error: source file not found");
     return;
   }
   does_file_exist2(filename);
@@ -1023,7 +1132,7 @@ void k_change_mode(const char* change, const char* filename) {
 
   if (strcmp(change, "-r") == 0) {
     if (perm == 2 || perm == 5 || perm == 7 || perm == 0) {
-      perror("chmod error invalid command");
+      perror("chmod error Error invalid command");
     } else if (perm == 6) {
       perm = 2;
     } else if (perm == 4) {
@@ -1054,7 +1163,7 @@ void k_change_mode(const char* change, const char* filename) {
       perm = 6;
     }
   } else if (strcmp(change, "-x") == 0) {
-    if (perm == 0 || perm == 2 || perm == 4 || perm == 7) {
+    if (perm == 0 || perm == 2 || perm == 4 || perm == 6) {
       perror("chmod error invalid command");
     } else if (perm == 5) {
       perm = 4;
@@ -1125,7 +1234,7 @@ char* k_read_all(const char* filename, int* read_num) {
   }
   uint32_t file_size = curr_de->size;
   int fd = k_open(filename, 1);
-  char* contents = (char*)malloc(file_size);
+  char* contents = (char*)calloc(1, file_size);
   int ret = k_read(fd, file_size, contents);
   // k_close(fd);
   if (ret == -1) {

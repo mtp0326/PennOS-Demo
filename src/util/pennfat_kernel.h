@@ -156,8 +156,12 @@ void k_ls(const char* filename);
 
 void k_rename(const char* source, const char* dest);
 
+void k_update_timestamp(const char* source);
+
 void k_change_mode(const char* change, const char* filename);
 
 char* k_read_all(const char* filename, int* read_num);
+
+bool is_file_name_valid(char* name);
 
 #endif
