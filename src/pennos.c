@@ -321,6 +321,7 @@ int main(int argc, char** argv) {
 
   if (mount(argv[1]) == -1) {
     perror("Mount error");
+    return -1;
   }
 
   processes[0] = init_list();
