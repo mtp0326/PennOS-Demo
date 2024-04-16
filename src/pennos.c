@@ -324,10 +324,14 @@ int main(int argc, char** argv) {
     log = argv[2];
   }
 
+  // mount the file system
   if (mount(argv[1]) == -1) {
     perror("Mount error");
     return -1;
   }
+
+  // create the global file descriptor table
+  initialize_global_fd_table();
 
   processes[0] = init_list();
   processes[1] = init_list();
