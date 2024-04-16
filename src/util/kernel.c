@@ -41,3 +41,17 @@ void k_proc_cleanup(pcb_t* proc) {
   free(proc);
   return;
 }
+
+int s_open(const char* fname, int mode);
+
+ssize_t s_read(int fd, int n, char* buf);
+
+ssize_t s_write(int fd, const char* str, int n);
+
+int s_close(int fd);
+
+int s_unlink(const char* fname);
+
+off_t s_lseek(int fd, int offset, int whence);
+
+int s_ls(const char* filename);

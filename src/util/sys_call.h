@@ -5,6 +5,7 @@
 #include <string.h>
 #include "globals.h"
 #include "kernel.h"
+#include "pennfat_kernel.h"
 
 #define STATUS_EXITED 0x00
 #define STATUS_STOPPED 0x01
@@ -91,7 +92,23 @@ void s_sleep(unsigned int ticks);
 
 /*== system call functions for interacting with PennOS filesystem ==*/
 /**
- * @brief
+ * @brief open a file name fname with the mode mode and return a file
+descriptor. The allowed modes are as follows:
+
+F_WRITE - writing and reading, truncates if the file exists, or creates it if it
+does not exist. Only one instance of a file can be opened in F_WRITE mode; error
+if PennOS attempts to open a file in F_WRITE mode more than once
+F_READ - open the file for reading only, return an error if the file does not
+exist F_APPEND - open the file for reading and writing but does not truncate the
+file if exists; additionally, the file pointer references the end of the file.
+
+s_open returns a file descriptor on success and a negative value on error. This
+open will initially be done at the kernel level, using a more intricate and
+already-implemented kernel level function. If the kernel level function succeeds
+and returns a fd, the user level function should also somehow keep track that
+such file descriptor is managed by the calling process. This can be done in
+multiple ways.
+
  *
  * @param fname
  * @param mode
@@ -100,7 +117,11 @@ void s_sleep(unsigned int ticks);
 int s_open(const char* fname, int mode);
 
 /**
- * @brief
+ * @brief read n bytes from the file referenced by fd. On return, s_read returns
+ * the number of bytes read, 0 if EOF is reached, or a negative number on error.
+ * A kernel level read should occur to perform the actual functionality, but its
+ * important to remember that the process’ file descriptor may need to be
+ * updated as the position of the file pointer changes.
  *
  * @param fd
  * @param n
@@ -110,7 +131,13 @@ int s_open(const char* fname, int mode);
 ssize_t s_read(int fd, int n, char* buf);
 
 /**
- * @brief
+ * @brief write n bytes of the string referenced by str to the file fd and
+ * increment the file pointer by n. On return, s_write returns the number of
+ * bytes written, or a negative value on error. Note that this writes bytes not
+ * chars, these can be anything, even '\0' A kernel level write should occur to
+ * perform the actual functionality, but its important to remember that the
+ * process’ file descriptor may need to be updated as the position of the file
+ * pointer changes.
  *
  * @param fd
  * @param str
@@ -120,7 +147,9 @@ ssize_t s_read(int fd, int n, char* buf);
 ssize_t s_write(int fd, const char* str, int n);
 
 /**
- * @brief
+ * @brief close the file fd and return 0 on success, or a negative value on
+ * failure. A kernel level close should occur, and on success the local process’
+ * file descriptor table should be cleaned up appropriately.
  *
  * @param fd
  * @return int
@@ -136,7 +165,11 @@ int s_close(int fd);
 int s_unlink(const char* fname);
 
 /**
- * @brief Construct a new s lseek object
+ * @brief reposition the file pointer for fd to the offset relative to whence.
+ * You must also implement the constants F_SEEK_SET, F_SEEK_CUR, and F_SEEK_END,
+ * which reference similar file whences as their similarly named counterparts in
+ * lseek(2). A kernel level lseek should occur, and necessary changes to the
+ * calling process’ file descriptor table will be necessary.
  *
  * @param fd
  * @param offset
@@ -145,7 +178,9 @@ int s_unlink(const char* fname);
 off_t s_lseek(int fd, int offset, int whence);
 
 /**
- * @brief Construct a new s ls object
+ * @brief List the file filename in the current directory. If filename is NULL,
+ * list all files in the current directory. Before EC implementations, this
+ * should be very simple and could literally be a call a similar k_function.
  *
  * @param filename
  */
