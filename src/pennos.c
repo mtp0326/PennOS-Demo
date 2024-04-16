@@ -88,6 +88,7 @@ static void* shell(void* arg) {
         // TODO: Call your implemented echo() function
       } else if (strcmp(args[0], "ls") == 0) {
         // TODO: Call your implemented ls() function
+        b_ls(NULL);
       } else if (strcmp(args[0], "touch") == 0) {
         // TODO: Call your implemented touch() function
       } else if (strcmp(args[0], "mv") == 0) {
@@ -316,6 +317,10 @@ int main(int argc, char** argv) {
   char* log = "log/log.txt";
   if (argc == 3) {
     log = argv[2];
+  }
+
+  if (mount(argv[1]) == -1) {
+    perror("Mount error");
   }
 
   processes[0] = init_list();

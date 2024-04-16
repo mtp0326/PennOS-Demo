@@ -61,3 +61,8 @@ void* b_logout(void* arg) {
   done = true;
   return NULL;
 }
+
+void* b_ls(void* arg) {
+  s_ls(NULL);
+  return NULL;
+}

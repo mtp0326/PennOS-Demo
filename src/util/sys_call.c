@@ -343,6 +343,6 @@ int s_unlink(const char* fname);
 
 off_t s_lseek(int fd, int offset, int whence);
 
-int s_ls(const char* filename) {
+void s_ls(const char* filename) {
   k_ls(filename);
 }

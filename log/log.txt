@@ -28,12 +28,8 @@
 [  26]	SCHEDULE	   1	   0	shell
 [  27]	SCHEDULE	   1	   0	shell
 [  28]	SCHEDULE	   1	   0	shell
-[  28]	CREATE	   2	   1	sleep
-[  28]	BLOCKED	   1	   0	shell
-[  29]	SCHEDULE	   2	   1	sleep
-[  30]	UNBLOCKED	   1	   0	shell
+[  29]	SCHEDULE	   1	   0	shell
 [  30]	SCHEDULE	   1	   0	shell
-[  30]	WAITED	   2	   1	sleep
 [  31]	SCHEDULE	   1	   0	shell
 [  32]	SCHEDULE	   1	   0	shell
 [  33]	SCHEDULE	   1	   0	shell
@@ -93,7 +89,3 @@
 [  87]	SCHEDULE	   1	   0	shell
 [  88]	SCHEDULE	   1	   0	shell
 [  89]	SCHEDULE	   1	   0	shell
-[  90]	SCHEDULE	   1	   0	shell
-[  91]	SCHEDULE	   1	   0	shell
-[  92]	SCHEDULE	   1	   0	shell
-[  93]	SCHEDULE	   1	   0	shell

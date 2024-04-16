@@ -184,6 +184,6 @@ off_t s_lseek(int fd, int offset, int whence);
  *
  * @param filename
  */
-int s_ls(const char* filename);
+void s_ls(const char* filename);
 
 #endif
