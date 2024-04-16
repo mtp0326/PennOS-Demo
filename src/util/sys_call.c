@@ -341,7 +341,9 @@ int s_close(int fd);
 
 int s_unlink(const char* fname);
 
-off_t s_lseek(int fd, int offset, int whence);
+off_t s_lseek(int fd, int offset, int whence) {
+  return k_lseek(fd, offset, whence);
+}
 
 void s_ls(const char* filename) {
   k_ls(filename);
