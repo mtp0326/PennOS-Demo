@@ -6,6 +6,7 @@
 #include "globals.h"
 #include "kernel.h"
 #include "pennfat_kernel.h"
+#include "shellbuiltins.h"
 
 #define STATUS_EXITED 0x00
 #define STATUS_STOPPED 0x01
@@ -14,6 +15,21 @@
 #define P_WIFEXITED(status) (((status) & 0xFF) == STATUS_EXITED)
 #define P_WIFSTOPPED(status) (((status) & 0xFF) == STATUS_STOPPED)
 #define P_WIFSIGNALED(status) (((status) & 0xFF) == STATUS_SIGNALED)
+
+typedef enum {
+  SCHEDULE,
+  CREATE,
+  EXIT,
+  SIGNAL,
+  ZOMBIE,
+  ORPHAN,
+  WAIT,
+  NICE,
+  BLOCK,
+  UNBLOCK,
+  STOP,
+  CONTINUE
+} log_message_t;
 
 /*== system call functions for interacting with PennOS process creation==*/
 /**
@@ -28,6 +44,7 @@
  * @return pid_t The process ID of the created child process.
  * // need to define error output?
  */
+
 pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1);
 
 pid_t s_spawn_nice(void* (*func)(void*),
@@ -89,6 +106,47 @@ int s_nice(pid_t pid, int priority);
  * than 0.
  */
 void s_sleep(unsigned int ticks);
+
+/***** CUSTOM SYSCALLS FOR SCHEDULER*/
+
+/**
+ * @brief Spawns and waits for a process
+ *
+ * @param func
+ * @param argv
+ * @param fd0
+ * @param fd1
+ * @param nohang
+ * @return int
+ */
+int s_spawn_and_wait(void* (*func)(void*),
+                     char* argv[],
+                     int fd0,
+                     int fd1,
+                     bool nohang,
+                     unsigned int priority);
+
+/**
+ * @brief Finds a process in any state.
+ *
+ * @param pid
+ * @return pcb_t*
+ */
+pcb_t* s_find_process(pid_t pid);
+
+/**
+ * @brief Removes a process in any state.
+ *
+ * @param pid
+ * @return int
+ */
+int s_remove_process(pid_t pid);
+
+void* s_function_from_string(char* program);
+
+int s_write_log(log_message_t logtype, pcb_t* proc, unsigned int old_nice);
+
+int s_move_process(CircularList* destination, pid_t pid);
 
 /*== system call functions for interacting with PennOS filesystem ==*/
 /**

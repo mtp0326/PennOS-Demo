@@ -23,7 +23,19 @@ void \mbox{\hyperlink{sys__call_8c_a53c8865d5bf1ca946e5b5405190f6690}{s\+\_\+exi
 int \mbox{\hyperlink{sys__call_8c_ac711d33fcf2573a590b224b6debab996}{s\+\_\+nice}} (pid\+\_\+t pid, int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
 \begin{DoxyCompactList}\small\item\em Set the priority of the specified thread. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{sys__call_8c_aec37528a3c7935864924764d1911126c}{s\+\_\+sleep}} (unsigned int ticks)
-\begin{DoxyCompactList}\small\item\em Suspends execution of the calling proces for a specified number of clock ticks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Suspends execution of the calling proces for a specified number of clock ticks. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8c_a9116ac84aeec3a4717eab9aa7137080e}{s\+\_\+spawn\+\_\+and\+\_\+wait}} (void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}func)(void \texorpdfstring{$\ast$}{*}), char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]}, int fd0, int fd1, bool nohang, unsigned int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
+\begin{DoxyCompactList}\small\item\em Spawns and waits for a process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sys__call_8c_a35ff16131dec7dc8b25686329a19d0db}{s\+\_\+find\+\_\+process}} (pid\+\_\+t pid)
+\begin{DoxyCompactList}\small\item\em Finds a process in any state. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8c_a09ef4dc77a6071976f7d93759d48afa6}{s\+\_\+remove\+\_\+process}} (pid\+\_\+t pid)
+\begin{DoxyCompactList}\small\item\em Removes a process in any state. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sys__call_8c_ab5efee98239591e685e3ae7da8203b21}{s\+\_\+function\+\_\+from\+\_\+string}} (char \texorpdfstring{$\ast$}{*}program)
+\item 
+int \mbox{\hyperlink{sys__call_8c_a1db57eb907f680ab844066357b793d5f}{s\+\_\+write\+\_\+log}} (\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\+\_\+message\+\_\+t}} logtype, \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}proc, unsigned int old\+\_\+nice)
+\item 
+int \mbox{\hyperlink{sys__call_8c_a7cc95330d937650d14281e3d6041f284}{s\+\_\+move\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}destination, pid\+\_\+t pid)
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -49,6 +61,30 @@ void \mbox{\hyperlink{sys__call_8c_aec37528a3c7935864924764d1911126c}{s\+\_\+sle
 
 Unconditionally exit the calling process. 
 
+\Hypertarget{sys__call_8c_a35ff16131dec7dc8b25686329a19d0db}\label{sys__call_8c_a35ff16131dec7dc8b25686329a19d0db} 
+\index{sys\_call.c@{sys\_call.c}!s\_find\_process@{s\_find\_process}}
+\index{s\_find\_process@{s\_find\_process}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_find\_process()}{s\_find\_process()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} s\+\_\+find\+\_\+process (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
+
+
+Finds a process in any state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pcb\+\_\+t\texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8c_ab5efee98239591e685e3ae7da8203b21}\label{sys__call_8c_ab5efee98239591e685e3ae7da8203b21} 
+\index{sys\_call.c@{sys\_call.c}!s\_function\_from\_string@{s\_function\_from\_string}}
+\index{s\_function\_from\_string@{s\_function\_from\_string}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_function\_from\_string()}{s\_function\_from\_string()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} s\+\_\+function\+\_\+from\+\_\+string (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{program }\end{DoxyParamCaption})}
+
 \Hypertarget{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76}\label{sys__call_8c_a18e6794b108eea25459bd7fe31de4e76} 
 \index{sys\_call.c@{sys\_call.c}!s\_kill@{s\_kill}}
 \index{s\_kill@{s\_kill}!sys\_call.c@{sys\_call.c}}
@@ -69,6 +105,12 @@ Send a signal to a particular process.
 \begin{DoxyReturn}{Returns}
 0 on success, -\/1 on error. 
 \end{DoxyReturn}
+\Hypertarget{sys__call_8c_a7cc95330d937650d14281e3d6041f284}\label{sys__call_8c_a7cc95330d937650d14281e3d6041f284} 
+\index{sys\_call.c@{sys\_call.c}!s\_move\_process@{s\_move\_process}}
+\index{s\_move\_process@{s\_move\_process}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_move\_process()}{s\_move\_process()}}
+{\footnotesize\ttfamily int s\+\_\+move\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{destination,  }\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
 \Hypertarget{sys__call_8c_ac711d33fcf2573a590b224b6debab996}\label{sys__call_8c_ac711d33fcf2573a590b224b6debab996} 
 \index{sys\_call.c@{sys\_call.c}!s\_nice@{s\_nice}}
 \index{s\_nice@{s\_nice}!sys\_call.c@{sys\_call.c}}
@@ -88,6 +130,24 @@ Set the priority of the specified thread.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8c_a09ef4dc77a6071976f7d93759d48afa6}\label{sys__call_8c_a09ef4dc77a6071976f7d93759d48afa6} 
+\index{sys\_call.c@{sys\_call.c}!s\_remove\_process@{s\_remove\_process}}
+\index{s\_remove\_process@{s\_remove\_process}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_remove\_process()}{s\_remove\_process()}}
+{\footnotesize\ttfamily int s\+\_\+remove\+\_\+process (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
+
+
+Removes a process in any state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
 \end{DoxyReturn}
 \Hypertarget{sys__call_8c_aec37528a3c7935864924764d1911126c}\label{sys__call_8c_aec37528a3c7935864924764d1911126c} 
 \index{sys\_call.c@{sys\_call.c}!s\_sleep@{s\_sleep}}
@@ -130,6 +190,32 @@ Create a child process that executes the function {\ttfamily func}. The child wi
 \begin{DoxyReturn}{Returns}
 pid\+\_\+t The process ID of the created child process. // need to define error output? 
 \end{DoxyReturn}
+\Hypertarget{sys__call_8c_a9116ac84aeec3a4717eab9aa7137080e}\label{sys__call_8c_a9116ac84aeec3a4717eab9aa7137080e} 
+\index{sys\_call.c@{sys\_call.c}!s\_spawn\_and\_wait@{s\_spawn\_and\_wait}}
+\index{s\_spawn\_and\_wait@{s\_spawn\_and\_wait}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_spawn\_and\_wait()}{s\_spawn\_and\_wait()}}
+{\footnotesize\ttfamily int s\+\_\+spawn\+\_\+and\+\_\+wait (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*})(void \texorpdfstring{$\ast$}{*})}]{func,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]},  }\item[{int}]{fd0,  }\item[{int}]{fd1,  }\item[{bool}]{nohang,  }\item[{unsigned int}]{priority }\end{DoxyParamCaption})}
+
+
+
+Spawns and waits for a process. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & \\
+\hline
+{\em argv} & \\
+\hline
+{\em fd0} & \\
+\hline
+{\em fd1} & \\
+\hline
+{\em nohang} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8c_a62b97025761b7f8ad7e59b641cad08d6}\label{sys__call_8c_a62b97025761b7f8ad7e59b641cad08d6} 
 \index{sys\_call.c@{sys\_call.c}!s\_spawn\_nice@{s\_spawn\_nice}}
 \index{s\_spawn\_nice@{s\_spawn\_nice}!sys\_call.c@{sys\_call.c}}
@@ -158,3 +244,9 @@ Wait on a child of the calling process, until it changes state. If {\ttfamily no
 \begin{DoxyReturn}{Returns}
 pid\+\_\+t The process ID of the child which has changed state on success, -\/1 on error. 
 \end{DoxyReturn}
+\Hypertarget{sys__call_8c_a1db57eb907f680ab844066357b793d5f}\label{sys__call_8c_a1db57eb907f680ab844066357b793d5f} 
+\index{sys\_call.c@{sys\_call.c}!s\_write\_log@{s\_write\_log}}
+\index{s\_write\_log@{s\_write\_log}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_write\_log()}{s\_write\_log()}}
+{\footnotesize\ttfamily int s\+\_\+write\+\_\+log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\+\_\+message\+\_\+t}}}]{logtype,  }\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proc,  }\item[{unsigned int}]{old\+\_\+nice }\end{DoxyParamCaption})}
+

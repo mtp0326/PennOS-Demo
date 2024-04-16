@@ -4,6 +4,7 @@
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include "{}globals.\+h"{}}\newline
 {\ttfamily \#include "{}kernel.\+h"{}}\newline
+{\ttfamily \#include "{}shellbuiltins.\+h"{}}\newline
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -18,6 +19,26 @@
 \#define \mbox{\hyperlink{sys__call_8h_a4ab1ade32fa50a6b4ce169bfd5a1aa53}{P\+\_\+\+WIFSTOPPED}}(status)~(((status) \& 0x\+FF) == \mbox{\hyperlink{sys__call_8h_ab26f0e851d5dd46ecec084f5b941acfd}{STATUS\+\_\+\+STOPPED}})
 \item 
 \#define \mbox{\hyperlink{sys__call_8h_a7dd24dcb672da49b7fef53824f098693}{P\+\_\+\+WIFSIGNALED}}(status)~(((status) \& 0x\+FF) == \mbox{\hyperlink{sys__call_8h_aad5f3b0332fe998d13d886e4d5969b19}{STATUS\+\_\+\+SIGNALED}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\+\_\+message\+\_\+t}} \{ \newline
+\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991ad594ab9bf88656efe790917210429046}{SCHEDULE}}
+, \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a473b49382a20dcc5b0ee10ddbc6338b4}{CREATE}}
+, \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a7a10b5d68d31711288e1fe0fa17dbf4f}{EXIT}}
+, \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a480882f626731b7fa7fc7caf12d8cb66}{SIGNAL}}
+, \newline
+\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a5dfb36109b24f39d54d5c3f48f53def8}{ZOMBIE}}
+, \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a4054f1e964953e9b2236beb36a714f7f}{ORPHAN}}
+, \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a79a322ccb4b29b85b3cab52dbccefd17}{WAIT}}
+, \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991ab31411fab4fd2cab988d78995b9e888f}{NICE}}
+, \newline
+\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a02fc27068fe9a3c151ffcc08ec5bb65d}{BLOCK}}
+, \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a2cf317a25bb87a47bcc72b2ac633945d}{UNBLOCK}}
+, \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a679ee5320d66c8322e310daeb2ee99b8}{STOP}}
+, \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a49959dd441dcda75d6898cf2c68fb374}{CONTINUE}}
+ \}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -36,6 +57,18 @@ int \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\+\_\+nice
 \begin{DoxyCompactList}\small\item\em Set the priority of the specified thread. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{sys__call_8h_aec37528a3c7935864924764d1911126c}{s\+\_\+sleep}} (unsigned int ticks)
 \begin{DoxyCompactList}\small\item\em Suspends execution of the calling proces for a specified number of clock ticks. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8h_a9116ac84aeec3a4717eab9aa7137080e}{s\+\_\+spawn\+\_\+and\+\_\+wait}} (void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*}func)(void \texorpdfstring{$\ast$}{*}), char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]}, int fd0, int fd1, bool nohang, unsigned int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
+\begin{DoxyCompactList}\small\item\em Spawns and waits for a process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db}{s\+\_\+find\+\_\+process}} (pid\+\_\+t pid)
+\begin{DoxyCompactList}\small\item\em Finds a process in any state. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8h_a09ef4dc77a6071976f7d93759d48afa6}{s\+\_\+remove\+\_\+process}} (pid\+\_\+t pid)
+\begin{DoxyCompactList}\small\item\em Removes a process in any state. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sys__call_8h_ab5efee98239591e685e3ae7da8203b21}{s\+\_\+function\+\_\+from\+\_\+string}} (char \texorpdfstring{$\ast$}{*}program)
+\item 
+int \mbox{\hyperlink{sys__call_8h_a1db57eb907f680ab844066357b793d5f}{s\+\_\+write\+\_\+log}} (\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\+\_\+message\+\_\+t}} logtype, \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}proc, unsigned int old\+\_\+nice)
+\item 
+int \mbox{\hyperlink{sys__call_8h_a7cc95330d937650d14281e3d6041f284}{s\+\_\+move\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}destination, pid\+\_\+t pid)
+\item 
 int \mbox{\hyperlink{sys__call_8h_afec6e61720e05918efefeab347e950f3}{s\+\_\+open}} (const char \texorpdfstring{$\ast$}{*}fname, int mode)
 \item 
 ssize\+\_\+t \mbox{\hyperlink{sys__call_8h_afdcf52e63af8002a5d7c02774ee0578f}{s\+\_\+read}} (int fd, int n, char \texorpdfstring{$\ast$}{*}buf)
@@ -91,6 +124,65 @@ int \mbox{\hyperlink{sys__call_8h_a6a6a25a8e0071c5e76fe05ee72587f0d}{s\+\_\+ls}}
 
 
 
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991} 
+\index{sys\_call.h@{sys\_call.h}!log\_message\_t@{log\_message\_t}}
+\index{log\_message\_t@{log\_message\_t}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{log\_message\_t}{log\_message\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\+\_\+message\+\_\+t}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SCHEDULE@{SCHEDULE}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!SCHEDULE@{SCHEDULE}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991ad594ab9bf88656efe790917210429046}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991ad594ab9bf88656efe790917210429046} 
+SCHEDULE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CREATE@{CREATE}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!CREATE@{CREATE}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a473b49382a20dcc5b0ee10ddbc6338b4}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a473b49382a20dcc5b0ee10ddbc6338b4} 
+CREATE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EXIT@{EXIT}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!EXIT@{EXIT}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a7a10b5d68d31711288e1fe0fa17dbf4f}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a7a10b5d68d31711288e1fe0fa17dbf4f} 
+EXIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SIGNAL@{SIGNAL}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!SIGNAL@{SIGNAL}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a480882f626731b7fa7fc7caf12d8cb66}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a480882f626731b7fa7fc7caf12d8cb66} 
+SIGNAL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ZOMBIE@{ZOMBIE}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!ZOMBIE@{ZOMBIE}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a5dfb36109b24f39d54d5c3f48f53def8}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a5dfb36109b24f39d54d5c3f48f53def8} 
+ZOMBIE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ORPHAN@{ORPHAN}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!ORPHAN@{ORPHAN}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a4054f1e964953e9b2236beb36a714f7f}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a4054f1e964953e9b2236beb36a714f7f} 
+ORPHAN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WAIT@{WAIT}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!WAIT@{WAIT}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a79a322ccb4b29b85b3cab52dbccefd17}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a79a322ccb4b29b85b3cab52dbccefd17} 
+WAIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NICE@{NICE}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!NICE@{NICE}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991ab31411fab4fd2cab988d78995b9e888f}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991ab31411fab4fd2cab988d78995b9e888f} 
+NICE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BLOCK@{BLOCK}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!BLOCK@{BLOCK}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a02fc27068fe9a3c151ffcc08ec5bb65d}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a02fc27068fe9a3c151ffcc08ec5bb65d} 
+BLOCK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNBLOCK@{UNBLOCK}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!UNBLOCK@{UNBLOCK}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a2cf317a25bb87a47bcc72b2ac633945d}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a2cf317a25bb87a47bcc72b2ac633945d} 
+UNBLOCK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STOP@{STOP}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!STOP@{STOP}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a679ee5320d66c8322e310daeb2ee99b8}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a679ee5320d66c8322e310daeb2ee99b8} 
+STOP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONTINUE@{CONTINUE}!sys\_call.h@{sys\_call.h}}\index{sys\_call.h@{sys\_call.h}!CONTINUE@{CONTINUE}}}\Hypertarget{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a49959dd441dcda75d6898cf2c68fb374}\label{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991a49959dd441dcda75d6898cf2c68fb374} 
+CONTINUE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
 \doxysubsection{Function Documentation}
 \Hypertarget{sys__call_8h_a1ee856dbd0706f79a440d1e98b42d32d}\label{sys__call_8h_a1ee856dbd0706f79a440d1e98b42d32d} 
 \index{sys\_call.h@{sys\_call.h}!s\_close@{s\_close}}
@@ -115,6 +207,30 @@ int
 
 
 Unconditionally exit the calling process. 
+
+\Hypertarget{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db}\label{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db} 
+\index{sys\_call.h@{sys\_call.h}!s\_find\_process@{s\_find\_process}}
+\index{s\_find\_process@{s\_find\_process}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_find\_process()}{s\_find\_process()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} s\+\_\+find\+\_\+process (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
+
+
+Finds a process in any state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pcb\+\_\+t\texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8h_ab5efee98239591e685e3ae7da8203b21}\label{sys__call_8h_ab5efee98239591e685e3ae7da8203b21} 
+\index{sys\_call.h@{sys\_call.h}!s\_function\_from\_string@{s\_function\_from\_string}}
+\index{s\_function\_from\_string@{s\_function\_from\_string}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_function\_from\_string()}{s\_function\_from\_string()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} s\+\_\+function\+\_\+from\+\_\+string (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{program }\end{DoxyParamCaption})}
 
 \Hypertarget{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}\label{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76} 
 \index{sys\_call.h@{sys\_call.h}!s\_kill@{s\_kill}}
@@ -170,6 +286,12 @@ Construct a new s lseek object.
 {\em whence} & \\
 \hline
 \end{DoxyParams}
+\Hypertarget{sys__call_8h_a7cc95330d937650d14281e3d6041f284}\label{sys__call_8h_a7cc95330d937650d14281e3d6041f284} 
+\index{sys\_call.h@{sys\_call.h}!s\_move\_process@{s\_move\_process}}
+\index{s\_move\_process@{s\_move\_process}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_move\_process()}{s\_move\_process()}}
+{\footnotesize\ttfamily int s\+\_\+move\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{destination,  }\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
 \Hypertarget{sys__call_8h_ac711d33fcf2573a590b224b6debab996}\label{sys__call_8h_ac711d33fcf2573a590b224b6debab996} 
 \index{sys\_call.h@{sys\_call.h}!s\_nice@{s\_nice}}
 \index{s\_nice@{s\_nice}!sys\_call.h@{sys\_call.h}}
@@ -224,6 +346,24 @@ int
 \begin{DoxyReturn}{Returns}
 ssize\+\_\+t 
 \end{DoxyReturn}
+\Hypertarget{sys__call_8h_a09ef4dc77a6071976f7d93759d48afa6}\label{sys__call_8h_a09ef4dc77a6071976f7d93759d48afa6} 
+\index{sys\_call.h@{sys\_call.h}!s\_remove\_process@{s\_remove\_process}}
+\index{s\_remove\_process@{s\_remove\_process}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_remove\_process()}{s\_remove\_process()}}
+{\footnotesize\ttfamily int s\+\_\+remove\+\_\+process (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
+
+
+Removes a process in any state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_aec37528a3c7935864924764d1911126c}\label{sys__call_8h_aec37528a3c7935864924764d1911126c} 
 \index{sys\_call.h@{sys\_call.h}!s\_sleep@{s\_sleep}}
 \index{s\_sleep@{s\_sleep}!sys\_call.h@{sys\_call.h}}
@@ -264,6 +404,32 @@ Create a child process that executes the function {\ttfamily func}. The child wi
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 pid\+\_\+t The process ID of the created child process. // need to define error output? 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8h_a9116ac84aeec3a4717eab9aa7137080e}\label{sys__call_8h_a9116ac84aeec3a4717eab9aa7137080e} 
+\index{sys\_call.h@{sys\_call.h}!s\_spawn\_and\_wait@{s\_spawn\_and\_wait}}
+\index{s\_spawn\_and\_wait@{s\_spawn\_and\_wait}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_spawn\_and\_wait()}{s\_spawn\_and\_wait()}}
+{\footnotesize\ttfamily int s\+\_\+spawn\+\_\+and\+\_\+wait (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*})(void \texorpdfstring{$\ast$}{*})}]{func,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]},  }\item[{int}]{fd0,  }\item[{int}]{fd1,  }\item[{bool}]{nohang,  }\item[{unsigned int}]{priority }\end{DoxyParamCaption})}
+
+
+
+Spawns and waits for a process. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & \\
+\hline
+{\em argv} & \\
+\hline
+{\em fd0} & \\
+\hline
+{\em fd1} & \\
+\hline
+{\em nohang} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
 \end{DoxyReturn}
 \Hypertarget{sys__call_8h_a62b97025761b7f8ad7e59b641cad08d6}\label{sys__call_8h_a62b97025761b7f8ad7e59b641cad08d6} 
 \index{sys\_call.h@{sys\_call.h}!s\_spawn\_nice@{s\_spawn\_nice}}
@@ -325,3 +491,9 @@ pid\+\_\+t The process ID of the child which has changed state on success, -\/1 
 \begin{DoxyReturn}{Returns}
 ssize\+\_\+t 
 \end{DoxyReturn}
+\Hypertarget{sys__call_8h_a1db57eb907f680ab844066357b793d5f}\label{sys__call_8h_a1db57eb907f680ab844066357b793d5f} 
+\index{sys\_call.h@{sys\_call.h}!s\_write\_log@{s\_write\_log}}
+\index{s\_write\_log@{s\_write\_log}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_write\_log()}{s\_write\_log()}}
+{\footnotesize\ttfamily int s\+\_\+write\+\_\+log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\+\_\+message\+\_\+t}}}]{logtype,  }\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proc,  }\item[{unsigned int}]{old\+\_\+nice }\end{DoxyParamCaption})}
+

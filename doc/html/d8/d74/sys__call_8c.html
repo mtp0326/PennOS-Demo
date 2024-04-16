@@ -113,6 +113,21 @@ Functions</h2></td></tr>
 <tr class="memitem:aec37528a3c7935864924764d1911126c" id="r_aec37528a3c7935864924764d1911126c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec37528a3c7935864924764d1911126c">s_sleep</a> (unsigned int ticks)</td></tr>
 <tr class="memdesc:aec37528a3c7935864924764d1911126c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suspends execution of the calling proces for a specified number of clock ticks.  <br /></td></tr>
 <tr class="separator:aec37528a3c7935864924764d1911126c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9116ac84aeec3a4717eab9aa7137080e" id="r_a9116ac84aeec3a4717eab9aa7137080e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9116ac84aeec3a4717eab9aa7137080e">s_spawn_and_wait</a> (void *(*func)(void *), char *argv[], int fd0, int fd1, bool nohang, unsigned int <a class="el" href="../../d8/d75/pennos_8c.html#a2e0cca4a43c21259b881d59c96c74fe0">priority</a>)</td></tr>
+<tr class="memdesc:a9116ac84aeec3a4717eab9aa7137080e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns and waits for a process.  <br /></td></tr>
+<tr class="separator:a9116ac84aeec3a4717eab9aa7137080e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35ff16131dec7dc8b25686329a19d0db" id="r_a35ff16131dec7dc8b25686329a19d0db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35ff16131dec7dc8b25686329a19d0db">s_find_process</a> (pid_t pid)</td></tr>
+<tr class="memdesc:a35ff16131dec7dc8b25686329a19d0db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a process in any state.  <br /></td></tr>
+<tr class="separator:a35ff16131dec7dc8b25686329a19d0db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09ef4dc77a6071976f7d93759d48afa6" id="r_a09ef4dc77a6071976f7d93759d48afa6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09ef4dc77a6071976f7d93759d48afa6">s_remove_process</a> (pid_t pid)</td></tr>
+<tr class="memdesc:a09ef4dc77a6071976f7d93759d48afa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a process in any state.  <br /></td></tr>
+<tr class="separator:a09ef4dc77a6071976f7d93759d48afa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5efee98239591e685e3ae7da8203b21" id="r_ab5efee98239591e685e3ae7da8203b21"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5efee98239591e685e3ae7da8203b21">s_function_from_string</a> (char *program)</td></tr>
+<tr class="separator:ab5efee98239591e685e3ae7da8203b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1db57eb907f680ab844066357b793d5f" id="r_a1db57eb907f680ab844066357b793d5f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1db57eb907f680ab844066357b793d5f">s_write_log</a> (<a class="el" href="../../db/d80/sys__call_8h.html#a9df1ce5034a7614c2c55bc05500f5991">log_message_t</a> logtype, <a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *proc, unsigned int old_nice)</td></tr>
+<tr class="separator:a1db57eb907f680ab844066357b793d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cc95330d937650d14281e3d6041f284" id="r_a7cc95330d937650d14281e3d6041f284"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7cc95330d937650d14281e3d6041f284">s_move_process</a> (<a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *destination, pid_t pid)</td></tr>
+<tr class="separator:a7cc95330d937650d14281e3d6041f284"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a628a3b2c1d461572974e97bea327519d" name="a628a3b2c1d461572974e97bea327519d"></a>
@@ -168,6 +183,49 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a35ff16131dec7dc8b25686329a19d0db" name="a35ff16131dec7dc8b25686329a19d0db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35ff16131dec7dc8b25686329a19d0db">&#9670;&#160;</a></span>s_find_process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> * s_find_process </td>
+          <td>(</td>
+          <td class="paramtype">pid_t</td>          <td class="paramname"><span class="paramname"><em>pid</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finds a process in any state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pid</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pcb_t* </dd></dl>
+
+</div>
+</div>
+<a id="ab5efee98239591e685e3ae7da8203b21" name="ab5efee98239591e685e3ae7da8203b21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5efee98239591e685e3ae7da8203b21">&#9670;&#160;</a></span>s_function_from_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * s_function_from_string </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>program</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a18e6794b108eea25459bd7fe31de4e76" name="a18e6794b108eea25459bd7fe31de4e76"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a18e6794b108eea25459bd7fe31de4e76">&#9670;&#160;</a></span>s_kill()</h2>
 
@@ -199,6 +257,27 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a7cc95330d937650d14281e3d6041f284" name="a7cc95330d937650d14281e3d6041f284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cc95330d937650d14281e3d6041f284">&#9670;&#160;</a></span>s_move_process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_move_process </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *</td>          <td class="paramname"><span class="paramname"><em>destination</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">pid_t</td>          <td class="paramname"><span class="paramname"><em>pid</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac711d33fcf2573a590b224b6debab996" name="ac711d33fcf2573a590b224b6debab996"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac711d33fcf2573a590b224b6debab996">&#9670;&#160;</a></span>s_nice()</h2>
 
@@ -227,6 +306,32 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure. </dd></dl>
+
+</div>
+</div>
+<a id="a09ef4dc77a6071976f7d93759d48afa6" name="a09ef4dc77a6071976f7d93759d48afa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09ef4dc77a6071976f7d93759d48afa6">&#9670;&#160;</a></span>s_remove_process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_remove_process </td>
+          <td>(</td>
+          <td class="paramtype">pid_t</td>          <td class="paramname"><span class="paramname"><em>pid</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Removes a process in any state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pid</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 </div>
 </div>
@@ -296,6 +401,60 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pid_t The process ID of the created child process. // need to define error output? </dd></dl>
+
+</div>
+</div>
+<a id="a9116ac84aeec3a4717eab9aa7137080e" name="a9116ac84aeec3a4717eab9aa7137080e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9116ac84aeec3a4717eab9aa7137080e">&#9670;&#160;</a></span>s_spawn_and_wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_spawn_and_wait </td>
+          <td>(</td>
+          <td class="paramtype">void *(*)(void *)</td>          <td class="paramname"><span class="paramname"><em>func</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>argv</em>[], </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd0</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd1</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>nohang</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>priority</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Spawns and waits for a process. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td></td></tr>
+    <tr><td class="paramname">argv</td><td></td></tr>
+    <tr><td class="paramname">fd0</td><td></td></tr>
+    <tr><td class="paramname">fd1</td><td></td></tr>
+    <tr><td class="paramname">nohang</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 </div>
 </div>
@@ -369,6 +528,32 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pid_t The process ID of the child which has changed state on success, -1 on error. </dd></dl>
+
+</div>
+</div>
+<a id="a1db57eb907f680ab844066357b793d5f" name="a1db57eb907f680ab844066357b793d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1db57eb907f680ab844066357b793d5f">&#9670;&#160;</a></span>s_write_log()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_write_log </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d80/sys__call_8h.html#a9df1ce5034a7614c2c55bc05500f5991">log_message_t</a></td>          <td class="paramname"><span class="paramname"><em>logtype</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *</td>          <td class="paramname"><span class="paramname"><em>proc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>old_nice</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
