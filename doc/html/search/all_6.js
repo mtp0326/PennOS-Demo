@@ -21,6 +21,5 @@ var searchData=
   ['fname_18',['fname',['../d1/d06/structfile__descriptor__st.html#a25cb5acb6a5c6e546b04f04cc56ee2be',1,'file_descriptor_st']]],
   ['formattime_19',['formatTime',['../dc/dfb/pennfat__kernel_8c.html#af2e67755671ac41b267522c63e52a7ba',1,'pennfat_kernel.c']]],
   ['free_5fargv_20',['free_argv',['../d8/d74/sys__call_8c.html#a33d16eae921a526aeb277c961c6933fc',1,'sys_call.c']]],
-  ['fs_5ffd_21',['fs_fd',['../dc/dfb/pennfat__kernel_8c.html#a64b57b29bcc87a7b1967c7d55e7d4212',1,'fs_fd:&#160;pennfat_kernel.c'],['../d0/d4d/pennfat__kernel_8h.html#a64b57b29bcc87a7b1967c7d55e7d4212',1,'fs_fd:&#160;pennfat_kernel.c']]],
-  ['function_5ffrom_5fstring_22',['function_from_string',['../d3/d2d/pennos_8h.html#ae8407b38c34512de0d26e126cd7ada44',1,'pennos.h']]]
+  ['fs_5ffd_21',['fs_fd',['../dc/dfb/pennfat__kernel_8c.html#a64b57b29bcc87a7b1967c7d55e7d4212',1,'fs_fd:&#160;pennfat_kernel.c'],['../d0/d4d/pennfat__kernel_8h.html#a64b57b29bcc87a7b1967c7d55e7d4212',1,'fs_fd:&#160;pennfat_kernel.c']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['process_5fstate_5ft_0',['process_state_t',['../d0/daa/kernel_8h.html#ab97efa0d1c4aeaf55ff756bf16685854',1,'kernel.h']]]
+  ['log_5fmessage_5ft_0',['log_message_t',['../db/d80/sys__call_8h.html#a9df1ce5034a7614c2c55bc05500f5991',1,'sys_call.h']]]
 ];

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.21)  27 MAR 2024 18:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.21)  14 APR 2024 16:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -854,12 +854,10 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 8.99994pt on input line 205.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 6.29996pt on input line 205.
- [1] [2] [3] [4
-
-]
+ [1] [2] [3] [4] [5] [6]
+[7] [8] [9] [10] [11] [12]
 Package hyperref Info: Option `pageanchor' set `true' on input line 208.
-
-(./d3/d87/md_doc_2README.tex
+ (./index.tex
 Chapter 1.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 18.66588pt on input line 1.
@@ -867,143 +865,549 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 18.66588pt on input line 1.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 22.39185pt on input line 1.
-) [1
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 10.79993pt on input line 5.
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 5.
+
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 9
+.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ts1phv.fd
+File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
+)
+LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 9.
+)
+(./d2/dd4/md_doc_2fat.tex [1
+
 
 ] [2
 
 ]
 Chapter 2.
-(./annotated.tex
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 12.9599pt on input line 1.
-) [3] [4
+) (./d2/d2d/md_doc_2kernel.tex [3] [4
 
 ]
 Chapter 3.
-(./files.tex) [5] [6
+) (./d9/d1f/md_doc_2scheduler.tex [5] [6
 
 ]
 Chapter 4.
-(./dc/d5f/structpcb__t.tex
+) (./d1/d57/md_doc_2shell.tex [7] [8
+
+]
+Chapter 5.
+) (./d2/d84/md_doc_2system.tex [9] [10
+
+]
+Chapter 6.
+) [11] [12
+
+]
+Chapter 7.
+(./annotated.tex
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 12.9599pt on input line 1.
+) [13] [14
+
+]
+Chapter 8.
+(./files.tex) [15] [16
+
+]
+Chapter 9.
+(./de/d82/structCircularList.tex
 LaTeX Font Info:    Trying to load font information for T1+pcr on input line 10
 .
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
-5.
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ts1phv.fd
-File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 7.19995pt on input line 29.
 )
-LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 15.
+(./d8/d68/structdirectory__entries.tex [17])
+(./d1/df6/structDynamicPIDArray.tex [18]) (./db/d26/structFD__Bitmap.tex
+[19]) (./d1/d06/structfile__descriptor__st.tex [20]) (./d8/d49/structNode.tex)
+(./dd/d3e/structparsed__command.tex [21]) (./dc/d5f/structpcb__t.tex [22]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.09995pt on input line 16.
+(Font)              scaled to size 8.09995pt on input line 18.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 16.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 18.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 16.
+(Font)              scaled to size 8.09995pt on input line 18.
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--17
-
- []
-
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 10.79993pt on input line 26.
-LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 34.
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
 
  []
 
-[7]) (./de/db6/structspthread__fwd__args__st.tex [8])
-(./d0/d22/structspthread__meta__st.tex)
-(./d0/ddf/structspthread__signal__args__st.tex [9])
-(./d6/dad/structspthread__st.tex) [10]
-Chapter 5.
-(./da/ddd/README_8md.tex) (./d4/dc4/pennfat_8c.tex) (./d8/d75/pennos_8c.tex)
-(./d9/d26/kernel_8c.tex) (./d0/daa/kernel_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--1
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
-
- []
-
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 25.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 6.29996pt on input line 25.
 LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
-(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 29.
+(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 25.
 LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 29.
-[11
+(Font)              scaled to size 8.09995pt on input line 25.
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
+
+ []
+
+[24]) (./dd/d6c/structPList.tex [25]) (./df/d3e/structPNode.tex)
+(./de/db6/structspthread__fwd__args__st.tex [26])
+(./d0/d22/structspthread__meta__st.tex [27])
+(./d0/ddf/structspthread__signal__args__st.tex [28])
+(./d6/dad/structspthread__st.tex) [29] [30
 
 ]
+Chapter 10.
+(./d1/d4c/fat_8md.tex) (./d1/d56/kernel_8md.tex) (./da/ddd/README_8md.tex)
+(./de/d4f/scheduler_8md.tex) (./d4/d40/shell_8md.tex) (./df/d66/system_8md.tex)
+(./d5/d36/parser_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+[31]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 78.
- [12]
-Underfull \hbox (badness 10000) detected at line 104
-[][][]
- []
-
-) (./d0/daa/kernel_8h_source.tex) (./de/d1c/spthread_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--11
-
- []
-
-[13] [14]
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 89.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 166.
- [15]) (./dc/d15/spthread_8h.tex
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 89.
+ [32]) (./d5/d36/parser_8h_source.tex [33]) (./d4/dc4/pennfat_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--5
 
  []
 
-[16] [17]) (./dc/d15/spthread_8h_source.tex [18] [19] [20])
-(./d8/d74/sys__call_8c.tex) (./db/d80/sys__call_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--1
+[34] [35] [36]) (./dc/d3d/pennfat_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--15
 
  []
 
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 7.
-[21]
-Underfull \hbox (badness 10000) detected at line 48
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 68
-[][][]
- []
-
-[22]
-Underfull \hbox (badness 10000) detected at line 109
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 131
-[][][]
- []
-
-) (./db/d80/sys__call_8h_source.tex [23]) (./d0/dd1/sched-demo_8c.tex
+[37] [38] [39] [40]) (./dc/d3d/pennfat_8h_source.tex [41])
+(./d8/d75/pennos_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--11
 
  []
 
-[24]) [25] [26
+[42]) (./d3/d2d/pennos_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--12
+
+ []
+
+[43]) (./d3/d2d/pennos_8h_source.tex [44]) (./de/dee/standalonefat_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+[45]) (./dc/dcc/array_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 38
+[][][]
+ []
+
+[46]
+Underfull \hbox (badness 10000) detected at line 58
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 76
+[][][]
+ []
+
+[47]
+Underfull \hbox (badness 10000) detected at line 111
+[][][]
+ []
+
+) (./db/d63/array_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+[48]
+Underfull \hbox (badness 10000) detected at line 44
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 82
+[][][]
+ []
+
+[49]
+Underfull \hbox (badness 10000) detected at line 117
+[][][]
+ []
+
+) (./db/d63/array_8h_source.tex) (./df/d9a/bitmap_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+[50]
+Underfull \hbox (badness 10000) detected at line 36
+[][][]
+ []
+
+[51]
+Underfull \hbox (badness 10000) detected at line 71
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 91
+[][][]
+ []
+
+) (./da/dcb/bitmap_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+[52]
+Underfull \hbox (badness 10000) detected at line 63
+[][][]
+ []
+
+[53]
+Underfull \hbox (badness 10000) detected at line 98
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 118
+[][][]
+ []
+
+) (./da/dcb/bitmap_8h_source.tex [54]) (./dd/dc7/clinkedlist_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+[55]
+Underfull \hbox (badness 10000) detected at line 46
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 55
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 71
+[][][]
+ []
+
+) (./d7/d12/clinkedlist_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+[56] [57]
+Underfull \hbox (badness 10000) detected at line 74
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 83
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 99
+[][][]
+ []
+
+) (./d7/d12/clinkedlist_8h_source.tex [58]) (./da/d41/error_8h.tex)
+(./da/d41/error_8h_source.tex [59]) (./db/d28/globals_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+[60]) (./d5/d87/globals_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+[61] [62]) (./d5/d87/globals_8h_source.tex) (./d9/d26/kernel_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+[63]
+Underfull \hbox (badness 10000) detected at line 45
+[][][]
+ []
+
+) (./d0/daa/kernel_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--10
+
+ []
+
+[64] [65] [66]
+Underfull \hbox (badness 10000) detected at line 151
+[][][]
+ []
+
+) (./d0/daa/kernel_8h_source.tex [67]) (./dc/dfb/pennfat__kernel_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 9.
+[68] [69]
+Underfull \hbox (badness 10000) detected at line 147
+[][][]
+ []
+
+[70]
+Underfull \hbox (badness 10000) detected at line 176
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 198
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 201
+[][][]
+ []
+
+[71]
+Underfull \hbox (badness 10000) detected at line 204
+[][][]
+ []
+
+
+Overfull \hbox (113.2695pt too wide) in paragraph at lines 205--206
+[][][] \T1/pcr/m/n/10 https[]://www.[]ibm.[]com/docs/en/zos/3.[]1.[]0?topic=loc
+ales-posix-portable-file-name-character-set[][] 
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 226
+[][][]
+ []
+
+[72]
+Underfull \hbox (badness 10000) detected at line 252
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 270
+[][][]
+ []
+
+[73]) (./d0/d4d/pennfat__kernel_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
+
+ []
+
+[74] [75] [76] [77]
+Underfull \hbox (badness 10000) detected at line 211
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 240
+[][][]
+ []
+
+[78]
+Underfull \hbox (badness 10000) detected at line 262
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 265
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 268
+[][][]
+ []
+
+
+Overfull \hbox (113.2695pt too wide) in paragraph at lines 269--270
+[][][] \T1/pcr/m/n/10 https[]://www.[]ibm.[]com/docs/en/zos/3.[]1.[]0?topic=loc
+ales-posix-portable-file-name-character-set[][] 
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 290
+[][][]
+ []
+
+[79]
+Underfull \hbox (badness 10000) detected at line 316
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 334
+[][][]
+ []
+
+[80]) (./d0/d4d/pennfat__kernel_8h_source.tex [81] [82])
+(./d8/deb/prioritylist_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 36
+[][][]
+ []
+
+[83]
+Underfull \hbox (badness 10000) detected at line 52
+[][][]
+ []
+
+) (./d6/dda/prioritylist_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+[84]
+Underfull \hbox (badness 10000) detected at line 56
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 72
+[][][]
+ []
+
+) (./d6/dda/prioritylist_8h_source.tex) (./dc/d49/shellbuiltins_8c.tex [85]
+Underfull \hbox (badness 10000) in paragraph at lines 3--10
+
+ []
+
+[86]) (./d0/d8c/shellbuiltins_8h.tex [87] [88] [89] [90] [91])
+(./d0/d8c/shellbuiltins_8h_source.tex [92]) (./de/d1c/spthread_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--11
+
+ []
+
+[93] [94] [95]) (./dc/d15/spthread_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+[96] [97]) (./dc/d15/spthread_8h_source.tex [98] [99] [100])
+(./d8/d74/sys__call_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+[101]
+Underfull \hbox (badness 10000) detected at line 69
+[][][]
+ []
+
+
+Overfull \vbox (17.52979pt too high) has occurred while \output is active []
+
+
+[102]
+Underfull \hbox (badness 10000) detected at line 89
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 130
+[][][]
+ []
+
+[103]
+Underfull \hbox (badness 10000) detected at line 158
+[][][]
+ []
+
+) (./db/d80/sys__call_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
+
+ []
+
+[104] [105]
+Underfull \hbox (badness 10000) detected at line 106
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 136
+[][][]
+ []
+
+[106]
+Underfull \hbox (badness 10000) detected at line 190
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 206
+[][][]
+ []
+
+[107]
+Underfull \hbox (badness 10000) detected at line 224
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 265
+[][][]
+ []
+
+[108]
+Underfull \hbox (badness 10000) detected at line 285
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 307
+[][][]
+ []
+
+[109]
+Underfull \hbox (badness 10000) detected at line 325
+[][][]
+ []
+
+) (./db/d80/sys__call_8h_source.tex) (./d0/dd1/sched-demo_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--11
+
+ []
+
+[110]) [111] [112
 
 ] (./refman.ind
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 22.39185pt on input line 1.
- [27
+ [113
 
 
-] [28] [29
+] [114] [115] [116] [117] [118] [119]
+[120] [121] [122
 
 ]) (./refman.aux)
  ***********
@@ -1011,29 +1415,32 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-03-14>
  ***********
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 9A436437C04159AFDD3D4CBDF3521E01;21126.
+(rerunfilecheck)             Checksum: B8F69742A211BD0FC791373895D2CD35;99706.
  ) 
 Here is how much of TeX's memory you used:
- 18360 strings out of 474104
- 298953 string characters out of 5743473
- 1951493 words of memory out of 5000000
- 40092 multiletter control sequences out of 15000+600000
- 611702 words of font info for 105 fonts, out of 8000000 for 9000
+ 20491 strings out of 474104
+ 359997 string characters out of 5743473
+ 1955493 words of memory out of 5000000
+ 41137 multiletter control sequences out of 15000+600000
+ 613501 words of font info for 106 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 101i,16n,117p,671b,744s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,16n,117p,754b,746s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></
-usr/local/texlive/2024/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/loca
-l/texlive/2024/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texli
-ve/2024/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2024
-/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/local/texlive/2024/texmf
--dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2024/texmf-dist/f
-onts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (35 pages, 162704 bytes).
+></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
+/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
+local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/lo
+cal/texlive/2024/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texl
+ive/2024/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/202
+4/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2024/texmf
+-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/local/texlive/2024/texmf-dist/
+fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/t
+ype1/urw/helvetic/uhvro8a.pfb>
+Output written on refman.pdf (136 pages, 442258 bytes).
 PDF statistics:
- 1294 PDF objects out of 1440 (max. 8388607)
- 1226 compressed objects within 13 object streams
- 256 named destinations out of 1000 (max. 500000)
- 873 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5826 PDF objects out of 6186 (max. 8388607)
+ 5600 compressed objects within 56 object streams
+ 1190 named destinations out of 1200 (max. 500000)
+ 3969 words of extra memory for PDF output out of 10000 (max. 10000000)
 

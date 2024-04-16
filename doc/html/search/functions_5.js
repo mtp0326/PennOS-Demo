@@ -6,6 +6,5 @@ var searchData=
   ['fd_5fbitmap_5ftest_3',['fd_bitmap_test',['../df/d9a/bitmap_8c.html#a7de93385481501b068dec877a52afb32',1,'fd_bitmap_test(const FD_Bitmap *bitmap, uint32_t fd):&#160;bitmap.c'],['../da/dcb/bitmap_8h.html#a7de93385481501b068dec877a52afb32',1,'fd_bitmap_test(const FD_Bitmap *bitmap, uint32_t fd):&#160;bitmap.c']]],
   ['find_5fprocess_4',['find_process',['../dd/dc7/clinkedlist_8c.html#a43d3a5a52f3e2c3d607e50ac257cb67b',1,'find_process(CircularList *list, pid_t pid):&#160;clinkedlist.c'],['../d7/d12/clinkedlist_8h.html#a43d3a5a52f3e2c3d607e50ac257cb67b',1,'find_process(CircularList *list, pid_t pid):&#160;clinkedlist.c']]],
   ['formattime_5',['formatTime',['../dc/dfb/pennfat__kernel_8c.html#af2e67755671ac41b267522c63e52a7ba',1,'pennfat_kernel.c']]],
-  ['free_5fargv_6',['free_argv',['../d8/d74/sys__call_8c.html#a33d16eae921a526aeb277c961c6933fc',1,'sys_call.c']]],
-  ['function_5ffrom_5fstring_7',['function_from_string',['../d3/d2d/pennos_8h.html#ae8407b38c34512de0d26e126cd7ada44',1,'pennos.h']]]
+  ['free_5fargv_6',['free_argv',['../d8/d74/sys__call_8c.html#a33d16eae921a526aeb277c961c6933fc',1,'sys_call.c']]]
 ];

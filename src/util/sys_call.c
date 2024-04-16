@@ -90,10 +90,7 @@ pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
       (char*)malloc(sizeof(char) * (strlen(child_argv[0]) + 1));
   strcpy(child->processname, child_argv[0]);
 
-  char buf[100];
-  sprintf(buf, "[%4u]\tCREATE\t%4u\t%4u\t%s\n", tick, child->pid,
-          child->priority, child_argv[0]);
-  write(logfiledescriptor, buf, strlen(buf));
+  s_write_log(CREATE, child, -1);
 
   return (child->pid);
 }
@@ -128,9 +125,9 @@ pid_t s_spawn_nice(void* (*func)(void*),
     return -1;
   }
   arg->argv = child_argv;
-  child->priority = priority;
+  child->priority = (priority == -1 ? 1 : priority);
 
-  add_process(processes[priority], child);
+  add_process(processes[(priority == -1 ? 1 : priority)], child);
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
     k_proc_cleanup(child);
     free_argv(child_argv);
@@ -142,11 +139,10 @@ pid_t s_spawn_nice(void* (*func)(void*),
       (char*)malloc(sizeof(char) * (strlen(child_argv[0]) + 1));
   strcpy(child->processname, child_argv[0]);
 
-  char buf[100];
-  sprintf(buf, "[%4u]\tCREATE\t%4u\t%4u\t%s\n", tick, child->pid,
-          child->priority, child_argv[0]);
-  write(logfiledescriptor, buf, strlen(buf));
-
+  s_write_log(CREATE, child, -1);
+  if (priority != -1) {
+    s_write_log(NICE, child, 1);
+  }
   return (child->pid);
 }
 
@@ -188,10 +184,7 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
     return pid;
   }
 
-  char buf[100];
-  sprintf(buf, "[%4u]\tBLOCKED\t%4u\t%4u\t%s\n", tick, current->pid,
-          current->priority, current->processname);
-  write(logfiledescriptor, buf, strlen(buf));
+  s_write_log(BLOCK, current, -1);
 
   // else, block self until state change
   current->state = BLOCKED;
@@ -216,59 +209,47 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
     // became blocked? edstem #730 will define spec
   }
 
-  sprintf(buf, "[%4u]\tWAITED\t%4u\t%4u\t%s\n", tick, child_pcb->pid,
-          child_pcb->priority, child_pcb->processname);
-  write(logfiledescriptor, buf, strlen(buf));
+  s_write_log(WAIT, child_pcb, -1);
 
   return pid;
 }
 
 int s_kill(pid_t pid, int signal) {
-  pcb_t* process;
-  if (find_process(processes[0], pid) != NULL) {
-    process = find_process(processes[0], pid);
-  } else if (find_process(processes[1], pid) != NULL) {
-    process = find_process(processes[1], pid);
-  } else if (find_process(processes[2], pid) != NULL) {
-    process = find_process(processes[2], pid);
-  } else if (find_process(blocked, pid) != NULL) {
-    process = find_process(blocked, pid);
-
-  } else if (find_process(zombied, pid) != NULL) {
-    process = find_process(zombied, pid);
-  } else if (find_process(stopped, pid) != NULL) {
-    process = find_process(stopped, pid);
-  } else {
-    return -1;  // process not found
+  pcb_t* process = s_find_process(pid);
+  if (process == NULL) {
+    // SET ERRNO: PROCESS NOT FOUND
+    return -1;
   }
 
-  if (signal == P_SIGSTOP) {
-    process->state = STOPPED;
-    process->statechanged = true;
-    remove_process(processes[process->priority], pid);
-    add_process(stopped, process);
-  } else if (signal == P_SIGCONT) {
-    if (!(process->state == STOPPED)) {
-      return -1;  // invalid? do nothing?
-    }
-    process->state = RUNNING;
-    process->statechanged = true;
-    remove_process(processes[process->priority], pid);
-    add_process(stopped, process);
-  } else if (signal == P_SIGTER) {
-    process->state = ZOMBIED;
-    process->statechanged = true;
-    process->term_signal = P_SIGTER;
-    process->exit_status = 0;
-    remove_process(processes[process->priority],
-                   pid);  // need to define more here based on edstem #738
-    add_process(zombied, process);
-    char buf[100];
-    sprintf(buf, "[%4u]\tSIGNALED\t%4u\t%4u\t%s\n", tick, process->pid,
-            process->priority, process->processname);
-    write(logfiledescriptor, buf, strlen(buf));
-  } else {
-    ;
+  switch (signal) {
+    case P_SIGSTOP:
+      s_move_process(stopped, pid);
+      process->state = STOPPED;
+      process->statechanged = true;
+      s_write_log(STOP, process, -1);
+      break;
+    case P_SIGCONT:
+      if (!(process->state == STOPPED)) {
+        // SET ERRNO? Ignore?
+        return -1;
+      }
+      process->state = RUNNING;
+      process->statechanged = true;
+      s_move_process(processes[process->priority], pid);
+      s_write_log(CONTINUE, process, -1);
+      break;
+    case P_SIGTER:
+      process->state = ZOMBIED;
+      process->statechanged = true;
+      process->term_signal = P_SIGTER;
+      process->exit_status = 0;
+      s_move_process(zombied, pid);
+      s_write_log(SIGNAL, process, -1);
+      break;
+    default:
+      // ERRNO: invalid SIGNAL?
+      return -1;
+      break;
   }
   return 0;
 }
@@ -279,37 +260,20 @@ void s_exit(void) {
   current->state = ZOMBIED;
   current->statechanged = true;
 
-  char buf[100];
-  sprintf(buf, "[%4u]\tEXITED\t%4u\t%4u\t%s\n", tick, current->pid,
-          current->priority, current->processname);
-  write(logfiledescriptor, buf, strlen(buf));
+  s_write_log(EXIT, current, -1);
 
   // TODO: need to kill all children
 }
 
 int s_nice(pid_t pid, int priority) {
-  pcb_t* pcb;
-  if (find_process(processes[0], pid) != NULL) {
-    pcb = find_process(processes[0], pid);
-    remove_process(processes[pcb->priority], pid);
-    add_process(processes[priority], pcb);
-  } else if (find_process(processes[1], pid) != NULL) {
-    pcb = find_process(processes[1], pid);
-    remove_process(processes[pcb->priority], pid);
-    add_process(processes[priority], pcb);
-  } else if (find_process(processes[2], pid) != NULL) {
-    pcb = find_process(processes[2], pid);
-    remove_process(processes[pcb->priority], pid);
-    add_process(processes[priority], pcb);
-  } else if (find_process(blocked, pid) != NULL) {
-    pcb = find_process(blocked, pid);
-    pcb->priority = priority;
-  } else if (find_process(stopped, pid) != NULL) {
-    pcb = find_process(stopped, pid);
-    pcb->priority = priority;
-  } else if (find_process(zombied, pid) != NULL) {
-    pcb = find_process(zombied, pid);
-    pcb->priority = priority;
+  pcb_t* pcb = s_find_process(pid);
+  if (pcb == NULL) {
+    // ERRNO: could not find process
+    return -1;
+  }
+  pcb->priority = priority;
+  if (pcb->state == RUNNING) {
+    s_move_process(processes[priority], pid);
   }
 
   return 0;
@@ -326,7 +290,193 @@ void s_sleep(unsigned int ticks) {
   remove_process(processes[current->priority], current->pid);
   add_process(blocked, current);
   spthread_suspend_self();
-
   s_exit();
   return;
+}
+
+int s_spawn_and_wait(void* (*func)(void*),
+                     char* argv[],
+                     int fd0,
+                     int fd1,
+                     bool nohang,
+                     unsigned int priority) {
+  pid_t child = s_spawn_nice(func, argv, fd0, fd1, priority);
+  int wstatus = 0;
+  s_waitpid(child, &wstatus, nohang);
+  if (!nohang) {
+    pcb_t* child_pcb = s_find_process(child);
+    s_remove_process(child);
+    k_proc_cleanup(child_pcb);
+    return 0;
+  } else {
+    return 0;
+  }
+}
+
+pcb_t* s_find_process(pid_t pid) {
+  pcb_t* ret = NULL;
+  find_process(zombied, pid);
+  find_process(blocked, pid);
+  find_process(stopped, pid);
+  find_process(processes[0], pid);
+  find_process(processes[1], pid);
+  find_process(processes[2], pid);
+
+  if (ret == NULL) {
+    // SET ERRNO
+    return NULL;
+  } else {
+    return ret;
+  }
+}
+
+int s_remove_process(pid_t pid) {
+  pcb_t* proc = s_find_process(pid);
+  if (proc == NULL) {
+    // SET ERRNO
+    return -1;
+  }
+  switch (proc->state) {
+    case BLOCKED:
+      remove_process(blocked, pid);
+      return 0;
+    case STOPPED:
+      remove_process(stopped, pid);
+      return 0;
+    case ZOMBIED:
+      remove_process(zombied, pid);
+      return 0;
+    case RUNNING:
+      remove_process(processes[proc->priority], pid);
+      return 0;
+    default:
+      // SET ERRNO
+      return -1;
+  }
+}
+
+void* s_function_from_string(char* program) {
+  // replace as you create/define more function
+  if (strcmp(program, "cat") == 0) {
+    return NULL;
+  } else if (strcmp(program, "sleep") == 0) {
+    return b_sleep;
+  } else if (strcmp(program, "busy") == 0) {
+    return NULL;
+  } else if (strcmp(program, "echo") == 0) {
+    return NULL;
+  } else if (strcmp(program, "ls") == 0) {
+    return NULL;
+  } else if (strcmp(program, "touch") == 0) {
+    return NULL;
+  } else if (strcmp(program, "mv") == 0) {
+    return NULL;
+  } else if (strcmp(program, "cp") == 0) {
+    return NULL;
+  } else if (strcmp(program, "rm") == 0) {
+    return NULL;
+  } else if (strcmp(program, "chmod") == 0) {
+    return NULL;
+  } else if (strcmp(program, "ps") == 0) {
+    return NULL;
+  } else if (strcmp(program, "kill") == 0) {
+    return b_kill;
+  } else if (strcmp(program, "zombify") == 0) {
+    return NULL;
+  } else if (strcmp(program, "orphanify") == 0) {
+    return NULL;
+  } else {
+    return NULL;
+  }
+}
+
+int s_write_log(log_message_t logtype, pcb_t* proc, unsigned int old_nice) {
+  char buf[100];
+  switch (logtype) {
+    case SCHEDULE:
+      sprintf(buf, "[%4u]\tSCHEDULE \t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    case CREATE:
+      sprintf(buf, "[%4u]\tCREATE   \t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    case SIGNAL:
+      sprintf(buf, "[%4u]\tSIGNALED \t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    case EXIT:
+      sprintf(buf, "[%4u]\tEXITED   \t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    case ZOMBIE:
+      sprintf(buf, "[%4u]\tZOMBIE   \t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    case ORPHAN:
+      sprintf(buf, "[%4u]\tORPHAN   \t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    case WAIT:
+      sprintf(buf, "[%4u]\tWAITED   \t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    case NICE:
+      sprintf(buf, "[%4u]\tNICE     \t%4u\t%4u\t%u\t%s\n", tick, proc->pid,
+              old_nice, proc->priority, proc->processname);
+      break;
+    case BLOCK:
+      sprintf(buf, "[%4u]\tBLOCKED  \t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    case UNBLOCK:
+      sprintf(buf, "[%4u]\tUNBLOCKED\t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    case STOP:
+      sprintf(buf, "[%4u]\tSTOPPED  \t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    case CONTINUE:
+      sprintf(buf, "[%4u]\tCONTINUED\t%4u\t%4u\t\t%s\n", tick, proc->pid,
+              proc->priority, proc->processname);
+      break;
+    default:
+      // SET ERRNO, INVALID LOGTYPE
+      return -1;
+  }
+  if (write(logfiledescriptor, buf, strlen(buf)) == -1) {
+    // SET ERRNO, WRITE TO LOGFILE FAILED
+    return -1;
+  } else {
+    return 0;  // exit successfully
+  }
+}
+
+int s_move_process(CircularList* destination, pid_t pid) {
+  pcb_t* pcb = s_find_process(pid);
+  if (pcb == NULL) {
+    // SET ERRNO?
+    return -1;
+  }
+
+  switch (pcb->state) {
+    case STOPPED:
+      remove_process(stopped, pid);
+      break;
+    case BLOCKED:
+      remove_process(blocked, pid);
+      break;
+    case ZOMBIED:
+      remove_process(zombied, pid);
+      break;
+    case RUNNING:
+      remove_process(processes[pcb->priority], pid);
+      break;
+    default:
+      // SET ERRNO? INVALID?
+      return -1;
+  }
+  add_process(destination, pcb);
+  return 0;
 }

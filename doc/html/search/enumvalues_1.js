@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['f_5fseek_5fcur_0',['F_SEEK_CUR',['../d0/d4d/pennfat__kernel_8h.html#a157e51c85caee5bec44a2f9a4e5605e6ab31ac29c12e35bd468f95e18263e9850',1,'pennfat_kernel.h']]],
-  ['f_5fseek_5fend_1',['F_SEEK_END',['../d0/d4d/pennfat__kernel_8h.html#a157e51c85caee5bec44a2f9a4e5605e6a3efde7f3f3639fd0801644753d2e5674',1,'pennfat_kernel.h']]],
-  ['f_5fseek_5fset_2',['F_SEEK_SET',['../d0/d4d/pennfat__kernel_8h.html#a157e51c85caee5bec44a2f9a4e5605e6ad21e659a9215dc7d9bc52f5d7e27b7cb',1,'pennfat_kernel.h']]]
+  ['continue_0',['CONTINUE',['../db/d80/sys__call_8h.html#a9df1ce5034a7614c2c55bc05500f5991a49959dd441dcda75d6898cf2c68fb374',1,'sys_call.h']]],
+  ['create_1',['CREATE',['../db/d80/sys__call_8h.html#a9df1ce5034a7614c2c55bc05500f5991a473b49382a20dcc5b0ee10ddbc6338b4',1,'sys_call.h']]]
 ];
