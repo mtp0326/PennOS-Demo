@@ -451,10 +451,12 @@ ssize_t k_read(int fd, int n, char* buf) {
 
   if (fd == STDOUT_FILENO) {
     perror("Cannot read from STDOUT");
+    return -1;
   }
 
   if (fd == STDERR_FILENO) {
     perror("Cannot read from STDERR");
+    return -1;
   }
 
   // returns number of bytes on success, 0 if EOF is reached, -1 on error
@@ -749,6 +751,18 @@ ssize_t k_write(int fd, const char* str, int n) {
   return -1;
 }
 
+int k_count_fd_num(const char* name) {
+  int count = 0;
+  for (int i = 0; i < fd_counter; i++) {
+    struct file_descriptor_st curr_fd;
+    curr_fd = global_fd_table[i];
+    if (strcmp(curr_fd.fname, name) == 0) {
+      count++;
+    }
+  }
+  return count;
+}
+
 int k_close(int fd) {
   struct file_descriptor_st* curr = global_fd_table + fd;
 
@@ -759,6 +773,15 @@ int k_close(int fd) {
 
   // close it by freeing it and turning it to null
   // free(caurr);
+  // int count = k_count_fd_num(curr->fname);
+
+  // if (count == 1) {
+  //   struct directory_entries* curr_de = does_file_exist(curr->fname);
+  //   if (curr_de->name[0] == 2) {
+  //     curr_de->name[0] = 1
+  //   }
+  // }
+  
 
   global_fd_table[fd].fname = "*";
 
@@ -774,21 +797,16 @@ int k_unlink(const char* fname) {
     fprintf(stdout, "unlink error: file fname not found\n");
     return -1;
   }
-  // struct file_descriptor_st curr_fd;
-  // search for fd with same fname to get num processes
-  // for (int i = 0; i < MAX_FD_NUM; i++) {
-  //   curr_fd = global_fd_table[i];
-  //   if (strcmp(curr_fd.fname, fname) == 0) {
-  //     break;
-  //   }
-  // }
-  // for multiple processes (shouldn't be used in standalone fat)
-  // if (curr_fd.ref_cnt > 1) {
-  //   (curr_de->name)[0] = 2;
-  // } else {
-  // mark name[0] with 1
-  (curr_de->name)[0] = 1;
-  // }
+  //search for fd with same fname to get num processes
+  int count = k_count_fd_num(fname);
+  //for multiple processes (shouldn't be used in standalone fat)
+  if (count > 1) {
+    (curr_de->name)[0] = 2;
+  } else if (count == 1 || count == 0) { // im the only process with it, mark name[0] with 1
+    (curr_de->name)[0] = 1;
+  } else {
+    perror("k_unlink: count is negatives something wrong");
+  }
 
   struct directory_entries* new_de =
       create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,

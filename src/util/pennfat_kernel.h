@@ -57,6 +57,7 @@ int get_first_empty_fat_index();
 void move_to_open_de(bool found);
 struct directory_entries* does_file_exist(const char* fname);
 off_t does_file_exist2(const char* fname);
+int k_count_fd_num(const char* name);
 struct file_descriptor_st* get_file_descriptor(int fd);
 
 /************************************************
