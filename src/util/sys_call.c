@@ -481,7 +481,29 @@ int s_move_process(CircularList* destination, pid_t pid) {
   return 0;
 }
 
-int s_open(const char* fname, int mode);
+int s_open(const char* fname, int mode) {
+  struct directory_entries* curr_de = does_file_exist(fname);
+
+  int fd = k_open(fname, mode);
+
+  if (fd == -1) {
+    perror("error: s_open: k_open error");
+    return -1;
+  } 
+  
+  if (curr_de == NULL) { // file doesn't exist (make new file in KLGFDT and change bit map)
+    // change bitmap to indicate open fd
+    fd_bitmap_set(current->open_fds, fd);
+
+  } else { // file exists
+    // change bitmap to indicate open fd
+    fd_bitmap_set(current->open_fds, fd);
+
+    // update KLGFDT to increment the ref_count
+    (global_fd_table[fd]).ref_cnt = (global_fd_table[fd]).ref_cnt + 1;
+  }
+  return fd;
+}
 
 ssize_t s_read(int fd, int n, char* buf);
 

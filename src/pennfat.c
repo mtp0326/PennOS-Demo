@@ -299,6 +299,11 @@ void cat_file_wa(char** args) {
     while (args[i] != NULL) {
       int read_num;
       char* contents = k_read_all(args[i], &read_num);
+      if (contents == NULL) {
+        free(contents);
+        perror("cat error");
+        return;
+      }
       k_write(STDOUT_FILENO, contents, read_num);
       // fprintf(stdout, "%s\n", contents);
       free(contents);
@@ -315,6 +320,11 @@ void cat_file_wa(char** args) {
            (strcmp(args[i], "-w") != 0)) {
       int read_num;
       char* contents = k_read_all(args[i], &read_num);
+      if (contents == NULL) {
+        free(contents);
+        perror("cat error");
+        return;
+      }
       k_write(fd, (char*)contents, read_num);
       free(contents);
       i += 1;

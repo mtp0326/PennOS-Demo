@@ -293,7 +293,7 @@ void move_to_open_de(bool found) {
         if (buffer[0] == 0 || buffer[0] == 1) {
           // look for first open or deleted entry
           // fprintf(stderr, "here!\n");
-          break;
+          return;
         } else {
           if (i == num_directories_per_block - 1 && !found) {
             // at last directory entry of
