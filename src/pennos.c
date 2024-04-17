@@ -44,12 +44,8 @@ static void* shell(void* arg) {
         // TODO: Call your implemented echo() function
       } else if (strcmp(args[0], "ls") == 0) {
         // TODO: Call your implemented ls() function
-        pid_t child = s_spawn(b_ls, args, STDIN_FILENO, STDOUT_FILENO);
-        int wstatus = 0;
-        s_waitpid(child, &wstatus, false);
-        pcb_t* child_pcb = find_process(zombied, child);
-        remove_process(zombied, child);
-        k_proc_cleanup(child_pcb);
+        s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "touch") == 0) {
         // TODO: Call your implemented touch() function
       } else if (strcmp(args[0], "mv") == 0) {

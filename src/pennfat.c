@@ -56,18 +56,18 @@ void initialize_global_fd_table() {
 
   // stdin
   struct file_descriptor_st* std_in =
-      create_file_descriptor(0, "stdin", READ, 0);
+      create_file_descriptor(0, "stdin", F_READ, 0);
   global_fd_table[0] = *std_in;
 
   // stdout
   struct file_descriptor_st* std_out =
-      create_file_descriptor(1, "stdout", WRITE, 0);
+      create_file_descriptor(1, "stdout", F_WRITE, 0);
 
   global_fd_table[1] = *std_out;
 
   // stderr
   struct file_descriptor_st* std_err =
-      create_file_descriptor(2, "stdout", WRITE, 0);
+      create_file_descriptor(2, "stdout", F_WRITE, 0);
 
   global_fd_table[2] = *std_err;
 }
@@ -249,7 +249,8 @@ void touch(char** args) {
     if (does_file_exist2(args[i]) != -1) {
       k_update_timestamp(args[i]);
     } else {
-      k_open(args[i], 0);
+      int fd = k_open(args[i], F_WRITE);
+      k_close(fd);
     }
 
     i += 1;
@@ -306,9 +307,9 @@ void cat_file_wa(char** args) {
   } else {
     int fd;
     if (w) {
-      fd = k_open(filename, 0);
+      fd = k_open(filename, F_WRITE);
     } else {
-      fd = k_open(filename, 2);
+      fd = k_open(filename, F_APPEND);
     }
     while (args[i] != NULL && (strcmp(args[i], "-a") != 0) &&
            (strcmp(args[i], "-w") != 0)) {
@@ -322,7 +323,7 @@ void cat_file_wa(char** args) {
 }
 
 void cat_w(char* output) {
-  int fd = k_open(output, 0);
+  int fd = k_open(output, F_WRITE);
   int BUF_SIZE = 4096;
   ssize_t bytesRead;      // Number of bytes read
   char buffer[BUF_SIZE];  // Buffer to store terminal input
@@ -333,7 +334,7 @@ void cat_w(char* output) {
   // Check for read error
   if (bytesRead == -1) {
     perror("Error reading from terminal");
-    close(fd);
+    k_close(fd);
     return;
   }
 
@@ -341,7 +342,7 @@ void cat_w(char* output) {
 }
 
 void cat_a(char* output) {
-  int fd = k_open(output, 2);
+  int fd = k_open(output, F_APPEND);
   int BUF_SIZE = 4096;
   ssize_t bytesRead;      // Number of bytes read
   char buffer[BUF_SIZE];  // Buffer to store terminal input
@@ -352,7 +353,7 @@ void cat_a(char* output) {
   // Check for read error
   if (bytesRead == -1) {
     perror("Error reading from terminal");
-    close(fd);
+    k_close(fd);
     return;
   }
 
@@ -371,8 +372,8 @@ void cp_within_fat(char* source, char* dest) {
     return;
   }
 
-  int dest_fd = k_open(dest, WRITE);
-  int source_fd = k_open(source, READ);
+  int dest_fd = k_open(dest, F_WRITE);
+  int source_fd = k_open(source, F_READ);
 
   int read_num;
 
@@ -389,7 +390,7 @@ void cp_to_host(char* source, char* host_dest) {
     perror("error: source does not exist");
     return;
   }
-  int source_fd = k_open(source, READ);
+  int source_fd = k_open(source, F_READ);
 
   int read_num;
 
@@ -414,7 +415,7 @@ void cp_from_host(char* host_source, char* dest) {
   }
 
   char buffer[1];
-  int dest_fd = k_open(dest, 0);
+  int dest_fd = k_open(dest, F_WRITE);
 
   while (read(host_fd, buffer, 1) > 0) {
     k_write(dest_fd, buffer, 1);

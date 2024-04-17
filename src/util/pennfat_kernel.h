@@ -6,10 +6,9 @@
 #include "../pennfat.h"
 #include "spthread.h"
 
-#define READ_WRITE 0
-#define READ 1
-#define WRITE 2
-#define APPEND 3
+#define F_READ 0
+#define F_WRITE 1
+#define F_APPEND 2
 
 #define MAX_FD_NUM 1024
 

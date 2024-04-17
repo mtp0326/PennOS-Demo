@@ -49,10 +49,10 @@ int k_open(const char* fname, int mode) {
   }
   lseek(fs_fd, 0, SEEK_CUR);
   // F_WRITE
-  if (mode == 0) {
+  if (mode == F_WRITE) {
     if (dir_entry != NULL) {  // file already exists (truncate)
-      for (int i = 0; i < curr_fd - 1; i++) {
-        if (global_fd_table[i].mode == WRITE &&
+      for (int i = 0; i < curr_fd; i++) {
+        if (global_fd_table[i].mode == F_WRITE &&
             (strcmp(global_fd_table[i].fname, fname) == 0)) {
           fd_counter--;
           perror(
@@ -73,7 +73,7 @@ int k_open(const char* fname, int mode) {
       // fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
       // fprintf(stderr, "dir entry first block: %d\n", dir_entry->firstBlock);
       // add to global fd table
-      opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
+      opened_file = create_file_descriptor(curr_fd, fname_copy, F_WRITE, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
       // truncate
       int start_fat_index = dir_entry->firstBlock;
@@ -113,7 +113,7 @@ int k_open(const char* fname, int mode) {
       // new
       //                                         // block for root dir
       // fat[efi] = 0xFFFF;
-      opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
+      opened_file = create_file_descriptor(curr_fd, fname_copy, F_WRITE, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
       new_de = create_directory_entry(fname_copy2, 0, 0xFFFF, 1, 6, time(NULL));
       // fs_fd should already be at next open location in root directory
@@ -126,8 +126,8 @@ int k_open(const char* fname, int mode) {
         // exit(EXIT_FAILURE);
       }
     }
-  } else if (mode == 1) {     // F_READ
-    if (dir_entry != NULL) {  // open file: add it to fd table
+  } else if (mode == F_READ) {  // F_READ
+    if (dir_entry != NULL) {    // open file: add it to fd table
       if (dir_entry->perm == 2 || dir_entry->perm == 0) {
         perror(
             "k_open: F_READ: attempting to open file that doesn't have read "
@@ -135,14 +135,14 @@ int k_open(const char* fname, int mode) {
         return -1;
         // exit(EXIT_FAILURE);
       }
-      opened_file = create_file_descriptor(curr_fd, fname_copy, READ, 0);
+      opened_file = create_file_descriptor(curr_fd, fname_copy, F_READ, 0);
       global_fd_table[curr_fd] = *opened_file;
     } else {
       fd_counter--;
       perror("k_open: f_read: file does not exist");
     }
-  } else if (mode == 2) {     // F_APPEND
-    if (dir_entry != NULL) {  // file exists, add to fd table in APPEND mode
+  } else if (mode == F_APPEND) {  // F_APPEND
+    if (dir_entry != NULL) {      // file exists, add to fd table in APPEND mode
       // file offset is at end of the file
       if (dir_entry->perm == 4 || dir_entry->perm == 5 ||
           dir_entry->perm == 0) {
@@ -152,13 +152,13 @@ int k_open(const char* fname, int mode) {
         return -1;
         // exit(EXIT_FAILURE);
       }
-      opened_file =
-          create_file_descriptor(curr_fd, fname_copy, APPEND, dir_entry->size);
+      opened_file = create_file_descriptor(curr_fd, fname_copy, F_APPEND,
+                                           dir_entry->size);
       global_fd_table[curr_fd] = *opened_file;
     } else {  // file doesn't exist, create it in root dir with read/write perm,
               // add to fd table in APPEND mode
       // fat[empty_fat_index] = 0xFFFF;
-      opened_file = create_file_descriptor(curr_fd, fname_copy, APPEND, 0);
+      opened_file = create_file_descriptor(curr_fd, fname_copy, F_APPEND, 0);
       global_fd_table[curr_fd] = *opened_file;  // update fd table
       new_de = create_directory_entry(fname_copy2, 0, 0xFFFF, 1, 6, time(NULL));
       // fs_fd should already be at next open location in root directory
@@ -465,7 +465,6 @@ ssize_t k_read(int fd, int n, char* buf) {
     return -1;
   }
 
-  int mode = curr->mode;
   int offset = curr->offset;
   char* fname = curr->fname;
 
@@ -474,10 +473,6 @@ ssize_t k_read(int fd, int n, char* buf) {
     return -1;
   }
 
-  // WRITE_ONLY (F_WRITE)
-  if (mode == WRITE) {
-    return -1;
-  }
   // find the directory entry from the fd name
   struct directory_entries* curr_de = does_file_exist(fname);
   uint8_t perm = curr_de->perm;
@@ -642,7 +637,7 @@ ssize_t k_write(int fd, const char* str, int n) {
   char* fname = curr->fname;
 
   // READ_ONLY (F_READ)
-  if (mode == 1) {
+  if (mode == F_READ) {
     return -1;
   }
 
@@ -674,7 +669,7 @@ ssize_t k_write(int fd, const char* str, int n) {
   }
 
   // this is opened with F_WRITE
-  if (mode == 0) {
+  if (mode == F_WRITE) {
     // we need to lseek to where we want to write
     uint16_t curr_block = firstBlock;
 
@@ -712,7 +707,7 @@ ssize_t k_write(int fd, const char* str, int n) {
   }  // end of mode == 0 (F_WRITE)
 
   // F_APPEND
-  if (mode == APPEND) {
+  if (mode == F_APPEND) {
     // we need to move the offset to the eof if this is in F_APPEND mode
     // the offset in the fd doesn't matter here
     uint32_t append_offset = curr_de->size;
@@ -755,7 +750,7 @@ ssize_t k_write(int fd, const char* str, int n) {
 }
 
 int k_close(int fd) {
-  struct file_descriptor_st* curr = get_file_descriptor(fd);
+  struct file_descriptor_st* curr = global_fd_table + fd;
 
   // fd is not a valid open file descriptor
   if (curr == NULL) {
@@ -763,8 +758,9 @@ int k_close(int fd) {
   }
 
   // close it by freeing it and turning it to null
-  // free(curr);
-  curr = NULL;
+  // free(caurr);
+
+  global_fd_table[fd].fname = "*";
 
   return 0;
 }
@@ -1233,7 +1229,7 @@ char* k_read_all(const char* filename, int* read_num) {
     return NULL;
   }
   uint32_t file_size = curr_de->size;
-  int fd = k_open(filename, 1);
+  int fd = k_open(filename, F_READ);
   char* contents = (char*)calloc(1, file_size);
   int ret = k_read(fd, file_size, contents);
   // k_close(fd);
