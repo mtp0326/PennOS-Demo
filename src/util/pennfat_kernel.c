@@ -781,7 +781,6 @@ int k_close(int fd) {
   //     curr_de->name[0] = 1
   //   }
   // }
-  
 
   global_fd_table[fd].fname = "*";
 
@@ -797,15 +796,21 @@ int k_unlink(const char* fname) {
     fprintf(stdout, "unlink error: file fname not found\n");
     return -1;
   }
-  //search for fd with same fname to get num processes
+  // search for fd with same fname to get num processes
   int count = k_count_fd_num(fname);
-  //for multiple processes (shouldn't be used in standalone fat)
+  // for multiple processes (shouldn't be used in standalone fat)
   if (count > 1) {
-    (curr_de->name)[0] = 2;
-  } else if (count == 1 || count == 0) { // im the only process with it, mark name[0] with 1
+    perror(
+        "k_unlink error: this file is being used by another process. Unable to "
+        "delete the file");
+    return -1;
+
+  } else if (count == 1 ||
+             count == 0) {  // im the only process with it, mark name[0] with 1
     (curr_de->name)[0] = 1;
   } else {
     perror("k_unlink: count is negatives something wrong");
+    return -1;
   }
 
   struct directory_entries* new_de =
