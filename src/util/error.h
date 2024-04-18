@@ -14,6 +14,19 @@
  */
 extern int errno;
 
+// KERNEL LEVEL ERRORS
+
+    // S_SPAWN ERRORS
+#define EPCBCREATE 0
+#define ENOARGS 1
+#define EADDPROC 2
+#define ETHREADCREATE 3
+#define EBITMAP 4
+
+
+
+
+// FAT LEVEL ERRORS
 /**
  * @brief This is an analogue of the perror(3) function. This allows the shell
  * or other function to pass in a message describing what error occured, which

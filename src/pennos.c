@@ -250,6 +250,7 @@ void cancel_and_join(spthread_t thread) {
 #include "pennfat.h"
 
 int main(int argc, char** argv) {
+  errno = -1;
   if (argc < 2) {
     fprintf(stderr, "pennos: filesystem not specified");  // REPLACE WITH PERROR
     return -1;

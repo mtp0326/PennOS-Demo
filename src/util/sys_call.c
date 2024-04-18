@@ -54,17 +54,24 @@ void free_argv(char* argv[]) {
 pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
   pcb_t* child = k_proc_create(current);
   if (child == NULL) {
-    return -1;
+      errno = EPCBCREATE;
+      return -1;
   }
 
   char** child_argv = duplicate_argv(argv);
   if (child_argv == NULL) {
     k_proc_cleanup(child);
+    errno = ENOARGS;
     return -1;
   }
 
-  fd_bitmap_set(child->open_fds, fd0);
-  fd_bitmap_set(child->open_fds, fd1);
+  if(!fd_bitmap_set(child->open_fds, fd0)) {
+    errno = EBITMAP;
+  }
+
+  if(!fd_bitmap_set(child->open_fds, fd1)) {
+    errno = EBITMAP;
+  }
 
   struct child_process_arg {
     char** argv;
@@ -74,15 +81,21 @@ pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
   if (arg == NULL) {
     k_proc_cleanup(child);
     free(child_argv);
+    errno = ENOARGS;
     return -1;
   }
   arg->argv = child_argv;
 
-  add_process(processes[1], child);  // 1 is default priority
+  if (add_process(processes[1], child) == -1) {
+    errno = EADDPROC;
+    return -1;
+  }
+
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
     k_proc_cleanup(child);
     free_argv(child_argv);
     free(arg);
+    errno = ETHREADCREATE;
     return -1;
   }
 

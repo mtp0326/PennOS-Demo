@@ -7,6 +7,8 @@
 #include "kernel.h"
 #include "pennfat_kernel.h"
 #include "shellbuiltins.h"
+#include "error.h"
+
 
 #define STATUS_EXITED 0x00
 #define STATUS_STOPPED 0x01

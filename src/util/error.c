@@ -1,5 +1,4 @@
 #include "error.h"
-
 void u_perror(char* message) {
     char* err_message;
     if (message == NULL) {
@@ -7,18 +6,20 @@ void u_perror(char* message) {
     } else if (strcmp(message, "\0") == 0) {
         return;
     } else {
+        write(STDERR_FILENO, message, strlen(message));
         switch (errno) {
-            case 0:
+            case ETHREADCREATE:
+                err_message = "Thread creation failed";
                 break;
             case 1:
                 break;
             // ..
             default:
-                write(STDERR_FILENO, message, strlen(message));
                 err_message = "Invalid value of errno";
-                write(STDERR_FILENO, err_message, strlen(err_message));
                 break;
         }    
     }
+    write(STDERR_FILENO, err_message, strlen(err_message));
+    write(STDERR_FILENO, "\n", 1);
 }
 

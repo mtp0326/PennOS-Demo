@@ -14,14 +14,14 @@ CircularList* init_list(void) {
 }
 
 // Adds a new process to the circular linked list
-void add_process(CircularList* list, pcb_t* process) {
+int add_process(CircularList* list, pcb_t* process) {
   if (list == NULL || process == NULL) {
-    return;  // Invalid parameters
+    return -1;  // Invalid parameters
   }
 
   Node* newNode = (Node*)malloc(sizeof(Node));
   if (newNode == NULL) {
-    return;  // Failed to allocate memory for the new node
+    return -1;  // Failed to allocate memory for the new node
   }
   newNode->process = process;
 
@@ -39,6 +39,7 @@ void add_process(CircularList* list, pcb_t* process) {
     newNode->next = list->head;  // Complete the circle
   }
   list->size++;
+  return 0;
 }
 
 // Removes a process from the circular linked list by its PID

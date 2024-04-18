@@ -12,7 +12,7 @@ kernel only:
  - test orphanify + zombify
  - add signal relaying to child processes (redirect ctrl c + ctrl z)
  - have shell shutdown at EOF (kill all processes properly)
- - logout, man
+ - logout
  - shell scripts (3.2)
  - double check idling (htop)
 
