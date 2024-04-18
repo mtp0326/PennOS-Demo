@@ -6,10 +6,9 @@
 #include "../pennfat.h"
 #include "spthread.h"
 
-#define READ_WRITE 0
-#define READ 1
-#define WRITE 2
-#define APPEND 3
+#define F_READ 0
+#define F_WRITE 1
+#define F_APPEND 2
 
 #define MAX_FD_NUM 1024
 
@@ -58,6 +57,7 @@ int get_first_empty_fat_index();
 void move_to_open_de(bool found);
 struct directory_entries* does_file_exist(const char* fname);
 off_t does_file_exist2(const char* fname);
+int k_count_fd_num(const char* name);
 struct file_descriptor_st* get_file_descriptor(int fd);
 
 /************************************************
@@ -156,8 +156,12 @@ void k_ls(const char* filename);
 
 void k_rename(const char* source, const char* dest);
 
+void k_update_timestamp(const char* source);
+
 void k_change_mode(const char* change, const char* filename);
 
 char* k_read_all(const char* filename, int* read_num);
+
+bool is_file_name_valid(char* name);
 
 #endif

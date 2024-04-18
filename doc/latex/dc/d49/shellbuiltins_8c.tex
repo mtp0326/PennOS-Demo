@@ -14,6 +14,8 @@ void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a8caa9d892fd52
 \begin{DoxyCompactList}\small\item\em Sleep for {\ttfamily n} seconds. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a371b3588a8f8a231c10f75b0ea84926f}{b\+\_\+kill}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Sends a specified signal to a list of processes. If a signal name is not specified, default to "{}term"{}. Valid signals are -\/term, -\/stop, and -\/cont. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a5c9d672a604065d43cc83893febc188a}{b\+\_\+nice}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Spawn a new process for {\ttfamily command} and set its priority to {\ttfamily priority}. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a9f61e992d66c53f4383b37699dab6ef3}{b\+\_\+nice\+\_\+pid}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Adjust the priority level of an existing process. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a184a1be3455442bda9bbd0789e438481}{b\+\_\+logout}} (void \texorpdfstring{$\ast$}{*}arg)
@@ -41,7 +43,22 @@ Example Usage\+: kill 1 2 3 (sends term to processes 1, 2, and 3) Example Usage\
 
 Exits the shell and shutsdown Penn\+OS. 
 
-Example Usage\+: logout \Hypertarget{shellbuiltins_8c_a9f61e992d66c53f4383b37699dab6ef3}\label{shellbuiltins_8c_a9f61e992d66c53f4383b37699dab6ef3} 
+Example Usage\+: logout \Hypertarget{shellbuiltins_8c_a5c9d672a604065d43cc83893febc188a}\label{shellbuiltins_8c_a5c9d672a604065d43cc83893febc188a} 
+\index{shellbuiltins.c@{shellbuiltins.c}!b\_nice@{b\_nice}}
+\index{b\_nice@{b\_nice}!shellbuiltins.c@{shellbuiltins.c}}
+\doxysubsubsection{\texorpdfstring{b\_nice()}{b\_nice()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+nice (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Spawn a new process for {\ttfamily command} and set its priority to {\ttfamily priority}. 
+
+
+\begin{DoxyEnumerate}
+\item Adjust the priority level of an existing process.
+\end{DoxyEnumerate}
+
+Example Usage\+: nice 2 cat f1 f2 f3 (spawns cat with priority 2) \Hypertarget{shellbuiltins_8c_a9f61e992d66c53f4383b37699dab6ef3}\label{shellbuiltins_8c_a9f61e992d66c53f4383b37699dab6ef3} 
 \index{shellbuiltins.c@{shellbuiltins.c}!b\_nice\_pid@{b\_nice\_pid}}
 \index{b\_nice\_pid@{b\_nice\_pid}!shellbuiltins.c@{shellbuiltins.c}}
 \doxysubsubsection{\texorpdfstring{b\_nice\_pid()}{b\_nice\_pid()}}

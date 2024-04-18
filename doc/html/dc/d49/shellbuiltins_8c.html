@@ -99,6 +99,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a371b3588a8f8a231c10f75b0ea84926f" id="r_a371b3588a8f8a231c10f75b0ea84926f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a371b3588a8f8a231c10f75b0ea84926f">b_kill</a> (void *arg)</td></tr>
 <tr class="memdesc:a371b3588a8f8a231c10f75b0ea84926f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a specified signal to a list of processes. If a signal name is not specified, default to "term". Valid signals are -term, -stop, and -cont.  <br /></td></tr>
 <tr class="separator:a371b3588a8f8a231c10f75b0ea84926f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c9d672a604065d43cc83893febc188a" id="r_a5c9d672a604065d43cc83893febc188a"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c9d672a604065d43cc83893febc188a">b_nice</a> (void *arg)</td></tr>
+<tr class="memdesc:a5c9d672a604065d43cc83893febc188a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn a new process for <code>command</code> and set its priority to <code>priority</code>.  <br /></td></tr>
+<tr class="separator:a5c9d672a604065d43cc83893febc188a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f61e992d66c53f4383b37699dab6ef3" id="r_a9f61e992d66c53f4383b37699dab6ef3"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f61e992d66c53f4383b37699dab6ef3">b_nice_pid</a> (void *arg)</td></tr>
 <tr class="memdesc:a9f61e992d66c53f4383b37699dab6ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjust the priority level of an existing process.  <br /></td></tr>
 <tr class="separator:a9f61e992d66c53f4383b37699dab6ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,6 +147,29 @@ Functions</h2></td></tr>
 
 <p>Exits the shell and shutsdown PennOS. </p>
 <p>Example Usage: logout </p>
+
+</div>
+</div>
+<a id="a5c9d672a604065d43cc83893febc188a" name="a5c9d672a604065d43cc83893febc188a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c9d672a604065d43cc83893febc188a">&#9670;&#160;</a></span>b_nice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * b_nice </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Spawn a new process for <code>command</code> and set its priority to <code>priority</code>. </p>
+<ol type="1">
+<li>Adjust the priority level of an existing process.</li>
+</ol>
+<p>Example Usage: nice 2 cat f1 f2 f3 (spawns cat with priority 2) </p>
 
 </div>
 </div>

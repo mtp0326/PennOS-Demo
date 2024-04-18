@@ -36,6 +36,5 @@
 #include "util/sys_call.h"
 
 static bool done = false;
-void* function_from_string(char* program);
 
 #endif

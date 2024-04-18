@@ -26,7 +26,7 @@ void* b_kill(void* arg) {
   char** argv = (char**)arg;
   int signal;
   int i = 1;
-  if (strlen(argv[1]) == 1) {
+  if (strlen(argv[1]) >= 4) {
     signal = P_SIGTER;
   } else {
     if (strcmp(argv[1], "-term") == 0) {
@@ -50,14 +50,31 @@ void* b_kill(void* arg) {
   return NULL;
 }
 
+void* b_nice(void* arg) {
+  struct parsed_command* parsed = NULL;
+  parse_command(arg, &parsed);
+  char** args = parsed->commands[0];
+  void* (*func)(void*) = s_function_from_string(args[2]);
+  unsigned priority = atoi(args[1]);  // USE STROL AND ERRNO
+  s_spawn_and_wait(func, &args[2], STDIN_FILENO, STDOUT_FILENO,
+                   parsed->is_background, priority);
+  return NULL;
+}
+
 void* b_nice_pid(void* arg) {
   char** argv = (char**)arg;
   s_nice(atoi(argv[2]), atoi(argv[1]));
-  s_exit();
+
   return NULL;
 }
 
 void* b_logout(void* arg) {
   done = true;
+  return NULL;
+}
+
+void* b_ls(void* arg) {
+  s_ls(NULL);
+  s_exit();
   return NULL;
 }

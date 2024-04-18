@@ -20,7 +20,7 @@ void read_command(char** cmds) {
     exit(EXIT_FAILURE);
   }
   // read in the user input
-  ssize_t read_res = read(STDIN_FILENO, cmd_temp, MAX_LEN);
+  ssize_t read_res = k_read(STDIN_FILENO, MAX_LEN, cmd_temp);
   // error catching for read
   if (read_res < 0) {
     perror("error: reading input");
@@ -47,27 +47,27 @@ void int_handler(int signo) {
 
 void initialize_global_fd_table() {
   // create an array of file_descriptor_st
-  global_fd_table = malloc(sizeof(struct file_descriptor_st) * MAX_FD_NUM);
+  global_fd_table = calloc(1, sizeof(struct file_descriptor_st) * MAX_FD_NUM);
 
   if (global_fd_table == NULL) {
-    fprintf(stderr, "Memory allocation failed\n");
+    perror("Memory allocation failed\n");
     return;
   }
 
   // stdin
   struct file_descriptor_st* std_in =
-      create_file_descriptor(0, "stdin", READ, 0);
+      create_file_descriptor(0, "stdin", F_READ, 0);
   global_fd_table[0] = *std_in;
 
   // stdout
   struct file_descriptor_st* std_out =
-      create_file_descriptor(1, "stdout", WRITE, 0);
+      create_file_descriptor(1, "stdout", F_WRITE, 0);
 
   global_fd_table[1] = *std_out;
 
   // stderr
   struct file_descriptor_st* std_err =
-      create_file_descriptor(2, "stdout", WRITE, 0);
+      create_file_descriptor(2, "stdout", F_WRITE, 0);
 
   global_fd_table[2] = *std_err;
 }
@@ -80,13 +80,16 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   }
   // call helper to get FAT size
   block_size = get_block_size(block_size_config);
+  if (block_size == -1) {
+    return;
+  }
   fat_size = get_fat_size(block_size, blocks_in_fat);
 
   num_fat_entries = get_num_fat_entries(block_size, blocks_in_fat);
   data_size = get_data_size(block_size, num_fat_entries);
 
   // declared global
-  fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+  fs_fd = open(fs_name, O_RDWR | O_CREAT, 0666);
 
   if (blocks_in_fat == 32 && block_size_config == 4) {  // handle case of maxfs
     data_size -= block_size;
@@ -115,11 +118,12 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
     perror("write error");
     // exit(EXIT_FAILURE);
   }
+  // close(fs_fd);
 }
 
 int mount(const char* fs_name) {
   if (fat != NULL) {
-    perror("unexpected command");
+    perror("error: exists an already mounted file system");
     return -1;
     // exit(EXIT_FAILURE);
   }
@@ -171,17 +175,20 @@ int mount(const char* fs_name) {
 int unmount() {
   // error handling if no currently mounted fs
   if (fat == NULL) {
-    perror("unexpected command");
+    perror("error: no file system mounted");
     return -1;
     // exit(EXIT_FAILURE);
   }
 
+  msync(fat, fat_size, MS_SYNC);
+
   // munmap(2) to unmount
   if (munmap(fat, fat_size) == -1) {
-    perror("munmap failed");
+    perror("error: munmap failed");
     return -1;
     // exit(EXIT_FAILURE);
   }
+  // close(fs_fd);
   fat = NULL;
   return 0;
 }
@@ -239,7 +246,13 @@ int get_offset_size(int block_num, int offset) {
 void touch(char** args) {
   int i = 1;
   while (args[i] != NULL) {
-    k_open(args[i], 0);
+    if (does_file_exist2(args[i]) != -1) {
+      k_update_timestamp(args[i]);
+    } else {
+      int fd = k_open(args[i], F_WRITE);
+      k_close(fd);
+    }
+
     i += 1;
   }
 }
@@ -284,44 +297,56 @@ void cat_file_wa(char** args) {
   i = 1;
   if (!file_flag) {
     while (args[i] != NULL) {
-      int fd = k_open(args[i], 1);
-      char buffer[1000];
-      buffer[999] = '\0';
-      k_read(fd, 1000, buffer);
-      fprintf(stdout, "%s\n", buffer);
+      int read_num;
+      char* contents = k_read_all(args[i], &read_num);
+      if (contents == NULL) {
+        free(contents);
+        perror("cat error");
+        return;
+      }
+      k_write(STDOUT_FILENO, contents, read_num);
+      // fprintf(stdout, "%s\n", contents);
+      free(contents);
       i += 1;
     }
   } else {
     int fd;
     if (w) {
-      fd = k_open(filename, 0);
+      fd = k_open(filename, F_WRITE);
     } else {
-      fd = k_open(filename, 2);
+      fd = k_open(filename, F_APPEND);
     }
     while (args[i] != NULL && (strcmp(args[i], "-a") != 0) &&
            (strcmp(args[i], "-w") != 0)) {
       int read_num;
       char* contents = k_read_all(args[i], &read_num);
+      if (contents == NULL) {
+        free(contents);
+        k_close(fd);
+        perror("cat error");
+        return;
+      }
       k_write(fd, (char*)contents, read_num);
       free(contents);
       i += 1;
     }
+    k_close(fd);
   }
 }
 
 void cat_w(char* output) {
-  int fd = k_open(output, 0);
+  int fd = k_open(output, F_WRITE);
   int BUF_SIZE = 4096;
   ssize_t bytesRead;      // Number of bytes read
   char buffer[BUF_SIZE];  // Buffer to store terminal input
-  while ((bytesRead = read(STDIN_FILENO, buffer, BUF_SIZE)) > 0) {
+  while ((bytesRead = k_read(STDIN_FILENO, BUF_SIZE, buffer)) > 0) {
     k_write(fd, buffer, bytesRead);
   }
 
   // Check for read error
   if (bytesRead == -1) {
     perror("Error reading from terminal");
-    close(fd);
+    k_close(fd);
     return;
   }
 
@@ -329,18 +354,18 @@ void cat_w(char* output) {
 }
 
 void cat_a(char* output) {
-  int fd = k_open(output, 2);
+  int fd = k_open(output, F_APPEND);
   int BUF_SIZE = 4096;
   ssize_t bytesRead;      // Number of bytes read
   char buffer[BUF_SIZE];  // Buffer to store terminal input
-  while ((bytesRead = read(STDIN_FILENO, buffer, BUF_SIZE)) > 0) {
+  while ((bytesRead = k_read(STDIN_FILENO, BUF_SIZE, buffer)) > 0) {
     k_write(fd, buffer, bytesRead);
   }
 
   // Check for read error
   if (bytesRead == -1) {
     perror("Error reading from terminal");
-    close(fd);
+    k_close(fd);
     return;
   }
 
@@ -359,8 +384,8 @@ void cp_within_fat(char* source, char* dest) {
     return;
   }
 
-  int dest_fd = k_open(dest, WRITE);
-  int source_fd = k_open(source, READ);
+  int dest_fd = k_open(dest, F_WRITE);
+  int source_fd = k_open(source, F_READ);
 
   int read_num;
 
@@ -377,13 +402,13 @@ void cp_to_host(char* source, char* host_dest) {
     perror("error: source does not exist");
     return;
   }
-  int source_fd = k_open(source, READ);
+  int source_fd = k_open(source, F_READ);
 
   int read_num;
 
   char* contents = k_read_all(source, &read_num);
 
-  int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+  int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, 0777);
 
   if (write(host_fd, contents, read_num) == -1) {
     perror("error: write to host file failed\n");
@@ -394,7 +419,7 @@ void cp_to_host(char* source, char* host_dest) {
 }
 
 void cp_from_host(char* host_source, char* dest) {
-  int host_fd = open(host_source, O_RDWR, S_IRUSR | S_IWUSR);
+  int host_fd = open(host_source, O_RDWR, 0777);
 
   if (host_fd == -1) {
     perror("error: host source does not exist or is invalid\n");
@@ -402,7 +427,7 @@ void cp_from_host(char* host_source, char* dest) {
   }
 
   char buffer[1];
-  int dest_fd = k_open(dest, 0);
+  int dest_fd = k_open(dest, F_WRITE);
 
   while (read(host_fd, buffer, 1) > 0) {
     k_write(dest_fd, buffer, 1);

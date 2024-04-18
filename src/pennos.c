@@ -3,6 +3,7 @@
 #include "fcntl.h"
 #include "parser.h"
 #include "pennfat.h"
+#include "sys/time.h"
 #include "unistd.h"
 #include "util/kernel.h"
 #include "util/prioritylist.h"
@@ -12,41 +13,6 @@ static pthread_mutex_t done_lock;
 static const int centisecond = 10000;  // 10 milliseconds
 
 PList* priority;
-
-// will be used for nice later maybe
-// void* function_from_string(char* program) {
-//   if (strcmp(program, "cat") == 0) {
-//     return cat;
-//   } else if (strcmp(program, "sleep") == 0) {
-//     return sleep;
-//   } else if (strcmp(program, "busy") == 0) {
-//     return busy;
-//   } else if (strcmp(program, "echo") == 0) {
-//     return echo;
-//   } else if (strcmp(program, "ls") == 0) {
-//     return ls;
-//   } else if (strcmp(program, "touch") == 0) {
-//     return touch;
-//   } else if (strcmp(program, "mv") == 0) {
-//     return mv;
-//   } else if (strcmp(program, "cp") == 0) {
-//     return cp;
-//   } else if (strcmp(program, "rm") == 0) {
-//     return rm;
-//   } else if (strcmp(program, "chmod") == 0) {
-//     return chmod;
-//   } else if (strcmp(program, "ps") == 0) {
-//     return ps;
-//   } else if (strcmp(program, "kill") == 0) {
-//     return kill;
-//   } else if (strcmp(program, "zombify") == 0) {
-//     return zombify;
-//   } else if (strcmp(program, "orphanify") == 0) {
-//     return orphanify;
-//   } else {
-//     return NULL;
-//   }
-// }
 
 static void* shell(void* arg) {
   while (1) {
@@ -70,23 +36,16 @@ static void* shell(void* arg) {
       if (strcmp(args[0], "cat") == 0) {
         // TODO: Call your implemented cat() function
       } else if (strcmp(args[0], "sleep") == 0) {
-        pid_t child = s_spawn(b_sleep, args, STDIN_FILENO, STDOUT_FILENO);
-        // NOTE: add code later here to use stdin and stdout from parsed
-        // command, need to convert char* to file descriptor though.
-        int wstatus = 0;
-        s_waitpid(child, &wstatus, parsed->is_background);
-
-        // add logic to check wstatus and make sure it exited correctly
-        pcb_t* child_pcb = find_process(zombied, child);
-        remove_process(zombied, child);
-        k_proc_cleanup(child_pcb);
-
+        s_spawn_and_wait(b_sleep, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "busy") == 0) {
         // TODO: Call your implemented busy() function
       } else if (strcmp(args[0], "echo") == 0) {
         // TODO: Call your implemented echo() function
       } else if (strcmp(args[0], "ls") == 0) {
         // TODO: Call your implemented ls() function
+        s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "touch") == 0) {
         // TODO: Call your implemented touch() function
       } else if (strcmp(args[0], "mv") == 0) {
@@ -100,25 +59,16 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "ps") == 0) {
         // TODO: Call your implemented ps() function
       } else if (strcmp(args[0], "kill") == 0) {
-        pid_t child = s_spawn(b_kill, args, STDIN_FILENO, STDOUT_FILENO);
-        int wstatus = 0;
-        s_waitpid(child, &wstatus, false);
-        pcb_t* child_pcb = find_process(zombied, child);
-        remove_process(zombied, child);
-        k_proc_cleanup(child_pcb);
+        s_spawn_and_wait(b_kill, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "zombify") == 0) {
         // TODO: Call your implemented zombify() function
       } else if (strcmp(args[0], "orphanify") == 0) {
         // TODO: Call your implemented orphanify() function
       } else if (strcmp(args[0], "nice") == 0) {
-        // TODO;
+        b_nice(cmd);
       } else if (strcmp(args[0], "nice_pid") == 0) {
-        pid_t child = s_spawn(b_nice_pid, args, STDIN_FILENO, STDOUT_FILENO);
-        int wstatus = 0;
-        pcb_t* child_pcb = find_process(zombied, child);
-        s_waitpid(child, &wstatus, false);
-        remove_process(zombied, child);
-        k_proc_cleanup(child_pcb);
+        b_nice_pid(args);
       } else if (strcmp(args[0], "man") == 0) {
         // TODO: Call your implemented man() function
       } else if (strcmp(args[0], "bg") == 0) {
@@ -131,6 +81,7 @@ static void* shell(void* arg) {
         b_logout(NULL);
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
+        // REPLACE WITH PERROR
       }
       free(parsed);
     }
@@ -143,8 +94,6 @@ static void* shell(void* arg) {
 static void alarm_handler(int signum) {}
 
 void scheduler(char* logfile) {
-  char buf[100];
-
   sigset_t suspend_set;
   sigfillset(&suspend_set);
   sigdelset(&suspend_set, SIGALRM);
@@ -207,6 +156,7 @@ void scheduler(char* logfile) {
           block->statechanged = true;
           remove_process(blocked, block->pid);
           add_process(zombied, block);
+          s_write_log(ZOMBIE, block, -1);
         }
 
         block->ticks_to_wait--;
@@ -239,9 +189,7 @@ void scheduler(char* logfile) {
         remove_process(blocked, block->pid);
         add_process(processes[block->priority], block);
 
-        sprintf(buf, "[%4u]\tUNBLOCKED\t%4u\t%4u\t%s\n", tick, block->pid,
-                block->priority, block->processname);
-        write(logfiledescriptor, buf, strlen(buf));
+        s_write_log(UNBLOCK, block, -1);
       }
       if (blocked->size != 0) {
         blocked->head = blocked->head->next;
@@ -274,9 +222,7 @@ void scheduler(char* logfile) {
       curr_thread = current->handle;
 
       // LOGGING OF SCHEDULE // make into helper later
-      sprintf(buf, "[%4u]\tSCHEDULE\t%4u\t%4u\t%s\n", tick, current->pid,
-              current->priority, current->processname);
-      write(logfiledescriptor, buf, strlen(buf));
+      s_write_log(SCHEDULE, current, -1);
 
       //
       spthread_continue(curr_thread);
@@ -305,10 +251,10 @@ void cancel_and_join(spthread_t thread) {
 
 int main(int argc, char** argv) {
   if (argc < 2) {
-    fprintf(stderr, "pennos: filesystem not specified");
+    fprintf(stderr, "pennos: filesystem not specified");  // REPLACE WITH PERROR
     return -1;
   } else if (argc > 3) {
-    fprintf(stderr, "pennos: too many arguments");
+    fprintf(stderr, "pennos: too many arguments");  // REPLACE WITH PERROR
     return -1;
   }
 
@@ -316,6 +262,15 @@ int main(int argc, char** argv) {
   if (argc == 3) {
     log = argv[2];
   }
+
+  // mount the file system
+  if (mount(argv[1]) == -1) {
+    perror("Mount error");
+    return -1;
+  }
+
+  // create the global file descriptor table
+  initialize_global_fd_table();
 
   processes[0] = init_list();
   processes[1] = init_list();
