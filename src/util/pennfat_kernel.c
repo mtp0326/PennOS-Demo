@@ -838,6 +838,20 @@ int k_unlink(const char* fname) {
   } else {
     zero_out_helper(curr);
   }
+
+  // when the file removal is successful, close the only lasting file
+  // descriptor to this file as well
+
+  for (int i = 0; i < fd_counter; i++) {
+    struct file_descriptor_st curr_fd;
+    curr_fd = global_fd_table[i];
+    if (strcmp(curr_fd.fname, fname) == 0) {
+      // we want to close this
+      k_close(curr_fd.fd);
+      break;
+    }
+  }
+
   return 1;
 }
 

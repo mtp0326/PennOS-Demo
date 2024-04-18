@@ -322,6 +322,7 @@ void cat_file_wa(char** args) {
       char* contents = k_read_all(args[i], &read_num);
       if (contents == NULL) {
         free(contents);
+        k_close(fd);
         perror("cat error");
         return;
       }
@@ -329,6 +330,7 @@ void cat_file_wa(char** args) {
       free(contents);
       i += 1;
     }
+    k_close(fd);
   }
 }
 
