@@ -35,49 +35,39 @@ static void* shell(void* arg) {
       // Shell built-ins that are implemented using user or system calls only.
       if (strcmp(args[0], "cat") == 0) {
         // this is when files arg was NOT provided
-        if (args[1] == NULL) {
-          int input_fd = -1;
-          int output_fd = -1;
-          // create the correct input
-          if (parsed->stdin_file == NULL) {
-            input_fd = STDIN_FILENO;
-          } else {
-            input_fd = s_open(parsed->stdin_file, F_READ);
-          }
-
-          if (input_fd == -1) {
-            perror("No such file or directory\n");
-            continue;
-          }
-
-          // create the correct output
-          if (parsed->stdout_file == NULL) {
-            output_fd = STDOUT_FILENO;
-          } else {
-            if (parsed->is_file_append) {
-              output_fd = s_open(parsed->stdout_file, F_APPEND);
-            } else {
-              output_fd = s_open(parsed->stdout_file, F_WRITE);
-            }
-          }
-
-          s_spawn_and_wait(b_cat, args, input_fd, output_fd,
-                           parsed->is_background, -1);
-
-          if (input_fd != STDIN_FILENO) {
-            s_close(input_fd);
-          }
-
-          if (output_fd != STDOUT_FILENO) {
-            s_close(output_fd);
-          }
-
+        int input_fd = -1;
+        int output_fd = -1;
+        // create the correct input
+        if (parsed->stdin_file == NULL) {
+          input_fd = STDIN_FILENO;
         } else {
-          // this is when files arg IS provided
-          int i = 1;
-          while (args[i] != NULL) {
-            i++;
+          input_fd = s_open(parsed->stdin_file, F_READ);
+        }
+
+        if (input_fd == -1) {
+          perror("No such file or directory\n");
+          continue;
+        }
+
+        if (parsed->stdout_file == NULL) {
+          output_fd = STDOUT_FILENO;
+        } else {
+          if (parsed->is_file_append) {
+            output_fd = s_open(parsed->stdout_file, F_APPEND);
+          } else {
+            output_fd = s_open(parsed->stdout_file, F_WRITE);
           }
+        }
+
+        s_spawn_and_wait(b_cat, args, input_fd, output_fd,
+                         parsed->is_background, -1);
+
+        if (input_fd != STDIN_FILENO) {
+          s_close(input_fd);
+        }
+
+        if (output_fd != STDOUT_FILENO) {
+          s_close(output_fd);
         }
 
       } else if (strcmp(args[0], "sleep") == 0) {

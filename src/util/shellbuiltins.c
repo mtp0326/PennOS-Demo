@@ -109,6 +109,21 @@ void* b_cat(void* arg) {
       char* contents = s_read_all(fname, &read_num);
       s_write(current->output_fd, contents, strlen(contents));
     }
+  } else {
+    // we always ignore the input_fd here
+
+    int i = 1;
+    while (argv[i] != NULL) {
+      int read_num;
+      char* contents = s_read_all(argv[i], &read_num);
+      if (contents == NULL) {
+        perror("No such file or directory\n");
+        i++;
+        continue;
+      }
+      s_write(current->output_fd, contents, strlen(contents));
+      i++;
+    }
   }
 
   s_exit();

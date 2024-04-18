@@ -1264,7 +1264,7 @@ void k_change_mode(const char* change, const char* filename) {
 char* k_read_all(const char* filename, int* read_num) {
   struct directory_entries* curr_de = does_file_exist(filename);
   if (curr_de == NULL) {
-    perror("error: filename not found");
+    perror("k_read_all, error: filename not found");
     return NULL;
   }
   uint32_t file_size = curr_de->size;
@@ -1282,5 +1282,8 @@ char* k_read_all(const char* filename, int* read_num) {
 }
 
 char* k_get_fname_from_fd(int fd) {
+  if (fd > fd_counter) {
+    return NULL;
+  }
   return global_fd_table[fd].fname;
 }
