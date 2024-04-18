@@ -1270,12 +1270,12 @@ char* k_read_all(const char* filename, int* read_num) {
   int fd = k_open(filename, F_READ);
   char* contents = (char*)calloc(1, file_size);
   int ret = k_read(fd, file_size, contents);
-  // k_close(fd);
   if (ret == -1) {
+    k_close(fd);
     return NULL;
   }
 
   *read_num = ret;
-
+  k_close(fd);
   return contents;
 }
