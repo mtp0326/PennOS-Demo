@@ -111,6 +111,9 @@ pid_t s_spawn_nice(void* (*func)(void*),
     return -1;
   }
 
+  child->input_fd = fd0;
+  child->output_fd = fd1;
+
   fd_bitmap_set(child->open_fds, fd0);
   fd_bitmap_set(child->open_fds, fd1);
 
@@ -487,7 +490,7 @@ int s_open(const char* fname, int mode) {
   if (fd == -1) {
     perror("error: s_open: k_open error");
     return -1;
-  } 
+  }
   fd_bitmap_set(current->open_fds, fd);
   return fd;
 }

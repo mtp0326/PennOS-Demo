@@ -86,6 +86,11 @@ typedef struct pcb_t {
       state; /** @brief This is an enum storing the process's current state.*/
   FD_Bitmap* open_fds; /** @brief This stores a bitmap containg all open file
                           descriptors.*/
+
+  int input_fd;
+
+  int output_fd;
+
   bool statechanged; /** @brief This contains a bool that keeps track of whether
                         or not the process state has changed.*/
 
