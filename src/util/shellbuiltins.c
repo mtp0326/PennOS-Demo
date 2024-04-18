@@ -92,3 +92,25 @@ void* b_echo(void* arg) {
   s_exit();
   return NULL;
 }
+
+void* b_cat(void* arg) {
+  char** argv = (char**)arg;
+  // int read_num;
+
+  // files arg is not provided
+  if (argv[1] == NULL) {
+    if ((current->input_fd) == STDIN_FILENO) {
+      char contents[4096];
+      s_read(STDIN_FILENO, 4096, contents);
+      s_write(current->output_fd, contents, strlen(contents));
+    } else {
+      int read_num;
+      char* fname = s_get_fname_from_fd(current->input_fd);
+      char* contents = s_read_all(fname, &read_num);
+      s_write(current->output_fd, contents, strlen(contents));
+    }
+  }
+
+  s_exit();
+  return NULL;
+}

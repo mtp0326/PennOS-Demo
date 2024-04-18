@@ -34,16 +34,55 @@ static void* shell(void* arg) {
       // Unfortunate canonical way to switch based on string in C.
       // Shell built-ins that are implemented using user or system calls only.
       if (strcmp(args[0], "cat") == 0) {
-        // TODO: Call your implemented cat() function
+        // this is when files arg was NOT provided
+        if (args[1] == NULL) {
+          int input_fd = -1;
+          int output_fd = -1;
+          // create the correct input
+          if (parsed->stdin_file == NULL) {
+            input_fd = STDIN_FILENO;
+          } else {
+            input_fd = s_open(parsed->stdin_file, F_READ);
+          }
+
+          // create the correct output
+          if (parsed->stdout_file == NULL) {
+            output_fd = STDOUT_FILENO;
+          } else {
+            if (parsed->is_file_append) {
+              output_fd = s_open(parsed->stdout_file, F_APPEND);
+            } else {
+              output_fd = s_open(parsed->stdout_file, F_WRITE);
+            }
+          }
+
+          s_spawn_and_wait(b_cat, args, input_fd, output_fd,
+                           parsed->is_background, -1);
+
+          if (input_fd != STDIN_FILENO) {
+            s_close(input_fd);
+          }
+
+          if (output_fd != STDOUT_FILENO) {
+            s_close(output_fd);
+          }
+
+        } else {
+          // this is when files arg IS provided
+          int i = 1;
+          while (args[i] != NULL) {
+            i++;
+          }
+        }
+
       } else if (strcmp(args[0], "sleep") == 0) {
         s_spawn_and_wait(b_sleep, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "busy") == 0) {
         // TODO: Call your implemented busy() function
       } else if (strcmp(args[0], "echo") == 0) {
-        // echo should ignore any inpuut redirection
+        // echo should ignore any input redirection
         // but it should write to the redirected output file
-
         if (parsed->stdout_file == NULL) {
           // we want to print to stdout
           s_spawn_and_wait(b_echo, args, STDIN_FILENO, STDOUT_FILENO,

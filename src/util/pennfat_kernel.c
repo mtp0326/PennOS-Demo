@@ -1279,3 +1279,7 @@ char* k_read_all(const char* filename, int* read_num) {
   k_close(fd);
   return contents;
 }
+
+char* k_get_fname_from_fd(int fd) {
+  return global_fd_table[fd].fname;
+}

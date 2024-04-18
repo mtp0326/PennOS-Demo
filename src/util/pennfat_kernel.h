@@ -164,4 +164,6 @@ char* k_read_all(const char* filename, int* read_num);
 
 bool is_file_name_valid(char* name);
 
+char* k_get_fname_from_fd(int fd);
+
 #endif

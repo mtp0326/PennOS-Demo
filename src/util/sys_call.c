@@ -530,3 +530,11 @@ off_t s_lseek(int fd, int offset, int whence) {
 void s_ls(const char* filename) {
   k_ls(filename);
 }
+
+char* s_read_all(const char* filename, int* read_num) {
+  return k_read_all(filename, read_num);
+}
+
+char* s_get_fname_from_fd(int fd) {
+  return k_get_fname_from_fd(fd);
+}
