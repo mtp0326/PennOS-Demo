@@ -39,6 +39,13 @@ CircularList* init_list(void);
 void add_process(CircularList* list, pcb_t* process);
 
 /**
+ * Adds a new process to the front of circular linked list.
+ * @param list Pointer to the circular linked list.
+ * @param process Pointer to the process control block (pcb_t) to add.
+ */
+void add_process_front(CircularList* list, pcb_t* process);
+
+/**
  * Removes a process from the circular linked list by its PID.
  * @param list Pointer to the circular linked list.
  * @param pid PID of the process to remove.

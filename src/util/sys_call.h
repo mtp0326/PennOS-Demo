@@ -50,6 +50,7 @@ pid_t s_spawn_nice(void* (*func)(void*),
                    char* argv[],
                    int fd0,
                    int fd1,
+                   bool is_background,
                    unsigned int priority);
 
 /**

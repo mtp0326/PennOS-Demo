@@ -41,6 +41,35 @@ void add_process(CircularList* list, pcb_t* process) {
   list->size++;
 }
 
+// Adds a new process to the circular linked list
+void add_process_front(CircularList* list, pcb_t* process) {
+  if (list == NULL || process == NULL) {
+    return;  // Invalid parameters
+  }
+
+  Node* newNode = (Node*)malloc(sizeof(Node));
+  if (newNode == NULL) {
+    return;  // Failed to allocate memory for the new node
+  }
+  newNode->process = process;
+
+  if (list->head == NULL) {
+    // If the list is empty, initialize it with the new node
+    newNode->next = newNode;  // Points to itself, making it circular
+    list->head = newNode;
+  } else {
+    // Insert the new node at the end of the list
+    Node* currentnode = list->head;
+    while (currentnode->next != list->head) {
+      currentnode = currentnode->next;
+    }
+    currentnode->next = newNode;
+    newNode->next = list->head;  // Complete the circle
+    list->head = newNode;        // move head to the last node
+  }
+  list->size++;
+}
+
 // Removes a process from the circular linked list by its PID
 bool remove_process(CircularList* list, pid_t pid) {
   if (list == NULL || list->head == NULL) {

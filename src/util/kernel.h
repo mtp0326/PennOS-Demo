@@ -8,6 +8,7 @@
 #include "globals.h"
 #include "spthread.h"
 #include "stdlib.h"
+#include "syscall.h"
 
 /**
  * @enum process_state_t
@@ -100,7 +101,7 @@ typedef struct pcb_t {
   unsigned int ticks_to_wait; /** @brief Ticks remaining to wait, used only for
                                  s_sleep calls */
 
-  char* processname;
+  char* processname; /** @brief The command name that this processor has */
 } pcb_t;
 
 /**

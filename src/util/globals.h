@@ -33,6 +33,12 @@ extern CircularList* stopped;
 extern CircularList* zombied;
 
 /**
+ * A global pointer to the process list of background processes. The processes
+ * enter this list when
+ */
+extern CircularList* bg_list;
+
+/**
  * This is the currently scheduled process. It can be accessed by any method to
  * easily access the current method.
  *

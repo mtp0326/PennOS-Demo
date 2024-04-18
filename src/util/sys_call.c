@@ -99,6 +99,7 @@ pid_t s_spawn_nice(void* (*func)(void*),
                    char* argv[],
                    int fd0,
                    int fd1,
+                   bool is_background,
                    unsigned int priority) {
   pcb_t* child = k_proc_create(current);
   if (child == NULL) {
@@ -126,6 +127,10 @@ pid_t s_spawn_nice(void* (*func)(void*),
   }
   arg->argv = child_argv;
   child->priority = (priority == -1 ? 1 : priority);
+
+  if (is_background) {
+    add_process(bg_list, child);
+  }
 
   add_process(processes[(priority == -1 ? 1 : priority)], child);
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
@@ -300,7 +305,7 @@ int s_spawn_and_wait(void* (*func)(void*),
                      int fd1,
                      bool nohang,
                      unsigned int priority) {
-  pid_t child = s_spawn_nice(func, argv, fd0, fd1, priority);
+  pid_t child = s_spawn_nice(func, argv, fd0, fd1, nohang, priority);
   int wstatus = 0;
   s_waitpid(child, &wstatus, nohang);
   if (!nohang) {
@@ -479,4 +484,121 @@ int s_move_process(CircularList* destination, pid_t pid) {
   }
   add_process(destination, pcb);
   return 0;
+}
+
+int s_print_process(CircularList* list) {
+  if (list == NULL || list->head == NULL) {
+    return -1;
+  }
+
+  Node* current_node = list->head;
+  pcb_t* proc;
+
+  do {
+    proc = current_node->process;
+    printf("%4u\t%4u\t%4u\t%d\t%s", proc->pid, proc->ppid, proc->priority,
+           proc->state, proc->processname);
+    current_node = current_node->next;
+  } while (current_node != list->head);
+
+  return 0;
+}
+
+int s_fg(pid_t index) {
+  pcb_t* proc;
+
+  if (index != -1) {
+    // pid is specified
+
+    proc = find_process(stopped, index);
+
+    if (proc != NULL) {
+      remove_process(stopped, proc);
+      // add to IMMEDIATE front of processes
+      add_process_front(processes[proc->priority], proc);
+
+      s_write_log(CONTINUE, proc, -1);  /// indicate background?
+
+      return NULL;
+    }
+
+    proc = find_process(bg_list, index);
+
+    if (proc != NULL) {
+      remove_process(bg_list, proc);
+      // add to IMMEDIATE front of processes
+      add_process_front(processes[proc->priority], proc);
+
+      s_write_log(CONTINUE, proc, -1);  /// indicate in bg brought forward?
+
+      return NULL;
+    }
+    /// error: PID with specified number does not exist
+
+    return NULL;
+  }
+
+  if (stopped != NULL && stopped->head != NULL) {
+    proc = stopped->head;
+    remove_process(stopped, proc);
+    // add to IMMEDIATE front of processes
+    add_process_front(processes[proc->priority], proc);
+
+    s_write_log(CONTINUE, proc, -1);  /// indicate background?
+
+    return NULL;
+  }
+
+  if (bg_list != NULL && bg_list->head != NULL) {
+    proc = bg_list->head;
+    remove_process(bg_list, proc);
+    // add to IMMEDIATE front of processes
+    add_process_front(processes[proc->priority], proc);
+
+    s_write_log(CONTINUE, proc, -1);  /// indicate in bg brought forward?
+
+    return NULL;
+  }
+
+  // error: to stopped or background job exist
+}
+
+int s_bg(pid_t index) {
+  pcb_t* proc;
+
+  if (index != -1) {
+    // pid is specified
+
+    proc = find_process(stopped, index);
+
+    if (proc != NULL) {
+      proc = stopped->head->process;
+      proc->state = RUNNING;
+      /// proc->statechanged = true;
+      /// proc->is_background = true;
+      remove_process(stopped, proc->pid);
+
+      add_process(bg_list, proc);
+
+      s_write_log(CONTINUE, proc, -1);  /// indicate background?
+      return NULL;
+    }
+    /// error: PID with specified number does not exist
+
+    return NULL;
+  }
+
+  if (stopped != NULL && stopped->head != NULL) {
+    proc = stopped->head->process;
+    proc->state = RUNNING;
+    /// proc->statechanged = true;
+    /// proc->statechanged = true;
+    remove_process(stopped, proc->pid);
+
+    add_process(bg_list, proc);
+
+    s_write_log(CONTINUE, proc, -1);  /// indicate background?
+    return NULL;
+  }
+  /// error: there are no stopped jobs
 }

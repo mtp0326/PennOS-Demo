@@ -54,7 +54,8 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "chmod") == 0) {
         // TODO: Call your implemented chmod() function
       } else if (strcmp(args[0], "ps") == 0) {
-        // TODO: Call your implemented ps() function
+        s_spawn_and_wait(b_ps, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "kill") == 0) {
         s_spawn_and_wait(b_kill, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
@@ -69,9 +70,9 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "man") == 0) {
         // TODO: Call your implemented man() function
       } else if (strcmp(args[0], "bg") == 0) {
-        // TODO: Call your implemented bg() function
+        b_bg(args);
       } else if (strcmp(args[0], "fg") == 0) {
-        // TODO: Call your implemented fg() function
+        b_fg(args);
       } else if (strcmp(args[0], "jobs") == 0) {
         // TODO: Call your implemented jobs() function
       } else if (strcmp(args[0], "logout") == 0) {
@@ -134,7 +135,7 @@ void scheduler(char* logfile) {
   arg[1] = NULL;             // Terminate the array
 
   // spawn in the shell process at priority 0
-  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, 0);
+  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, false, 0);
 
   // main loop
   while (!done) {
@@ -194,6 +195,8 @@ void scheduler(char* logfile) {
         blocked->head = NULL;
       }
     }
+
+    // iterates over all background processes that have a timer
 
     bool noRunningProcesses = true;
     // Check if all queues are empty or all processes are blocked.

@@ -68,6 +68,44 @@ void* b_nice_pid(void* arg) {
   return NULL;
 }
 
+void* b_ps(void* arg) {
+  // displaying PID, PPID, priority, status, and command name.
+  /// not sure if order has to change
+
+  for (int i = 0; i < 3; i++) {
+    s_print_process(processes[i]);
+  }
+  for (int i = 0; i < 3; i++) {
+    s_print_process(bg_list[i]);
+  }
+  s_print_process(blocked);
+  s_print_process(stopped);
+  s_print_process(zombied);
+
+  return NULL;
+}
+
+void* b_fg(void* arg) {
+  /// check Ed #773 for priority
+  char** argv = (char**)arg;
+  pid_t index = -1;
+  if (argv[1] != NULL) {
+    index = atoi(argv[1]);
+  }
+  s_fg(index);
+  return NULL;
+}
+
+void* b_bg(void* arg) {
+  char** argv = (char**)arg;
+  pid_t index = -1;
+  if (argv[1] != NULL) {
+    index = atoi(argv[1]);
+  }
+  s_bg(index);
+  return NULL;
+}
+
 void* b_logout(void* arg) {
   done = true;
   return NULL;
