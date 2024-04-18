@@ -52,7 +52,8 @@ int k_open(const char* fname, int mode) {
   if (mode == F_WRITE) {
     if (dir_entry != NULL) {  // file already exists (truncate)
       for (int i = 0; i < curr_fd; i++) {
-        if (global_fd_table[i].mode == F_WRITE &&
+        if ((global_fd_table[i].mode == F_WRITE ||
+             global_fd_table[i].mode == F_APPEND) &&
             (strcmp(global_fd_table[i].fname, fname) == 0)) {
           fd_counter--;
           perror(
