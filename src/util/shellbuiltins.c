@@ -81,7 +81,7 @@ void* b_ls(void* arg) {
 
 void* b_echo(void* arg) {
   // char** argv = (char**)arg;
-
   s_write(current->output_fd, "test", 4);
+  s_exit();
   return NULL;
 }
