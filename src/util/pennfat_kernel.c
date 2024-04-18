@@ -141,6 +141,7 @@ int k_open(const char* fname, int mode) {
     } else {
       fd_counter--;
       perror("k_open: f_read: file does not exist");
+      return -1;
     }
   } else if (mode == F_APPEND) {  // F_APPEND
     if (dir_entry != NULL) {      // file exists, add to fd table in APPEND mode

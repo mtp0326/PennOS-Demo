@@ -45,6 +45,11 @@ static void* shell(void* arg) {
             input_fd = s_open(parsed->stdin_file, F_READ);
           }
 
+          if (input_fd == -1) {
+            perror("No such file or directory\n");
+            continue;
+          }
+
           // create the correct output
           if (parsed->stdout_file == NULL) {
             output_fd = STDOUT_FILENO;
