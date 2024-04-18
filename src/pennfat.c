@@ -3,7 +3,8 @@
 
 void prompt() {
   // display the prompt to the user
-  ssize_t prompt_res = write(STDERR_FILENO, PROMPT, strlen(PROMPT));
+  ssize_t prompt_res =
+      k_write(STDERR_FILENO, PROMPT_PENN_FAT, strlen(PROMPT_PENN_FAT));
   // error catching for write
 
   if (prompt_res < 0) {

@@ -80,8 +80,15 @@ void* b_ls(void* arg) {
 }
 
 void* b_echo(void* arg) {
-  // char** argv = (char**)arg;
-  s_write(current->output_fd, "test", 4);
+  char** argv = (char**)arg;
+
+  int i = 1;
+  while (argv[i] != NULL) {
+    s_write(current->output_fd, argv[i], strlen(argv[i]));
+    s_write(current->output_fd, " ", 1);
+    i++;
+  }
+
   s_exit();
   return NULL;
 }
