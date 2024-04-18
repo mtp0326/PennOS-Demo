@@ -16,7 +16,7 @@ PList* priority;
 
 static void* shell(void* arg) {
   while (1) {
-    prompt();
+    prompt(true);
     char* cmd;
 
     read_command(&cmd);
@@ -108,7 +108,8 @@ static void* shell(void* arg) {
         s_spawn_and_wait(b_mv, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "cp") == 0) {
-        // TODO: Call your implemented cp() function
+        s_spawn_and_wait(b_cp, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "rm") == 0) {
          s_spawn_and_wait(b_rm, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);

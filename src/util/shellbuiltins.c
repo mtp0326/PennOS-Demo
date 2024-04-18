@@ -172,3 +172,21 @@ void* b_chmod(void* arg) {
   return NULL;
 }
 
+void* b_cp(void* arg) {
+  char** args = (char**)arg;
+  if (strcmp(args[1], "-h") == 0) {
+    // cp -h SOURCE DEST
+    s_cp_from_host(args[2], args[3]);
+  } else {
+    if (strcmp(args[2], "-h") == 0) {
+      // cp SOURCE -h DEST
+      s_cp_to_host(args[1], args[3]);
+    } else {
+      // cp SOURCE DEST
+      s_cp_within_fat(args[1], args[2]);
+    }
+  }
+  s_exit();
+  return NULL;
+}
+

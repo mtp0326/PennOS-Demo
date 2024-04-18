@@ -166,4 +166,10 @@ bool is_file_name_valid(char* name);
 
 char* k_get_fname_from_fd(int fd);
 
+void k_cp_within_fat(char* source, char* dest);
+
+void k_cp_to_host(char* source, char* host_dest);
+
+void k_cp_from_host(char* host_source, char* dest);
+
 #endif

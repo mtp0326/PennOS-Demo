@@ -1,15 +1,26 @@
 #include "pennfat.h"
 #include <unistd.h>
 
-void prompt() {
+void prompt(bool shell) {
   // display the prompt to the user
-  ssize_t prompt_res =
-      k_write(STDERR_FILENO, PROMPT_PENN_FAT, strlen(PROMPT_PENN_FAT));
-  // error catching for write
+  if (shell) {
+    ssize_t prompt_res =
+      k_write(STDERR_FILENO, PROMPT_SHELL, strlen(PROMPT_SHELL));
+    // error catching for write
 
-  if (prompt_res < 0) {
-    perror("error: prompting");
-    exit(EXIT_FAILURE);
+    if (prompt_res < 0) {
+      perror("error: prompting");
+      exit(EXIT_FAILURE);
+    }
+  } else {
+    ssize_t prompt_res =
+      k_write(STDERR_FILENO, PROMPT_PENN_FAT, strlen(PROMPT_PENN_FAT));
+    // error catching for write
+
+    if (prompt_res < 0) {
+      perror("error: prompting");
+      exit(EXIT_FAILURE);
+    }
   }
 }
 
@@ -43,7 +54,7 @@ void int_handler(int signo) {
       exit(EXIT_FAILURE);
     }
   }
-  prompt();
+  prompt(true);
 }
 
 void initialize_global_fd_table() {
@@ -378,62 +389,13 @@ void ls() {
 }
 
 void cp_within_fat(char* source, char* dest) {
-  // source file must exist
-
-  if (does_file_exist2(source) == -1) {
-    perror("error: source does not exist");
-    return;
-  }
-
-  int dest_fd = k_open(dest, F_WRITE);
-  int source_fd = k_open(source, F_READ);
-
-  int read_num;
-
-  char* contents = k_read_all(source, &read_num);
-
-  k_write(dest_fd, contents, read_num);
-
-  k_close(dest_fd);
-  k_close(source_fd);
+  return k_cp_within_fat(source, dest);
 }
 
 void cp_to_host(char* source, char* host_dest) {
-  if (does_file_exist2(source) == -1) {
-    perror("error: source does not exist");
-    return;
-  }
-  int source_fd = k_open(source, F_READ);
-
-  int read_num;
-
-  char* contents = k_read_all(source, &read_num);
-
-  int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, 0777);
-
-  if (write(host_fd, contents, read_num) == -1) {
-    perror("error: write to host file failed\n");
-  }
-
-  close(host_fd);
-  k_close(source_fd);
+  return k_cp_to_host(source, host_dest);
 }
 
 void cp_from_host(char* host_source, char* dest) {
-  int host_fd = open(host_source, O_RDWR, 0777);
-
-  if (host_fd == -1) {
-    perror("error: host source does not exist or is invalid\n");
-    return;
-  }
-
-  char buffer[1];
-  int dest_fd = k_open(dest, F_WRITE);
-
-  while (read(host_fd, buffer, 1) > 0) {
-    k_write(dest_fd, buffer, 1);
-  }
-
-  close(host_fd);
-  k_close(dest_fd);
+  return k_cp_from_host(host_source, dest);
 }

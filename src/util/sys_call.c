@@ -548,9 +548,21 @@ off_t s_does_file_exist2(const char* fname) {
 }  
 
 void s_rename(const char* source, const char* dest) {
-  k_rename(source, dest);
+  return k_rename(source, dest);
 }
 
 void s_change_mode(const char* change, const char* filename) {
-  k_change_mode(change, filename);
+  return k_change_mode(change, filename);
+}
+
+void s_cp_within_fat(char* source, char* dest) {
+  return k_cp_within_fat(source, dest);
+}
+
+void s_cp_to_host(char* source, char* host_dest) {
+   return k_cp_to_host(source, host_dest);
+}
+
+void s_cp_from_host(char* host_source, char* dest) {
+  return k_cp_from_host(host_source, dest);
 }

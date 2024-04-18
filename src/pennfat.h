@@ -17,13 +17,16 @@
 #ifndef PROMPT_PENN_FAT
 #define PROMPT_PENN_FAT "penn-fat> "
 #endif
+#ifndef PROMPT_SHELL
+#define PROMPT_SHELL "$ "
+#endif
 #define MAX_LEN 4096
 
 void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config);
 int mount(const char* fs_name);
 int unmount();
 
-void prompt();
+void prompt(bool shell);
 void read_command();
 void int_handler(int signo);
 int get_block_size(int block_size_config);

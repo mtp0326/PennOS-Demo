@@ -1287,3 +1287,64 @@ char* k_get_fname_from_fd(int fd) {
   }
   return global_fd_table[fd].fname;
 }
+
+void k_cp_within_fat(char* source, char* dest) {
+  // source file must exist
+
+  if (does_file_exist2(source) == -1) {
+    perror("error: source does not exist");
+    return;
+  }
+
+  int dest_fd = k_open(dest, F_WRITE);
+  int source_fd = k_open(source, F_READ);
+
+  int read_num;
+
+  char* contents = k_read_all(source, &read_num);
+
+  k_write(dest_fd, contents, read_num);
+
+  k_close(dest_fd);
+  k_close(source_fd);
+}
+
+void k_cp_to_host(char* source, char* host_dest) {
+  if (does_file_exist2(source) == -1) {
+    perror("error: source does not exist");
+    return;
+  }
+  int source_fd = k_open(source, F_READ);
+
+  int read_num;
+
+  char* contents = k_read_all(source, &read_num);
+
+  int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, 0777);
+
+  if (write(host_fd, contents, read_num) == -1) {
+    perror("error: write to host file failed\n");
+  }
+
+  close(host_fd);
+  k_close(source_fd);
+}
+
+void k_cp_from_host(char* host_source, char* dest) {
+  int host_fd = open(host_source, O_RDWR, 0777);
+
+  if (host_fd == -1) {
+    perror("error: host source does not exist or is invalid\n");
+    return;
+  }
+
+  char buffer[1];
+  int dest_fd = k_open(dest, F_WRITE);
+
+  while (read(host_fd, buffer, 1) > 0) {
+    k_write(dest_fd, buffer, 1);
+  }
+
+  close(host_fd);
+  k_close(dest_fd);
+}

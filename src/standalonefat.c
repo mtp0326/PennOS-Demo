@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
   // create fd_table
   initialize_global_fd_table();
   while (1) {
-    prompt();
+    prompt(false);
     char* cmd;
     read_command(&cmd);
     if (cmd[0] != '\n') {
