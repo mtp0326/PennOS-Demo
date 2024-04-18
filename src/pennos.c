@@ -41,7 +41,27 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "busy") == 0) {
         // TODO: Call your implemented busy() function
       } else if (strcmp(args[0], "echo") == 0) {
-        // TODO: Call your implemented echo() function
+        // echo should ignore any inpuut redirection
+        // but it should write to the redirected output file
+
+        if (parsed->stdout_file == NULL) {
+          // we want to print to stdout
+          s_spawn_and_wait(b_echo, args, STDIN_FILENO, STDOUT_FILENO,
+                           parsed->is_background, -1);
+        } else {
+          if (parsed->is_file_append) {
+            int fd = s_open(parsed->stdout_file, F_APPEND);
+            s_spawn_and_wait(b_echo, args, STDIN_FILENO, fd,
+                             parsed->is_background, -1);
+            s_close(fd);
+          } else {
+            int fd = s_open(parsed->stdout_file, F_WRITE);
+            s_spawn_and_wait(b_echo, args, STDIN_FILENO, fd,
+                             parsed->is_background, -1);
+            s_close(fd);
+          }
+        }
+
       } else if (strcmp(args[0], "ls") == 0) {
         // TODO: Call your implemented ls() function
         s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,

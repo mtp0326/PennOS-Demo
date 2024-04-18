@@ -78,3 +78,8 @@ void* b_ls(void* arg) {
   s_exit();
   return NULL;
 }
+
+void* b_echo(void* arg) {
+  char** argv = (char**)arg;
+  fprintf(stderr, argv);
+}
