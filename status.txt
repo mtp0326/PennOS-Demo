@@ -1,0 +1,29 @@
+THINGS TO DO:
+
+everyone:
+ - errno/error handling
+ - run with gdb and valgrind to check for any errors/memleaks in normal operation
+ - terminal control of stdin (stop processes that read from stdin if they don't have control?)
+ - write README file (describe code layout, etc)
+
+kernel only:
+ - fix logging issues (if still there? was unsure but check)
+ - add stress.h and stress.c (edstem #772) and test kernel
+ - test orphanify + zombify
+ - add signal relaying to child processes (redirect ctrl c + ctrl z)
+ - have shell shutdown at EOF (kill all processes properly)
+ - logout, man
+ - shell scripts (3.2)
+ - double check idling (htop)
+
+fat only:
+ - document all code
+ - all of syscalls (idk progress on this)
+ - all of shell calls (idk progress on this)
+ - idk what else
+ - append output redirection 
+
+
+ BUGS TO REPORT:
+ - bug, issue described, person/team that should fix
+ - 

@@ -100,7 +100,7 @@ typedef struct pcb_t {
   unsigned int ticks_to_wait; /** @brief Ticks remaining to wait, used only for
                                  s_sleep calls */
 
-  char* processname;
+  char* processname; /** @brief Name of process, to be used for logging and ps*/
 } pcb_t;
 
 /**

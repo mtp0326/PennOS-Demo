@@ -18,8 +18,18 @@ void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a5c9d672a60406
 \begin{DoxyCompactList}\small\item\em Spawn a new process for {\ttfamily command} and set its priority to {\ttfamily priority}. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a9f61e992d66c53f4383b37699dab6ef3}{b\+\_\+nice\+\_\+pid}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Adjust the priority level of an existing process. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a8ffcfc65c56806d110fbb3eb2ac9238f}{b\+\_\+orphan\+\_\+child}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Helper for orphanify. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_ac0ab5e22f55a4f660a54973379d1722d}{b\+\_\+orphanify}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Used to test orphanifying functionality of your kernel. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_af7a3b6e724d8044a194e1c23e5499304}{b\+\_\+zombie\+\_\+child}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Helper for zombify. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_ac6f1b11929c2509c8c73d232643f2ae3}{b\+\_\+zombify}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Used to test zombifying functionality of your kernel. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a184a1be3455442bda9bbd0789e438481}{b\+\_\+logout}} (void \texorpdfstring{$\ast$}{*}arg)
-\begin{DoxyCompactList}\small\item\em Exits the shell and shutsdown Penn\+OS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Exits the shell and shutsdown Penn\+OS. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8c_a8705f3b70f67031e5aac30c27866998d}{b\+\_\+ls}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Lists all files in the working directory. For extra credit, it should support relative and absolute file paths. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -43,7 +53,17 @@ Example Usage\+: kill 1 2 3 (sends term to processes 1, 2, and 3) Example Usage\
 
 Exits the shell and shutsdown Penn\+OS. 
 
-Example Usage\+: logout \Hypertarget{shellbuiltins_8c_a5c9d672a604065d43cc83893febc188a}\label{shellbuiltins_8c_a5c9d672a604065d43cc83893febc188a} 
+Example Usage\+: logout \Hypertarget{shellbuiltins_8c_a8705f3b70f67031e5aac30c27866998d}\label{shellbuiltins_8c_a8705f3b70f67031e5aac30c27866998d} 
+\index{shellbuiltins.c@{shellbuiltins.c}!b\_ls@{b\_ls}}
+\index{b\_ls@{b\_ls}!shellbuiltins.c@{shellbuiltins.c}}
+\doxysubsubsection{\texorpdfstring{b\_ls()}{b\_ls()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+ls (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Lists all files in the working directory. For extra credit, it should support relative and absolute file paths. 
+
+Example Usage\+: ls (regular credit) Example Usage\+: ls ../../foo/./bar/sample (only for EC) \Hypertarget{shellbuiltins_8c_a5c9d672a604065d43cc83893febc188a}\label{shellbuiltins_8c_a5c9d672a604065d43cc83893febc188a} 
 \index{shellbuiltins.c@{shellbuiltins.c}!b\_nice@{b\_nice}}
 \index{b\_nice@{b\_nice}!shellbuiltins.c@{shellbuiltins.c}}
 \doxysubsubsection{\texorpdfstring{b\_nice()}{b\_nice()}}
@@ -68,7 +88,27 @@ Example Usage\+: nice 2 cat f1 f2 f3 (spawns cat with priority 2) \Hypertarget{s
 
 Adjust the priority level of an existing process. 
 
-Example Usage\+: nice\+\_\+pid 0 123 (sets priority 0 to PID 123) \Hypertarget{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06}\label{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06} 
+Example Usage\+: nice\+\_\+pid 0 123 (sets priority 0 to PID 123) \Hypertarget{shellbuiltins_8c_a8ffcfc65c56806d110fbb3eb2ac9238f}\label{shellbuiltins_8c_a8ffcfc65c56806d110fbb3eb2ac9238f} 
+\index{shellbuiltins.c@{shellbuiltins.c}!b\_orphan\_child@{b\_orphan\_child}}
+\index{b\_orphan\_child@{b\_orphan\_child}!shellbuiltins.c@{shellbuiltins.c}}
+\doxysubsubsection{\texorpdfstring{b\_orphan\_child()}{b\_orphan\_child()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+orphan\+\_\+child (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Helper for orphanify. 
+
+\Hypertarget{shellbuiltins_8c_ac0ab5e22f55a4f660a54973379d1722d}\label{shellbuiltins_8c_ac0ab5e22f55a4f660a54973379d1722d} 
+\index{shellbuiltins.c@{shellbuiltins.c}!b\_orphanify@{b\_orphanify}}
+\index{b\_orphanify@{b\_orphanify}!shellbuiltins.c@{shellbuiltins.c}}
+\doxysubsubsection{\texorpdfstring{b\_orphanify()}{b\_orphanify()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+orphanify (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Used to test orphanifying functionality of your kernel. 
+
+Example Usage\+: orphanify \Hypertarget{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06}\label{shellbuiltins_8c_a8caa9d892fd52ba7fbaf212e3bcdae06} 
 \index{shellbuiltins.c@{shellbuiltins.c}!b\_sleep@{b\_sleep}}
 \index{b\_sleep@{b\_sleep}!shellbuiltins.c@{shellbuiltins.c}}
 \doxysubsubsection{\texorpdfstring{b\_sleep()}{b\_sleep()}}
@@ -80,4 +120,24 @@ Sleep for {\ttfamily n} seconds.
 
 Note that you\textquotesingle{}ll have to convert the number of seconds to the correct number of ticks.
 
-Example Usage\+: sleep 10 
+Example Usage\+: sleep 10 \Hypertarget{shellbuiltins_8c_af7a3b6e724d8044a194e1c23e5499304}\label{shellbuiltins_8c_af7a3b6e724d8044a194e1c23e5499304} 
+\index{shellbuiltins.c@{shellbuiltins.c}!b\_zombie\_child@{b\_zombie\_child}}
+\index{b\_zombie\_child@{b\_zombie\_child}!shellbuiltins.c@{shellbuiltins.c}}
+\doxysubsubsection{\texorpdfstring{b\_zombie\_child()}{b\_zombie\_child()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+zombie\+\_\+child (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Helper for zombify. 
+
+\Hypertarget{shellbuiltins_8c_ac6f1b11929c2509c8c73d232643f2ae3}\label{shellbuiltins_8c_ac6f1b11929c2509c8c73d232643f2ae3} 
+\index{shellbuiltins.c@{shellbuiltins.c}!b\_zombify@{b\_zombify}}
+\index{b\_zombify@{b\_zombify}!shellbuiltins.c@{shellbuiltins.c}}
+\doxysubsubsection{\texorpdfstring{b\_zombify()}{b\_zombify()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+zombify (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Used to test zombifying functionality of your kernel. 
+
+Example Usage\+: zombify 

@@ -25,7 +25,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">PennOS<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">PennOS<span id="projectnumber">&#160;2.0</span>
    </div>
    <div id="projectbrief">PennOS, a UNIX-like operating system.</div>
   </td>
@@ -103,14 +103,12 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:af8c4f48aea422f196a7757a38a81e7e2" id="r_af8c4f48aea422f196a7757a38a81e7e2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af8c4f48aea422f196a7757a38a81e7e2">READ_WRITE</a>&#160;&#160;&#160;0</td></tr>
-<tr class="separator:af8c4f48aea422f196a7757a38a81e7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada74e7db007a68e763f20c17f2985356" id="r_ada74e7db007a68e763f20c17f2985356"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada74e7db007a68e763f20c17f2985356">READ</a>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:ada74e7db007a68e763f20c17f2985356"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa10f470e996d0f51210d24f442d25e1e" id="r_aa10f470e996d0f51210d24f442d25e1e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa10f470e996d0f51210d24f442d25e1e">WRITE</a>&#160;&#160;&#160;2</td></tr>
-<tr class="separator:aa10f470e996d0f51210d24f442d25e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a2a76e18bbd8b8cd9026f1cee18f197" id="r_a5a2a76e18bbd8b8cd9026f1cee18f197"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5a2a76e18bbd8b8cd9026f1cee18f197">APPEND</a>&#160;&#160;&#160;3</td></tr>
-<tr class="separator:a5a2a76e18bbd8b8cd9026f1cee18f197"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab86e09c9385938942f76becf2c2aae95" id="r_ab86e09c9385938942f76becf2c2aae95"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab86e09c9385938942f76becf2c2aae95">F_READ</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ab86e09c9385938942f76becf2c2aae95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65bc715eea79704953e87d562e15f366" id="r_a65bc715eea79704953e87d562e15f366"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65bc715eea79704953e87d562e15f366">F_WRITE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a65bc715eea79704953e87d562e15f366"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a298b91deec2bed5a79398eedd81cd754" id="r_a298b91deec2bed5a79398eedd81cd754"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a298b91deec2bed5a79398eedd81cd754">F_APPEND</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a298b91deec2bed5a79398eedd81cd754"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42dd65bff5e0d98e3d17b523e65b9e06" id="r_a42dd65bff5e0d98e3d17b523e65b9e06"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42dd65bff5e0d98e3d17b523e65b9e06">MAX_FD_NUM</a>&#160;&#160;&#160;1024</td></tr>
 <tr class="separator:a42dd65bff5e0d98e3d17b523e65b9e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -140,6 +138,8 @@ Functions</h2></td></tr>
 <tr class="separator:a78d95341bbd2b21ed69dd341ff47669f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8434cdce67b1512300f44ed38497c22a" id="r_a8434cdce67b1512300f44ed38497c22a"><td class="memItemLeft" align="right" valign="top">off_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8434cdce67b1512300f44ed38497c22a">does_file_exist2</a> (const char *fname)</td></tr>
 <tr class="separator:a8434cdce67b1512300f44ed38497c22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7f9a41e9fb0fdf97403eff276990e1f" id="r_af7f9a41e9fb0fdf97403eff276990e1f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7f9a41e9fb0fdf97403eff276990e1f">k_count_fd_num</a> (const char *name)</td></tr>
+<tr class="separator:af7f9a41e9fb0fdf97403eff276990e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe5ffc180d9fc063efc7127d14378b54" id="r_abe5ffc180d9fc063efc7127d14378b54"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe5ffc180d9fc063efc7127d14378b54">get_file_descriptor</a> (int fd)</td></tr>
 <tr class="separator:abe5ffc180d9fc063efc7127d14378b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d2cf4232cddee738996ca9ad83ea56f" id="r_a4d2cf4232cddee738996ca9ad83ea56f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d2cf4232cddee738996ca9ad83ea56f">k_open</a> (const char *fname, int mode)</td></tr>
@@ -159,10 +159,14 @@ Functions</h2></td></tr>
 <tr class="separator:a9317fe11a36bfc2d731bcbacc3a57728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac41ad0b4fad0417ca8009c0475a8fb45" id="r_ac41ad0b4fad0417ca8009c0475a8fb45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac41ad0b4fad0417ca8009c0475a8fb45">k_rename</a> (const char *source, const char *dest)</td></tr>
 <tr class="separator:ac41ad0b4fad0417ca8009c0475a8fb45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f444f05860d0b719fef5252d58e206e" id="r_a9f444f05860d0b719fef5252d58e206e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f444f05860d0b719fef5252d58e206e">k_update_timestamp</a> (const char *source)</td></tr>
+<tr class="separator:a9f444f05860d0b719fef5252d58e206e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a244379d41a5f93e98ab32fb999982696" id="r_a244379d41a5f93e98ab32fb999982696"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a244379d41a5f93e98ab32fb999982696">k_change_mode</a> (const char *change, const char *filename)</td></tr>
 <tr class="separator:a244379d41a5f93e98ab32fb999982696"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08194e0542962e4d980cd9278f33c7f5" id="r_a08194e0542962e4d980cd9278f33c7f5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08194e0542962e4d980cd9278f33c7f5">k_read_all</a> (const char *filename, int *read_num)</td></tr>
 <tr class="separator:a08194e0542962e4d980cd9278f33c7f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada30dc78055b7b113ff2dac9aabe4eb3" id="r_ada30dc78055b7b113ff2dac9aabe4eb3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada30dc78055b7b113ff2dac9aabe4eb3">is_file_name_valid</a> (char *name)</td></tr>
+<tr class="separator:ada30dc78055b7b113ff2dac9aabe4eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -182,14 +186,42 @@ Variables</h2></td></tr>
 <tr class="separator:af69e180c878a9c8f4e45ec7dc25a062f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a5a2a76e18bbd8b8cd9026f1cee18f197" name="a5a2a76e18bbd8b8cd9026f1cee18f197"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a2a76e18bbd8b8cd9026f1cee18f197">&#9670;&#160;</a></span>APPEND</h2>
+<a id="a298b91deec2bed5a79398eedd81cd754" name="a298b91deec2bed5a79398eedd81cd754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a298b91deec2bed5a79398eedd81cd754">&#9670;&#160;</a></span>F_APPEND</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define APPEND&#160;&#160;&#160;3</td>
+          <td class="memname">#define F_APPEND&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab86e09c9385938942f76becf2c2aae95" name="ab86e09c9385938942f76becf2c2aae95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab86e09c9385938942f76becf2c2aae95">&#9670;&#160;</a></span>F_READ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define F_READ&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a65bc715eea79704953e87d562e15f366" name="a65bc715eea79704953e87d562e15f366"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65bc715eea79704953e87d562e15f366">&#9670;&#160;</a></span>F_WRITE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define F_WRITE&#160;&#160;&#160;1</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -204,48 +236,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define MAX_FD_NUM&#160;&#160;&#160;1024</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ada74e7db007a68e763f20c17f2985356" name="ada74e7db007a68e763f20c17f2985356"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada74e7db007a68e763f20c17f2985356">&#9670;&#160;</a></span>READ</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define READ&#160;&#160;&#160;1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af8c4f48aea422f196a7757a38a81e7e2" name="af8c4f48aea422f196a7757a38a81e7e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8c4f48aea422f196a7757a38a81e7e2">&#9670;&#160;</a></span>READ_WRITE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define READ_WRITE&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa10f470e996d0f51210d24f442d25e1e" name="aa10f470e996d0f51210d24f442d25e1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa10f470e996d0f51210d24f442d25e1e">&#9670;&#160;</a></span>WRITE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define WRITE&#160;&#160;&#160;2</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -434,6 +424,23 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ada30dc78055b7b113ff2dac9aabe4eb3" name="ada30dc78055b7b113ff2dac9aabe4eb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada30dc78055b7b113ff2dac9aabe4eb3">&#9670;&#160;</a></span>is_file_name_valid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_file_name_valid </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a244379d41a5f93e98ab32fb999982696" name="a244379d41a5f93e98ab32fb999982696"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a244379d41a5f93e98ab32fb999982696">&#9670;&#160;</a></span>k_change_mode()</h2>
 
@@ -476,6 +483,23 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="af7f9a41e9fb0fdf97403eff276990e1f" name="af7f9a41e9fb0fdf97403eff276990e1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7f9a41e9fb0fdf97403eff276990e1f">&#9670;&#160;</a></span>k_count_fd_num()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int k_count_fd_num </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -673,6 +697,23 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a9f444f05860d0b719fef5252d58e206e" name="a9f444f05860d0b719fef5252d58e206e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f444f05860d0b719fef5252d58e206e">&#9670;&#160;</a></span>k_update_timestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void k_update_timestamp </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>source</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

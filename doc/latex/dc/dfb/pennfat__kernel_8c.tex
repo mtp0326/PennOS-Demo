@@ -5,8 +5,12 @@
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \mbox{\hyperlink{pennfat__kernel_8c_a2620b333236d4362345a3eaa15479aa5}{zero\+\_\+out\+\_\+helper}} (int curr)
+\item 
 int \mbox{\hyperlink{pennfat__kernel_8c_a4d2cf4232cddee738996ca9ad83ea56f}{k\+\_\+open}} (const char \texorpdfstring{$\ast$}{*}fname, int mode)
 \begin{DoxyCompactList}\small\item\em Open file name {\ttfamily fname} with the mode {\ttfamily mode}, and return a file descriptor to that file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{pennfat__kernel_8c_ada30dc78055b7b113ff2dac9aabe4eb3}{is\+\_\+file\+\_\+name\+\_\+valid}} (char \texorpdfstring{$\ast$}{*}name)
+\item 
 struct \mbox{\hyperlink{structdirectory__entries}{directory\+\_\+entries}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8c_a78d95341bbd2b21ed69dd341ff47669f}{does\+\_\+file\+\_\+exist}} (const char \texorpdfstring{$\ast$}{*}fname)
 \item 
 void \mbox{\hyperlink{pennfat__kernel_8c_a6532ad36b852dd09d641bcaac2642b9b}{move\+\_\+to\+\_\+open\+\_\+de}} (bool found)
@@ -27,11 +31,13 @@ ssize\+\_\+t \mbox{\hyperlink{pennfat__kernel_8c_a1951ec11865274b45144d6dd6f8786
 \item 
 void \mbox{\hyperlink{pennfat__kernel_8c_a580177591867f52c90932219a6c29e71}{extend\+\_\+fat}} (int start\+\_\+index, int empty\+\_\+fat\+\_\+index)
 \item 
-void \mbox{\hyperlink{pennfat__kernel_8c_a9e07233051c139f0ae786e839ea36b03}{write\+\_\+one\+\_\+byte\+\_\+in\+\_\+while}} (int bytes\+\_\+left, int size, int \texorpdfstring{$\ast$}{*}size\+\_\+increment, int \texorpdfstring{$\ast$}{*}bytes\+\_\+written, int \texorpdfstring{$\ast$}{*}current\+\_\+offset, const char \texorpdfstring{$\ast$}{*}str, uint16\+\_\+t first\+Block)
+void \mbox{\hyperlink{pennfat__kernel_8c_a83562583c4bda73b3c02691374ed1655}{write\+\_\+one\+\_\+byte\+\_\+in\+\_\+while}} (int bytes\+\_\+left, int size, int true\+\_\+offset, int \texorpdfstring{$\ast$}{*}size\+\_\+increment, int \texorpdfstring{$\ast$}{*}bytes\+\_\+written, int \texorpdfstring{$\ast$}{*}current\+\_\+offset, const char \texorpdfstring{$\ast$}{*}str, uint16\+\_\+t first\+Block)
 \item 
 void \mbox{\hyperlink{pennfat__kernel_8c_a07773059737a331913ba55c458fbaccd}{update\+\_\+directory\+\_\+entry\+\_\+after\+\_\+write}} (struct \mbox{\hyperlink{structdirectory__entries}{directory\+\_\+entries}} \texorpdfstring{$\ast$}{*}curr\+\_\+de, char \texorpdfstring{$\ast$}{*}fname, int bytes\+\_\+written)
 \item 
 ssize\+\_\+t \mbox{\hyperlink{pennfat__kernel_8c_a79d2a9b65d0e04de358fe1a2cfa79baf}{k\+\_\+write}} (int fd, const char \texorpdfstring{$\ast$}{*}str, int n)
+\item 
+int \mbox{\hyperlink{pennfat__kernel_8c_af7f9a41e9fb0fdf97403eff276990e1f}{k\+\_\+count\+\_\+fd\+\_\+num}} (const char \texorpdfstring{$\ast$}{*}name)
 \item 
 int \mbox{\hyperlink{pennfat__kernel_8c_a9ecd38dc6f3a9721ab53ff9a815b5480}{k\+\_\+close}} (int fd)
 \item 
@@ -44,6 +50,8 @@ void \mbox{\hyperlink{pennfat__kernel_8c_a4760215b7653953e799d8489ca88be8e}{gene
 char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8c_af2e67755671ac41b267522c63e52a7ba}{format\+Time}} (time\+\_\+t t)
 \item 
 void \mbox{\hyperlink{pennfat__kernel_8c_a9317fe11a36bfc2d731bcbacc3a57728}{k\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename)
+\item 
+void \mbox{\hyperlink{pennfat__kernel_8c_a9f444f05860d0b719fef5252d58e206e}{k\+\_\+update\+\_\+timestamp}} (const char \texorpdfstring{$\ast$}{*}source)
 \item 
 void \mbox{\hyperlink{pennfat__kernel_8c_ac41ad0b4fad0417ca8009c0475a8fb45}{k\+\_\+rename}} (const char \texorpdfstring{$\ast$}{*}source, const char \texorpdfstring{$\ast$}{*}dest)
 \item 
@@ -127,6 +135,12 @@ int \mbox{\hyperlink{pennfat__kernel_8c_ab5dda65dc446f15f9c0449ca2d9e82b1}{fd\+\
 \doxysubsubsection{\texorpdfstring{get\_first\_empty\_fat\_index()}{get\_first\_empty\_fat\_index()}}
 {\footnotesize\ttfamily int get\+\_\+first\+\_\+empty\+\_\+fat\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+\Hypertarget{pennfat__kernel_8c_ada30dc78055b7b113ff2dac9aabe4eb3}\label{pennfat__kernel_8c_ada30dc78055b7b113ff2dac9aabe4eb3} 
+\index{pennfat\_kernel.c@{pennfat\_kernel.c}!is\_file\_name\_valid@{is\_file\_name\_valid}}
+\index{is\_file\_name\_valid@{is\_file\_name\_valid}!pennfat\_kernel.c@{pennfat\_kernel.c}}
+\doxysubsubsection{\texorpdfstring{is\_file\_name\_valid()}{is\_file\_name\_valid()}}
+{\footnotesize\ttfamily bool is\+\_\+file\+\_\+name\+\_\+valid (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{name }\end{DoxyParamCaption})}
+
 \Hypertarget{pennfat__kernel_8c_a244379d41a5f93e98ab32fb999982696}\label{pennfat__kernel_8c_a244379d41a5f93e98ab32fb999982696} 
 \index{pennfat\_kernel.c@{pennfat\_kernel.c}!k\_change\_mode@{k\_change\_mode}}
 \index{k\_change\_mode@{k\_change\_mode}!pennfat\_kernel.c@{pennfat\_kernel.c}}
@@ -147,6 +161,12 @@ int \mbox{\hyperlink{pennfat__kernel_8c_ab5dda65dc446f15f9c0449ca2d9e82b1}{fd\+\
 \begin{DoxyReturn}{Returns}
 int 
 \end{DoxyReturn}
+\Hypertarget{pennfat__kernel_8c_af7f9a41e9fb0fdf97403eff276990e1f}\label{pennfat__kernel_8c_af7f9a41e9fb0fdf97403eff276990e1f} 
+\index{pennfat\_kernel.c@{pennfat\_kernel.c}!k\_count\_fd\_num@{k\_count\_fd\_num}}
+\index{k\_count\_fd\_num@{k\_count\_fd\_num}!pennfat\_kernel.c@{pennfat\_kernel.c}}
+\doxysubsubsection{\texorpdfstring{k\_count\_fd\_num()}{k\_count\_fd\_num()}}
+{\footnotesize\ttfamily int k\+\_\+count\+\_\+fd\+\_\+num (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name }\end{DoxyParamCaption})}
+
 \Hypertarget{pennfat__kernel_8c_a9317fe11a36bfc2d731bcbacc3a57728}\label{pennfat__kernel_8c_a9317fe11a36bfc2d731bcbacc3a57728} 
 \index{pennfat\_kernel.c@{pennfat\_kernel.c}!k\_ls@{k\_ls}}
 \index{k\_ls@{k\_ls}!pennfat\_kernel.c@{pennfat\_kernel.c}}
@@ -252,6 +272,12 @@ ssize\+\_\+t
 \begin{DoxyReturn}{Returns}
 int 
 \end{DoxyReturn}
+\Hypertarget{pennfat__kernel_8c_a9f444f05860d0b719fef5252d58e206e}\label{pennfat__kernel_8c_a9f444f05860d0b719fef5252d58e206e} 
+\index{pennfat\_kernel.c@{pennfat\_kernel.c}!k\_update\_timestamp@{k\_update\_timestamp}}
+\index{k\_update\_timestamp@{k\_update\_timestamp}!pennfat\_kernel.c@{pennfat\_kernel.c}}
+\doxysubsubsection{\texorpdfstring{k\_update\_timestamp()}{k\_update\_timestamp()}}
+{\footnotesize\ttfamily void k\+\_\+update\+\_\+timestamp (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{source }\end{DoxyParamCaption})}
+
 \Hypertarget{pennfat__kernel_8c_a79d2a9b65d0e04de358fe1a2cfa79baf}\label{pennfat__kernel_8c_a79d2a9b65d0e04de358fe1a2cfa79baf} 
 \index{pennfat\_kernel.c@{pennfat\_kernel.c}!k\_write@{k\_write}}
 \index{k\_write@{k\_write}!pennfat\_kernel.c@{pennfat\_kernel.c}}
@@ -288,11 +314,17 @@ ssize\+\_\+t
 \doxysubsubsection{\texorpdfstring{update\_directory\_entry\_after\_write()}{update\_directory\_entry\_after\_write()}}
 {\footnotesize\ttfamily void update\+\_\+directory\+\_\+entry\+\_\+after\+\_\+write (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdirectory__entries}{directory\+\_\+entries}} \texorpdfstring{$\ast$}{*}}]{curr\+\_\+de,  }\item[{char \texorpdfstring{$\ast$}{*}}]{fname,  }\item[{int}]{bytes\+\_\+written }\end{DoxyParamCaption})}
 
-\Hypertarget{pennfat__kernel_8c_a9e07233051c139f0ae786e839ea36b03}\label{pennfat__kernel_8c_a9e07233051c139f0ae786e839ea36b03} 
+\Hypertarget{pennfat__kernel_8c_a83562583c4bda73b3c02691374ed1655}\label{pennfat__kernel_8c_a83562583c4bda73b3c02691374ed1655} 
 \index{pennfat\_kernel.c@{pennfat\_kernel.c}!write\_one\_byte\_in\_while@{write\_one\_byte\_in\_while}}
 \index{write\_one\_byte\_in\_while@{write\_one\_byte\_in\_while}!pennfat\_kernel.c@{pennfat\_kernel.c}}
 \doxysubsubsection{\texorpdfstring{write\_one\_byte\_in\_while()}{write\_one\_byte\_in\_while()}}
-{\footnotesize\ttfamily void write\+\_\+one\+\_\+byte\+\_\+in\+\_\+while (\begin{DoxyParamCaption}\item[{int}]{bytes\+\_\+left,  }\item[{int}]{size,  }\item[{int \texorpdfstring{$\ast$}{*}}]{size\+\_\+increment,  }\item[{int \texorpdfstring{$\ast$}{*}}]{bytes\+\_\+written,  }\item[{int \texorpdfstring{$\ast$}{*}}]{current\+\_\+offset,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{str,  }\item[{uint16\+\_\+t}]{first\+Block }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void write\+\_\+one\+\_\+byte\+\_\+in\+\_\+while (\begin{DoxyParamCaption}\item[{int}]{bytes\+\_\+left,  }\item[{int}]{size,  }\item[{int}]{true\+\_\+offset,  }\item[{int \texorpdfstring{$\ast$}{*}}]{size\+\_\+increment,  }\item[{int \texorpdfstring{$\ast$}{*}}]{bytes\+\_\+written,  }\item[{int \texorpdfstring{$\ast$}{*}}]{current\+\_\+offset,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{str,  }\item[{uint16\+\_\+t}]{first\+Block }\end{DoxyParamCaption})}
+
+\Hypertarget{pennfat__kernel_8c_a2620b333236d4362345a3eaa15479aa5}\label{pennfat__kernel_8c_a2620b333236d4362345a3eaa15479aa5} 
+\index{pennfat\_kernel.c@{pennfat\_kernel.c}!zero\_out\_helper@{zero\_out\_helper}}
+\index{zero\_out\_helper@{zero\_out\_helper}!pennfat\_kernel.c@{pennfat\_kernel.c}}
+\doxysubsubsection{\texorpdfstring{zero\_out\_helper()}{zero\_out\_helper()}}
+{\footnotesize\ttfamily void zero\+\_\+out\+\_\+helper (\begin{DoxyParamCaption}\item[{int}]{curr }\end{DoxyParamCaption})}
 
 
 

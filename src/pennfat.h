@@ -15,7 +15,7 @@
 #include "parser.h"
 #include "util/pennfat_kernel.h"
 #ifndef PROMPT
-#define PROMPT "penn-fat> "
+#define PROMPT "pennos> "
 #endif
 #define MAX_LEN 4096
 

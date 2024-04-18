@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['touch_0',['touch',['../d0/d8c/shellbuiltins_8h.html#a8cd9eba4290506b4c1c3887ff5ddaccd',1,'shellbuiltins.h']]]
+  ['zero_5fout_5fhelper_0',['zero_out_helper',['../dc/dfb/pennfat__kernel_8c.html#a2620b333236d4362345a3eaa15479aa5',1,'pennfat_kernel.c']]]
 ];

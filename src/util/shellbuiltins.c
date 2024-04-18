@@ -68,10 +68,37 @@ void* b_nice_pid(void* arg) {
   return NULL;
 }
 
+void* b_orphan_child(void* arg) {
+  // Please sir,
+  // I want some more
+  while (1)
+    ;
+  return NULL;
+}
+
+void* b_orphanify(void* arg) {
+  s_spawn(b_orphan_child, arg, STDIN_FILENO, STDOUT_FILENO);
+  return NULL;
+}
+
+void* b_zombie_child(void* arg) {
+  // MMMMM Brains...!
+  return NULL;
+}
+
+void* b_zombify(void* arg) {
+  s_spawn(b_zombie_child, arg, STDIN_FILENO, STDOUT_FILENO);
+  while (1)
+    ;
+  return NULL;
+}
+
 void* b_logout(void* arg) {
   done = true;
   return NULL;
 }
+
+// FAT LEVEL SHELL FUNCTIONS
 
 void* b_ls(void* arg) {
   s_ls(NULL);
