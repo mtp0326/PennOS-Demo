@@ -538,3 +538,19 @@ char* s_read_all(const char* filename, int* read_num) {
 char* s_get_fname_from_fd(int fd) {
   return k_get_fname_from_fd(fd);
 }
+
+void s_update_timestamp(const char* source) {
+  return k_update_timestamp(source);
+}
+
+off_t s_does_file_exist2(const char* fname) {
+  return does_file_exist2(fname);
+}  
+
+void s_rename(const char* source, const char* dest) {
+  k_rename(source, dest);
+}
+
+void s_change_mode(const char* change, const char* filename) {
+  k_change_mode(change, filename);
+}

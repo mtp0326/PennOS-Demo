@@ -129,3 +129,46 @@ void* b_cat(void* arg) {
   s_exit();
   return NULL;
 }
+
+void* b_touch(void* arg) {
+  char** args = (char**)arg;
+  int i = 1;
+  while (args[i] != NULL) {
+    if (s_does_file_exist2(args[i]) != -1) {
+      s_update_timestamp(args[i]);
+    } else {
+      int fd = s_open(args[i], F_WRITE);
+      s_close(fd);
+    }
+    i += 1;
+  }
+
+  s_exit();
+  return NULL;
+}
+
+void* b_mv(void* arg) {
+  char** args = (char**)arg;
+  s_rename(args[1], args[2]);
+  s_exit();
+  return NULL;
+}
+
+void* b_rm(void* arg) {
+  char** args = (char**)arg;
+  int i = 1;
+  while (args[i] != NULL) {
+    s_unlink(args[i]);
+    i += 1;
+  }
+  s_exit();
+  return NULL;
+}
+
+void* b_chmod(void* arg) {
+  char** args = (char**)arg;
+  s_change_mode(args[1], args[2]);
+  s_exit();
+  return NULL;
+}
+

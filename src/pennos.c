@@ -102,14 +102,19 @@ static void* shell(void* arg) {
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "touch") == 0) {
         // TODO: Call your implemented touch() function
+        s_spawn_and_wait(b_touch, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "mv") == 0) {
-        // TODO: Call your implemented mv() function
+        s_spawn_and_wait(b_mv, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "cp") == 0) {
         // TODO: Call your implemented cp() function
       } else if (strcmp(args[0], "rm") == 0) {
-        // TODO: Call your implemented rm() function
+         s_spawn_and_wait(b_rm, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "chmod") == 0) {
-        // TODO: Call your implemented chmod() function
+        s_spawn_and_wait(b_chmod, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "ps") == 0) {
         // TODO: Call your implemented ps() function
       } else if (strcmp(args[0], "kill") == 0) {
