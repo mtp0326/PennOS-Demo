@@ -5,6 +5,8 @@
 #include "errno.h"
 #include "pennos.h"
 #include "sys_call.h"
+#include "unistd.h"
+
 
 void* b_sleep(void* arg) {
   char** argv = (char**)arg;
@@ -49,6 +51,20 @@ void* b_kill(void* arg) {
   s_exit();
   return NULL;
 }
+
+
+void* b_man(void* arg) {
+    char* output = "cat\nsleep\nbusy\necho\nls\ntouch\nmv\ncp\nrm\nchmod\nps\nkill\nzombify\norphanify\nnice\nnice_pid\nman\nbg\nfg\njobs\nlogout\n";
+    ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
+    if (result == -1) {
+        u_perror("Failed to write to STDOUT");
+    }
+    s_exit();
+    return NULL;
+}
+
+
+
 
 void* b_nice(void* arg) {
   struct parsed_command* parsed = NULL;

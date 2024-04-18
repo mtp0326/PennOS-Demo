@@ -1,6 +1,6 @@
 #ifndef SHELL_BUILTINS
 #define SHELL_BUILTINS
-
+#include "error.h"
 // SHELL BUILTINS: Implemented using user and system level functions only!
 
 /**

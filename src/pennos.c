@@ -70,7 +70,7 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "nice_pid") == 0) {
         b_nice_pid(args);
       } else if (strcmp(args[0], "man") == 0) {
-        // TODO: Call your implemented man() function
+        s_spawn_and_wait(b_man, args, STDIN_FILENO, STDOUT_FILENO, parsed->is_background, -1); 
       } else if (strcmp(args[0], "bg") == 0) {
         // TODO: Call your implemented bg() function
       } else if (strcmp(args[0], "fg") == 0) {
