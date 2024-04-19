@@ -1,7 +1,7 @@
 #include "pennfat_kernel.h"
 #include "unistd.h"
 uint16_t* fat = NULL;
-struct file_descriptor_st* global_fd_table = NULL;
+struct file_descriptor_st** global_fd_table = NULL;
 
 /*ALL THE EXTERN VARIABLES ARE INITIALIZED HERE*/
 int fs_fd = -1;
@@ -52,9 +52,9 @@ int k_open(const char* fname, int mode) {
   if (mode == F_WRITE) {
     if (dir_entry != NULL) {  // file already exists (truncate)
       for (int i = 0; i < curr_fd; i++) {
-        if ((global_fd_table[i].mode == F_WRITE ||
-             global_fd_table[i].mode == F_APPEND) &&
-            (strcmp(global_fd_table[i].fname, fname) == 0)) {
+        if ((global_fd_table[i]->mode == F_WRITE ||
+             global_fd_table[i]->mode == F_APPEND) &&
+            (strcmp(global_fd_table[i]->fname, fname) == 0)) {
           fd_counter--;
           perror(
               "k_open: F_WRITE error: attempted to open a file in F_WRITE mode "
@@ -75,7 +75,7 @@ int k_open(const char* fname, int mode) {
       // fprintf(stderr, "dir entry first block: %d\n", dir_entry->firstBlock);
       // add to global fd table
       opened_file = create_file_descriptor(curr_fd, fname_copy, F_WRITE, 0);
-      global_fd_table[curr_fd] = *opened_file;  // update fd table
+      global_fd_table[curr_fd] = opened_file;  // update fd table
       // truncate
       int start_fat_index = dir_entry->firstBlock;
       if (start_fat_index != 0xFFFF) {
@@ -115,7 +115,7 @@ int k_open(const char* fname, int mode) {
       //                                         // block for root dir
       // fat[efi] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, F_WRITE, 0);
-      global_fd_table[curr_fd] = *opened_file;  // update fd table
+      global_fd_table[curr_fd] = opened_file;  // update fd table
       new_de = create_directory_entry(fname_copy2, 0, 0xFFFF, 1, 6, time(NULL));
       // fs_fd should already be at next open location in root directory
       // (lseeked in does_file_exist())
@@ -137,7 +137,7 @@ int k_open(const char* fname, int mode) {
         // exit(EXIT_FAILURE);
       }
       opened_file = create_file_descriptor(curr_fd, fname_copy, F_READ, 0);
-      global_fd_table[curr_fd] = *opened_file;
+      global_fd_table[curr_fd] = opened_file;
     } else {
       fd_counter--;
       perror("k_open: f_read: file does not exist");
@@ -156,12 +156,12 @@ int k_open(const char* fname, int mode) {
       }
       opened_file = create_file_descriptor(curr_fd, fname_copy, F_APPEND,
                                            dir_entry->size);
-      global_fd_table[curr_fd] = *opened_file;
+      global_fd_table[curr_fd] = opened_file;
     } else {  // file doesn't exist, create it in root dir with read/write perm,
               // add to fd table in APPEND mode
       // fat[empty_fat_index] = 0xFFFF;
       opened_file = create_file_descriptor(curr_fd, fname_copy, F_APPEND, 0);
-      global_fd_table[curr_fd] = *opened_file;  // update fd table
+      global_fd_table[curr_fd] = opened_file;  // update fd table
       new_de = create_directory_entry(fname_copy2, 0, 0xFFFF, 1, 6, time(NULL));
       // fs_fd should already be at next open location in root directory
       // (lseeked in does_file_exist())
@@ -395,7 +395,7 @@ void lseek_to_root_directory() {
 }
 
 struct file_descriptor_st* get_file_descriptor(int fd) {
-  return (global_fd_table + fd);
+  return (global_fd_table[fd]);
 }
 
 struct file_descriptor_st* create_file_descriptor(int fd,
@@ -757,9 +757,9 @@ ssize_t k_write(int fd, const char* str, int n) {
 int k_count_fd_num(const char* name) {
   int count = 0;
   for (int i = 0; i < fd_counter; i++) {
-    struct file_descriptor_st curr_fd;
+    struct file_descriptor_st* curr_fd;
     curr_fd = global_fd_table[i];
-    if (strcmp(curr_fd.fname, name) == 0) {
+    if (strcmp(curr_fd->fname, name) == 0) {
       count++;
     }
   }
@@ -767,7 +767,7 @@ int k_count_fd_num(const char* name) {
 }
 
 int k_close(int fd) {
-  struct file_descriptor_st* curr = global_fd_table + fd;
+  struct file_descriptor_st* curr = *global_fd_table + fd;
 
   // fd is not a valid open file descriptor
   if (curr == NULL) {
@@ -785,7 +785,7 @@ int k_close(int fd) {
   //   }
   // }
 
-  global_fd_table[fd].fname = "*";
+  global_fd_table[fd]->fname = "*";
 
   return 0;
 }
@@ -845,11 +845,11 @@ int k_unlink(const char* fname) {
   // descriptor to this file as well
 
   for (int i = 0; i < fd_counter; i++) {
-    struct file_descriptor_st curr_fd;
+    struct file_descriptor_st* curr_fd;
     curr_fd = global_fd_table[i];
-    if (strcmp(curr_fd.fname, fname) == 0) {
+    if (strcmp(curr_fd->fname, fname) == 0) {
       // we want to close this
-      k_close(curr_fd.fd);
+      k_close(curr_fd->fd);
       break;
     }
   }
@@ -1289,7 +1289,7 @@ char* k_get_fname_from_fd(int fd) {
   if (fd > fd_counter) {
     return NULL;
   }
-  return global_fd_table[fd].fname;
+  return global_fd_table[fd]->fname;
 }
 
 int k_cp_within_fat(char* source, char* dest) {

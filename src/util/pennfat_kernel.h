@@ -103,7 +103,7 @@ extern uint16_t* fat;
 
 /** @brief Kernel level global file descriptor table that stores all file
  * descriptor that has been created through out the program's runtime.*/
-extern struct file_descriptor_st* global_fd_table;
+extern struct file_descriptor_st** global_fd_table;
 
 /** @brief File descriptor number (host system level) for the filesystem that
  * has been mounted to the program.*/

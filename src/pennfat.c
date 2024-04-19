@@ -24,12 +24,12 @@ void prompt(bool isShell) {
   }
 }
 
-void read_command(char** cmds) {
+int read_command(char** cmds) {
   char* cmd_temp;
   cmd_temp = calloc(MAX_LEN, sizeof(char));
   if (cmd_temp == NULL) {
     free(cmd_temp);
-    exit(EXIT_FAILURE);
+    return -1;
   }
   // read in the user input
   ssize_t read_res = k_read(STDIN_FILENO, MAX_LEN, cmd_temp);
@@ -37,13 +37,14 @@ void read_command(char** cmds) {
   // error catching for read
   if (read_res < 0) {
     perror("error: reading input");
-    exit(EXIT_FAILURE);
+    return -1;
   }
   if (read_res == 0) {  // EOF (CTRL-D)
     free(cmd_temp);
-    exit(EXIT_SUCCESS);
+    return -1;
   }
   *cmds = cmd_temp;
+  return 1;
 }
 
 void int_handler(int signo) {
@@ -60,7 +61,7 @@ void int_handler(int signo) {
 
 void initialize_global_fd_table() {
   // create an array of file_descriptor_st
-  global_fd_table = calloc(1, sizeof(struct file_descriptor_st) * MAX_FD_NUM);
+  global_fd_table = calloc(1, sizeof(struct file_descriptor_st*) * MAX_FD_NUM);
 
   if (global_fd_table == NULL) {
     perror("Memory allocation failed\n");
@@ -70,19 +71,19 @@ void initialize_global_fd_table() {
   // stdin
   struct file_descriptor_st* std_in =
       create_file_descriptor(0, "stdin", F_READ, 0);
-  global_fd_table[0] = *std_in;
+  global_fd_table[0] = std_in;
 
   // stdout
   struct file_descriptor_st* std_out =
       create_file_descriptor(1, "stdout", F_WRITE, 0);
 
-  global_fd_table[1] = *std_out;
+  global_fd_table[1] = std_out;
 
   // stderr
   struct file_descriptor_st* std_err =
       create_file_descriptor(2, "stdout", F_WRITE, 0);
 
-  global_fd_table[2] = *std_err;
+  global_fd_table[2] = std_err;
 }
 
 void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {

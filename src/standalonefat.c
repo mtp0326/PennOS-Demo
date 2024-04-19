@@ -13,7 +13,10 @@ int main(int argc, char* argv[]) {
   while (1) {
     prompt(false);
     char* cmd;
-    read_command(&cmd);
+    int read_flag = read_command(&cmd);
+    if (read_flag < 0) {
+      break;
+    }
     if (cmd[0] != '\n') {
       // for strtol
       char* ptr;
@@ -176,6 +179,18 @@ int main(int argc, char* argv[]) {
     }
     free(cmd);
   }
+
+  int i = 0;
+  while (global_fd_table[i] != NULL) {
+    if (i > 2) {
+      free(global_fd_table[i]->fname);
+    }
+
+    free(global_fd_table[i]);
+    i++;
+  }
+
+  free(global_fd_table);
   unmount();
   return EXIT_SUCCESS;
 }

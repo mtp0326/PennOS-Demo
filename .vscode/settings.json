@@ -25,6 +25,7 @@
     "time.h": "c",
     "cerrno": "c",
     "parser.h": "c",
-    "shellbuiltins.h": "c"
+    "shellbuiltins.h": "c",
+    "typeinfo": "c"
   }
 }
