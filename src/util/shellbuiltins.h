@@ -2,6 +2,10 @@
 #define SHELL_BUILTINS
 
 // SHELL BUILTINS: Implemented using user and system level functions only!
+/**
+ * @brief For each shell run, the background processors are checked and signaled
+ */
+void* b_background_poll(void* arg);
 
 /**
  * @brief The ususal `cat` program.

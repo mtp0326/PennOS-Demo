@@ -20,6 +20,8 @@ static void* shell(void* arg) {
 
     read_command(&cmd);
 
+    b_background_poll(NULL);
+
     if (cmd[0] != '\n') {
       // parse command
       struct parsed_command* parsed;
@@ -35,7 +37,7 @@ static void* shell(void* arg) {
       if (strcmp(args[0], "cat") == 0) {
         // TODO: Call your implemented cat() function
       } else if (strcmp(args[0], "sleep") == 0) {
-        s_spawn_and_wait(b_sleep, args, STDIN_FILENO, STDOUT_FILENO,
+        s_spawn_and_wait(b_sleep, args, STDIN_FILENO, STDOUT_FILENO, cmd,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "busy") == 0) {
         // TODO: Call your implemented busy() function
@@ -54,10 +56,9 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "chmod") == 0) {
         // TODO: Call your implemented chmod() function
       } else if (strcmp(args[0], "ps") == 0) {
-        s_spawn_and_wait(b_ps, args, STDIN_FILENO, STDOUT_FILENO,
-                         parsed->is_background, -1);
+        b_ps(NULL);
       } else if (strcmp(args[0], "kill") == 0) {
-        s_spawn_and_wait(b_kill, args, STDIN_FILENO, STDOUT_FILENO,
+        s_spawn_and_wait(b_kill, args, STDIN_FILENO, STDOUT_FILENO, cmd,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "zombify") == 0) {
         // TODO: Call your implemented zombify() function
@@ -74,7 +75,7 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "fg") == 0) {
         b_fg(args);
       } else if (strcmp(args[0], "jobs") == 0) {
-        // TODO: Call your implemented jobs() function
+        b_jobs(NULL);
       } else if (strcmp(args[0], "logout") == 0) {
         b_logout(NULL);
       } else {
@@ -135,7 +136,7 @@ void scheduler(char* logfile) {
   arg[1] = NULL;             // Terminate the array
 
   // spawn in the shell process at priority 0
-  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, false, 0);
+  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, "shell", false, 0);
 
   // main loop
   while (!done) {
@@ -271,6 +272,8 @@ int main(int argc, char** argv) {
   stopped = init_list();
   blocked = init_list();
   zombied = init_list();
+
+  bg_list = init_list();
 
   priority = init_priority();
   pthread_mutex_init(&done_lock, NULL);

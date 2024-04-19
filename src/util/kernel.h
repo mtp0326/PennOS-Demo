@@ -102,6 +102,10 @@ typedef struct pcb_t {
                                  s_sleep calls */
 
   char* processname; /** @brief The command name that this processor has */
+
+  u_int64_t job_num; /** @brief The command name that this processor has */
+
+  char* cmd_name; /** @brief The command line of the processor */
 } pcb_t;
 
 /**

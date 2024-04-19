@@ -55,6 +55,13 @@ extern pcb_t* current;
 extern pid_t next_pid;
 
 /**
+ * This is to keep track of the job numbers from processes that are in the
+ * background or stopped.
+ *
+ */
+extern uint64_t job_id;
+
+/**
  * This is the int representing the file descriptor of the log file, to be used
  * for writing purposes for the logging of events.
  *

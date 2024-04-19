@@ -50,6 +50,7 @@ pid_t s_spawn_nice(void* (*func)(void*),
                    char* argv[],
                    int fd0,
                    int fd1,
+                   char* cmd_string,
                    bool is_background,
                    unsigned int priority);
 
@@ -123,6 +124,7 @@ int s_spawn_and_wait(void* (*func)(void*),
                      char* argv[],
                      int fd0,
                      int fd1,
+                     char* cmd_string,
                      bool nohang,
                      unsigned int priority);
 
@@ -147,6 +149,10 @@ void* s_function_from_string(char* program);
 int s_write_log(log_message_t logtype, pcb_t* proc, unsigned int old_nice);
 
 int s_move_process(CircularList* destination, pid_t pid);
+
+int s_print_process(CircularList* list);
+
+int s_print_jobs(CircularList* list);
 
 /*== system call functions for interacting with PennOS filesystem ==*/
 /**

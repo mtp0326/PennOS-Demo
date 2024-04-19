@@ -9,6 +9,7 @@ CircularList* init_list(void) {
     return NULL;  // Failed to allocate memory for the list
   }
   list->head = NULL;
+  list->tail = NULL;
   list->size = 0;
   return list;
 }
@@ -38,6 +39,7 @@ void add_process(CircularList* list, pcb_t* process) {
     currentnode->next = newNode;
     newNode->next = list->head;  // Complete the circle
   }
+  list->tail = newNode;  // the recently added newNode will be the last(tail)
   list->size++;
 }
 
@@ -57,12 +59,14 @@ void add_process_front(CircularList* list, pcb_t* process) {
     // If the list is empty, initialize it with the new node
     newNode->next = newNode;  // Points to itself, making it circular
     list->head = newNode;
+    list->tail = newNode;
   } else {
     // Insert the new node at the end of the list
     Node* currentnode = list->head;
     while (currentnode->next != list->head) {
       currentnode = currentnode->next;
     }
+    list->tail = currentnode;  // the node before the head becomes the new tail
     currentnode->next = newNode;
     newNode->next = list->head;  // Complete the circle
     list->head = newNode;        // move head to the last node
@@ -82,6 +86,7 @@ bool remove_process(CircularList* list, pid_t pid) {
       if (prev == NULL) {                       // Removing the head
         if (currentnode->next == list->head) {  // Only one element
           list->head = NULL;
+          list->tail = NULL;
         } else {
           prev = list->head;
           while (prev->next != list->head)
@@ -89,7 +94,11 @@ bool remove_process(CircularList* list, pid_t pid) {
           list->head = currentnode->next;
           prev->next = list->head;
         }
-      } else {  // Removing non-head
+      } else if (currentnode ==
+                 list->tail) {  // Removing the tail ///not sure this works
+        prev->next = list->head;
+        list->tail = prev;
+      } else {  // Removing non-head and non-tail
         prev->next = currentnode->next;
         if (currentnode == list->head) {
           list->head = currentnode->next;
@@ -115,6 +124,23 @@ pcb_t* find_process(CircularList* list, pid_t pid) {
   Node* currentnode = list->head;
   do {
     if (currentnode->process->pid == pid) {
+      return currentnode->process;
+    }
+    currentnode = currentnode->next;
+  } while (currentnode != list->head);
+
+  return NULL;  // Process not found
+}
+
+// Finds a process in the circular linked list by its PID
+pcb_t* find_process_job_id(CircularList* list, u_int64_t index) {
+  if (list == NULL || list->head == NULL) {
+    return NULL;  // List is empty or not initialized
+  }
+
+  Node* currentnode = list->head;
+  do {
+    if (currentnode->process->job_num == index) {
       return currentnode->process;
     }
     currentnode = currentnode->next;

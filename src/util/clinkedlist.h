@@ -22,6 +22,7 @@ typedef struct Node {
  */
 typedef struct {
   Node* head;        /**< Pointer to the head (first node) of the list. */
+  Node* tail;        /**< Pointer to the tail (last node) of the list. */
   unsigned int size; /**< Number of nodes in the list. */
 } CircularList;
 
@@ -61,5 +62,14 @@ bool remove_process(CircularList* list, pid_t pid);
  * found.
  */
 pcb_t* find_process(CircularList* list, pid_t pid);
+
+/**
+ * Finds a process in the circular linked list by its Job ID.
+ * @param list Pointer to the circular linked list.
+ * @param index Job Id specified by user.
+ * @return pcb_t* Pointer to the found process control block, or NULL if not
+ * found.
+ */
+pcb_t* find_process_job_id(CircularList* list, u_int64_t index);
 
 #endif  // SCHEDULER_LIST_H
