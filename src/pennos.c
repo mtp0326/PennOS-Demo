@@ -111,7 +111,7 @@ static void* shell(void* arg) {
         s_spawn_and_wait(b_cp, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "rm") == 0) {
-         s_spawn_and_wait(b_rm, args, STDIN_FILENO, STDOUT_FILENO,
+        s_spawn_and_wait(b_rm, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "chmod") == 0) {
         s_spawn_and_wait(b_chmod, args, STDIN_FILENO, STDOUT_FILENO,

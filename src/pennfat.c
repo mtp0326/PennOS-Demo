@@ -1,9 +1,9 @@
 #include "pennfat.h"
 #include <unistd.h>
 
-void prompt(bool shell) {
+void prompt(bool isShell) {
   // display the prompt to the user
-  if (shell) {
+  if (isShell) {
     ssize_t prompt_res =
         k_write(STDERR_FILENO, PROMPT_SHELL, strlen(PROMPT_SHELL));
     // error catching for write
@@ -33,6 +33,7 @@ void read_command(char** cmds) {
   }
   // read in the user input
   ssize_t read_res = k_read(STDIN_FILENO, MAX_LEN, cmd_temp);
+  cmd_temp[read_res] = '\0';
   // error catching for read
   if (read_res < 0) {
     perror("error: reading input");
