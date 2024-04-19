@@ -17,9 +17,6 @@ kernel only:
 
 fat only:
  - document all code
- - all of syscalls (idk progress on this)
- - all of shell calls (idk progress on this)
- - idk what else
  - append output redirection 
 
 

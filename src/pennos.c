@@ -139,6 +139,8 @@ static void* shell(void* arg) {
         // TODO: Call your implemented jobs() function
       } else if (strcmp(args[0], "logout") == 0) {
         b_logout(NULL);
+      } else if (strcmp(args[0], "clear") == 0) {
+          b_clear(NULL);
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
         // REPLACE WITH PERROR

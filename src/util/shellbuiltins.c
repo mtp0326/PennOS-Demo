@@ -107,9 +107,18 @@ void* b_zombify(void* arg) {
 }
 
 void* b_logout(void* arg) {
+   
    done = true; 
     return NULL;
 }
+
+void* b_clear(void* arg) {
+    char* clear = "\033c";
+    s_write(STDOUT_FILENO, clear, strlen(clear));
+
+    return NULL;
+}
+
 
 // FAT LEVEL SHELL FUNCTIONS
 

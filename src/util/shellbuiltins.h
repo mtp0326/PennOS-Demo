@@ -186,6 +186,13 @@ void* b_jobs(void* arg);
  */
 void* b_logout(void* arg);
 
+/**
+ * @brief Clears the terminal.
+ *
+ * Example Usage: clear
+ */
+void* b_clear(void* arg);
+
 // SHELL BUILTINS TO TEST ZOMBIE + ORPHANS
 /**
  * @brief Used to test zombifying functionality of your kernel.
