@@ -110,8 +110,8 @@ void* b_zombify(void* arg) {
 }
 
 void* b_logout(void* arg) {
-  done = true;
-  return NULL;
+   done = true; 
+    return NULL;
 }
 
 // FAT LEVEL SHELL FUNCTIONS

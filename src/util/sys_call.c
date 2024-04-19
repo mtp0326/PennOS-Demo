@@ -292,9 +292,10 @@ int s_nice(pid_t pid, int priority) {
   return 0;
 }
 
-void s_sleep(unsigned int ticks) {
+int s_sleep(unsigned int ticks) {
   if (ticks <= 0) {
-    return;
+    errno = EINVARG;
+    return -1;
   }
 
   current->ticks_to_wait = ticks;
@@ -304,7 +305,7 @@ void s_sleep(unsigned int ticks) {
   add_process(blocked, current);
   spthread_suspend_self();
   s_exit();
-  return;
+  return 0;
 }
 
 int s_spawn_and_wait(void* (*func)(void*),

@@ -11,7 +11,11 @@ void u_perror(char* message) {
             case ETHREADCREATE:
                 err_message = "Thread creation failed";
                 break;
-            case 1:
+            case EPCBCREATE:
+                err_message = "PCB creation failed";
+                break;
+            case ENOARGS: 
+                err_message = "Spawn recieved no arguments"; 
                 break;
             // ..
             default:

@@ -24,6 +24,8 @@ extern int errno;
 #define EBITMAP 4
 
 
+    // S_SLEEP ERRORS
+#define EINVARG 5
 
 
 // FAT LEVEL ERRORS

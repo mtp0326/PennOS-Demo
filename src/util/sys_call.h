@@ -18,6 +18,12 @@
 #define P_WIFSTOPPED(status) (((status) & 0xFF) == STATUS_STOPPED)
 #define P_WIFSIGNALED(status) (((status) & 0xFF) == STATUS_SIGNALED)
 
+
+/**
+ * @enum log_message_t 
+ * @brief This is an enum used to specify which log message should be added for \ref s_write_log.
+ *
+ */
 typedef enum {
   SCHEDULE,
   CREATE,
@@ -49,6 +55,18 @@ typedef enum {
 
 pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1);
 
+
+/**
+ * @brief Create a child process that executes the function `func`, with a specified priority.
+ * This is an exact copy of \ref s_spawn except that the priority of the created process can be specificed at creation.
+ *
+ * @param func Function to be executed by the child process.
+ * @param argv Null-terminated array of args, including the command name as
+ * argv[0].
+ * @param fd0 Input file descriptor.
+ * @param fd1 Output file descriptor.
+ * @return pid_t The process ID of the created child process.
+ */
 pid_t s_spawn_nice(void* (*func)(void*),
                    char* argv[],
                    int fd0,
@@ -80,6 +98,9 @@ int s_kill(pid_t pid, int signal);
 
 /**
  * @brief Unconditionally exit the calling process.
+ *
+ * This will set the process state to zombied, adjust its state within the scheduler structures, and 
+ * kill all child proceseses. (not done). 
  */
 void s_exit(void);
 
@@ -106,20 +127,25 @@ int s_nice(pid_t pid, int priority);
  *
  * @param ticks Duration of the sleep in system clock ticks. Must be greater
  * than 0.
+ *
+ * @return int Returns 0 on success, -1 on failure and sets errno.
  */
-void s_sleep(unsigned int ticks);
+int  s_sleep(unsigned int ticks);
 
 /***** CUSTOM SYSCALLS FOR SCHEDULER*/
 
 /**
- * @brief Spawns and waits for a process
+ * @brief Spawns and waits for a process, combining s_spawn and s_waitpid.
  *
- * @param func
- * @param argv
- * @param fd0
- * @param fd1
- * @param nohang
- * @return int
+ * This generalizes the control loop of spawning a process, waiting on it via s_waitpid (depending on whether it was a background process)
+ * and then cleaning it up, into one function call. Used to call most shell functions (b_functions).
+ *
+ * @param func The function to be executed.
+ * @param argv The argument to that function that is passed into the \ref s_spawn call.
+ * @param fd0 Input file descriptor.
+ * @param fd1 Output file descriptor.
+ * @param nohang Whether or not to wait on the process or immediately proceed.
+ * @return int Returns 0 on success, -1 on failure and sets errno.
  */
 int s_spawn_and_wait(void* (*func)(void*),
                      char* argv[],
