@@ -6,6 +6,10 @@
 #include "../pennfat.h"
 #include "spthread.h"
 
+/************************************************
+ *  PENNFAT MACRO DEFINITION
+ ***********************************************/
+
 /**
  * @brief open the file for reading only
  */
@@ -30,23 +34,61 @@
  */
 #define MAX_FD_NUM 1024
 
+/**
+ * @brief Error number for when there does not exist a file with the given file
+ * name.
+ */
 #define FILE_NOT_FOUND -1
 
+/**
+ * @brief Error number for when the file name doesn't follow the POSIX standard.
+ */
 #define INVALID_FILE_NAME -2
 
+/**
+ * @brief Error number for when trying to open more than one file descriptor in
+ * F_WRITE / F_APPEND mode.
+ */
 #define MULTIPLE_F_WRITE -3
 
+/**
+ * @brief Error number for when trying to use the file descriptor in an invalid
+ * way such as writing to F_READ file descriptor.
+ */
 #define WRONG_PERMISSION -4
 
+/**
+ * @brief Error number for when C level system function fails.
+ */
 #define SYSTEM_ERROR -5
 
+/**
+ * @brief Error number for when trying to access or use a deleted file.
+ */
 #define FILE_DELETED -6
 
+/**
+ * @brief Error number for when trying to access or use a invalid file
+ * descriptor.
+ */
 #define INVALID_FILE_DESCRIPTOR -7
 
+/**
+ * @brief Error number for when delete a file that is used by some other
+ * processes.
+ */
 #define FILE_IN_USE -8
 
+/**
+ * @brief Error number for when the parameter given to the function is invalid.
+ */
 #define INVALID_PARAMETERS -9
+
+/**
+ * @brief Error number for when the filesystem is not mounted but tries to
+ * access or use the file system.
+ */
+#define FS_NOT_MOUNTED -10
 
 /**
  * @enum Whence

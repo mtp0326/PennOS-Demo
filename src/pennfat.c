@@ -135,14 +135,12 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
 
 int mount(const char* fs_name) {
   if (fat != NULL) {
-    perror("error: exists an already mounted file system");
     return -1;
     // exit(EXIT_FAILURE);
   }
   fs_fd = open(fs_name, O_RDWR);
   if (fs_fd == -1) {
-    perror("fs_fd open error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   // get blocks_in_fat and block_size_config from meta data
@@ -151,16 +149,14 @@ int mount(const char* fs_name) {
 
   unsigned char buffer[1];
   if (read(fs_fd, buffer, 1) != 1) {
-    perror("mount: read error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   block_config = buffer[0];
 
   unsigned char buffer2[1];
   if (read(fs_fd, buffer2, 1) != 1) {
-    perror("mount: read error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   num_blocks = buffer2[0];
@@ -176,8 +172,7 @@ int mount(const char* fs_name) {
   // mmap FAT into memory
   fat = mmap(NULL, fat_size, PROT_READ | PROT_WRITE, MAP_SHARED, fs_fd, 0);
   if (fat == MAP_FAILED) {
-    perror("FAT mmap error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   // fprintf(stderr, "here: %x\n", fat[0]);
@@ -187,8 +182,7 @@ int mount(const char* fs_name) {
 int unmount() {
   // error handling if no currently mounted fs
   if (fat == NULL) {
-    perror("error: no file system mounted");
-    return -1;
+    return FS_NOT_MOUNTED;
     // exit(EXIT_FAILURE);
   }
 
@@ -196,8 +190,7 @@ int unmount() {
 
   // munmap(2) to unmount
   if (munmap(fat, fat_size) == -1) {
-    perror("error: munmap failed");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   // close(fs_fd);

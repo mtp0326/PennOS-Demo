@@ -120,23 +120,29 @@ int main(int argc, char* argv[]) {
         // fprintf(stderr, "block size: %d\n", block_size);
       } else if (strcmp(args[0], "mount") == 0) {
         if (args[1] == NULL) {
-          perror("error: mount requires an argument");
+          perror("error(mount): mount requires an argument");
           continue;
         }
-        if (mount(args[1]) != 0) {
-          perror("mount error");
+        if (mounted) {
+          perror("error(mount): another filesystem already mounted");
+          continue;
         } else {
-          mounted = true;
+          if (mount(args[1]) != 0) {
+            perror("error(mount): system error");
+          } else {
+            mounted = true;
+          }
         }
+
         // fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
         // fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
       } else if (strcmp(args[0], "unmount") == 0) {
         if (!mounted) {
-          perror("error: unexpected command");
+          perror("error(unmount): no file system mounted");
           continue;
         }
         if (unmount() != 0) {
-          perror("unmount error");
+          perror("error(unmount): system error");
         } else {
           mounted = false;
         }
