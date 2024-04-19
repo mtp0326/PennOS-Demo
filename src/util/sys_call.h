@@ -3,12 +3,11 @@
 
 #include <stdbool.h>
 #include <string.h>
+#include "error.h"
 #include "globals.h"
 #include "kernel.h"
 #include "pennfat_kernel.h"
 #include "shellbuiltins.h"
-#include "error.h"
-
 
 #define STATUS_EXITED 0x00
 #define STATUS_STOPPED 0x01
@@ -245,5 +244,23 @@ off_t s_lseek(int fd, int offset, int whence);
  * @param filename
  */
 void s_ls(const char* filename);
+
+char* s_read_all(const char* filename, int* read_num);
+
+char* s_get_fname_from_fd(int fd);
+
+int s_update_timestamp(const char* source);
+
+off_t s_does_file_exist2(const char* fname);
+
+int s_rename(const char* source, const char* dest);
+
+int s_change_mode(const char* change, const char* filename);
+
+int s_cp_within_fat(char* source, char* dest);
+
+int s_cp_to_host(char* source, char* host_dest);
+
+int s_cp_from_host(char* host_source, char* dest);
 
 #endif

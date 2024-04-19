@@ -1,36 +1,50 @@
 #include "pennfat.h"
 #include <unistd.h>
 
-void prompt() {
+void prompt(bool isShell) {
   // display the prompt to the user
-  ssize_t prompt_res = write(STDERR_FILENO, PROMPT, strlen(PROMPT));
-  // error catching for write
+  if (isShell) {
+    ssize_t prompt_res =
+        k_write(STDERR_FILENO, PROMPT_SHELL, strlen(PROMPT_SHELL));
+    // error catching for write
 
-  if (prompt_res < 0) {
-    perror("error: prompting");
-    exit(EXIT_FAILURE);
+    if (prompt_res < 0) {
+      perror("error: prompting");
+      exit(EXIT_FAILURE);
+    }
+  } else {
+    ssize_t prompt_res =
+        k_write(STDERR_FILENO, PROMPT_PENN_FAT, strlen(PROMPT_PENN_FAT));
+    // error catching for write
+
+    if (prompt_res < 0) {
+      perror("error: prompting");
+      exit(EXIT_FAILURE);
+    }
   }
 }
 
-void read_command(char** cmds) {
+int read_command(char** cmds) {
   char* cmd_temp;
   cmd_temp = calloc(MAX_LEN, sizeof(char));
   if (cmd_temp == NULL) {
     free(cmd_temp);
-    exit(EXIT_FAILURE);
+    return -1;
   }
   // read in the user input
   ssize_t read_res = k_read(STDIN_FILENO, MAX_LEN, cmd_temp);
+  cmd_temp[read_res] = '\0';
   // error catching for read
   if (read_res < 0) {
     perror("error: reading input");
-    exit(EXIT_FAILURE);
+    return -1;
   }
   if (read_res == 0) {  // EOF (CTRL-D)
     free(cmd_temp);
-    exit(EXIT_SUCCESS);
+    return -1;
   }
   *cmds = cmd_temp;
+  return 1;
 }
 
 void int_handler(int signo) {
@@ -42,12 +56,12 @@ void int_handler(int signo) {
       exit(EXIT_FAILURE);
     }
   }
-  prompt();
+  prompt(true);
 }
 
 void initialize_global_fd_table() {
   // create an array of file_descriptor_st
-  global_fd_table = calloc(1, sizeof(struct file_descriptor_st) * MAX_FD_NUM);
+  global_fd_table = calloc(1, sizeof(struct file_descriptor_st*) * MAX_FD_NUM);
 
   if (global_fd_table == NULL) {
     perror("Memory allocation failed\n");
@@ -57,19 +71,19 @@ void initialize_global_fd_table() {
   // stdin
   struct file_descriptor_st* std_in =
       create_file_descriptor(0, "stdin", F_READ, 0);
-  global_fd_table[0] = *std_in;
+  global_fd_table[0] = std_in;
 
   // stdout
   struct file_descriptor_st* std_out =
       create_file_descriptor(1, "stdout", F_WRITE, 0);
 
-  global_fd_table[1] = *std_out;
+  global_fd_table[1] = std_out;
 
   // stderr
   struct file_descriptor_st* std_err =
       create_file_descriptor(2, "stdout", F_WRITE, 0);
 
-  global_fd_table[2] = *std_err;
+  global_fd_table[2] = std_err;
 }
 
 void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
@@ -123,14 +137,12 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
 
 int mount(const char* fs_name) {
   if (fat != NULL) {
-    perror("error: exists an already mounted file system");
     return -1;
     // exit(EXIT_FAILURE);
   }
   fs_fd = open(fs_name, O_RDWR);
   if (fs_fd == -1) {
-    perror("fs_fd open error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   // get blocks_in_fat and block_size_config from meta data
@@ -139,16 +151,14 @@ int mount(const char* fs_name) {
 
   unsigned char buffer[1];
   if (read(fs_fd, buffer, 1) != 1) {
-    perror("mount: read error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   block_config = buffer[0];
 
   unsigned char buffer2[1];
   if (read(fs_fd, buffer2, 1) != 1) {
-    perror("mount: read error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   num_blocks = buffer2[0];
@@ -164,8 +174,7 @@ int mount(const char* fs_name) {
   // mmap FAT into memory
   fat = mmap(NULL, fat_size, PROT_READ | PROT_WRITE, MAP_SHARED, fs_fd, 0);
   if (fat == MAP_FAILED) {
-    perror("FAT mmap error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   // fprintf(stderr, "here: %x\n", fat[0]);
@@ -175,8 +184,7 @@ int mount(const char* fs_name) {
 int unmount() {
   // error handling if no currently mounted fs
   if (fat == NULL) {
-    perror("error: no file system mounted");
-    return -1;
+    return FS_NOT_MOUNTED;
     // exit(EXIT_FAILURE);
   }
 
@@ -184,8 +192,7 @@ int unmount() {
 
   // munmap(2) to unmount
   if (munmap(fat, fat_size) == -1) {
-    perror("error: munmap failed");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   // close(fs_fd);
@@ -376,63 +383,14 @@ void ls() {
   k_ls(NULL);
 }
 
-void cp_within_fat(char* source, char* dest) {
-  // source file must exist
-
-  if (does_file_exist2(source) == -1) {
-    perror("error: source does not exist");
-    return;
-  }
-
-  int dest_fd = k_open(dest, F_WRITE);
-  int source_fd = k_open(source, F_READ);
-
-  int read_num;
-
-  char* contents = k_read_all(source, &read_num);
-
-  k_write(dest_fd, contents, read_num);
-
-  k_close(dest_fd);
-  k_close(source_fd);
+int cp_within_fat(char* source, char* dest) {
+  return k_cp_within_fat(source, dest);
 }
 
-void cp_to_host(char* source, char* host_dest) {
-  if (does_file_exist2(source) == -1) {
-    perror("error: source does not exist");
-    return;
-  }
-  int source_fd = k_open(source, F_READ);
-
-  int read_num;
-
-  char* contents = k_read_all(source, &read_num);
-
-  int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, 0777);
-
-  if (write(host_fd, contents, read_num) == -1) {
-    perror("error: write to host file failed\n");
-  }
-
-  close(host_fd);
-  k_close(source_fd);
+int cp_to_host(char* source, char* host_dest) {
+  return k_cp_to_host(source, host_dest);
 }
 
-void cp_from_host(char* host_source, char* dest) {
-  int host_fd = open(host_source, O_RDWR, 0777);
-
-  if (host_fd == -1) {
-    perror("error: host source does not exist or is invalid\n");
-    return;
-  }
-
-  char buffer[1];
-  int dest_fd = k_open(dest, F_WRITE);
-
-  while (read(host_fd, buffer, 1) > 0) {
-    k_write(dest_fd, buffer, 1);
-  }
-
-  close(host_fd);
-  k_close(dest_fd);
+int cp_from_host(char* host_source, char* dest) {
+  return k_cp_from_host(host_source, dest);
 }

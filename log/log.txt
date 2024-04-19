@@ -8,20 +8,35 @@
 [   5]	SCHEDULE 	   1	   0		shell
 [   6]	SCHEDULE 	   1	   0		shell
 [   7]	SCHEDULE 	   1	   0		shell
-[   8]	SCHEDULE 	   1	   0		shell
+[   7]	CREATE   	   2	   1		ls
+[   7]	BLOCKED  	   1	   0		shell
+[   8]	SCHEDULE 	   2	   1		ls
+[   8]	EXITED   	   2	   1		ls
+[   9]	UNBLOCKED	   1	   0		shell
 [   9]	SCHEDULE 	   1	   0		shell
+[   9]	WAITED   	   2	   1		ls
 [  10]	SCHEDULE 	   1	   0		shell
 [  11]	SCHEDULE 	   1	   0		shell
 [  12]	SCHEDULE 	   1	   0		shell
 [  13]	SCHEDULE 	   1	   0		shell
-[  14]	SCHEDULE 	   1	   0		shell
+[  13]	CREATE   	   3	   1		ls
+[  13]	BLOCKED  	   1	   0		shell
+[  14]	SCHEDULE 	   3	   1		ls
+[  14]	EXITED   	   3	   1		ls
+[  15]	UNBLOCKED	   1	   0		shell
 [  15]	SCHEDULE 	   1	   0		shell
+[  15]	WAITED   	   3	   1		ls
 [  16]	SCHEDULE 	   1	   0		shell
 [  17]	SCHEDULE 	   1	   0		shell
 [  18]	SCHEDULE 	   1	   0		shell
 [  19]	SCHEDULE 	   1	   0		shell
-[  20]	SCHEDULE 	   1	   0		shell
+[  19]	CREATE   	   4	   1		ls
+[  19]	BLOCKED  	   1	   0		shell
+[  20]	SCHEDULE 	   4	   1		ls
+[  20]	EXITED   	   4	   1		ls
+[  21]	UNBLOCKED	   1	   0		shell
 [  21]	SCHEDULE 	   1	   0		shell
+[  21]	WAITED   	   4	   1		ls
 [  22]	SCHEDULE 	   1	   0		shell
 [  23]	SCHEDULE 	   1	   0		shell
 [  24]	SCHEDULE 	   1	   0		shell
@@ -30,6 +45,7 @@
 [  27]	SCHEDULE 	   1	   0		shell
 [  28]	SCHEDULE 	   1	   0		shell
 [  29]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [  30]	SCHEDULE 	   1	   0		shell
 [  31]	SCHEDULE 	   1	   0		shell
 [  32]	SCHEDULE 	   1	   0		shell
@@ -1187,3 +1203,14 @@
 [1178]	SCHEDULE 	   1	   0		shell
 [1179]	SCHEDULE 	   1	   0		shell
 [1180]	SCHEDULE 	   1	   0		shell
+=======
+[  29]	CREATE   	   5	   1		ls
+[  29]	BLOCKED  	   1	   0		shell
+[  30]	SCHEDULE 	   5	   1		ls
+[  30]	EXITED   	   5	   1		ls
+[  31]	UNBLOCKED	   1	   0		shell
+[  31]	SCHEDULE 	   1	   0		shell
+[  31]	WAITED   	   5	   1		ls
+[  32]	SCHEDULE 	   1	   0		shell
+[  33]	SCHEDULE 	   1	   0		shell
+>>>>>>> joseph-memory

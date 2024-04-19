@@ -16,7 +16,7 @@ PList* priority;
 
 static void* shell(void* arg) {
   while (1) {
-    prompt();
+    prompt(true);
     char* cmd;
 
     read_command(&cmd);
@@ -34,28 +34,88 @@ static void* shell(void* arg) {
       // Unfortunate canonical way to switch based on string in C.
       // Shell built-ins that are implemented using user or system calls only.
       if (strcmp(args[0], "cat") == 0) {
-        // TODO: Call your implemented cat() function
+        // this is when files arg was NOT provided
+        int input_fd = -1;
+        int output_fd = -1;
+        // create the correct input
+        if (parsed->stdin_file == NULL) {
+          input_fd = STDIN_FILENO;
+        } else {
+          input_fd = s_open(parsed->stdin_file, F_READ);
+        }
+
+        if (input_fd == -1) {
+          perror("No such file or directory\n");
+          continue;
+        }
+
+        if (parsed->stdout_file == NULL) {
+          output_fd = STDOUT_FILENO;
+        } else {
+          if (parsed->is_file_append) {
+            output_fd = s_open(parsed->stdout_file, F_APPEND);
+          } else {
+            output_fd = s_open(parsed->stdout_file, F_WRITE);
+          }
+        }
+
+        s_spawn_and_wait(b_cat, args, input_fd, output_fd,
+                         parsed->is_background, -1);
+
+        if (input_fd != STDIN_FILENO) {
+          s_close(input_fd);
+        }
+
+        if (output_fd != STDOUT_FILENO) {
+          s_close(output_fd);
+        }
+
       } else if (strcmp(args[0], "sleep") == 0) {
         s_spawn_and_wait(b_sleep, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "busy") == 0) {
         // TODO: Call your implemented busy() function
       } else if (strcmp(args[0], "echo") == 0) {
-        // TODO: Call your implemented echo() function
+        // echo should ignore any input redirection
+        // but it should write to the redirected output file
+        if (parsed->stdout_file == NULL) {
+          // we want to print to stdout
+          s_spawn_and_wait(b_echo, args, STDIN_FILENO, STDOUT_FILENO,
+                           parsed->is_background, -1);
+        } else {
+          if (parsed->is_file_append) {
+            int fd = s_open(parsed->stdout_file, F_APPEND);
+            s_spawn_and_wait(b_echo, args, STDIN_FILENO, fd,
+                             parsed->is_background, -1);
+            s_close(fd);
+          } else {
+            int fd = s_open(parsed->stdout_file, F_WRITE);
+            s_spawn_and_wait(b_echo, args, STDIN_FILENO, fd,
+                             parsed->is_background, -1);
+            s_close(fd);
+          }
+        }
+
       } else if (strcmp(args[0], "ls") == 0) {
         // TODO: Call your implemented ls() function
         s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "touch") == 0) {
         // TODO: Call your implemented touch() function
+        s_spawn_and_wait(b_touch, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "mv") == 0) {
-        // TODO: Call your implemented mv() function
+        s_spawn_and_wait(b_mv, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "cp") == 0) {
-        // TODO: Call your implemented cp() function
+        s_spawn_and_wait(b_cp, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "rm") == 0) {
-        // TODO: Call your implemented rm() function
+        s_spawn_and_wait(b_rm, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "chmod") == 0) {
-        // TODO: Call your implemented chmod() function
+        s_spawn_and_wait(b_chmod, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "ps") == 0) {
         // TODO: Call your implemented ps() function
       } else if (strcmp(args[0], "kill") == 0) {

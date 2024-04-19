@@ -14,8 +14,11 @@
 
 #include "parser.h"
 #include "util/pennfat_kernel.h"
-#ifndef PROMPT
-#define PROMPT "pennos> "
+#ifndef PROMPT_PENN_FAT
+#define PROMPT_PENN_FAT "penn-fat> "
+#endif
+#ifndef PROMPT_SHELL
+#define PROMPT_SHELL "$ "
 #endif
 #define MAX_LEN 4096
 
@@ -23,8 +26,8 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config);
 int mount(const char* fs_name);
 int unmount();
 
-void prompt();
-void read_command(char** cmds);
+void prompt(bool shell);
+int read_command(char** cmds);
 void int_handler(int signo);
 int get_block_size(int block_size_config);
 int get_fat_size(int block_size, int blocks_in_fat);
@@ -41,9 +44,9 @@ void chmod(char** args);
 void cat_file_wa(char** args);
 
 void ls();
-void cp_within_fat(char* source, char* dest);
-void cp_to_host(char* source, char* host_dest);
-void cp_from_host(char* host_source, char* dest);
+int cp_within_fat(char* source, char* dest);
+int cp_to_host(char* source, char* host_dest);
+int cp_from_host(char* host_source, char* dest);
 
 void cat_w(char* output);
 void cat_a(char* output);
