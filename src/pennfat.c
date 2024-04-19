@@ -5,7 +5,7 @@ void prompt(bool shell) {
   // display the prompt to the user
   if (shell) {
     ssize_t prompt_res =
-      k_write(STDERR_FILENO, PROMPT_SHELL, strlen(PROMPT_SHELL));
+        k_write(STDERR_FILENO, PROMPT_SHELL, strlen(PROMPT_SHELL));
     // error catching for write
 
     if (prompt_res < 0) {
@@ -14,7 +14,7 @@ void prompt(bool shell) {
     }
   } else {
     ssize_t prompt_res =
-      k_write(STDERR_FILENO, PROMPT_PENN_FAT, strlen(PROMPT_PENN_FAT));
+        k_write(STDERR_FILENO, PROMPT_PENN_FAT, strlen(PROMPT_PENN_FAT));
     // error catching for write
 
     if (prompt_res < 0) {
@@ -388,14 +388,14 @@ void ls() {
   k_ls(NULL);
 }
 
-void cp_within_fat(char* source, char* dest) {
+int cp_within_fat(char* source, char* dest) {
   return k_cp_within_fat(source, dest);
 }
 
-void cp_to_host(char* source, char* host_dest) {
+int cp_to_host(char* source, char* host_dest) {
   return k_cp_to_host(source, host_dest);
 }
 
-void cp_from_host(char* host_source, char* dest) {
+int cp_from_host(char* host_source, char* dest) {
   return k_cp_from_host(host_source, dest);
 }

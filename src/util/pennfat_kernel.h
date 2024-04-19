@@ -102,74 +102,178 @@ struct file_descriptor_st* get_file_descriptor(int fd);
 int k_open(const char* fname, int mode);
 
 /**
- * @brief
+ * @brief Read n bytes from the file referenced by fd. On return, k_read returns
+ * the number of bytes read, 0 if EOF is reached, or a negative number on error.
  *
- * @param fd A
- * @param n
- * @param buf
- * @return ssize_t
+ * @param fd File descriptor number we are reading from
+ * @param n Number of bytes we are reading from \p fd
+ * @param buf Buffer where we store the read value
+ *
+ * @return ssize_t the number of bytes read, 0 if EOF is reached, or a negative
+ * number on error
  */
 ssize_t k_read(int fd, int n, char* buf);
 
 /**
- * @brief
+ * @brief Write n bytes of the string referenced by str to the file fd and
+ * increment the file pointer by n. On return, k_write returns the number of
+ * bytes written, or a negative value on error.
  *
- * @param fd
- * @param str
- * @param n
- * @return ssize_t
+ * @param fd File descriptor number we are reading to
+ * @param str Provided string we want to write to \p fd
+ * @param n Number of bytes we are writing
+ *
+ * @return ssize_t number of bytes written, or a negative value on error.
  */
 ssize_t k_write(int fd, const char* str, int n);
 
 /**
- * @brief
+ * @brief Close the file fd and return 0 on success, or a negative value on
+ * failure.
  *
- * @param fd
- * @return int
+ * @param fd File descriptor number that needs to be closed
+ * @return 0 on success, or a negative value on failure.
  */
 int k_close(int fd);
 
 /**
- * @brief
+ * @brief Remove the file by freeing the FAT table and zeroing out previously
+ * existing data.
  *
- * @param fname
- * @return int
+ * @param fname Name of the file we want to remove.
+ *
+ * @return 1 on success. Negative value of failure.
  */
 int k_unlink(const char* fname);
 
 /**
- * @brief
+ * @brief Reposition the file pointer for fd to the offset relative to whence.
+ * Refer to lseek(2) for how whence interacts with the file offset. If the newly
+ * calculated offset is creater than the current size of the file, the file
+ * expands to match that offset with the newly allocated space filled with 0s.
  *
- * @param fd
- * @param offset
- * @param whence
- * @return off_t
+ * @param fd File descriptor number
+ * @param offset Offset value
+ * @param whence F_SEEK_SET, F_SEEK_CUR, and F_SEEK_END. Follows the lseek(2)
+ * whence mode.
+ *
+ * @return off_t Newly calculated offset for \p fd
  */
 off_t k_lseek(int fd, int offset, int whence);
 
 /**
- * @brief
+ * @brief List the file filename in the current directory. If filename is NULL,
+ * list all files in the current directory.
  *
- * @param filename
+ * Similar to posix ls.
+ *
+ * @param filename Optional parameter. If specified, ls data for the specified
+ * file is printed
  */
 void k_ls(const char* filename);
 
-void k_rename(const char* source, const char* dest);
+/**
+ * @brief Rename \p source to \p dest
+ *
+ * @param source Source file name.
+ * @param dest Destination file name.
+ *
+ * @return 1 on success. Negative number on failure.
+ */
+int k_rename(const char* source, const char* dest);
 
-void k_update_timestamp(const char* source);
+/**
+ * @brief Change the timestamp of the file to the current time
+ *
+ * @param source Source file name.
+ *
+ * @return 1 on success. Negative number on failure.
+ */
+int k_update_timestamp(const char* source);
 
-void k_change_mode(const char* change, const char* filename);
+/**
+ * @brief Change file mode bits
+ *
+ * The operator + causes the selected file mode bits to be added to the existing
+ * file mode bits of each file; - causes them to be removed.
+ *
+ * @param change String that determines how the bits are modified.
+ * @param filename Name of the file.
+ *
+ * @return 1 on success. Negative number on failure.
+ */
+int k_change_mode(const char* change, const char* filename);
 
+/**
+ * @brief Reads all contents from the file with the file name \p filename.
+ * Outputs the contents as well as update \p read_num to the number of bytes
+ * read.
+ *
+ * @param filename Name of the file we want to read from.
+ * @param read_num Pointer to an integer variable that will store the number of
+ * bytes read.
+ *
+ * @return All contents of \p filename in char* format.
+ */
 char* k_read_all(const char* filename, int* read_num);
 
+/**
+ * @brief Checks whether the filename follows the POSIX standard.
+ *
+ * @param name Filename.
+ *
+ * @return True if valid. False otherwise.
+ */
 bool is_file_name_valid(char* name);
 
+/**
+ * @brief Returns the filename for the given file descriptor number.
+ *
+ * @param fd The file descriptor number.
+ *
+ * @return The file name of the \p fd . NULL is \p fd is invalid.
+ */
 char* k_get_fname_from_fd(int fd);
 
-void k_cp_within_fat(char* source, char* dest);
+/**
+ * @brief Copies the contents from \p source to \p dest. Both \p source and \p
+ * dest must be files within the PENNFAT system.
+ *
+ * \p source must exist. If \p dest does not exist, it will be newly created.
+ *
+ * @param source File name of source. Must be a PennFAT file.
+ * @param dest File name of dest. Must be a PennFAT file.
+ *
+ * @return 1 on success. Negative number on failure.
+ */
+int k_cp_within_fat(char* source, char* dest);
 
-void k_cp_to_host(char* source, char* host_dest);
+/**
+ * @brief Copies the contents from \p source to \p host_dest \p source must be a
+ * file within the PENNFAT system. \p host_dest is a host system file.
+ *
+ * \p source must exist. If \p host_dest does not exist, it will be newly
+ * created.
+ *
+ * @param source File name of source. Must be a PennFAT file.
+ * @param host_dest File name of dest. Must be a host system file.
+ *
+ * @return 1 on success. Negative number on failure.
+ */
+int k_cp_to_host(char* source, char* host_dest);
 
-void k_cp_from_host(char* host_source, char* dest);
+/**
+ * @brief Copies the contents from \p host_source to \p dest. \p dest must be a
+ * file within the PENNFAT system. \p host_source is a host system file.
+ *
+ * \p host_source must exist. If \p dest does not exist, it will be newly
+ * created.
+ *
+ * @param host_source File name of source. Must be a host system file.
+ * @param dest File name of dest. Must be a PennFAT file.
+ *
+ * @return 1 on success. Negative number on failure.
+ */
+int k_cp_from_host(char* host_source, char* dest);
 
 #endif

@@ -248,18 +248,18 @@ char* s_read_all(const char* filename, int* read_num);
 
 char* s_get_fname_from_fd(int fd);
 
-void s_update_timestamp(const char* source);
+int s_update_timestamp(const char* source);
 
 off_t s_does_file_exist2(const char* fname);
 
-void s_rename(const char* source, const char* dest);
+int s_rename(const char* source, const char* dest);
 
-void s_change_mode(const char* change, const char* filename);
+int s_change_mode(const char* change, const char* filename);
 
-void s_cp_within_fat(char* source, char* dest);
+int s_cp_within_fat(char* source, char* dest);
 
-void s_cp_to_host(char* source, char* host_dest);
+int s_cp_to_host(char* source, char* host_dest);
 
-void s_cp_from_host(char* host_source, char* dest);
+int s_cp_from_host(char* host_source, char* dest);
 
 #endif

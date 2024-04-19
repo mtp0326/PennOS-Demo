@@ -648,7 +648,8 @@ ssize_t k_write(int fd, const char* str, int n) {
   struct directory_entries* curr_de = does_file_exist(fname);
 
   if (curr_de == NULL) {
-    perror("error: k_write: the file doesn't exist?\n");
+    perror("error: k_write: the file doesn't exist\n");
+    return -1;
   }
 
   if (curr_de->name[0] == 1 || curr_de->name[1] == 2) {
@@ -1123,25 +1124,26 @@ void k_ls(const char* filename) {
   return;
 }
 
-void k_update_timestamp(const char* source) {
+int k_update_timestamp(const char* source) {
   struct directory_entries* curr_de = does_file_exist(source);
   if (curr_de == NULL) {
     perror("k_update_timestamp error Error: source file not found");
-    return;
+    return -1;
   }
   struct directory_entries* new_de =
       create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
                              curr_de->type, curr_de->perm, time(NULL));
   does_file_exist2(source);
   write(fs_fd, new_de, 64);
+  return 1;
 }
 
-void k_rename(const char* source, const char* dest) {
+int k_rename(const char* source, const char* dest) {
   struct directory_entries* curr_de = does_file_exist(source);
   struct directory_entries* curr_de2 = does_file_exist(dest);
   if (curr_de == NULL) {
     perror("k_rename error Error: source file not found");
-    return;
+    return -1;
   }
   if (curr_de2 != NULL) {
     k_unlink(curr_de2->name);
@@ -1154,13 +1156,14 @@ void k_rename(const char* source, const char* dest) {
       create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
                              curr_de->type, curr_de->perm, time(NULL));
   write(fs_fd, new_de, 64);
+  return 1;
 }
 
-void k_change_mode(const char* change, const char* filename) {
+int k_change_mode(const char* change, const char* filename) {
   struct directory_entries* curr_de = does_file_exist(filename);
   if (curr_de == NULL) {
     perror("k_rename error Error: source file not found");
-    return;
+    return -1;
   }
   does_file_exist2(filename);
   int perm = curr_de->perm;
@@ -1251,7 +1254,7 @@ void k_change_mode(const char* change, const char* filename) {
     }
   } else {
     perror("chmod error invalid command");
-    return;
+    return -1;
   }
 
   curr_de->perm = perm;
@@ -1259,6 +1262,7 @@ void k_change_mode(const char* change, const char* filename) {
       create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
                              curr_de->type, curr_de->perm, time(NULL));
   write(fs_fd, new_de, 64);
+  return 1;
 }
 
 char* k_read_all(const char* filename, int* read_num) {
@@ -1288,12 +1292,12 @@ char* k_get_fname_from_fd(int fd) {
   return global_fd_table[fd].fname;
 }
 
-void k_cp_within_fat(char* source, char* dest) {
+int k_cp_within_fat(char* source, char* dest) {
   // source file must exist
 
   if (does_file_exist2(source) == -1) {
     perror("error: source does not exist");
-    return;
+    return -1;
   }
 
   int dest_fd = k_open(dest, F_WRITE);
@@ -1307,12 +1311,13 @@ void k_cp_within_fat(char* source, char* dest) {
 
   k_close(dest_fd);
   k_close(source_fd);
+  return 1;
 }
 
-void k_cp_to_host(char* source, char* host_dest) {
+int k_cp_to_host(char* source, char* host_dest) {
   if (does_file_exist2(source) == -1) {
     perror("error: source does not exist");
-    return;
+    return -1;
   }
   int source_fd = k_open(source, F_READ);
 
@@ -1324,18 +1329,22 @@ void k_cp_to_host(char* source, char* host_dest) {
 
   if (write(host_fd, contents, read_num) == -1) {
     perror("error: write to host file failed\n");
+    close(host_fd);
+    k_close(source_fd);
+    return -1;
   }
 
   close(host_fd);
   k_close(source_fd);
+  return 1;
 }
 
-void k_cp_from_host(char* host_source, char* dest) {
+int k_cp_from_host(char* host_source, char* dest) {
   int host_fd = open(host_source, O_RDWR, 0777);
 
   if (host_fd == -1) {
     perror("error: host source does not exist or is invalid\n");
-    return;
+    return -1;
   }
 
   char buffer[1];
@@ -1347,4 +1356,5 @@ void k_cp_from_host(char* host_source, char* dest) {
 
   close(host_fd);
   k_close(dest_fd);
+  return 1;
 }

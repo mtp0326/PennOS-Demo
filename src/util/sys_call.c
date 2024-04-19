@@ -539,30 +539,30 @@ char* s_get_fname_from_fd(int fd) {
   return k_get_fname_from_fd(fd);
 }
 
-void s_update_timestamp(const char* source) {
+int s_update_timestamp(const char* source) {
   return k_update_timestamp(source);
 }
 
 off_t s_does_file_exist2(const char* fname) {
   return does_file_exist2(fname);
-}  
+}
 
-void s_rename(const char* source, const char* dest) {
+int s_rename(const char* source, const char* dest) {
   return k_rename(source, dest);
 }
 
-void s_change_mode(const char* change, const char* filename) {
+int s_change_mode(const char* change, const char* filename) {
   return k_change_mode(change, filename);
 }
 
-void s_cp_within_fat(char* source, char* dest) {
+int s_cp_within_fat(char* source, char* dest) {
   return k_cp_within_fat(source, dest);
 }
 
-void s_cp_to_host(char* source, char* host_dest) {
-   return k_cp_to_host(source, host_dest);
+int s_cp_to_host(char* source, char* host_dest) {
+  return k_cp_to_host(source, host_dest);
 }
 
-void s_cp_from_host(char* host_source, char* dest) {
+int s_cp_from_host(char* host_source, char* dest) {
   return k_cp_from_host(host_source, dest);
 }
