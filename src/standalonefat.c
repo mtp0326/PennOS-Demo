@@ -182,10 +182,6 @@ int main(int argc, char* argv[]) {
 
   int i = 0;
   while (global_fd_table[i] != NULL) {
-    if (i > 2) {
-      free(global_fd_table[i]->fname);
-    }
-
     free(global_fd_table[i]);
     i++;
   }
