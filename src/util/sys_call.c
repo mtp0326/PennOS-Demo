@@ -54,8 +54,8 @@ void free_argv(char* argv[]) {
 pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
   pcb_t* child = k_proc_create(current);
   if (child == NULL) {
-      errno = EPCBCREATE;
-      return -1;
+    errno = EPCBCREATE;
+    return -1;
   }
 
   char** child_argv = duplicate_argv(argv);
@@ -65,11 +65,11 @@ pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
     return -1;
   }
 
-  if(!fd_bitmap_set(child->open_fds, fd0)) {
+  if (!fd_bitmap_set(child->open_fds, fd0)) {
     errno = EBITMAP;
   }
 
-  if(!fd_bitmap_set(child->open_fds, fd1)) {
+  if (!fd_bitmap_set(child->open_fds, fd1)) {
     errno = EBITMAP;
   }
 
@@ -123,6 +123,9 @@ pid_t s_spawn_nice(void* (*func)(void*),
     k_proc_cleanup(child);
     return -1;
   }
+
+  child->input_fd = fd0;
+  child->output_fd = fd1;
 
   fd_bitmap_set(child->open_fds, fd0);
   fd_bitmap_set(child->open_fds, fd1);
@@ -501,7 +504,7 @@ int s_open(const char* fname, int mode) {
   if (fd == -1) {
     perror("error: s_open: k_open error");
     return -1;
-  } 
+  }
   fd_bitmap_set(current->open_fds, fd);
   return fd;
 }
@@ -540,4 +543,40 @@ off_t s_lseek(int fd, int offset, int whence) {
 
 void s_ls(const char* filename) {
   k_ls(filename);
+}
+
+char* s_read_all(const char* filename, int* read_num) {
+  return k_read_all(filename, read_num);
+}
+
+char* s_get_fname_from_fd(int fd) {
+  return k_get_fname_from_fd(fd);
+}
+
+int s_update_timestamp(const char* source) {
+  return k_update_timestamp(source);
+}
+
+off_t s_does_file_exist2(const char* fname) {
+  return does_file_exist2(fname);
+}
+
+int s_rename(const char* source, const char* dest) {
+  return k_rename(source, dest);
+}
+
+int s_change_mode(const char* change, const char* filename) {
+  return k_change_mode(change, filename);
+}
+
+int s_cp_within_fat(char* source, char* dest) {
+  return k_cp_within_fat(source, dest);
+}
+
+int s_cp_to_host(char* source, char* host_dest) {
+  return k_cp_to_host(source, host_dest);
+}
+
+int s_cp_from_host(char* host_source, char* dest) {
+  return k_cp_from_host(host_source, dest);
 }
