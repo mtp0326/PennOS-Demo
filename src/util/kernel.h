@@ -87,9 +87,9 @@ typedef struct pcb_t {
   FD_Bitmap* open_fds; /** @brief This stores a bitmap containg all open file
                           descriptors.*/
 
-  int input_fd;
+  int input_fd; /** @brief The input i/o that his process reads data from.*/
 
-  int output_fd;
+  int output_fd; /** @brief The out i/o that his process writes data to*/
 
   bool statechanged; /** @brief This contains a bool that keeps track of whether
                         or not the process state has changed.*/

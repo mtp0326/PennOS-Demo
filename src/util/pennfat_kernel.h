@@ -6,58 +6,209 @@
 #include "../pennfat.h"
 #include "spthread.h"
 
+/**
+ * @brief open the file for reading only
+ */
+
 #define F_READ 0
+
+/**
+ * @brief writing and reading, truncates if the file exists, or creates it if it
+ * does not exist. Only one instance of a file can be opened in F_WRITE mode;
+ * error if attempted to open a file in F_WRITE mode more than once
+ */
 #define F_WRITE 1
+
+/**
+ * @brief open the file for reading and writing but does not truncate the file
+ * if exists; additionally, the file pointer references the end of the file.
+ */
 #define F_APPEND 2
 
+/**
+ * @brief Size of the global_fd_table.
+ */
 #define MAX_FD_NUM 1024
 
+/**
+ * @enum Whence
+ * @brief Defines how the offset will be calculated when using the k_lseek
+ * method. For more detail, refer to lseek(2).
+ */
 enum Whence { F_SEEK_SET, F_SEEK_CUR, F_SEEK_END };
 
+/** @brief PennFAT filesystem that has been mounted to memory using the
+ * mmap(2).*/
 extern uint16_t* fat;
+
+/** @brief Kernel level global file descriptor table that stores all file
+ * descriptor that has been created through out the program's runtime.*/
 extern struct file_descriptor_st* global_fd_table;
+
+/** @brief File descriptor number (host system level) for the filesystem that
+ * has been mounted to the program.*/
 extern int fs_fd;
+
+/** @brief Block size of the currently mounted filesystem that is defined during
+ * the mkfs process.*/
 extern int block_size;
+
+/** @brief FAT region size of the currently mounted filesystem.*/
 extern int fat_size;
+
+/** @brief Calculated value of the total number of FAT entries within the
+ * currently mounted filesystem.*/
 extern int num_fat_entries;
+
+/** @brief Calculated data region size of the currently mounted filesystem*/
 extern int data_size;
 
+/**
+ * @struct directory_entries
+ * @brief This structure stores all required information about the directory
+ * entries that are stored in the root directory.
+ */
 struct directory_entries {
-  char name[32];
-  uint32_t size;
-  uint16_t firstBlock;
-  uint8_t type;
-  uint8_t perm;
-  time_t mtime;
-  uint8_t reserved[16];
+  char name[32]; /** @brief 32-byte null-terminated file name. name[0] also
+serves as a special marker 0: end of directory 1: deleted entry; the file is
+also deleted 2: deleted entry; the file is still being used  */
+
+  uint32_t size; /** @brief 4-byte number of bytes in file*/
+
+  uint16_t firstBlock; /** @brief 2-byte number indicating the first block
+                          number of the file (undefined if size is zero)*/
+
+  uint8_t type; /** @brief 1-byte number for the type of the file, which will be
+one of the following: 0: unknown 1: a regular file 2: a directory file*/
+
+  uint8_t perm; /** @brief file permissions, which will be one of the following:
+0: none 2: write only 4: read only 5: read and executable (shell scripts) 6:
+read and write 7: read, write, and executable*/
+
+  time_t mtime; /** @brief creation/modification time as returned by time(2) in
+                   Linux*/
+
+  uint8_t reserved[16]; /** @brief unused buffer*/
 };
 
+/**
+ * @struct file_descriptor_st
+ * @brief This structure stores all required information about the file
+ * descriptor.
+ */
 struct file_descriptor_st {
-  int fd;
-  char* fname;
-  int mode;
-  int offset;
-  int ref_cnt;
+  int fd; /** @brief File descriptor number. This is also used as the index for
+             the global_fd_table*/
+  char* fname; /** @brief File name.*/
+  int mode; /** @brief Either F_WRITE, F_READ, F_OPEN. Refer to k_open for more
+               details*/
+  int offset;  /** @brief Offset from the start of the file.*/
+  int ref_cnt; /** @brief Number of processes that has this file descriptor
+                  open*/
 };
 
-// helper functions
+/**
+ * @brief Creates a new file_descriptor_st struct, initialized with the values
+ * provided by the parameters. For more information of the parameters, refer to
+ * struct file_descriptor_st
+ *
+ * @param fd File descriptor number.
+ * @param fname Name of the file.
+ * @param mode Either F_WRITE, F_READ, F_APPEND.
+ * @param offset Offset to the start of the file.
+ *
+ * @return A newly created file_descriptor_st struct. NULL on memory allocation
+ * error.
+ */
 struct file_descriptor_st* create_file_descriptor(int fd,
                                                   char* fname,
                                                   int mode,
                                                   int offset);
+
+/**
+ * @brief Creates a new directory_entries struct, initialized with the values
+ * provided by the parameters. For more information of the parameters, refer to
+ * struct directory_entries.
+ *
+ * @param name Name of the file.
+ * @param size Size of the current file.
+ * @param firstBlock First FAT block number.
+ * @param type Type of the file.
+ * @param perm Permission of the file.
+ * @param mtime Last modified time.
+ *
+ * @return A newly created directory_entries struct. NULL on memory allocation
+ * error.
+ */
 struct directory_entries* create_directory_entry(const char* name,
                                                  uint32_t size,
                                                  uint16_t firstBlock,
                                                  uint8_t type,
                                                  uint8_t perm,
                                                  time_t mtime);
+
+/**
+ * @brief lseek the file system's offset to the start of the root directory.
+ *
+ */
 void lseek_to_root_directory();
+
+/**
+ * @brief Extend the fat region of the given file (marked by the \p start_index
+ * ) by one block.
+ *
+ * @param start_index Start fat index for the given file.
+ * @param empty_fat_index The first empty index of the current FAT table. Should
+ * be calculated using get_first_empty_fat_index().
+ *
+ */
 void extend_fat(int start_index, int empty_fat_index);
+
+/**
+ * @brief Finds and returns the first empty fat index marked as 0x0000.
+ *
+ * @return first empty fat index.
+ */
 int get_first_empty_fat_index();
+
+/**
+ * @brief Change the offset to the fs_fd to the first open directory entry.
+ *
+ * @param found
+ */
 void move_to_open_de(bool found);
+
+/**
+ * @brief helper that traverses root directory block by block to check if fname
+ * file exists return: the directory entry struct with name fname (NULL if not
+ * found) also moves fs_fd to the end of the root directory
+ *
+ * @param fname Name of the file that we want to check.
+ */
 struct directory_entries* does_file_exist(const char* fname);
+
+/**
+ * @brief Helper function that given a files name, it outputs the offset to the
+ * directory entry or -1 if the file isn't found
+ *
+ * @param fname Name of the file that we want to check.
+ */
 off_t does_file_exist2(const char* fname);
+
+/**
+ * @brief Returns the number of currently open in the global_fd_table with the
+ * \p name as the fname.
+ *
+ * @param name Name of the file that we want to check.
+ */
 int k_count_fd_num(const char* name);
+
+/**
+ * @brief Return the file descriptor struct for the given file descriptor
+ * number.
+ *
+ * @param fd File descriptor number.
+ */
 struct file_descriptor_st* get_file_descriptor(int fd);
 
 /************************************************
