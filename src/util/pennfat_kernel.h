@@ -30,6 +30,24 @@
  */
 #define MAX_FD_NUM 1024
 
+#define FILE_NOT_FOUND -1
+
+#define INVALID_FILE_NAME -2
+
+#define MULTIPLE_F_WRITE -3
+
+#define WRONG_PERMISSION -4
+
+#define SYSTEM_ERROR -5
+
+#define FILE_DELETED -6
+
+#define INVALID_FILE_DESCRIPTOR -7
+
+#define FILE_IN_USE -8
+
+#define INVALID_PARAMETERS -9
+
 /**
  * @enum Whence
  * @brief Defines how the offset will be calculated when using the k_lseek
@@ -189,7 +207,7 @@ struct directory_entries* does_file_exist(const char* fname);
 
 /**
  * @brief Helper function that given a files name, it outputs the offset to the
- * directory entry or -1 if the file isn't found
+ * directory entry or negative number if the file isn't found
  *
  * @param fname Name of the file that we want to check.
  */
