@@ -50,7 +50,6 @@ pid_t s_spawn_nice(void* (*func)(void*),
                    char* argv[],
                    int fd0,
                    int fd1,
-                   char* cmd_string,
                    bool is_background,
                    unsigned int priority);
 
@@ -124,9 +123,16 @@ int s_spawn_and_wait(void* (*func)(void*),
                      char* argv[],
                      int fd0,
                      int fd1,
-                     char* cmd_string,
                      bool nohang,
                      unsigned int priority);
+
+/**
+ * @brief Checks status of background processes with waitpid(nohang)
+ *
+ * @param proc
+ * @return int
+ */
+int s_bg_wait(pcb_t* proc);
 
 /**
  * @brief Finds a process in any state.

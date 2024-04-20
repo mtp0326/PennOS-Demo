@@ -37,7 +37,7 @@ static void* shell(void* arg) {
       if (strcmp(args[0], "cat") == 0) {
         // TODO: Call your implemented cat() function
       } else if (strcmp(args[0], "sleep") == 0) {
-        s_spawn_and_wait(b_sleep, args, STDIN_FILENO, STDOUT_FILENO, cmd,
+        s_spawn_and_wait(b_sleep, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "busy") == 0) {
         // TODO: Call your implemented busy() function
@@ -58,7 +58,7 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "ps") == 0) {
         b_ps(NULL);
       } else if (strcmp(args[0], "kill") == 0) {
-        s_spawn_and_wait(b_kill, args, STDIN_FILENO, STDOUT_FILENO, cmd,
+        s_spawn_and_wait(b_kill, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "zombify") == 0) {
         // TODO: Call your implemented zombify() function
@@ -136,7 +136,7 @@ void scheduler(char* logfile) {
   arg[1] = NULL;             // Terminate the array
 
   // spawn in the shell process at priority 0
-  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, "shell", false, 0);
+  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, false, 0);
 
   // main loop
   while (!done) {
@@ -146,6 +146,7 @@ void scheduler(char* logfile) {
 
     // iterates over all blocked processes
     for (unsigned int i = 0; i < blocked->size; i++) {
+      // fprintf(stdout, "num blocked: %d\n", blocked->size);
       pcb_t* block = blocked->head->process;
       // checks if process is executing s_sleep, and decrements ticks to wait
       if (block->ticks_to_wait > 0) {
@@ -159,7 +160,11 @@ void scheduler(char* logfile) {
         }
 
         block->ticks_to_wait--;
-        blocked->head = blocked->head->next;
+        // fprintf(stdout, "num blocked: %d\n", blocked->size);
+        /// TODO: segfault here, need to borrow mutex
+        if (blocked->head != NULL) {
+          blocked->head = blocked->head->next;
+        }
         continue;
       }
       pcb_t* child_pcb;
@@ -196,8 +201,6 @@ void scheduler(char* logfile) {
         blocked->head = NULL;
       }
     }
-
-    // iterates over all background processes that have a timer
 
     bool noRunningProcesses = true;
     // Check if all queues are empty or all processes are blocked.

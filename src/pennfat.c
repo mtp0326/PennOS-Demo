@@ -288,7 +288,7 @@ void cat_file_wa(char** args) {
       char buffer[1000];
       buffer[999] = '\0';
       k_read(fd, 1000, buffer);
-      fprintf(stdout, "%s\n", buffer);
+      // fprintf(stdout, "%s\n", buffer);
       i += 1;
     }
   } else {

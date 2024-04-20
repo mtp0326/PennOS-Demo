@@ -12,26 +12,23 @@ void* b_background_poll(void* arg) {
   }
 
   Node* node = bg_list->head;
-  int status = 0;
   do {
     pcb_t* proc = node->process;
-    s_waitpid(proc->pid, &status, true);
+    s_bg_wait(proc);
+    // if (P_WIFSIGNALED(status)) {
+    //   fprintf(stdout, "[%ld]\t %4u SIGNALED\t%s\n", proc->job_num, proc->pid,
+    //           proc->processname);
+    //   // remove_process(bg_list, proc->pid);
+    //   /// might have to change processor manually
+    //   /// do we know with waitpid the processors changed???
+    // } else if (P_WIFSTOPPED(status)) {
+    //   fprintf(stdout, "[%ld]\t %4u STOPPED\t%s\n", proc->job_num, proc->pid,
+    //           proc->processname);
+    //   // remove_process(bg_list, proc->pid);
+    // } else if (P_WIFEXITED(status)) {
 
-    if (P_WIFSIGNALED(status)) {
-      fprintf(stdout, "[%ld]\t %4u SIGNALED\t%s\n", proc->job_num, proc->pid,
-              proc->cmd_name);
-      // remove_process(bg_list, proc->pid);
-      /// might have to change processor manually
-      /// do we know with waitpid the processors changed???
-    } else if (P_WIFSTOPPED(status)) {
-      fprintf(stdout, "[%ld]\t %4u STOPPED\t%s\n", proc->job_num, proc->pid,
-              proc->cmd_name);
-      // remove_process(bg_list, proc->pid);
-    } else if (P_WIFEXITED(status)) {
-      fprintf(stdout, "[%ld]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
-              proc->cmd_name);
-      // remove_process(bg_list, proc->pid);
-    }
+    // remove_process(bg_list, proc->pid);
+    // }
     node = node->next;
   } while (node != bg_list->head);
 
@@ -88,7 +85,7 @@ void* b_nice(void* arg) {
   char** args = parsed->commands[0];
   void* (*func)(void*) = s_function_from_string(args[2]);
   unsigned priority = atoi(args[1]);  // USE STROL AND ERRNO
-  s_spawn_and_wait(func, &args[2], STDIN_FILENO, STDOUT_FILENO, arg,
+  s_spawn_and_wait(func, &args[2], STDIN_FILENO, STDOUT_FILENO,
                    parsed->is_background, priority);
   return NULL;
 }
@@ -103,7 +100,7 @@ void* b_nice_pid(void* arg) {
 void* b_ps(void* arg) {
   // displaying PID, PPID, priority, status, and command name.
   /// not sure if order has to change
-  fprintf(stdout, "  PID\tPPID\tPRIORITY    STATUS\tCMD_NAME\n");
+  fprintf(stdout, "  PID\t PPID\t  PRI\tSTAT\tCMD\n");
 
   for (int i = 0; i < 3; i++) {
     s_print_process(processes[i]);
@@ -134,7 +131,7 @@ void* b_fg(void* arg) {
 
     if (proc != NULL) {
       fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
-              proc->cmd_name);
+              proc->processname);
       if (s_kill(proc->pid, SIGCONT) < 0) {
         // error
         fprintf(stdout, "SIGCONT failed to send\n");
@@ -153,7 +150,7 @@ void* b_fg(void* arg) {
 
     if (proc != NULL) {
       fprintf(stdout, "[%ld]\t %4u RUNNING\t%s\n", proc->job_num, proc->pid,
-              proc->cmd_name);
+              proc->processname);
 
       /// TODO: immediate send to tcprescp
 
@@ -171,7 +168,7 @@ void* b_fg(void* arg) {
   if (stopped != NULL && stopped->tail != NULL) {
     proc = stopped->tail->process;
     fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
-            proc->cmd_name);
+            proc->processname);
     if (s_kill(proc->pid, SIGCONT) < 0) {
       // error
       fprintf(stdout, "SIGCONT failed to send\n");
@@ -189,7 +186,7 @@ void* b_fg(void* arg) {
   if (bg_list != NULL && bg_list->tail != NULL) {
     proc = bg_list->tail->process;
     fprintf(stdout, "[%ld]\t %4u RUNNING\t%s\n", proc->job_num, proc->pid,
-            proc->cmd_name);
+            proc->processname);
 
     /// TODO: immediate send to tcprescp
 
@@ -225,7 +222,7 @@ void* b_bg(void* arg) {
 
       add_process(bg_list, proc);
       fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
-              proc->cmd_name);
+              proc->processname);
 
       // proc->state = RUNNING;
       // /// proc->statechanged = true;
@@ -250,7 +247,7 @@ void* b_bg(void* arg) {
 
     add_process(bg_list, proc);
     fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
-            proc->cmd_name);
+            proc->processname);
 
     // proc->state = RUNNING;
     // /// proc->statechanged = true;

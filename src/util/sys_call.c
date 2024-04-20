@@ -99,7 +99,6 @@ pid_t s_spawn_nice(void* (*func)(void*),
                    char* argv[],
                    int fd0,
                    int fd1,
-                   char* cmd_string,
                    bool is_background,
                    unsigned int priority) {
   pcb_t* child = k_proc_create(current);
@@ -128,16 +127,11 @@ pid_t s_spawn_nice(void* (*func)(void*),
   }
   arg->argv = child_argv;
   child->priority = (priority == -1 ? 1 : priority);
-  child->cmd_name = cmd_string;
-
-  if (is_background) {
-    child->job_num = job_id;
-    job_id++;
-    add_process(bg_list, child);
-  }
 
   add_process(processes[(priority == -1 ? 1 : priority)], child);
+  fprintf(stdout, "\n1---------\n");
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
+    fprintf(stdout, "2---------\n");
     k_proc_cleanup(child);
     free_argv(child_argv);
     free(arg);
@@ -168,6 +162,7 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
   }
 
   // if nohang, return immediately
+  ////need more commands??
   if (nohang) {
     if (child_pcb->state == ZOMBIED) {
       *wstatus = 0;
@@ -301,6 +296,7 @@ void s_sleep(unsigned int ticks) {
   remove_process(processes[current->priority], current->pid);
   add_process(blocked, current);
   spthread_suspend_self();
+  fprintf(stdout, "s_sleep terminated\n");
   s_exit();
   return;
 }
@@ -309,38 +305,68 @@ int s_spawn_and_wait(void* (*func)(void*),
                      char* argv[],
                      int fd0,
                      int fd1,
-                     char* cmd_string,
                      bool nohang,
                      unsigned int priority) {
-  pid_t child =
-      s_spawn_nice(func, argv, fd0, fd1, cmd_string, nohang, priority);
+  pid_t child = s_spawn_nice(func, argv, fd0, fd1, nohang, priority);
   int wstatus = 0;
   s_waitpid(child, &wstatus, nohang);
+  if (nohang) {
+    pcb_t* child_proc = s_find_process(child);
+    child_proc->job_num = job_id;
+    job_id++;
+    add_process(bg_list, child_proc);
+  }
   if (!nohang) {
     pcb_t* child_pcb = s_find_process(child);
     s_remove_process(child);
     k_proc_cleanup(child_pcb);
-    return 0;
-  } else {
-    return 0;
   }
+  return 0;
+}
+
+int s_bg_wait(pcb_t* proc) {
+  int status = 0;
+  pid_t wpid = s_waitpid(proc->pid, &status, true);
+  if (wpid != -1) {
+    fprintf(stdout, "[%ld]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
+            proc->processname);
+    s_remove_process(proc->pid);
+    remove_process(bg_list, proc->pid);
+    k_proc_cleanup(proc);
+  }
+
+  return 0;
 }
 
 pcb_t* s_find_process(pid_t pid) {
   pcb_t* ret = NULL;
-  find_process(zombied, pid);
-  find_process(blocked, pid);
-  find_process(stopped, pid);
-  find_process(processes[0], pid);
-  find_process(processes[1], pid);
-  find_process(processes[2], pid);
 
-  if (ret == NULL) {
-    // SET ERRNO
-    return NULL;
-  } else {
+  ret = find_process(zombied, pid);
+  if (ret != NULL) {
     return ret;
   }
+  ret = find_process(blocked, pid);
+  if (ret != NULL) {
+    return ret;
+  }
+  ret = find_process(stopped, pid);
+  if (ret != NULL) {
+    return ret;
+  }
+  ret = find_process(processes[0], pid);
+  if (ret != NULL) {
+    return ret;
+  }
+  ret = find_process(processes[1], pid);
+  if (ret != NULL) {
+    return ret;
+  }
+  ret = find_process(processes[2], pid);
+
+  if (ret != NULL) {
+    return ret;
+  }
+  return NULL;
 }
 
 int s_remove_process(pid_t pid) {
@@ -504,8 +530,24 @@ int s_print_process(CircularList* list) {
 
   do {
     proc = current_node->process;
-    fprintf(stdout, "%4u\t%4u\t%4u\t\t%d\t%s\n", proc->pid, proc->ppid,
-            proc->priority, proc->state, proc->cmd_name);
+    switch (proc->state) {
+      case RUNNING:
+        fprintf(stdout, "%4u\t%4u\t%4u\t R\t%s\n", proc->pid, proc->ppid,
+                proc->priority, proc->processname);
+        break;
+      case BLOCKED:
+        fprintf(stdout, "%4u\t%4u\t%4u\t B\t%s\n", proc->pid, proc->ppid,
+                proc->priority, proc->processname);
+        break;
+      case STOPPED:
+        fprintf(stdout, "%4u\t%4u\t%4u\t S\t%s\n", proc->pid, proc->ppid,
+                proc->priority, proc->processname);
+        break;
+      case ZOMBIED:
+        fprintf(stdout, "%4u\t%4u\t%4u\t Z\t%s\n", proc->pid, proc->ppid,
+                proc->priority, proc->processname);
+        break;
+    }
     current_node = current_node->next;
   } while (current_node != list->head);
 
@@ -522,7 +564,7 @@ int s_print_jobs(CircularList* list) {
   do {
     proc = current_node->process;
     fprintf(stdout, "[%ld]  %d  %s\n", proc->job_num, proc->state,
-            proc->cmd_name);
+            proc->processname);
     current_node = current_node->next;
   } while (current_node != list->head);
 
