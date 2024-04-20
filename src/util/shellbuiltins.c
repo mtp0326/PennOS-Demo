@@ -107,8 +107,10 @@ void* b_zombify(void* arg) {
 }
 
 void* b_logout(void* arg) {
-   
-   done = true; 
+    pthread_mutex_lock(&done_lock);
+    done = true;
+    pthread_mutex_unlock(&done_lock);
+    s_exit();
     return NULL;
 }
 

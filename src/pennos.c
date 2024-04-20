@@ -8,7 +8,6 @@
 #include "util/kernel.h"
 #include "util/prioritylist.h"
 
-static pthread_mutex_t done_lock;
 
 static const int centisecond = 10000;  // 10 milliseconds
 
@@ -31,7 +30,6 @@ static void* shell(void* arg) {
       }
 
       char** args = parsed->commands[0];
-      // Unfortunate canonical way to switch based on string in C.
       // Shell built-ins that are implemented using user or system calls only.
       if (strcmp(args[0], "cat") == 0) {
         // this is when files arg was NOT provided
@@ -97,11 +95,9 @@ static void* shell(void* arg) {
         }
 
       } else if (strcmp(args[0], "ls") == 0) {
-        // TODO: Call your implemented ls() function
         s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "touch") == 0) {
-        // TODO: Call your implemented touch() function
         s_spawn_and_wait(b_touch, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "mv") == 0) {
@@ -139,6 +135,7 @@ static void* shell(void* arg) {
         // TODO: Call your implemented jobs() function
       } else if (strcmp(args[0], "logout") == 0) {
         b_logout(NULL);
+        break;
       } else if (strcmp(args[0], "clear") == 0) {
           b_clear(NULL);
       } else {
@@ -153,7 +150,18 @@ static void* shell(void* arg) {
   return EXIT_SUCCESS;
 }
 
-static void alarm_handler(int signum) {}
+
+
+static void alarm_handler(int signum) {
+  if (signum == SIGINT) {
+      char* newline = "\n";
+      s_write(STDOUT_FILENO, newline, strlen(newline));
+      s_exit();
+  } else if (signum == SIGTSTP) {
+      fprintf(stderr, "AHH");
+      s_kill(current->pid, P_SIGSTOP);
+  }
+}
 
 void scheduler(char* logfile) {
   sigset_t suspend_set;
@@ -171,6 +179,12 @@ void scheduler(char* logfile) {
       .sa_flags = SA_RESTART,
   };
   sigaction(SIGALRM, &act, NULL);
+  sigaction(SIGINT, &act, NULL);
+  sigaction(SIGTSTP, &act, NULL);
+
+
+
+
 
   // make sure SIGALRM is unblocked
   sigset_t alarm_set;
@@ -301,6 +315,7 @@ void scheduler(char* logfile) {
   }
   close(file);
   pthread_mutex_unlock(&done_lock);
+  return;
 }
 
 void cancel_and_join(spthread_t thread) {
@@ -370,13 +385,7 @@ int main(int argc, char** argv) {
   add_priority(priority, 0);
 
   scheduler(log);
-
-  // cleanup
-  while (processes[0]->size != 0) {
-    cancel_and_join(processes[0]->head->process->handle);
-    remove_process(processes[0], processes[0]->head->process->pid);
-  }
-
+    fprintf(stderr, "AHH");
   pthread_mutex_destroy(&done_lock);
 
   return EXIT_SUCCESS;
