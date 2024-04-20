@@ -5,6 +5,7 @@
 #include "errno.h"
 #include "pennos.h"
 #include "sys_call.h"
+#include "unistd.h"
 
 void* b_background_poll(void* arg) {
   if (bg_list == NULL || bg_list->head == NULL) {
@@ -79,6 +80,7 @@ void* b_kill(void* arg) {
   return NULL;
 }
 
+<<<<<<< HEAD
 void* b_nice(void* arg) {
   struct parsed_command* parsed = NULL;
   parse_command(arg, &parsed);
@@ -256,10 +258,194 @@ void* b_bg(void* arg) {
     return NULL;
   }
   /// error: there are no stopped jobs
+=======
+void* b_man(void* arg) {
+  char* output =
+      "cat\nsleep\nbusy\necho\nls\ntouch\nmv\ncp\nrm\nchmod\nps\nkill\nzombify"
+      "\norphanify\nnice\nnice_pid\nman\nbg\nfg\njobs\nlogout\n";
+  ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
+  if (result == -1) {
+    u_perror("Failed to write to STDOUT");
+  }
+  s_exit();
+>>>>>>> main
+  return NULL;
+}
+
+void* b_nice(void* arg) {
+  struct parsed_command* parsed = NULL;
+  parse_command(arg, &parsed);
+  char** args = parsed->commands[0];
+  void* (*func)(void*) = s_function_from_string(args[2]);
+  unsigned priority = atoi(args[1]);  // USE STROL AND ERRNO
+  s_spawn_and_wait(func, &args[2], STDIN_FILENO, STDOUT_FILENO,
+                   parsed->is_background, priority);
+  return NULL;
+}
+
+void* b_nice_pid(void* arg) {
+  char** argv = (char**)arg;
+  s_nice(atoi(argv[2]), atoi(argv[1]));
+
+  return NULL;
+}
+
+void* b_orphan_child(void* arg) {
+  // Please sir,
+  // I want some more
+  while (1)
+    ;
+  return NULL;
+}
+
+void* b_orphanify(void* arg) {
+  s_spawn(b_orphan_child, arg, STDIN_FILENO, STDOUT_FILENO);
+  return NULL;
+}
+
+void* b_zombie_child(void* arg) {
+  // MMMMM Brains...!
+  return NULL;
+}
+
+void* b_zombify(void* arg) {
+  s_spawn(b_zombie_child, arg, STDIN_FILENO, STDOUT_FILENO);
+  while (1)
+    ;
   return NULL;
 }
 
 void* b_logout(void* arg) {
-  done = true;
+    pthread_mutex_lock(&done_lock);
+    done = true;
+    pthread_mutex_unlock(&done_lock);
+    s_exit();
+    return NULL;
+}
+
+void* b_clear(void* arg) {
+    char* clear = "\033c";
+    s_write(STDOUT_FILENO, clear, strlen(clear));
+
+    return NULL;
+}
+
+
+// FAT LEVEL SHELL FUNCTIONS
+
+void* b_ls(void* arg) {
+  s_ls(NULL);
+  s_exit();
+  return NULL;
+}
+
+void* b_echo(void* arg) {
+  char** argv = (char**)arg;
+
+  int i = 1;
+  while (argv[i] != NULL) {
+    s_write(current->output_fd, argv[i], strlen(argv[i]));
+    s_write(current->output_fd, " ", 1);
+    i++;
+  }
+
+  s_exit();
+  return NULL;
+}
+
+void* b_cat(void* arg) {
+  char** argv = (char**)arg;
+  // int read_num;
+
+  // files arg is not provided
+  if (argv[1] == NULL) {
+    if ((current->input_fd) == STDIN_FILENO) {
+      char contents[4096];
+      s_read(STDIN_FILENO, 4096, contents);
+      s_write(current->output_fd, contents, strlen(contents));
+    } else {
+      int read_num;
+      char* fname = s_get_fname_from_fd(current->input_fd);
+      char* contents = s_read_all(fname, &read_num);
+      s_write(current->output_fd, contents, strlen(contents));
+    }
+  } else {
+    // we always ignore the input_fd here
+
+    int i = 1;
+    while (argv[i] != NULL) {
+      int read_num;
+      char* contents = s_read_all(argv[i], &read_num);
+      if (contents == NULL) {
+        perror("No such file or directory\n");
+        i++;
+        continue;
+      }
+      s_write(current->output_fd, contents, strlen(contents));
+      i++;
+    }
+  }
+
+  s_exit();
+  return NULL;
+}
+
+void* b_touch(void* arg) {
+  char** args = (char**)arg;
+  int i = 1;
+  while (args[i] != NULL) {
+    if (s_does_file_exist2(args[i]) != -1) {
+      s_update_timestamp(args[i]);
+    } else {
+      int fd = s_open(args[i], F_WRITE);
+      s_close(fd);
+    }
+    i += 1;
+  }
+
+  s_exit();
+  return NULL;
+}
+
+void* b_mv(void* arg) {
+  char** args = (char**)arg;
+  s_rename(args[1], args[2]);
+  s_exit();
+  return NULL;
+}
+
+void* b_rm(void* arg) {
+  char** args = (char**)arg;
+  int i = 1;
+  while (args[i] != NULL) {
+    s_unlink(args[i]);
+    i += 1;
+  }
+  s_exit();
+  return NULL;
+}
+
+void* b_chmod(void* arg) {
+  char** args = (char**)arg;
+  s_change_mode(args[1], args[2]);
+  s_exit();
+  return NULL;
+}
+
+void* b_cp(void* arg) {
+  char** args = (char**)arg;
+  if (strcmp(args[1], "-h") == 0) {
+    // cp -h SOURCE DEST
+    s_cp_from_host(args[2], args[3]);
+  } else {
+    if (strcmp(args[2], "-h") == 0) {
+      // cp SOURCE -h DEST
+      s_cp_to_host(args[1], args[3]);
+    } else {
+      // cp SOURCE DEST
+      s_cp_within_fat(args[1], args[2]);
+    }
+  }
+  s_exit();
   return NULL;
 }

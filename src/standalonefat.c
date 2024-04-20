@@ -1,3 +1,4 @@
+#include <errno.h>
 #include "pennfat.h"
 
 int main(int argc, char* argv[]) {
@@ -10,9 +11,12 @@ int main(int argc, char* argv[]) {
   // create fd_table
   initialize_global_fd_table();
   while (1) {
-    prompt();
+    prompt(false);
     char* cmd;
-    read_command(&cmd);
+    int read_flag = read_command(&cmd);
+    if (read_flag < 0) {
+      break;
+    }
     if (cmd[0] != '\n') {
       // for strtol
       char* ptr;
@@ -37,6 +41,7 @@ int main(int argc, char* argv[]) {
         } else {
           mv(args);
         }
+
       } else if (strcmp(args[0], "rm") == 0) {
         if (!mounted) {
           perror("error: needs to mount fs");
@@ -55,6 +60,7 @@ int main(int argc, char* argv[]) {
             cat_file_wa(args);
           }
         }
+
       } else if (strcmp(args[0], "cp") == 0) {
         if (!mounted) {
           perror("error: needs to mount fs");
@@ -72,6 +78,7 @@ int main(int argc, char* argv[]) {
             }
           }
         }
+
       } else if (strcmp(args[0], "chmod") == 0) {
         if (!mounted) {
           perror("error: needs to mount fs");
@@ -84,31 +91,67 @@ int main(int argc, char* argv[]) {
         } else {
           ls();
         }
-
       }
 
       // other test stuff
 
       else if (strcmp(args[0], "mkfs") == 0) {
+        if (args[1] == NULL || args[2] == NULL || args[3] == NULL) {
+          perror("error: invalid arguments for mkfs");
+          continue;
+        }
+        errno = 0;
         int blocks_in_fat = strtol(args[2], &ptr, base);
+        if (errno == ERANGE) {
+          perror("error: invalid arguments for number of blocks in fat");
+          continue;
+        }
+        errno = 0;
+        if (blocks_in_fat < 1 || blocks_in_fat > 32) {
+          perror("error: number of blocks in fat must be between 1~32");
+          continue;
+        }
         int block_size_config = strtol(args[3], &ptr, base);
+        if (errno == ERANGE) {
+          perror(
+              "error: invalid arguments for number of block size "
+              "configuration");
+          continue;
+        }
         mkfs(args[1], blocks_in_fat, block_size_config);
         // fprintf(stderr, "block size: %d\n", block_size);
+        // fprintf(stderr, "block size: %d\n", block_size);
       } else if (strcmp(args[0], "mount") == 0) {
-        if (mount(args[1]) != 0) {
-          perror("mount error");
-        } else {
-          mounted = true;
+        if (args[1] == NULL) {
+          perror("error(mount): mount requires an argument");
+          continue;
         }
+        if (mounted) {
+          perror("error(mount): another filesystem already mounted");
+          continue;
+        } else {
+          if (mount(args[1]) != 0) {
+            perror("error(mount): system error");
+          } else {
+            mounted = true;
+          }
+        }
+
         // fprintf(stderr, "fd table: %s\n", global_fd_table[3].fname);
         // fprintf(stderr, "mode: %d\n", global_fd_table[3].mode);
       } else if (strcmp(args[0], "unmount") == 0) {
+        if (!mounted) {
+          perror("error(unmount): no file system mounted");
+          continue;
+        }
         if (unmount() != 0) {
-          perror("unmount error");
+          perror("error(unmount): system error");
         } else {
           mounted = false;
         }
-      } else if (strcmp(args[0], "write") == 0) {
+      }
+
+      else if (strcmp(args[0], "write") == 0) {
         int fd = strtol(args[1], &ptr, base);
         k_write(fd, args[2], strlen(args[2]));
       } else if (strcmp(args[0], "open") == 0) {
@@ -127,12 +170,23 @@ int main(int argc, char* argv[]) {
         int offset = strtol(args[2], &ptr, base);
         int whence = strtol(args[3], &ptr, base);
         k_lseek(fd, offset, whence);
-      } else {
+      }
+
+      else {
         fprintf(stderr, "pennfat: command not found: %s\n", args[0]);
       }
       free(parsed);
     }
     free(cmd);
   }
+
+  int i = 0;
+  while (global_fd_table[i] != NULL) {
+    free(global_fd_table[i]);
+    i++;
+  }
+
+  free(global_fd_table);
+  unmount();
   return EXIT_SUCCESS;
 }

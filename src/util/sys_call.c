@@ -54,17 +54,24 @@ void free_argv(char* argv[]) {
 pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
   pcb_t* child = k_proc_create(current);
   if (child == NULL) {
+    errno = EPCBCREATE;
     return -1;
   }
 
   char** child_argv = duplicate_argv(argv);
   if (child_argv == NULL) {
     k_proc_cleanup(child);
+    errno = ENOARGS;
     return -1;
   }
 
-  fd_bitmap_set(child->open_fds, fd0);
-  fd_bitmap_set(child->open_fds, fd1);
+  if (!fd_bitmap_set(child->open_fds, fd0)) {
+    errno = EBITMAP;
+  }
+
+  if (!fd_bitmap_set(child->open_fds, fd1)) {
+    errno = EBITMAP;
+  }
 
   struct child_process_arg {
     char** argv;
@@ -74,15 +81,21 @@ pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
   if (arg == NULL) {
     k_proc_cleanup(child);
     free(child_argv);
+    errno = ENOARGS;
     return -1;
   }
   arg->argv = child_argv;
 
-  add_process(processes[1], child);  // 1 is default priority
+  if (add_process(processes[1], child) == -1) {
+    errno = EADDPROC;
+    return -1;
+  }
+
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
     k_proc_cleanup(child);
     free_argv(child_argv);
     free(arg);
+    errno = ETHREADCREATE;
     return -1;
   }
 
@@ -112,6 +125,9 @@ pid_t s_spawn_nice(void* (*func)(void*),
     return -1;
   }
 
+  child->input_fd = fd0;
+  child->output_fd = fd1;
+
   fd_bitmap_set(child->open_fds, fd0);
   fd_bitmap_set(child->open_fds, fd1);
 
@@ -129,7 +145,10 @@ pid_t s_spawn_nice(void* (*func)(void*),
   child->priority = (priority == -1 ? 1 : priority);
 
   add_process(processes[(priority == -1 ? 1 : priority)], child);
+<<<<<<< HEAD
   fprintf(stdout, "\n1---------\n");
+=======
+>>>>>>> main
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
     fprintf(stdout, "2---------\n");
     k_proc_cleanup(child);
@@ -230,8 +249,11 @@ int s_kill(pid_t pid, int signal) {
       s_move_process(stopped, pid);
       process->state = STOPPED;
       process->statechanged = true;
+<<<<<<< HEAD
       process->job_num = job_id;
       job_id++;
+=======
+>>>>>>> main
       s_write_log(STOP, process, -1);
       break;
     case P_SIGCONT:
@@ -285,9 +307,10 @@ int s_nice(pid_t pid, int priority) {
   return 0;
 }
 
-void s_sleep(unsigned int ticks) {
+int s_sleep(unsigned int ticks) {
   if (ticks <= 0) {
-    return;
+    errno = EINVARG;
+    return -1;
   }
 
   current->ticks_to_wait = ticks;
@@ -296,9 +319,14 @@ void s_sleep(unsigned int ticks) {
   remove_process(processes[current->priority], current->pid);
   add_process(blocked, current);
   spthread_suspend_self();
+<<<<<<< HEAD
   fprintf(stdout, "s_sleep terminated\n");
   s_exit();
   return;
+=======
+  s_exit();
+  return 0;
+>>>>>>> main
 }
 
 int s_spawn_and_wait(void* (*func)(void*),
@@ -307,6 +335,7 @@ int s_spawn_and_wait(void* (*func)(void*),
                      int fd1,
                      bool nohang,
                      unsigned int priority) {
+<<<<<<< HEAD
   pid_t child = s_spawn_nice(func, argv, fd0, fd1, nohang, priority);
   int wstatus = 0;
   s_waitpid(child, &wstatus, nohang);
@@ -316,10 +345,16 @@ int s_spawn_and_wait(void* (*func)(void*),
     job_id++;
     add_process(bg_list, child_proc);
   }
+=======
+  pid_t child = s_spawn_nice(func, argv, fd0, fd1, priority);
+  int wstatus = 0;
+  s_waitpid(child, &wstatus, nohang);
+>>>>>>> main
   if (!nohang) {
     pcb_t* child_pcb = s_find_process(child);
     s_remove_process(child);
     k_proc_cleanup(child_pcb);
+<<<<<<< HEAD
   }
   return 0;
 }
@@ -336,10 +371,17 @@ int s_bg_wait(pcb_t* proc) {
   }
 
   return 0;
+=======
+    return 0;
+  } else {
+    return 0;
+  }
+>>>>>>> main
 }
 
 pcb_t* s_find_process(pid_t pid) {
   pcb_t* ret = NULL;
+<<<<<<< HEAD
 
   ret = find_process(zombied, pid);
   if (ret != NULL) {
@@ -367,6 +409,21 @@ pcb_t* s_find_process(pid_t pid) {
     return ret;
   }
   return NULL;
+=======
+  find_process(zombied, pid);
+  find_process(blocked, pid);
+  find_process(stopped, pid);
+  find_process(processes[0], pid);
+  find_process(processes[1], pid);
+  find_process(processes[2], pid);
+
+  if (ret == NULL) {
+    // SET ERRNO
+    return NULL;
+  } else {
+    return ret;
+  }
+>>>>>>> main
 }
 
 int s_remove_process(pid_t pid) {
@@ -417,7 +474,11 @@ void* s_function_from_string(char* program) {
   } else if (strcmp(program, "chmod") == 0) {
     return NULL;
   } else if (strcmp(program, "ps") == 0) {
+<<<<<<< HEAD
     return b_ps;
+=======
+    return NULL;
+>>>>>>> main
   } else if (strcmp(program, "kill") == 0) {
     return b_kill;
   } else if (strcmp(program, "zombify") == 0) {
@@ -520,6 +581,7 @@ int s_move_process(CircularList* destination, pid_t pid) {
   return 0;
 }
 
+<<<<<<< HEAD
 int s_print_process(CircularList* list) {
   if (list == NULL || list->head == NULL) {
     return -1;
@@ -569,4 +631,87 @@ int s_print_jobs(CircularList* list) {
   } while (current_node != list->head);
 
   return 0;
+=======
+int s_open(const char* fname, int mode) {
+  int fd = k_open(fname, mode);
+
+  if (fd == -1) {
+    perror("error: s_open: k_open error");
+    return -1;
+  }
+  fd_bitmap_set(current->open_fds, fd);
+  return fd;
+}
+
+ssize_t s_read(int fd, int n, char* buf) {
+  ssize_t ret = k_read(fd, n, buf);
+  if (ret == -1) {
+    perror("error: s_read: k_read error");
+    return -1;
+  }
+  return ret;
+}
+
+ssize_t s_write(int fd, const char* str, int n) {
+  ssize_t ret = k_write(fd, str, n);
+  if (ret == -1) {
+    perror("error: s_write: k_write error");
+    return -1;
+  }
+  return ret;
+}
+
+int s_close(int fd) {
+  k_close(fd);
+  fd_bitmap_clear(current->open_fds, fd);
+  return 0;
+}
+
+int s_unlink(const char* fname) {
+  return k_unlink(fname);
+}
+
+off_t s_lseek(int fd, int offset, int whence) {
+  return k_lseek(fd, offset, whence);
+}
+
+void s_ls(const char* filename) {
+  k_ls(filename);
+}
+
+char* s_read_all(const char* filename, int* read_num) {
+  return k_read_all(filename, read_num);
+}
+
+char* s_get_fname_from_fd(int fd) {
+  return k_get_fname_from_fd(fd);
+}
+
+int s_update_timestamp(const char* source) {
+  return k_update_timestamp(source);
+}
+
+off_t s_does_file_exist2(const char* fname) {
+  return does_file_exist2(fname);
+}
+
+int s_rename(const char* source, const char* dest) {
+  return k_rename(source, dest);
+}
+
+int s_change_mode(const char* change, const char* filename) {
+  return k_change_mode(change, filename);
+}
+
+int s_cp_within_fat(char* source, char* dest) {
+  return k_cp_within_fat(source, dest);
+}
+
+int s_cp_to_host(char* source, char* host_dest) {
+  return k_cp_to_host(source, host_dest);
+}
+
+int s_cp_from_host(char* host_source, char* dest) {
+  return k_cp_from_host(host_source, dest);
+>>>>>>> main
 }

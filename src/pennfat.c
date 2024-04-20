@@ -1,36 +1,50 @@
 #include "pennfat.h"
 #include <unistd.h>
 
-void prompt() {
+void prompt(bool isShell) {
   // display the prompt to the user
-  ssize_t prompt_res = write(STDERR_FILENO, PROMPT, strlen(PROMPT));
-  // error catching for write
+  if (isShell) {
+    ssize_t prompt_res =
+        k_write(STDERR_FILENO, PROMPT_SHELL, strlen(PROMPT_SHELL));
+    // error catching for write
 
-  if (prompt_res < 0) {
-    perror("error: prompting");
-    exit(EXIT_FAILURE);
+    if (prompt_res < 0) {
+      perror("error: prompting");
+      exit(EXIT_FAILURE);
+    }
+  } else {
+    ssize_t prompt_res =
+        k_write(STDERR_FILENO, PROMPT_PENN_FAT, strlen(PROMPT_PENN_FAT));
+    // error catching for write
+
+    if (prompt_res < 0) {
+      perror("error: prompting");
+      exit(EXIT_FAILURE);
+    }
   }
 }
 
-void read_command(char** cmds) {
+int read_command(char** cmds) {
   char* cmd_temp;
   cmd_temp = calloc(MAX_LEN, sizeof(char));
   if (cmd_temp == NULL) {
     free(cmd_temp);
-    exit(EXIT_FAILURE);
+    return -1;
   }
   // read in the user input
-  ssize_t read_res = read(STDIN_FILENO, cmd_temp, MAX_LEN);
+  ssize_t read_res = k_read(STDIN_FILENO, MAX_LEN, cmd_temp);
+  cmd_temp[read_res] = '\0';
   // error catching for read
   if (read_res < 0) {
     perror("error: reading input");
-    exit(EXIT_FAILURE);
+    return -1;
   }
   if (read_res == 0) {  // EOF (CTRL-D)
     free(cmd_temp);
-    exit(EXIT_SUCCESS);
+    return -1;
   }
   *cmds = cmd_temp;
+  return 1;
 }
 
 void int_handler(int signo) {
@@ -42,34 +56,34 @@ void int_handler(int signo) {
       exit(EXIT_FAILURE);
     }
   }
-  prompt();
+  prompt(true);
 }
 
 void initialize_global_fd_table() {
   // create an array of file_descriptor_st
-  global_fd_table = malloc(sizeof(struct file_descriptor_st) * MAX_FD_NUM);
+  global_fd_table = calloc(1, sizeof(struct file_descriptor_st*) * MAX_FD_NUM);
 
   if (global_fd_table == NULL) {
-    fprintf(stderr, "Memory allocation failed\n");
+    perror("Memory allocation failed\n");
     return;
   }
 
   // stdin
   struct file_descriptor_st* std_in =
-      create_file_descriptor(0, "stdin", READ, 0);
-  global_fd_table[0] = *std_in;
+      create_file_descriptor(0, "stdin", F_READ, 0);
+  global_fd_table[0] = std_in;
 
   // stdout
   struct file_descriptor_st* std_out =
-      create_file_descriptor(1, "stdout", WRITE, 0);
+      create_file_descriptor(1, "stdout", F_WRITE, 0);
 
-  global_fd_table[1] = *std_out;
+  global_fd_table[1] = std_out;
 
   // stderr
   struct file_descriptor_st* std_err =
-      create_file_descriptor(2, "stdout", WRITE, 0);
+      create_file_descriptor(2, "stdout", F_WRITE, 0);
 
-  global_fd_table[2] = *std_err;
+  global_fd_table[2] = std_err;
 }
 
 void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
@@ -80,13 +94,16 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
   }
   // call helper to get FAT size
   block_size = get_block_size(block_size_config);
+  if (block_size == -1) {
+    return;
+  }
   fat_size = get_fat_size(block_size, blocks_in_fat);
 
   num_fat_entries = get_num_fat_entries(block_size, blocks_in_fat);
   data_size = get_data_size(block_size, num_fat_entries);
 
   // declared global
-  fs_fd = open(fs_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+  fs_fd = open(fs_name, O_RDWR | O_CREAT, 0666);
 
   if (blocks_in_fat == 32 && block_size_config == 4) {  // handle case of maxfs
     data_size -= block_size;
@@ -115,18 +132,17 @@ void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
     perror("write error");
     // exit(EXIT_FAILURE);
   }
+  // close(fs_fd);
 }
 
 int mount(const char* fs_name) {
   if (fat != NULL) {
-    perror("unexpected command");
     return -1;
     // exit(EXIT_FAILURE);
   }
   fs_fd = open(fs_name, O_RDWR);
   if (fs_fd == -1) {
-    perror("fs_fd open error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   // get blocks_in_fat and block_size_config from meta data
@@ -135,16 +151,14 @@ int mount(const char* fs_name) {
 
   unsigned char buffer[1];
   if (read(fs_fd, buffer, 1) != 1) {
-    perror("mount: read error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   block_config = buffer[0];
 
   unsigned char buffer2[1];
   if (read(fs_fd, buffer2, 1) != 1) {
-    perror("mount: read error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   num_blocks = buffer2[0];
@@ -160,8 +174,7 @@ int mount(const char* fs_name) {
   // mmap FAT into memory
   fat = mmap(NULL, fat_size, PROT_READ | PROT_WRITE, MAP_SHARED, fs_fd, 0);
   if (fat == MAP_FAILED) {
-    perror("FAT mmap error");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
   // fprintf(stderr, "here: %x\n", fat[0]);
@@ -171,17 +184,18 @@ int mount(const char* fs_name) {
 int unmount() {
   // error handling if no currently mounted fs
   if (fat == NULL) {
-    perror("unexpected command");
-    return -1;
+    return FS_NOT_MOUNTED;
     // exit(EXIT_FAILURE);
   }
 
+  msync(fat, fat_size, MS_SYNC);
+
   // munmap(2) to unmount
   if (munmap(fat, fat_size) == -1) {
-    perror("munmap failed");
-    return -1;
+    return SYSTEM_ERROR;
     // exit(EXIT_FAILURE);
   }
+  // close(fs_fd);
   fat = NULL;
   return 0;
 }
@@ -239,7 +253,13 @@ int get_offset_size(int block_num, int offset) {
 void touch(char** args) {
   int i = 1;
   while (args[i] != NULL) {
-    k_open(args[i], 0);
+    if (does_file_exist2(args[i]) != -1) {
+      k_update_timestamp(args[i]);
+    } else {
+      int fd = k_open(args[i], F_WRITE);
+      k_close(fd);
+    }
+
     i += 1;
   }
 }
@@ -284,44 +304,64 @@ void cat_file_wa(char** args) {
   i = 1;
   if (!file_flag) {
     while (args[i] != NULL) {
+<<<<<<< HEAD
       int fd = k_open(args[i], 1);
       char buffer[1000];
       buffer[999] = '\0';
       k_read(fd, 1000, buffer);
       // fprintf(stdout, "%s\n", buffer);
+=======
+      int read_num;
+      char* contents = k_read_all(args[i], &read_num);
+      if (contents == NULL) {
+        free(contents);
+        perror("cat error");
+        return;
+      }
+      k_write(STDOUT_FILENO, contents, read_num);
+      // fprintf(stdout, "%s\n", contents);
+      free(contents);
+>>>>>>> main
       i += 1;
     }
   } else {
     int fd;
     if (w) {
-      fd = k_open(filename, 0);
+      fd = k_open(filename, F_WRITE);
     } else {
-      fd = k_open(filename, 2);
+      fd = k_open(filename, F_APPEND);
     }
     while (args[i] != NULL && (strcmp(args[i], "-a") != 0) &&
            (strcmp(args[i], "-w") != 0)) {
       int read_num;
       char* contents = k_read_all(args[i], &read_num);
+      if (contents == NULL) {
+        free(contents);
+        k_close(fd);
+        perror("cat error");
+        return;
+      }
       k_write(fd, (char*)contents, read_num);
       free(contents);
       i += 1;
     }
+    k_close(fd);
   }
 }
 
 void cat_w(char* output) {
-  int fd = k_open(output, 0);
+  int fd = k_open(output, F_WRITE);
   int BUF_SIZE = 4096;
   ssize_t bytesRead;      // Number of bytes read
   char buffer[BUF_SIZE];  // Buffer to store terminal input
-  while ((bytesRead = read(STDIN_FILENO, buffer, BUF_SIZE)) > 0) {
+  while ((bytesRead = k_read(STDIN_FILENO, BUF_SIZE, buffer)) > 0) {
     k_write(fd, buffer, bytesRead);
   }
 
   // Check for read error
   if (bytesRead == -1) {
     perror("Error reading from terminal");
-    close(fd);
+    k_close(fd);
     return;
   }
 
@@ -329,18 +369,18 @@ void cat_w(char* output) {
 }
 
 void cat_a(char* output) {
-  int fd = k_open(output, 2);
+  int fd = k_open(output, F_APPEND);
   int BUF_SIZE = 4096;
   ssize_t bytesRead;      // Number of bytes read
   char buffer[BUF_SIZE];  // Buffer to store terminal input
-  while ((bytesRead = read(STDIN_FILENO, buffer, BUF_SIZE)) > 0) {
+  while ((bytesRead = k_read(STDIN_FILENO, BUF_SIZE, buffer)) > 0) {
     k_write(fd, buffer, bytesRead);
   }
 
   // Check for read error
   if (bytesRead == -1) {
     perror("Error reading from terminal");
-    close(fd);
+    k_close(fd);
     return;
   }
 
@@ -351,63 +391,14 @@ void ls() {
   k_ls(NULL);
 }
 
-void cp_within_fat(char* source, char* dest) {
-  // source file must exist
-
-  if (does_file_exist2(source) == -1) {
-    perror("error: source does not exist");
-    return;
-  }
-
-  int dest_fd = k_open(dest, WRITE);
-  int source_fd = k_open(source, READ);
-
-  int read_num;
-
-  char* contents = k_read_all(source, &read_num);
-
-  k_write(dest_fd, contents, read_num);
-
-  k_close(dest_fd);
-  k_close(source_fd);
+int cp_within_fat(char* source, char* dest) {
+  return k_cp_within_fat(source, dest);
 }
 
-void cp_to_host(char* source, char* host_dest) {
-  if (does_file_exist2(source) == -1) {
-    perror("error: source does not exist");
-    return;
-  }
-  int source_fd = k_open(source, READ);
-
-  int read_num;
-
-  char* contents = k_read_all(source, &read_num);
-
-  int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-
-  if (write(host_fd, contents, read_num) == -1) {
-    perror("error: write to host file failed\n");
-  }
-
-  close(host_fd);
-  k_close(source_fd);
+int cp_to_host(char* source, char* host_dest) {
+  return k_cp_to_host(source, host_dest);
 }
 
-void cp_from_host(char* host_source, char* dest) {
-  int host_fd = open(host_source, O_RDWR, S_IRUSR | S_IWUSR);
-
-  if (host_fd == -1) {
-    perror("error: host source does not exist or is invalid\n");
-    return;
-  }
-
-  char buffer[1];
-  int dest_fd = k_open(dest, 0);
-
-  while (read(host_fd, buffer, 1) > 0) {
-    k_write(dest_fd, buffer, 1);
-  }
-
-  close(host_fd);
-  k_close(dest_fd);
+int cp_from_host(char* host_source, char* dest) {
+  return k_cp_from_host(host_source, dest);
 }

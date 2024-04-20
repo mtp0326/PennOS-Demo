@@ -1,7 +1,7 @@
 #include "pennfat_kernel.h"
 #include "unistd.h"
 uint16_t* fat = NULL;
-struct file_descriptor_st* global_fd_table = NULL;
+struct file_descriptor_st** global_fd_table = NULL;
 
 /*ALL THE EXTERN VARIABLES ARE INITIALIZED HERE*/
 int fs_fd = -1;
@@ -18,11 +18,26 @@ int data_size = 0;
 // we increment it afterwards
 int fd_counter = 3;
 
+void zero_out_helper(int curr) {
+  lseek(fs_fd, fat_size + block_size * (curr - 1), SEEK_SET);
+
+  char* zero_out = calloc(1, block_size);
+
+  write(fs_fd, zero_out, block_size);
+}
+
 int k_open(const char* fname, int mode) {
   int curr_fd = fd_counter;
   fd_counter++;
   char* fname_copy = strdup(fname);
   char* fname_copy2 = strdup(fname);
+  char* fname_copy3 = strdup(fname);
+  // using fname_copy3 check if the fname is a valid name (unix)
+  if (!is_file_name_valid(fname_copy3)) {
+    perror("error: invalid filename please follow POSIX standard");
+    return INVALID_FILE_NAME;
+  }
+
   // int empty_fat_index = get_first_empty_fat_index();
   struct file_descriptor_st* opened_file;
   struct directory_entries* new_de;
@@ -34,16 +49,17 @@ int k_open(const char* fname, int mode) {
   }
   lseek(fs_fd, 0, SEEK_CUR);
   // F_WRITE
-  if (mode == 0) {
+  if (mode == F_WRITE) {
     if (dir_entry != NULL) {  // file already exists (truncate)
-      for (int i = 0; i < curr_fd - 1; i++) {
-        if (global_fd_table[i].mode == WRITE &&
-            (strcmp(global_fd_table[i].fname, fname) == 0)) {
+      for (int i = 0; i < curr_fd; i++) {
+        if ((global_fd_table[i]->mode == F_WRITE ||
+             global_fd_table[i]->mode == F_APPEND) &&
+            (strcmp(global_fd_table[i]->fname, fname) == 0)) {
           fd_counter--;
           perror(
               "k_open: F_WRITE error: attempted to open a file in F_WRITE mode "
               "more than once");
-          return -1;
+          return MULTIPLE_F_WRITE;
           // exit(EXIT_FAILURE);
         }
       }
@@ -52,14 +68,14 @@ int k_open(const char* fname, int mode) {
         perror(
             "k_open: F_WRITE: attempting to open file without write "
             "permission");
-        return -1;
+        return WRONG_PERMISSION;
         // exit(EXIT_FAILURE);
       }
       // fprintf(stderr, "dir entry name: %s\n", dir_entry->name);
       // fprintf(stderr, "dir entry first block: %d\n", dir_entry->firstBlock);
       // add to global fd table
-      opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
-      global_fd_table[curr_fd] = *opened_file;  // update fd table
+      opened_file = create_file_descriptor(curr_fd, fname_copy, F_WRITE, 0);
+      global_fd_table[curr_fd] = opened_file;  // update fd table
       // truncate
       int start_fat_index = dir_entry->firstBlock;
       if (start_fat_index != 0xFFFF) {
@@ -67,15 +83,24 @@ int k_open(const char* fname, int mode) {
         while (fat[curr] != 0xFFFF) {
           int next = fat[curr];
           fat[curr] = 0x0000;
+
+          zero_out_helper(curr);
+
           curr = next;
         }
         fat[curr] = 0x0000;
+
+        zero_out_helper(curr);
+
         fat[start_fat_index] = 0xFFFF;
+      } else {
+        zero_out_helper(start_fat_index);
       }
       // set directory entry size to 0 since truncated and write to fs_fd to
       // update
-      off_t dir_entry_offset =
-          does_file_exist2(fname);               // should be lseeked there
+
+      // should be lseeked there
+      off_t dir_entry_offset = does_file_exist2(fname);
       lseek(fs_fd, dir_entry_offset, SEEK_SET);  // get to found directory entry
       struct directory_entries* updated_de =
           create_directory_entry(dir_entry->name, 0, dir_entry->firstBlock,
@@ -89,8 +114,8 @@ int k_open(const char* fname, int mode) {
       // new
       //                                         // block for root dir
       // fat[efi] = 0xFFFF;
-      opened_file = create_file_descriptor(curr_fd, fname_copy, READ_WRITE, 0);
-      global_fd_table[curr_fd] = *opened_file;  // update fd table
+      opened_file = create_file_descriptor(curr_fd, fname_copy, F_WRITE, 0);
+      global_fd_table[curr_fd] = opened_file;  // update fd table
       new_de = create_directory_entry(fname_copy2, 0, 0xFFFF, 1, 6, time(NULL));
       // fs_fd should already be at next open location in root directory
       // (lseeked in does_file_exist())
@@ -98,44 +123,45 @@ int k_open(const char* fname, int mode) {
           sizeof(struct directory_entries)) {
         fd_counter--;
         perror("k_open: write error");
-        return -1;
+        return SYSTEM_ERROR;
         // exit(EXIT_FAILURE);
       }
     }
-  } else if (mode == 1) {     // F_READ
-    if (dir_entry != NULL) {  // open file: add it to fd table
+  } else if (mode == F_READ) {  // F_READ
+    if (dir_entry != NULL) {    // open file: add it to fd table
       if (dir_entry->perm == 2 || dir_entry->perm == 0) {
         perror(
             "k_open: F_READ: attempting to open file that doesn't have read "
             "permission");
-        return -1;
+        return WRONG_PERMISSION;
         // exit(EXIT_FAILURE);
       }
-      opened_file = create_file_descriptor(curr_fd, fname_copy, READ, 0);
-      global_fd_table[curr_fd] = *opened_file;
+      opened_file = create_file_descriptor(curr_fd, fname_copy, F_READ, 0);
+      global_fd_table[curr_fd] = opened_file;
     } else {
       fd_counter--;
       perror("k_open: f_read: file does not exist");
+      return FILE_NOT_FOUND;
     }
-  } else if (mode == 2) {     // F_APPEND
-    if (dir_entry != NULL) {  // file exists, add to fd table in APPEND mode
+  } else if (mode == F_APPEND) {  // F_APPEND
+    if (dir_entry != NULL) {      // file exists, add to fd table in APPEND mode
       // file offset is at end of the file
       if (dir_entry->perm == 4 || dir_entry->perm == 5 ||
           dir_entry->perm == 0) {
         perror(
             "k_open: F_READ: attempting to open file that doesn't have write "
             "permission");
-        return -1;
+        return WRONG_PERMISSION;
         // exit(EXIT_FAILURE);
       }
-      opened_file =
-          create_file_descriptor(curr_fd, fname_copy, APPEND, dir_entry->size);
-      global_fd_table[curr_fd] = *opened_file;
+      opened_file = create_file_descriptor(curr_fd, fname_copy, F_APPEND,
+                                           dir_entry->size);
+      global_fd_table[curr_fd] = opened_file;
     } else {  // file doesn't exist, create it in root dir with read/write perm,
               // add to fd table in APPEND mode
       // fat[empty_fat_index] = 0xFFFF;
-      opened_file = create_file_descriptor(curr_fd, fname_copy, APPEND, 0);
-      global_fd_table[curr_fd] = *opened_file;  // update fd table
+      opened_file = create_file_descriptor(curr_fd, fname_copy, F_APPEND, 0);
+      global_fd_table[curr_fd] = opened_file;  // update fd table
       new_de = create_directory_entry(fname_copy2, 0, 0xFFFF, 1, 6, time(NULL));
       // fs_fd should already be at next open location in root directory
       // (lseeked in does_file_exist())
@@ -143,12 +169,27 @@ int k_open(const char* fname, int mode) {
           sizeof(struct directory_entries)) {
         fd_counter--;
         perror("k_open: write error");
-        return -1;
+        return SYSTEM_ERROR;
         // exit(EXIT_FAILURE);
       }
     }
   }
   return curr_fd;
+}
+
+bool is_file_name_valid(char* name) {
+  if (name == NULL) {
+    return false;
+  }
+  while (*name != '\0') {
+    char c = *name;
+    if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
+          (c >= '0' && c <= '9') || c == '.' || c == '_' || c == '-')) {
+      return false;
+    }
+    name++;
+  }
+  return true;
 }
 
 // helper that traverses root directory block by block to check if fname file
@@ -171,7 +212,7 @@ struct directory_entries* does_file_exist(const char* fname) {
       for (int i = 0; i < num_directories_per_block;
            i++) {  // check each directory in block
         if (!found) {
-          temp = malloc(sizeof(struct directory_entries));
+          temp = calloc(1, sizeof(struct directory_entries));
           read(fs_fd, temp, sizeof(struct directory_entries));
           // fprintf(stderr, "temp name: %s\n", temp->name);
           if (strcmp(temp->name, fname) == 0) {
@@ -188,7 +229,7 @@ struct directory_entries* does_file_exist(const char* fname) {
       for (int i = 0; i < num_directories_per_block;
            i++) {  // check each directory in block
         if (!found) {
-          temp = malloc(sizeof(struct directory_entries));
+          temp = calloc(1, sizeof(struct directory_entries));
           lseek(fs_fd, 0, SEEK_CUR);
           // fprintf(stderr, "offset3: %ld\n", current_offset3);
           read(fs_fd, temp, sizeof(struct directory_entries));
@@ -237,7 +278,7 @@ void move_to_open_de(bool found) {
         if (buffer[0] == 0 ||
             buffer[0] == 1) {  // look for first open or deleted entry
           // fprintf(stderr, "here!\n");
-          break;
+          return;
         }
         lseek(fs_fd, 64, SEEK_CUR);
       }
@@ -251,22 +292,22 @@ void move_to_open_de(bool found) {
         }
         lseek(fs_fd, -1, SEEK_CUR);
         // fprintf(stderr, "here1!\n");
-        if (buffer[0] == 0 ||
-            buffer[0] == 1) {  // look for first open or deleted entry
+        if (buffer[0] == 0 || buffer[0] == 1) {
+          // look for first open or deleted entry
           // fprintf(stderr, "here!\n");
-          break;
+          return;
         } else {
-          if (i == num_directories_per_block - 1 &&
-              !found) {  // at last directory entry of
-                         // last block and still occupied
+          if (i == num_directories_per_block - 1 && !found) {
+            // at last directory entry of
+            // last block and still occupied
             int next_fat_block = get_first_empty_fat_index();
             int offset1 = get_offset_size(next_fat_block, 0);
-            lseek(fs_fd, offset1, SEEK_SET);  // position fs_fd at new block for
-                                              // extended root directory
+            // position fs_fd at new block for extended root directory
+            lseek(fs_fd, offset1, SEEK_SET);
             // update fat
             fat[curr] = next_fat_block;
             fat[next_fat_block] = 0xFFFF;
-            break;
+            return;
           }
           // fprintf(stderr, "hereeeee!\n");
           lseek(fs_fd, 64,
@@ -275,6 +316,7 @@ void move_to_open_de(bool found) {
       }
     }
     curr = fat[curr];  // move to next block in fat link
+
     if (curr == 0xFFFF) {
       break;
     }
@@ -319,7 +361,7 @@ off_t does_file_exist2(const char* fname) {
 
     // we should be at the correct offset for fs_fd to read the next directory
     // entry
-    temp = malloc(sizeof(struct directory_entries));
+    temp = calloc(1, sizeof(struct directory_entries));
     read(fs_fd, temp, sizeof(struct directory_entries));
     if (strcmp(temp->name, fname) == 0) {
       found = true;
@@ -333,7 +375,7 @@ off_t does_file_exist2(const char* fname) {
     return lseek(fs_fd, -sizeof(struct directory_entries), SEEK_CUR);
   }
 
-  return -1;
+  return FILE_NOT_FOUND;
 }
 
 int get_first_empty_fat_index() {
@@ -353,14 +395,15 @@ void lseek_to_root_directory() {
 }
 
 struct file_descriptor_st* get_file_descriptor(int fd) {
-  return (global_fd_table + fd);
+  return (global_fd_table[fd]);
 }
 
 struct file_descriptor_st* create_file_descriptor(int fd,
                                                   char* fname,
                                                   int mode,
                                                   int offset) {
-  struct file_descriptor_st* new_fd = malloc(sizeof(struct file_descriptor_st));
+  struct file_descriptor_st* new_fd =
+      calloc(1, sizeof(struct file_descriptor_st));
 
   if (new_fd == NULL) {
     perror("Memory allocation failed\n");
@@ -382,7 +425,8 @@ struct directory_entries* create_directory_entry(const char* name,
                                                  uint8_t type,
                                                  uint8_t perm,
                                                  time_t mtime) {
-  struct directory_entries* new_de = malloc(sizeof(struct directory_entries));
+  struct directory_entries* new_de =
+      calloc(1, sizeof(struct directory_entries));
 
   if (new_de == NULL) {
     perror("Memory allocation failed\n");
@@ -401,27 +445,38 @@ struct directory_entries* create_directory_entry(const char* name,
 }
 
 ssize_t k_read(int fd, int n, char* buf) {
+  // special case for STDIN, STDOUT, STDERR
+
+  if (fd == STDIN_FILENO) {
+    return read(STDIN_FILENO, buf, n);
+  }
+
+  if (fd == STDOUT_FILENO) {
+    perror("Cannot read from STDOUT");
+    return WRONG_PERMISSION;
+  }
+
+  if (fd == STDERR_FILENO) {
+    perror("Cannot read from STDERR");
+    return WRONG_PERMISSION;
+  }
+
   // returns number of bytes on success, 0 if EOF is reached, -1 on error
   struct file_descriptor_st* curr = get_file_descriptor(fd);
   // fd is not a valid open file descriptor
   if (curr == NULL) {
     perror("k_read error: could not find file descriptor");
-    return -1;
+    return FILE_NOT_FOUND;
   }
 
-  int mode = curr->mode;
   int offset = curr->offset;
   char* fname = curr->fname;
 
   if (fname[0] == 1) {
     perror("k_read error: attempting to read into a deleted file");
-    return -1;
+    return FILE_DELETED;
   }
 
-  // WRITE_ONLY (F_WRITE)
-  if (mode == WRITE) {
-    return -1;
-  }
   // find the directory entry from the fd name
   struct directory_entries* curr_de = does_file_exist(fname);
   uint8_t perm = curr_de->perm;
@@ -429,12 +484,12 @@ ssize_t k_read(int fd, int n, char* buf) {
   uint32_t size = curr_de->size;
   if (curr_de == NULL) {
     perror("k_read error: could not find directory entry");
-    return -1;
+    return FILE_NOT_FOUND;
   }
 
   // file permission is write only
   if (perm == 2) {
-    return -1;
+    return WRONG_PERMISSION;
   }
 
   if (offset >= size) {  // already starting at EOF condition
@@ -500,10 +555,12 @@ void extend_fat(int start_index, int empty_fat_index) {
 
   fat[start_index] = empty_fat_index;
   fat[empty_fat_index] = 0xFFFF;
+  msync(fat, fat_size, MS_SYNC);
 }
 
 void write_one_byte_in_while(int bytes_left,
                              int size,
+                             int true_offset,
                              int* size_increment,
                              int* bytes_written,
                              int* current_offset,
@@ -531,12 +588,12 @@ void write_one_byte_in_while(int bytes_left,
 
     write(fs_fd, str + *bytes_written, 1);
 
-    if (*current_offset >= size) {
+    if (true_offset >= size) {
       *size_increment += 1;
     }
     *bytes_written += 1;
     bytes_left -= 1;
-
+    true_offset += 1;
     *current_offset += 1;
   }
 }
@@ -558,11 +615,25 @@ void update_directory_entry_after_write(struct directory_entries* curr_de,
 }
 
 ssize_t k_write(int fd, const char* str, int n) {
+  // special cases for 0, 1, 2
+  if (fd == STDIN_FILENO) {
+    perror("Cannot write into STDIN");
+    return WRONG_PERMISSION;
+  }
+
+  if (fd == STDOUT_FILENO) {
+    return write(STDOUT_FILENO, str, n);
+  }
+
+  if (fd == STDERR_FILENO) {
+    return write(STDERR_FILENO, str, n);
+  }
+
   // 0 for READ/WRITE, 1 for READ, and 2 for WRITE, 3 for APPEND
   struct file_descriptor_st* curr = get_file_descriptor(fd);
   // fd is not a valid open file descriptor
   if (curr == NULL) {
-    return -1;
+    return INVALID_FILE_DESCRIPTOR;
   }
 
   int mode = curr->mode;
@@ -570,20 +641,21 @@ ssize_t k_write(int fd, const char* str, int n) {
   char* fname = curr->fname;
 
   // READ_ONLY (F_READ)
-  if (mode == 1) {
-    return -1;
+  if (mode == F_READ) {
+    return WRONG_PERMISSION;
   }
 
   struct directory_entries* curr_de = does_file_exist(fname);
 
   if (curr_de == NULL) {
-    perror("error: k_write: the file doesn't exist?\n");
+    perror("error: k_write: the file doesn't exist\n");
+    return FILE_NOT_FOUND;
   }
 
   if (curr_de->name[0] == 1 || curr_de->name[1] == 2) {
     perror(
         "error: k_write: trying to write into a file that has been deleted\n");
-    return -1;
+    return FILE_DELETED;
   }
 
   uint8_t perm = curr_de->perm;
@@ -592,18 +664,22 @@ ssize_t k_write(int fd, const char* str, int n) {
     firstBlock = get_first_empty_fat_index();
     curr_de->firstBlock = firstBlock;
     fat[firstBlock] = 0xFFFF;
+    msync(fat, fat_size, MS_SYNC);
     // fprintf(stderr, "first block: %d\n", firstBlock);
   }
 
   // file permission is read only
   if (perm == 4) {
-    return -1;
+    return WRONG_PERMISSION;
   }
 
   // this is opened with F_WRITE
-  if (mode == 0) {
+  if (mode == F_WRITE) {
     // we need to lseek to where we want to write
     uint16_t curr_block = firstBlock;
+
+    int true_offset = offset;
+
     // move to the correct block
     while (offset > block_size && curr_block != 0xFFFF) {
       curr_block = fat[curr_block];
@@ -622,8 +698,9 @@ ssize_t k_write(int fd, const char* str, int n) {
     int size_increment = 0;
     // for bytes_written and current_offset, we send in a pointer to the
     // variable so that we modify it during writing
-    write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                            &bytes_written, &current_offset, str, firstBlock);
+    write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                            &size_increment, &bytes_written, &current_offset,
+                            str, firstBlock);
 
     update_directory_entry_after_write(curr_de, fname, size_increment);
 
@@ -635,10 +712,12 @@ ssize_t k_write(int fd, const char* str, int n) {
   }  // end of mode == 0 (F_WRITE)
 
   // F_APPEND
-  if (mode == APPEND) {
+  if (mode == F_APPEND) {
     // we need to move the offset to the eof if this is in F_APPEND mode
     // the offset in the fd doesn't matter here
     uint32_t append_offset = curr_de->size;
+
+    int true_offset = curr_de->size;
 
     // we need to lseek to where we want to write
     uint16_t curr_block = firstBlock;
@@ -659,8 +738,9 @@ ssize_t k_write(int fd, const char* str, int n) {
     int size_increment = 0;
     // for bytes_written and current_offset, we send in a pointer to the
     // variable so that we modify it during writing
-    write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                            &bytes_written, &current_offset, str, firstBlock);
+    write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                            &size_increment, &bytes_written, &current_offset,
+                            str, firstBlock);
 
     update_directory_entry_after_write(curr_de, fname, size_increment);
 
@@ -671,20 +751,41 @@ ssize_t k_write(int fd, const char* str, int n) {
     return bytes_written;
   }
 
-  return -1;
+  return INVALID_PARAMETERS;
+}
+
+int k_count_fd_num(const char* name) {
+  int count = 0;
+  for (int i = 0; i < fd_counter; i++) {
+    struct file_descriptor_st* curr_fd;
+    curr_fd = global_fd_table[i];
+    if (strcmp(curr_fd->fname, name) == 0) {
+      count++;
+    }
+  }
+  return count;
 }
 
 int k_close(int fd) {
-  struct file_descriptor_st* curr = get_file_descriptor(fd);
+  struct file_descriptor_st* curr = *global_fd_table + fd;
 
   // fd is not a valid open file descriptor
   if (curr == NULL) {
-    return -1;
+    return INVALID_FILE_DESCRIPTOR;
   }
 
   // close it by freeing it and turning it to null
-  // free(curr);
-  curr = NULL;
+  // free(caurr);
+  // int count = k_count_fd_num(curr->fname);
+
+  // if (count == 1) {
+  //   struct directory_entries* curr_de = does_file_exist(curr->fname);
+  //   if (curr_de->name[0] == 2) {
+  //     curr_de->name[0] = 1
+  //   }
+  // }
+
+  global_fd_table[fd]->fname = "*";
 
   return 0;
 }
@@ -695,24 +796,25 @@ int k_unlink(const char* fname) {
   does_file_exist2(fname);  // lseeks to fname position
 
   if (curr_de == NULL) {
-    perror("unlink error: file fname not found");
-    return -1;
+    fprintf(stdout, "unlink error: file fname not found\n");
+    return FILE_NOT_FOUND;
   }
-  // struct file_descriptor_st curr_fd;
   // search for fd with same fname to get num processes
-  // for (int i = 0; i < MAX_FD_NUM; i++) {
-  //   curr_fd = global_fd_table[i];
-  //   if (strcmp(curr_fd.fname, fname) == 0) {
-  //     break;
-  //   }
-  // }
+  int count = k_count_fd_num(fname);
   // for multiple processes (shouldn't be used in standalone fat)
-  // if (curr_fd.ref_cnt > 1) {
-  //   (curr_de->name)[0] = 2;
-  // } else {
-  // mark name[0] with 1
-  (curr_de->name)[0] = 1;
-  // }
+  if (count > 1) {
+    perror(
+        "k_unlink error: this file is being used by another process. Unable to "
+        "delete the file");
+    return FILE_IN_USE;
+
+  } else if (count == 1 ||
+             count == 0) {  // im the only process with it, mark name[0] with 1
+    (curr_de->name)[0] = 1;
+  } else {
+    perror("k_unlink: count is negatives something wrong");
+    return SYSTEM_ERROR;
+  }
 
   struct directory_entries* new_de =
       create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
@@ -728,10 +830,30 @@ int k_unlink(const char* fname) {
     while (fat[curr] != 0xFFFF) {
       int next = fat[curr];
       fat[curr] = 0x0000;
+      zero_out_helper(curr);
       curr = next;
+      msync(fat, fat_size, MS_SYNC);
     }
+    zero_out_helper(curr);
     fat[curr] = 0x0000;
+    msync(fat, fat_size, MS_SYNC);
+  } else {
+    zero_out_helper(curr);
   }
+
+  // when the file removal is successful, close the only lasting file
+  // descriptor to this file as well
+
+  for (int i = 0; i < fd_counter; i++) {
+    struct file_descriptor_st* curr_fd;
+    curr_fd = global_fd_table[i];
+    if (strcmp(curr_fd->fname, fname) == 0) {
+      // we want to close this
+      k_close(curr_fd->fd);
+      break;
+    }
+  }
+
   return 1;
 }
 
@@ -739,7 +861,7 @@ off_t k_lseek(int fd, int offset, int whence) {
   struct file_descriptor_st* curr_fd = get_file_descriptor(fd);
 
   if (curr_fd == NULL) {
-    return -1;
+    return INVALID_FILE_DESCRIPTOR;
   }
 
   struct directory_entries* curr_de = does_file_exist(curr_fd->fname);
@@ -747,19 +869,20 @@ off_t k_lseek(int fd, int offset, int whence) {
   int curr_size = curr_de->size;
 
   if (curr_de == NULL) {
-    return -1;
+    return FILE_NOT_FOUND;
   }
 
   if (curr_de->name[0] == 1 || curr_de->name[1] == 2) {
     fprintf(stderr,
             "k_lseek: trying to klseek into a file that has been deleted\n");
-    return -1;
+    return FILE_DELETED;
   }
 
   if (curr_de->firstBlock == 0xFFFF) {
     int firstBlock = get_first_empty_fat_index();
     curr_de->firstBlock = firstBlock;
     fat[firstBlock] = 0xFFFF;
+    msync(fat, fat_size, MS_SYNC);
     // fprintf(stderr, "first block: %d\n", firstBlock);
   }
 
@@ -774,6 +897,8 @@ off_t k_lseek(int fd, int offset, int whence) {
       // it's like appending offset - curr_size to this file
 
       uint32_t append_offset = curr_de->size;
+
+      int true_offset = curr_de->size;
 
       uint16_t curr_block = curr_de->firstBlock;
 
@@ -793,9 +918,9 @@ off_t k_lseek(int fd, int offset, int whence) {
       int size_increment = 0;
       // for bytes_written and current_offset, we send in a pointer to the
       // variable so that we modify it during writing
-      write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                              &bytes_written, &current_offset, str,
-                              curr_de->firstBlock);
+      write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                              &size_increment, &bytes_written, &current_offset,
+                              str, curr_de->firstBlock);
 
       update_directory_entry_after_write(curr_de, curr_fd->fname,
                                          size_increment);
@@ -818,6 +943,8 @@ off_t k_lseek(int fd, int offset, int whence) {
     if (new_offset > curr_size) {
       uint32_t append_offset = curr_de->size;
 
+      int true_offset = curr_de->size;
+
       uint16_t curr_block = curr_de->firstBlock;
 
       while (append_offset > block_size && curr_block != 0xFFFF) {
@@ -836,9 +963,9 @@ off_t k_lseek(int fd, int offset, int whence) {
       int size_increment = 0;
       // for bytes_written and current_offset, we send in a pointer to the
       // variable so that we modify it during writing
-      write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                              &bytes_written, &current_offset, str,
-                              curr_de->firstBlock);
+      write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                              &size_increment, &bytes_written, &current_offset,
+                              str, curr_de->firstBlock);
 
       update_directory_entry_after_write(curr_de, curr_fd->fname,
                                          size_increment);
@@ -854,6 +981,8 @@ off_t k_lseek(int fd, int offset, int whence) {
     // we always need to extend this file
     // it's like appending "offset" to this file
     uint32_t append_offset = curr_de->size;
+
+    int true_offset = curr_de->size;
 
     uint16_t curr_block = curr_de->firstBlock;
 
@@ -873,15 +1002,15 @@ off_t k_lseek(int fd, int offset, int whence) {
     int size_increment = 0;
     // for bytes_written and current_offset, we send in a pointer to the
     // variable so that we modify it during writing
-    write_one_byte_in_while(bytes_left, curr_de->size, &size_increment,
-                            &bytes_written, &current_offset, str,
-                            curr_de->firstBlock);
+    write_one_byte_in_while(bytes_left, curr_de->size, true_offset,
+                            &size_increment, &bytes_written, &current_offset,
+                            str, curr_de->firstBlock);
 
     update_directory_entry_after_write(curr_de, curr_fd->fname, size_increment);
   }
 
   // invalid whence
-  return -1;
+  return INVALID_PARAMETERS;
 }
 
 void generate_permission(uint8_t perm, char** permissions) {
@@ -914,10 +1043,8 @@ char* formatTime(time_t t) {
 }
 
 void k_ls(const char* filename) {
-  struct directory_entries* temp = malloc(sizeof(struct directory_entries));
+  struct directory_entries* temp = calloc(1, sizeof(struct directory_entries));
   if (filename == NULL) {
-    // fprintf(stderr, "k_ls: the param is NULL here\n");
-
     // we need to list everything in the current directory
     lseek_to_root_directory();
     int curr_root_block = 1;
@@ -949,6 +1076,7 @@ void k_ls(const char* filename) {
 
       // deleted files we don't want!
       if (temp->name[0] == 1 || temp->name[0] == 2) {
+        read_cnt += 1;
         continue;
       }
 
@@ -996,11 +1124,29 @@ void k_ls(const char* filename) {
   return;
 }
 
-void k_rename(const char* source, const char* dest) {
+int k_update_timestamp(const char* source) {
   struct directory_entries* curr_de = does_file_exist(source);
   if (curr_de == NULL) {
-    perror("k_rename error: source file not found");
-    return;
+    perror("k_update_timestamp error Error: source file not found");
+    return FILE_NOT_FOUND;
+  }
+  struct directory_entries* new_de =
+      create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
+                             curr_de->type, curr_de->perm, time(NULL));
+  does_file_exist2(source);
+  write(fs_fd, new_de, 64);
+  return 1;
+}
+
+int k_rename(const char* source, const char* dest) {
+  struct directory_entries* curr_de = does_file_exist(source);
+  struct directory_entries* curr_de2 = does_file_exist(dest);
+  if (curr_de == NULL) {
+    perror("k_rename error Error: source file not found");
+    return FILE_NOT_FOUND;
+  }
+  if (curr_de2 != NULL) {
+    k_unlink(curr_de2->name);
   }
   does_file_exist2(source);
   char* dest_copy = strdup(dest);
@@ -1010,20 +1156,21 @@ void k_rename(const char* source, const char* dest) {
       create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
                              curr_de->type, curr_de->perm, time(NULL));
   write(fs_fd, new_de, 64);
+  return 1;
 }
 
-void k_change_mode(const char* change, const char* filename) {
+int k_change_mode(const char* change, const char* filename) {
   struct directory_entries* curr_de = does_file_exist(filename);
   if (curr_de == NULL) {
-    perror("k_rename error: source file not found");
-    return;
+    perror("k_rename error Error: source file not found");
+    return FILE_NOT_FOUND;
   }
   does_file_exist2(filename);
   int perm = curr_de->perm;
 
   if (strcmp(change, "-r") == 0) {
     if (perm == 2 || perm == 5 || perm == 7 || perm == 0) {
-      perror("chmod error invalid command");
+      perror("chmod error Error invalid command");
     } else if (perm == 6) {
       perm = 2;
     } else if (perm == 4) {
@@ -1054,7 +1201,7 @@ void k_change_mode(const char* change, const char* filename) {
       perm = 6;
     }
   } else if (strcmp(change, "-x") == 0) {
-    if (perm == 0 || perm == 2 || perm == 4 || perm == 7) {
+    if (perm == 0 || perm == 2 || perm == 4 || perm == 6) {
       perror("chmod error invalid command");
     } else if (perm == 5) {
       perm = 4;
@@ -1107,7 +1254,7 @@ void k_change_mode(const char* change, const char* filename) {
     }
   } else {
     perror("chmod error invalid command");
-    return;
+    return INVALID_PARAMETERS;
   }
 
   curr_de->perm = perm;
@@ -1115,24 +1262,99 @@ void k_change_mode(const char* change, const char* filename) {
       create_directory_entry(curr_de->name, curr_de->size, curr_de->firstBlock,
                              curr_de->type, curr_de->perm, time(NULL));
   write(fs_fd, new_de, 64);
+  return 1;
 }
 
 char* k_read_all(const char* filename, int* read_num) {
   struct directory_entries* curr_de = does_file_exist(filename);
   if (curr_de == NULL) {
-    perror("error: filename not found");
+    perror("k_read_all, error: filename not found");
     return NULL;
   }
   uint32_t file_size = curr_de->size;
-  int fd = k_open(filename, 1);
-  char* contents = (char*)malloc(file_size);
+  int fd = k_open(filename, F_READ);
+  char* contents = (char*)calloc(1, file_size);
   int ret = k_read(fd, file_size, contents);
-  // k_close(fd);
   if (ret == -1) {
+    k_close(fd);
     return NULL;
   }
 
   *read_num = ret;
-
+  k_close(fd);
   return contents;
+}
+
+char* k_get_fname_from_fd(int fd) {
+  if (fd > fd_counter) {
+    return NULL;
+  }
+  return global_fd_table[fd]->fname;
+}
+
+int k_cp_within_fat(char* source, char* dest) {
+  // source file must exist
+
+  if (does_file_exist2(source) == -1) {
+    perror("error: source does not exist");
+    return FILE_NOT_FOUND;
+  }
+
+  int dest_fd = k_open(dest, F_WRITE);
+  int source_fd = k_open(source, F_READ);
+
+  int read_num;
+
+  char* contents = k_read_all(source, &read_num);
+
+  k_write(dest_fd, contents, read_num);
+
+  k_close(dest_fd);
+  k_close(source_fd);
+  return 1;
+}
+
+int k_cp_to_host(char* source, char* host_dest) {
+  if (does_file_exist2(source) == -1) {
+    perror("error: source does not exist");
+    return FILE_NOT_FOUND;
+  }
+  int source_fd = k_open(source, F_READ);
+
+  int read_num;
+
+  char* contents = k_read_all(source, &read_num);
+
+  int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, 0777);
+
+  if (write(host_fd, contents, read_num) == -1) {
+    perror("error: write to host file failed\n");
+    close(host_fd);
+    k_close(source_fd);
+    return SYSTEM_ERROR;
+  }
+
+  close(host_fd);
+  k_close(source_fd);
+  return 1;
+}
+
+int k_cp_from_host(char* host_source, char* dest) {
+  int host_fd = open(host_source, O_RDWR, 0777);
+
+  if (host_fd == -1) {
+    perror("error: host source does not exist or is invalid\n");
+    return FILE_NOT_FOUND;
+  }
+
+  char buffer[1];
+  int dest_fd = k_open(dest, F_WRITE);
+
+  while (read(host_fd, buffer, 1) > 0) {
+    k_write(dest_fd, buffer, 1);
+  }
+
+  close(host_fd);
+  k_close(dest_fd);
+  return 1;
 }

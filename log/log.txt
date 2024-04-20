@@ -12,8 +12,18 @@
 [   9]	SCHEDULE 	   1	   0		shell
 [  10]	SCHEDULE 	   1	   0		shell
 [  11]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [  12]	SCHEDULE 	   1	   0		shell
 [  13]	SCHEDULE 	   1	   0		shell
+=======
+[  11]	CREATE   	   2	   1		sleep
+[  11]	BLOCKED  	   1	   0		shell
+[  12]	SCHEDULE 	   2	   1		sleep
+[  13]	ZOMBIE   	   2	   1		sleep
+[  13]	UNBLOCKED	   1	   0		shell
+[  13]	SCHEDULE 	   1	   0		shell
+[  13]	WAITED   	   2	   1		sleep
+>>>>>>> main
 [  14]	SCHEDULE 	   1	   0		shell
 [  15]	SCHEDULE 	   1	   0		shell
 [  16]	SCHEDULE 	   1	   0		shell
@@ -51,8 +61,18 @@
 [  48]	SCHEDULE 	   1	   0		shell
 [  49]	SCHEDULE 	   1	   0		shell
 [  50]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [  51]	SCHEDULE 	   1	   0		shell
 [  52]	SCHEDULE 	   1	   0		shell
+=======
+[  50]	CREATE   	   3	   1		sleep
+[  50]	BLOCKED  	   1	   0		shell
+[  51]	SCHEDULE 	   3	   1		sleep
+[  52]	ZOMBIE   	   3	   1		sleep
+[  52]	UNBLOCKED	   1	   0		shell
+[  52]	SCHEDULE 	   1	   0		shell
+[  52]	WAITED   	   3	   1		sleep
+>>>>>>> main
 [  53]	SCHEDULE 	   1	   0		shell
 [  54]	SCHEDULE 	   1	   0		shell
 [  55]	SCHEDULE 	   1	   0		shell
@@ -60,7 +80,10 @@
 [  57]	SCHEDULE 	   1	   0		shell
 [  58]	SCHEDULE 	   1	   0		shell
 [  59]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [  59]	CREATE   	   2	   1		sleep
+=======
+>>>>>>> main
 [  60]	SCHEDULE 	   1	   0		shell
 [  61]	SCHEDULE 	   1	   0		shell
 [  62]	SCHEDULE 	   1	   0		shell
@@ -80,7 +103,10 @@
 [  76]	SCHEDULE 	   1	   0		shell
 [  77]	SCHEDULE 	   1	   0		shell
 [  78]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [  78]	CREATE   	   3	   1		sleep
+=======
+>>>>>>> main
 [  79]	SCHEDULE 	   1	   0		shell
 [  80]	SCHEDULE 	   1	   0		shell
 [  81]	SCHEDULE 	   1	   0		shell
@@ -94,6 +120,7 @@
 [  89]	SCHEDULE 	   1	   0		shell
 [  90]	SCHEDULE 	   1	   0		shell
 [  91]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [  91]	CREATE   	   4	   1		sleep
 [  91]	BLOCKED  	   1	   0		shell
 [  92]	SCHEDULE 	   2	   1		sleep
@@ -108,13 +135,31 @@
 [  97]	SCHEDULE 	   1	   0		shell
 [  98]	SCHEDULE 	   1	   0		shell
 [  99]	SCHEDULE 	   1	   0		shell
+=======
+[  92]	SCHEDULE 	   1	   0		shell
+[  93]	SCHEDULE 	   1	   0		shell
+[  94]	SCHEDULE 	   1	   0		shell
+[  95]	SCHEDULE 	   1	   0		shell
+[  96]	SCHEDULE 	   1	   0		shell
+[  97]	SCHEDULE 	   1	   0		shell
+[  97]	CREATE   	   4	   1		sleep
+[  97]	BLOCKED  	   1	   0		shell
+[  98]	SCHEDULE 	   4	   1		sleep
+[  99]	ZOMBIE   	   4	   1		sleep
+[  99]	UNBLOCKED	   1	   0		shell
+[  99]	SCHEDULE 	   1	   0		shell
+[  99]	WAITED   	   4	   1		sleep
+>>>>>>> main
 [ 100]	SCHEDULE 	   1	   0		shell
 [ 101]	SCHEDULE 	   1	   0		shell
 [ 102]	SCHEDULE 	   1	   0		shell
 [ 103]	SCHEDULE 	   1	   0		shell
 [ 104]	SCHEDULE 	   1	   0		shell
 [ 105]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [ 106]	ZOMBIE   	   3	   1		sleep
+=======
+>>>>>>> main
 [ 106]	SCHEDULE 	   1	   0		shell
 [ 107]	SCHEDULE 	   1	   0		shell
 [ 108]	SCHEDULE 	   1	   0		shell
@@ -172,6 +217,7 @@
 [ 160]	SCHEDULE 	   1	   0		shell
 [ 161]	SCHEDULE 	   1	   0		shell
 [ 162]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [ 163]	SCHEDULE 	   1	   0		shell
 [ 164]	SCHEDULE 	   1	   0		shell
 [ 165]	SCHEDULE 	   1	   0		shell
@@ -10118,3 +10164,5 @@
 [10105]	SCHEDULE 	   1	   0		shell
 [10106]	SCHEDULE 	   1	   0		shell
 [10107]	SCHEDULE 	   1	   0		shell
+=======
+>>>>>>> main

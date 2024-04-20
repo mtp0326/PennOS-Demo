@@ -87,6 +87,11 @@ typedef struct pcb_t {
       state; /** @brief This is an enum storing the process's current state.*/
   FD_Bitmap* open_fds; /** @brief This stores a bitmap containg all open file
                           descriptors.*/
+
+  int input_fd; /** @brief The input i/o that his process reads data from.*/
+
+  int output_fd; /** @brief The out i/o that his process writes data to*/
+
   bool statechanged; /** @brief This contains a bool that keeps track of whether
                         or not the process state has changed.*/
 
@@ -101,9 +106,13 @@ typedef struct pcb_t {
   unsigned int ticks_to_wait; /** @brief Ticks remaining to wait, used only for
                                  s_sleep calls */
 
+<<<<<<< HEAD
   char* processname; /** @brief The command name that this processor has */
 
   u_int64_t job_num; /** @brief The command name that this processor has */
+=======
+  char* processname; /** @brief Name of process, to be used for logging and ps*/
+>>>>>>> main
 } pcb_t;
 
 /**
