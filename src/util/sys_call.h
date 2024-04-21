@@ -96,6 +96,13 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang);
 int s_kill(pid_t pid, int signal);
 
 /**
+ * @brief Uses recursion to reap all children of specified parent.
+ *
+ * @param parent PCB of the parent.
+ */
+void s_reap_all_child(pcb_t* parent);
+
+/**
  * @brief Unconditionally exit the calling process.
  *
  * This will set the process state to zombied, adjust its state within the

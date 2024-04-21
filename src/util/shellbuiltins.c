@@ -128,7 +128,7 @@ void* b_fg(void* arg) {
               proc->processname);
       if (s_kill(proc->pid, SIGCONT) < 0) {
         // error
-        fprintf(stdout, "SIGCONT failed to send\n");
+        fprintf(stderr, "SIGCONT failed to send\n");
         return NULL;
       }
 
@@ -154,7 +154,9 @@ void* b_fg(void* arg) {
 
       return NULL;
     }
+
     /// error: PID with specified number does not exist
+    fprintf(stderr, "PID with specified number does not exist\n");
 
     return NULL;
   }
@@ -165,7 +167,7 @@ void* b_fg(void* arg) {
             proc->processname);
     if (s_kill(proc->pid, SIGCONT) < 0) {
       // error
-      fprintf(stdout, "SIGCONT failed to send\n");
+      fprintf(stderr, "SIGCONT failed to send\n");
       return NULL;
     }
 
@@ -192,7 +194,7 @@ void* b_fg(void* arg) {
   }
 
   // error: to stopped or background job exist
-  fprintf(stdout, "Job does not exist\n");
+  fprintf(stderr, "Job does not exist\n");
   return NULL;
 }
 
@@ -210,7 +212,7 @@ void* b_bg(void* arg) {
       proc = stopped->head->process;
       if (s_kill(proc->pid, SIGCONT) < 0) {
         // error
-        fprintf(stdout, "SIGCONT failed to send\n");
+        fprintf(stderr, "SIGCONT failed to send\n");
         return NULL;
       }
 
@@ -227,7 +229,7 @@ void* b_bg(void* arg) {
       return NULL;
     }
     /// error: PID with specified number does not exist
-
+    fprintf(stderr, "PID with specified number does not exist\n");
     return NULL;
   }
 
@@ -235,7 +237,7 @@ void* b_bg(void* arg) {
     proc = stopped->tail->process;
     if (s_kill(proc->pid, SIGCONT) < 0) {
       // error
-      fprintf(stdout, "SIGCONT failed to send\n");
+      fprintf(stderr, "SIGCONT failed to send\n");
       return NULL;
     }
 
@@ -250,6 +252,8 @@ void* b_bg(void* arg) {
     return NULL;
   }
   /// error: there are no stopped jobs
+  fprintf(stderr, "there are no stopped jobs\n");
+
   return NULL;
 }
 

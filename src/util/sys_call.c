@@ -277,6 +277,24 @@ int s_kill(pid_t pid, int signal) {
   return 0;
 }
 
+void s_reap_all_child(pcb_t* parent) {
+  if (parent == NULL || parent->child_pids == NULL ||
+      parent->child_pids->array) {
+    return;
+  }
+
+  DynamicPIDArray* child_array = parent->child_pids;
+  int c_size = child_array->size;
+  for (int i = 0; i < c_size; i++) {
+    pcb_t* child_proc = s_find_process(child_array->array[i]);
+    s_reap_all_child(child_proc);
+    if (child_proc != NULL) {
+      s_remove_process(child_array->array[i]);
+      k_proc_cleanup(child_proc);
+    }
+  }
+}
+
 void s_exit(void) {
   remove_process(processes[current->priority], current->pid);
   add_process(zombied, current);
@@ -285,7 +303,8 @@ void s_exit(void) {
 
   s_write_log(EXIT, current, -1);
 
-  // TODO: need to kill all children
+  // reap all children
+  s_reap_all_child(current);
 }
 
 int s_nice(pid_t pid, int priority) {
@@ -337,6 +356,7 @@ int s_spawn_and_wait(void* (*func)(void*),
   s_waitpid(child, &wstatus, nohang);
   if (!nohang) {
     pcb_t* child_pcb = s_find_process(child);
+    s_reap_all_child(child_pcb);
     s_remove_process(child);
     k_proc_cleanup(child_pcb);
   }
