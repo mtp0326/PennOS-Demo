@@ -233,8 +233,6 @@ void scheduler(char* logfile) {
         }
 
         block->ticks_to_wait--;
-        // fprintf(stdout, "num blocked: %d\n", blocked->size);
-        /// TODO: segfault here, need to borrow mutex
         if (blocked->head != NULL) {
           blocked->head = blocked->head->next;
         }
