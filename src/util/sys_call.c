@@ -151,6 +151,21 @@ pid_t s_spawn_nice(void* (*func)(void*),
 
 pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
   pcb_t* child_pcb;
+
+  // if nohang, return immediately
+  ////need more commands??
+  if (nohang) {
+    child_pcb = find_process(bg_list, pid);
+    if (child_pcb->statechanged) {
+      if (child_pcb->state == ZOMBIED) {
+        *wstatus = 0;
+        child_pcb->statechanged = false;
+        return pid;
+      }
+    }
+    return -1;
+  }
+
   if (find_process(processes[0], pid) != NULL) {
     child_pcb = find_process(processes[0], pid);
   } else if (find_process(processes[1], pid) != NULL) {
@@ -159,17 +174,6 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
     child_pcb = find_process(processes[2], pid);
   } else {
     return -1;
-  }
-
-  // if nohang, return immediately
-  ////need more commands??
-  if (nohang) {
-    if (child_pcb->state == ZOMBIED) {
-      *wstatus = 0;
-      return pid;
-    } else {
-      return -1;
-    }
   }
 
   // if child already changed state
@@ -308,14 +312,17 @@ int s_spawn_and_wait(void* (*func)(void*),
                      bool nohang,
                      unsigned int priority) {
   pid_t child = s_spawn_nice(func, argv, fd0, fd1, nohang, priority);
-  int wstatus = 0;
-  s_waitpid(child, &wstatus, nohang);
+
   if (nohang) {
     pcb_t* child_proc = s_find_process(child);
     child_proc->job_num = job_id;
     job_id++;
     add_process(bg_list, child_proc);
+    fprintf(stdout, "[%ld] %4u\n", child_proc->job_num, child_proc->pid);
   }
+
+  int wstatus = 0;
+  s_waitpid(child, &wstatus, nohang);
   if (!nohang) {
     pcb_t* child_pcb = s_find_process(child);
     s_remove_process(child);
@@ -331,8 +338,7 @@ int s_bg_wait(pcb_t* proc) {
     fprintf(stdout, "[%ld]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
             proc->processname);
     s_remove_process(proc->pid);
-    remove_process(bg_list, proc->pid);
-    k_proc_cleanup(proc);
+    proc->bg_done = true;
   }
 
   return 0;
@@ -563,8 +569,26 @@ int s_print_jobs(CircularList* list) {
   pcb_t* proc;
   do {
     proc = current_node->process;
-    fprintf(stdout, "[%ld]  %d  %s\n", proc->job_num, proc->state,
-            proc->processname);
+    if (!proc->bg_done) {
+      switch (proc->state) {
+        case RUNNING:
+          fprintf(stdout, "[%ld] RUNNING %s\n", proc->job_num,
+                  proc->processname);
+          break;
+        case BLOCKED:
+          fprintf(stdout, "[%ld] BLOCKED %s\n", proc->job_num,
+                  proc->processname);
+          break;
+        case STOPPED:
+          fprintf(stdout, "[%ld] STOPPED %s\n", proc->job_num,
+                  proc->processname);
+          break;
+        case ZOMBIED:
+          fprintf(stdout, "[%ld] ZOMBIED %s\n", proc->job_num,
+                  proc->processname);
+          break;
+      }
+    }
     current_node = current_node->next;
   } while (current_node != list->head);
 

@@ -103,6 +103,9 @@ typedef struct pcb_t {
 
   char* processname; /** @brief The command name that this processor has */
 
+  bool bg_done; /** @brief To signal whether or not the processor in background
+                                  is terminated */
+
   u_int64_t job_num; /** @brief The command name that this processor has */
 } pcb_t;
 

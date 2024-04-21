@@ -3,6 +3,7 @@
 #include "fcntl.h"
 #include "parser.h"
 #include "pennfat.h"
+#include "sys/time.h"
 #include "unistd.h"
 #include "util/kernel.h"
 #include "util/prioritylist.h"
@@ -217,10 +218,13 @@ void scheduler(char* logfile) {
       sigsuspend(&suspend_set);
 
     } else {
-      while (processes[priority->head->priority]->size == 0) {
+      if (((processes[0]->size + processes[1]->size + processes[2]->size) -
+           processes[priority->head->priority]->size) != 0) {
         priority->head = priority->head->next;
+        while (processes[priority->head->priority]->size == 0) {
+          priority->head = priority->head->next;
+        }
       }
-
       CircularList* current_priority = processes[priority->head->priority];
       current = current_priority->head->process;
       curr_thread = current->handle;

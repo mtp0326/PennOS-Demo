@@ -12,25 +12,36 @@ void* b_background_poll(void* arg) {
   }
 
   Node* node = bg_list->head;
-  do {
+  int bgsize = bg_list->size;
+  for (int i = 0; i < bgsize; i++) {
     pcb_t* proc = node->process;
     s_bg_wait(proc);
-    // if (P_WIFSIGNALED(status)) {
-    //   fprintf(stdout, "[%ld]\t %4u SIGNALED\t%s\n", proc->job_num, proc->pid,
-    //           proc->processname);
-    //   // remove_process(bg_list, proc->pid);
-    //   /// might have to change processor manually
-    //   /// do we know with waitpid the processors changed???
-    // } else if (P_WIFSTOPPED(status)) {
-    //   fprintf(stdout, "[%ld]\t %4u STOPPED\t%s\n", proc->job_num, proc->pid,
-    //           proc->processname);
-    //   // remove_process(bg_list, proc->pid);
-    // } else if (P_WIFEXITED(status)) {
-
-    // remove_process(bg_list, proc->pid);
-    // }
     node = node->next;
-  } while (node != bg_list->head);
+  }
+  // do {
+  //   pcb_t* proc = node->process;
+  //   s_bg_wait(proc);
+  //   if (bg_list->size == 0) {
+  //     return NULL;
+  //   }
+  //   // if (P_WIFSIGNALED(status)) {
+  //   //   fprintf(stdout, "[%ld]\t %4u SIGNALED\t%s\n", proc->job_num,
+  //   proc->pid,
+  //   //           proc->processname);
+  //   //   // remove_process(bg_list, proc->pid);
+  //   //   /// might have to change processor manually
+  //   //   /// do we know with waitpid the processors changed???
+  //   // } else if (P_WIFSTOPPED(status)) {
+  //   //   fprintf(stdout, "[%ld]\t %4u STOPPED\t%s\n", proc->job_num,
+  //   proc->pid,
+  //   //           proc->processname);
+  //   //   // remove_process(bg_list, proc->pid);
+  //   // } else if (P_WIFEXITED(status)) {
+
+  //   // remove_process(bg_list, proc->pid);
+  //   // }
+  //   node = node->next;
+  // } while (node != bg_list->head);
 
   return NULL;
 }

@@ -19,6 +19,7 @@ pcb_t* k_proc_create(pcb_t* parent) {
   child->ticks_to_wait = 0;
   child->exit_status = -1;
   child->job_num = -1;
+  child->bg_done = false;
   if (child->child_pids == NULL) {
     free(child);
     return NULL;
