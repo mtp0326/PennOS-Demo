@@ -250,6 +250,9 @@ int s_kill(pid_t pid, int signal) {
       process->job_num = job_id;
       job_id++;
       s_write_log(STOP, process, -1);
+      char message[40];
+      sprintf(message, "\n[%d] + Stopped %s\n", process->pid, process->processname);
+      s_write(STDOUT_FILENO, message, strlen(message));
       break;
     case P_SIGCONT:
       if (!(process->state == STOPPED)) {
