@@ -112,7 +112,6 @@ pid_t s_spawn_nice(void* (*func)(void*),
                    char* argv[],
                    int fd0,
                    int fd1,
-                   bool is_background,
                    unsigned int priority) {
   pcb_t* child = k_proc_create(current);
   if (child == NULL) {
@@ -145,12 +144,7 @@ pid_t s_spawn_nice(void* (*func)(void*),
   child->priority = (priority == -1 ? 1 : priority);
 
   add_process(processes[(priority == -1 ? 1 : priority)], child);
-<<<<<<< HEAD
-  fprintf(stdout, "\n1---------\n");
-=======
->>>>>>> main
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
-    fprintf(stdout, "2---------\n");
     k_proc_cleanup(child);
     free_argv(child_argv);
     free(arg);
@@ -253,11 +247,8 @@ int s_kill(pid_t pid, int signal) {
       s_move_process(stopped, pid);
       process->state = STOPPED;
       process->statechanged = true;
-<<<<<<< HEAD
       process->job_num = job_id;
       job_id++;
-=======
->>>>>>> main
       s_write_log(STOP, process, -1);
       break;
     case P_SIGCONT:
@@ -323,14 +314,8 @@ int s_sleep(unsigned int ticks) {
   remove_process(processes[current->priority], current->pid);
   add_process(blocked, current);
   spthread_suspend_self();
-<<<<<<< HEAD
-  fprintf(stdout, "s_sleep terminated\n");
-  s_exit();
-  return;
-=======
   s_exit();
   return 0;
->>>>>>> main
 }
 
 int s_spawn_and_wait(void* (*func)(void*),
@@ -339,8 +324,7 @@ int s_spawn_and_wait(void* (*func)(void*),
                      int fd1,
                      bool nohang,
                      unsigned int priority) {
-<<<<<<< HEAD
-  pid_t child = s_spawn_nice(func, argv, fd0, fd1, nohang, priority);
+  pid_t child = s_spawn_nice(func, argv, fd0, fd1, priority);
 
   if (nohang) {
     pcb_t* child_proc = s_find_process(child);
@@ -349,16 +333,13 @@ int s_spawn_and_wait(void* (*func)(void*),
     add_process(bg_list, child_proc);
     fprintf(stdout, "[%ld] %4u\n", child_proc->job_num, child_proc->pid);
   }
-=======
   pid_t child = s_spawn_nice(func, argv, fd0, fd1, priority);
   int wstatus = 0;
   s_waitpid(child, &wstatus, nohang);
->>>>>>> main
   if (!nohang) {
     pcb_t* child_pcb = s_find_process(child);
     s_remove_process(child);
     k_proc_cleanup(child_pcb);
-<<<<<<< HEAD
   }
   return 0;
 }
@@ -374,17 +355,10 @@ int s_bg_wait(pcb_t* proc) {
   }
 
   return 0;
-=======
-    return 0;
-  } else {
-    return 0;
-  }
->>>>>>> main
 }
 
 pcb_t* s_find_process(pid_t pid) {
   pcb_t* ret = NULL;
-<<<<<<< HEAD
 
   ret = find_process(zombied, pid);
   if (ret != NULL) {
@@ -412,21 +386,6 @@ pcb_t* s_find_process(pid_t pid) {
     return ret;
   }
   return NULL;
-=======
-  find_process(zombied, pid);
-  find_process(blocked, pid);
-  find_process(stopped, pid);
-  find_process(processes[0], pid);
-  find_process(processes[1], pid);
-  find_process(processes[2], pid);
-
-  if (ret == NULL) {
-    // SET ERRNO
-    return NULL;
-  } else {
-    return ret;
-  }
->>>>>>> main
 }
 
 int s_remove_process(pid_t pid) {
@@ -477,11 +436,7 @@ void* s_function_from_string(char* program) {
   } else if (strcmp(program, "chmod") == 0) {
     return NULL;
   } else if (strcmp(program, "ps") == 0) {
-<<<<<<< HEAD
     return b_ps;
-=======
-    return NULL;
->>>>>>> main
   } else if (strcmp(program, "kill") == 0) {
     return b_kill;
   } else if (strcmp(program, "zombify") == 0) {
@@ -584,7 +539,6 @@ int s_move_process(CircularList* destination, pid_t pid) {
   return 0;
 }
 
-<<<<<<< HEAD
 int s_print_process(CircularList* list) {
   if (list == NULL || list->head == NULL) {
     return -1;
@@ -652,7 +606,8 @@ int s_print_jobs(CircularList* list) {
   } while (current_node != list->head);
 
   return 0;
-=======
+}
+
 int s_open(const char* fname, int mode) {
   int fd = k_open(fname, mode);
 
@@ -734,5 +689,4 @@ int s_cp_to_host(char* source, char* host_dest) {
 
 int s_cp_from_host(char* host_source, char* dest) {
   return k_cp_from_host(host_source, dest);
->>>>>>> main
 }

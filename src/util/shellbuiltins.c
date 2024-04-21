@@ -91,7 +91,6 @@ void* b_kill(void* arg) {
   return NULL;
 }
 
-<<<<<<< HEAD
 void* b_nice(void* arg) {
   struct parsed_command* parsed = NULL;
   parse_command(arg, &parsed);
@@ -269,17 +268,17 @@ void* b_bg(void* arg) {
     return NULL;
   }
   /// error: there are no stopped jobs
-=======
+}
 void* b_man(void* arg) {
   char* output =
-      "cat\nsleep\nbusy\necho\nls\ntouch\nmv\ncp\nrm\nchmod\nps\nkill\nzombify"
+      "cat\nsleep\nbusy\necho\nls\ntouch\nmv\ncp\nrm\nchmod\nps\nkill\nzombif"
+      "y"
       "\norphanify\nnice\nnice_pid\nman\nbg\nfg\njobs\nlogout\n";
   ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
   if (result == -1) {
     u_perror("Failed to write to STDOUT");
   }
   s_exit();
->>>>>>> main
   return NULL;
 }
 
@@ -327,20 +326,19 @@ void* b_zombify(void* arg) {
 }
 
 void* b_logout(void* arg) {
-    pthread_mutex_lock(&done_lock);
-    done = true;
-    pthread_mutex_unlock(&done_lock);
-    s_exit();
-    return NULL;
+  pthread_mutex_lock(&done_lock);
+  done = true;
+  pthread_mutex_unlock(&done_lock);
+  s_exit();
+  return NULL;
 }
 
 void* b_clear(void* arg) {
-    char* clear = "\033c";
-    s_write(STDOUT_FILENO, clear, strlen(clear));
+  char* clear = "\033c";
+  s_write(STDOUT_FILENO, clear, strlen(clear));
 
-    return NULL;
+  return NULL;
 }
-
 
 // FAT LEVEL SHELL FUNCTIONS
 

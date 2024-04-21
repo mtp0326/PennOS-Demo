@@ -106,16 +106,12 @@ typedef struct pcb_t {
   unsigned int ticks_to_wait; /** @brief Ticks remaining to wait, used only for
                                  s_sleep calls */
 
-<<<<<<< HEAD
-  char* processname; /** @brief The command name that this processor has */
+  char* processname; /** @brief Name of process, to be used for logging and ps*/
 
   bool bg_done; /** @brief To signal whether or not the processor in background
                                   is terminated */
 
   u_int64_t job_num; /** @brief The command name that this processor has */
-=======
-  char* processname; /** @brief Name of process, to be used for logging and ps*/
->>>>>>> main
 } pcb_t;
 
 /**
