@@ -8,7 +8,6 @@
 #include "util/kernel.h"
 #include "util/prioritylist.h"
 
-
 static const int centisecond = 10000;  // 10 milliseconds
 
 PList* priority;
@@ -128,7 +127,8 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "nice_pid") == 0) {
         b_nice_pid(args);
       } else if (strcmp(args[0], "man") == 0) {
-        s_spawn_and_wait(b_man, args, STDIN_FILENO, STDOUT_FILENO, parsed->is_background, -1); 
+        s_spawn_and_wait(b_man, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "bg") == 0) {
         b_bg(args);
       } else if (strcmp(args[0], "fg") == 0) {
@@ -139,7 +139,7 @@ static void* shell(void* arg) {
         b_logout(NULL);
         break;
       } else if (strcmp(args[0], "clear") == 0) {
-          b_clear(NULL);
+        b_clear(NULL);
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
         // REPLACE WITH PERROR
@@ -152,16 +152,14 @@ static void* shell(void* arg) {
   return EXIT_SUCCESS;
 }
 
-
-
 static void alarm_handler(int signum) {
   if (signum == SIGINT) {
-      char* newline = "\n";
-      s_write(STDOUT_FILENO, newline, strlen(newline));
-      s_exit();
+    char* newline = "\n";
+    s_write(STDOUT_FILENO, newline, strlen(newline));
+    s_exit();
   } else if (signum == SIGTSTP) {
-      fprintf(stderr, "AHH");
-      s_kill(current->pid, P_SIGSTOP);
+    fprintf(stderr, "AHH");
+    s_kill(current->pid, P_SIGSTOP);
   }
 }
 
@@ -183,10 +181,6 @@ void scheduler(char* logfile) {
   sigaction(SIGALRM, &act, NULL);
   sigaction(SIGINT, &act, NULL);
   sigaction(SIGTSTP, &act, NULL);
-
-
-
-
 
   // make sure SIGALRM is unblocked
   sigset_t alarm_set;
@@ -215,7 +209,7 @@ void scheduler(char* logfile) {
   arg[1] = NULL;             // Terminate the array
 
   // spawn in the shell process at priority 0
-  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, false, 0);
+  s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, 0);
 
   // main loop
   while (!done) {
@@ -397,7 +391,7 @@ int main(int argc, char** argv) {
   add_priority(priority, 0);
 
   scheduler(log);
-    fprintf(stderr, "AHH");
+  fprintf(stderr, "AHH");
   pthread_mutex_destroy(&done_lock);
 
   return EXIT_SUCCESS;

@@ -41,6 +41,7 @@ int add_process(CircularList* list, pcb_t* process) {
   }
   list->tail = newNode;  // the recently added newNode will be the last(tail)
   list->size++;
+  return 0;
 }
 
 // Adds a new process to the circular linked list
@@ -72,7 +73,7 @@ void add_process_front(CircularList* list, pcb_t* process) {
     list->head = newNode;        // move head to the last node
   }
   list->size++;
-  return 0;
+  return;
 }
 
 // Removes a process from the circular linked list by its PID

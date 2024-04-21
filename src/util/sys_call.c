@@ -333,7 +333,6 @@ int s_spawn_and_wait(void* (*func)(void*),
     add_process(bg_list, child_proc);
     fprintf(stdout, "[%ld] %4u\n", child_proc->job_num, child_proc->pid);
   }
-  pid_t child = s_spawn_nice(func, argv, fd0, fd1, priority);
   int wstatus = 0;
   s_waitpid(child, &wstatus, nohang);
   if (!nohang) {

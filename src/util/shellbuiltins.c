@@ -91,24 +91,6 @@ void* b_kill(void* arg) {
   return NULL;
 }
 
-void* b_nice(void* arg) {
-  struct parsed_command* parsed = NULL;
-  parse_command(arg, &parsed);
-  char** args = parsed->commands[0];
-  void* (*func)(void*) = s_function_from_string(args[2]);
-  unsigned priority = atoi(args[1]);  // USE STROL AND ERRNO
-  s_spawn_and_wait(func, &args[2], STDIN_FILENO, STDOUT_FILENO,
-                   parsed->is_background, priority);
-  return NULL;
-}
-
-void* b_nice_pid(void* arg) {
-  char** argv = (char**)arg;
-  s_nice(atoi(argv[2]), atoi(argv[1]));
-
-  return NULL;
-}
-
 void* b_ps(void* arg) {
   // displaying PID, PPID, priority, status, and command name.
   /// not sure if order has to change
@@ -268,7 +250,9 @@ void* b_bg(void* arg) {
     return NULL;
   }
   /// error: there are no stopped jobs
+  return NULL;
 }
+
 void* b_man(void* arg) {
   char* output =
       "cat\nsleep\nbusy\necho\nls\ntouch\nmv\ncp\nrm\nchmod\nps\nkill\nzombif"
