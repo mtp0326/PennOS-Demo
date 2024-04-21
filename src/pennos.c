@@ -8,7 +8,6 @@
 #include "util/kernel.h"
 #include "util/prioritylist.h"
 
-static pthread_mutex_t done_lock;
 
 static const int centisecond = 10000;  // 10 milliseconds
 
@@ -16,7 +15,7 @@ PList* priority;
 
 static void* shell(void* arg) {
   while (1) {
-    prompt();
+    prompt(true);
     char* cmd;
 
     read_command(&cmd);
@@ -33,29 +32,88 @@ static void* shell(void* arg) {
       }
 
       char** args = parsed->commands[0];
-      // Unfortunate canonical way to switch based on string in C.
       // Shell built-ins that are implemented using user or system calls only.
       if (strcmp(args[0], "cat") == 0) {
-        // TODO: Call your implemented cat() function
+        // this is when files arg was NOT provided
+        int input_fd = -1;
+        int output_fd = -1;
+        // create the correct input
+        if (parsed->stdin_file == NULL) {
+          input_fd = STDIN_FILENO;
+        } else {
+          input_fd = s_open(parsed->stdin_file, F_READ);
+        }
+
+        if (input_fd == -1) {
+          perror("No such file or directory\n");
+          continue;
+        }
+
+        if (parsed->stdout_file == NULL) {
+          output_fd = STDOUT_FILENO;
+        } else {
+          if (parsed->is_file_append) {
+            output_fd = s_open(parsed->stdout_file, F_APPEND);
+          } else {
+            output_fd = s_open(parsed->stdout_file, F_WRITE);
+          }
+        }
+
+        s_spawn_and_wait(b_cat, args, input_fd, output_fd,
+                         parsed->is_background, -1);
+
+        if (input_fd != STDIN_FILENO) {
+          s_close(input_fd);
+        }
+
+        if (output_fd != STDOUT_FILENO) {
+          s_close(output_fd);
+        }
+
       } else if (strcmp(args[0], "sleep") == 0) {
         s_spawn_and_wait(b_sleep, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "busy") == 0) {
         // TODO: Call your implemented busy() function
       } else if (strcmp(args[0], "echo") == 0) {
-        // TODO: Call your implemented echo() function
+        // echo should ignore any input redirection
+        // but it should write to the redirected output file
+        if (parsed->stdout_file == NULL) {
+          // we want to print to stdout
+          s_spawn_and_wait(b_echo, args, STDIN_FILENO, STDOUT_FILENO,
+                           parsed->is_background, -1);
+        } else {
+          if (parsed->is_file_append) {
+            int fd = s_open(parsed->stdout_file, F_APPEND);
+            s_spawn_and_wait(b_echo, args, STDIN_FILENO, fd,
+                             parsed->is_background, -1);
+            s_close(fd);
+          } else {
+            int fd = s_open(parsed->stdout_file, F_WRITE);
+            s_spawn_and_wait(b_echo, args, STDIN_FILENO, fd,
+                             parsed->is_background, -1);
+            s_close(fd);
+          }
+        }
+
       } else if (strcmp(args[0], "ls") == 0) {
-        // TODO: Call your implemented ls() function
+        s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "touch") == 0) {
-        // TODO: Call your implemented touch() function
+        s_spawn_and_wait(b_touch, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "mv") == 0) {
-        // TODO: Call your implemented mv() function
+        s_spawn_and_wait(b_mv, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "cp") == 0) {
-        // TODO: Call your implemented cp() function
+        s_spawn_and_wait(b_cp, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "rm") == 0) {
-        // TODO: Call your implemented rm() function
+        s_spawn_and_wait(b_rm, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "chmod") == 0) {
-        // TODO: Call your implemented chmod() function
+        s_spawn_and_wait(b_chmod, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "ps") == 0) {
         b_ps(NULL);
       } else if (strcmp(args[0], "kill") == 0) {
@@ -70,7 +128,7 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "nice_pid") == 0) {
         b_nice_pid(args);
       } else if (strcmp(args[0], "man") == 0) {
-        // TODO: Call your implemented man() function
+        s_spawn_and_wait(b_man, args, STDIN_FILENO, STDOUT_FILENO, parsed->is_background, -1); 
       } else if (strcmp(args[0], "bg") == 0) {
         b_bg(args);
       } else if (strcmp(args[0], "fg") == 0) {
@@ -79,6 +137,9 @@ static void* shell(void* arg) {
         b_jobs(NULL);
       } else if (strcmp(args[0], "logout") == 0) {
         b_logout(NULL);
+        break;
+      } else if (strcmp(args[0], "clear") == 0) {
+          b_clear(NULL);
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
         // REPLACE WITH PERROR
@@ -91,7 +152,18 @@ static void* shell(void* arg) {
   return EXIT_SUCCESS;
 }
 
-static void alarm_handler(int signum) {}
+
+
+static void alarm_handler(int signum) {
+  if (signum == SIGINT) {
+      char* newline = "\n";
+      s_write(STDOUT_FILENO, newline, strlen(newline));
+      s_exit();
+  } else if (signum == SIGTSTP) {
+      fprintf(stderr, "AHH");
+      s_kill(current->pid, P_SIGSTOP);
+  }
+}
 
 void scheduler(char* logfile) {
   sigset_t suspend_set;
@@ -109,6 +181,12 @@ void scheduler(char* logfile) {
       .sa_flags = SA_RESTART,
   };
   sigaction(SIGALRM, &act, NULL);
+  sigaction(SIGINT, &act, NULL);
+  sigaction(SIGTSTP, &act, NULL);
+
+
+
+
 
   // make sure SIGALRM is unblocked
   sigset_t alarm_set;
@@ -247,6 +325,7 @@ void scheduler(char* logfile) {
   }
   close(file);
   pthread_mutex_unlock(&done_lock);
+  return;
 }
 
 void cancel_and_join(spthread_t thread) {
@@ -258,6 +337,7 @@ void cancel_and_join(spthread_t thread) {
 #include "pennfat.h"
 
 int main(int argc, char** argv) {
+  errno = -1;
   if (argc < 2) {
     fprintf(stderr, "pennos: filesystem not specified");  // REPLACE WITH PERROR
     return -1;
@@ -270,6 +350,15 @@ int main(int argc, char** argv) {
   if (argc == 3) {
     log = argv[2];
   }
+
+  // mount the file system
+  if (mount(argv[1]) == -1) {
+    perror("Mount error");
+    return -1;
+  }
+
+  // create the global file descriptor table
+  initialize_global_fd_table();
 
   processes[0] = init_list();
   processes[1] = init_list();
@@ -308,13 +397,7 @@ int main(int argc, char** argv) {
   add_priority(priority, 0);
 
   scheduler(log);
-
-  // cleanup
-  while (processes[0]->size != 0) {
-    cancel_and_join(processes[0]->head->process->handle);
-    remove_process(processes[0], processes[0]->head->process->pid);
-  }
-
+    fprintf(stderr, "AHH");
   pthread_mutex_destroy(&done_lock);
 
   return EXIT_SUCCESS;

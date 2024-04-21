@@ -37,7 +37,7 @@ CircularList* init_list(void);
  * @param list Pointer to the circular linked list.
  * @param process Pointer to the process control block (pcb_t) to add.
  */
-void add_process(CircularList* list, pcb_t* process);
+int add_process(CircularList* list, pcb_t* process);
 
 /**
  * Adds a new process to the front of circular linked list.

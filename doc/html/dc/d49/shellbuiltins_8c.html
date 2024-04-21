@@ -25,7 +25,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">PennOS<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">PennOS<span id="projectnumber">&#160;2.0</span>
    </div>
    <div id="projectbrief">PennOS, a UNIX-like operating system.</div>
   </td>
@@ -105,9 +105,24 @@ Functions</h2></td></tr>
 <tr class="memitem:a9f61e992d66c53f4383b37699dab6ef3" id="r_a9f61e992d66c53f4383b37699dab6ef3"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f61e992d66c53f4383b37699dab6ef3">b_nice_pid</a> (void *arg)</td></tr>
 <tr class="memdesc:a9f61e992d66c53f4383b37699dab6ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjust the priority level of an existing process.  <br /></td></tr>
 <tr class="separator:a9f61e992d66c53f4383b37699dab6ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ffcfc65c56806d110fbb3eb2ac9238f" id="r_a8ffcfc65c56806d110fbb3eb2ac9238f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ffcfc65c56806d110fbb3eb2ac9238f">b_orphan_child</a> (void *arg)</td></tr>
+<tr class="memdesc:a8ffcfc65c56806d110fbb3eb2ac9238f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for orphanify.  <br /></td></tr>
+<tr class="separator:a8ffcfc65c56806d110fbb3eb2ac9238f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ab5e22f55a4f660a54973379d1722d" id="r_ac0ab5e22f55a4f660a54973379d1722d"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0ab5e22f55a4f660a54973379d1722d">b_orphanify</a> (void *arg)</td></tr>
+<tr class="memdesc:ac0ab5e22f55a4f660a54973379d1722d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to test orphanifying functionality of your kernel.  <br /></td></tr>
+<tr class="separator:ac0ab5e22f55a4f660a54973379d1722d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7a3b6e724d8044a194e1c23e5499304" id="r_af7a3b6e724d8044a194e1c23e5499304"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7a3b6e724d8044a194e1c23e5499304">b_zombie_child</a> (void *arg)</td></tr>
+<tr class="memdesc:af7a3b6e724d8044a194e1c23e5499304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for zombify.  <br /></td></tr>
+<tr class="separator:af7a3b6e724d8044a194e1c23e5499304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6f1b11929c2509c8c73d232643f2ae3" id="r_ac6f1b11929c2509c8c73d232643f2ae3"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6f1b11929c2509c8c73d232643f2ae3">b_zombify</a> (void *arg)</td></tr>
+<tr class="memdesc:ac6f1b11929c2509c8c73d232643f2ae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to test zombifying functionality of your kernel.  <br /></td></tr>
+<tr class="separator:ac6f1b11929c2509c8c73d232643f2ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a184a1be3455442bda9bbd0789e438481" id="r_a184a1be3455442bda9bbd0789e438481"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a184a1be3455442bda9bbd0789e438481">b_logout</a> (void *arg)</td></tr>
 <tr class="memdesc:a184a1be3455442bda9bbd0789e438481"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exits the shell and shutsdown PennOS.  <br /></td></tr>
 <tr class="separator:a184a1be3455442bda9bbd0789e438481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8705f3b70f67031e5aac30c27866998d" id="r_a8705f3b70f67031e5aac30c27866998d"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8705f3b70f67031e5aac30c27866998d">b_ls</a> (void *arg)</td></tr>
+<tr class="memdesc:a8705f3b70f67031e5aac30c27866998d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lists all files in the working directory. For extra credit, it should support relative and absolute file paths.  <br /></td></tr>
+<tr class="separator:a8705f3b70f67031e5aac30c27866998d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a371b3588a8f8a231c10f75b0ea84926f" name="a371b3588a8f8a231c10f75b0ea84926f"></a>
@@ -150,6 +165,29 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<<<<<<< HEAD
+=======
+<a id="a8705f3b70f67031e5aac30c27866998d" name="a8705f3b70f67031e5aac30c27866998d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8705f3b70f67031e5aac30c27866998d">&#9670;&#160;</a></span>b_ls()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * b_ls </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lists all files in the working directory. For extra credit, it should support relative and absolute file paths. </p>
+<p>Example Usage: ls (regular credit) Example Usage: ls ../../foo/./bar/sample (only for EC) </p>
+
+</div>
+</div>
+>>>>>>> main
 <a id="a5c9d672a604065d43cc83893febc188a" name="a5c9d672a604065d43cc83893febc188a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5c9d672a604065d43cc83893febc188a">&#9670;&#160;</a></span>b_nice()</h2>
 
@@ -193,6 +231,45 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a8ffcfc65c56806d110fbb3eb2ac9238f" name="a8ffcfc65c56806d110fbb3eb2ac9238f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ffcfc65c56806d110fbb3eb2ac9238f">&#9670;&#160;</a></span>b_orphan_child()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * b_orphan_child </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper for orphanify. </p>
+
+</div>
+</div>
+<a id="ac0ab5e22f55a4f660a54973379d1722d" name="ac0ab5e22f55a4f660a54973379d1722d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0ab5e22f55a4f660a54973379d1722d">&#9670;&#160;</a></span>b_orphanify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * b_orphanify </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Used to test orphanifying functionality of your kernel. </p>
+<p>Example Usage: orphanify </p>
+
+</div>
+</div>
 <a id="a8caa9d892fd52ba7fbaf212e3bcdae06" name="a8caa9d892fd52ba7fbaf212e3bcdae06"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8caa9d892fd52ba7fbaf212e3bcdae06">&#9670;&#160;</a></span>b_sleep()</h2>
 
@@ -211,6 +288,45 @@ Functions</h2></td></tr>
 <p>Sleep for <code>n</code> seconds. </p>
 <p>Note that you'll have to convert the number of seconds to the correct number of ticks.</p>
 <p>Example Usage: sleep 10 </p>
+
+</div>
+</div>
+<a id="af7a3b6e724d8044a194e1c23e5499304" name="af7a3b6e724d8044a194e1c23e5499304"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7a3b6e724d8044a194e1c23e5499304">&#9670;&#160;</a></span>b_zombie_child()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * b_zombie_child </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper for zombify. </p>
+
+</div>
+</div>
+<a id="ac6f1b11929c2509c8c73d232643f2ae3" name="ac6f1b11929c2509c8c73d232643f2ae3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6f1b11929c2509c8c73d232643f2ae3">&#9670;&#160;</a></span>b_zombify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * b_zombify </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Used to test zombifying functionality of your kernel. </p>
+<p>Example Usage: zombify </p>
 
 </div>
 </div>

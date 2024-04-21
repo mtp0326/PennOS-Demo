@@ -35,7 +35,25 @@ void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sys__call_8c_ab5efee98239591e68
 int \mbox{\hyperlink{sys__call_8c_a1db57eb907f680ab844066357b793d5f}{s\+\_\+write\+\_\+log}} (\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\+\_\+message\+\_\+t}} logtype, \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}proc, unsigned int old\+\_\+nice)
 \item 
 int \mbox{\hyperlink{sys__call_8c_a7cc95330d937650d14281e3d6041f284}{s\+\_\+move\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}destination, pid\+\_\+t pid)
+<<<<<<< HEAD
 \end{DoxyCompactItemize}
+=======
+\item 
+int \mbox{\hyperlink{sys__call_8c_afec6e61720e05918efefeab347e950f3}{s\+\_\+open}} (const char \texorpdfstring{$\ast$}{*}fname, int mode)
+\begin{DoxyCompactList}\small\item\em open a file name fname with the mode mode and return a file descriptor. The allowed modes are as follows\+: \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{sys__call_8c_afdcf52e63af8002a5d7c02774ee0578f}{s\+\_\+read}} (int fd, int n, char \texorpdfstring{$\ast$}{*}buf)
+\begin{DoxyCompactList}\small\item\em read n bytes from the file referenced by fd. On return, s\+\_\+read returns the number of bytes read, 0 if EOF is reached, or a negative number on error. A kernel level read should occur to perform the actual functionality, but its important to remember that the process’ file descriptor may need to be updated as the position of the file pointer changes. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{sys__call_8c_ad3317435b4bd7309160538fc5d730eb9}{s\+\_\+write}} (int fd, const char \texorpdfstring{$\ast$}{*}str, int n)
+\begin{DoxyCompactList}\small\item\em write n bytes of the string referenced by str to the file fd and increment the file pointer by n. On return, s\+\_\+write returns the number of bytes written, or a negative value on error. Note that this writes bytes not chars, these can be anything, even \textquotesingle{}\textbackslash{}0\textquotesingle{} A kernel level write should occur to perform the actual functionality, but its important to remember that the process’ file descriptor may need to be updated as the position of the file pointer changes. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8c_a1ee856dbd0706f79a440d1e98b42d32d}{s\+\_\+close}} (int fd)
+\begin{DoxyCompactList}\small\item\em close the file fd and return 0 on success, or a negative value on failure. A kernel level close should occur, and on success the local process’ file descriptor table should be cleaned up appropriately. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8c_a395873f1de0b89a686d438580ba5dcf7}{s\+\_\+unlink}} (const char \texorpdfstring{$\ast$}{*}fname)
+\item 
+off\+\_\+t \mbox{\hyperlink{sys__call_8c_ac21f611f4fb486935d9ad2915a529d3b}{s\+\_\+lseek}} (int fd, int offset, int whence)
+\begin{DoxyCompactList}\small\item\em reposition the file pointer for fd to the offset relative to whence. You must also implement the constants F\+\_\+\+SEEK\+\_\+\+SET, F\+\_\+\+SEEK\+\_\+\+CUR, and F\+\_\+\+SEEK\+\_\+\+END, which reference similar file whences as their similarly named counterparts in lseek(2). A kernel level lseek should occur, and necessary changes to the calling process’ file descriptor table will be necessary. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sys__call_8c_ab913114f1534d9ab098d0d5c4517bfe2}{s\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename)
+\begin{DoxyCompactList}\small\item\em List the file filename in the current directory. If filename is NULL, list all files in the current directory. Before EC implementations, this should be very simple and could literally be a call a similar k\+\_\+function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+>>>>>>> main
 
 
 \doxysubsection{Function Documentation}
@@ -51,6 +69,24 @@ int \mbox{\hyperlink{sys__call_8c_a7cc95330d937650d14281e3d6041f284}{s\+\_\+move
 \doxysubsubsection{\texorpdfstring{free\_argv()}{free\_argv()}}
 {\footnotesize\ttfamily void free\+\_\+argv (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
+\Hypertarget{sys__call_8c_a1ee856dbd0706f79a440d1e98b42d32d}\label{sys__call_8c_a1ee856dbd0706f79a440d1e98b42d32d} 
+\index{sys\_call.c@{sys\_call.c}!s\_close@{s\_close}}
+\index{s\_close@{s\_close}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_close()}{s\_close()}}
+{\footnotesize\ttfamily int s\+\_\+close (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+close the file fd and return 0 on success, or a negative value on failure. A kernel level close should occur, and on success the local process’ file descriptor table should be cleaned up appropriately. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8c_a53c8865d5bf1ca946e5b5405190f6690}\label{sys__call_8c_a53c8865d5bf1ca946e5b5405190f6690} 
 \index{sys\_call.c@{sys\_call.c}!s\_exit@{s\_exit}}
 \index{s\_exit@{s\_exit}!sys\_call.c@{sys\_call.c}}
@@ -105,6 +141,43 @@ Send a signal to a particular process.
 \begin{DoxyReturn}{Returns}
 0 on success, -\/1 on error. 
 \end{DoxyReturn}
+<<<<<<< HEAD
+=======
+\Hypertarget{sys__call_8c_ab913114f1534d9ab098d0d5c4517bfe2}\label{sys__call_8c_ab913114f1534d9ab098d0d5c4517bfe2} 
+\index{sys\_call.c@{sys\_call.c}!s\_ls@{s\_ls}}
+\index{s\_ls@{s\_ls}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_ls()}{s\_ls()}}
+{\footnotesize\ttfamily void s\+\_\+ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
+
+
+
+List the file filename in the current directory. If filename is NULL, list all files in the current directory. Before EC implementations, this should be very simple and could literally be a call a similar k\+\_\+function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{sys__call_8c_ac21f611f4fb486935d9ad2915a529d3b}\label{sys__call_8c_ac21f611f4fb486935d9ad2915a529d3b} 
+\index{sys\_call.c@{sys\_call.c}!s\_lseek@{s\_lseek}}
+\index{s\_lseek@{s\_lseek}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_lseek()}{s\_lseek()}}
+{\footnotesize\ttfamily off\+\_\+t s\+\_\+lseek (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{int}]{offset,  }\item[{int}]{whence }\end{DoxyParamCaption})}
+
+
+
+reposition the file pointer for fd to the offset relative to whence. You must also implement the constants F\+\_\+\+SEEK\+\_\+\+SET, F\+\_\+\+SEEK\+\_\+\+CUR, and F\+\_\+\+SEEK\+\_\+\+END, which reference similar file whences as their similarly named counterparts in lseek(2). A kernel level lseek should occur, and necessary changes to the calling process’ file descriptor table will be necessary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & \\
+\hline
+{\em offset} & \\
+\hline
+{\em whence} & \\
+\hline
+\end{DoxyParams}
+>>>>>>> main
 \Hypertarget{sys__call_8c_a7cc95330d937650d14281e3d6041f284}\label{sys__call_8c_a7cc95330d937650d14281e3d6041f284} 
 \index{sys\_call.c@{sys\_call.c}!s\_move\_process@{s\_move\_process}}
 \index{s\_move\_process@{s\_move\_process}!sys\_call.c@{sys\_call.c}}
@@ -131,6 +204,55 @@ Set the priority of the specified thread.
 \begin{DoxyReturn}{Returns}
 0 on success, -\/1 on failure. 
 \end{DoxyReturn}
+<<<<<<< HEAD
+=======
+\Hypertarget{sys__call_8c_afec6e61720e05918efefeab347e950f3}\label{sys__call_8c_afec6e61720e05918efefeab347e950f3} 
+\index{sys\_call.c@{sys\_call.c}!s\_open@{s\_open}}
+\index{s\_open@{s\_open}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_open()}{s\_open()}}
+{\footnotesize\ttfamily int s\+\_\+open (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fname,  }\item[{int}]{mode }\end{DoxyParamCaption})}
+
+
+
+open a file name fname with the mode mode and return a file descriptor. The allowed modes are as follows\+: 
+
+F\+\_\+\+WRITE -\/ writing and reading, truncates if the file exists, or creates it if it does not exist. Only one instance of a file can be opened in F\+\_\+\+WRITE mode; error if Penn\+OS attempts to open a file in F\+\_\+\+WRITE mode more than once F\+\_\+\+READ -\/ open the file for reading only, return an error if the file does not exist F\+\_\+\+APPEND -\/ open the file for reading and writing but does not truncate the file if exists; additionally, the file pointer references the end of the file.
+
+s\+\_\+open returns a file descriptor on success and a negative value on error. This open will initially be done at the kernel level, using a more intricate and already-\/implemented kernel level function. If the kernel level function succeeds and returns a fd, the user level function should also somehow keep track that such file descriptor is managed by the calling process. This can be done in multiple ways.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fname} & \\
+\hline
+{\em mode} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8c_afdcf52e63af8002a5d7c02774ee0578f}\label{sys__call_8c_afdcf52e63af8002a5d7c02774ee0578f} 
+\index{sys\_call.c@{sys\_call.c}!s\_read@{s\_read}}
+\index{s\_read@{s\_read}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_read()}{s\_read()}}
+{\footnotesize\ttfamily ssize\+\_\+t s\+\_\+read (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{int}]{n,  }\item[{char \texorpdfstring{$\ast$}{*}}]{buf }\end{DoxyParamCaption})}
+
+
+
+read n bytes from the file referenced by fd. On return, s\+\_\+read returns the number of bytes read, 0 if EOF is reached, or a negative number on error. A kernel level read should occur to perform the actual functionality, but its important to remember that the process’ file descriptor may need to be updated as the position of the file pointer changes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & \\
+\hline
+{\em n} & \\
+\hline
+{\em buf} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ssize\+\_\+t 
+\end{DoxyReturn}
+>>>>>>> main
 \Hypertarget{sys__call_8c_a09ef4dc77a6071976f7d93759d48afa6}\label{sys__call_8c_a09ef4dc77a6071976f7d93759d48afa6} 
 \index{sys\_call.c@{sys\_call.c}!s\_remove\_process@{s\_remove\_process}}
 \index{s\_remove\_process@{s\_remove\_process}!sys\_call.c@{sys\_call.c}}
@@ -222,6 +344,20 @@ int
 \doxysubsubsection{\texorpdfstring{s\_spawn\_nice()}{s\_spawn\_nice()}}
 {\footnotesize\ttfamily pid\+\_\+t s\+\_\+spawn\+\_\+nice (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*})(void \texorpdfstring{$\ast$}{*})}]{func,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]},  }\item[{int}]{fd0,  }\item[{int}]{fd1,  }\item[{unsigned int}]{priority }\end{DoxyParamCaption})}
 
+\Hypertarget{sys__call_8c_a395873f1de0b89a686d438580ba5dcf7}\label{sys__call_8c_a395873f1de0b89a686d438580ba5dcf7} 
+\index{sys\_call.c@{sys\_call.c}!s\_unlink@{s\_unlink}}
+\index{s\_unlink@{s\_unlink}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_unlink()}{s\_unlink()}}
+{\footnotesize\ttfamily int s\+\_\+unlink (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fname }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em fname} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}\label{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3} 
 \index{sys\_call.c@{sys\_call.c}!s\_waitpid@{s\_waitpid}}
 \index{s\_waitpid@{s\_waitpid}!sys\_call.c@{sys\_call.c}}
@@ -244,6 +380,31 @@ Wait on a child of the calling process, until it changes state. If {\ttfamily no
 \begin{DoxyReturn}{Returns}
 pid\+\_\+t The process ID of the child which has changed state on success, -\/1 on error. 
 \end{DoxyReturn}
+<<<<<<< HEAD
+=======
+\Hypertarget{sys__call_8c_ad3317435b4bd7309160538fc5d730eb9}\label{sys__call_8c_ad3317435b4bd7309160538fc5d730eb9} 
+\index{sys\_call.c@{sys\_call.c}!s\_write@{s\_write}}
+\index{s\_write@{s\_write}!sys\_call.c@{sys\_call.c}}
+\doxysubsubsection{\texorpdfstring{s\_write()}{s\_write()}}
+{\footnotesize\ttfamily ssize\+\_\+t s\+\_\+write (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{str,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+write n bytes of the string referenced by str to the file fd and increment the file pointer by n. On return, s\+\_\+write returns the number of bytes written, or a negative value on error. Note that this writes bytes not chars, these can be anything, even \textquotesingle{}\textbackslash{}0\textquotesingle{} A kernel level write should occur to perform the actual functionality, but its important to remember that the process’ file descriptor may need to be updated as the position of the file pointer changes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & \\
+\hline
+{\em str} & \\
+\hline
+{\em n} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ssize\+\_\+t 
+\end{DoxyReturn}
+>>>>>>> main
 \Hypertarget{sys__call_8c_a1db57eb907f680ab844066357b793d5f}\label{sys__call_8c_a1db57eb907f680ab844066357b793d5f} 
 \index{sys\_call.c@{sys\_call.c}!s\_write\_log@{s\_write\_log}}
 \index{s\_write\_log@{s\_write\_log}!sys\_call.c@{sys\_call.c}}

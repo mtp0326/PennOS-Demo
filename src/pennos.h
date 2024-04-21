@@ -37,4 +37,5 @@
 
 static bool done = false;
 
+static pthread_mutex_t done_lock;
 #endif

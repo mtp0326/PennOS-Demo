@@ -25,7 +25,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">PennOS<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">PennOS<span id="projectnumber">&#160;2.0</span>
    </div>
    <div id="projectbrief">PennOS, a UNIX-like operating system.</div>
   </td>
@@ -128,6 +128,29 @@ Functions</h2></td></tr>
 <tr class="separator:a1db57eb907f680ab844066357b793d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cc95330d937650d14281e3d6041f284" id="r_a7cc95330d937650d14281e3d6041f284"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7cc95330d937650d14281e3d6041f284">s_move_process</a> (<a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *destination, pid_t pid)</td></tr>
 <tr class="separator:a7cc95330d937650d14281e3d6041f284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<<<<<<< HEAD
+=======
+<tr class="memitem:afec6e61720e05918efefeab347e950f3" id="r_afec6e61720e05918efefeab347e950f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afec6e61720e05918efefeab347e950f3">s_open</a> (const char *fname, int mode)</td></tr>
+<tr class="memdesc:afec6e61720e05918efefeab347e950f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">open a file name fname with the mode mode and return a file descriptor. The allowed modes are as follows:  <br /></td></tr>
+<tr class="separator:afec6e61720e05918efefeab347e950f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdcf52e63af8002a5d7c02774ee0578f" id="r_afdcf52e63af8002a5d7c02774ee0578f"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdcf52e63af8002a5d7c02774ee0578f">s_read</a> (int fd, int n, char *buf)</td></tr>
+<tr class="memdesc:afdcf52e63af8002a5d7c02774ee0578f"><td class="mdescLeft">&#160;</td><td class="mdescRight">read n bytes from the file referenced by fd. On return, s_read returns the number of bytes read, 0 if EOF is reached, or a negative number on error. A kernel level read should occur to perform the actual functionality, but its important to remember that the process’ file descriptor may need to be updated as the position of the file pointer changes.  <br /></td></tr>
+<tr class="separator:afdcf52e63af8002a5d7c02774ee0578f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3317435b4bd7309160538fc5d730eb9" id="r_ad3317435b4bd7309160538fc5d730eb9"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3317435b4bd7309160538fc5d730eb9">s_write</a> (int fd, const char *str, int n)</td></tr>
+<tr class="memdesc:ad3317435b4bd7309160538fc5d730eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">write n bytes of the string referenced by str to the file fd and increment the file pointer by n. On return, s_write returns the number of bytes written, or a negative value on error. Note that this writes bytes not chars, these can be anything, even '\0' A kernel level write should occur to perform the actual functionality, but its important to remember that the process’ file descriptor may need to be updated as the position of the file pointer changes.  <br /></td></tr>
+<tr class="separator:ad3317435b4bd7309160538fc5d730eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ee856dbd0706f79a440d1e98b42d32d" id="r_a1ee856dbd0706f79a440d1e98b42d32d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1ee856dbd0706f79a440d1e98b42d32d">s_close</a> (int fd)</td></tr>
+<tr class="memdesc:a1ee856dbd0706f79a440d1e98b42d32d"><td class="mdescLeft">&#160;</td><td class="mdescRight">close the file fd and return 0 on success, or a negative value on failure. A kernel level close should occur, and on success the local process’ file descriptor table should be cleaned up appropriately.  <br /></td></tr>
+<tr class="separator:a1ee856dbd0706f79a440d1e98b42d32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395873f1de0b89a686d438580ba5dcf7" id="r_a395873f1de0b89a686d438580ba5dcf7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a395873f1de0b89a686d438580ba5dcf7">s_unlink</a> (const char *fname)</td></tr>
+<tr class="separator:a395873f1de0b89a686d438580ba5dcf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac21f611f4fb486935d9ad2915a529d3b" id="r_ac21f611f4fb486935d9ad2915a529d3b"><td class="memItemLeft" align="right" valign="top">off_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac21f611f4fb486935d9ad2915a529d3b">s_lseek</a> (int fd, int offset, int whence)</td></tr>
+<tr class="memdesc:ac21f611f4fb486935d9ad2915a529d3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">reposition the file pointer for fd to the offset relative to whence. You must also implement the constants F_SEEK_SET, F_SEEK_CUR, and F_SEEK_END, which reference similar file whences as their similarly named counterparts in lseek(2). A kernel level lseek should occur, and necessary changes to the calling process’ file descriptor table will be necessary.  <br /></td></tr>
+<tr class="separator:ac21f611f4fb486935d9ad2915a529d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab913114f1534d9ab098d0d5c4517bfe2" id="r_ab913114f1534d9ab098d0d5c4517bfe2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab913114f1534d9ab098d0d5c4517bfe2">s_ls</a> (const char *filename)</td></tr>
+<tr class="memdesc:ab913114f1534d9ab098d0d5c4517bfe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">List the file filename in the current directory. If filename is NULL, list all files in the current directory. Before EC implementations, this should be very simple and could literally be a call a similar k_function.  <br /></td></tr>
+<tr class="separator:ab913114f1534d9ab098d0d5c4517bfe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+>>>>>>> main
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a628a3b2c1d461572974e97bea327519d" name="a628a3b2c1d461572974e97bea327519d"></a>
@@ -161,6 +184,32 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ee856dbd0706f79a440d1e98b42d32d" name="a1ee856dbd0706f79a440d1e98b42d32d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ee856dbd0706f79a440d1e98b42d32d">&#9670;&#160;</a></span>s_close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_close </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>close the file fd and return 0 on success, or a negative value on failure. A kernel level close should occur, and on success the local process’ file descriptor table should be cleaned up appropriately. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 </div>
 </div>
@@ -257,6 +306,70 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<<<<<<< HEAD
+=======
+<a id="ab913114f1534d9ab098d0d5c4517bfe2" name="ab913114f1534d9ab098d0d5c4517bfe2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab913114f1534d9ab098d0d5c4517bfe2">&#9670;&#160;</a></span>s_ls()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void s_ls </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>List the file filename in the current directory. If filename is NULL, list all files in the current directory. Before EC implementations, this should be very simple and could literally be a call a similar k_function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac21f611f4fb486935d9ad2915a529d3b" name="ac21f611f4fb486935d9ad2915a529d3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac21f611f4fb486935d9ad2915a529d3b">&#9670;&#160;</a></span>s_lseek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">off_t s_lseek </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>whence</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reposition the file pointer for fd to the offset relative to whence. You must also implement the constants F_SEEK_SET, F_SEEK_CUR, and F_SEEK_END, which reference similar file whences as their similarly named counterparts in lseek(2). A kernel level lseek should occur, and necessary changes to the calling process’ file descriptor table will be necessary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">offset</td><td></td></tr>
+    <tr><td class="paramname">whence</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+>>>>>>> main
 <a id="a7cc95330d937650d14281e3d6041f284" name="a7cc95330d937650d14281e3d6041f284"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7cc95330d937650d14281e3d6041f284">&#9670;&#160;</a></span>s_move_process()</h2>
 
@@ -309,6 +422,79 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<<<<<<< HEAD
+=======
+<a id="afec6e61720e05918efefeab347e950f3" name="afec6e61720e05918efefeab347e950f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afec6e61720e05918efefeab347e950f3">&#9670;&#160;</a></span>s_open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_open </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fname</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>open a file name fname with the mode mode and return a file descriptor. The allowed modes are as follows: </p>
+<p>F_WRITE - writing and reading, truncates if the file exists, or creates it if it does not exist. Only one instance of a file can be opened in F_WRITE mode; error if PennOS attempts to open a file in F_WRITE mode more than once F_READ - open the file for reading only, return an error if the file does not exist F_APPEND - open the file for reading and writing but does not truncate the file if exists; additionally, the file pointer references the end of the file.</p>
+<p>s_open returns a file descriptor on success and a negative value on error. This open will initially be done at the kernel level, using a more intricate and already-implemented kernel level function. If the kernel level function succeeds and returns a fd, the user level function should also somehow keep track that such file descriptor is managed by the calling process. This can be done in multiple ways.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fname</td><td></td></tr>
+    <tr><td class="paramname">mode</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="afdcf52e63af8002a5d7c02774ee0578f" name="afdcf52e63af8002a5d7c02774ee0578f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdcf52e63af8002a5d7c02774ee0578f">&#9670;&#160;</a></span>s_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t s_read </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>buf</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>read n bytes from the file referenced by fd. On return, s_read returns the number of bytes read, 0 if EOF is reached, or a negative number on error. A kernel level read should occur to perform the actual functionality, but its important to remember that the process’ file descriptor may need to be updated as the position of the file pointer changes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">n</td><td></td></tr>
+    <tr><td class="paramname">buf</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
+
+</div>
+</div>
+>>>>>>> main
 <a id="a09ef4dc77a6071976f7d93759d48afa6" name="a09ef4dc77a6071976f7d93759d48afa6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09ef4dc77a6071976f7d93759d48afa6">&#9670;&#160;</a></span>s_remove_process()</h2>
 
@@ -494,6 +680,30 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a395873f1de0b89a686d438580ba5dcf7" name="a395873f1de0b89a686d438580ba5dcf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a395873f1de0b89a686d438580ba5dcf7">&#9670;&#160;</a></span>s_unlink()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int s_unlink </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fname</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fname</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
 <a id="a3c0c6c4ae69799354d707ff57ac925d3" name="a3c0c6c4ae69799354d707ff57ac925d3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c0c6c4ae69799354d707ff57ac925d3">&#9670;&#160;</a></span>s_waitpid()</h2>
 
@@ -531,6 +741,46 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<<<<<<< HEAD
+=======
+<a id="ad3317435b4bd7309160538fc5d730eb9" name="ad3317435b4bd7309160538fc5d730eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3317435b4bd7309160538fc5d730eb9">&#9670;&#160;</a></span>s_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t s_write </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>str</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>write n bytes of the string referenced by str to the file fd and increment the file pointer by n. On return, s_write returns the number of bytes written, or a negative value on error. Note that this writes bytes not chars, these can be anything, even '\0' A kernel level write should occur to perform the actual functionality, but its important to remember that the process’ file descriptor may need to be updated as the position of the file pointer changes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">str</td><td></td></tr>
+    <tr><td class="paramname">n</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
+
+</div>
+</div>
+>>>>>>> main
 <a id="a1db57eb907f680ab844066357b793d5f" name="a1db57eb907f680ab844066357b793d5f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1db57eb907f680ab844066357b793d5f">&#9670;&#160;</a></span>s_write_log()</h2>
 
