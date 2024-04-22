@@ -158,7 +158,6 @@ static void alarm_handler(int signum) {
     s_write(STDOUT_FILENO, newline, strlen(newline));
     s_exit();
   } else if (signum == SIGTSTP) {
-    fprintf(stderr, "AHH");
     s_kill(current->pid, P_SIGSTOP);
   }
 }
