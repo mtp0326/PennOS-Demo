@@ -141,9 +141,9 @@ static void* shell(void* arg) {
         s_spawn_and_wait(b_kill, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "zombify") == 0) {
-        // TODO: Call your implemented zombify() function
+        s_spawn_and_wait(b_zombify, args, STDIN_FILENO, STDOUT_FILENO, parsed->is_background, -1);
       } else if (strcmp(args[0], "orphanify") == 0) {
-        // TODO: Call your implemented orphanify() function
+        s_spawn_and_wait(b_orphanify, args, STDIN_FILENO, STDOUT_FILENO, parsed->is_background, -1);
       } else if (strcmp(args[0], "nice") == 0) {
         b_nice(cmd);
       } else if (strcmp(args[0], "nice_pid") == 0) {
@@ -188,6 +188,10 @@ int b_output_redir(struct parsed_command* parsed) {
 }
 
 static void alarm_handler(int signum) {
+
+  if (current->pid == 1) {
+    return;
+  }
   if (signum == SIGINT) {
     char* newline = "\n";
     s_write(STDOUT_FILENO, newline, strlen(newline));
