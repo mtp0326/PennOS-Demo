@@ -38,4 +38,15 @@
 static bool done = false;
 
 static pthread_mutex_t done_lock;
+
+/**
+ * @brief handles edge case output redirection
+ *
+ * @param parsed parsed user command
+ *
+ * @return -1 if not output redirection, fd number if file is opened
+ *
+ */
+int b_output_redir(struct parsed_command* parsed);
+
 #endif
