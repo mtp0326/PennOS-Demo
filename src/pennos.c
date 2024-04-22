@@ -344,7 +344,7 @@ int main(int argc, char** argv) {
   }
 
   // mount the file system
-  if (mount(argv[1]) == -1) {
+  if (mount(argv[1]) < 0) {
     perror("Mount error");
     return -1;
   }
