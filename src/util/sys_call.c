@@ -333,6 +333,16 @@ int s_sleep(unsigned int ticks) {
   remove_process(processes[current->priority], current->pid);
   add_process(blocked, current);
   spthread_suspend_self();
+  return 0;
+}
+
+int s_busy(void) {
+  current->ticks_to_wait = -1;
+
+  current->state = BLOCKED;
+  remove_process(processes[current->priority], current->pid);
+  add_process(blocked, current);
+  spthread_suspend_self();
   s_exit();
   return 0;
 }
@@ -360,6 +370,25 @@ int s_spawn_and_wait(void* (*func)(void*),
     s_remove_process(child);
     k_proc_cleanup(child_pcb);
   }
+  return 0;
+}
+
+int s_fg(pcb_t* proc) {
+  // void* func = s_function_from_string(proc->processname);
+  proc->bg_done = true;
+
+  // if (spthread_create(&proc->handle, NULL, func, child_argv) != 0) {
+  //   k_proc_cleanup(proc);
+  //   free_argv(child_argv);
+  //   free(arg);
+  //   return -1;
+  // }
+  int wstatus = 0;
+  s_waitpid(proc->pid, &wstatus, false);
+
+  s_reap_all_child(proc);
+  s_remove_process(proc->pid);
+  k_proc_cleanup(proc);
   return 0;
 }
 
@@ -439,7 +468,7 @@ void* s_function_from_string(char* program) {
   } else if (strcmp(program, "sleep") == 0) {
     return b_sleep;
   } else if (strcmp(program, "busy") == 0) {
-    return NULL;
+    return b_busy;
   } else if (strcmp(program, "echo") == 0) {
     return NULL;
   } else if (strcmp(program, "ls") == 0) {

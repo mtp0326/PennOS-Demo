@@ -63,6 +63,12 @@ void* b_sleep(void* arg) {
   return NULL;
 }
 
+void* b_busy(void* arg) {
+  s_busy();
+  s_exit();
+  return NULL;
+}
+
 void* b_kill(void* arg) {
   char** argv = (char**)arg;
   int signal;
@@ -103,6 +109,7 @@ void* b_ps(void* arg) {
   s_print_process(stopped);
   s_print_process(zombied);
 
+  s_exit();
   return NULL;
 }
 
@@ -131,6 +138,7 @@ void* b_fg(void* arg) {
         fprintf(stderr, "SIGCONT failed to send\n");
         return NULL;
       }
+      s_fg(proc);
 
       /// TODO: immediate send to tcprescp
 
@@ -145,6 +153,12 @@ void* b_fg(void* arg) {
     if (proc != NULL) {
       fprintf(stdout, "[%ld]\t %4u RUNNING\t%s\n", proc->job_num, proc->pid,
               proc->processname);
+      if (s_kill(proc->pid, SIGCONT) < 0) {
+        // error
+        fprintf(stderr, "SIGCONT failed to send\n");
+        return NULL;
+      }
+      s_fg(proc);
 
       /// TODO: immediate send to tcprescp
 
@@ -165,11 +179,12 @@ void* b_fg(void* arg) {
     proc = stopped->tail->process;
     fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
             proc->processname);
-    if (s_kill(proc->pid, SIGCONT) < 0) {
+    if (s_kill(proc->pid, P_SIGCONT) < 0) {
       // error
       fprintf(stderr, "SIGCONT failed to send\n");
       return NULL;
     }
+    s_fg(proc);
 
     /// TODO: immediate send to tcprescp
 
@@ -183,6 +198,12 @@ void* b_fg(void* arg) {
     proc = bg_list->tail->process;
     fprintf(stdout, "[%ld]\t %4u RUNNING\t%s\n", proc->job_num, proc->pid,
             proc->processname);
+    if (s_kill(proc->pid, P_SIGCONT) < 0) {
+      // error
+      fprintf(stderr, "SIGCONT failed to send\n");
+      return NULL;
+    }
+    s_fg(proc);
 
     /// TODO: immediate send to tcprescp
 
