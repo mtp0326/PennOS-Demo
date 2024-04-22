@@ -138,6 +138,16 @@ int s_nice(pid_t pid, int priority);
  */
 int s_sleep(unsigned int ticks);
 
+/**
+ * @brief Suspends execution of the calling process for an unspecified amount of
+ * time.
+ *
+ * @param void.
+ *
+ * @return int Returns 0 on success, -1 on failure and sets errno.
+ */
+int s_busy(void);
+
 /***** CUSTOM SYSCALLS FOR SCHEDULER*/
 
 /**
@@ -203,6 +213,8 @@ int s_spawn_and_wait(void* (*func)(void*),
                      int fd1,
                      bool nohang,
                      unsigned int priority);
+
+int s_fg(pcb_t* proc);
 
 /**
  * @brief Checks status of background processes with waitpid(nohang)
