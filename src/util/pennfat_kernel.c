@@ -1042,8 +1042,10 @@ char* formatTime(time_t t) {
   return buffer;
 }
 
-void k_ls(const char* filename) {
+void k_ls(const char* filename, int fd) {
   struct directory_entries* temp = calloc(1, sizeof(struct directory_entries));
+  char* acc = calloc(sizeof(char), 2048);
+  int total_acc_size = 0;
   if (filename == NULL) {
     // we need to list everything in the current directory
     lseek_to_root_directory();
@@ -1089,12 +1091,19 @@ void k_ls(const char* filename) {
         firstBlock = 0;
       }
 
-      // first_block permissions file_size last_touched_timestamp file_name
-      fprintf(stderr, "%u %s %d %s %s\n", firstBlock, permissions, temp->size,
-              formatTime(temp->mtime), temp->name);
+      char* line = calloc(sizeof(char), 100);
+
+      total_acc_size +=
+          sprintf(line, "%u %s %d %s %s\n", firstBlock, permissions, temp->size,
+                  formatTime(temp->mtime), temp->name);
+
+      strcat(acc, line);
 
       read_cnt += 1;
+      free(line);
     }
+    k_write(fd, acc, total_acc_size);
+    free(acc);
     return;
   }  // end of if
 
@@ -1118,8 +1127,13 @@ void k_ls(const char* filename) {
   generate_permission(temp->perm, &permissions);
 
   // first_block permissions file_size last_touched_timestamp file_name
-  fprintf(stderr, "%u %s %d %s %s\n", temp->firstBlock, permissions, temp->size,
-          formatTime(temp->mtime), temp->name);
+  char line[100];
+
+  int line_size =
+      sprintf(line, "%u %s %d %s %s\n", temp->firstBlock, permissions,
+              temp->size, formatTime(temp->mtime), temp->name);
+
+  k_write(fd, line, line_size);
 
   return;
 }

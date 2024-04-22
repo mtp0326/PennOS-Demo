@@ -358,7 +358,8 @@ void* b_clear(void* arg) {
 // FAT LEVEL SHELL FUNCTIONS
 
 void* b_ls(void* arg) {
-  s_ls(NULL);
+  s_ls(NULL, current->output_fd);
+
   s_exit();
   return NULL;
 }

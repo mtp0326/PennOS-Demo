@@ -344,7 +344,7 @@ off_t s_lseek(int fd, int offset, int whence);
  *
  * @param filename
  */
-void s_ls(const char* filename);
+void s_ls(const char* filename, int fd);
 
 char* s_read_all(const char* filename, int* read_num);
 

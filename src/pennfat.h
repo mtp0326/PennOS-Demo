@@ -66,7 +66,7 @@ void prompt(bool shell);
  * @brief Helper function that reads user input and handles CTRL-D
  *
  */
-void read_command();
+int read_command(char** cmds);
 
 /**
  * @brief Helper function that handles CTRL-Z

@@ -96,8 +96,24 @@ static void* shell(void* arg) {
         }
 
       } else if (strcmp(args[0], "ls") == 0) {
-        s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,
-                         parsed->is_background, -1);
+        if (parsed->stdout_file == NULL) {
+          // we want to print to stdout
+          s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,
+                           parsed->is_background, -1);
+        } else {
+          if (parsed->is_file_append) {
+            int fd = s_open(parsed->stdout_file, F_APPEND);
+            s_spawn_and_wait(b_ls, args, STDIN_FILENO, fd,
+                             parsed->is_background, -1);
+            s_close(fd);
+          } else {
+            int fd = s_open(parsed->stdout_file, F_WRITE);
+            s_spawn_and_wait(b_ls, args, STDIN_FILENO, fd,
+                             parsed->is_background, -1);
+            s_close(fd);
+          }
+        }
+
       } else if (strcmp(args[0], "touch") == 0) {
         // TODO: Call your implemented touch() function
         s_spawn_and_wait(b_touch, args, STDIN_FILENO, STDOUT_FILENO,
@@ -141,9 +157,11 @@ static void* shell(void* arg) {
         s_spawn_and_wait(b_kill, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "zombify") == 0) {
-        s_spawn_and_wait(b_zombify, args, STDIN_FILENO, STDOUT_FILENO, parsed->is_background, -1);
+        s_spawn_and_wait(b_zombify, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "orphanify") == 0) {
-        s_spawn_and_wait(b_orphanify, args, STDIN_FILENO, STDOUT_FILENO, parsed->is_background, -1);
+        s_spawn_and_wait(b_orphanify, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "nice") == 0) {
         b_nice(cmd);
       } else if (strcmp(args[0], "nice_pid") == 0) {
@@ -188,7 +206,6 @@ int b_output_redir(struct parsed_command* parsed) {
 }
 
 static void alarm_handler(int signum) {
-
   if (current->pid == 1) {
     return;
   }

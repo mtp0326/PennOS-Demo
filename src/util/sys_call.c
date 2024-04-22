@@ -251,7 +251,8 @@ int s_kill(pid_t pid, int signal) {
       job_id++;
       s_write_log(STOP, process, -1);
       char message[40];
-      sprintf(message, "\n[%d] + Stopped %s\n", process->pid, process->processname);
+      sprintf(message, "\n[%d] + Stopped %s\n", process->pid,
+              process->processname);
       s_write(STDOUT_FILENO, message, strlen(message));
       break;
     case P_SIGCONT:
@@ -702,8 +703,8 @@ off_t s_lseek(int fd, int offset, int whence) {
   return k_lseek(fd, offset, whence);
 }
 
-void s_ls(const char* filename) {
-  k_ls(filename);
+void s_ls(const char* filename, int fd) {
+  k_ls(filename, fd);
 }
 
 char* s_read_all(const char* filename, int* read_num) {
