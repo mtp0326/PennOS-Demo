@@ -218,7 +218,6 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang)
     }
   } else if (child_pcb->state == STOPPED) {
     *wstatus = STATUS_STOPPED;
-    // fprintf(stdout, "222222\n");
   } else {
     // became blocked? edstem #730 will define spec
   }
@@ -245,7 +244,6 @@ int s_kill(pid_t pid, int signal)
       job_id++;
       s_write_log(STOP, process, -1);
       char message[40];
-      // fprintf(stdout, "333333\n");
       sprintf(message, "\n[%d] + Stopped %s\n", process->pid,
               process->processname);
       s_write(STDOUT_FILENO, message, strlen(message));
@@ -261,13 +259,11 @@ int s_kill(pid_t pid, int signal)
       s_write_log(CONTINUE, process, -1);
       break;
     case P_SIGTER:
-      s_move_process(zombied, pid);
-      process->state = ZOMBIED;
-      process->statechanged = true;
+      
       process->term_signal = P_SIGTER;
       process->exit_status = 0;
       s_write_log(SIGNAL, process, -1);
-      s_write_log(ZOMBIE, process, -1);
+      s_zombie(pid);
       break;
     default:
       // ERRNO: invalid SIGNAL?
@@ -296,21 +292,9 @@ void s_reap_all_child(pcb_t* parent)
 
 void s_exit(void)
 {
-  s_move_process(zombied, current->pid);
-  current->state = ZOMBIED;
-  current->statechanged = true;
 
   s_write_log(EXIT, current, -1);
-  s_write_log(ZOMBIE, current, -1);
-  DynamicPIDArray* pid_array = current->child_pids;
-  for (size_t i = 0; i < pid_array->used; i++) {
-    pid_t current_pid = pid_array->array[i];
-    // Here you can use the current_pid, for example, print it or perform any other operation
-    s_write_log(ORPHAN, s_find_process(current_pid), -1);
-    fprintf(stderr, "AHHHH\n");
-  }
-  // reap all children
-  s_reap_all_child(current);
+  s_zombie(current->pid);
 }
 
 
@@ -326,7 +310,6 @@ void s_zombie(pid_t pid)
     pid_t current_pid = pid_array->array[i];
     // Here you can use the current_pid, for example, print it or perform any other operation
     s_write_log(ORPHAN, s_find_process(current_pid), -1);
-    fprintf(stderr, "AHHHH\n");
   }
   s_reap_all_child(s_find_process(pid));
 }
@@ -389,7 +372,9 @@ int s_spawn_and_wait(void* (*func)(void*),
     child_proc->job_num = job_id;
     job_id++;
     add_process(bg_list, child_proc);
-    fprintf(stdout, "[%ld] %4u\n", child_proc->job_num, child_proc->pid);
+    char message[25];
+    sprintf(message, "[%lu] %4u\n", child_proc->job_num, child_proc->pid);
+    s_write(STDOUT_FILENO, message, strlen(message));
   }
   int wstatus = 0;
   s_waitpid(child, &wstatus, nohang);
@@ -437,8 +422,10 @@ int s_bg_wait(pcb_t* proc)
   int status = 0;
   pid_t wpid = s_waitpid(proc->pid, &status, true);
   if (wpid != -1) {
-    fprintf(stdout, "[%ld]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
+    char message[50];
+    sprintf(message, "[%lu]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
         proc->processname);
+    s_write(STDOUT_FILENO, message, strlen(message));
     s_remove_process(proc->pid);
     proc->bg_done = true;
   }
