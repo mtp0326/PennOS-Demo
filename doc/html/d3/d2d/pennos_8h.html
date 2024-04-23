@@ -79,7 +79,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">pennos.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -92,6 +93,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="../../d0/daa/kernel_8h_source.html">util/kernel.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d0/d8c/shellbuiltins_8h_source.html">util/shellbuiltins.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../db/d80/sys__call_8h_source.html">util/sys_call.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d2/d50/stress_8h_source.html">util/stress.h</a>&quot;</code><br />
 </div>
 <p><a href="../../d3/d2d/pennos_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -113,6 +115,12 @@ Macros</h2></td></tr>
 <tr class="separator:abd165ee6474b5b75bf075842fff13a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2fe1725bb5e9823d089c46b9ed5266e" id="r_ae2fe1725bb5e9823d089c46b9ed5266e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2fe1725bb5e9823d089c46b9ed5266e">STDERR_FILENO</a>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:ae2fe1725bb5e9823d089c46b9ed5266e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:afc52712119cc00e63fc2748f652cfbac" id="r_afc52712119cc00e63fc2748f652cfbac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc52712119cc00e63fc2748f652cfbac">b_output_redir</a> (struct <a class="el" href="../../dd/d3e/structparsed__command.html">parsed_command</a> *parsed)</td></tr>
+<tr class="memdesc:afc52712119cc00e63fc2748f652cfbac"><td class="mdescLeft">&#160;</td><td class="mdescRight">handles edge case output redirection  <br /></td></tr>
+<tr class="separator:afc52712119cc00e63fc2748f652cfbac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a8fb447618db946a9e2a596d9ea18763f" name="a8fb447618db946a9e2a596d9ea18763f"></a>
@@ -224,6 +232,33 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="afc52712119cc00e63fc2748f652cfbac" name="afc52712119cc00e63fc2748f652cfbac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc52712119cc00e63fc2748f652cfbac">&#9670;&#160;</a></span>b_output_redir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int b_output_redir </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="../../dd/d3e/structparsed__command.html">parsed_command</a> *</td>          <td class="paramname"><span class="paramname"><em>parsed</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>handles edge case output redirection </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parsed</td><td>parsed user command</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>-1 if not output redirection, fd number if file is opened </dd></dl>
 
 </div>
 </div>

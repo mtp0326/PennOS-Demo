@@ -99,16 +99,43 @@ Variables</h2></td></tr>
 <tr class="separator:aa733d308e782d6ef693944928ff7d3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e7aa369c6421b8cf905e838507cc70a" id="r_a5e7aa369c6421b8cf905e838507cc70a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e7aa369c6421b8cf905e838507cc70a">zombied</a></td></tr>
 <tr class="separator:a5e7aa369c6421b8cf905e838507cc70a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a094c1776b4826f9aff421225ba8bd96f" id="r_a094c1776b4826f9aff421225ba8bd96f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a094c1776b4826f9aff421225ba8bd96f">bg_list</a></td></tr>
+<tr class="separator:a094c1776b4826f9aff421225ba8bd96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadfd9da35df54aa07940062a8b8326e2" id="r_aadfd9da35df54aa07940062a8b8326e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aadfd9da35df54aa07940062a8b8326e2">current</a></td></tr>
 <tr class="separator:aadfd9da35df54aa07940062a8b8326e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54a60f61f4b468b7e6ef164c4b5ba60b" id="r_a54a60f61f4b468b7e6ef164c4b5ba60b"><td class="memItemLeft" align="right" valign="top">pid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54a60f61f4b468b7e6ef164c4b5ba60b">next_pid</a></td></tr>
 <tr class="separator:a54a60f61f4b468b7e6ef164c4b5ba60b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eaa855e821dfd115dd64e929aeb6102" id="r_a6eaa855e821dfd115dd64e929aeb6102"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6eaa855e821dfd115dd64e929aeb6102">job_id</a></td></tr>
+<tr class="separator:a6eaa855e821dfd115dd64e929aeb6102"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfb6a5b45038dfab7134f82adad169d7" id="r_abfb6a5b45038dfab7134f82adad169d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abfb6a5b45038dfab7134f82adad169d7">logfiledescriptor</a></td></tr>
 <tr class="separator:abfb6a5b45038dfab7134f82adad169d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c17b5754a836f005f69312ee0080106" id="r_a6c17b5754a836f005f69312ee0080106"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c17b5754a836f005f69312ee0080106">tick</a></td></tr>
 <tr class="separator:a6c17b5754a836f005f69312ee0080106"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a094c1776b4826f9aff421225ba8bd96f" name="a094c1776b4826f9aff421225ba8bd96f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a094c1776b4826f9aff421225ba8bd96f">&#9670;&#160;</a></span>bg_list</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../de/d82/structCircularList.html">CircularList</a>* bg_list</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A global pointer to the process list of background processes. The processes enter this list when </p>
+
+</div>
+</div>
 <a id="a4a5bf3e2ca112a01dc3029503e3e80e4" name="a4a5bf3e2ca112a01dc3029503e3e80e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a5bf3e2ca112a01dc3029503e3e80e4">&#9670;&#160;</a></span>blocked</h2>
 
@@ -128,7 +155,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>A global pointer to the process list of blocked processes. Processes enter this list via <a class="el" href="../../d8/d74/sys__call_8c.html#a3c0c6c4ae69799354d707ff57ac925d3" title="Wait on a child of the calling process, until it changes state. If nohang is true,...">s_waitpid()</a> or <a class="el" href="../../d8/d74/sys__call_8c.html#aec37528a3c7935864924764d1911126c" title="Suspends execution of the calling proces for a specified number of clock ticks.">s_sleep()</a>. </p>
+<p>A global pointer to the process list of blocked processes. Processes enter this list via <a class="el" href="../../d8/d74/sys__call_8c.html#a3c0c6c4ae69799354d707ff57ac925d3" title="Wait on a child of the calling process, until it changes state. If nohang is true,...">s_waitpid()</a> or <a class="el" href="../../d8/d74/sys__call_8c.html#a0b8fdff50e5b9c5fa8559fe294e4243f" title="Suspends execution of the calling proces for a specified number of clock ticks.">s_sleep()</a>. </p>
 
 </div>
 </div>
@@ -152,6 +179,29 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>This is the currently scheduled process. It can be accessed by any method to easily access the current method. </p>
+
+</div>
+</div>
+<a id="a6eaa855e821dfd115dd64e929aeb6102" name="a6eaa855e821dfd115dd64e929aeb6102"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eaa855e821dfd115dd64e929aeb6102">&#9670;&#160;</a></span>job_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t job_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This is to keep track of the job numbers from processes that are in the background or stopped. </p>
 
 </div>
 </div>

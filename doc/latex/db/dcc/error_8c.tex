@@ -1,0 +1,26 @@
+\doxysection{src/util/error.c File Reference}
+\hypertarget{error_8c}{}\label{error_8c}\index{src/util/error.c@{src/util/error.c}}
+{\ttfamily \#include "{}error.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{error_8c_ab2e01b83bcc336abdcc77b088661cdfd}{u\+\_\+perror}} (char \texorpdfstring{$\ast$}{*}message)
+\begin{DoxyCompactList}\small\item\em This is an analogue of the perror(3) function. This allows the shell or other function to pass in a message describing what error occured, which the function then concatenates to the default error message based on your errno value. The filesystem and kernel will both set errno and return -\/1 on system calls if they fail, after which \doxylink{error_8h_ab2e01b83bcc336abdcc77b088661cdfd}{u\+\_\+perror()} can be called. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{error_8c_ab2e01b83bcc336abdcc77b088661cdfd}\label{error_8c_ab2e01b83bcc336abdcc77b088661cdfd} 
+\index{error.c@{error.c}!u\_perror@{u\_perror}}
+\index{u\_perror@{u\_perror}!error.c@{error.c}}
+\doxysubsubsection{\texorpdfstring{u\_perror()}{u\_perror()}}
+{\footnotesize\ttfamily void u\+\_\+perror (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{message }\end{DoxyParamCaption})}
+
+
+
+This is an analogue of the perror(3) function. This allows the shell or other function to pass in a message describing what error occured, which the function then concatenates to the default error message based on your errno value. The filesystem and kernel will both set errno and return -\/1 on system calls if they fail, after which \doxylink{error_8h_ab2e01b83bcc336abdcc77b088661cdfd}{u\+\_\+perror()} can be called. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & This is the message that will be concatenated to the default error message. \\
+\hline
+\end{DoxyParams}

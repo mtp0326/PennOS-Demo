@@ -108,8 +108,14 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a53ab4c02de07bcca467dff05771554a0" id="r_a53ab4c02de07bcca467dff05771554a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/d26/structFD__Bitmap.html">FD_Bitmap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53ab4c02de07bcca467dff05771554a0">open_fds</a></td></tr>
 <tr class="memdesc:a53ab4c02de07bcca467dff05771554a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an enum storing the process's current state.  <br /></td></tr>
 <tr class="separator:a53ab4c02de07bcca467dff05771554a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6778a8e4c4755a5b6c0f98d104f9a4a" id="r_ad6778a8e4c4755a5b6c0f98d104f9a4a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6778a8e4c4755a5b6c0f98d104f9a4a">input_fd</a></td></tr>
+<tr class="memdesc:ad6778a8e4c4755a5b6c0f98d104f9a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores a bitmap containg all open file descriptors.  <br /></td></tr>
+<tr class="separator:ad6778a8e4c4755a5b6c0f98d104f9a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25cb35b3c96a2dc2876cd983ba65f0ff" id="r_a25cb35b3c96a2dc2876cd983ba65f0ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25cb35b3c96a2dc2876cd983ba65f0ff">output_fd</a></td></tr>
+<tr class="memdesc:a25cb35b3c96a2dc2876cd983ba65f0ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">The input i/o that his process reads data from.  <br /></td></tr>
+<tr class="separator:a25cb35b3c96a2dc2876cd983ba65f0ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09cd01a482977b7d568726b57e3adeda" id="r_a09cd01a482977b7d568726b57e3adeda"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09cd01a482977b7d568726b57e3adeda">statechanged</a></td></tr>
-<tr class="memdesc:a09cd01a482977b7d568726b57e3adeda"><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores a bitmap containg all open file descriptors.  <br /></td></tr>
+<tr class="memdesc:a09cd01a482977b7d568726b57e3adeda"><td class="mdescLeft">&#160;</td><td class="mdescRight">The out i/o that his process writes data to.  <br /></td></tr>
 <tr class="separator:a09cd01a482977b7d568726b57e3adeda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a649db56ea039615cb6e9a2c9ac0a5059" id="r_a649db56ea039615cb6e9a2c9ac0a5059"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a649db56ea039615cb6e9a2c9ac0a5059">exit_status</a></td></tr>
 <tr class="memdesc:a649db56ea039615cb6e9a2c9ac0a5059"><td class="mdescLeft">&#160;</td><td class="mdescRight">This contains a bool that keeps track of whether or not the process state has changed.  <br /></td></tr>
@@ -129,10 +135,51 @@ Data Fields</h2></td></tr>
 <tr class="memitem:abc136142080bdf5d6d5f430851e6d052" id="r_abc136142080bdf5d6d5f430851e6d052"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc136142080bdf5d6d5f430851e6d052">processname</a></td></tr>
 <tr class="memdesc:abc136142080bdf5d6d5f430851e6d052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ticks remaining to wait, used only for s_sleep calls.  <br /></td></tr>
 <tr class="separator:abc136142080bdf5d6d5f430851e6d052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51e03090ceb30aba480f00adb06ba1b2" id="r_a51e03090ceb30aba480f00adb06ba1b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51e03090ceb30aba480f00adb06ba1b2">bg_done</a></td></tr>
+<tr class="memdesc:a51e03090ceb30aba480f00adb06ba1b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of process, to be used for logging and ps.  <br /></td></tr>
+<tr class="separator:a51e03090ceb30aba480f00adb06ba1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6fe13c375b62338dc716826fb1e0da3" id="r_ad6fe13c375b62338dc716826fb1e0da3"><td class="memItemLeft" align="right" valign="top">u_int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6fe13c375b62338dc716826fb1e0da3">job_num</a></td></tr>
+<tr class="memdesc:ad6fe13c375b62338dc716826fb1e0da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">To signal whether or not the processor in background is terminated.  <br /></td></tr>
+<tr class="separator:ad6fe13c375b62338dc716826fb1e0da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e0a75a820f11a4b6b670495a8795ec0" id="r_a0e0a75a820f11a4b6b670495a8795ec0"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e0a75a820f11a4b6b670495a8795ec0">argv</a></td></tr>
+<tr class="memdesc:a0e0a75a820f11a4b6b670495a8795ec0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The command name that this processor has.  <br /></td></tr>
+<tr class="separator:a0e0a75a820f11a4b6b670495a8795ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This structure stores all required information about a running process. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="a0e0a75a820f11a4b6b670495a8795ec0" name="a0e0a75a820f11a4b6b670495a8795ec0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e0a75a820f11a4b6b670495a8795ec0">&#9670;&#160;</a></span>argv</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** pcb_t::argv</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The command name that this processor has. </p>
+
+</div>
+</div>
+<a id="a51e03090ceb30aba480f00adb06ba1b2" name="a51e03090ceb30aba480f00adb06ba1b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51e03090ceb30aba480f00adb06ba1b2">&#9670;&#160;</a></span>bg_done</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pcb_t::bg_done</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Name of process, to be used for logging and ps. </p>
+
+</div>
+</div>
 <a id="a905cc6faa7cf99a347e57bebcdf0da5e" name="a905cc6faa7cf99a347e57bebcdf0da5e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a905cc6faa7cf99a347e57bebcdf0da5e">&#9670;&#160;</a></span>child_pids</h2>
 
@@ -179,6 +226,38 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="ad6778a8e4c4755a5b6c0f98d104f9a4a" name="ad6778a8e4c4755a5b6c0f98d104f9a4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6778a8e4c4755a5b6c0f98d104f9a4a">&#9670;&#160;</a></span>input_fd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int pcb_t::input_fd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This stores a bitmap containg all open file descriptors. </p>
+
+</div>
+</div>
+<a id="ad6fe13c375b62338dc716826fb1e0da3" name="ad6fe13c375b62338dc716826fb1e0da3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6fe13c375b62338dc716826fb1e0da3">&#9670;&#160;</a></span>job_num</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">u_int64_t pcb_t::job_num</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>To signal whether or not the processor in background is terminated. </p>
+
+</div>
+</div>
 <a id="a53ab4c02de07bcca467dff05771554a0" name="a53ab4c02de07bcca467dff05771554a0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53ab4c02de07bcca467dff05771554a0">&#9670;&#160;</a></span>open_fds</h2>
 
@@ -192,6 +271,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This is an enum storing the process's current state. </p>
+
+</div>
+</div>
+<a id="a25cb35b3c96a2dc2876cd983ba65f0ff" name="a25cb35b3c96a2dc2876cd983ba65f0ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25cb35b3c96a2dc2876cd983ba65f0ff">&#9670;&#160;</a></span>output_fd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int pcb_t::output_fd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The input i/o that his process reads data from. </p>
 
 </div>
 </div>
@@ -288,7 +383,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This stores a bitmap containg all open file descriptors. </p>
+<p>The out i/o that his process writes data to. </p>
 
 </div>
 </div>

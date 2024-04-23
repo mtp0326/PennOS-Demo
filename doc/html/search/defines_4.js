@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['max_5ffd_5fnum_0',['MAX_FD_NUM',['../d0/d4d/pennfat__kernel_8h.html#a42dd65bff5e0d98e3d17b523e65b9e06',1,'pennfat_kernel.h']]],
-  ['max_5flen_1',['MAX_LEN',['../dc/d3d/pennfat_8h.html#aabf4f709c8199e41cf279c77112345fe',1,'MAX_LEN:&#160;pennfat.h'],['../d3/d2d/pennos_8h.html#aabf4f709c8199e41cf279c77112345fe',1,'MAX_LEN:&#160;pennos.h']]],
-  ['milisec_5fin_5fnano_2',['MILISEC_IN_NANO',['../de/d1c/spthread_8c.html#a78d2c967692b28a42becb102670560e0',1,'spthread.c']]]
+  ['invalid_5ffile_5fdescriptor_0',['INVALID_FILE_DESCRIPTOR',['../d0/d4d/pennfat__kernel_8h.html#ac464698b9650d3fae2d2fa746624130a',1,'pennfat_kernel.h']]],
+  ['invalid_5ffile_5fname_1',['INVALID_FILE_NAME',['../d0/d4d/pennfat__kernel_8h.html#a766ef9868dc2ca892fec7594bf5c001f',1,'pennfat_kernel.h']]],
+  ['invalid_5fparameters_2',['INVALID_PARAMETERS',['../d0/d4d/pennfat__kernel_8h.html#a388389bcfc8bc6948baafab7862e0ad9',1,'pennfat_kernel.h']]]
 ];

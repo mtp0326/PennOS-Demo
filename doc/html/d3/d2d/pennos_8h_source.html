@@ -122,15 +122,23 @@ $(function() { codefold.init(1); });
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="../../d0/daa/kernel_8h.html">util/kernel.h</a>&quot;</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="../../d0/d8c/shellbuiltins_8h.html">util/shellbuiltins.h</a>&quot;</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/d80/sys__call_8h.html">util/sys_call.h</a>&quot;</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">static</span> <span class="keywordtype">bool</span> done = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &quot;<a class="code" href="../../d2/d50/stress_8h.html">util/stress.h</a>&quot;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">static</span> <span class="keywordtype">bool</span> done = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">static</span> pthread_mutex_t done_lock;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d3/d2d/pennos_8h.html#afc52712119cc00e63fc2748f652cfbac">b_output_redir</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="../../dd/d3e/structparsed__command.html">parsed_command</a>* parsed);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aglobals_8h_html"><div class="ttname"><a href="../../d5/d87/globals_8h.html">globals.h</a></div></div>
 <div class="ttc" id="akernel_8h_html"><div class="ttname"><a href="../../d0/daa/kernel_8h.html">kernel.h</a></div></div>
 <div class="ttc" id="aparser_8h_html"><div class="ttname"><a href="../../d5/d36/parser_8h.html">parser.h</a></div></div>
 <div class="ttc" id="apennfat_8h_html"><div class="ttname"><a href="../../dc/d3d/pennfat_8h.html">pennfat.h</a></div></div>
+<div class="ttc" id="apennos_8h_html_afc52712119cc00e63fc2748f652cfbac"><div class="ttname"><a href="../../d3/d2d/pennos_8h.html#afc52712119cc00e63fc2748f652cfbac">b_output_redir</a></div><div class="ttdeci">int b_output_redir(struct parsed_command *parsed)</div><div class="ttdoc">handles edge case output redirection</div><div class="ttdef"><b>Definition</b> pennos.c:216</div></div>
 <div class="ttc" id="ashellbuiltins_8h_html"><div class="ttname"><a href="../../d0/d8c/shellbuiltins_8h.html">shellbuiltins.h</a></div></div>
+<div class="ttc" id="astress_8h_html"><div class="ttname"><a href="../../d2/d50/stress_8h.html">stress.h</a></div></div>
+<div class="ttc" id="astructparsed__command_html"><div class="ttname"><a href="../../dd/d3e/structparsed__command.html">parsed_command</a></div><div class="ttdef"><b>Definition</b> parser.h:36</div></div>
 <div class="ttc" id="asys__call_8h_html"><div class="ttname"><a href="../../db/d80/sys__call_8h.html">sys_call.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -8,22 +8,39 @@
 \item 
 \mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{clinkedlist_8c_a40af759c666c8683b21e533eae304bd5}{init\+\_\+list}} (void)
 \item 
-void \mbox{\hyperlink{clinkedlist_8c_aeedee99ef47d460de79eebe5bcf19d83}{add\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}process)
+int \mbox{\hyperlink{clinkedlist_8c_aa502493a1fe088e8763033dcc4fc4839}{add\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}process)
+\item 
+void \mbox{\hyperlink{clinkedlist_8c_a65cec0c339fb28e407b3c42a9108a53b}{add\+\_\+process\+\_\+front}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}process)
 \item 
 bool \mbox{\hyperlink{clinkedlist_8c_a6d27d9f54d9189fe8149a2d8cb8baa24}{remove\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, pid\+\_\+t pid)
 \item 
 \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{clinkedlist_8c_a43d3a5a52f3e2c3d607e50ac257cb67b}{find\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, pid\+\_\+t pid)
+\item 
+\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{clinkedlist_8c_afde8f3d4e1dd02b36cf5b7d2c3ac7b5e}{find\+\_\+process\+\_\+job\+\_\+id}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, u\+\_\+int64\+\_\+t index)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{clinkedlist_8c_aeedee99ef47d460de79eebe5bcf19d83}\label{clinkedlist_8c_aeedee99ef47d460de79eebe5bcf19d83} 
+\Hypertarget{clinkedlist_8c_aa502493a1fe088e8763033dcc4fc4839}\label{clinkedlist_8c_aa502493a1fe088e8763033dcc4fc4839} 
 \index{clinkedlist.c@{clinkedlist.c}!add\_process@{add\_process}}
 \index{add\_process@{add\_process}!clinkedlist.c@{clinkedlist.c}}
 \doxysubsubsection{\texorpdfstring{add\_process()}{add\_process()}}
-{\footnotesize\ttfamily void add\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{process }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int add\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{process }\end{DoxyParamCaption})}
 
 Adds a new process to the circular linked list. 
+\begin{DoxyParams}{Parameters}
+{\em list} & Pointer to the circular linked list. \\
+\hline
+{\em process} & Pointer to the process control block (\doxylink{structpcb__t}{pcb\+\_\+t}) to add. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{clinkedlist_8c_a65cec0c339fb28e407b3c42a9108a53b}\label{clinkedlist_8c_a65cec0c339fb28e407b3c42a9108a53b} 
+\index{clinkedlist.c@{clinkedlist.c}!add\_process\_front@{add\_process\_front}}
+\index{add\_process\_front@{add\_process\_front}!clinkedlist.c@{clinkedlist.c}}
+\doxysubsubsection{\texorpdfstring{add\_process\_front()}{add\_process\_front()}}
+{\footnotesize\ttfamily void add\+\_\+process\+\_\+front (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{process }\end{DoxyParamCaption})}
+
+Adds a new process to the front of circular linked list. 
 \begin{DoxyParams}{Parameters}
 {\em list} & Pointer to the circular linked list. \\
 \hline
@@ -41,6 +58,22 @@ Finds a process in the circular linked list by its PID.
 {\em list} & Pointer to the circular linked list. \\
 \hline
 {\em pid} & PID of the process to find. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pcb\+\_\+t\texorpdfstring{$\ast$}{*} Pointer to the found process control block, or NULL if not found. 
+\end{DoxyReturn}
+\Hypertarget{clinkedlist_8c_afde8f3d4e1dd02b36cf5b7d2c3ac7b5e}\label{clinkedlist_8c_afde8f3d4e1dd02b36cf5b7d2c3ac7b5e} 
+\index{clinkedlist.c@{clinkedlist.c}!find\_process\_job\_id@{find\_process\_job\_id}}
+\index{find\_process\_job\_id@{find\_process\_job\_id}!clinkedlist.c@{clinkedlist.c}}
+\doxysubsubsection{\texorpdfstring{find\_process\_job\_id()}{find\_process\_job\_id()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} find\+\_\+process\+\_\+job\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{u\+\_\+int64\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+Finds a process in the circular linked list by its Job ID. 
+\begin{DoxyParams}{Parameters}
+{\em list} & Pointer to the circular linked list. \\
+\hline
+{\em index} & Job Id specified by user. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

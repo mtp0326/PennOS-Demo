@@ -86,14 +86,35 @@ $(function() { codefold.init(1); });
   <div class="headertitle"><div class="title">error.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../da/d41/error_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef ERROR</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define ERROR</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="../../da/d41/error_8h.html#ad65a8842cc674e3ddf69355898c0ecbf">errno</a>;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="../../da/d41/error_8h.html#ab2e01b83bcc336abdcc77b088661cdfd">   21</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../da/d41/error_8h.html#ab2e01b83bcc336abdcc77b088661cdfd">u_perror</a>(<span class="keywordtype">char</span>* message);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aerror_8h_html_ab2e01b83bcc336abdcc77b088661cdfd"><div class="ttname"><a href="../../da/d41/error_8h.html#ab2e01b83bcc336abdcc77b088661cdfd">u_perror</a></div><div class="ttdeci">void u_perror(char *message)</div><div class="ttdoc">This is an analogue of the perror(3) function. This allows the shell or other function to pass in a m...</div></div>
+<a href="../../da/d41/error_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;unistd.h&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;errno.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;stdio.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef ERROR</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define ERROR</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="../../da/d41/error_8h.html#ad65a8842cc674e3ddf69355898c0ecbf">errno</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// KERNEL LEVEL ERRORS</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="comment">// S_SPAWN ERRORS</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="../../da/d41/error_8h.html#a53d186873a290a149683f9b9ee11c492">   20</a></span><span class="preprocessor">#define EPCBCREATE 0</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="../../da/d41/error_8h.html#a0ba510724fffc6e8b380e18ef76174aa">   21</a></span><span class="preprocessor">#define ENOARGS 1</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="../../da/d41/error_8h.html#a850db54c11401b3a33f79c1ee334a3e3">   22</a></span><span class="preprocessor">#define EADDPROC 2</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="../../da/d41/error_8h.html#a29a8288f3c0f2111159dbeadfd619c1a">   23</a></span><span class="preprocessor">#define ETHREADCREATE 3</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="../../da/d41/error_8h.html#ab63e8f0456257c703a5c5f25ed139981">   24</a></span><span class="preprocessor">#define EBITMAP 4</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="comment">// S_SLEEP ERRORS</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="../../da/d41/error_8h.html#ab3d8ec79ca1a1eb0d42f5bdf5c473e83">   28</a></span><span class="preprocessor">#define EINVARG 5</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// FAT LEVEL ERRORS</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../da/d41/error_8h.html#ab2e01b83bcc336abdcc77b088661cdfd">u_perror</a>(<span class="keywordtype">char</span>* message);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aerror_8h_html_ab2e01b83bcc336abdcc77b088661cdfd"><div class="ttname"><a href="../../da/d41/error_8h.html#ab2e01b83bcc336abdcc77b088661cdfd">u_perror</a></div><div class="ttdeci">void u_perror(char *message)</div><div class="ttdoc">This is an analogue of the perror(3) function. This allows the shell or other function to pass in a m...</div><div class="ttdef"><b>Definition</b> error.c:2</div></div>
 <div class="ttc" id="aerror_8h_html_ad65a8842cc674e3ddf69355898c0ecbf"><div class="ttname"><a href="../../da/d41/error_8h.html#ad65a8842cc674e3ddf69355898c0ecbf">errno</a></div><div class="ttdeci">int errno</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

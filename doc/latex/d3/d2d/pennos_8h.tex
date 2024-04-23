@@ -9,6 +9,7 @@
 {\ttfamily \#include "{}util/kernel.\+h"{}}\newline
 {\ttfamily \#include "{}util/shellbuiltins.\+h"{}}\newline
 {\ttfamily \#include "{}util/sys\+\_\+call.\+h"{}}\newline
+{\ttfamily \#include "{}util/stress.\+h"{}}\newline
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -28,6 +29,11 @@
 \item 
 \#define \mbox{\hyperlink{pennos_8h_ae2fe1725bb5e9823d089c46b9ed5266e}{STDERR\+\_\+\+FILENO}}~2
 \end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{pennos_8h_afc52712119cc00e63fc2748f652cfbac}{b\+\_\+output\+\_\+redir}} (struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}parsed)
+\begin{DoxyCompactList}\small\item\em handles edge case output redirection \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -79,3 +85,24 @@
 \doxysubsubsection{\texorpdfstring{STDOUT\_FILENO}{STDOUT\_FILENO}}
 {\footnotesize\ttfamily \#define STDOUT\+\_\+\+FILENO~1}
 
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{pennos_8h_afc52712119cc00e63fc2748f652cfbac}\label{pennos_8h_afc52712119cc00e63fc2748f652cfbac} 
+\index{pennos.h@{pennos.h}!b\_output\_redir@{b\_output\_redir}}
+\index{b\_output\_redir@{b\_output\_redir}!pennos.h@{pennos.h}}
+\doxysubsubsection{\texorpdfstring{b\_output\_redir()}{b\_output\_redir()}}
+{\footnotesize\ttfamily int b\+\_\+output\+\_\+redir (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}}]{parsed }\end{DoxyParamCaption})}
+
+
+
+handles edge case output redirection 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parsed} & parsed user command\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if not output redirection, fd number if file is opened 
+\end{DoxyReturn}

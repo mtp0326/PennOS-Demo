@@ -4,58 +4,61 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SHELL\_BUILTINS}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SHELL\_BUILTINS}}
-\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{error_8h}{error.h}}"{}}}
 \DoxyCodeLine{00004\ \textcolor{comment}{//\ SHELL\ BUILTINS:\ Implemented\ using\ user\ and\ system\ level\ functions\ only!}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00016\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a12d3c2e9ad69506dfe091ed1467cde0c}{b\_cat}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a8caa9d892fd52ba7fbaf212e3bcdae06}{b\_sleep}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00034\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a522b7a9dcadf792f7d79b3211f8bba9f}{b\_busy}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_af01e6b67f01ef538abcc03c9aff00aba}{b\_echo}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00050\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a8705f3b70f67031e5aac30c27866998d}{b\_ls}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00058\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a65b90b6bb0ac5b9c681bf586f71cbac7}{b\_touch}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00070\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_ae7826fb0ca0dfd26303f175febb14f48}{b\_mv}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00071\ }
-\DoxyCodeLine{00082\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a9cba475b009648053432d0cc0ec4bbbf}{b\_cp}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00094\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_aa583bdf1b3a5fbfb577ad5a7230fe054}{b\_rm}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00110\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a3eddaabc7eca841fc9a71e9bb814d2a5}{b\_chmod}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00111\ }
-\DoxyCodeLine{00118\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a18df407e357bc44721dd39f95369843b}{b\_ps}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00119\ }
-\DoxyCodeLine{00130\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a371b3588a8f8a231c10f75b0ea84926f}{b\_kill}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00131\ }
-\DoxyCodeLine{00132\ \textcolor{comment}{//\ SHELL\ BUILTINS\ THAT\ DON'T\ SPAWN\ PROCESSES}}
-\DoxyCodeLine{00133\ }
-\DoxyCodeLine{00141\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a5c9d672a604065d43cc83893febc188a}{b\_nice}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00142\ }
-\DoxyCodeLine{00148\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a9f61e992d66c53f4383b37699dab6ef3}{b\_nice\_pid}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00149\ }
-\DoxyCodeLine{00155\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_aeb7266201350c6e4da06c851afbffded}{b\_man}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00156\ }
-\DoxyCodeLine{00164\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a0b70bfb624f4ae16efbcbfa9b433c191}{b\_bg}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00165\ }
-\DoxyCodeLine{00173\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_ad11ad4f83749953ddc5d36dd093bc797}{b\_fg}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00174\ }
-\DoxyCodeLine{00180\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_add6abae88d55c1b8ee57843799af9730}{b\_jobs}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00181\ }
-\DoxyCodeLine{00187\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a184a1be3455442bda9bbd0789e438481}{b\_logout}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00188\ }
-\DoxyCodeLine{00189\ \textcolor{comment}{//\ SHELL\ BUILTINS\ TO\ TEST\ ZOMBIE\ +\ ORPHANS}}
-\DoxyCodeLine{00195\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_ac6f1b11929c2509c8c73d232643f2ae3}{b\_zombify}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00196\ }
-\DoxyCodeLine{00200\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_af7a3b6e724d8044a194e1c23e5499304}{b\_zombie\_child}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00201\ }
-\DoxyCodeLine{00207\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_ac0ab5e22f55a4f660a54973379d1722d}{b\_orphanify}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00208\ }
-\DoxyCodeLine{00212\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a8ffcfc65c56806d110fbb3eb2ac9238f}{b\_orphan\_child}}(\textcolor{keywordtype}{void}*\ arg);}
-\DoxyCodeLine{00213\ }
-\DoxyCodeLine{00214\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00008\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a69fe4fffb608d9acfba5ed9482ce18f3}{b\_background\_poll}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00020\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a12d3c2e9ad69506dfe091ed1467cde0c}{b\_cat}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a8caa9d892fd52ba7fbaf212e3bcdae06}{b\_sleep}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a522b7a9dcadf792f7d79b3211f8bba9f}{b\_busy}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_af01e6b67f01ef538abcc03c9aff00aba}{b\_echo}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a8705f3b70f67031e5aac30c27866998d}{b\_ls}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00062\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a65b90b6bb0ac5b9c681bf586f71cbac7}{b\_touch}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_ae7826fb0ca0dfd26303f175febb14f48}{b\_mv}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00086\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a9cba475b009648053432d0cc0ec4bbbf}{b\_cp}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00098\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_aa583bdf1b3a5fbfb577ad5a7230fe054}{b\_rm}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00114\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a3eddaabc7eca841fc9a71e9bb814d2a5}{b\_chmod}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00122\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a18df407e357bc44721dd39f95369843b}{b\_ps}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00134\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a371b3588a8f8a231c10f75b0ea84926f}{b\_kill}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{comment}{//\ SHELL\ BUILTINS\ THAT\ DON'T\ SPAWN\ PROCESSES}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00145\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a5c9d672a604065d43cc83893febc188a}{b\_nice}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00152\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a9f61e992d66c53f4383b37699dab6ef3}{b\_nice\_pid}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00159\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_aeb7266201350c6e4da06c851afbffded}{b\_man}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00168\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a0b70bfb624f4ae16efbcbfa9b433c191}{b\_bg}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00177\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_ad11ad4f83749953ddc5d36dd093bc797}{b\_fg}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00184\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_add6abae88d55c1b8ee57843799af9730}{b\_jobs}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00191\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a184a1be3455442bda9bbd0789e438481}{b\_logout}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00198\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a0118ff3db9e343eeb6ad0d043fdee012}{b\_clear}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \textcolor{comment}{//\ SHELL\ BUILTINS\ TO\ TEST\ ZOMBIE\ +\ ORPHANS}}
+\DoxyCodeLine{00206\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_ac6f1b11929c2509c8c73d232643f2ae3}{b\_zombify}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00211\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_af7a3b6e724d8044a194e1c23e5499304}{b\_zombie\_child}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00218\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_ac0ab5e22f55a4f660a54973379d1722d}{b\_orphanify}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00223\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{shellbuiltins_8h_a8ffcfc65c56806d110fbb3eb2ac9238f}{b\_orphan\_child}}(\textcolor{keywordtype}{void}*\ arg);}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
