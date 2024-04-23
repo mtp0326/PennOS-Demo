@@ -15,7 +15,7 @@ pcb_t* k_proc_create(pcb_t* parent) {
   child->statechanged = false;
   child->waiting_for_change = false;
   child->term_signal = -1;
-  child->waiting_on_pid = -1;
+  child->waiting_on_pid = 0;
   child->ticks_to_wait = 0;
   child->exit_status = -1;
   child->job_num = -1;
@@ -26,7 +26,6 @@ pcb_t* k_proc_create(pcb_t* parent) {
   }
 
   child->open_fds = (FD_Bitmap*)malloc(sizeof(FD_Bitmap));
-  printf("%p", child->open_fds);
   if (child->open_fds == NULL) {
     dynamic_pid_array_destroy(child->child_pids);
     free(child);

@@ -20,8 +20,10 @@
 
 #include "kernel.h"
 
-static void* nap(void*) {
-  usleep(10000);  // 10 milliseconds
+static void* nap(void*)
+{
+  usleep(10000); // 10 milliseconds
+  s_exit();
   return NULL;
 }
 
@@ -30,9 +32,10 @@ static void* nap(void*) {
  * on them. The wait is non-blocking if nohang is true, or blocking otherwise.
  */
 
-static void spawn(bool nohang) {
+static void spawn(bool nohang)
+{
   char name[] = "child_0";
-  char* argv[] = {name, NULL};
+  char* argv[] = { name, NULL };
   pid_t pid = 0;
 
   // Spawn 10 nappers named child_0 through child_9.
@@ -50,17 +53,15 @@ static void spawn(bool nohang) {
   // Wait on all children.
   while (1) {
     const pid_t cpid = s_waitpid(-1, NULL, nohang);
-
-    if (cpid < 0) {  // no more waitable children (if block-waiting) or error
+    // fprintf(stderr, "AHH %d", cpid);
+    if (cpid < 0) { // no more waitable children (if block-waiting) or error
       break;
     }
-
     // polling if nonblocking wait and no waitable children yet
     if (nohang && cpid == 0) {
-      usleep(90000);  // 90 milliseconds
+      usleep(90000); // 90 milliseconds
       continue;
     }
-
     dprintf(STDERR_FILENO, "child_%d was reaped\n", cpid - pid);
   }
 }
@@ -70,23 +71,25 @@ static void spawn(bool nohang) {
  * processes Gen_A through Gen_Z. Each process is block-waited by its parent.
  */
 
-static void* spawn_r(void* arg) {
+static void* spawn_r(void* arg)
+{
   static int i = 0;
 
   int pid = 0;
   char name[] = "Gen_A";
-  char* argv[] = {name, NULL};
+  char* argv[] = { name, NULL };
 
   if (i < 26) {
     argv[0][(sizeof(name)) - 2] = 'A' + i++;
     pid = s_spawn(spawn_r, argv, 0, 1);
     dprintf(STDERR_FILENO, "%s was spawned\n", name);
-    usleep(10000);  // 10 milliseconds
+    usleep(10000); // 10 milliseconds
   }
 
   if (pid > 0 && pid == s_waitpid(pid, NULL, false)) {
     dprintf(STDERR_FILENO, "%s was reaped\n", *argv);
   }
+  s_exit();
   return NULL;
 }
 
@@ -97,18 +100,21 @@ static void* spawn_r(void* arg) {
  *                                                                            *
  ******************************************************************************/
 
-void* hang(void* arg) {
+void* hang(void* arg)
+{
 
   spawn(false);
   return NULL;
 }
 
-void* nohang(void* arg) {
+void* nohang(void* arg)
+{
   spawn(true);
   return NULL;
 }
 
-void* recur(void* arg) {
+void* recur(void* arg)
+{
   spawn_r(NULL);
   return NULL;
 }

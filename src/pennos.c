@@ -322,22 +322,29 @@ void scheduler(char* logfile)
         continue;
       }
       pcb_t* child_pcb;
-      if (block->waiting_on_pid != -1) { // if this process is currently s_waitpiding on a child
-        if (find_process(processes[0], block->waiting_on_pid) != NULL) {
-          child_pcb = find_process(processes[0], block->waiting_on_pid);
-        } else if (find_process(processes[1], block->waiting_on_pid) != NULL) {
-          child_pcb = find_process(processes[1], block->waiting_on_pid);
-        } else if (find_process(processes[2], block->waiting_on_pid) != NULL) {
-          child_pcb = find_process(processes[2], block->waiting_on_pid);
-        } else if (find_process(blocked, block->waiting_on_pid) != NULL) {
-          child_pcb = find_process(blocked, block->waiting_on_pid);
-        } else if (find_process(stopped, block->waiting_on_pid) != NULL) {
-          child_pcb = find_process(stopped, block->waiting_on_pid);
-        } else if (find_process(zombied, block->waiting_on_pid) != NULL) {
-          child_pcb = find_process(zombied, block->waiting_on_pid);
+      if (block->waiting_on_pid != 0) { // if this process is currently s_waitpiding on a child
+
+        if (block->waiting_on_pid == -1) {
+          DynamicPIDArray* pid_array = block->child_pids;
+          bool child_changed = false;
+          for (size_t i = 0; i < pid_array->used; i++) {
+            pid_t current_pid = pid_array->array[i];
+            child_pcb = s_find_process(current_pid);
+            if (child_pcb->statechanged) {
+              child_changed = true;
+              break;
+            }
+          }
+          if (child_changed == false) {
+            blocked->head = blocked->head->next;
+            continue;
+          }
         } else {
-          blocked->head = blocked->head->next;
-          continue;
+          child_pcb = s_find_process(block->waiting_on_pid);
+          if (child_pcb == NULL) {
+            blocked->head = blocked->head->next;
+            continue;
+          }
         }
       }
 
@@ -472,7 +479,6 @@ int main(int argc, char** argv)
   add_priority(priority, 0);
 
   scheduler(log);
-  fprintf(stderr, "AHH");
   pthread_mutex_destroy(&done_lock);
 
   return EXIT_SUCCESS;

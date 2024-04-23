@@ -172,32 +172,40 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang)
   if (pid > 0) {
     child_pcb = s_find_process(pid);
   } else {
-      DynamicPIDArray* pid_array = current->child_pids;
-      for (size_t i = 0; i < pid_array->used; i++) {
-        pid_t current_pid = pid_array->array[i];
-        child_pcb = s_find_process(current_pid);
-        if (child_pcb->statechanged) {
-          break;
-        }
+    bool give_up = true;
+    DynamicPIDArray* pid_array = current->child_pids;
+    for (size_t i = 0; i < pid_array->used; i++) {
+      pid_t current_pid = pid_array->array[i];
+      child_pcb = s_find_process(current_pid);
+      // is there at least one child process left to wait on?
+      if ((child_pcb->state == RUNNING) || (child_pcb->state == BLOCKED) || (child_pcb->statechanged)) {
+        give_up = false;
       }
+      if (child_pcb->statechanged) {
+        break;
+      }
+    }
+    if (give_up == true) {
+      return -1; // no children to wait on
+    }
   }
-
 
   // if nohang, return immediately
   if (nohang) {
     if (child_pcb->statechanged) {
       if (child_pcb->state == ZOMBIED) {
-        *wstatus = 0;
+        if (wstatus != NULL) {
+          *wstatus = 0;
+        }
         child_pcb->statechanged = false;
         return child_pcb->pid;
       }
     }
-    return -1;
+    return 0;
   }
 
-
   // if child already changed state
-  if (child_pcb->statechanged) {
+  if (child_pcb->statechanged && (wstatus != NULL)) {
     if (child_pcb->state == ZOMBIED) {
       if (child_pcb->term_signal != -1) {
         *wstatus = STATUS_SIGNALED;
@@ -222,7 +230,7 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang)
   spthread_suspend_self();
 
   child_pcb->statechanged = false;
-  if (child_pcb->state == ZOMBIED) {
+  if ((child_pcb->state == ZOMBIED) && (wstatus != NULL)) {
     if (child_pcb->term_signal != -1) {
       *wstatus = STATUS_SIGNALED;
     } else {
@@ -236,7 +244,7 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang)
 
   s_write_log(WAIT, child_pcb, -1);
 
-  return pid;
+  return child_pcb->pid;
 }
 
 int s_kill(pid_t pid, int signal)
@@ -248,39 +256,39 @@ int s_kill(pid_t pid, int signal)
   }
 
   switch (signal) {
-    case P_SIGSTOP:
-      s_move_process(stopped, pid);
-      process->state = STOPPED;
-      process->statechanged = true;
-      process->job_num = job_id;
-      job_id++;
-      s_write_log(STOP, process, -1);
-      char message[40];
-      sprintf(message, "\n[%d] + Stopped %s\n", process->pid,
-              process->processname);
-      s_write(STDOUT_FILENO, message, strlen(message));
-      break;
-    case P_SIGCONT:
-      if (!(process->state == STOPPED)) {
-        // SET ERRNO? Ignore?
-        return -1;
-      }
-      s_move_process(processes[process->priority], pid);
-      process->state = RUNNING;
-      process->statechanged = true;
-      s_write_log(CONTINUE, process, -1);
-      break;
-    case P_SIGTER:
-      
-      process->term_signal = P_SIGTER;
-      process->exit_status = 0;
-      s_write_log(SIGNAL, process, -1);
-      s_zombie(pid);
-      break;
-    default:
-      // ERRNO: invalid SIGNAL?
+  case P_SIGSTOP:
+    s_move_process(stopped, pid);
+    process->state = STOPPED;
+    process->statechanged = true;
+    process->job_num = job_id;
+    job_id++;
+    s_write_log(STOP, process, -1);
+    char message[40];
+    sprintf(message, "\n[%d] + Stopped %s\n", process->pid,
+        process->processname);
+    s_write(STDOUT_FILENO, message, strlen(message));
+    break;
+  case P_SIGCONT:
+    if (!(process->state == STOPPED)) {
+      // SET ERRNO? Ignore?
       return -1;
     }
+    s_move_process(processes[process->priority], pid);
+    process->state = RUNNING;
+    process->statechanged = true;
+    s_write_log(CONTINUE, process, -1);
+    break;
+  case P_SIGTER:
+
+    process->term_signal = P_SIGTER;
+    process->exit_status = 0;
+    s_write_log(SIGNAL, process, -1);
+    s_zombie(pid);
+    break;
+  default:
+    // ERRNO: invalid SIGNAL?
+    return -1;
+  }
   return 0;
 }
 
@@ -308,7 +316,6 @@ void s_exit(void)
   s_write_log(EXIT, current, -1);
   s_zombie(current->pid);
 }
-
 
 void s_zombie(pid_t pid)
 {
@@ -348,7 +355,7 @@ int s_sleep(unsigned int ticks)
   }
 
   current->ticks_to_wait = ticks;
-  while(current->ticks_to_wait >= 1) {
+  while (current->ticks_to_wait >= 1) {
     current->state = BLOCKED;
     remove_process(processes[current->priority], current->pid);
     add_process(blocked, current);
@@ -399,7 +406,8 @@ int s_spawn_and_wait(void* (*func)(void*),
   return 0;
 }
 
-int s_fg(pcb_t* proc) {
+int s_fg(pcb_t* proc)
+{
   void* func = s_function_from_string(proc->processname);
   proc->bg_done = true;
 
@@ -751,7 +759,8 @@ off_t s_lseek(int fd, int offset, int whence)
   return k_lseek(fd, offset, whence);
 }
 
-void s_ls(const char* filename, int fd) {
+void s_ls(const char* filename, int fd)
+{
   k_ls(filename, fd);
 }
 

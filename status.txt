@@ -24,7 +24,7 @@ fat only:
  - bug, issue described, person/team that should fix
  
  currently working demos:
- kernel: 1, 2, 3 (tested so far), 4, 5, 6 (not implemented)
+ kernel: 1, 2, 3, 4, 5, 6 (all pass)
  scheduling: 1, 2, 3, 4, 5, 6 (all fail)
  continuity: pass ig
  file system: idk, but pass i think
