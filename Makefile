@@ -48,12 +48,26 @@ all: $(EXECS) doxygen
 
 tests: $(TEST_EXECS)
 
+
+# Architecture detection and setting the appropriate parser object file
+ARCH := $(shell uname -m)
+ifeq ($(ARCH),x86_64)
+PARSER_OBJ := $(SRC_DIR)/parser_x86.o
+else ifeq ($(ARCH),aarch64)
+PARSER_OBJ := $(SRC_DIR)/parser_arm.o
+else
+$(error Unsupported architecture)
+endif
+
 $(EXECS): $(BIN_DIR)/%: $(SRC_DIR)/%.c $(OBJS) $(HDRS) $(PARSER_OBJ)
 	$(info Linking $@ with $(OBJS), $(PARSER_OBJ) and $<)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $(OBJS) $(PARSER_OBJ) $<
 
 $(TEST_EXECS): $(BIN_DIR)/%: $(TESTS_DIR)/%.c $(OBJS) $(HDRS) $(PARSER_OBJ)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $(OBJS) $(PARSER_OBJ) $(subst $(BIN_DIR)/,$(TESTS_DIR)/,$@).c
+
+
+
 
 %.o: %.c $(HDRS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
