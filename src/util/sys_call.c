@@ -167,9 +167,8 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
   pcb_t* child_pcb;
 
   // if nohang, return immediately
-  ////need more commands??
   if (nohang) {
-    child_pcb = find_process(bg_list, pid);
+    child_pcb = s_find_process(pid);
     if (child_pcb->statechanged) {
       if (child_pcb->state == ZOMBIED) {
         *wstatus = 0;
@@ -180,16 +179,8 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
     return -1;
   }
 
-  if (find_process(processes[0], pid) != NULL) {
-    child_pcb = find_process(processes[0], pid);
-  } else if (find_process(processes[1], pid) != NULL) {
-    child_pcb = find_process(processes[1], pid);
-  } else if (find_process(processes[2], pid) != NULL) {
-    child_pcb = find_process(processes[2], pid);
-  } else {
-    return -1;
-  }
 
+  child_pcb = s_find_process(pid);
   // if child already changed state
   if (child_pcb->statechanged) {
     if (child_pcb->state == ZOMBIED) {
@@ -200,7 +191,6 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
       }
     } else if (child_pcb->state == STOPPED) {
       *wstatus = STATUS_STOPPED;
-      // fprintf(stdout, "111111\n");
     } else {
       // became blocked? edstem #730 will define spec
     }
@@ -210,13 +200,10 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
   s_write_log(BLOCK, current, -1);
 
   // else, block self until state change
-  current->state = BLOCKED;
   current->waiting_for_change = true;
   current->waiting_on_pid = child_pcb->pid;
-  remove_process(processes[current->priority],
-                 current->pid);   // remove process from running processes
-  add_process(blocked, current);  // add process to list of blocked processes
-
+  s_move_process(blocked, current->pid);
+  current->state = BLOCKED;
   spthread_suspend_self();
 
   child_pcb->statechanged = false;
@@ -337,11 +324,12 @@ int s_sleep(unsigned int ticks) {
   }
 
   current->ticks_to_wait = ticks;
-
-  current->state = BLOCKED;
-  remove_process(processes[current->priority], current->pid);
-  add_process(blocked, current);
-  spthread_suspend_self();
+  while(current->ticks_to_wait >= 1) {
+    current->state = BLOCKED;
+    remove_process(processes[current->priority], current->pid);
+    add_process(blocked, current);
+    spthread_suspend_self();
+  }
   return 0;
 }
 

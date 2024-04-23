@@ -225,7 +225,7 @@ static void alarm_handler(int signum) {
   if (signum == SIGINT) {
     char* newline = "\n";
     s_write(STDOUT_FILENO, newline, strlen(newline));
-    s_exit();
+    s_kill(current->pid, P_SIGTER);
   } else if (signum == SIGTSTP) {
     s_kill(current->pid, P_SIGSTOP);
   }

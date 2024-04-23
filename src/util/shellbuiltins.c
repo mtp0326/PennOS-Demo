@@ -334,7 +334,8 @@ void* b_zombie_child(void* arg) {
 }
 
 void* b_zombify(void* arg) {
-  s_spawn(b_zombie_child, arg, STDIN_FILENO, STDOUT_FILENO);
+  char* args[2] = {"zombie_child", NULL};
+  s_spawn(b_zombie_child, args, STDIN_FILENO, STDOUT_FILENO);
   while (1)
     ;
   return NULL;
