@@ -49,7 +49,7 @@ int read_command(char** cmds) {
 
 void int_handler(int signo) {
   // fprintf(stderr, "entered int handler");
-  if (signo == SIGINT) {
+  if (signo == SIGINT || SIGTSTP) {
     ssize_t new_line = write(STDERR_FILENO, "\n", strlen("\n"));
     if (new_line < 0) {
       perror("error: printing new line upon CTRL+C");
