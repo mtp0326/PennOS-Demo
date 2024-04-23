@@ -56,7 +56,8 @@ void int_handler(int signo) {
       exit(EXIT_FAILURE);
     }
   }
-  prompt(true);
+
+  prompt(false);
 }
 
 void initialize_global_fd_table() {
