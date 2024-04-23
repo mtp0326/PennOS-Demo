@@ -366,12 +366,7 @@ int s_sleep(unsigned int ticks)
 
 int s_busy(void)
 {
-  current->ticks_to_wait = -1;
-
-  current->state = BLOCKED;
-  remove_process(processes[current->priority], current->pid);
-  add_process(blocked, current);
-  spthread_suspend_self();
+  while(1);
   s_exit();
   return 0;
 }
