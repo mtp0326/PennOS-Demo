@@ -34,6 +34,7 @@
 #include "util/kernel.h"
 #include "util/shellbuiltins.h"
 #include "util/sys_call.h"
+#include "util/stress.h"
 
 static bool done = false;
 

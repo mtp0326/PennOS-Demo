@@ -195,6 +195,12 @@ static void* shell(void* arg)
         break;
       } else if (strcmp(args[0], "clear") == 0) {
         b_clear(NULL);
+      } else if (strcmp(args[0], "hang") == 0) {
+        hang(args);
+      } else if (strcmp(args[0], "nohang") == 0) {
+        nohang(args);
+      } else if (strcmp(args[0], "recur") == 0) {
+        recur(args);
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
         // REPLACE WITH PERROR

@@ -1,2 +1,2 @@
-zombify
-^C
+hang
+

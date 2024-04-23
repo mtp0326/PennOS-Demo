@@ -168,22 +168,34 @@ pid_t s_spawn_nice(void* (*func)(void*),
 pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang)
 {
   pcb_t* child_pcb;
+  child_pcb = s_find_process(pid);
+  if (pid > 0) {
+    child_pcb = s_find_process(pid);
+  } else {
+      DynamicPIDArray* pid_array = current->child_pids;
+      for (size_t i = 0; i < pid_array->used; i++) {
+        pid_t current_pid = pid_array->array[i];
+        child_pcb = s_find_process(current_pid);
+        if (child_pcb->statechanged) {
+          break;
+        }
+      }
+  }
+
 
   // if nohang, return immediately
   if (nohang) {
-    child_pcb = s_find_process(pid);
     if (child_pcb->statechanged) {
       if (child_pcb->state == ZOMBIED) {
         *wstatus = 0;
         child_pcb->statechanged = false;
-        return pid;
+        return child_pcb->pid;
       }
     }
     return -1;
   }
 
 
-  child_pcb = s_find_process(pid);
   // if child already changed state
   if (child_pcb->statechanged) {
     if (child_pcb->state == ZOMBIED) {
@@ -204,7 +216,7 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang)
 
   // else, block self until state change
   current->waiting_for_change = true;
-  current->waiting_on_pid = child_pcb->pid;
+  current->waiting_on_pid = pid;
   s_move_process(blocked, current->pid);
   current->state = BLOCKED;
   spthread_suspend_self();
@@ -308,7 +320,6 @@ void s_zombie(pid_t pid)
   DynamicPIDArray* pid_array = s_find_process(pid)->child_pids;
   for (size_t i = 0; i < pid_array->used; i++) {
     pid_t current_pid = pid_array->array[i];
-    // Here you can use the current_pid, for example, print it or perform any other operation
     s_write_log(ORPHAN, s_find_process(current_pid), -1);
   }
   s_reap_all_child(s_find_process(pid));
