@@ -235,7 +235,7 @@ void* b_bg(void* arg) {
 
     if (proc != NULL) {
       proc = stopped->head->process;
-      if (s_kill(proc->pid, SIGCONT) < 0) {
+      if (s_kill(proc->pid, P_SIGCONT) < 0) {
         // error
         fprintf(stderr, "SIGCONT failed to send\n");
         return NULL;
@@ -260,7 +260,7 @@ void* b_bg(void* arg) {
 
   if (stopped != NULL && stopped->head != NULL) {
     proc = stopped->tail->process;
-    if (s_kill(proc->pid, SIGCONT) < 0) {
+    if (s_kill(proc->pid, P_SIGCONT) < 0) {
       // error
       fprintf(stderr, "SIGCONT failed to send\n");
       return NULL;
