@@ -296,13 +296,19 @@ void s_reap_all_child(pcb_t* parent)
 
 void s_exit(void)
 {
-  remove_process(processes[current->priority], current->pid);
-  add_process(zombied, current);
+  s_move_process(zombied, current->pid);
   current->state = ZOMBIED;
   current->statechanged = true;
 
   s_write_log(EXIT, current, -1);
   s_write_log(ZOMBIE, current, -1);
+  DynamicPIDArray* pid_array = current->child_pids;
+  for (size_t i = 0; i < pid_array->used; i++) {
+    pid_t current_pid = pid_array->array[i];
+    // Here you can use the current_pid, for example, print it or perform any other operation
+    s_write_log(ORPHAN, s_find_process(current_pid), -1);
+    fprintf(stderr, "AHHHH\n");
+  }
   // reap all children
   s_reap_all_child(current);
 }
@@ -314,7 +320,15 @@ void s_zombie(pid_t pid)
   s_move_process(zombied, pid);
   proc->state = ZOMBIED;
   proc->statechanged = true;
-  s_write_log(ZOMBIE, current, -1);
+  s_write_log(ZOMBIE, s_find_process(pid), -1);
+  DynamicPIDArray* pid_array = s_find_process(pid)->child_pids;
+  for (size_t i = 0; i < pid_array->used; i++) {
+    pid_t current_pid = pid_array->array[i];
+    // Here you can use the current_pid, for example, print it or perform any other operation
+    s_write_log(ORPHAN, s_find_process(current_pid), -1);
+    fprintf(stderr, "AHHHH\n");
+  }
+  s_reap_all_child(s_find_process(pid));
 }
 
 int s_nice(pid_t pid, int priority)

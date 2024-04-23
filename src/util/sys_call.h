@@ -195,6 +195,7 @@ int s_write_log(log_message_t logtype, pcb_t* proc, unsigned int old_nice);
 
 int s_move_process(CircularList* destination, pid_t pid);
 
+void s_zombie(pid_t pid);
 /***** CUSTOM SYSCALLS FOR SCHEDULER*/
 
 /**

@@ -330,7 +330,7 @@ void* b_orphanify(void* arg) {
 
 void* b_zombie_child(void* arg) {
   // MMMMM Brains...!
-  s_exit();
+  s_zombie(current->pid);
   return NULL;
 }
 
