@@ -137,11 +137,11 @@ void* b_fg(void* arg) {
     if (proc != NULL) {
       fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
               proc->processname);
-      if (s_kill(proc->pid, SIGCONT) < 0) {
-        // error
-        fprintf(stderr, "SIGCONT failed to send\n");
-        return NULL;
-      }
+      // if (s_kill(proc->pid, SIGCONT) < 0) {
+      //   // error
+      //   fprintf(stderr, "SIGCONT failed to send\n");
+      //   return NULL;
+      // }
       s_fg(proc);
 
       /// TODO: immediate send to tcprescp
@@ -157,11 +157,11 @@ void* b_fg(void* arg) {
     if (proc != NULL) {
       fprintf(stdout, "[%ld]\t %4u RUNNING\t%s\n", proc->job_num, proc->pid,
               proc->processname);
-      if (s_kill(proc->pid, SIGCONT) < 0) {
-        // error
-        fprintf(stderr, "SIGCONT failed to send\n");
-        return NULL;
-      }
+      // if (s_kill(proc->pid, SIGCONT) < 0) {
+      //   // error
+      //   fprintf(stderr, "SIGCONT failed to send\n");
+      //   return NULL;
+      // }
       s_fg(proc);
 
       /// TODO: immediate send to tcprescp
@@ -183,11 +183,11 @@ void* b_fg(void* arg) {
     proc = stopped->tail->process;
     fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
             proc->processname);
-    if (s_kill(proc->pid, P_SIGCONT) < 0) {
-      // error
-      fprintf(stderr, "SIGCONT failed to send\n");
-      return NULL;
-    }
+    // if (s_kill(proc->pid, P_SIGCONT) < 0) {
+    //   // error
+    //   fprintf(stderr, "SIGCONT failed to send\n");
+    //   return NULL;
+    // }
     s_fg(proc);
 
     /// TODO: immediate send to tcprescp
@@ -202,11 +202,11 @@ void* b_fg(void* arg) {
     proc = bg_list->tail->process;
     fprintf(stdout, "[%ld]\t %4u RUNNING\t%s\n", proc->job_num, proc->pid,
             proc->processname);
-    if (s_kill(proc->pid, P_SIGCONT) < 0) {
-      // error
-      fprintf(stderr, "SIGCONT failed to send\n");
-      return NULL;
-    }
+    // if (s_kill(proc->pid, P_SIGCONT) < 0) {
+    //   // error
+    //   fprintf(stderr, "SIGCONT failed to send\n");
+    //   return NULL;
+    // }
     s_fg(proc);
 
     /// TODO: immediate send to tcprescp

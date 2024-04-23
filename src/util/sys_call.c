@@ -142,6 +142,7 @@ pid_t s_spawn_nice(void* (*func)(void*),
   }
   arg->argv = child_argv;
   child->priority = (priority == -1 ? 1 : priority);
+  child->argv = child_argv;
 
   add_process(processes[(priority == -1 ? 1 : priority)], child);
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
@@ -199,6 +200,7 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
       }
     } else if (child_pcb->state == STOPPED) {
       *wstatus = STATUS_STOPPED;
+      // fprintf(stdout, "111111\n");
     } else {
       // became blocked? edstem #730 will define spec
     }
@@ -226,6 +228,7 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
     }
   } else if (child_pcb->state == STOPPED) {
     *wstatus = STATUS_STOPPED;
+    // fprintf(stdout, "222222\n");
   } else {
     // became blocked? edstem #730 will define spec
   }
@@ -251,6 +254,7 @@ int s_kill(pid_t pid, int signal) {
       job_id++;
       s_write_log(STOP, process, -1);
       char message[40];
+      // fprintf(stdout, "333333\n");
       sprintf(message, "\n[%d] + Stopped %s\n", process->pid,
               process->processname);
       s_write(STDOUT_FILENO, message, strlen(message));
@@ -260,17 +264,18 @@ int s_kill(pid_t pid, int signal) {
         // SET ERRNO? Ignore?
         return -1;
       }
+      s_move_process(processes[process->priority], pid);
       process->state = RUNNING;
       process->statechanged = true;
-      s_move_process(processes[process->priority], pid);
       s_write_log(CONTINUE, process, -1);
       break;
     case P_SIGTER:
+      // fprintf(stdout, "444444\n");
+      s_move_process(zombied, pid);
       process->state = ZOMBIED;
       process->statechanged = true;
       process->term_signal = P_SIGTER;
       process->exit_status = 0;
-      s_move_process(zombied, pid);
       s_write_log(SIGNAL, process, -1);
       break;
     default:
@@ -368,7 +373,8 @@ int s_spawn_and_wait(void* (*func)(void*),
   }
   int wstatus = 0;
   s_waitpid(child, &wstatus, nohang);
-  if (!nohang) {
+  /// or status signaled?
+  if (!nohang && (wstatus == STATUS_EXITED || wstatus == STATUS_SIGNALED)) {
     pcb_t* child_pcb = s_find_process(child);
     s_reap_all_child(child_pcb);
     s_remove_process(child);
@@ -378,15 +384,25 @@ int s_spawn_and_wait(void* (*func)(void*),
 }
 
 int s_fg(pcb_t* proc) {
-  // void* func = s_function_from_string(proc->processname);
+  void* func = s_function_from_string(proc->processname);
   proc->bg_done = true;
 
-  // if (spthread_create(&proc->handle, NULL, func, child_argv) != 0) {
-  //   k_proc_cleanup(proc);
-  //   free_argv(child_argv);
-  //   free(arg);
-  //   return -1;
-  // }
+  if (strcmp(proc->processname, "sleep") == 0) {
+    /// random number to convert int to string
+    char str[10];
+
+    sprintf(str, "%d", proc->ticks_to_wait);
+    proc->argv[1] = str;
+  }
+
+  s_move_process(processes[proc->priority], proc->pid);
+  proc->state = RUNNING;
+  proc->statechanged = false;
+
+  if (spthread_create(&proc->handle, NULL, func, proc->argv) != 0) {
+    k_proc_cleanup(proc);
+    return -1;
+  }
   int wstatus = 0;
   s_waitpid(proc->pid, &wstatus, false);
 

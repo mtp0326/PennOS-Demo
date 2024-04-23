@@ -112,6 +112,8 @@ typedef struct pcb_t {
                                   is terminated */
 
   u_int64_t job_num; /** @brief The command name that this processor has */
+
+  char** argv; /** @brief The arguments that the processor has */
 } pcb_t;
 
 /**
