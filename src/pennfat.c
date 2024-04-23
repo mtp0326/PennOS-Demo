@@ -385,7 +385,7 @@ void cat_a(char* output) {
 }
 
 void ls() {
-  k_ls(NULL);
+  k_ls(NULL, STDERR_FILENO);
 }
 
 int cp_within_fat(char* source, char* dest) {

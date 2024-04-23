@@ -73,16 +73,20 @@ void* b_kill(void* arg) {
   char** argv = (char**)arg;
   int signal;
   int i = 1;
-  if (strlen(argv[1]) >= 4) {
+  fprintf(stderr, "%ld\n", strlen(argv[1]));
+  if (strlen(argv[1]) <= 4) {
     signal = P_SIGTER;
   } else {
     if (strcmp(argv[1], "-term") == 0) {
       signal = P_SIGTER;
+      fprintf(stderr, "terminate signal");
     } else if (strcmp(argv[1], "-stop") == 0) {
       signal = P_SIGSTOP;
+      fprintf(stderr, "stop signal");
 
     } else if (strcmp(argv[1], "-cont") == 0) {
       signal = P_SIGCONT;
+      fprintf(stderr, "continue signal");
 
     } else {
       return NULL;
@@ -318,7 +322,9 @@ void* b_orphan_child(void* arg) {
 }
 
 void* b_orphanify(void* arg) {
-  s_spawn(b_orphan_child, arg, STDIN_FILENO, STDOUT_FILENO);
+  char* args[2] = {"orphan_child", NULL};
+  s_spawn(b_orphan_child, args, STDIN_FILENO, STDOUT_FILENO);
+  s_exit();
   return NULL;
 }
 
@@ -352,7 +358,8 @@ void* b_clear(void* arg) {
 // FAT LEVEL SHELL FUNCTIONS
 
 void* b_ls(void* arg) {
-  s_ls(NULL);
+  s_ls(NULL, current->output_fd);
+
   s_exit();
   return NULL;
 }

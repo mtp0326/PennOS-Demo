@@ -96,23 +96,60 @@ static void* shell(void* arg) {
         }
 
       } else if (strcmp(args[0], "ls") == 0) {
-        s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,
-                         parsed->is_background, -1);
+        if (parsed->stdout_file == NULL) {
+          // we want to print to stdout
+          s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,
+                           parsed->is_background, -1);
+        } else {
+          if (parsed->is_file_append) {
+            int fd = s_open(parsed->stdout_file, F_APPEND);
+            s_spawn_and_wait(b_ls, args, STDIN_FILENO, fd,
+                             parsed->is_background, -1);
+            s_close(fd);
+          } else {
+            int fd = s_open(parsed->stdout_file, F_WRITE);
+            s_spawn_and_wait(b_ls, args, STDIN_FILENO, fd,
+                             parsed->is_background, -1);
+            s_close(fd);
+          }
+        }
+
       } else if (strcmp(args[0], "touch") == 0) {
+        // TODO: Call your implemented touch() function
         s_spawn_and_wait(b_touch, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
+        int output_fd = b_output_redir(parsed);
+        if (output_fd != -1) {
+          s_close(output_fd);
+        }
       } else if (strcmp(args[0], "mv") == 0) {
         s_spawn_and_wait(b_mv, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
+        int output_fd = b_output_redir(parsed);
+        if (output_fd != -1) {
+          s_close(output_fd);
+        }
       } else if (strcmp(args[0], "cp") == 0) {
         s_spawn_and_wait(b_cp, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
+        int output_fd = b_output_redir(parsed);
+        if (output_fd != -1) {
+          s_close(output_fd);
+        }
       } else if (strcmp(args[0], "rm") == 0) {
         s_spawn_and_wait(b_rm, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
+        int output_fd = b_output_redir(parsed);
+        if (output_fd != -1) {
+          s_close(output_fd);
+        }
       } else if (strcmp(args[0], "chmod") == 0) {
         s_spawn_and_wait(b_chmod, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
+        int output_fd = b_output_redir(parsed);
+        if (output_fd != -1) {
+          s_close(output_fd);
+        }
       } else if (strcmp(args[0], "ps") == 0) {
         s_spawn_and_wait(b_ps, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
@@ -120,9 +157,11 @@ static void* shell(void* arg) {
         s_spawn_and_wait(b_kill, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "zombify") == 0) {
-        // TODO: Call your implemented zombify() function
+        s_spawn_and_wait(b_zombify, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "orphanify") == 0) {
-        // TODO: Call your implemented orphanify() function
+        s_spawn_and_wait(b_orphanify, args, STDIN_FILENO, STDOUT_FILENO,
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "nice") == 0) {
         b_nice(cmd);
       } else if (strcmp(args[0], "nice_pid") == 0) {
@@ -153,7 +192,23 @@ static void* shell(void* arg) {
   return EXIT_SUCCESS;
 }
 
+int b_output_redir(struct parsed_command* parsed) {
+  int output_fd = -1;
+  if (parsed->stdout_file != NULL) {
+    if (parsed->is_file_append) {
+      output_fd = s_open(parsed->stdout_file, F_APPEND);
+    } else {
+      output_fd = s_open(parsed->stdout_file, F_WRITE);
+    }
+    s_close(output_fd);
+  }
+  return output_fd;
+}
+
 static void alarm_handler(int signum) {
+  if (current->pid == 1) {
+    return;
+  }
   if (signum == SIGINT) {
     char* newline = "\n";
     s_write(STDOUT_FILENO, newline, strlen(newline));
@@ -344,7 +399,7 @@ int main(int argc, char** argv) {
   }
 
   // mount the file system
-  if (mount(argv[1]) == -1) {
+  if (mount(argv[1]) < 0) {
     perror("Mount error");
     return -1;
   }
