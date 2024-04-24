@@ -75,19 +75,19 @@ static void* spawn_r(void* arg)
 {
   static int i = 0;
 
-  int pid = 0;
+  int pid = next_pid;
   char name[] = "Gen_A";
   char* argv[] = { name, NULL };
 
   if (i < 26) {
     argv[0][(sizeof(name)) - 2] = 'A' + i++;
     pid = s_spawn(spawn_r, argv, 0, 1);
-    dprintf(STDERR_FILENO, "%s was spawned\n", name);
+    dprintf(STDERR_FILENO, "%s was spawned with pid %d\n", name, pid);
     usleep(10000); // 10 milliseconds
   }
 
   if (pid > 0 && pid == s_waitpid(pid, NULL, false)) {
-    dprintf(STDERR_FILENO, "%s was reaped\n", *argv);
+    dprintf(STDERR_FILENO, "%s was reaped and had pid: %d\n", *argv, pid);
   }
   s_exit();
   return NULL;
@@ -116,5 +116,6 @@ void* nohang(void* arg)
 void* recur(void* arg)
 {
   spawn_r(NULL);
+  s_exit();
   return NULL;
 }

@@ -163,11 +163,15 @@ pid_t s_spawn_nice(void* (*func)(void*),
   return (child->pid);
 }
 
-pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
+pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang)
+{
+  fprintf(stdout, "s_waitpid called by pid: %d, to wait on pid: %d\n", current->pid, pid);
   pcb_t* child_pcb;
-  // child_pcb = s_find_process(pid);
+  child_pcb = s_find_process(pid);
+  if (child_pcb == NULL) {
+    return -1;
+  }
   if (pid > 0) {
-    child_pcb = s_find_process(pid);
   } else {
     bool give_up = true;
     DynamicPIDArray* pid_array = current->child_pids;
@@ -175,8 +179,10 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
       pid_t current_pid = pid_array->array[i];
       child_pcb = s_find_process(current_pid);
       // is there at least one child process left to wait on?
-      if ((child_pcb->state == RUNNING) || (child_pcb->state == BLOCKED) ||
-          (child_pcb->statechanged)) {
+      if (child_pcb == NULL) {
+        continue;
+      }
+      if ((child_pcb->state == RUNNING) || (child_pcb->state == BLOCKED) || (child_pcb->statechanged)) {
         give_up = false;
       }
       if (child_pcb->statechanged) {

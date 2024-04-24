@@ -15,7 +15,7 @@
 #include "parser.h"
 #include "util/pennfat_kernel.h"
 #ifndef PROMPT_PENN_FAT
-#define PROMPT_PENN_FAT "penn-fat> "
+#define PROMPT_PENN_FAT "\033[31mpenn-fat>\033[0m "
 #endif
 #ifndef PROMPT_SHELL
 #define PROMPT_SHELL "$ "

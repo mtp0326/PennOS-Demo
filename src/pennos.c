@@ -201,6 +201,7 @@ static void* shell(void* arg)
         nohang(args);
       } else if (strcmp(args[0], "recur") == 0) {
         recur(args);
+
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
         // REPLACE WITH PERROR
