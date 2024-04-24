@@ -146,7 +146,6 @@ pid_t s_spawn_nice(void* (*func)(void*),
   arg->argv = child_argv;
   child->priority = (priority == -1 ? 1 : priority);
   child->argv = child_argv;
-
   add_process(processes[(priority == -1 ? 1 : priority)], child);
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
     k_proc_cleanup(child);
@@ -154,7 +153,6 @@ pid_t s_spawn_nice(void* (*func)(void*),
     free(arg);
     return -1;
   }
-
   child->processname = (char*)malloc(sizeof(char) * (strlen(child_argv[0]) + 1));
   strcpy(child->processname, child_argv[0]);
 

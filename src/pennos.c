@@ -195,9 +195,8 @@ static void* shell(void* arg)
         b_jobs(NULL);
       } else if (strcmp(args[0], "logout") == 0) {
         done = true;
-        return NULL;
-        b_logout(NULL);
-        return NULL;
+        free(parsed);
+        s_exit();
         break;
       } else if (strcmp(args[0], "clear") == 0) {
         b_clear(NULL);
@@ -206,7 +205,7 @@ static void* shell(void* arg)
       } else if (strcmp(args[0], "nohang") == 0) {
         nohang(args);
       } else if (strcmp(args[0], "recur") == 0) {
-        s_spawn_and_wait(recur, args, STDIN_FILENO, STDOUT_FILENO, false, -1); 
+        s_spawn_and_wait(recur, args, STDIN_FILENO, STDOUT_FILENO, false, -1);
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
         // REPLACE WITH PERROR
@@ -215,6 +214,7 @@ static void* shell(void* arg)
     }
     free(cmd);
   }
+  s_exit();
 
   return EXIT_SUCCESS;
 }
@@ -412,6 +412,13 @@ void scheduler(char* logfile)
       pthread_mutex_lock(&done_lock);
     }
   }
+
+  free(arg[0]);
+  free(arg);
+  dynamic_pid_array_destroy(place->child_pids);
+  free(place);
+
+
   close(file);
   pthread_mutex_unlock(&done_lock);
   return;

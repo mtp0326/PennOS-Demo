@@ -1,15 +1,16 @@
 #include "kernel.h"
 #include "stdio.h"
 
-pcb_t* k_proc_create(pcb_t* parent) {
+pcb_t* k_proc_create(pcb_t* parent)
+{
   // allocate memory for child pcb
   pcb_t* child = (pcb_t*)malloc(sizeof(pcb_t));
   if (child == NULL) {
     return NULL;
   }
-  child->pid = next_pid++;    // code here to generate pids
-  child->ppid = parent->pid;  // inherit
-  child->priority = 1;        // default value // AHHH CHANGE TO 1 after test
+  child->pid = next_pid++;   // code here to generate pids
+  child->ppid = parent->pid; // inherit
+  child->priority = 1;       // default value // AHHH CHANGE TO 1 after test
   child->state = RUNNING;
   child->initial_state = RUNNING;
   child->child_pids = dynamic_pid_array_create(4);
@@ -38,8 +39,13 @@ pcb_t* k_proc_create(pcb_t* parent) {
   return child;
 }
 
-void k_proc_cleanup(pcb_t* proc) {
-  /// need to kill all children
+void k_proc_cleanup(pcb_t* proc)
+{
+ // dynamic_pid_array_destroy(proc->child_pids);
+ // free(proc->open_fds);
+  //free(proc->processname);
+  //free(proc->argv);
+  //spthread_exit(NULL);
   free(proc);
   return;
 }
