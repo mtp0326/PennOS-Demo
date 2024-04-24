@@ -16,7 +16,9 @@ void* b_background_poll(void* arg) {
   int bgsize = bg_list->size;
   for (int i = 0; i < bgsize; i++) {
     pcb_t* proc = node->process;
-    s_bg_wait(proc);
+    if (proc->is_bg) {
+      s_bg_wait(proc);
+    }
     node = node->next;
   }
   // do {
@@ -130,13 +132,17 @@ void* b_fg(void* arg) {
     proc = find_process_job_id(stopped, index);
 
     if (proc != NULL) {
-      fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
+      fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
               proc->processname);
-      // if (s_kill(proc->pid, SIGCONT) < 0) {
-      //   // error
-      //   fprintf(stderr, "SIGCONT failed to send\n");
-      //   return NULL;
-      // }
+      if (proc->initial_state != RUNNING) {
+        s_resume_block(proc->pid);
+      } else {
+        if (s_kill(proc->pid, P_SIGCONT) < 0) {
+          // error
+          fprintf(stderr, "SIGCONT failed to send\n");
+          return NULL;
+        }
+      }
       s_fg(proc);
 
       /// TODO: immediate send to tcprescp
@@ -150,7 +156,7 @@ void* b_fg(void* arg) {
     proc = find_process_job_id(bg_list, index);
 
     if (proc != NULL) {
-      fprintf(stdout, "[%ld]\t %4u RUNNING\t%s\n", proc->job_num, proc->pid,
+      fprintf(stdout, "[%ld]  + %4u Running\t%s\n", proc->job_num, proc->pid,
               proc->processname);
       // if (s_kill(proc->pid, SIGCONT) < 0) {
       //   // error
@@ -176,13 +182,19 @@ void* b_fg(void* arg) {
 
   if (stopped != NULL && stopped->tail != NULL) {
     proc = stopped->tail->process;
-    fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
+    fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
             proc->processname);
-    // if (s_kill(proc->pid, P_SIGCONT) < 0) {
-    //   // error
-    //   fprintf(stderr, "SIGCONT failed to send\n");
-    //   return NULL;
-    // }
+    /// TODO:there could be more but wrote for sleep for now
+    if (proc->initial_state != RUNNING) {
+      s_resume_block(proc->pid);
+    } else {
+      if (s_kill(proc->pid, P_SIGCONT) < 0) {
+        // error
+        fprintf(stderr, "SIGCONT failed to send\n");
+        return NULL;
+      }
+    }
+
     s_fg(proc);
 
     /// TODO: immediate send to tcprescp
@@ -195,7 +207,7 @@ void* b_fg(void* arg) {
 
   if (bg_list != NULL && bg_list->tail != NULL) {
     proc = bg_list->tail->process;
-    fprintf(stdout, "[%ld]\t %4u RUNNING\t%s\n", proc->job_num, proc->pid,
+    fprintf(stdout, "[%ld]  + %4u Running\t%s\n", proc->job_num, proc->pid,
             proc->processname);
     // if (s_kill(proc->pid, P_SIGCONT) < 0) {
     //   // error
@@ -230,14 +242,19 @@ void* b_bg(void* arg) {
 
     if (proc != NULL) {
       proc = stopped->head->process;
-      if (s_kill(proc->pid, P_SIGCONT) < 0) {
-        // error
-        fprintf(stderr, "SIGCONT failed to send\n");
-        return NULL;
+      if (proc->initial_state != RUNNING) {
+        s_resume_block(proc->pid);
+      } else {
+        if (s_kill(proc->pid, P_SIGCONT) < 0) {
+          // error
+          fprintf(stderr, "SIGCONT failed to send\n");
+          return NULL;
+        }
       }
 
+      proc->is_bg = true;
       add_process(bg_list, proc);
-      fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
+      fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
               proc->processname);
 
       // proc->state = RUNNING;
@@ -255,14 +272,19 @@ void* b_bg(void* arg) {
 
   if (stopped != NULL && stopped->head != NULL) {
     proc = stopped->tail->process;
-    if (s_kill(proc->pid, P_SIGCONT) < 0) {
-      // error
-      fprintf(stderr, "SIGCONT failed to send\n");
-      return NULL;
+    if (proc->initial_state != RUNNING) {
+      s_resume_block(proc->pid);
+    } else {
+      if (s_kill(proc->pid, P_SIGCONT) < 0) {
+        // error
+        fprintf(stderr, "SIGCONT failed to send\n");
+        return NULL;
+      }
     }
 
+    proc->is_bg = true;
     add_process(bg_list, proc);
-    fprintf(stdout, "[%ld]\t %4u CONTINUED\t%s\n", proc->job_num, proc->pid,
+    fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
             proc->processname);
 
     // proc->state = RUNNING;

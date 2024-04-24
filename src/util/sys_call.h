@@ -87,6 +87,14 @@ pid_t s_spawn_nice(void* (*func)(void*),
 pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang);
 
 /**
+ * @brief Blocks process with command "sleep" that has been stopped before.
+ *
+ * @param pid Process ID of the child to wait for.
+ * @return 0 on success, -1 on error.
+ */
+int s_resume_block(pid_t pid);
+
+/**
  * @brief Send a signal to a particular process.
  *
  * @param pid Process ID of the target proces.
