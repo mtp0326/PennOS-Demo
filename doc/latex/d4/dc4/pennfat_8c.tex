@@ -5,52 +5,52 @@
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{pennfat_8c_aa7e4fe1d0c843e02dfdba34edc69fe91}{prompt}} ()
-\item 
-void \mbox{\hyperlink{pennfat_8c_a16c44eadc8a5f1fbd168422e13eb6890}{read\+\_\+command}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}cmds)
-\item 
+void \mbox{\hyperlink{pennfat_8c_ab02874a244e197192421ab6306b01a6f}{prompt}} (bool is\+Shell)
+\begin{DoxyCompactList}\small\item\em Helper function to display the prompt to the user. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pennfat_8c_ac7f326a6111f42f1adbaf05923c128de}{read\+\_\+command}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}cmds)
+\begin{DoxyCompactList}\small\item\em Helper function that reads user input and handles CTRL-\/D. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_a95c1eedbf28e070d02d04fbbb832a3b8}{int\+\_\+handler}} (int signo)
-\item 
+\begin{DoxyCompactList}\small\item\em Helper function that handles CTRL-\/Z. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_a7d5ac507ab09ed439fe59e6ba52e6374}{initialize\+\_\+global\+\_\+fd\+\_\+table}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Initializes global fd table with stdin, stdout, and stderr. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_adf6e89b78280efda4b5c486c9697b513}{mkfs}} (const char \texorpdfstring{$\ast$}{*}fs\+\_\+name, int blocks\+\_\+in\+\_\+fat, int block\+\_\+size\+\_\+config)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a "{}filesytem"{} (file on host device) with name {\ttfamily fs\+\_\+name} with each of the {\ttfamily blocks\+\_\+in\+\_\+fat} blocks of size specified via {\ttfamily block\+\_\+size\+\_\+config} . \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat_8c_a2fe0ff1115fb73cfaef3441eb8d77426}{mount}} (const char \texorpdfstring{$\ast$}{*}fs\+\_\+name)
-\item 
+\begin{DoxyCompactList}\small\item\em Mounts the file system specified by {\ttfamily fs\+\_\+name} via mmap(2) \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat_8c_a1db7f084483fe1bc09d688e3d3a69eb4}{unmount}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Unmounts the currently mounted filesystem. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat_8c_a1d5876a5f78107bed3847c8d5485b7c4}{get\+\_\+block\+\_\+size}} (int block\+\_\+size\+\_\+config)
-\item 
+\begin{DoxyCompactList}\small\item\em Converts config number to actual blocks size in bytes. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat_8c_ad9f7eae33584363000a4ef799b8a53bf}{get\+\_\+fat\+\_\+size}} (int \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\+\_\+size}}, int blocks\+\_\+in\+\_\+fat)
-\item 
+\begin{DoxyCompactList}\small\item\em Computes fat size via block\+\_\+size and number of blocks in fat. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat_8c_a3c58e4046bc0fb7d042ae61a478b902f}{get\+\_\+num\+\_\+fat\+\_\+entries}} (int \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\+\_\+size}}, int blocks\+\_\+in\+\_\+fat)
-\item 
+\begin{DoxyCompactList}\small\item\em Computes number of fat entries. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat_8c_afe223c13a71e93bc31d9c453fd2fb856}{get\+\_\+data\+\_\+size}} (int \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\+\_\+size}}, int \mbox{\hyperlink{pennfat__kernel_8c_af866bcf6c2272c2f6b1b7e5ad3a2e127}{num\+\_\+fat\+\_\+entries}})
-\item 
+\begin{DoxyCompactList}\small\item\em Computes size of data region in bytes. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat_8c_af81db977c099887a61b6c74f0893cb4a}{get\+\_\+offset\+\_\+size}} (int block\+\_\+num, int offset)
-\item 
+\begin{DoxyCompactList}\small\item\em Gets offset size from start of filesystem to {\ttfamily block\+\_\+num} with {\ttfamily offset}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_a71f9fc8600d2bc8e7a150dc916c31105}{touch}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}args)
-\item 
+\begin{DoxyCompactList}\small\item\em Implements touch function via k\+\_\+open. Opens all files specified in user command. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_ac7051d05598e13d47c1f51c8f4fc41ec}{rm}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}args)
-\item 
+\begin{DoxyCompactList}\small\item\em Implements rm function via k\+\_\+unlink. Removes files specific by user. Errors if file to be removed doesn\textquotesingle{}t exist. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_af3c595e77dc267c7748160ff5070eb12}{mv}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}args)
-\item 
+\begin{DoxyCompactList}\small\item\em Implements mv function via k\+\_\+rename. For command mv f1 f2, f1 is renamed to f2 f2 is removed if it already exists. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_a3c36044e4d46eeeac317c0625aa2a0aa}{chmod}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}args)
-\item 
+\begin{DoxyCompactList}\small\item\em Implements chmod function via k\+\_\+change\+\_\+mode. Changes mode (file permission) of file directory entry Errors if resulting file permission is invalid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_afdca5618cfd95ac674ef9714c8aaf94b}{cat\+\_\+file\+\_\+wa}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}args)
-\item 
+\begin{DoxyCompactList}\small\item\em Implements cat functions E.\+g. cat f1 -\/w f2 writes contents of f1 into f2, cat f1 f2 prints contents of f1 and f2 into stdout, cat f1 -\/a f2, appends contents of f1 into f2. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_a474b370f4b5879f82110fdca97892348}{cat\+\_\+w}} (char \texorpdfstring{$\ast$}{*}output)
-\item 
+\begin{DoxyCompactList}\small\item\em Implements cat function that reads from terminal and writes to {\ttfamily output} file. Creates {\ttfamily output} file if it doesn\textquotesingle{}t exist. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_ab188252d77516fed55f14aee897fcaf8}{cat\+\_\+a}} (char \texorpdfstring{$\ast$}{*}output)
-\item 
+\begin{DoxyCompactList}\small\item\em Implements cat function that reads from terminal and appends to {\ttfamily output} file. Creates {\ttfamily output} file if it doesn\textquotesingle{}t exist. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8c_a0a4a3cef40cd8acefe8d3913380a814a}{ls}} ()
-\item 
-void \mbox{\hyperlink{pennfat_8c_a45864d35d26a4bd9e21c7d003eca6089}{cp\+\_\+within\+\_\+fat}} (char \texorpdfstring{$\ast$}{*}source, char \texorpdfstring{$\ast$}{*}dest)
-\item 
-void \mbox{\hyperlink{pennfat_8c_aa7619ba3caa26fbd788a93bc650e7dba}{cp\+\_\+to\+\_\+host}} (char \texorpdfstring{$\ast$}{*}source, char \texorpdfstring{$\ast$}{*}host\+\_\+dest)
-\item 
-void \mbox{\hyperlink{pennfat_8c_a5e60907e2ac348f2b539ac4afd25d2bd}{cp\+\_\+from\+\_\+host}} (char \texorpdfstring{$\ast$}{*}host\+\_\+source, char \texorpdfstring{$\ast$}{*}dest)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Implements standard ls function. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pennfat_8c_a96e0c0752c3a4f14c705c8438d4e1d32}{cp\+\_\+within\+\_\+fat}} (char \texorpdfstring{$\ast$}{*}source, char \texorpdfstring{$\ast$}{*}dest)
+\begin{DoxyCompactList}\small\item\em Implements cp function of copying within the fat by calling k\+\_\+cp\+\_\+within\+\_\+fat Creates {\ttfamily dest} file if it doesn\textquotesingle{}t exist, {\ttfamily source} must exist. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pennfat_8c_ae1db417a813b6e049324bcc193940e91}{cp\+\_\+to\+\_\+host}} (char \texorpdfstring{$\ast$}{*}source, char \texorpdfstring{$\ast$}{*}host\+\_\+dest)
+\begin{DoxyCompactList}\small\item\em Implements cp function of copying from fat to host by calling k\+\_\+cp\+\_\+to\+\_\+host Creates {\ttfamily host\+\_\+dest} if it doesn\textquotesingle{}t exist, {\ttfamily source} must exist. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pennfat_8c_aa8a88599335904e85ca7186505bc07ae}{cp\+\_\+from\+\_\+host}} (char \texorpdfstring{$\ast$}{*}host\+\_\+source, char \texorpdfstring{$\ast$}{*}dest)
+\begin{DoxyCompactList}\small\item\em Implements cp function of copying from the host to fat by calling k\+\_\+cp\+\_\+from\+\_\+host Creates {\ttfamily dest} file if it doesn\textquotesingle{}t exist, {\ttfamily host\+\_\+source} nust exist. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -60,77 +60,227 @@ void \mbox{\hyperlink{pennfat_8c_a5e60907e2ac348f2b539ac4afd25d2bd}{cp\+\_\+from
 \doxysubsubsection{\texorpdfstring{cat\_a()}{cat\_a()}}
 {\footnotesize\ttfamily void cat\+\_\+a (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{output }\end{DoxyParamCaption})}
 
+
+
+Implements cat function that reads from terminal and appends to {\ttfamily output} file. Creates {\ttfamily output} file if it doesn\textquotesingle{}t exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & File to be appended to \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat_8c_afdca5618cfd95ac674ef9714c8aaf94b}\label{pennfat_8c_afdca5618cfd95ac674ef9714c8aaf94b} 
 \index{pennfat.c@{pennfat.c}!cat\_file\_wa@{cat\_file\_wa}}
 \index{cat\_file\_wa@{cat\_file\_wa}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{cat\_file\_wa()}{cat\_file\_wa()}}
 {\footnotesize\ttfamily void cat\+\_\+file\+\_\+wa (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
+
+
+Implements cat functions E.\+g. cat f1 -\/w f2 writes contents of f1 into f2, cat f1 f2 prints contents of f1 and f2 into stdout, cat f1 -\/a f2, appends contents of f1 into f2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & user command \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat_8c_a474b370f4b5879f82110fdca97892348}\label{pennfat_8c_a474b370f4b5879f82110fdca97892348} 
 \index{pennfat.c@{pennfat.c}!cat\_w@{cat\_w}}
 \index{cat\_w@{cat\_w}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{cat\_w()}{cat\_w()}}
 {\footnotesize\ttfamily void cat\+\_\+w (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{output }\end{DoxyParamCaption})}
 
+
+
+Implements cat function that reads from terminal and writes to {\ttfamily output} file. Creates {\ttfamily output} file if it doesn\textquotesingle{}t exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & File to be written to \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat_8c_a3c36044e4d46eeeac317c0625aa2a0aa}\label{pennfat_8c_a3c36044e4d46eeeac317c0625aa2a0aa} 
 \index{pennfat.c@{pennfat.c}!chmod@{chmod}}
 \index{chmod@{chmod}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{chmod()}{chmod()}}
 {\footnotesize\ttfamily void chmod (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{pennfat_8c_a5e60907e2ac348f2b539ac4afd25d2bd}\label{pennfat_8c_a5e60907e2ac348f2b539ac4afd25d2bd} 
+
+
+Implements chmod function via k\+\_\+change\+\_\+mode. Changes mode (file permission) of file directory entry Errors if resulting file permission is invalid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & user command \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pennfat_8c_aa8a88599335904e85ca7186505bc07ae}\label{pennfat_8c_aa8a88599335904e85ca7186505bc07ae} 
 \index{pennfat.c@{pennfat.c}!cp\_from\_host@{cp\_from\_host}}
 \index{cp\_from\_host@{cp\_from\_host}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{cp\_from\_host()}{cp\_from\_host()}}
-{\footnotesize\ttfamily void cp\+\_\+from\+\_\+host (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{host\+\_\+source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int cp\+\_\+from\+\_\+host (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{host\+\_\+source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
 
-\Hypertarget{pennfat_8c_aa7619ba3caa26fbd788a93bc650e7dba}\label{pennfat_8c_aa7619ba3caa26fbd788a93bc650e7dba} 
+
+
+Implements cp function of copying from the host to fat by calling k\+\_\+cp\+\_\+from\+\_\+host Creates {\ttfamily dest} file if it doesn\textquotesingle{}t exist, {\ttfamily host\+\_\+source} nust exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em host\+\_\+source} & source file to copy from host \\
+\hline
+{\em dest} & destination file to copy into in fat\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on error, 1 if successful 
+\end{DoxyReturn}
+\Hypertarget{pennfat_8c_ae1db417a813b6e049324bcc193940e91}\label{pennfat_8c_ae1db417a813b6e049324bcc193940e91} 
 \index{pennfat.c@{pennfat.c}!cp\_to\_host@{cp\_to\_host}}
 \index{cp\_to\_host@{cp\_to\_host}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{cp\_to\_host()}{cp\_to\_host()}}
-{\footnotesize\ttfamily void cp\+\_\+to\+\_\+host (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{host\+\_\+dest }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int cp\+\_\+to\+\_\+host (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{host\+\_\+dest }\end{DoxyParamCaption})}
 
-\Hypertarget{pennfat_8c_a45864d35d26a4bd9e21c7d003eca6089}\label{pennfat_8c_a45864d35d26a4bd9e21c7d003eca6089} 
+
+
+Implements cp function of copying from fat to host by calling k\+\_\+cp\+\_\+to\+\_\+host Creates {\ttfamily host\+\_\+dest} if it doesn\textquotesingle{}t exist, {\ttfamily source} must exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & source file to copy from in fat \\
+\hline
+{\em host\+\_\+dest} & destination file to copy into in host filesystem\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on error, 1 if successful 
+\end{DoxyReturn}
+\Hypertarget{pennfat_8c_a96e0c0752c3a4f14c705c8438d4e1d32}\label{pennfat_8c_a96e0c0752c3a4f14c705c8438d4e1d32} 
 \index{pennfat.c@{pennfat.c}!cp\_within\_fat@{cp\_within\_fat}}
 \index{cp\_within\_fat@{cp\_within\_fat}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{cp\_within\_fat()}{cp\_within\_fat()}}
-{\footnotesize\ttfamily void cp\+\_\+within\+\_\+fat (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int cp\+\_\+within\+\_\+fat (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
 
+
+
+Implements cp function of copying within the fat by calling k\+\_\+cp\+\_\+within\+\_\+fat Creates {\ttfamily dest} file if it doesn\textquotesingle{}t exist, {\ttfamily source} must exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & source file to copy from \\
+\hline
+{\em dest} & destination file to copy into\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on error, 0 if successful 
+\end{DoxyReturn}
 \Hypertarget{pennfat_8c_a1d5876a5f78107bed3847c8d5485b7c4}\label{pennfat_8c_a1d5876a5f78107bed3847c8d5485b7c4} 
 \index{pennfat.c@{pennfat.c}!get\_block\_size@{get\_block\_size}}
 \index{get\_block\_size@{get\_block\_size}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{get\_block\_size()}{get\_block\_size()}}
 {\footnotesize\ttfamily int get\+\_\+block\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+size\+\_\+config }\end{DoxyParamCaption})}
 
+
+
+Converts config number to actual blocks size in bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\+\_\+size\+\_\+config} & The block size config number\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer representing block size in bytes 
+\end{DoxyReturn}
 \Hypertarget{pennfat_8c_afe223c13a71e93bc31d9c453fd2fb856}\label{pennfat_8c_afe223c13a71e93bc31d9c453fd2fb856} 
 \index{pennfat.c@{pennfat.c}!get\_data\_size@{get\_data\_size}}
 \index{get\_data\_size@{get\_data\_size}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{get\_data\_size()}{get\_data\_size()}}
 {\footnotesize\ttfamily int get\+\_\+data\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+size,  }\item[{int}]{num\+\_\+fat\+\_\+entries }\end{DoxyParamCaption})}
 
+
+
+Computes size of data region in bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\+\_\+size} & the size in bytes of each block \\
+\hline
+{\em num\+\_\+fat\+\_\+entries} & number of fat entries\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer representing data size in bytes 
+\end{DoxyReturn}
 \Hypertarget{pennfat_8c_ad9f7eae33584363000a4ef799b8a53bf}\label{pennfat_8c_ad9f7eae33584363000a4ef799b8a53bf} 
 \index{pennfat.c@{pennfat.c}!get\_fat\_size@{get\_fat\_size}}
 \index{get\_fat\_size@{get\_fat\_size}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{get\_fat\_size()}{get\_fat\_size()}}
 {\footnotesize\ttfamily int get\+\_\+fat\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+size,  }\item[{int}]{blocks\+\_\+in\+\_\+fat }\end{DoxyParamCaption})}
 
+
+
+Computes fat size via block\+\_\+size and number of blocks in fat. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\+\_\+size} & the size in bytes of each block \\
+\hline
+{\em blocks\+\_\+in\+\_\+fat} & number of blocks in fat\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer representing size of fat in bytes 
+\end{DoxyReturn}
 \Hypertarget{pennfat_8c_a3c58e4046bc0fb7d042ae61a478b902f}\label{pennfat_8c_a3c58e4046bc0fb7d042ae61a478b902f} 
 \index{pennfat.c@{pennfat.c}!get\_num\_fat\_entries@{get\_num\_fat\_entries}}
 \index{get\_num\_fat\_entries@{get\_num\_fat\_entries}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{get\_num\_fat\_entries()}{get\_num\_fat\_entries()}}
 {\footnotesize\ttfamily int get\+\_\+num\+\_\+fat\+\_\+entries (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+size,  }\item[{int}]{blocks\+\_\+in\+\_\+fat }\end{DoxyParamCaption})}
 
+
+
+Computes number of fat entries. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\+\_\+size} & the size in bytes of each block \\
+\hline
+{\em blocks\+\_\+in\+\_\+fat} & number of blocks in fat\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer representing number of fat entries 
+\end{DoxyReturn}
 \Hypertarget{pennfat_8c_af81db977c099887a61b6c74f0893cb4a}\label{pennfat_8c_af81db977c099887a61b6c74f0893cb4a} 
 \index{pennfat.c@{pennfat.c}!get\_offset\_size@{get\_offset\_size}}
 \index{get\_offset\_size@{get\_offset\_size}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{get\_offset\_size()}{get\_offset\_size()}}
 {\footnotesize\ttfamily int get\+\_\+offset\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{block\+\_\+num,  }\item[{int}]{offset }\end{DoxyParamCaption})}
 
+
+
+Gets offset size from start of filesystem to {\ttfamily block\+\_\+num} with {\ttfamily offset}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\+\_\+num} & the block number \\
+\hline
+{\em offset} & offset from start if {\ttfamily block\+\_\+num} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+total offset size in bytes 
+\end{DoxyReturn}
 \Hypertarget{pennfat_8c_a7d5ac507ab09ed439fe59e6ba52e6374}\label{pennfat_8c_a7d5ac507ab09ed439fe59e6ba52e6374} 
 \index{pennfat.c@{pennfat.c}!initialize\_global\_fd\_table@{initialize\_global\_fd\_table}}
 \index{initialize\_global\_fd\_table@{initialize\_global\_fd\_table}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{initialize\_global\_fd\_table()}{initialize\_global\_fd\_table()}}
 {\footnotesize\ttfamily void initialize\+\_\+global\+\_\+fd\+\_\+table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes global fd table with stdin, stdout, and stderr. 
 
 \Hypertarget{pennfat_8c_a95c1eedbf28e070d02d04fbbb832a3b8}\label{pennfat_8c_a95c1eedbf28e070d02d04fbbb832a3b8} 
 \index{pennfat.c@{pennfat.c}!int\_handler@{int\_handler}}
@@ -138,11 +288,24 @@ void \mbox{\hyperlink{pennfat_8c_a5e60907e2ac348f2b539ac4afd25d2bd}{cp\+\_\+from
 \doxysubsubsection{\texorpdfstring{int\_handler()}{int\_handler()}}
 {\footnotesize\ttfamily void int\+\_\+handler (\begin{DoxyParamCaption}\item[{int}]{signo }\end{DoxyParamCaption})}
 
+
+
+Helper function that handles CTRL-\/Z. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signo} & Signal for int handler \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat_8c_a0a4a3cef40cd8acefe8d3913380a814a}\label{pennfat_8c_a0a4a3cef40cd8acefe8d3913380a814a} 
 \index{pennfat.c@{pennfat.c}!ls@{ls}}
 \index{ls@{ls}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{ls()}{ls()}}
 {\footnotesize\ttfamily void ls (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implements standard ls function. 
 
 \Hypertarget{pennfat_8c_adf6e89b78280efda4b5c486c9697b513}\label{pennfat_8c_adf6e89b78280efda4b5c486c9697b513} 
 \index{pennfat.c@{pennfat.c}!mkfs@{mkfs}}
@@ -150,29 +313,76 @@ void \mbox{\hyperlink{pennfat_8c_a5e60907e2ac348f2b539ac4afd25d2bd}{cp\+\_\+from
 \doxysubsubsection{\texorpdfstring{mkfs()}{mkfs()}}
 {\footnotesize\ttfamily void mkfs (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fs\+\_\+name,  }\item[{int}]{blocks\+\_\+in\+\_\+fat,  }\item[{int}]{block\+\_\+size\+\_\+config }\end{DoxyParamCaption})}
 
+
+
+Creates a "{}filesytem"{} (file on host device) with name {\ttfamily fs\+\_\+name} with each of the {\ttfamily blocks\+\_\+in\+\_\+fat} blocks of size specified via {\ttfamily block\+\_\+size\+\_\+config} . 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fs\+\_\+name} & Name of the file system to be created \\
+\hline
+{\em blocks\+\_\+in\+\_\+fat} & Number of blocks in the fat \\
+\hline
+{\em block\+\_\+size\+\_\+config} & Configuration specifying size of each block in fat \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat_8c_a2fe0ff1115fb73cfaef3441eb8d77426}\label{pennfat_8c_a2fe0ff1115fb73cfaef3441eb8d77426} 
 \index{pennfat.c@{pennfat.c}!mount@{mount}}
 \index{mount@{mount}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{mount()}{mount()}}
 {\footnotesize\ttfamily int mount (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fs\+\_\+name }\end{DoxyParamCaption})}
 
+
+
+Mounts the file system specified by {\ttfamily fs\+\_\+name} via mmap(2) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fs\+\_\+name} & Name of the file system to be mounted\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if successful and -\/1 if error 
+\end{DoxyReturn}
 \Hypertarget{pennfat_8c_af3c595e77dc267c7748160ff5070eb12}\label{pennfat_8c_af3c595e77dc267c7748160ff5070eb12} 
 \index{pennfat.c@{pennfat.c}!mv@{mv}}
 \index{mv@{mv}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{mv()}{mv()}}
 {\footnotesize\ttfamily void mv (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{pennfat_8c_aa7e4fe1d0c843e02dfdba34edc69fe91}\label{pennfat_8c_aa7e4fe1d0c843e02dfdba34edc69fe91} 
+
+
+Implements mv function via k\+\_\+rename. For command mv f1 f2, f1 is renamed to f2 f2 is removed if it already exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & user command \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pennfat_8c_ab02874a244e197192421ab6306b01a6f}\label{pennfat_8c_ab02874a244e197192421ab6306b01a6f} 
 \index{pennfat.c@{pennfat.c}!prompt@{prompt}}
 \index{prompt@{prompt}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{prompt()}{prompt()}}
-{\footnotesize\ttfamily void prompt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void prompt (\begin{DoxyParamCaption}\item[{bool}]{shell }\end{DoxyParamCaption})}
 
-\Hypertarget{pennfat_8c_a16c44eadc8a5f1fbd168422e13eb6890}\label{pennfat_8c_a16c44eadc8a5f1fbd168422e13eb6890} 
+
+
+Helper function to display the prompt to the user. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shell} & true if shell prompt, false otherwise \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pennfat_8c_ac7f326a6111f42f1adbaf05923c128de}\label{pennfat_8c_ac7f326a6111f42f1adbaf05923c128de} 
 \index{pennfat.c@{pennfat.c}!read\_command@{read\_command}}
 \index{read\_command@{read\_command}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{read\_command()}{read\_command()}}
-{\footnotesize\ttfamily void read\+\_\+command (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{cmds }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int read\+\_\+command (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{cmds }\end{DoxyParamCaption})}
+
+
+
+Helper function that reads user input and handles CTRL-\/D. 
 
 \Hypertarget{pennfat_8c_ac7051d05598e13d47c1f51c8f4fc41ec}\label{pennfat_8c_ac7051d05598e13d47c1f51c8f4fc41ec} 
 \index{pennfat.c@{pennfat.c}!rm@{rm}}
@@ -180,15 +390,40 @@ void \mbox{\hyperlink{pennfat_8c_a5e60907e2ac348f2b539ac4afd25d2bd}{cp\+\_\+from
 \doxysubsubsection{\texorpdfstring{rm()}{rm()}}
 {\footnotesize\ttfamily void rm (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
+
+
+Implements rm function via k\+\_\+unlink. Removes files specific by user. Errors if file to be removed doesn\textquotesingle{}t exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & user command \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat_8c_a71f9fc8600d2bc8e7a150dc916c31105}\label{pennfat_8c_a71f9fc8600d2bc8e7a150dc916c31105} 
 \index{pennfat.c@{pennfat.c}!touch@{touch}}
 \index{touch@{touch}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{touch()}{touch()}}
 {\footnotesize\ttfamily void touch (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
+
+
+Implements touch function via k\+\_\+open. Opens all files specified in user command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & user command \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat_8c_a1db7f084483fe1bc09d688e3d3a69eb4}\label{pennfat_8c_a1db7f084483fe1bc09d688e3d3a69eb4} 
 \index{pennfat.c@{pennfat.c}!unmount@{unmount}}
 \index{unmount@{unmount}!pennfat.c@{pennfat.c}}
 \doxysubsubsection{\texorpdfstring{unmount()}{unmount()}}
 {\footnotesize\ttfamily int unmount (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Unmounts the currently mounted filesystem. 
+
+\begin{DoxyReturn}{Returns}
+Returns 0 if successful and -\/1 if error 
+\end{DoxyReturn}

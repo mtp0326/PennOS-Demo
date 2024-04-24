@@ -8,20 +8,40 @@
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structdirectory__entries}{directory\+\_\+entries}}
-\item 
+\begin{DoxyCompactList}\small\item\em This structure stores all required information about the directory entries that are stored in the root directory. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This structure stores all required information about the file descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{pennfat__kernel_8h_ab86e09c9385938942f76becf2c2aae95}{F\+\_\+\+READ}}~0
-\item 
+\begin{DoxyCompactList}\small\item\em open the file for reading only \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{pennfat__kernel_8h_a65bc715eea79704953e87d562e15f366}{F\+\_\+\+WRITE}}~1
-\item 
+\begin{DoxyCompactList}\small\item\em writing and reading, truncates if the file exists, or creates it if it does not exist. Only one instance of a file can be opened in F\+\_\+\+WRITE mode; error if attempted to open a file in F\+\_\+\+WRITE mode more than once \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{pennfat__kernel_8h_a298b91deec2bed5a79398eedd81cd754}{F\+\_\+\+APPEND}}~2
-\item 
+\begin{DoxyCompactList}\small\item\em open the file for reading and writing but does not truncate the file if exists; additionally, the file pointer references the end of the file. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{pennfat__kernel_8h_a42dd65bff5e0d98e3d17b523e65b9e06}{MAX\+\_\+\+FD\+\_\+\+NUM}}~1024
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Size of the global\+\_\+fd\+\_\+table. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_a775241e32b7ccb12e344ae23aa2db6b1}{FILE\+\_\+\+NOT\+\_\+\+FOUND}}~-\/1
+\begin{DoxyCompactList}\small\item\em Error number for when there does not exist a file with the given file name. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_a766ef9868dc2ca892fec7594bf5c001f}{INVALID\+\_\+\+FILE\+\_\+\+NAME}}~-\/2
+\begin{DoxyCompactList}\small\item\em Error number for when the file name doesn\textquotesingle{}t follow the POSIX standard. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_a6d87b58f2f59988fb038e8e7a624d3a1}{MULTIPLE\+\_\+\+F\+\_\+\+WRITE}}~-\/3
+\begin{DoxyCompactList}\small\item\em Error number for when trying to open more than one file descriptor in F\+\_\+\+WRITE / F\+\_\+\+APPEND mode. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_a4f508739f76b70b145cc951856b9bb10}{WRONG\+\_\+\+PERMISSION}}~-\/4
+\begin{DoxyCompactList}\small\item\em Error number for when trying to use the file descriptor in an invalid way such as writing to F\+\_\+\+READ file descriptor. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_afc193a671d528c44d636e641c0eedf1e}{SYSTEM\+\_\+\+ERROR}}~-\/5
+\begin{DoxyCompactList}\small\item\em Error number for when C level system function fails. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_a94473fc029d7adc723de1a71f26c7e8b}{FILE\+\_\+\+DELETED}}~-\/6
+\begin{DoxyCompactList}\small\item\em Error number for when trying to access or use a deleted file. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_ac464698b9650d3fae2d2fa746624130a}{INVALID\+\_\+\+FILE\+\_\+\+DESCRIPTOR}}~-\/7
+\begin{DoxyCompactList}\small\item\em Error number for when trying to access or use a invalid file descriptor. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_a2c2ba7f8612dbda8692281d69b237221}{FILE\+\_\+\+IN\+\_\+\+USE}}~-\/8
+\begin{DoxyCompactList}\small\item\em Error number for when delete a file that is used by some other processes. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_a388389bcfc8bc6948baafab7862e0ad9}{INVALID\+\_\+\+PARAMETERS}}~-\/9
+\begin{DoxyCompactList}\small\item\em Error number for when the parameter given to the function is invalid. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_a5570301c863e2a1c4cdcc49083d8a041}{FS\+\_\+\+NOT\+\_\+\+MOUNTED}}~-\/10
+\begin{DoxyCompactList}\small\item\em Error number for when the filesystem is not mounted but tries to access or use the file system. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,71 +49,79 @@ enum \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6}{When
 , \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6ab31ac29c12e35bd468f95e18263e9850}{F\+\_\+\+SEEK\+\_\+\+CUR}}
 , \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6a3efde7f3f3639fd0801644753d2e5674}{F\+\_\+\+SEEK\+\_\+\+END}}
  \}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Defines how the offset will be calculated when using the k\+\_\+lseek method. For more detail, refer to lseek(2). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8h_a25ad4d01d5ade905b2bfce04910a5c0d}{create\+\_\+file\+\_\+descriptor}} (int fd, char \texorpdfstring{$\ast$}{*}fname, int mode, int offset)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st} struct, initialized with the values provided by the parameters. For more information of the parameters, refer to struct \doxylink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structdirectory__entries}{directory\+\_\+entries}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8h_a3fd2d5dba8f5f42be13d549b0e08a3ad}{create\+\_\+directory\+\_\+entry}} (const char \texorpdfstring{$\ast$}{*}name, uint32\+\_\+t size, uint16\+\_\+t first\+Block, uint8\+\_\+t type, uint8\+\_\+t perm, time\+\_\+t mtime)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{structdirectory__entries}{directory\+\_\+entries} struct, initialized with the values provided by the parameters. For more information of the parameters, refer to struct \doxylink{structdirectory__entries}{directory\+\_\+entries}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat__kernel_8h_a2d501c304eeba5035c83c1e2a4aec4fb}{lseek\+\_\+to\+\_\+root\+\_\+directory}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em lseek the file system\textquotesingle{}s offset to the start of the root directory. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat__kernel_8h_a580177591867f52c90932219a6c29e71}{extend\+\_\+fat}} (int start\+\_\+index, int empty\+\_\+fat\+\_\+index)
-\item 
+\begin{DoxyCompactList}\small\item\em Extend the fat region of the given file (marked by the {\ttfamily start\+\_\+index} ) by one block. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_addbc36d23ce41b02cb1508bf85ca24e2}{get\+\_\+first\+\_\+empty\+\_\+fat\+\_\+index}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Finds and returns the first empty fat index marked as 0x0000. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat__kernel_8h_a6532ad36b852dd09d641bcaac2642b9b}{move\+\_\+to\+\_\+open\+\_\+de}} (bool found)
-\item 
+\begin{DoxyCompactList}\small\item\em Change the offset to the fs\+\_\+fd to the first open directory entry. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structdirectory__entries}{directory\+\_\+entries}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8h_a78d95341bbd2b21ed69dd341ff47669f}{does\+\_\+file\+\_\+exist}} (const char \texorpdfstring{$\ast$}{*}fname)
-\item 
+\begin{DoxyCompactList}\small\item\em helper that traverses root directory block by block to check if fname file exists return\+: the directory entry struct with name fname (NULL if not found) also moves fs\+\_\+fd to the end of the root directory \end{DoxyCompactList}\item 
 off\+\_\+t \mbox{\hyperlink{pennfat__kernel_8h_a8434cdce67b1512300f44ed38497c22a}{does\+\_\+file\+\_\+exist2}} (const char \texorpdfstring{$\ast$}{*}fname)
-\item 
+\begin{DoxyCompactList}\small\item\em Helper function that given a files name, it outputs the offset to the directory entry or negative number if the file isn\textquotesingle{}t found. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_af7f9a41e9fb0fdf97403eff276990e1f}{k\+\_\+count\+\_\+fd\+\_\+num}} (const char \texorpdfstring{$\ast$}{*}name)
-\item 
+\begin{DoxyCompactList}\small\item\em Returns the number of currently open in the global\+\_\+fd\+\_\+table with the {\ttfamily name} as the fname. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8h_abe5ffc180d9fc063efc7127d14378b54}{get\+\_\+file\+\_\+descriptor}} (int fd)
-\item 
+\begin{DoxyCompactList}\small\item\em Return the file descriptor struct for the given file descriptor number. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_a4d2cf4232cddee738996ca9ad83ea56f}{k\+\_\+open}} (const char \texorpdfstring{$\ast$}{*}fname, int mode)
 \begin{DoxyCompactList}\small\item\em Open file name {\ttfamily fname} with the mode {\ttfamily mode}, and return a file descriptor to that file. \end{DoxyCompactList}\item 
 ssize\+\_\+t \mbox{\hyperlink{pennfat__kernel_8h_a1951ec11865274b45144d6dd6f878692}{k\+\_\+read}} (int fd, int n, char \texorpdfstring{$\ast$}{*}buf)
-\item 
+\begin{DoxyCompactList}\small\item\em Read n bytes from the file referenced by fd. On return, k\+\_\+read returns the number of bytes read, 0 if EOF is reached, or a negative number on error. \end{DoxyCompactList}\item 
 ssize\+\_\+t \mbox{\hyperlink{pennfat__kernel_8h_a79d2a9b65d0e04de358fe1a2cfa79baf}{k\+\_\+write}} (int fd, const char \texorpdfstring{$\ast$}{*}str, int n)
-\item 
+\begin{DoxyCompactList}\small\item\em Write n bytes of the string referenced by str to the file fd and increment the file pointer by n. On return, k\+\_\+write returns the number of bytes written, or a negative value on error. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_a9ecd38dc6f3a9721ab53ff9a815b5480}{k\+\_\+close}} (int fd)
-\item 
+\begin{DoxyCompactList}\small\item\em Close the file fd and return 0 on success, or a negative value on failure. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_ae8b44b3621ebb542bec49f73d19d2885}{k\+\_\+unlink}} (const char \texorpdfstring{$\ast$}{*}fname)
-\item 
+\begin{DoxyCompactList}\small\item\em Remove the file by freeing the FAT table and zeroing out previously existing data. \end{DoxyCompactList}\item 
 off\+\_\+t \mbox{\hyperlink{pennfat__kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96}{k\+\_\+lseek}} (int fd, int offset, int whence)
-\item 
-void \mbox{\hyperlink{pennfat__kernel_8h_a9317fe11a36bfc2d731bcbacc3a57728}{k\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename)
-\item 
-void \mbox{\hyperlink{pennfat__kernel_8h_ac41ad0b4fad0417ca8009c0475a8fb45}{k\+\_\+rename}} (const char \texorpdfstring{$\ast$}{*}source, const char \texorpdfstring{$\ast$}{*}dest)
-\item 
-void \mbox{\hyperlink{pennfat__kernel_8h_a9f444f05860d0b719fef5252d58e206e}{k\+\_\+update\+\_\+timestamp}} (const char \texorpdfstring{$\ast$}{*}source)
-\item 
-void \mbox{\hyperlink{pennfat__kernel_8h_a244379d41a5f93e98ab32fb999982696}{k\+\_\+change\+\_\+mode}} (const char \texorpdfstring{$\ast$}{*}change, const char \texorpdfstring{$\ast$}{*}filename)
-\item 
+\begin{DoxyCompactList}\small\item\em Reposition the file pointer for fd to the offset relative to whence. Refer to lseek(2) for how whence interacts with the file offset. If the newly calculated offset is creater than the current size of the file, the file expands to match that offset with the newly allocated space filled with 0s. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pennfat__kernel_8h_aa1a03cfc7e106d29d54196f03557b9ba}{k\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename, int fd)
+\begin{DoxyCompactList}\small\item\em List the file filename in the current directory. If filename is NULL, list all files in the current directory. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pennfat__kernel_8h_a85eace193c41193d1646af1a8b943200}{k\+\_\+rename}} (const char \texorpdfstring{$\ast$}{*}source, const char \texorpdfstring{$\ast$}{*}dest)
+\begin{DoxyCompactList}\small\item\em Rename {\ttfamily source} to {\ttfamily dest}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pennfat__kernel_8h_abf487212da5b9d6ebceef678fa744ad9}{k\+\_\+update\+\_\+timestamp}} (const char \texorpdfstring{$\ast$}{*}source)
+\begin{DoxyCompactList}\small\item\em Change the timestamp of the file to the current time. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pennfat__kernel_8h_ad4e9851dc3cbc61a9f8ffd36b94b9938}{k\+\_\+change\+\_\+mode}} (const char \texorpdfstring{$\ast$}{*}change, const char \texorpdfstring{$\ast$}{*}filename)
+\begin{DoxyCompactList}\small\item\em Change file mode bits. \end{DoxyCompactList}\item 
 char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8h_a08194e0542962e4d980cd9278f33c7f5}{k\+\_\+read\+\_\+all}} (const char \texorpdfstring{$\ast$}{*}filename, int \texorpdfstring{$\ast$}{*}read\+\_\+num)
-\item 
+\begin{DoxyCompactList}\small\item\em Reads all contents from the file with the file name {\ttfamily filename}. Outputs the contents as well as update {\ttfamily read\+\_\+num} to the number of bytes read. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{pennfat__kernel_8h_ada30dc78055b7b113ff2dac9aabe4eb3}{is\+\_\+file\+\_\+name\+\_\+valid}} (char \texorpdfstring{$\ast$}{*}name)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Checks whether the filename follows the POSIX standard. \end{DoxyCompactList}\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8h_af6d6a9bc81e4cf0788c8f1de39999c22}{k\+\_\+get\+\_\+fname\+\_\+from\+\_\+fd}} (int fd)
+\begin{DoxyCompactList}\small\item\em Returns the filename for the given file descriptor number. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pennfat__kernel_8h_a82daa98d4c392b4249bfbc975be22daa}{k\+\_\+cp\+\_\+within\+\_\+fat}} (char \texorpdfstring{$\ast$}{*}source, char \texorpdfstring{$\ast$}{*}dest)
+\begin{DoxyCompactList}\small\item\em Copies the contents from {\ttfamily source} to {\ttfamily dest}. Both {\ttfamily source} and {\ttfamily dest} must be files within the PENNFAT system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pennfat__kernel_8h_aaad024bf5305fa73db8c92084f8a1df0}{k\+\_\+cp\+\_\+to\+\_\+host}} (char \texorpdfstring{$\ast$}{*}source, char \texorpdfstring{$\ast$}{*}host\+\_\+dest)
+\begin{DoxyCompactList}\small\item\em Copies the contents from {\ttfamily source} to {\ttfamily host\+\_\+dest} {\ttfamily source} must be a file within the PENNFAT system. {\ttfamily host\+\_\+dest} is a host system file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pennfat__kernel_8h_a90de0cbbfd37f924016dd07d60d38853}{k\+\_\+cp\+\_\+from\+\_\+host}} (char \texorpdfstring{$\ast$}{*}host\+\_\+source, char \texorpdfstring{$\ast$}{*}dest)
+\begin{DoxyCompactList}\small\item\em Copies the contents from {\ttfamily host\+\_\+source} to {\ttfamily dest}. {\ttfamily dest} must be a file within the PENNFAT system. {\ttfamily host\+\_\+source} is a host system file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 uint16\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8h_a0e52a1a113ded7f4787290edc22ad954}{fat}}
-\item 
-struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8h_aaa044c9a05adf7c4c653586036be5bd7}{global\+\_\+fd\+\_\+table}}
-\item 
+\begin{DoxyCompactList}\small\item\em Penn\+FAT filesystem that has been mounted to memory using the mmap(2). \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8h_a07afa4cbf62f3ce8292a6ddbcb37c8fc}{global\+\_\+fd\+\_\+table}}
+\begin{DoxyCompactList}\small\item\em Kernel level global file descriptor table that stores all file descriptor that has been created through out the program\textquotesingle{}s runtime. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_a64b57b29bcc87a7b1967c7d55e7d4212}{fs\+\_\+fd}}
-\item 
+\begin{DoxyCompactList}\small\item\em File descriptor number (host system level) for the filesystem that has been mounted to the program. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_a70b27761c7d0bd5cd90f4fe47e569b94}{block\+\_\+size}}
-\item 
+\begin{DoxyCompactList}\small\item\em Block size of the currently mounted filesystem that is defined during the mkfs process. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_a6a5f2839b4852a1e8b5c0b10ec6caa5b}{fat\+\_\+size}}
-\item 
+\begin{DoxyCompactList}\small\item\em FAT region size of the currently mounted filesystem. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_af866bcf6c2272c2f6b1b7e5ad3a2e127}{num\+\_\+fat\+\_\+entries}}
-\item 
+\begin{DoxyCompactList}\small\item\em Calculated value of the total number of FAT entries within the currently mounted filesystem. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_af69e180c878a9c8f4e45ec7dc25a062f}{data\+\_\+size}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Calculated data region size of the currently mounted filesystem. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -103,17 +131,99 @@ int \mbox{\hyperlink{pennfat__kernel_8h_af69e180c878a9c8f4e45ec7dc25a062f}{data\
 \doxysubsubsection{\texorpdfstring{F\_APPEND}{F\_APPEND}}
 {\footnotesize\ttfamily \#define F\+\_\+\+APPEND~2}
 
+
+
+open the file for reading and writing but does not truncate the file if exists; additionally, the file pointer references the end of the file. 
+
 \Hypertarget{pennfat__kernel_8h_ab86e09c9385938942f76becf2c2aae95}\label{pennfat__kernel_8h_ab86e09c9385938942f76becf2c2aae95} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!F\_READ@{F\_READ}}
 \index{F\_READ@{F\_READ}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{F\_READ}{F\_READ}}
 {\footnotesize\ttfamily \#define F\+\_\+\+READ~0}
 
+
+
+open the file for reading only 
+
 \Hypertarget{pennfat__kernel_8h_a65bc715eea79704953e87d562e15f366}\label{pennfat__kernel_8h_a65bc715eea79704953e87d562e15f366} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!F\_WRITE@{F\_WRITE}}
 \index{F\_WRITE@{F\_WRITE}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{F\_WRITE}{F\_WRITE}}
 {\footnotesize\ttfamily \#define F\+\_\+\+WRITE~1}
+
+
+
+writing and reading, truncates if the file exists, or creates it if it does not exist. Only one instance of a file can be opened in F\+\_\+\+WRITE mode; error if attempted to open a file in F\+\_\+\+WRITE mode more than once 
+
+\Hypertarget{pennfat__kernel_8h_a94473fc029d7adc723de1a71f26c7e8b}\label{pennfat__kernel_8h_a94473fc029d7adc723de1a71f26c7e8b} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!FILE\_DELETED@{FILE\_DELETED}}
+\index{FILE\_DELETED@{FILE\_DELETED}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{FILE\_DELETED}{FILE\_DELETED}}
+{\footnotesize\ttfamily \#define FILE\+\_\+\+DELETED~-\/6}
+
+
+
+Error number for when trying to access or use a deleted file. 
+
+\Hypertarget{pennfat__kernel_8h_a2c2ba7f8612dbda8692281d69b237221}\label{pennfat__kernel_8h_a2c2ba7f8612dbda8692281d69b237221} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!FILE\_IN\_USE@{FILE\_IN\_USE}}
+\index{FILE\_IN\_USE@{FILE\_IN\_USE}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{FILE\_IN\_USE}{FILE\_IN\_USE}}
+{\footnotesize\ttfamily \#define FILE\+\_\+\+IN\+\_\+\+USE~-\/8}
+
+
+
+Error number for when delete a file that is used by some other processes. 
+
+\Hypertarget{pennfat__kernel_8h_a775241e32b7ccb12e344ae23aa2db6b1}\label{pennfat__kernel_8h_a775241e32b7ccb12e344ae23aa2db6b1} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!FILE\_NOT\_FOUND@{FILE\_NOT\_FOUND}}
+\index{FILE\_NOT\_FOUND@{FILE\_NOT\_FOUND}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{FILE\_NOT\_FOUND}{FILE\_NOT\_FOUND}}
+{\footnotesize\ttfamily \#define FILE\+\_\+\+NOT\+\_\+\+FOUND~-\/1}
+
+
+
+Error number for when there does not exist a file with the given file name. 
+
+\Hypertarget{pennfat__kernel_8h_a5570301c863e2a1c4cdcc49083d8a041}\label{pennfat__kernel_8h_a5570301c863e2a1c4cdcc49083d8a041} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!FS\_NOT\_MOUNTED@{FS\_NOT\_MOUNTED}}
+\index{FS\_NOT\_MOUNTED@{FS\_NOT\_MOUNTED}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{FS\_NOT\_MOUNTED}{FS\_NOT\_MOUNTED}}
+{\footnotesize\ttfamily \#define FS\+\_\+\+NOT\+\_\+\+MOUNTED~-\/10}
+
+
+
+Error number for when the filesystem is not mounted but tries to access or use the file system. 
+
+\Hypertarget{pennfat__kernel_8h_ac464698b9650d3fae2d2fa746624130a}\label{pennfat__kernel_8h_ac464698b9650d3fae2d2fa746624130a} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!INVALID\_FILE\_DESCRIPTOR@{INVALID\_FILE\_DESCRIPTOR}}
+\index{INVALID\_FILE\_DESCRIPTOR@{INVALID\_FILE\_DESCRIPTOR}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{INVALID\_FILE\_DESCRIPTOR}{INVALID\_FILE\_DESCRIPTOR}}
+{\footnotesize\ttfamily \#define INVALID\+\_\+\+FILE\+\_\+\+DESCRIPTOR~-\/7}
+
+
+
+Error number for when trying to access or use a invalid file descriptor. 
+
+\Hypertarget{pennfat__kernel_8h_a766ef9868dc2ca892fec7594bf5c001f}\label{pennfat__kernel_8h_a766ef9868dc2ca892fec7594bf5c001f} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!INVALID\_FILE\_NAME@{INVALID\_FILE\_NAME}}
+\index{INVALID\_FILE\_NAME@{INVALID\_FILE\_NAME}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{INVALID\_FILE\_NAME}{INVALID\_FILE\_NAME}}
+{\footnotesize\ttfamily \#define INVALID\+\_\+\+FILE\+\_\+\+NAME~-\/2}
+
+
+
+Error number for when the file name doesn\textquotesingle{}t follow the POSIX standard. 
+
+\Hypertarget{pennfat__kernel_8h_a388389bcfc8bc6948baafab7862e0ad9}\label{pennfat__kernel_8h_a388389bcfc8bc6948baafab7862e0ad9} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!INVALID\_PARAMETERS@{INVALID\_PARAMETERS}}
+\index{INVALID\_PARAMETERS@{INVALID\_PARAMETERS}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{INVALID\_PARAMETERS}{INVALID\_PARAMETERS}}
+{\footnotesize\ttfamily \#define INVALID\+\_\+\+PARAMETERS~-\/9}
+
+
+
+Error number for when the parameter given to the function is invalid. 
 
 \Hypertarget{pennfat__kernel_8h_a42dd65bff5e0d98e3d17b523e65b9e06}\label{pennfat__kernel_8h_a42dd65bff5e0d98e3d17b523e65b9e06} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!MAX\_FD\_NUM@{MAX\_FD\_NUM}}
@@ -123,12 +233,50 @@ int \mbox{\hyperlink{pennfat__kernel_8h_af69e180c878a9c8f4e45ec7dc25a062f}{data\
 
 
 
+Size of the global\+\_\+fd\+\_\+table. 
+
+\Hypertarget{pennfat__kernel_8h_a6d87b58f2f59988fb038e8e7a624d3a1}\label{pennfat__kernel_8h_a6d87b58f2f59988fb038e8e7a624d3a1} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!MULTIPLE\_F\_WRITE@{MULTIPLE\_F\_WRITE}}
+\index{MULTIPLE\_F\_WRITE@{MULTIPLE\_F\_WRITE}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{MULTIPLE\_F\_WRITE}{MULTIPLE\_F\_WRITE}}
+{\footnotesize\ttfamily \#define MULTIPLE\+\_\+\+F\+\_\+\+WRITE~-\/3}
+
+
+
+Error number for when trying to open more than one file descriptor in F\+\_\+\+WRITE / F\+\_\+\+APPEND mode. 
+
+\Hypertarget{pennfat__kernel_8h_afc193a671d528c44d636e641c0eedf1e}\label{pennfat__kernel_8h_afc193a671d528c44d636e641c0eedf1e} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!SYSTEM\_ERROR@{SYSTEM\_ERROR}}
+\index{SYSTEM\_ERROR@{SYSTEM\_ERROR}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{SYSTEM\_ERROR}{SYSTEM\_ERROR}}
+{\footnotesize\ttfamily \#define SYSTEM\+\_\+\+ERROR~-\/5}
+
+
+
+Error number for when C level system function fails. 
+
+\Hypertarget{pennfat__kernel_8h_a4f508739f76b70b145cc951856b9bb10}\label{pennfat__kernel_8h_a4f508739f76b70b145cc951856b9bb10} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!WRONG\_PERMISSION@{WRONG\_PERMISSION}}
+\index{WRONG\_PERMISSION@{WRONG\_PERMISSION}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{WRONG\_PERMISSION}{WRONG\_PERMISSION}}
+{\footnotesize\ttfamily \#define WRONG\+\_\+\+PERMISSION~-\/4}
+
+
+
+Error number for when trying to use the file descriptor in an invalid way such as writing to F\+\_\+\+READ file descriptor. 
+
+
+
 \doxysubsection{Enumeration Type Documentation}
 \Hypertarget{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6}\label{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!Whence@{Whence}}
 \index{Whence@{Whence}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{Whence}{Whence}}
 {\footnotesize\ttfamily enum \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6}{Whence}}}
+
+
+
+Defines how the offset will be calculated when using the k\+\_\+lseek method. For more detail, refer to lseek(2). 
 
 \begin{DoxyEnumFields}{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{F\_SEEK\_SET@{F\_SEEK\_SET}!pennfat\_kernel.h@{pennfat\_kernel.h}}\index{pennfat\_kernel.h@{pennfat\_kernel.h}!F\_SEEK\_SET@{F\_SEEK\_SET}}}\Hypertarget{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6ad21e659a9215dc7d9bc52f5d7e27b7cb}\label{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6ad21e659a9215dc7d9bc52f5d7e27b7cb} 
@@ -153,54 +301,167 @@ F\+\_\+\+SEEK\+\_\+\+END&\\
 \doxysubsubsection{\texorpdfstring{create\_directory\_entry()}{create\_directory\_entry()}}
 {\footnotesize\ttfamily struct \mbox{\hyperlink{structdirectory__entries}{directory\+\_\+entries}} \texorpdfstring{$\ast$}{*} create\+\_\+directory\+\_\+entry (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name,  }\item[{uint32\+\_\+t}]{size,  }\item[{uint16\+\_\+t}]{first\+Block,  }\item[{uint8\+\_\+t}]{type,  }\item[{uint8\+\_\+t}]{perm,  }\item[{time\+\_\+t}]{mtime }\end{DoxyParamCaption})}
 
+
+
+Creates a new \doxylink{structdirectory__entries}{directory\+\_\+entries} struct, initialized with the values provided by the parameters. For more information of the parameters, refer to struct \doxylink{structdirectory__entries}{directory\+\_\+entries}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the file. \\
+\hline
+{\em size} & Size of the current file. \\
+\hline
+{\em first\+Block} & First FAT block number. \\
+\hline
+{\em type} & Type of the file. \\
+\hline
+{\em perm} & Permission of the file. \\
+\hline
+{\em mtime} & Last modified time.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A newly created \doxylink{structdirectory__entries}{directory\+\_\+entries} struct. NULL on memory allocation error. 
+\end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_a25ad4d01d5ade905b2bfce04910a5c0d}\label{pennfat__kernel_8h_a25ad4d01d5ade905b2bfce04910a5c0d} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!create\_file\_descriptor@{create\_file\_descriptor}}
 \index{create\_file\_descriptor@{create\_file\_descriptor}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{create\_file\_descriptor()}{create\_file\_descriptor()}}
 {\footnotesize\ttfamily struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}} \texorpdfstring{$\ast$}{*} create\+\_\+file\+\_\+descriptor (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{char \texorpdfstring{$\ast$}{*}}]{fname,  }\item[{int}]{mode,  }\item[{int}]{offset }\end{DoxyParamCaption})}
 
+
+
+Creates a new \doxylink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st} struct, initialized with the values provided by the parameters. For more information of the parameters, refer to struct \doxylink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & File descriptor number. \\
+\hline
+{\em fname} & Name of the file. \\
+\hline
+{\em mode} & Either F\+\_\+\+WRITE, F\+\_\+\+READ, F\+\_\+\+APPEND. \\
+\hline
+{\em offset} & Offset to the start of the file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A newly created \doxylink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st} struct. NULL on memory allocation error. 
+\end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_a78d95341bbd2b21ed69dd341ff47669f}\label{pennfat__kernel_8h_a78d95341bbd2b21ed69dd341ff47669f} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!does\_file\_exist@{does\_file\_exist}}
 \index{does\_file\_exist@{does\_file\_exist}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{does\_file\_exist()}{does\_file\_exist()}}
 {\footnotesize\ttfamily struct \mbox{\hyperlink{structdirectory__entries}{directory\+\_\+entries}} \texorpdfstring{$\ast$}{*} does\+\_\+file\+\_\+exist (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fname }\end{DoxyParamCaption})}
 
+
+
+helper that traverses root directory block by block to check if fname file exists return\+: the directory entry struct with name fname (NULL if not found) also moves fs\+\_\+fd to the end of the root directory 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fname} & Name of the file that we want to check. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat__kernel_8h_a8434cdce67b1512300f44ed38497c22a}\label{pennfat__kernel_8h_a8434cdce67b1512300f44ed38497c22a} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!does\_file\_exist2@{does\_file\_exist2}}
 \index{does\_file\_exist2@{does\_file\_exist2}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{does\_file\_exist2()}{does\_file\_exist2()}}
 {\footnotesize\ttfamily off\+\_\+t does\+\_\+file\+\_\+exist2 (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fname }\end{DoxyParamCaption})}
 
+
+
+Helper function that given a files name, it outputs the offset to the directory entry or negative number if the file isn\textquotesingle{}t found. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fname} & Name of the file that we want to check. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat__kernel_8h_a580177591867f52c90932219a6c29e71}\label{pennfat__kernel_8h_a580177591867f52c90932219a6c29e71} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!extend\_fat@{extend\_fat}}
 \index{extend\_fat@{extend\_fat}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{extend\_fat()}{extend\_fat()}}
 {\footnotesize\ttfamily void extend\+\_\+fat (\begin{DoxyParamCaption}\item[{int}]{start\+\_\+index,  }\item[{int}]{empty\+\_\+fat\+\_\+index }\end{DoxyParamCaption})}
 
+
+
+Extend the fat region of the given file (marked by the {\ttfamily start\+\_\+index} ) by one block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+index} & Start fat index for the given file. \\
+\hline
+{\em empty\+\_\+fat\+\_\+index} & The first empty index of the current FAT table. Should be calculated using \doxylink{pennfat__kernel_8h_addbc36d23ce41b02cb1508bf85ca24e2}{get\+\_\+first\+\_\+empty\+\_\+fat\+\_\+index()}. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat__kernel_8h_abe5ffc180d9fc063efc7127d14378b54}\label{pennfat__kernel_8h_abe5ffc180d9fc063efc7127d14378b54} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!get\_file\_descriptor@{get\_file\_descriptor}}
 \index{get\_file\_descriptor@{get\_file\_descriptor}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{get\_file\_descriptor()}{get\_file\_descriptor()}}
 {\footnotesize\ttfamily struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}} \texorpdfstring{$\ast$}{*} get\+\_\+file\+\_\+descriptor (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})}
 
+
+
+Return the file descriptor struct for the given file descriptor number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & File descriptor number. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pennfat__kernel_8h_addbc36d23ce41b02cb1508bf85ca24e2}\label{pennfat__kernel_8h_addbc36d23ce41b02cb1508bf85ca24e2} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!get\_first\_empty\_fat\_index@{get\_first\_empty\_fat\_index}}
 \index{get\_first\_empty\_fat\_index@{get\_first\_empty\_fat\_index}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{get\_first\_empty\_fat\_index()}{get\_first\_empty\_fat\_index()}}
 {\footnotesize\ttfamily int get\+\_\+first\+\_\+empty\+\_\+fat\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Finds and returns the first empty fat index marked as 0x0000. 
+
+\begin{DoxyReturn}{Returns}
+first empty fat index. 
+\end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_ada30dc78055b7b113ff2dac9aabe4eb3}\label{pennfat__kernel_8h_ada30dc78055b7b113ff2dac9aabe4eb3} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!is\_file\_name\_valid@{is\_file\_name\_valid}}
 \index{is\_file\_name\_valid@{is\_file\_name\_valid}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{is\_file\_name\_valid()}{is\_file\_name\_valid()}}
 {\footnotesize\ttfamily bool is\+\_\+file\+\_\+name\+\_\+valid (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{name }\end{DoxyParamCaption})}
 
-\Hypertarget{pennfat__kernel_8h_a244379d41a5f93e98ab32fb999982696}\label{pennfat__kernel_8h_a244379d41a5f93e98ab32fb999982696} 
+
+
+Checks whether the filename follows the POSIX standard. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Filename.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if valid. False otherwise. 
+\end{DoxyReturn}
+\Hypertarget{pennfat__kernel_8h_ad4e9851dc3cbc61a9f8ffd36b94b9938}\label{pennfat__kernel_8h_ad4e9851dc3cbc61a9f8ffd36b94b9938} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_change\_mode@{k\_change\_mode}}
 \index{k\_change\_mode@{k\_change\_mode}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{k\_change\_mode()}{k\_change\_mode()}}
-{\footnotesize\ttfamily void k\+\_\+change\+\_\+mode (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{change,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int k\+\_\+change\+\_\+mode (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{change,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
 
+
+
+Change file mode bits. 
+
+The operator + causes the selected file mode bits to be added to the existing file mode bits of each file; -\/ causes them to be removed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em change} & String that determines how the bits are modified. \\
+\hline
+{\em filename} & Name of the file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success. Negative number on failure. 
+\end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_a9ecd38dc6f3a9721ab53ff9a815b5480}\label{pennfat__kernel_8h_a9ecd38dc6f3a9721ab53ff9a815b5480} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_close@{k\_close}}
 \index{k\_close@{k\_close}!pennfat\_kernel.h@{pennfat\_kernel.h}}
@@ -208,12 +469,16 @@ F\+\_\+\+SEEK\+\_\+\+END&\\
 {\footnotesize\ttfamily int k\+\_\+close (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})}
 
 
+
+Close the file fd and return 0 on success, or a negative value on failure. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em fd} & \\
+{\em fd} & File descriptor number that needs to be closed \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int 
+0 on success, or a negative value on failure. 
 \end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_af7f9a41e9fb0fdf97403eff276990e1f}\label{pennfat__kernel_8h_af7f9a41e9fb0fdf97403eff276990e1f} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_count\_fd\_num@{k\_count\_fd\_num}}
@@ -221,15 +486,116 @@ int
 \doxysubsubsection{\texorpdfstring{k\_count\_fd\_num()}{k\_count\_fd\_num()}}
 {\footnotesize\ttfamily int k\+\_\+count\+\_\+fd\+\_\+num (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name }\end{DoxyParamCaption})}
 
-\Hypertarget{pennfat__kernel_8h_a9317fe11a36bfc2d731bcbacc3a57728}\label{pennfat__kernel_8h_a9317fe11a36bfc2d731bcbacc3a57728} 
-\index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_ls@{k\_ls}}
-\index{k\_ls@{k\_ls}!pennfat\_kernel.h@{pennfat\_kernel.h}}
-\doxysubsubsection{\texorpdfstring{k\_ls()}{k\_ls()}}
-{\footnotesize\ttfamily void k\+\_\+ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
+
+
+Returns the number of currently open in the global\+\_\+fd\+\_\+table with the {\ttfamily name} as the fname. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em filename} & \\
+{\em name} & Name of the file that we want to check. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pennfat__kernel_8h_a90de0cbbfd37f924016dd07d60d38853}\label{pennfat__kernel_8h_a90de0cbbfd37f924016dd07d60d38853} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_cp\_from\_host@{k\_cp\_from\_host}}
+\index{k\_cp\_from\_host@{k\_cp\_from\_host}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{k\_cp\_from\_host()}{k\_cp\_from\_host()}}
+{\footnotesize\ttfamily int k\+\_\+cp\+\_\+from\+\_\+host (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{host\+\_\+source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
+
+
+
+Copies the contents from {\ttfamily host\+\_\+source} to {\ttfamily dest}. {\ttfamily dest} must be a file within the PENNFAT system. {\ttfamily host\+\_\+source} is a host system file. 
+
+{\ttfamily host\+\_\+source} must exist. If {\ttfamily dest} does not exist, it will be newly created.
+
+
+\begin{DoxyParams}{Parameters}
+{\em host\+\_\+source} & File name of source. Must be a host system file. \\
+\hline
+{\em dest} & File name of dest. Must be a Penn\+FAT file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success. Negative number on failure. 
+\end{DoxyReturn}
+\Hypertarget{pennfat__kernel_8h_aaad024bf5305fa73db8c92084f8a1df0}\label{pennfat__kernel_8h_aaad024bf5305fa73db8c92084f8a1df0} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_cp\_to\_host@{k\_cp\_to\_host}}
+\index{k\_cp\_to\_host@{k\_cp\_to\_host}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{k\_cp\_to\_host()}{k\_cp\_to\_host()}}
+{\footnotesize\ttfamily int k\+\_\+cp\+\_\+to\+\_\+host (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{host\+\_\+dest }\end{DoxyParamCaption})}
+
+
+
+Copies the contents from {\ttfamily source} to {\ttfamily host\+\_\+dest} {\ttfamily source} must be a file within the PENNFAT system. {\ttfamily host\+\_\+dest} is a host system file. 
+
+{\ttfamily source} must exist. If {\ttfamily host\+\_\+dest} does not exist, it will be newly created.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & File name of source. Must be a Penn\+FAT file. \\
+\hline
+{\em host\+\_\+dest} & File name of dest. Must be a host system file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success. Negative number on failure. 
+\end{DoxyReturn}
+\Hypertarget{pennfat__kernel_8h_a82daa98d4c392b4249bfbc975be22daa}\label{pennfat__kernel_8h_a82daa98d4c392b4249bfbc975be22daa} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_cp\_within\_fat@{k\_cp\_within\_fat}}
+\index{k\_cp\_within\_fat@{k\_cp\_within\_fat}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{k\_cp\_within\_fat()}{k\_cp\_within\_fat()}}
+{\footnotesize\ttfamily int k\+\_\+cp\+\_\+within\+\_\+fat (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
+
+
+
+Copies the contents from {\ttfamily source} to {\ttfamily dest}. Both {\ttfamily source} and {\ttfamily dest} must be files within the PENNFAT system. 
+
+{\ttfamily source} must exist. If {\ttfamily dest} does not exist, it will be newly created.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & File name of source. Must be a Penn\+FAT file. \\
+\hline
+{\em dest} & File name of dest. Must be a Penn\+FAT file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success. Negative number on failure. 
+\end{DoxyReturn}
+\Hypertarget{pennfat__kernel_8h_af6d6a9bc81e4cf0788c8f1de39999c22}\label{pennfat__kernel_8h_af6d6a9bc81e4cf0788c8f1de39999c22} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_get\_fname\_from\_fd@{k\_get\_fname\_from\_fd}}
+\index{k\_get\_fname\_from\_fd@{k\_get\_fname\_from\_fd}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{k\_get\_fname\_from\_fd()}{k\_get\_fname\_from\_fd()}}
+{\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*} k\+\_\+get\+\_\+fname\+\_\+from\+\_\+fd (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+Returns the filename for the given file descriptor number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The file name of the {\ttfamily fd} . NULL is {\ttfamily fd} is invalid. 
+\end{DoxyReturn}
+\Hypertarget{pennfat__kernel_8h_aa1a03cfc7e106d29d54196f03557b9ba}\label{pennfat__kernel_8h_aa1a03cfc7e106d29d54196f03557b9ba} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_ls@{k\_ls}}
+\index{k\_ls@{k\_ls}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{k\_ls()}{k\_ls()}}
+{\footnotesize\ttfamily void k\+\_\+ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename,  }\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+List the file filename in the current directory. If filename is NULL, list all files in the current directory. 
+
+Similar to posix ls.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Optional parameter. If specified, ls data for the specified file is printed \\
+\hline
+{\em fd} & The file descriptor you want to write the result of k\+\_\+ls to \\
 \hline
 \end{DoxyParams}
 \Hypertarget{pennfat__kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96}\label{pennfat__kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96} 
@@ -239,16 +605,20 @@ int
 {\footnotesize\ttfamily off\+\_\+t k\+\_\+lseek (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{int}]{offset,  }\item[{int}]{whence }\end{DoxyParamCaption})}
 
 
+
+Reposition the file pointer for fd to the offset relative to whence. Refer to lseek(2) for how whence interacts with the file offset. If the newly calculated offset is creater than the current size of the file, the file expands to match that offset with the newly allocated space filled with 0s. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em fd} & \\
+{\em fd} & File descriptor number \\
 \hline
-{\em offset} & \\
+{\em offset} & Offset value \\
 \hline
-{\em whence} & \\
+{\em whence} & F\+\_\+\+SEEK\+\_\+\+SET, F\+\_\+\+SEEK\+\_\+\+CUR, and F\+\_\+\+SEEK\+\_\+\+END. Follows the lseek(2) whence mode.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-off\+\_\+t 
+off\+\_\+t Newly calculated offset for {\ttfamily fd} 
 \end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_a4d2cf4232cddee738996ca9ad83ea56f}\label{pennfat__kernel_8h_a4d2cf4232cddee738996ca9ad83ea56f} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_open@{k\_open}}
@@ -289,16 +659,20 @@ Possible values of {\ttfamily errno} are\+:
 {\footnotesize\ttfamily ssize\+\_\+t k\+\_\+read (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{int}]{n,  }\item[{char \texorpdfstring{$\ast$}{*}}]{buf }\end{DoxyParamCaption})}
 
 
+
+Read n bytes from the file referenced by fd. On return, k\+\_\+read returns the number of bytes read, 0 if EOF is reached, or a negative number on error. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em fd} & A \\
+{\em fd} & File descriptor number we are reading from \\
 \hline
-{\em n} & \\
+{\em n} & Number of bytes we are reading from {\ttfamily fd} \\
 \hline
-{\em buf} & \\
+{\em buf} & Buffer where we store the read value\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-ssize\+\_\+t 
+ssize\+\_\+t the number of bytes read, 0 if EOF is reached, or a negative number on error 
 \end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_a08194e0542962e4d980cd9278f33c7f5}\label{pennfat__kernel_8h_a08194e0542962e4d980cd9278f33c7f5} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_read\_all@{k\_read\_all}}
@@ -306,12 +680,40 @@ ssize\+\_\+t
 \doxysubsubsection{\texorpdfstring{k\_read\_all()}{k\_read\_all()}}
 {\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*} k\+\_\+read\+\_\+all (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename,  }\item[{int \texorpdfstring{$\ast$}{*}}]{read\+\_\+num }\end{DoxyParamCaption})}
 
-\Hypertarget{pennfat__kernel_8h_ac41ad0b4fad0417ca8009c0475a8fb45}\label{pennfat__kernel_8h_ac41ad0b4fad0417ca8009c0475a8fb45} 
+
+
+Reads all contents from the file with the file name {\ttfamily filename}. Outputs the contents as well as update {\ttfamily read\+\_\+num} to the number of bytes read. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Name of the file we want to read from. \\
+\hline
+{\em read\+\_\+num} & Pointer to an integer variable that will store the number of bytes read.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+All contents of {\ttfamily filename} in char\texorpdfstring{$\ast$}{*} format. 
+\end{DoxyReturn}
+\Hypertarget{pennfat__kernel_8h_a85eace193c41193d1646af1a8b943200}\label{pennfat__kernel_8h_a85eace193c41193d1646af1a8b943200} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_rename@{k\_rename}}
 \index{k\_rename@{k\_rename}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{k\_rename()}{k\_rename()}}
-{\footnotesize\ttfamily void k\+\_\+rename (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int k\+\_\+rename (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
 
+
+
+Rename {\ttfamily source} to {\ttfamily dest}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & Source file name. \\
+\hline
+{\em dest} & Destination file name.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success. Negative number on failure. 
+\end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_ae8b44b3621ebb542bec49f73d19d2885}\label{pennfat__kernel_8h_ae8b44b3621ebb542bec49f73d19d2885} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_unlink@{k\_unlink}}
 \index{k\_unlink@{k\_unlink}!pennfat\_kernel.h@{pennfat\_kernel.h}}
@@ -319,19 +721,35 @@ ssize\+\_\+t
 {\footnotesize\ttfamily int k\+\_\+unlink (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fname }\end{DoxyParamCaption})}
 
 
+
+Remove the file by freeing the FAT table and zeroing out previously existing data. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em fname} & \\
+{\em fname} & Name of the file we want to remove.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int 
+1 on success. Negative value of failure. 
 \end{DoxyReturn}
-\Hypertarget{pennfat__kernel_8h_a9f444f05860d0b719fef5252d58e206e}\label{pennfat__kernel_8h_a9f444f05860d0b719fef5252d58e206e} 
+\Hypertarget{pennfat__kernel_8h_abf487212da5b9d6ebceef678fa744ad9}\label{pennfat__kernel_8h_abf487212da5b9d6ebceef678fa744ad9} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_update\_timestamp@{k\_update\_timestamp}}
 \index{k\_update\_timestamp@{k\_update\_timestamp}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{k\_update\_timestamp()}{k\_update\_timestamp()}}
-{\footnotesize\ttfamily void k\+\_\+update\+\_\+timestamp (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{source }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int k\+\_\+update\+\_\+timestamp (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{source }\end{DoxyParamCaption})}
 
+
+
+Change the timestamp of the file to the current time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & Source file name.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success. Negative number on failure. 
+\end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_a79d2a9b65d0e04de358fe1a2cfa79baf}\label{pennfat__kernel_8h_a79d2a9b65d0e04de358fe1a2cfa79baf} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_write@{k\_write}}
 \index{k\_write@{k\_write}!pennfat\_kernel.h@{pennfat\_kernel.h}}
@@ -339,22 +757,30 @@ int
 {\footnotesize\ttfamily ssize\+\_\+t k\+\_\+write (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{str,  }\item[{int}]{n }\end{DoxyParamCaption})}
 
 
+
+Write n bytes of the string referenced by str to the file fd and increment the file pointer by n. On return, k\+\_\+write returns the number of bytes written, or a negative value on error. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em fd} & \\
+{\em fd} & File descriptor number we are reading to \\
 \hline
-{\em str} & \\
+{\em str} & Provided string we want to write to {\ttfamily fd} \\
 \hline
-{\em n} & \\
+{\em n} & Number of bytes we are writing\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-ssize\+\_\+t 
+ssize\+\_\+t number of bytes written, or a negative value on error. 
 \end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_a2d501c304eeba5035c83c1e2a4aec4fb}\label{pennfat__kernel_8h_a2d501c304eeba5035c83c1e2a4aec4fb} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!lseek\_to\_root\_directory@{lseek\_to\_root\_directory}}
 \index{lseek\_to\_root\_directory@{lseek\_to\_root\_directory}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{lseek\_to\_root\_directory()}{lseek\_to\_root\_directory()}}
 {\footnotesize\ttfamily void lseek\+\_\+to\+\_\+root\+\_\+directory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+lseek the file system\textquotesingle{}s offset to the start of the root directory. 
 
 \Hypertarget{pennfat__kernel_8h_a6532ad36b852dd09d641bcaac2642b9b}\label{pennfat__kernel_8h_a6532ad36b852dd09d641bcaac2642b9b} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!move\_to\_open\_de@{move\_to\_open\_de}}
@@ -364,6 +790,15 @@ ssize\+\_\+t
 
 
 
+Change the offset to the fs\+\_\+fd to the first open directory entry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em found} & \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Variable Documentation}
 \Hypertarget{pennfat__kernel_8h_a70b27761c7d0bd5cd90f4fe47e569b94}\label{pennfat__kernel_8h_a70b27761c7d0bd5cd90f4fe47e569b94} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!block\_size@{block\_size}}
@@ -371,11 +806,19 @@ ssize\+\_\+t
 \doxysubsubsection{\texorpdfstring{block\_size}{block\_size}}
 {\footnotesize\ttfamily int block\+\_\+size\hspace{0.3cm}{\ttfamily [extern]}}
 
+
+
+Block size of the currently mounted filesystem that is defined during the mkfs process. 
+
 \Hypertarget{pennfat__kernel_8h_af69e180c878a9c8f4e45ec7dc25a062f}\label{pennfat__kernel_8h_af69e180c878a9c8f4e45ec7dc25a062f} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!data\_size@{data\_size}}
 \index{data\_size@{data\_size}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{data\_size}{data\_size}}
 {\footnotesize\ttfamily int data\+\_\+size\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Calculated data region size of the currently mounted filesystem. 
 
 \Hypertarget{pennfat__kernel_8h_a0e52a1a113ded7f4787290edc22ad954}\label{pennfat__kernel_8h_a0e52a1a113ded7f4787290edc22ad954} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!fat@{fat}}
@@ -383,11 +826,19 @@ ssize\+\_\+t
 \doxysubsubsection{\texorpdfstring{fat}{fat}}
 {\footnotesize\ttfamily uint16\+\_\+t\texorpdfstring{$\ast$}{*} fat\hspace{0.3cm}{\ttfamily [extern]}}
 
+
+
+Penn\+FAT filesystem that has been mounted to memory using the mmap(2). 
+
 \Hypertarget{pennfat__kernel_8h_a6a5f2839b4852a1e8b5c0b10ec6caa5b}\label{pennfat__kernel_8h_a6a5f2839b4852a1e8b5c0b10ec6caa5b} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!fat\_size@{fat\_size}}
 \index{fat\_size@{fat\_size}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{fat\_size}{fat\_size}}
 {\footnotesize\ttfamily int fat\+\_\+size\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+FAT region size of the currently mounted filesystem. 
 
 \Hypertarget{pennfat__kernel_8h_a64b57b29bcc87a7b1967c7d55e7d4212}\label{pennfat__kernel_8h_a64b57b29bcc87a7b1967c7d55e7d4212} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!fs\_fd@{fs\_fd}}
@@ -395,15 +846,27 @@ ssize\+\_\+t
 \doxysubsubsection{\texorpdfstring{fs\_fd}{fs\_fd}}
 {\footnotesize\ttfamily int fs\+\_\+fd\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{pennfat__kernel_8h_aaa044c9a05adf7c4c653586036be5bd7}\label{pennfat__kernel_8h_aaa044c9a05adf7c4c653586036be5bd7} 
+
+
+File descriptor number (host system level) for the filesystem that has been mounted to the program. 
+
+\Hypertarget{pennfat__kernel_8h_a07afa4cbf62f3ce8292a6ddbcb37c8fc}\label{pennfat__kernel_8h_a07afa4cbf62f3ce8292a6ddbcb37c8fc} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!global\_fd\_table@{global\_fd\_table}}
 \index{global\_fd\_table@{global\_fd\_table}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{global\_fd\_table}{global\_fd\_table}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}}\texorpdfstring{$\ast$}{*} global\+\_\+fd\+\_\+table\hspace{0.3cm}{\ttfamily [extern]}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st}}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} global\+\_\+fd\+\_\+table\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Kernel level global file descriptor table that stores all file descriptor that has been created through out the program\textquotesingle{}s runtime. 
 
 \Hypertarget{pennfat__kernel_8h_af866bcf6c2272c2f6b1b7e5ad3a2e127}\label{pennfat__kernel_8h_af866bcf6c2272c2f6b1b7e5ad3a2e127} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!num\_fat\_entries@{num\_fat\_entries}}
 \index{num\_fat\_entries@{num\_fat\_entries}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{num\_fat\_entries}{num\_fat\_entries}}
 {\footnotesize\ttfamily int num\+\_\+fat\+\_\+entries\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Calculated value of the total number of FAT entries within the currently mounted filesystem. 
 

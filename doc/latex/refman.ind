@@ -1,1103 +1,1466 @@
 \begin{theindex}
 
   \item {\_DEFAULT\_SOURCE}
-    \subitem {pennos.h}, \hyperpage{44}
-    \subitem {sched-\/demo.c}, \hyperpage{111}
+    \subitem {pennos.h}, \hyperpage{57}
+    \subitem {sched-\/demo.c}, \hyperpage{166}
   \item {\_GNU\_SOURCE}
-    \subitem {spthread.c}, \hyperpage{94}
+    \subitem {spthread.c}, \hyperpage{132}
   \item {\_POSIX\_C\_SOURCE}
-    \subitem {pennos.h}, \hyperpage{44}
-    \subitem {sched-\/demo.c}, \hyperpage{111}
+    \subitem {pennos.h}, \hyperpage{57}
+    \subitem {sched-\/demo.c}, \hyperpage{166}
   \item {\_XOPEN\_SOURCE}
-    \subitem {pennos.h}, \hyperpage{44}
-    \subitem {sched-\/demo.c}, \hyperpage{111}
-    \subitem {spthread.c}, \hyperpage{94}
+    \subitem {pennos.h}, \hyperpage{57}
+    \subitem {sched-\/demo.c}, \hyperpage{167}
+    \subitem {spthread.c}, \hyperpage{132}
 
   \indexspace
 
   \item {ack}
-    \subitem {spthread\_signal\_args\_st}, \hyperpage{29}
+    \subitem {spthread\_signal\_args\_st}, \hyperpage{31}
   \item {actual\_arg}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{27}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{29}
   \item {actual\_routine}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{27}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{29}
   \item {add\_priority}
-    \subitem {prioritylist.c}, \hyperpage{83}
-    \subitem {prioritylist.h}, \hyperpage{84}
+    \subitem {prioritylist.c}, \hyperpage{114}
+    \subitem {prioritylist.h}, \hyperpage{115}
   \item {add\_process}
-    \subitem {clinkedlist.c}, \hyperpage{55}
-    \subitem {clinkedlist.h}, \hyperpage{57}
-  \item {APPEND}
-    \subitem {pennfat\_kernel.h}, \hyperpage{76}
+    \subitem {clinkedlist.c}, \hyperpage{68}
+    \subitem {clinkedlist.h}, \hyperpage{71}
+  \item {add\_process\_front}
+    \subitem {clinkedlist.c}, \hyperpage{68}
+    \subitem {clinkedlist.h}, \hyperpage{71}
+  \item {argv}
+    \subitem {pcb\_t}, \hyperpage{25}
   \item {array}
-    \subitem {DynamicPIDArray}, \hyperpage{19}
+    \subitem {DynamicPIDArray}, \hyperpage{20}
   \item {array.c}
-    \subitem {dynamic\_pid\_array\_add}, \hyperpage{46}
-    \subitem {dynamic\_pid\_array\_contains}, \hyperpage{46}
-    \subitem {dynamic\_pid\_array\_create}, \hyperpage{47}
-    \subitem {dynamic\_pid\_array\_destroy}, \hyperpage{47}
-    \subitem {dynamic\_pid\_array\_remove}, \hyperpage{47}
+    \subitem {dynamic\_pid\_array\_add}, \hyperpage{59}
+    \subitem {dynamic\_pid\_array\_contains}, \hyperpage{59}
+    \subitem {dynamic\_pid\_array\_create}, \hyperpage{60}
+    \subitem {dynamic\_pid\_array\_destroy}, \hyperpage{60}
+    \subitem {dynamic\_pid\_array\_remove}, \hyperpage{60}
   \item {array.h}
-    \subitem {dynamic\_pid\_array\_add}, \hyperpage{48}
-    \subitem {dynamic\_pid\_array\_contains}, \hyperpage{49}
-    \subitem {dynamic\_pid\_array\_create}, \hyperpage{49}
-    \subitem {dynamic\_pid\_array\_destroy}, \hyperpage{49}
-    \subitem {dynamic\_pid\_array\_remove}, \hyperpage{50}
+    \subitem {dynamic\_pid\_array\_add}, \hyperpage{61}
+    \subitem {dynamic\_pid\_array\_contains}, \hyperpage{62}
+    \subitem {dynamic\_pid\_array\_create}, \hyperpage{62}
+    \subitem {dynamic\_pid\_array\_destroy}, \hyperpage{62}
+    \subitem {dynamic\_pid\_array\_remove}, \hyperpage{63}
 
   \indexspace
 
+  \item {b\_background\_poll}
+    \subitem {shellbuiltins.c}, \hyperpage{118}
+    \subitem {shellbuiltins.h}, \hyperpage{125}
   \item {b\_bg}
-    \subitem {shellbuiltins.h}, \hyperpage{88}
+    \subitem {shellbuiltins.c}, \hyperpage{118}
+    \subitem {shellbuiltins.h}, \hyperpage{125}
   \item {b\_busy}
-    \subitem {shellbuiltins.h}, \hyperpage{88}
+    \subitem {shellbuiltins.c}, \hyperpage{118}
+    \subitem {shellbuiltins.h}, \hyperpage{125}
   \item {b\_cat}
-    \subitem {shellbuiltins.h}, \hyperpage{88}
+    \subitem {shellbuiltins.c}, \hyperpage{118}
+    \subitem {shellbuiltins.h}, \hyperpage{125}
   \item {b\_chmod}
-    \subitem {shellbuiltins.h}, \hyperpage{88}
+    \subitem {shellbuiltins.c}, \hyperpage{119}
+    \subitem {shellbuiltins.h}, \hyperpage{125}
+  \item {b\_clear}
+    \subitem {shellbuiltins.c}, \hyperpage{119}
+    \subitem {shellbuiltins.h}, \hyperpage{125}
   \item {b\_cp}
-    \subitem {shellbuiltins.h}, \hyperpage{89}
+    \subitem {shellbuiltins.c}, \hyperpage{119}
+    \subitem {shellbuiltins.h}, \hyperpage{126}
   \item {b\_echo}
-    \subitem {shellbuiltins.h}, \hyperpage{89}
+    \subitem {shellbuiltins.c}, \hyperpage{119}
+    \subitem {shellbuiltins.h}, \hyperpage{126}
   \item {b\_fg}
-    \subitem {shellbuiltins.h}, \hyperpage{89}
+    \subitem {shellbuiltins.c}, \hyperpage{120}
+    \subitem {shellbuiltins.h}, \hyperpage{126}
   \item {b\_jobs}
-    \subitem {shellbuiltins.h}, \hyperpage{89}
+    \subitem {shellbuiltins.c}, \hyperpage{120}
+    \subitem {shellbuiltins.h}, \hyperpage{126}
   \item {b\_kill}
-    \subitem {shellbuiltins.c}, \hyperpage{86}
-    \subitem {shellbuiltins.h}, \hyperpage{90}
+    \subitem {shellbuiltins.c}, \hyperpage{120}
+    \subitem {shellbuiltins.h}, \hyperpage{127}
   \item {b\_logout}
-    \subitem {shellbuiltins.c}, \hyperpage{86}
-    \subitem {shellbuiltins.h}, \hyperpage{90}
+    \subitem {shellbuiltins.c}, \hyperpage{120}
+    \subitem {shellbuiltins.h}, \hyperpage{127}
   \item {b\_ls}
-    \subitem {shellbuiltins.h}, \hyperpage{90}
+    \subitem {shellbuiltins.c}, \hyperpage{121}
+    \subitem {shellbuiltins.h}, \hyperpage{127}
   \item {b\_man}
-    \subitem {shellbuiltins.h}, \hyperpage{90}
+    \subitem {shellbuiltins.c}, \hyperpage{121}
+    \subitem {shellbuiltins.h}, \hyperpage{127}
   \item {b\_mv}
-    \subitem {shellbuiltins.h}, \hyperpage{90}
+    \subitem {shellbuiltins.c}, \hyperpage{121}
+    \subitem {shellbuiltins.h}, \hyperpage{127}
   \item {b\_nice}
-    \subitem {shellbuiltins.h}, \hyperpage{91}
+    \subitem {shellbuiltins.c}, \hyperpage{121}
+    \subitem {shellbuiltins.h}, \hyperpage{128}
   \item {b\_nice\_pid}
-    \subitem {shellbuiltins.c}, \hyperpage{86}
-    \subitem {shellbuiltins.h}, \hyperpage{91}
+    \subitem {shellbuiltins.c}, \hyperpage{121}
+    \subitem {shellbuiltins.h}, \hyperpage{128}
   \item {b\_orphan\_child}
-    \subitem {shellbuiltins.h}, \hyperpage{91}
+    \subitem {shellbuiltins.c}, \hyperpage{122}
+    \subitem {shellbuiltins.h}, \hyperpage{128}
   \item {b\_orphanify}
-    \subitem {shellbuiltins.h}, \hyperpage{91}
+    \subitem {shellbuiltins.c}, \hyperpage{122}
+    \subitem {shellbuiltins.h}, \hyperpage{128}
+  \item {b\_output\_redir}
+    \subitem {pennos.c}, \hyperpage{55}
+    \subitem {pennos.h}, \hyperpage{57}
   \item {b\_ps}
-    \subitem {shellbuiltins.h}, \hyperpage{91}
+    \subitem {shellbuiltins.c}, \hyperpage{122}
+    \subitem {shellbuiltins.h}, \hyperpage{128}
   \item {b\_rm}
-    \subitem {shellbuiltins.h}, \hyperpage{92}
+    \subitem {shellbuiltins.c}, \hyperpage{122}
+    \subitem {shellbuiltins.h}, \hyperpage{129}
   \item {b\_sleep}
-    \subitem {shellbuiltins.c}, \hyperpage{87}
-    \subitem {shellbuiltins.h}, \hyperpage{92}
+    \subitem {shellbuiltins.c}, \hyperpage{122}
+    \subitem {shellbuiltins.h}, \hyperpage{129}
   \item {b\_touch}
-    \subitem {shellbuiltins.h}, \hyperpage{92}
+    \subitem {shellbuiltins.c}, \hyperpage{123}
+    \subitem {shellbuiltins.h}, \hyperpage{129}
   \item {b\_zombie\_child}
-    \subitem {shellbuiltins.h}, \hyperpage{92}
+    \subitem {shellbuiltins.c}, \hyperpage{123}
+    \subitem {shellbuiltins.h}, \hyperpage{129}
   \item {b\_zombify}
-    \subitem {shellbuiltins.h}, \hyperpage{92}
+    \subitem {shellbuiltins.c}, \hyperpage{123}
+    \subitem {shellbuiltins.h}, \hyperpage{129}
+  \item {bg\_done}
+    \subitem {pcb\_t}, \hyperpage{25}
+  \item {bg\_list}
+    \subitem {globals.c}, \hyperpage{76}
+    \subitem {globals.h}, \hyperpage{78}
   \item {bitmap.c}
-    \subitem {fd\_bitmap\_clear}, \hyperpage{51}
-    \subitem {fd\_bitmap\_initialize}, \hyperpage{51}
-    \subitem {fd\_bitmap\_set}, \hyperpage{51}
-    \subitem {fd\_bitmap\_test}, \hyperpage{52}
+    \subitem {fd\_bitmap\_clear}, \hyperpage{64}
+    \subitem {fd\_bitmap\_initialize}, \hyperpage{64}
+    \subitem {fd\_bitmap\_set}, \hyperpage{64}
+    \subitem {fd\_bitmap\_test}, \hyperpage{65}
   \item {bitmap.h}
-    \subitem {FD\_BITMAP\_BYTES}, \hyperpage{53}
-    \subitem {fd\_bitmap\_clear}, \hyperpage{53}
-    \subitem {fd\_bitmap\_initialize}, \hyperpage{53}
-    \subitem {fd\_bitmap\_set}, \hyperpage{54}
-    \subitem {FD\_BITMAP\_SIZE}, \hyperpage{53}
-    \subitem {fd\_bitmap\_test}, \hyperpage{54}
+    \subitem {FD\_BITMAP\_BYTES}, \hyperpage{66}
+    \subitem {fd\_bitmap\_clear}, \hyperpage{66}
+    \subitem {fd\_bitmap\_initialize}, \hyperpage{66}
+    \subitem {fd\_bitmap\_set}, \hyperpage{67}
+    \subitem {FD\_BITMAP\_SIZE}, \hyperpage{66}
+    \subitem {fd\_bitmap\_test}, \hyperpage{67}
   \item {bits}
-    \subitem {FD\_Bitmap}, \hyperpage{20}
+    \subitem {FD\_Bitmap}, \hyperpage{21}
+  \item {BLOCK}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {block\_size}
-    \subitem {pennfat\_kernel.c}, \hyperpage{74}
-    \subitem {pennfat\_kernel.h}, \hyperpage{81}
+    \subitem {pennfat\_kernel.c}, \hyperpage{96}
+    \subitem {pennfat\_kernel.h}, \hyperpage{111}
   \item {BLOCKED}
-    \subitem {kernel.h}, \hyperpage{66}
+    \subitem {kernel.h}, \hyperpage{83}
   \item {blocked}
-    \subitem {globals.c}, \hyperpage{60}
-    \subitem {globals.h}, \hyperpage{62}
+    \subitem {globals.c}, \hyperpage{76}
+    \subitem {globals.h}, \hyperpage{78}
   \item {BUF\_SIZE}
-    \subitem {sched-\/demo.c}, \hyperpage{111}
+    \subitem {sched-\/demo.c}, \hyperpage{167}
 
   \indexspace
 
   \item {cancel\_and\_join}
-    \subitem {pennos.c}, \hyperpage{43}
-    \subitem {sched-\/demo.c}, \hyperpage{111}
+    \subitem {pennos.c}, \hyperpage{55}
+    \subitem {sched-\/demo.c}, \hyperpage{167}
   \item {cat\_a}
-    \subitem {pennfat.c}, \hyperpage{35}
-    \subitem {pennfat.h}, \hyperpage{39}
+    \subitem {pennfat.c}, \hyperpage{37}
+    \subitem {pennfat.h}, \hyperpage{46}
   \item {cat\_file\_wa}
-    \subitem {pennfat.c}, \hyperpage{35}
-    \subitem {pennfat.h}, \hyperpage{39}
+    \subitem {pennfat.c}, \hyperpage{38}
+    \subitem {pennfat.h}, \hyperpage{47}
   \item {cat\_w}
-    \subitem {pennfat.c}, \hyperpage{35}
-    \subitem {pennfat.h}, \hyperpage{39}
+    \subitem {pennfat.c}, \hyperpage{38}
+    \subitem {pennfat.h}, \hyperpage{47}
   \item {child\_meta}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{27}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{29}
   \item {child\_pids}
-    \subitem {pcb\_t}, \hyperpage{24}
+    \subitem {pcb\_t}, \hyperpage{25}
   \item {chmod}
-    \subitem {pennfat.c}, \hyperpage{35}
-    \subitem {pennfat.h}, \hyperpage{39}
+    \subitem {pennfat.c}, \hyperpage{38}
+    \subitem {pennfat.h}, \hyperpage{47}
   \item {CircularList}, \hyperpage{17}
     \subitem {head}, \hyperpage{17}
     \subitem {size}, \hyperpage{17}
+    \subitem {tail}, \hyperpage{17}
   \item {clinkedlist.c}
-    \subitem {add\_process}, \hyperpage{55}
-    \subitem {find\_process}, \hyperpage{55}
-    \subitem {init\_list}, \hyperpage{56}
-    \subitem {remove\_process}, \hyperpage{56}
+    \subitem {add\_process}, \hyperpage{68}
+    \subitem {add\_process\_front}, \hyperpage{68}
+    \subitem {find\_process}, \hyperpage{69}
+    \subitem {find\_process\_job\_id}, \hyperpage{69}
+    \subitem {init\_list}, \hyperpage{69}
+    \subitem {remove\_process}, \hyperpage{69}
   \item {clinkedlist.h}
-    \subitem {add\_process}, \hyperpage{57}
-    \subitem {find\_process}, \hyperpage{57}
-    \subitem {init\_list}, \hyperpage{58}
-    \subitem {Node}, \hyperpage{57}
-    \subitem {pcb\_t}, \hyperpage{57}
-    \subitem {remove\_process}, \hyperpage{58}
+    \subitem {add\_process}, \hyperpage{71}
+    \subitem {add\_process\_front}, \hyperpage{71}
+    \subitem {find\_process}, \hyperpage{71}
+    \subitem {find\_process\_job\_id}, \hyperpage{72}
+    \subitem {init\_list}, \hyperpage{72}
+    \subitem {Node}, \hyperpage{70}
+    \subitem {pcb\_t}, \hyperpage{70}
+    \subitem {remove\_process}, \hyperpage{72}
   \item {commands}
-    \subitem {parsed\_command}, \hyperpage{22}
+    \subitem {parsed\_command}, \hyperpage{23}
+  \item {CONTINUE}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {cp\_from\_host}
-    \subitem {pennfat.c}, \hyperpage{35}
-    \subitem {pennfat.h}, \hyperpage{39}
+    \subitem {pennfat.c}, \hyperpage{38}
+    \subitem {pennfat.h}, \hyperpage{47}
   \item {cp\_to\_host}
-    \subitem {pennfat.c}, \hyperpage{35}
-    \subitem {pennfat.h}, \hyperpage{39}
+    \subitem {pennfat.c}, \hyperpage{40}
+    \subitem {pennfat.h}, \hyperpage{49}
   \item {cp\_within\_fat}
-    \subitem {pennfat.c}, \hyperpage{35}
-    \subitem {pennfat.h}, \hyperpage{39}
+    \subitem {pennfat.c}, \hyperpage{40}
+    \subitem {pennfat.h}, \hyperpage{49}
+  \item {CREATE}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {create\_directory\_entry}
-    \subitem {pennfat\_kernel.c}, \hyperpage{69}
-    \subitem {pennfat\_kernel.h}, \hyperpage{76}
+    \subitem {pennfat\_kernel.c}, \hyperpage{86}
+    \subitem {pennfat\_kernel.h}, \hyperpage{102}
   \item {create\_file\_descriptor}
-    \subitem {pennfat\_kernel.c}, \hyperpage{69}
-    \subitem {pennfat\_kernel.h}, \hyperpage{77}
+    \subitem {pennfat\_kernel.c}, \hyperpage{87}
+    \subitem {pennfat\_kernel.h}, \hyperpage{102}
   \item {current}
-    \subitem {globals.c}, \hyperpage{60}
-    \subitem {globals.h}, \hyperpage{62}
+    \subitem {globals.c}, \hyperpage{77}
+    \subitem {globals.h}, \hyperpage{78}
 
   \indexspace
 
   \item {data\_size}
-    \subitem {pennfat\_kernel.c}, \hyperpage{74}
-    \subitem {pennfat\_kernel.h}, \hyperpage{81}
+    \subitem {pennfat\_kernel.c}, \hyperpage{96}
+    \subitem {pennfat\_kernel.h}, \hyperpage{111}
   \item {directory\_entries}, \hyperpage{18}
     \subitem {firstBlock}, \hyperpage{18}
     \subitem {mtime}, \hyperpage{18}
-    \subitem {name}, \hyperpage{18}
-    \subitem {perm}, \hyperpage{18}
-    \subitem {reserved}, \hyperpage{18}
-    \subitem {size}, \hyperpage{18}
-    \subitem {type}, \hyperpage{18}
-  \item {doc/fat.md}, \hyperpage{31}
-  \item {doc/kernel.md}, \hyperpage{31}
-  \item {doc/README.md}, \hyperpage{31}
-  \item {doc/scheduler.md}, \hyperpage{31}
-  \item {doc/shell.md}, \hyperpage{31}
-  \item {doc/system.md}, \hyperpage{31}
-  \item {does\_file\_exist}
-    \subitem {pennfat\_kernel.c}, \hyperpage{69}
-    \subitem {pennfat\_kernel.h}, \hyperpage{77}
-  \item {does\_file\_exist2}
-    \subitem {pennfat\_kernel.c}, \hyperpage{69}
-    \subitem {pennfat\_kernel.h}, \hyperpage{77}
-  \item {duplicate\_argv}
-    \subitem {sys\_call.c}, \hyperpage{102}
-  \item {dynamic\_pid\_array\_add}
-    \subitem {array.c}, \hyperpage{46}
-    \subitem {array.h}, \hyperpage{48}
-  \item {dynamic\_pid\_array\_contains}
-    \subitem {array.c}, \hyperpage{46}
-    \subitem {array.h}, \hyperpage{49}
-  \item {dynamic\_pid\_array\_create}
-    \subitem {array.c}, \hyperpage{47}
-    \subitem {array.h}, \hyperpage{49}
-  \item {dynamic\_pid\_array\_destroy}
-    \subitem {array.c}, \hyperpage{47}
-    \subitem {array.h}, \hyperpage{49}
-  \item {dynamic\_pid\_array\_remove}
-    \subitem {array.c}, \hyperpage{47}
-    \subitem {array.h}, \hyperpage{50}
-  \item {DynamicPIDArray}, \hyperpage{19}
-    \subitem {array}, \hyperpage{19}
+    \subitem {name}, \hyperpage{19}
+    \subitem {perm}, \hyperpage{19}
+    \subitem {reserved}, \hyperpage{19}
     \subitem {size}, \hyperpage{19}
-    \subitem {used}, \hyperpage{19}
+    \subitem {type}, \hyperpage{19}
+  \item {doc/fat.md}, \hyperpage{33}
+  \item {doc/kernel.md}, \hyperpage{33}
+  \item {doc/README.md}, \hyperpage{33}
+  \item {doc/scheduler.md}, \hyperpage{33}
+  \item {doc/shell.md}, \hyperpage{33}
+  \item {doc/system.md}, \hyperpage{33}
+  \item {does\_file\_exist}
+    \subitem {pennfat\_kernel.c}, \hyperpage{87}
+    \subitem {pennfat\_kernel.h}, \hyperpage{103}
+  \item {does\_file\_exist2}
+    \subitem {pennfat\_kernel.c}, \hyperpage{87}
+    \subitem {pennfat\_kernel.h}, \hyperpage{103}
+  \item {duplicate\_argv}
+    \subitem {sys\_call.c}, \hyperpage{142}
+  \item {dynamic\_pid\_array\_add}
+    \subitem {array.c}, \hyperpage{59}
+    \subitem {array.h}, \hyperpage{61}
+  \item {dynamic\_pid\_array\_contains}
+    \subitem {array.c}, \hyperpage{59}
+    \subitem {array.h}, \hyperpage{62}
+  \item {dynamic\_pid\_array\_create}
+    \subitem {array.c}, \hyperpage{60}
+    \subitem {array.h}, \hyperpage{62}
+  \item {dynamic\_pid\_array\_destroy}
+    \subitem {array.c}, \hyperpage{60}
+    \subitem {array.h}, \hyperpage{62}
+  \item {dynamic\_pid\_array\_remove}
+    \subitem {array.c}, \hyperpage{60}
+    \subitem {array.h}, \hyperpage{63}
+  \item {DynamicPIDArray}, \hyperpage{19}
+    \subitem {array}, \hyperpage{20}
+    \subitem {size}, \hyperpage{20}
+    \subitem {used}, \hyperpage{20}
 
   \indexspace
 
+  \item {EADDPROC}
+    \subitem {error.h}, \hyperpage{74}
+  \item {EBITMAP}
+    \subitem {error.h}, \hyperpage{74}
+  \item {EINVARG}
+    \subitem {error.h}, \hyperpage{74}
+  \item {ENOARGS}
+    \subitem {error.h}, \hyperpage{75}
+  \item {EPCBCREATE}
+    \subitem {error.h}, \hyperpage{75}
   \item {errno}
-    \subitem {error.h}, \hyperpage{59}
+    \subitem {error.h}, \hyperpage{75}
+  \item {error.c}
+    \subitem {u\_perror}, \hyperpage{73}
   \item {error.h}
-    \subitem {errno}, \hyperpage{59}
-    \subitem {u\_perror}, \hyperpage{59}
+    \subitem {EADDPROC}, \hyperpage{74}
+    \subitem {EBITMAP}, \hyperpage{74}
+    \subitem {EINVARG}, \hyperpage{74}
+    \subitem {ENOARGS}, \hyperpage{75}
+    \subitem {EPCBCREATE}, \hyperpage{75}
+    \subitem {errno}, \hyperpage{75}
+    \subitem {ETHREADCREATE}, \hyperpage{75}
+    \subitem {u\_perror}, \hyperpage{75}
+  \item {ETHREADCREATE}
+    \subitem {error.h}, \hyperpage{75}
+  \item {EXIT}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {exit\_status}
-    \subitem {pcb\_t}, \hyperpage{24}
+    \subitem {pcb\_t}, \hyperpage{25}
   \item {EXPECT\_COMMANDS}
-    \subitem {parser.h}, \hyperpage{32}
+    \subitem {parser.h}, \hyperpage{34}
   \item {EXPECT\_INPUT\_FILENAME}
-    \subitem {parser.h}, \hyperpage{32}
+    \subitem {parser.h}, \hyperpage{34}
   \item {EXPECT\_OUTPUT\_FILENAME}
-    \subitem {parser.h}, \hyperpage{32}
+    \subitem {parser.h}, \hyperpage{34}
   \item {extend\_fat}
-    \subitem {pennfat\_kernel.c}, \hyperpage{69}
-    \subitem {pennfat\_kernel.h}, \hyperpage{77}
+    \subitem {pennfat\_kernel.c}, \hyperpage{88}
+    \subitem {pennfat\_kernel.h}, \hyperpage{103}
 
   \indexspace
 
+  \item {F\_APPEND}
+    \subitem {pennfat\_kernel.h}, \hyperpage{100}
+  \item {F\_READ}
+    \subitem {pennfat\_kernel.h}, \hyperpage{100}
   \item {F\_SEEK\_CUR}
-    \subitem {pennfat\_kernel.h}, \hyperpage{76}
+    \subitem {pennfat\_kernel.h}, \hyperpage{102}
   \item {F\_SEEK\_END}
-    \subitem {pennfat\_kernel.h}, \hyperpage{76}
+    \subitem {pennfat\_kernel.h}, \hyperpage{102}
   \item {F\_SEEK\_SET}
-    \subitem {pennfat\_kernel.h}, \hyperpage{76}
+    \subitem {pennfat\_kernel.h}, \hyperpage{102}
+  \item {F\_WRITE}
+    \subitem {pennfat\_kernel.h}, \hyperpage{100}
   \item {fat}, \hyperpage{3}
-    \subitem {pennfat\_kernel.c}, \hyperpage{74}
-    \subitem {pennfat\_kernel.h}, \hyperpage{81}
+    \subitem {pennfat\_kernel.c}, \hyperpage{96}
+    \subitem {pennfat\_kernel.h}, \hyperpage{111}
   \item {fat\_size}
-    \subitem {pennfat\_kernel.c}, \hyperpage{74}
-    \subitem {pennfat\_kernel.h}, \hyperpage{81}
+    \subitem {pennfat\_kernel.c}, \hyperpage{96}
+    \subitem {pennfat\_kernel.h}, \hyperpage{111}
   \item {fd}
-    \subitem {file\_descriptor\_st}, \hyperpage{20}
+    \subitem {file\_descriptor\_st}, \hyperpage{21}
   \item {FD\_Bitmap}, \hyperpage{20}
-    \subitem {bits}, \hyperpage{20}
+    \subitem {bits}, \hyperpage{21}
   \item {FD\_BITMAP\_BYTES}
-    \subitem {bitmap.h}, \hyperpage{53}
+    \subitem {bitmap.h}, \hyperpage{66}
   \item {fd\_bitmap\_clear}
-    \subitem {bitmap.c}, \hyperpage{51}
-    \subitem {bitmap.h}, \hyperpage{53}
+    \subitem {bitmap.c}, \hyperpage{64}
+    \subitem {bitmap.h}, \hyperpage{66}
   \item {fd\_bitmap\_initialize}
-    \subitem {bitmap.c}, \hyperpage{51}
-    \subitem {bitmap.h}, \hyperpage{53}
+    \subitem {bitmap.c}, \hyperpage{64}
+    \subitem {bitmap.h}, \hyperpage{66}
   \item {fd\_bitmap\_set}
-    \subitem {bitmap.c}, \hyperpage{51}
-    \subitem {bitmap.h}, \hyperpage{54}
+    \subitem {bitmap.c}, \hyperpage{64}
+    \subitem {bitmap.h}, \hyperpage{67}
   \item {FD\_BITMAP\_SIZE}
-    \subitem {bitmap.h}, \hyperpage{53}
+    \subitem {bitmap.h}, \hyperpage{66}
   \item {fd\_bitmap\_test}
-    \subitem {bitmap.c}, \hyperpage{52}
-    \subitem {bitmap.h}, \hyperpage{54}
+    \subitem {bitmap.c}, \hyperpage{65}
+    \subitem {bitmap.h}, \hyperpage{67}
   \item {fd\_counter}
-    \subitem {pennfat\_kernel.c}, \hyperpage{74}
-  \item {file\_descriptor\_st}, \hyperpage{20}
-    \subitem {fd}, \hyperpage{20}
-    \subitem {fname}, \hyperpage{20}
-    \subitem {mode}, \hyperpage{21}
-    \subitem {offset}, \hyperpage{21}
-    \subitem {ref\_cnt}, \hyperpage{21}
+    \subitem {pennfat\_kernel.c}, \hyperpage{96}
+  \item {FILE\_DELETED}
+    \subitem {pennfat\_kernel.h}, \hyperpage{100}
+  \item {file\_descriptor\_st}, \hyperpage{21}
+    \subitem {fd}, \hyperpage{21}
+    \subitem {fname}, \hyperpage{21}
+    \subitem {mode}, \hyperpage{22}
+    \subitem {offset}, \hyperpage{22}
+    \subitem {ref\_cnt}, \hyperpage{22}
+  \item {FILE\_IN\_USE}
+    \subitem {pennfat\_kernel.h}, \hyperpage{100}
+  \item {FILE\_NOT\_FOUND}
+    \subitem {pennfat\_kernel.h}, \hyperpage{100}
   \item {find\_process}
-    \subitem {clinkedlist.c}, \hyperpage{55}
-    \subitem {clinkedlist.h}, \hyperpage{57}
+    \subitem {clinkedlist.c}, \hyperpage{69}
+    \subitem {clinkedlist.h}, \hyperpage{71}
+  \item {find\_process\_job\_id}
+    \subitem {clinkedlist.c}, \hyperpage{69}
+    \subitem {clinkedlist.h}, \hyperpage{72}
   \item {firstBlock}
     \subitem {directory\_entries}, \hyperpage{18}
   \item {fname}
-    \subitem {file\_descriptor\_st}, \hyperpage{20}
+    \subitem {file\_descriptor\_st}, \hyperpage{21}
   \item {formatTime}
-    \subitem {pennfat\_kernel.c}, \hyperpage{69}
+    \subitem {pennfat\_kernel.c}, \hyperpage{88}
   \item {free\_argv}
-    \subitem {sys\_call.c}, \hyperpage{102}
+    \subitem {sys\_call.c}, \hyperpage{142}
   \item {fs\_fd}
-    \subitem {pennfat\_kernel.c}, \hyperpage{74}
-    \subitem {pennfat\_kernel.h}, \hyperpage{81}
-  \item {function\_from\_string}
-    \subitem {pennos.h}, \hyperpage{45}
+    \subitem {pennfat\_kernel.c}, \hyperpage{96}
+    \subitem {pennfat\_kernel.h}, \hyperpage{111}
+  \item {FS\_NOT\_MOUNTED}
+    \subitem {pennfat\_kernel.h}, \hyperpage{100}
 
   \indexspace
 
   \item {generate\_permission}
-    \subitem {pennfat\_kernel.c}, \hyperpage{70}
+    \subitem {pennfat\_kernel.c}, \hyperpage{88}
   \item {get\_block\_size}
-    \subitem {pennfat.c}, \hyperpage{36}
-    \subitem {pennfat.h}, \hyperpage{39}
+    \subitem {pennfat.c}, \hyperpage{40}
+    \subitem {pennfat.h}, \hyperpage{49}
   \item {get\_data\_size}
-    \subitem {pennfat.c}, \hyperpage{36}
-    \subitem {pennfat.h}, \hyperpage{39}
+    \subitem {pennfat.c}, \hyperpage{41}
+    \subitem {pennfat.h}, \hyperpage{50}
   \item {get\_fat\_size}
-    \subitem {pennfat.c}, \hyperpage{36}
-    \subitem {pennfat.h}, \hyperpage{40}
+    \subitem {pennfat.c}, \hyperpage{41}
+    \subitem {pennfat.h}, \hyperpage{50}
   \item {get\_file\_descriptor}
-    \subitem {pennfat\_kernel.c}, \hyperpage{70}
-    \subitem {pennfat\_kernel.h}, \hyperpage{77}
+    \subitem {pennfat\_kernel.c}, \hyperpage{88}
+    \subitem {pennfat\_kernel.h}, \hyperpage{103}
   \item {get\_first\_empty\_fat\_index}
-    \subitem {pennfat\_kernel.c}, \hyperpage{70}
-    \subitem {pennfat\_kernel.h}, \hyperpage{77}
+    \subitem {pennfat\_kernel.c}, \hyperpage{88}
+    \subitem {pennfat\_kernel.h}, \hyperpage{104}
   \item {get\_num\_fat\_entries}
-    \subitem {pennfat.c}, \hyperpage{36}
-    \subitem {pennfat.h}, \hyperpage{40}
+    \subitem {pennfat.c}, \hyperpage{41}
+    \subitem {pennfat.h}, \hyperpage{50}
   \item {get\_offset\_size}
-    \subitem {pennfat.c}, \hyperpage{36}
-    \subitem {pennfat.h}, \hyperpage{40}
+    \subitem {pennfat.c}, \hyperpage{42}
+    \subitem {pennfat.h}, \hyperpage{51}
   \item {global\_fd\_table}
-    \subitem {pennfat\_kernel.c}, \hyperpage{74}
-    \subitem {pennfat\_kernel.h}, \hyperpage{81}
+    \subitem {pennfat\_kernel.c}, \hyperpage{97}
+    \subitem {pennfat\_kernel.h}, \hyperpage{111}
   \item {globals.c}
-    \subitem {blocked}, \hyperpage{60}
-    \subitem {current}, \hyperpage{60}
-    \subitem {logfiledescriptor}, \hyperpage{60}
-    \subitem {next\_pid}, \hyperpage{60}
-    \subitem {processes}, \hyperpage{61}
-    \subitem {stopped}, \hyperpage{61}
-    \subitem {tick}, \hyperpage{61}
-    \subitem {zombied}, \hyperpage{61}
+    \subitem {bg\_list}, \hyperpage{76}
+    \subitem {blocked}, \hyperpage{76}
+    \subitem {current}, \hyperpage{77}
+    \subitem {job\_id}, \hyperpage{77}
+    \subitem {logfiledescriptor}, \hyperpage{77}
+    \subitem {next\_pid}, \hyperpage{77}
+    \subitem {processes}, \hyperpage{77}
+    \subitem {stopped}, \hyperpage{77}
+    \subitem {tick}, \hyperpage{77}
+    \subitem {zombied}, \hyperpage{78}
   \item {globals.h}
-    \subitem {blocked}, \hyperpage{62}
-    \subitem {current}, \hyperpage{62}
-    \subitem {logfiledescriptor}, \hyperpage{62}
-    \subitem {next\_pid}, \hyperpage{62}
-    \subitem {processes}, \hyperpage{62}
-    \subitem {stopped}, \hyperpage{62}
-    \subitem {tick}, \hyperpage{63}
-    \subitem {zombied}, \hyperpage{63}
+    \subitem {bg\_list}, \hyperpage{78}
+    \subitem {blocked}, \hyperpage{78}
+    \subitem {current}, \hyperpage{78}
+    \subitem {job\_id}, \hyperpage{79}
+    \subitem {logfiledescriptor}, \hyperpage{79}
+    \subitem {next\_pid}, \hyperpage{79}
+    \subitem {processes}, \hyperpage{79}
+    \subitem {stopped}, \hyperpage{79}
+    \subitem {tick}, \hyperpage{79}
+    \subitem {zombied}, \hyperpage{79}
 
   \indexspace
 
   \item {handle}
-    \subitem {pcb\_t}, \hyperpage{24}
+    \subitem {pcb\_t}, \hyperpage{26}
+  \item {hang}
+    \subitem {stress.c}, \hyperpage{139}
+    \subitem {stress.h}, \hyperpage{139}
   \item {head}
     \subitem {CircularList}, \hyperpage{17}
-    \subitem {PList}, \hyperpage{26}
+    \subitem {PList}, \hyperpage{28}
 
   \indexspace
 
   \item {init\_list}
-    \subitem {clinkedlist.c}, \hyperpage{56}
-    \subitem {clinkedlist.h}, \hyperpage{58}
+    \subitem {clinkedlist.c}, \hyperpage{69}
+    \subitem {clinkedlist.h}, \hyperpage{72}
   \item {init\_priority}
-    \subitem {prioritylist.c}, \hyperpage{83}
-    \subitem {prioritylist.h}, \hyperpage{85}
+    \subitem {prioritylist.c}, \hyperpage{114}
+    \subitem {prioritylist.h}, \hyperpage{115}
   \item {initialize\_global\_fd\_table}
-    \subitem {pennfat.c}, \hyperpage{36}
-    \subitem {pennfat.h}, \hyperpage{40}
+    \subitem {pennfat.c}, \hyperpage{42}
+    \subitem {pennfat.h}, \hyperpage{51}
+  \item {input\_fd}
+    \subitem {pcb\_t}, \hyperpage{26}
   \item {int\_handler}
-    \subitem {pennfat.c}, \hyperpage{36}
-    \subitem {pennfat.h}, \hyperpage{40}
+    \subitem {pennfat.c}, \hyperpage{42}
+    \subitem {pennfat.h}, \hyperpage{51}
+  \item {INVALID\_FILE\_DESCRIPTOR}
+    \subitem {pennfat\_kernel.h}, \hyperpage{101}
+  \item {INVALID\_FILE\_NAME}
+    \subitem {pennfat\_kernel.h}, \hyperpage{101}
+  \item {INVALID\_PARAMETERS}
+    \subitem {pennfat\_kernel.h}, \hyperpage{101}
   \item {is\_background}
-    \subitem {parsed\_command}, \hyperpage{22}
+    \subitem {parsed\_command}, \hyperpage{23}
   \item {is\_file\_append}
-    \subitem {parsed\_command}, \hyperpage{22}
+    \subitem {parsed\_command}, \hyperpage{23}
+  \item {is\_file\_name\_valid}
+    \subitem {pennfat\_kernel.c}, \hyperpage{88}
+    \subitem {pennfat\_kernel.h}, \hyperpage{104}
+
+  \indexspace
+
+  \item {job\_id}
+    \subitem {globals.c}, \hyperpage{77}
+    \subitem {globals.h}, \hyperpage{79}
+  \item {job\_num}
+    \subitem {pcb\_t}, \hyperpage{26}
 
   \indexspace
 
   \item {k\_change\_mode}
-    \subitem {pennfat\_kernel.c}, \hyperpage{70}
-    \subitem {pennfat\_kernel.h}, \hyperpage{77}
+    \subitem {pennfat\_kernel.c}, \hyperpage{89}
+    \subitem {pennfat\_kernel.h}, \hyperpage{104}
   \item {k\_close}
-    \subitem {pennfat\_kernel.c}, \hyperpage{70}
-    \subitem {pennfat\_kernel.h}, \hyperpage{77}
+    \subitem {pennfat\_kernel.c}, \hyperpage{89}
+    \subitem {pennfat\_kernel.h}, \hyperpage{105}
+  \item {k\_count\_fd\_num}
+    \subitem {pennfat\_kernel.c}, \hyperpage{90}
+    \subitem {pennfat\_kernel.h}, \hyperpage{105}
+  \item {k\_cp\_from\_host}
+    \subitem {pennfat\_kernel.c}, \hyperpage{90}
+    \subitem {pennfat\_kernel.h}, \hyperpage{105}
+  \item {k\_cp\_to\_host}
+    \subitem {pennfat\_kernel.c}, \hyperpage{90}
+    \subitem {pennfat\_kernel.h}, \hyperpage{106}
+  \item {k\_cp\_within\_fat}
+    \subitem {pennfat\_kernel.c}, \hyperpage{91}
+    \subitem {pennfat\_kernel.h}, \hyperpage{106}
+  \item {k\_get\_fname\_from\_fd}
+    \subitem {pennfat\_kernel.c}, \hyperpage{91}
+    \subitem {pennfat\_kernel.h}, \hyperpage{106}
   \item {k\_ls}
-    \subitem {pennfat\_kernel.c}, \hyperpage{70}
-    \subitem {pennfat\_kernel.h}, \hyperpage{78}
+    \subitem {pennfat\_kernel.c}, \hyperpage{91}
+    \subitem {pennfat\_kernel.h}, \hyperpage{107}
   \item {k\_lseek}
-    \subitem {pennfat\_kernel.c}, \hyperpage{71}
-    \subitem {pennfat\_kernel.h}, \hyperpage{78}
+    \subitem {pennfat\_kernel.c}, \hyperpage{92}
+    \subitem {pennfat\_kernel.h}, \hyperpage{107}
   \item {k\_open}
-    \subitem {pennfat\_kernel.c}, \hyperpage{71}
-    \subitem {pennfat\_kernel.h}, \hyperpage{78}
+    \subitem {pennfat\_kernel.c}, \hyperpage{92}
+    \subitem {pennfat\_kernel.h}, \hyperpage{107}
   \item {k\_proc\_cleanup}
-    \subitem {kernel.c}, \hyperpage{64}
-    \subitem {kernel.h}, \hyperpage{67}
+    \subitem {kernel.c}, \hyperpage{80}
+    \subitem {kernel.h}, \hyperpage{83}
   \item {k\_proc\_create}
-    \subitem {kernel.c}, \hyperpage{64}
-    \subitem {kernel.h}, \hyperpage{67}
+    \subitem {kernel.c}, \hyperpage{81}
+    \subitem {kernel.h}, \hyperpage{83}
   \item {k\_read}
-    \subitem {pennfat\_kernel.c}, \hyperpage{72}
-    \subitem {pennfat\_kernel.h}, \hyperpage{79}
+    \subitem {pennfat\_kernel.c}, \hyperpage{93}
+    \subitem {pennfat\_kernel.h}, \hyperpage{108}
   \item {k\_read\_all}
-    \subitem {pennfat\_kernel.c}, \hyperpage{72}
-    \subitem {pennfat\_kernel.h}, \hyperpage{79}
+    \subitem {pennfat\_kernel.c}, \hyperpage{93}
+    \subitem {pennfat\_kernel.h}, \hyperpage{109}
   \item {k\_rename}
-    \subitem {pennfat\_kernel.c}, \hyperpage{72}
-    \subitem {pennfat\_kernel.h}, \hyperpage{79}
+    \subitem {pennfat\_kernel.c}, \hyperpage{94}
+    \subitem {pennfat\_kernel.h}, \hyperpage{109}
   \item {k\_unlink}
-    \subitem {pennfat\_kernel.c}, \hyperpage{72}
-    \subitem {pennfat\_kernel.h}, \hyperpage{80}
+    \subitem {pennfat\_kernel.c}, \hyperpage{94}
+    \subitem {pennfat\_kernel.h}, \hyperpage{109}
+  \item {k\_update\_timestamp}
+    \subitem {pennfat\_kernel.c}, \hyperpage{94}
+    \subitem {pennfat\_kernel.h}, \hyperpage{110}
   \item {k\_write}
-    \subitem {pennfat\_kernel.c}, \hyperpage{73}
-    \subitem {pennfat\_kernel.h}, \hyperpage{80}
+    \subitem {pennfat\_kernel.c}, \hyperpage{95}
+    \subitem {pennfat\_kernel.h}, \hyperpage{110}
   \item {kernel}, \hyperpage{5}
   \item {kernel.c}
-    \subitem {k\_proc\_cleanup}, \hyperpage{64}
-    \subitem {k\_proc\_create}, \hyperpage{64}
+    \subitem {k\_proc\_cleanup}, \hyperpage{80}
+    \subitem {k\_proc\_create}, \hyperpage{81}
   \item {kernel.h}
-    \subitem {BLOCKED}, \hyperpage{66}
-    \subitem {k\_proc\_cleanup}, \hyperpage{67}
-    \subitem {k\_proc\_create}, \hyperpage{67}
-    \subitem {P\_SIGCONT}, \hyperpage{65}
-    \subitem {P\_SIGSTOP}, \hyperpage{65}
-    \subitem {P\_SIGTER}, \hyperpage{66}
-    \subitem {pcb\_t}, \hyperpage{66}
-    \subitem {process\_state\_t}, \hyperpage{66}
-    \subitem {RUNNING}, \hyperpage{66}
-    \subitem {STOPPED}, \hyperpage{66}
-    \subitem {ZOMBIED}, \hyperpage{66}
+    \subitem {BLOCKED}, \hyperpage{83}
+    \subitem {k\_proc\_cleanup}, \hyperpage{83}
+    \subitem {k\_proc\_create}, \hyperpage{83}
+    \subitem {P\_SIGCONT}, \hyperpage{82}
+    \subitem {P\_SIGSTOP}, \hyperpage{82}
+    \subitem {P\_SIGTER}, \hyperpage{82}
+    \subitem {pcb\_t}, \hyperpage{82}
+    \subitem {process\_state\_t}, \hyperpage{82}
+    \subitem {RUNNING}, \hyperpage{83}
+    \subitem {STOPPED}, \hyperpage{83}
+    \subitem {ZOMBIED}, \hyperpage{83}
 
   \indexspace
 
+  \item {log\_message\_t}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {logfiledescriptor}
-    \subitem {globals.c}, \hyperpage{60}
-    \subitem {globals.h}, \hyperpage{62}
+    \subitem {globals.c}, \hyperpage{77}
+    \subitem {globals.h}, \hyperpage{79}
   \item {ls}
-    \subitem {pennfat.c}, \hyperpage{36}
-    \subitem {pennfat.h}, \hyperpage{40}
+    \subitem {pennfat.c}, \hyperpage{43}
+    \subitem {pennfat.h}, \hyperpage{52}
   \item {lseek\_to\_root\_directory}
-    \subitem {pennfat\_kernel.c}, \hyperpage{73}
-    \subitem {pennfat\_kernel.h}, \hyperpage{80}
+    \subitem {pennfat\_kernel.c}, \hyperpage{95}
+    \subitem {pennfat\_kernel.h}, \hyperpage{110}
 
   \indexspace
 
   \item {main}
-    \subitem {pennos.c}, \hyperpage{43}
-    \subitem {sched-\/demo.c}, \hyperpage{111}
-    \subitem {standalonefat.c}, \hyperpage{46}
+    \subitem {pennos.c}, \hyperpage{56}
+    \subitem {sched-\/demo.c}, \hyperpage{167}
+    \subitem {standalonefat.c}, \hyperpage{59}
   \item {MAX\_FD\_NUM}
-    \subitem {pennfat\_kernel.h}, \hyperpage{76}
+    \subitem {pennfat\_kernel.h}, \hyperpage{101}
   \item {MAX\_LEN}
-    \subitem {pennfat.h}, \hyperpage{38}
-    \subitem {pennos.h}, \hyperpage{44}
+    \subitem {pennfat.h}, \hyperpage{46}
+    \subitem {pennos.h}, \hyperpage{57}
   \item {meta}
-    \subitem {spthread\_st}, \hyperpage{29}
+    \subitem {spthread\_st}, \hyperpage{31}
   \item {meta\_mutex}
-    \subitem {spthread\_meta\_st}, \hyperpage{28}
+    \subitem {spthread\_meta\_st}, \hyperpage{30}
   \item {MILISEC\_IN\_NANO}
-    \subitem {spthread.c}, \hyperpage{95}
+    \subitem {spthread.c}, \hyperpage{132}
   \item {mkfs}
-    \subitem {pennfat.c}, \hyperpage{37}
-    \subitem {pennfat.h}, \hyperpage{40}
+    \subitem {pennfat.c}, \hyperpage{43}
+    \subitem {pennfat.h}, \hyperpage{52}
   \item {mode}
-    \subitem {file\_descriptor\_st}, \hyperpage{21}
+    \subitem {file\_descriptor\_st}, \hyperpage{22}
   \item {mount}
-    \subitem {pennfat.c}, \hyperpage{37}
-    \subitem {pennfat.h}, \hyperpage{40}
+    \subitem {pennfat.c}, \hyperpage{43}
+    \subitem {pennfat.h}, \hyperpage{52}
   \item {move\_to\_open\_de}
-    \subitem {pennfat\_kernel.c}, \hyperpage{73}
-    \subitem {pennfat\_kernel.h}, \hyperpage{80}
+    \subitem {pennfat\_kernel.c}, \hyperpage{95}
+    \subitem {pennfat\_kernel.h}, \hyperpage{110}
   \item {mtime}
     \subitem {directory\_entries}, \hyperpage{18}
+  \item {MULTIPLE\_F\_WRITE}
+    \subitem {pennfat\_kernel.h}, \hyperpage{101}
   \item {mv}
-    \subitem {pennfat.c}, \hyperpage{37}
-    \subitem {pennfat.h}, \hyperpage{41}
+    \subitem {pennfat.c}, \hyperpage{43}
+    \subitem {pennfat.h}, \hyperpage{52}
 
   \indexspace
 
   \item {name}
-    \subitem {directory\_entries}, \hyperpage{18}
+    \subitem {directory\_entries}, \hyperpage{19}
   \item {next}
-    \subitem {Node}, \hyperpage{21}
-    \subitem {PNode}, \hyperpage{26}
+    \subitem {Node}, \hyperpage{23}
+    \subitem {PNode}, \hyperpage{29}
   \item {next\_pid}
-    \subitem {globals.c}, \hyperpage{60}
-    \subitem {globals.h}, \hyperpage{62}
-  \item {Node}, \hyperpage{21}
-    \subitem {clinkedlist.h}, \hyperpage{57}
-    \subitem {next}, \hyperpage{21}
-    \subitem {process}, \hyperpage{21}
+    \subitem {globals.c}, \hyperpage{77}
+    \subitem {globals.h}, \hyperpage{79}
+  \item {NICE}
+    \subitem {sys\_call.h}, \hyperpage{154}
+  \item {Node}, \hyperpage{22}
+    \subitem {clinkedlist.h}, \hyperpage{70}
+    \subitem {next}, \hyperpage{23}
+    \subitem {process}, \hyperpage{23}
+  \item {nohang}
+    \subitem {stress.c}, \hyperpage{139}
+    \subitem {stress.h}, \hyperpage{139}
   \item {num\_commands}
-    \subitem {parsed\_command}, \hyperpage{22}
+    \subitem {parsed\_command}, \hyperpage{24}
   \item {num\_fat\_entries}
-    \subitem {pennfat\_kernel.c}, \hyperpage{74}
-    \subitem {pennfat\_kernel.h}, \hyperpage{81}
+    \subitem {pennfat\_kernel.c}, \hyperpage{97}
+    \subitem {pennfat\_kernel.h}, \hyperpage{111}
   \item {NUM\_THREADS}
-    \subitem {sched-\/demo.c}, \hyperpage{111}
+    \subitem {sched-\/demo.c}, \hyperpage{167}
 
   \indexspace
 
   \item {offset}
-    \subitem {file\_descriptor\_st}, \hyperpage{21}
+    \subitem {file\_descriptor\_st}, \hyperpage{22}
   \item {open\_fds}
-    \subitem {pcb\_t}, \hyperpage{24}
+    \subitem {pcb\_t}, \hyperpage{26}
+  \item {ORPHAN}
+    \subitem {sys\_call.h}, \hyperpage{154}
+  \item {output\_fd}
+    \subitem {pcb\_t}, \hyperpage{26}
 
   \indexspace
 
   \item {P\_SIGCONT}
-    \subitem {kernel.h}, \hyperpage{65}
+    \subitem {kernel.h}, \hyperpage{82}
   \item {P\_SIGSTOP}
-    \subitem {kernel.h}, \hyperpage{65}
+    \subitem {kernel.h}, \hyperpage{82}
   \item {P\_SIGTER}
-    \subitem {kernel.h}, \hyperpage{66}
+    \subitem {kernel.h}, \hyperpage{82}
   \item {P\_WIFEXITED}
-    \subitem {sys\_call.h}, \hyperpage{105}
+    \subitem {sys\_call.h}, \hyperpage{153}
   \item {P\_WIFSIGNALED}
-    \subitem {sys\_call.h}, \hyperpage{105}
+    \subitem {sys\_call.h}, \hyperpage{153}
   \item {P\_WIFSTOPPED}
-    \subitem {sys\_call.h}, \hyperpage{105}
+    \subitem {sys\_call.h}, \hyperpage{153}
   \item {parse\_command}
-    \subitem {parser.h}, \hyperpage{33}
-  \item {parsed\_command}, \hyperpage{22}
-    \subitem {commands}, \hyperpage{22}
-    \subitem {is\_background}, \hyperpage{22}
-    \subitem {is\_file\_append}, \hyperpage{22}
-    \subitem {num\_commands}, \hyperpage{22}
-    \subitem {stdin\_file}, \hyperpage{22}
-    \subitem {stdout\_file}, \hyperpage{23}
+    \subitem {parser.h}, \hyperpage{35}
+  \item {parsed\_command}, \hyperpage{23}
+    \subitem {commands}, \hyperpage{23}
+    \subitem {is\_background}, \hyperpage{23}
+    \subitem {is\_file\_append}, \hyperpage{23}
+    \subitem {num\_commands}, \hyperpage{24}
+    \subitem {stdin\_file}, \hyperpage{24}
+    \subitem {stdout\_file}, \hyperpage{24}
   \item {parser.h}
-    \subitem {EXPECT\_COMMANDS}, \hyperpage{32}
-    \subitem {EXPECT\_INPUT\_FILENAME}, \hyperpage{32}
-    \subitem {EXPECT\_OUTPUT\_FILENAME}, \hyperpage{32}
-    \subitem {parse\_command}, \hyperpage{33}
-    \subitem {print\_parsed\_command}, \hyperpage{33}
-    \subitem {print\_parser\_errcode}, \hyperpage{33}
-    \subitem {UNEXPECTED\_AMPERSAND}, \hyperpage{32}
-    \subitem {UNEXPECTED\_FILE\_INPUT}, \hyperpage{32}
-    \subitem {UNEXPECTED\_FILE\_OUTPUT}, \hyperpage{32}
-    \subitem {UNEXPECTED\_PIPELINE}, \hyperpage{32}
-  \item {pcb\_t}, \hyperpage{23}
-    \subitem {child\_pids}, \hyperpage{24}
-    \subitem {clinkedlist.h}, \hyperpage{57}
-    \subitem {exit\_status}, \hyperpage{24}
-    \subitem {handle}, \hyperpage{24}
-    \subitem {kernel.h}, \hyperpage{66}
-    \subitem {open\_fds}, \hyperpage{24}
-    \subitem {pid}, \hyperpage{24}
-    \subitem {ppid}, \hyperpage{24}
-    \subitem {priority}, \hyperpage{24}
-    \subitem {processname}, \hyperpage{24}
-    \subitem {state}, \hyperpage{25}
-    \subitem {statechanged}, \hyperpage{25}
-    \subitem {term\_signal}, \hyperpage{25}
-    \subitem {ticks\_to\_wait}, \hyperpage{25}
-    \subitem {waiting\_for\_change}, \hyperpage{25}
-    \subitem {waiting\_on\_pid}, \hyperpage{25}
+    \subitem {EXPECT\_COMMANDS}, \hyperpage{34}
+    \subitem {EXPECT\_INPUT\_FILENAME}, \hyperpage{34}
+    \subitem {EXPECT\_OUTPUT\_FILENAME}, \hyperpage{34}
+    \subitem {parse\_command}, \hyperpage{35}
+    \subitem {print\_parsed\_command}, \hyperpage{35}
+    \subitem {print\_parser\_errcode}, \hyperpage{35}
+    \subitem {UNEXPECTED\_AMPERSAND}, \hyperpage{34}
+    \subitem {UNEXPECTED\_FILE\_INPUT}, \hyperpage{34}
+    \subitem {UNEXPECTED\_FILE\_OUTPUT}, \hyperpage{34}
+    \subitem {UNEXPECTED\_PIPELINE}, \hyperpage{34}
+  \item {pcb\_t}, \hyperpage{24}
+    \subitem {argv}, \hyperpage{25}
+    \subitem {bg\_done}, \hyperpage{25}
+    \subitem {child\_pids}, \hyperpage{25}
+    \subitem {clinkedlist.h}, \hyperpage{70}
+    \subitem {exit\_status}, \hyperpage{25}
+    \subitem {handle}, \hyperpage{26}
+    \subitem {input\_fd}, \hyperpage{26}
+    \subitem {job\_num}, \hyperpage{26}
+    \subitem {kernel.h}, \hyperpage{82}
+    \subitem {open\_fds}, \hyperpage{26}
+    \subitem {output\_fd}, \hyperpage{26}
+    \subitem {pid}, \hyperpage{26}
+    \subitem {ppid}, \hyperpage{26}
+    \subitem {priority}, \hyperpage{26}
+    \subitem {processname}, \hyperpage{27}
+    \subitem {state}, \hyperpage{27}
+    \subitem {statechanged}, \hyperpage{27}
+    \subitem {term\_signal}, \hyperpage{27}
+    \subitem {ticks\_to\_wait}, \hyperpage{27}
+    \subitem {waiting\_for\_change}, \hyperpage{27}
+    \subitem {waiting\_on\_pid}, \hyperpage{27}
   \item {pennfat.c}
-    \subitem {cat\_a}, \hyperpage{35}
-    \subitem {cat\_file\_wa}, \hyperpage{35}
-    \subitem {cat\_w}, \hyperpage{35}
-    \subitem {chmod}, \hyperpage{35}
-    \subitem {cp\_from\_host}, \hyperpage{35}
-    \subitem {cp\_to\_host}, \hyperpage{35}
-    \subitem {cp\_within\_fat}, \hyperpage{35}
-    \subitem {get\_block\_size}, \hyperpage{36}
-    \subitem {get\_data\_size}, \hyperpage{36}
-    \subitem {get\_fat\_size}, \hyperpage{36}
-    \subitem {get\_num\_fat\_entries}, \hyperpage{36}
-    \subitem {get\_offset\_size}, \hyperpage{36}
-    \subitem {initialize\_global\_fd\_table}, \hyperpage{36}
-    \subitem {int\_handler}, \hyperpage{36}
-    \subitem {ls}, \hyperpage{36}
-    \subitem {mkfs}, \hyperpage{37}
-    \subitem {mount}, \hyperpage{37}
-    \subitem {mv}, \hyperpage{37}
-    \subitem {prompt}, \hyperpage{37}
-    \subitem {read\_command}, \hyperpage{37}
-    \subitem {rm}, \hyperpage{37}
-    \subitem {touch}, \hyperpage{37}
-    \subitem {unmount}, \hyperpage{37}
+    \subitem {cat\_a}, \hyperpage{37}
+    \subitem {cat\_file\_wa}, \hyperpage{38}
+    \subitem {cat\_w}, \hyperpage{38}
+    \subitem {chmod}, \hyperpage{38}
+    \subitem {cp\_from\_host}, \hyperpage{38}
+    \subitem {cp\_to\_host}, \hyperpage{40}
+    \subitem {cp\_within\_fat}, \hyperpage{40}
+    \subitem {get\_block\_size}, \hyperpage{40}
+    \subitem {get\_data\_size}, \hyperpage{41}
+    \subitem {get\_fat\_size}, \hyperpage{41}
+    \subitem {get\_num\_fat\_entries}, \hyperpage{41}
+    \subitem {get\_offset\_size}, \hyperpage{42}
+    \subitem {initialize\_global\_fd\_table}, \hyperpage{42}
+    \subitem {int\_handler}, \hyperpage{42}
+    \subitem {ls}, \hyperpage{43}
+    \subitem {mkfs}, \hyperpage{43}
+    \subitem {mount}, \hyperpage{43}
+    \subitem {mv}, \hyperpage{43}
+    \subitem {prompt}, \hyperpage{44}
+    \subitem {read\_command}, \hyperpage{44}
+    \subitem {rm}, \hyperpage{44}
+    \subitem {touch}, \hyperpage{44}
+    \subitem {unmount}, \hyperpage{44}
   \item {pennfat.h}
-    \subitem {cat\_a}, \hyperpage{39}
-    \subitem {cat\_file\_wa}, \hyperpage{39}
-    \subitem {cat\_w}, \hyperpage{39}
-    \subitem {chmod}, \hyperpage{39}
-    \subitem {cp\_from\_host}, \hyperpage{39}
-    \subitem {cp\_to\_host}, \hyperpage{39}
-    \subitem {cp\_within\_fat}, \hyperpage{39}
-    \subitem {get\_block\_size}, \hyperpage{39}
-    \subitem {get\_data\_size}, \hyperpage{39}
-    \subitem {get\_fat\_size}, \hyperpage{40}
-    \subitem {get\_num\_fat\_entries}, \hyperpage{40}
-    \subitem {get\_offset\_size}, \hyperpage{40}
-    \subitem {initialize\_global\_fd\_table}, \hyperpage{40}
-    \subitem {int\_handler}, \hyperpage{40}
-    \subitem {ls}, \hyperpage{40}
-    \subitem {MAX\_LEN}, \hyperpage{38}
-    \subitem {mkfs}, \hyperpage{40}
-    \subitem {mount}, \hyperpage{40}
-    \subitem {mv}, \hyperpage{41}
-    \subitem {prompt}, \hyperpage{41}
-    \subitem {read\_command}, \hyperpage{41}
-    \subitem {rm}, \hyperpage{41}
-    \subitem {touch}, \hyperpage{41}
-    \subitem {unmount}, \hyperpage{41}
+    \subitem {cat\_a}, \hyperpage{46}
+    \subitem {cat\_file\_wa}, \hyperpage{47}
+    \subitem {cat\_w}, \hyperpage{47}
+    \subitem {chmod}, \hyperpage{47}
+    \subitem {cp\_from\_host}, \hyperpage{47}
+    \subitem {cp\_to\_host}, \hyperpage{49}
+    \subitem {cp\_within\_fat}, \hyperpage{49}
+    \subitem {get\_block\_size}, \hyperpage{49}
+    \subitem {get\_data\_size}, \hyperpage{50}
+    \subitem {get\_fat\_size}, \hyperpage{50}
+    \subitem {get\_num\_fat\_entries}, \hyperpage{50}
+    \subitem {get\_offset\_size}, \hyperpage{51}
+    \subitem {initialize\_global\_fd\_table}, \hyperpage{51}
+    \subitem {int\_handler}, \hyperpage{51}
+    \subitem {ls}, \hyperpage{52}
+    \subitem {MAX\_LEN}, \hyperpage{46}
+    \subitem {mkfs}, \hyperpage{52}
+    \subitem {mount}, \hyperpage{52}
+    \subitem {mv}, \hyperpage{52}
+    \subitem {prompt}, \hyperpage{53}
+    \subitem {read\_command}, \hyperpage{53}
+    \subitem {rm}, \hyperpage{53}
+    \subitem {touch}, \hyperpage{53}
+    \subitem {unmount}, \hyperpage{53}
   \item {pennfat\_kernel.c}
-    \subitem {block\_size}, \hyperpage{74}
-    \subitem {create\_directory\_entry}, \hyperpage{69}
-    \subitem {create\_file\_descriptor}, \hyperpage{69}
-    \subitem {data\_size}, \hyperpage{74}
-    \subitem {does\_file\_exist}, \hyperpage{69}
-    \subitem {does\_file\_exist2}, \hyperpage{69}
-    \subitem {extend\_fat}, \hyperpage{69}
-    \subitem {fat}, \hyperpage{74}
-    \subitem {fat\_size}, \hyperpage{74}
-    \subitem {fd\_counter}, \hyperpage{74}
-    \subitem {formatTime}, \hyperpage{69}
-    \subitem {fs\_fd}, \hyperpage{74}
-    \subitem {generate\_permission}, \hyperpage{70}
-    \subitem {get\_file\_descriptor}, \hyperpage{70}
-    \subitem {get\_first\_empty\_fat\_index}, \hyperpage{70}
-    \subitem {global\_fd\_table}, \hyperpage{74}
-    \subitem {k\_change\_mode}, \hyperpage{70}
-    \subitem {k\_close}, \hyperpage{70}
-    \subitem {k\_ls}, \hyperpage{70}
-    \subitem {k\_lseek}, \hyperpage{71}
-    \subitem {k\_open}, \hyperpage{71}
-    \subitem {k\_read}, \hyperpage{72}
-    \subitem {k\_read\_all}, \hyperpage{72}
-    \subitem {k\_rename}, \hyperpage{72}
-    \subitem {k\_unlink}, \hyperpage{72}
-    \subitem {k\_write}, \hyperpage{73}
-    \subitem {lseek\_to\_root\_directory}, \hyperpage{73}
-    \subitem {move\_to\_open\_de}, \hyperpage{73}
-    \subitem {num\_fat\_entries}, \hyperpage{74}
-    \subitem {update\_directory\_entry\_after\_write}, \hyperpage{73}
-    \subitem {write\_one\_byte\_in\_while}, \hyperpage{73}
+    \subitem {block\_size}, \hyperpage{96}
+    \subitem {create\_directory\_entry}, \hyperpage{86}
+    \subitem {create\_file\_descriptor}, \hyperpage{87}
+    \subitem {data\_size}, \hyperpage{96}
+    \subitem {does\_file\_exist}, \hyperpage{87}
+    \subitem {does\_file\_exist2}, \hyperpage{87}
+    \subitem {extend\_fat}, \hyperpage{88}
+    \subitem {fat}, \hyperpage{96}
+    \subitem {fat\_size}, \hyperpage{96}
+    \subitem {fd\_counter}, \hyperpage{96}
+    \subitem {formatTime}, \hyperpage{88}
+    \subitem {fs\_fd}, \hyperpage{96}
+    \subitem {generate\_permission}, \hyperpage{88}
+    \subitem {get\_file\_descriptor}, \hyperpage{88}
+    \subitem {get\_first\_empty\_fat\_index}, \hyperpage{88}
+    \subitem {global\_fd\_table}, \hyperpage{97}
+    \subitem {is\_file\_name\_valid}, \hyperpage{88}
+    \subitem {k\_change\_mode}, \hyperpage{89}
+    \subitem {k\_close}, \hyperpage{89}
+    \subitem {k\_count\_fd\_num}, \hyperpage{90}
+    \subitem {k\_cp\_from\_host}, \hyperpage{90}
+    \subitem {k\_cp\_to\_host}, \hyperpage{90}
+    \subitem {k\_cp\_within\_fat}, \hyperpage{91}
+    \subitem {k\_get\_fname\_from\_fd}, \hyperpage{91}
+    \subitem {k\_ls}, \hyperpage{91}
+    \subitem {k\_lseek}, \hyperpage{92}
+    \subitem {k\_open}, \hyperpage{92}
+    \subitem {k\_read}, \hyperpage{93}
+    \subitem {k\_read\_all}, \hyperpage{93}
+    \subitem {k\_rename}, \hyperpage{94}
+    \subitem {k\_unlink}, \hyperpage{94}
+    \subitem {k\_update\_timestamp}, \hyperpage{94}
+    \subitem {k\_write}, \hyperpage{95}
+    \subitem {lseek\_to\_root\_directory}, \hyperpage{95}
+    \subitem {move\_to\_open\_de}, \hyperpage{95}
+    \subitem {num\_fat\_entries}, \hyperpage{97}
+    \subitem {update\_directory\_entry\_after\_write}, \hyperpage{95}
+    \subitem {write\_one\_byte\_in\_while}, \hyperpage{95}
+    \subitem {zero\_out\_helper}, \hyperpage{96}
   \item {pennfat\_kernel.h}
-    \subitem {APPEND}, \hyperpage{76}
-    \subitem {block\_size}, \hyperpage{81}
-    \subitem {create\_directory\_entry}, \hyperpage{76}
-    \subitem {create\_file\_descriptor}, \hyperpage{77}
-    \subitem {data\_size}, \hyperpage{81}
-    \subitem {does\_file\_exist}, \hyperpage{77}
-    \subitem {does\_file\_exist2}, \hyperpage{77}
-    \subitem {extend\_fat}, \hyperpage{77}
-    \subitem {F\_SEEK\_CUR}, \hyperpage{76}
-    \subitem {F\_SEEK\_END}, \hyperpage{76}
-    \subitem {F\_SEEK\_SET}, \hyperpage{76}
-    \subitem {fat}, \hyperpage{81}
-    \subitem {fat\_size}, \hyperpage{81}
-    \subitem {fs\_fd}, \hyperpage{81}
-    \subitem {get\_file\_descriptor}, \hyperpage{77}
-    \subitem {get\_first\_empty\_fat\_index}, \hyperpage{77}
-    \subitem {global\_fd\_table}, \hyperpage{81}
-    \subitem {k\_change\_mode}, \hyperpage{77}
-    \subitem {k\_close}, \hyperpage{77}
-    \subitem {k\_ls}, \hyperpage{78}
-    \subitem {k\_lseek}, \hyperpage{78}
-    \subitem {k\_open}, \hyperpage{78}
-    \subitem {k\_read}, \hyperpage{79}
-    \subitem {k\_read\_all}, \hyperpage{79}
-    \subitem {k\_rename}, \hyperpage{79}
-    \subitem {k\_unlink}, \hyperpage{80}
-    \subitem {k\_write}, \hyperpage{80}
-    \subitem {lseek\_to\_root\_directory}, \hyperpage{80}
-    \subitem {MAX\_FD\_NUM}, \hyperpage{76}
-    \subitem {move\_to\_open\_de}, \hyperpage{80}
-    \subitem {num\_fat\_entries}, \hyperpage{81}
-    \subitem {READ}, \hyperpage{76}
-    \subitem {READ\_WRITE}, \hyperpage{76}
-    \subitem {Whence}, \hyperpage{76}
-    \subitem {WRITE}, \hyperpage{76}
+    \subitem {block\_size}, \hyperpage{111}
+    \subitem {create\_directory\_entry}, \hyperpage{102}
+    \subitem {create\_file\_descriptor}, \hyperpage{102}
+    \subitem {data\_size}, \hyperpage{111}
+    \subitem {does\_file\_exist}, \hyperpage{103}
+    \subitem {does\_file\_exist2}, \hyperpage{103}
+    \subitem {extend\_fat}, \hyperpage{103}
+    \subitem {F\_APPEND}, \hyperpage{100}
+    \subitem {F\_READ}, \hyperpage{100}
+    \subitem {F\_SEEK\_CUR}, \hyperpage{102}
+    \subitem {F\_SEEK\_END}, \hyperpage{102}
+    \subitem {F\_SEEK\_SET}, \hyperpage{102}
+    \subitem {F\_WRITE}, \hyperpage{100}
+    \subitem {fat}, \hyperpage{111}
+    \subitem {fat\_size}, \hyperpage{111}
+    \subitem {FILE\_DELETED}, \hyperpage{100}
+    \subitem {FILE\_IN\_USE}, \hyperpage{100}
+    \subitem {FILE\_NOT\_FOUND}, \hyperpage{100}
+    \subitem {fs\_fd}, \hyperpage{111}
+    \subitem {FS\_NOT\_MOUNTED}, \hyperpage{100}
+    \subitem {get\_file\_descriptor}, \hyperpage{103}
+    \subitem {get\_first\_empty\_fat\_index}, \hyperpage{104}
+    \subitem {global\_fd\_table}, \hyperpage{111}
+    \subitem {INVALID\_FILE\_DESCRIPTOR}, \hyperpage{101}
+    \subitem {INVALID\_FILE\_NAME}, \hyperpage{101}
+    \subitem {INVALID\_PARAMETERS}, \hyperpage{101}
+    \subitem {is\_file\_name\_valid}, \hyperpage{104}
+    \subitem {k\_change\_mode}, \hyperpage{104}
+    \subitem {k\_close}, \hyperpage{105}
+    \subitem {k\_count\_fd\_num}, \hyperpage{105}
+    \subitem {k\_cp\_from\_host}, \hyperpage{105}
+    \subitem {k\_cp\_to\_host}, \hyperpage{106}
+    \subitem {k\_cp\_within\_fat}, \hyperpage{106}
+    \subitem {k\_get\_fname\_from\_fd}, \hyperpage{106}
+    \subitem {k\_ls}, \hyperpage{107}
+    \subitem {k\_lseek}, \hyperpage{107}
+    \subitem {k\_open}, \hyperpage{107}
+    \subitem {k\_read}, \hyperpage{108}
+    \subitem {k\_read\_all}, \hyperpage{109}
+    \subitem {k\_rename}, \hyperpage{109}
+    \subitem {k\_unlink}, \hyperpage{109}
+    \subitem {k\_update\_timestamp}, \hyperpage{110}
+    \subitem {k\_write}, \hyperpage{110}
+    \subitem {lseek\_to\_root\_directory}, \hyperpage{110}
+    \subitem {MAX\_FD\_NUM}, \hyperpage{101}
+    \subitem {move\_to\_open\_de}, \hyperpage{110}
+    \subitem {MULTIPLE\_F\_WRITE}, \hyperpage{101}
+    \subitem {num\_fat\_entries}, \hyperpage{111}
+    \subitem {SYSTEM\_ERROR}, \hyperpage{101}
+    \subitem {Whence}, \hyperpage{101}
+    \subitem {WRONG\_PERMISSION}, \hyperpage{101}
   \item {PennOS}, \hyperpage{1}
   \item {pennos.c}
-    \subitem {cancel\_and\_join}, \hyperpage{43}
-    \subitem {main}, \hyperpage{43}
-    \subitem {priority}, \hyperpage{43}
-    \subitem {scheduler}, \hyperpage{43}
+    \subitem {b\_output\_redir}, \hyperpage{55}
+    \subitem {cancel\_and\_join}, \hyperpage{55}
+    \subitem {main}, \hyperpage{56}
+    \subitem {print\_queue}, \hyperpage{56}
+    \subitem {priority}, \hyperpage{56}
+    \subitem {scheduler}, \hyperpage{56}
   \item {pennos.h}
-    \subitem {\_DEFAULT\_SOURCE}, \hyperpage{44}
-    \subitem {\_POSIX\_C\_SOURCE}, \hyperpage{44}
-    \subitem {\_XOPEN\_SOURCE}, \hyperpage{44}
-    \subitem {function\_from\_string}, \hyperpage{45}
-    \subitem {MAX\_LEN}, \hyperpage{44}
-    \subitem {PROMPT}, \hyperpage{44}
-    \subitem {STDERR\_FILENO}, \hyperpage{44}
-    \subitem {STDIN\_FILENO}, \hyperpage{44}
-    \subitem {STDOUT\_FILENO}, \hyperpage{44}
+    \subitem {\_DEFAULT\_SOURCE}, \hyperpage{57}
+    \subitem {\_POSIX\_C\_SOURCE}, \hyperpage{57}
+    \subitem {\_XOPEN\_SOURCE}, \hyperpage{57}
+    \subitem {b\_output\_redir}, \hyperpage{57}
+    \subitem {MAX\_LEN}, \hyperpage{57}
+    \subitem {PROMPT}, \hyperpage{57}
+    \subitem {STDERR\_FILENO}, \hyperpage{57}
+    \subitem {STDIN\_FILENO}, \hyperpage{57}
+    \subitem {STDOUT\_FILENO}, \hyperpage{57}
   \item {perm}
-    \subitem {directory\_entries}, \hyperpage{18}
+    \subitem {directory\_entries}, \hyperpage{19}
   \item {pid}
-    \subitem {pcb\_t}, \hyperpage{24}
-  \item {PList}, \hyperpage{26}
-    \subitem {head}, \hyperpage{26}
-    \subitem {size}, \hyperpage{26}
-  \item {PNode}, \hyperpage{26}
-    \subitem {next}, \hyperpage{26}
-    \subitem {priority}, \hyperpage{26}
-    \subitem {prioritylist.h}, \hyperpage{84}
+    \subitem {pcb\_t}, \hyperpage{26}
+  \item {PList}, \hyperpage{28}
+    \subitem {head}, \hyperpage{28}
+    \subitem {size}, \hyperpage{28}
+  \item {PNode}, \hyperpage{28}
+    \subitem {next}, \hyperpage{29}
+    \subitem {priority}, \hyperpage{29}
+    \subitem {prioritylist.h}, \hyperpage{115}
   \item {ppid}
-    \subitem {pcb\_t}, \hyperpage{24}
+    \subitem {pcb\_t}, \hyperpage{26}
   \item {print\_parsed\_command}
-    \subitem {parser.h}, \hyperpage{33}
+    \subitem {parser.h}, \hyperpage{35}
   \item {print\_parser\_errcode}
-    \subitem {parser.h}, \hyperpage{33}
+    \subitem {parser.h}, \hyperpage{35}
+  \item {print\_queue}
+    \subitem {pennos.c}, \hyperpage{56}
   \item {priority}
-    \subitem {pcb\_t}, \hyperpage{24}
-    \subitem {pennos.c}, \hyperpage{43}
-    \subitem {PNode}, \hyperpage{26}
+    \subitem {pcb\_t}, \hyperpage{26}
+    \subitem {pennos.c}, \hyperpage{56}
+    \subitem {PNode}, \hyperpage{29}
   \item {prioritylist.c}
-    \subitem {add\_priority}, \hyperpage{83}
-    \subitem {init\_priority}, \hyperpage{83}
-    \subitem {remove\_priority}, \hyperpage{83}
+    \subitem {add\_priority}, \hyperpage{114}
+    \subitem {init\_priority}, \hyperpage{114}
+    \subitem {remove\_priority}, \hyperpage{114}
   \item {prioritylist.h}
-    \subitem {add\_priority}, \hyperpage{84}
-    \subitem {init\_priority}, \hyperpage{85}
-    \subitem {PNode}, \hyperpage{84}
-    \subitem {remove\_priority}, \hyperpage{85}
+    \subitem {add\_priority}, \hyperpage{115}
+    \subitem {init\_priority}, \hyperpage{115}
+    \subitem {PNode}, \hyperpage{115}
+    \subitem {remove\_priority}, \hyperpage{116}
   \item {process}
-    \subitem {Node}, \hyperpage{21}
+    \subitem {Node}, \hyperpage{23}
   \item {process\_state\_t}
-    \subitem {kernel.h}, \hyperpage{66}
+    \subitem {kernel.h}, \hyperpage{82}
   \item {processes}
-    \subitem {globals.c}, \hyperpage{61}
-    \subitem {globals.h}, \hyperpage{62}
+    \subitem {globals.c}, \hyperpage{77}
+    \subitem {globals.h}, \hyperpage{79}
   \item {processname}
-    \subitem {pcb\_t}, \hyperpage{24}
+    \subitem {pcb\_t}, \hyperpage{27}
   \item {PROMPT}
-    \subitem {pennos.h}, \hyperpage{44}
+    \subitem {pennos.h}, \hyperpage{57}
   \item {prompt}
-    \subitem {pennfat.c}, \hyperpage{37}
-    \subitem {pennfat.h}, \hyperpage{41}
+    \subitem {pennfat.c}, \hyperpage{44}
+    \subitem {pennfat.h}, \hyperpage{53}
   \item {pthread\_fn}
-    \subitem {spthread.c}, \hyperpage{95}
+    \subitem {spthread.c}, \hyperpage{132}
 
   \indexspace
 
-  \item {READ}
-    \subitem {pennfat\_kernel.h}, \hyperpage{76}
   \item {read\_command}
-    \subitem {pennfat.c}, \hyperpage{37}
-    \subitem {pennfat.h}, \hyperpage{41}
-  \item {READ\_WRITE}
-    \subitem {pennfat\_kernel.h}, \hyperpage{76}
+    \subitem {pennfat.c}, \hyperpage{44}
+    \subitem {pennfat.h}, \hyperpage{53}
+  \item {recur}
+    \subitem {stress.c}, \hyperpage{139}
+    \subitem {stress.h}, \hyperpage{140}
   \item {ref\_cnt}
-    \subitem {file\_descriptor\_st}, \hyperpage{21}
+    \subitem {file\_descriptor\_st}, \hyperpage{22}
   \item {remove\_priority}
-    \subitem {prioritylist.c}, \hyperpage{83}
-    \subitem {prioritylist.h}, \hyperpage{85}
+    \subitem {prioritylist.c}, \hyperpage{114}
+    \subitem {prioritylist.h}, \hyperpage{116}
   \item {remove\_process}
-    \subitem {clinkedlist.c}, \hyperpage{56}
-    \subitem {clinkedlist.h}, \hyperpage{58}
+    \subitem {clinkedlist.c}, \hyperpage{69}
+    \subitem {clinkedlist.h}, \hyperpage{72}
   \item {reserved}
-    \subitem {directory\_entries}, \hyperpage{18}
+    \subitem {directory\_entries}, \hyperpage{19}
   \item {rm}
-    \subitem {pennfat.c}, \hyperpage{37}
-    \subitem {pennfat.h}, \hyperpage{41}
+    \subitem {pennfat.c}, \hyperpage{44}
+    \subitem {pennfat.h}, \hyperpage{53}
   \item {RUNNING}
-    \subitem {kernel.h}, \hyperpage{66}
+    \subitem {kernel.h}, \hyperpage{83}
 
   \indexspace
 
+  \item {s\_bg\_wait}
+    \subitem {sys\_call.c}, \hyperpage{142}
+    \subitem {sys\_call.h}, \hyperpage{154}
+  \item {s\_busy}
+    \subitem {sys\_call.c}, \hyperpage{142}
+    \subitem {sys\_call.h}, \hyperpage{155}
+  \item {s\_change\_mode}
+    \subitem {sys\_call.c}, \hyperpage{142}
+    \subitem {sys\_call.h}, \hyperpage{155}
   \item {s\_close}
-    \subitem {sys\_call.h}, \hyperpage{105}
+    \subitem {sys\_call.c}, \hyperpage{142}
+    \subitem {sys\_call.h}, \hyperpage{155}
+  \item {s\_cp\_from\_host}
+    \subitem {sys\_call.c}, \hyperpage{143}
+    \subitem {sys\_call.h}, \hyperpage{155}
+  \item {s\_cp\_to\_host}
+    \subitem {sys\_call.c}, \hyperpage{143}
+    \subitem {sys\_call.h}, \hyperpage{155}
+  \item {s\_cp\_within\_fat}
+    \subitem {sys\_call.c}, \hyperpage{143}
+    \subitem {sys\_call.h}, \hyperpage{156}
+  \item {s\_does\_file\_exist2}
+    \subitem {sys\_call.c}, \hyperpage{143}
+    \subitem {sys\_call.h}, \hyperpage{156}
   \item {s\_exit}
-    \subitem {sys\_call.c}, \hyperpage{102}
-    \subitem {sys\_call.h}, \hyperpage{106}
+    \subitem {sys\_call.c}, \hyperpage{143}
+    \subitem {sys\_call.h}, \hyperpage{156}
+  \item {s\_fg}
+    \subitem {sys\_call.c}, \hyperpage{143}
+    \subitem {sys\_call.h}, \hyperpage{156}
+  \item {s\_find\_process}
+    \subitem {sys\_call.c}, \hyperpage{144}
+    \subitem {sys\_call.h}, \hyperpage{156}
+  \item {s\_function\_from\_string}
+    \subitem {sys\_call.c}, \hyperpage{144}
+    \subitem {sys\_call.h}, \hyperpage{157}
+  \item {s\_get\_fname\_from\_fd}
+    \subitem {sys\_call.c}, \hyperpage{144}
+    \subitem {sys\_call.h}, \hyperpage{157}
   \item {s\_kill}
-    \subitem {sys\_call.c}, \hyperpage{102}
-    \subitem {sys\_call.h}, \hyperpage{106}
+    \subitem {sys\_call.c}, \hyperpage{144}
+    \subitem {sys\_call.h}, \hyperpage{157}
   \item {s\_ls}
-    \subitem {sys\_call.h}, \hyperpage{106}
+    \subitem {sys\_call.c}, \hyperpage{145}
+    \subitem {sys\_call.h}, \hyperpage{157}
   \item {s\_lseek}
-    \subitem {sys\_call.h}, \hyperpage{106}
+    \subitem {sys\_call.c}, \hyperpage{145}
+    \subitem {sys\_call.h}, \hyperpage{157}
+  \item {s\_move\_process}
+    \subitem {sys\_call.c}, \hyperpage{145}
+    \subitem {sys\_call.h}, \hyperpage{158}
   \item {s\_nice}
-    \subitem {sys\_call.c}, \hyperpage{102}
-    \subitem {sys\_call.h}, \hyperpage{107}
+    \subitem {sys\_call.c}, \hyperpage{145}
+    \subitem {sys\_call.h}, \hyperpage{158}
   \item {s\_open}
-    \subitem {sys\_call.h}, \hyperpage{107}
+    \subitem {sys\_call.c}, \hyperpage{146}
+    \subitem {sys\_call.h}, \hyperpage{158}
+  \item {s\_print\_jobs}
+    \subitem {sys\_call.c}, \hyperpage{146}
+    \subitem {sys\_call.h}, \hyperpage{159}
+  \item {s\_print\_process}
+    \subitem {sys\_call.c}, \hyperpage{146}
+    \subitem {sys\_call.h}, \hyperpage{159}
   \item {s\_read}
-    \subitem {sys\_call.h}, \hyperpage{107}
+    \subitem {sys\_call.c}, \hyperpage{146}
+    \subitem {sys\_call.h}, \hyperpage{159}
+  \item {s\_read\_all}
+    \subitem {sys\_call.c}, \hyperpage{147}
+    \subitem {sys\_call.h}, \hyperpage{159}
+  \item {s\_reap\_all\_child}
+    \subitem {sys\_call.c}, \hyperpage{147}
+    \subitem {sys\_call.h}, \hyperpage{160}
+  \item {s\_remove\_process}
+    \subitem {sys\_call.c}, \hyperpage{147}
+    \subitem {sys\_call.h}, \hyperpage{160}
+  \item {s\_rename}
+    \subitem {sys\_call.c}, \hyperpage{148}
+    \subitem {sys\_call.h}, \hyperpage{160}
   \item {s\_sleep}
-    \subitem {sys\_call.c}, \hyperpage{103}
-    \subitem {sys\_call.h}, \hyperpage{108}
+    \subitem {sys\_call.c}, \hyperpage{148}
+    \subitem {sys\_call.h}, \hyperpage{160}
   \item {s\_spawn}
-    \subitem {sys\_call.c}, \hyperpage{103}
-    \subitem {sys\_call.h}, \hyperpage{108}
+    \subitem {sys\_call.c}, \hyperpage{148}
+    \subitem {sys\_call.h}, \hyperpage{161}
+  \item {s\_spawn\_and\_wait}
+    \subitem {sys\_call.c}, \hyperpage{149}
+    \subitem {sys\_call.h}, \hyperpage{161}
   \item {s\_spawn\_nice}
-    \subitem {sys\_call.c}, \hyperpage{103}
-    \subitem {sys\_call.h}, \hyperpage{108}
+    \subitem {sys\_call.c}, \hyperpage{149}
+    \subitem {sys\_call.h}, \hyperpage{162}
   \item {s\_unlink}
-    \subitem {sys\_call.h}, \hyperpage{109}
+    \subitem {sys\_call.c}, \hyperpage{150}
+    \subitem {sys\_call.h}, \hyperpage{163}
+  \item {s\_update\_timestamp}
+    \subitem {sys\_call.c}, \hyperpage{150}
+    \subitem {sys\_call.h}, \hyperpage{163}
   \item {s\_waitpid}
-    \subitem {sys\_call.c}, \hyperpage{103}
-    \subitem {sys\_call.h}, \hyperpage{109}
+    \subitem {sys\_call.c}, \hyperpage{150}
+    \subitem {sys\_call.h}, \hyperpage{163}
   \item {s\_write}
-    \subitem {sys\_call.h}, \hyperpage{109}
+    \subitem {sys\_call.c}, \hyperpage{150}
+    \subitem {sys\_call.h}, \hyperpage{163}
+  \item {s\_write\_log}
+    \subitem {sys\_call.c}, \hyperpage{151}
+    \subitem {sys\_call.h}, \hyperpage{164}
+  \item {s\_zombie}
+    \subitem {sys\_call.c}, \hyperpage{151}
+    \subitem {sys\_call.h}, \hyperpage{164}
   \item {sched-\/demo.c}
-    \subitem {\_DEFAULT\_SOURCE}, \hyperpage{111}
-    \subitem {\_POSIX\_C\_SOURCE}, \hyperpage{111}
-    \subitem {\_XOPEN\_SOURCE}, \hyperpage{111}
-    \subitem {BUF\_SIZE}, \hyperpage{111}
-    \subitem {cancel\_and\_join}, \hyperpage{111}
-    \subitem {main}, \hyperpage{111}
-    \subitem {NUM\_THREADS}, \hyperpage{111}
+    \subitem {\_DEFAULT\_SOURCE}, \hyperpage{166}
+    \subitem {\_POSIX\_C\_SOURCE}, \hyperpage{166}
+    \subitem {\_XOPEN\_SOURCE}, \hyperpage{167}
+    \subitem {BUF\_SIZE}, \hyperpage{167}
+    \subitem {cancel\_and\_join}, \hyperpage{167}
+    \subitem {main}, \hyperpage{167}
+    \subitem {NUM\_THREADS}, \hyperpage{167}
+  \item {SCHEDULE}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {scheduler}, \hyperpage{7}
-    \subitem {pennos.c}, \hyperpage{43}
+    \subitem {pennos.c}, \hyperpage{56}
   \item {setup\_cond}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{27}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{29}
   \item {setup\_done}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{27}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{30}
   \item {setup\_mutex}
-    \subitem {spthread\_fwd\_args\_st}, \hyperpage{27}
+    \subitem {spthread\_fwd\_args\_st}, \hyperpage{30}
   \item {shell}, \hyperpage{9}
   \item {shellbuiltins.c}
-    \subitem {b\_kill}, \hyperpage{86}
-    \subitem {b\_logout}, \hyperpage{86}
-    \subitem {b\_nice\_pid}, \hyperpage{86}
-    \subitem {b\_sleep}, \hyperpage{87}
+    \subitem {b\_background\_poll}, \hyperpage{118}
+    \subitem {b\_bg}, \hyperpage{118}
+    \subitem {b\_busy}, \hyperpage{118}
+    \subitem {b\_cat}, \hyperpage{118}
+    \subitem {b\_chmod}, \hyperpage{119}
+    \subitem {b\_clear}, \hyperpage{119}
+    \subitem {b\_cp}, \hyperpage{119}
+    \subitem {b\_echo}, \hyperpage{119}
+    \subitem {b\_fg}, \hyperpage{120}
+    \subitem {b\_jobs}, \hyperpage{120}
+    \subitem {b\_kill}, \hyperpage{120}
+    \subitem {b\_logout}, \hyperpage{120}
+    \subitem {b\_ls}, \hyperpage{121}
+    \subitem {b\_man}, \hyperpage{121}
+    \subitem {b\_mv}, \hyperpage{121}
+    \subitem {b\_nice}, \hyperpage{121}
+    \subitem {b\_nice\_pid}, \hyperpage{121}
+    \subitem {b\_orphan\_child}, \hyperpage{122}
+    \subitem {b\_orphanify}, \hyperpage{122}
+    \subitem {b\_ps}, \hyperpage{122}
+    \subitem {b\_rm}, \hyperpage{122}
+    \subitem {b\_sleep}, \hyperpage{122}
+    \subitem {b\_touch}, \hyperpage{123}
+    \subitem {b\_zombie\_child}, \hyperpage{123}
+    \subitem {b\_zombify}, \hyperpage{123}
   \item {shellbuiltins.h}
-    \subitem {b\_bg}, \hyperpage{88}
-    \subitem {b\_busy}, \hyperpage{88}
-    \subitem {b\_cat}, \hyperpage{88}
-    \subitem {b\_chmod}, \hyperpage{88}
-    \subitem {b\_cp}, \hyperpage{89}
-    \subitem {b\_echo}, \hyperpage{89}
-    \subitem {b\_fg}, \hyperpage{89}
-    \subitem {b\_jobs}, \hyperpage{89}
-    \subitem {b\_kill}, \hyperpage{90}
-    \subitem {b\_logout}, \hyperpage{90}
-    \subitem {b\_ls}, \hyperpage{90}
-    \subitem {b\_man}, \hyperpage{90}
-    \subitem {b\_mv}, \hyperpage{90}
-    \subitem {b\_nice}, \hyperpage{91}
-    \subitem {b\_nice\_pid}, \hyperpage{91}
-    \subitem {b\_orphan\_child}, \hyperpage{91}
-    \subitem {b\_orphanify}, \hyperpage{91}
-    \subitem {b\_ps}, \hyperpage{91}
-    \subitem {b\_rm}, \hyperpage{92}
-    \subitem {b\_sleep}, \hyperpage{92}
-    \subitem {b\_touch}, \hyperpage{92}
-    \subitem {b\_zombie\_child}, \hyperpage{92}
-    \subitem {b\_zombify}, \hyperpage{92}
+    \subitem {b\_background\_poll}, \hyperpage{125}
+    \subitem {b\_bg}, \hyperpage{125}
+    \subitem {b\_busy}, \hyperpage{125}
+    \subitem {b\_cat}, \hyperpage{125}
+    \subitem {b\_chmod}, \hyperpage{125}
+    \subitem {b\_clear}, \hyperpage{125}
+    \subitem {b\_cp}, \hyperpage{126}
+    \subitem {b\_echo}, \hyperpage{126}
+    \subitem {b\_fg}, \hyperpage{126}
+    \subitem {b\_jobs}, \hyperpage{126}
+    \subitem {b\_kill}, \hyperpage{127}
+    \subitem {b\_logout}, \hyperpage{127}
+    \subitem {b\_ls}, \hyperpage{127}
+    \subitem {b\_man}, \hyperpage{127}
+    \subitem {b\_mv}, \hyperpage{127}
+    \subitem {b\_nice}, \hyperpage{128}
+    \subitem {b\_nice\_pid}, \hyperpage{128}
+    \subitem {b\_orphan\_child}, \hyperpage{128}
+    \subitem {b\_orphanify}, \hyperpage{128}
+    \subitem {b\_ps}, \hyperpage{128}
+    \subitem {b\_rm}, \hyperpage{129}
+    \subitem {b\_sleep}, \hyperpage{129}
+    \subitem {b\_touch}, \hyperpage{129}
+    \subitem {b\_zombie\_child}, \hyperpage{129}
+    \subitem {b\_zombify}, \hyperpage{129}
   \item {shutup\_mutex}
-    \subitem {spthread\_signal\_args\_st}, \hyperpage{29}
+    \subitem {spthread\_signal\_args\_st}, \hyperpage{31}
+  \item {SIGNAL}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {signal}
-    \subitem {spthread\_signal\_args\_st}, \hyperpage{29}
+    \subitem {spthread\_signal\_args\_st}, \hyperpage{31}
   \item {SIGPTHD}
-    \subitem {spthread.h}, \hyperpage{97}
+    \subitem {spthread.h}, \hyperpage{135}
   \item {size}
     \subitem {CircularList}, \hyperpage{17}
-    \subitem {directory\_entries}, \hyperpage{18}
-    \subitem {DynamicPIDArray}, \hyperpage{19}
-    \subitem {PList}, \hyperpage{26}
+    \subitem {directory\_entries}, \hyperpage{19}
+    \subitem {DynamicPIDArray}, \hyperpage{20}
+    \subitem {PList}, \hyperpage{28}
   \item {spthread.c}
-    \subitem {\_GNU\_SOURCE}, \hyperpage{94}
-    \subitem {\_XOPEN\_SOURCE}, \hyperpage{94}
-    \subitem {MILISEC\_IN\_NANO}, \hyperpage{95}
-    \subitem {pthread\_fn}, \hyperpage{95}
-    \subitem {spthread\_cancel}, \hyperpage{96}
-    \subitem {spthread\_continue}, \hyperpage{96}
-    \subitem {spthread\_create}, \hyperpage{96}
-    \subitem {spthread\_exit}, \hyperpage{96}
-    \subitem {spthread\_fwd\_args}, \hyperpage{95}
-    \subitem {spthread\_join}, \hyperpage{96}
-    \subitem {spthread\_meta\_t}, \hyperpage{95}
-    \subitem {SPTHREAD\_RUNNING\_STATE}, \hyperpage{95}
-    \subitem {spthread\_self}, \hyperpage{96}
-    \subitem {SPTHREAD\_SIG\_CONTINUE}, \hyperpage{95}
-    \subitem {SPTHREAD\_SIG\_SUSPEND}, \hyperpage{95}
-    \subitem {spthread\_signal\_args}, \hyperpage{95}
-    \subitem {spthread\_suspend}, \hyperpage{96}
-    \subitem {spthread\_suspend\_self}, \hyperpage{96}
-    \subitem {SPTHREAD\_SUSPENDED\_STATE}, \hyperpage{95}
-    \subitem {SPTHREAD\_TERMINATED\_STATE}, \hyperpage{95}
+    \subitem {\_GNU\_SOURCE}, \hyperpage{132}
+    \subitem {\_XOPEN\_SOURCE}, \hyperpage{132}
+    \subitem {MILISEC\_IN\_NANO}, \hyperpage{132}
+    \subitem {pthread\_fn}, \hyperpage{132}
+    \subitem {spthread\_cancel}, \hyperpage{133}
+    \subitem {spthread\_continue}, \hyperpage{133}
+    \subitem {spthread\_create}, \hyperpage{133}
+    \subitem {spthread\_exit}, \hyperpage{133}
+    \subitem {spthread\_fwd\_args}, \hyperpage{132}
+    \subitem {spthread\_join}, \hyperpage{133}
+    \subitem {spthread\_meta\_t}, \hyperpage{133}
+    \subitem {SPTHREAD\_RUNNING\_STATE}, \hyperpage{132}
+    \subitem {spthread\_self}, \hyperpage{133}
+    \subitem {SPTHREAD\_SIG\_CONTINUE}, \hyperpage{132}
+    \subitem {SPTHREAD\_SIG\_SUSPEND}, \hyperpage{132}
+    \subitem {spthread\_signal\_args}, \hyperpage{133}
+    \subitem {spthread\_suspend}, \hyperpage{134}
+    \subitem {spthread\_suspend\_self}, \hyperpage{134}
+    \subitem {SPTHREAD\_SUSPENDED\_STATE}, \hyperpage{132}
+    \subitem {SPTHREAD\_TERMINATED\_STATE}, \hyperpage{132}
   \item {spthread.h}
-    \subitem {SIGPTHD}, \hyperpage{97}
-    \subitem {spthread\_cancel}, \hyperpage{98}
-    \subitem {spthread\_continue}, \hyperpage{98}
-    \subitem {spthread\_create}, \hyperpage{98}
-    \subitem {spthread\_exit}, \hyperpage{98}
-    \subitem {spthread\_join}, \hyperpage{98}
-    \subitem {spthread\_meta\_t}, \hyperpage{97}
-    \subitem {spthread\_self}, \hyperpage{98}
-    \subitem {spthread\_suspend}, \hyperpage{98}
-    \subitem {spthread\_suspend\_self}, \hyperpage{98}
-    \subitem {spthread\_t}, \hyperpage{97}
+    \subitem {SIGPTHD}, \hyperpage{135}
+    \subitem {spthread\_cancel}, \hyperpage{135}
+    \subitem {spthread\_continue}, \hyperpage{135}
+    \subitem {spthread\_create}, \hyperpage{135}
+    \subitem {spthread\_exit}, \hyperpage{135}
+    \subitem {spthread\_join}, \hyperpage{135}
+    \subitem {spthread\_meta\_t}, \hyperpage{135}
+    \subitem {spthread\_self}, \hyperpage{136}
+    \subitem {spthread\_suspend}, \hyperpage{136}
+    \subitem {spthread\_suspend\_self}, \hyperpage{136}
+    \subitem {spthread\_t}, \hyperpage{135}
   \item {spthread\_cancel}
-    \subitem {spthread.c}, \hyperpage{96}
-    \subitem {spthread.h}, \hyperpage{98}
+    \subitem {spthread.c}, \hyperpage{133}
+    \subitem {spthread.h}, \hyperpage{135}
   \item {spthread\_continue}
-    \subitem {spthread.c}, \hyperpage{96}
-    \subitem {spthread.h}, \hyperpage{98}
+    \subitem {spthread.c}, \hyperpage{133}
+    \subitem {spthread.h}, \hyperpage{135}
   \item {spthread\_create}
-    \subitem {spthread.c}, \hyperpage{96}
-    \subitem {spthread.h}, \hyperpage{98}
+    \subitem {spthread.c}, \hyperpage{133}
+    \subitem {spthread.h}, \hyperpage{135}
   \item {spthread\_exit}
-    \subitem {spthread.c}, \hyperpage{96}
-    \subitem {spthread.h}, \hyperpage{98}
+    \subitem {spthread.c}, \hyperpage{133}
+    \subitem {spthread.h}, \hyperpage{135}
   \item {spthread\_fwd\_args}
-    \subitem {spthread.c}, \hyperpage{95}
-  \item {spthread\_fwd\_args\_st}, \hyperpage{27}
-    \subitem {actual\_arg}, \hyperpage{27}
-    \subitem {actual\_routine}, \hyperpage{27}
-    \subitem {child\_meta}, \hyperpage{27}
-    \subitem {setup\_cond}, \hyperpage{27}
-    \subitem {setup\_done}, \hyperpage{27}
-    \subitem {setup\_mutex}, \hyperpage{27}
+    \subitem {spthread.c}, \hyperpage{132}
+  \item {spthread\_fwd\_args\_st}, \hyperpage{29}
+    \subitem {actual\_arg}, \hyperpage{29}
+    \subitem {actual\_routine}, \hyperpage{29}
+    \subitem {child\_meta}, \hyperpage{29}
+    \subitem {setup\_cond}, \hyperpage{29}
+    \subitem {setup\_done}, \hyperpage{30}
+    \subitem {setup\_mutex}, \hyperpage{30}
   \item {spthread\_join}
-    \subitem {spthread.c}, \hyperpage{96}
-    \subitem {spthread.h}, \hyperpage{98}
-  \item {spthread\_meta\_st}, \hyperpage{28}
-    \subitem {meta\_mutex}, \hyperpage{28}
-    \subitem {state}, \hyperpage{28}
-    \subitem {suspend\_set}, \hyperpage{28}
+    \subitem {spthread.c}, \hyperpage{133}
+    \subitem {spthread.h}, \hyperpage{135}
+  \item {spthread\_meta\_st}, \hyperpage{30}
+    \subitem {meta\_mutex}, \hyperpage{30}
+    \subitem {state}, \hyperpage{30}
+    \subitem {suspend\_set}, \hyperpage{30}
   \item {spthread\_meta\_t}
-    \subitem {spthread.c}, \hyperpage{95}
-    \subitem {spthread.h}, \hyperpage{97}
+    \subitem {spthread.c}, \hyperpage{133}
+    \subitem {spthread.h}, \hyperpage{135}
   \item {SPTHREAD\_RUNNING\_STATE}
-    \subitem {spthread.c}, \hyperpage{95}
+    \subitem {spthread.c}, \hyperpage{132}
   \item {spthread\_self}
-    \subitem {spthread.c}, \hyperpage{96}
-    \subitem {spthread.h}, \hyperpage{98}
+    \subitem {spthread.c}, \hyperpage{133}
+    \subitem {spthread.h}, \hyperpage{136}
   \item {SPTHREAD\_SIG\_CONTINUE}
-    \subitem {spthread.c}, \hyperpage{95}
+    \subitem {spthread.c}, \hyperpage{132}
   \item {SPTHREAD\_SIG\_SUSPEND}
-    \subitem {spthread.c}, \hyperpage{95}
+    \subitem {spthread.c}, \hyperpage{132}
   \item {spthread\_signal\_args}
-    \subitem {spthread.c}, \hyperpage{95}
-  \item {spthread\_signal\_args\_st}, \hyperpage{28}
-    \subitem {ack}, \hyperpage{29}
-    \subitem {shutup\_mutex}, \hyperpage{29}
-    \subitem {signal}, \hyperpage{29}
-  \item {spthread\_st}, \hyperpage{29}
-    \subitem {meta}, \hyperpage{29}
-    \subitem {thread}, \hyperpage{29}
+    \subitem {spthread.c}, \hyperpage{133}
+  \item {spthread\_signal\_args\_st}, \hyperpage{31}
+    \subitem {ack}, \hyperpage{31}
+    \subitem {shutup\_mutex}, \hyperpage{31}
+    \subitem {signal}, \hyperpage{31}
+  \item {spthread\_st}, \hyperpage{31}
+    \subitem {meta}, \hyperpage{31}
+    \subitem {thread}, \hyperpage{31}
   \item {spthread\_suspend}
-    \subitem {spthread.c}, \hyperpage{96}
-    \subitem {spthread.h}, \hyperpage{98}
+    \subitem {spthread.c}, \hyperpage{134}
+    \subitem {spthread.h}, \hyperpage{136}
   \item {spthread\_suspend\_self}
-    \subitem {spthread.c}, \hyperpage{96}
-    \subitem {spthread.h}, \hyperpage{98}
+    \subitem {spthread.c}, \hyperpage{134}
+    \subitem {spthread.h}, \hyperpage{136}
   \item {SPTHREAD\_SUSPENDED\_STATE}
-    \subitem {spthread.c}, \hyperpage{95}
+    \subitem {spthread.c}, \hyperpage{132}
   \item {spthread\_t}
-    \subitem {spthread.h}, \hyperpage{97}
+    \subitem {spthread.h}, \hyperpage{135}
   \item {SPTHREAD\_TERMINATED\_STATE}
-    \subitem {spthread.c}, \hyperpage{95}
-  \item {src/parser.h}, \hyperpage{31}, \hyperpage{33}
-  \item {src/pennfat.c}, \hyperpage{34}
-  \item {src/pennfat.h}, \hyperpage{38}, \hyperpage{42}
-  \item {src/pennos.c}, \hyperpage{42}
-  \item {src/pennos.h}, \hyperpage{43}, \hyperpage{45}
-  \item {src/standalonefat.c}, \hyperpage{45}
-  \item {src/util/array.c}, \hyperpage{46}
-  \item {src/util/array.h}, \hyperpage{48}, \hyperpage{50}
-  \item {src/util/bitmap.c}, \hyperpage{50}
-  \item {src/util/bitmap.h}, \hyperpage{52}, \hyperpage{54}
-  \item {src/util/clinkedlist.c}, \hyperpage{55}
-  \item {src/util/clinkedlist.h}, \hyperpage{56}, \hyperpage{58}
-  \item {src/util/error.h}, \hyperpage{59, 60}
-  \item {src/util/globals.c}, \hyperpage{60}
-  \item {src/util/globals.h}, \hyperpage{61}, \hyperpage{63}
-  \item {src/util/kernel.c}, \hyperpage{63}
-  \item {src/util/kernel.h}, \hyperpage{64}, \hyperpage{67}
-  \item {src/util/pennfat\_kernel.c}, \hyperpage{68}
-  \item {src/util/pennfat\_kernel.h}, \hyperpage{74}, \hyperpage{82}
-  \item {src/util/prioritylist.c}, \hyperpage{83}
-  \item {src/util/prioritylist.h}, \hyperpage{84, 85}
-  \item {src/util/shellbuiltins.c}, \hyperpage{86}
-  \item {src/util/shellbuiltins.h}, \hyperpage{87}, \hyperpage{93}
-  \item {src/util/spthread.c}, \hyperpage{93}
-  \item {src/util/spthread.h}, \hyperpage{97}, \hyperpage{99}
-  \item {src/util/sys\_call.c}, \hyperpage{101}
-  \item {src/util/sys\_call.h}, \hyperpage{104}, \hyperpage{110}
+    \subitem {spthread.c}, \hyperpage{132}
+  \item {src/parser.h}, \hyperpage{33}, \hyperpage{35}
+  \item {src/pennfat.c}, \hyperpage{36}
+  \item {src/pennfat.h}, \hyperpage{45}, \hyperpage{54}
+  \item {src/pennos.c}, \hyperpage{55}
+  \item {src/pennos.h}, \hyperpage{56}, \hyperpage{58}
+  \item {src/standalonefat.c}, \hyperpage{58}
+  \item {src/util/array.c}, \hyperpage{59}
+  \item {src/util/array.h}, \hyperpage{61}, \hyperpage{63}
+  \item {src/util/bitmap.c}, \hyperpage{63}
+  \item {src/util/bitmap.h}, \hyperpage{65}, \hyperpage{67}
+  \item {src/util/clinkedlist.c}, \hyperpage{68}
+  \item {src/util/clinkedlist.h}, \hyperpage{70}, \hyperpage{73}
+  \item {src/util/error.c}, \hyperpage{73}
+  \item {src/util/error.h}, \hyperpage{74}, \hyperpage{76}
+  \item {src/util/globals.c}, \hyperpage{76}
+  \item {src/util/globals.h}, \hyperpage{78}, \hyperpage{80}
+  \item {src/util/kernel.c}, \hyperpage{80}
+  \item {src/util/kernel.h}, \hyperpage{81}, \hyperpage{83}
+  \item {src/util/pennfat\_kernel.c}, \hyperpage{84}
+  \item {src/util/pennfat\_kernel.h}, \hyperpage{97}, \hyperpage{112}
+  \item {src/util/prioritylist.c}, \hyperpage{113}
+  \item {src/util/prioritylist.h}, \hyperpage{115, 116}
+  \item {src/util/shellbuiltins.c}, \hyperpage{117}
+  \item {src/util/shellbuiltins.h}, \hyperpage{123}, \hyperpage{130}
+  \item {src/util/spthread.c}, \hyperpage{131}
+  \item {src/util/spthread.h}, \hyperpage{134}, \hyperpage{136}
+  \item {src/util/stress.c}, \hyperpage{138}
+  \item {src/util/stress.h}, \hyperpage{139, 140}
+  \item {src/util/sys\_call.c}, \hyperpage{140}
+  \item {src/util/sys\_call.h}, \hyperpage{151}, \hyperpage{164}
   \item {standalonefat.c}
-    \subitem {main}, \hyperpage{46}
+    \subitem {main}, \hyperpage{59}
   \item {state}
-    \subitem {pcb\_t}, \hyperpage{25}
-    \subitem {spthread\_meta\_st}, \hyperpage{28}
+    \subitem {pcb\_t}, \hyperpage{27}
+    \subitem {spthread\_meta\_st}, \hyperpage{30}
   \item {statechanged}
-    \subitem {pcb\_t}, \hyperpage{25}
+    \subitem {pcb\_t}, \hyperpage{27}
   \item {STATUS\_EXITED}
-    \subitem {sys\_call.h}, \hyperpage{105}
+    \subitem {sys\_call.h}, \hyperpage{153}
   \item {STATUS\_SIGNALED}
-    \subitem {sys\_call.h}, \hyperpage{105}
+    \subitem {sys\_call.h}, \hyperpage{153}
   \item {STATUS\_STOPPED}
-    \subitem {sys\_call.h}, \hyperpage{105}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {STDERR\_FILENO}
-    \subitem {pennos.h}, \hyperpage{44}
+    \subitem {pennos.h}, \hyperpage{57}
   \item {stdin\_file}
-    \subitem {parsed\_command}, \hyperpage{22}
+    \subitem {parsed\_command}, \hyperpage{24}
   \item {STDIN\_FILENO}
-    \subitem {pennos.h}, \hyperpage{44}
+    \subitem {pennos.h}, \hyperpage{57}
   \item {stdout\_file}
-    \subitem {parsed\_command}, \hyperpage{23}
+    \subitem {parsed\_command}, \hyperpage{24}
   \item {STDOUT\_FILENO}
-    \subitem {pennos.h}, \hyperpage{44}
+    \subitem {pennos.h}, \hyperpage{57}
+  \item {STOP}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {STOPPED}
-    \subitem {kernel.h}, \hyperpage{66}
+    \subitem {kernel.h}, \hyperpage{83}
   \item {stopped}
-    \subitem {globals.c}, \hyperpage{61}
-    \subitem {globals.h}, \hyperpage{62}
+    \subitem {globals.c}, \hyperpage{77}
+    \subitem {globals.h}, \hyperpage{79}
+  \item {stress.c}
+    \subitem {hang}, \hyperpage{139}
+    \subitem {nohang}, \hyperpage{139}
+    \subitem {recur}, \hyperpage{139}
+  \item {stress.h}
+    \subitem {hang}, \hyperpage{139}
+    \subitem {nohang}, \hyperpage{139}
+    \subitem {recur}, \hyperpage{140}
   \item {suspend\_set}
-    \subitem {spthread\_meta\_st}, \hyperpage{28}
+    \subitem {spthread\_meta\_st}, \hyperpage{30}
   \item {sys\_call.c}
-    \subitem {duplicate\_argv}, \hyperpage{102}
-    \subitem {free\_argv}, \hyperpage{102}
-    \subitem {s\_exit}, \hyperpage{102}
-    \subitem {s\_kill}, \hyperpage{102}
-    \subitem {s\_nice}, \hyperpage{102}
-    \subitem {s\_sleep}, \hyperpage{103}
-    \subitem {s\_spawn}, \hyperpage{103}
-    \subitem {s\_spawn\_nice}, \hyperpage{103}
-    \subitem {s\_waitpid}, \hyperpage{103}
+    \subitem {duplicate\_argv}, \hyperpage{142}
+    \subitem {free\_argv}, \hyperpage{142}
+    \subitem {s\_bg\_wait}, \hyperpage{142}
+    \subitem {s\_busy}, \hyperpage{142}
+    \subitem {s\_change\_mode}, \hyperpage{142}
+    \subitem {s\_close}, \hyperpage{142}
+    \subitem {s\_cp\_from\_host}, \hyperpage{143}
+    \subitem {s\_cp\_to\_host}, \hyperpage{143}
+    \subitem {s\_cp\_within\_fat}, \hyperpage{143}
+    \subitem {s\_does\_file\_exist2}, \hyperpage{143}
+    \subitem {s\_exit}, \hyperpage{143}
+    \subitem {s\_fg}, \hyperpage{143}
+    \subitem {s\_find\_process}, \hyperpage{144}
+    \subitem {s\_function\_from\_string}, \hyperpage{144}
+    \subitem {s\_get\_fname\_from\_fd}, \hyperpage{144}
+    \subitem {s\_kill}, \hyperpage{144}
+    \subitem {s\_ls}, \hyperpage{145}
+    \subitem {s\_lseek}, \hyperpage{145}
+    \subitem {s\_move\_process}, \hyperpage{145}
+    \subitem {s\_nice}, \hyperpage{145}
+    \subitem {s\_open}, \hyperpage{146}
+    \subitem {s\_print\_jobs}, \hyperpage{146}
+    \subitem {s\_print\_process}, \hyperpage{146}
+    \subitem {s\_read}, \hyperpage{146}
+    \subitem {s\_read\_all}, \hyperpage{147}
+    \subitem {s\_reap\_all\_child}, \hyperpage{147}
+    \subitem {s\_remove\_process}, \hyperpage{147}
+    \subitem {s\_rename}, \hyperpage{148}
+    \subitem {s\_sleep}, \hyperpage{148}
+    \subitem {s\_spawn}, \hyperpage{148}
+    \subitem {s\_spawn\_and\_wait}, \hyperpage{149}
+    \subitem {s\_spawn\_nice}, \hyperpage{149}
+    \subitem {s\_unlink}, \hyperpage{150}
+    \subitem {s\_update\_timestamp}, \hyperpage{150}
+    \subitem {s\_waitpid}, \hyperpage{150}
+    \subitem {s\_write}, \hyperpage{150}
+    \subitem {s\_write\_log}, \hyperpage{151}
+    \subitem {s\_zombie}, \hyperpage{151}
   \item {sys\_call.h}
-    \subitem {P\_WIFEXITED}, \hyperpage{105}
-    \subitem {P\_WIFSIGNALED}, \hyperpage{105}
-    \subitem {P\_WIFSTOPPED}, \hyperpage{105}
-    \subitem {s\_close}, \hyperpage{105}
-    \subitem {s\_exit}, \hyperpage{106}
-    \subitem {s\_kill}, \hyperpage{106}
-    \subitem {s\_ls}, \hyperpage{106}
-    \subitem {s\_lseek}, \hyperpage{106}
-    \subitem {s\_nice}, \hyperpage{107}
-    \subitem {s\_open}, \hyperpage{107}
-    \subitem {s\_read}, \hyperpage{107}
-    \subitem {s\_sleep}, \hyperpage{108}
-    \subitem {s\_spawn}, \hyperpage{108}
-    \subitem {s\_spawn\_nice}, \hyperpage{108}
-    \subitem {s\_unlink}, \hyperpage{109}
-    \subitem {s\_waitpid}, \hyperpage{109}
-    \subitem {s\_write}, \hyperpage{109}
-    \subitem {STATUS\_EXITED}, \hyperpage{105}
-    \subitem {STATUS\_SIGNALED}, \hyperpage{105}
-    \subitem {STATUS\_STOPPED}, \hyperpage{105}
+    \subitem {BLOCK}, \hyperpage{154}
+    \subitem {CONTINUE}, \hyperpage{154}
+    \subitem {CREATE}, \hyperpage{154}
+    \subitem {EXIT}, \hyperpage{154}
+    \subitem {log\_message\_t}, \hyperpage{154}
+    \subitem {NICE}, \hyperpage{154}
+    \subitem {ORPHAN}, \hyperpage{154}
+    \subitem {P\_WIFEXITED}, \hyperpage{153}
+    \subitem {P\_WIFSIGNALED}, \hyperpage{153}
+    \subitem {P\_WIFSTOPPED}, \hyperpage{153}
+    \subitem {s\_bg\_wait}, \hyperpage{154}
+    \subitem {s\_busy}, \hyperpage{155}
+    \subitem {s\_change\_mode}, \hyperpage{155}
+    \subitem {s\_close}, \hyperpage{155}
+    \subitem {s\_cp\_from\_host}, \hyperpage{155}
+    \subitem {s\_cp\_to\_host}, \hyperpage{155}
+    \subitem {s\_cp\_within\_fat}, \hyperpage{156}
+    \subitem {s\_does\_file\_exist2}, \hyperpage{156}
+    \subitem {s\_exit}, \hyperpage{156}
+    \subitem {s\_fg}, \hyperpage{156}
+    \subitem {s\_find\_process}, \hyperpage{156}
+    \subitem {s\_function\_from\_string}, \hyperpage{157}
+    \subitem {s\_get\_fname\_from\_fd}, \hyperpage{157}
+    \subitem {s\_kill}, \hyperpage{157}
+    \subitem {s\_ls}, \hyperpage{157}
+    \subitem {s\_lseek}, \hyperpage{157}
+    \subitem {s\_move\_process}, \hyperpage{158}
+    \subitem {s\_nice}, \hyperpage{158}
+    \subitem {s\_open}, \hyperpage{158}
+    \subitem {s\_print\_jobs}, \hyperpage{159}
+    \subitem {s\_print\_process}, \hyperpage{159}
+    \subitem {s\_read}, \hyperpage{159}
+    \subitem {s\_read\_all}, \hyperpage{159}
+    \subitem {s\_reap\_all\_child}, \hyperpage{160}
+    \subitem {s\_remove\_process}, \hyperpage{160}
+    \subitem {s\_rename}, \hyperpage{160}
+    \subitem {s\_sleep}, \hyperpage{160}
+    \subitem {s\_spawn}, \hyperpage{161}
+    \subitem {s\_spawn\_and\_wait}, \hyperpage{161}
+    \subitem {s\_spawn\_nice}, \hyperpage{162}
+    \subitem {s\_unlink}, \hyperpage{163}
+    \subitem {s\_update\_timestamp}, \hyperpage{163}
+    \subitem {s\_waitpid}, \hyperpage{163}
+    \subitem {s\_write}, \hyperpage{163}
+    \subitem {s\_write\_log}, \hyperpage{164}
+    \subitem {s\_zombie}, \hyperpage{164}
+    \subitem {SCHEDULE}, \hyperpage{154}
+    \subitem {SIGNAL}, \hyperpage{154}
+    \subitem {STATUS\_EXITED}, \hyperpage{153}
+    \subitem {STATUS\_SIGNALED}, \hyperpage{153}
+    \subitem {STATUS\_STOPPED}, \hyperpage{154}
+    \subitem {STOP}, \hyperpage{154}
+    \subitem {UNBLOCK}, \hyperpage{154}
+    \subitem {WAIT}, \hyperpage{154}
+    \subitem {ZOMBIE}, \hyperpage{154}
   \item {system}, \hyperpage{11}
+  \item {SYSTEM\_ERROR}
+    \subitem {pennfat\_kernel.h}, \hyperpage{101}
 
   \indexspace
 
+  \item {tail}
+    \subitem {CircularList}, \hyperpage{17}
   \item {term\_signal}
-    \subitem {pcb\_t}, \hyperpage{25}
-  \item {test/sched-\/demo.c}, \hyperpage{110}
+    \subitem {pcb\_t}, \hyperpage{27}
+  \item {test/sched-\/demo.c}, \hyperpage{166}
   \item {thread}
-    \subitem {spthread\_st}, \hyperpage{29}
+    \subitem {spthread\_st}, \hyperpage{31}
   \item {tick}
-    \subitem {globals.c}, \hyperpage{61}
-    \subitem {globals.h}, \hyperpage{63}
+    \subitem {globals.c}, \hyperpage{77}
+    \subitem {globals.h}, \hyperpage{79}
   \item {ticks\_to\_wait}
-    \subitem {pcb\_t}, \hyperpage{25}
+    \subitem {pcb\_t}, \hyperpage{27}
   \item {touch}
-    \subitem {pennfat.c}, \hyperpage{37}
-    \subitem {pennfat.h}, \hyperpage{41}
+    \subitem {pennfat.c}, \hyperpage{44}
+    \subitem {pennfat.h}, \hyperpage{53}
   \item {type}
-    \subitem {directory\_entries}, \hyperpage{18}
+    \subitem {directory\_entries}, \hyperpage{19}
 
   \indexspace
 
   \item {u\_perror}
-    \subitem {error.h}, \hyperpage{59}
+    \subitem {error.c}, \hyperpage{73}
+    \subitem {error.h}, \hyperpage{75}
+  \item {UNBLOCK}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {UNEXPECTED\_AMPERSAND}
-    \subitem {parser.h}, \hyperpage{32}
+    \subitem {parser.h}, \hyperpage{34}
   \item {UNEXPECTED\_FILE\_INPUT}
-    \subitem {parser.h}, \hyperpage{32}
+    \subitem {parser.h}, \hyperpage{34}
   \item {UNEXPECTED\_FILE\_OUTPUT}
-    \subitem {parser.h}, \hyperpage{32}
+    \subitem {parser.h}, \hyperpage{34}
   \item {UNEXPECTED\_PIPELINE}
-    \subitem {parser.h}, \hyperpage{32}
+    \subitem {parser.h}, \hyperpage{34}
   \item {unmount}
-    \subitem {pennfat.c}, \hyperpage{37}
-    \subitem {pennfat.h}, \hyperpage{41}
+    \subitem {pennfat.c}, \hyperpage{44}
+    \subitem {pennfat.h}, \hyperpage{53}
   \item {update\_directory\_entry\_after\_write}
-    \subitem {pennfat\_kernel.c}, \hyperpage{73}
+    \subitem {pennfat\_kernel.c}, \hyperpage{95}
   \item {used}
-    \subitem {DynamicPIDArray}, \hyperpage{19}
+    \subitem {DynamicPIDArray}, \hyperpage{20}
 
   \indexspace
 
+  \item {WAIT}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {waiting\_for\_change}
-    \subitem {pcb\_t}, \hyperpage{25}
+    \subitem {pcb\_t}, \hyperpage{27}
   \item {waiting\_on\_pid}
-    \subitem {pcb\_t}, \hyperpage{25}
+    \subitem {pcb\_t}, \hyperpage{27}
   \item {Whence}
-    \subitem {pennfat\_kernel.h}, \hyperpage{76}
-  \item {WRITE}
-    \subitem {pennfat\_kernel.h}, \hyperpage{76}
+    \subitem {pennfat\_kernel.h}, \hyperpage{101}
   \item {write\_one\_byte\_in\_while}
-    \subitem {pennfat\_kernel.c}, \hyperpage{73}
+    \subitem {pennfat\_kernel.c}, \hyperpage{95}
+  \item {WRONG\_PERMISSION}
+    \subitem {pennfat\_kernel.h}, \hyperpage{101}
 
   \indexspace
 
+  \item {zero\_out\_helper}
+    \subitem {pennfat\_kernel.c}, \hyperpage{96}
+  \item {ZOMBIE}
+    \subitem {sys\_call.h}, \hyperpage{154}
   \item {ZOMBIED}
-    \subitem {kernel.h}, \hyperpage{66}
+    \subitem {kernel.h}, \hyperpage{83}
   \item {zombied}
-    \subitem {globals.c}, \hyperpage{61}
-    \subitem {globals.h}, \hyperpage{63}
+    \subitem {globals.c}, \hyperpage{78}
+    \subitem {globals.h}, \hyperpage{79}
 
 \end{theindex}

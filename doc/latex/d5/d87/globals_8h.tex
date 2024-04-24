@@ -14,9 +14,13 @@
 \item 
 \mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{globals_8h_a5e7aa369c6421b8cf905e838507cc70a}{zombied}}
 \item 
+\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{globals_8h_a094c1776b4826f9aff421225ba8bd96f}{bg\+\_\+list}}
+\item 
 \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{globals_8h_aadfd9da35df54aa07940062a8b8326e2}{current}}
 \item 
 pid\+\_\+t \mbox{\hyperlink{globals_8h_a54a60f61f4b468b7e6ef164c4b5ba60b}{next\+\_\+pid}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{globals_8h_a6eaa855e821dfd115dd64e929aeb6102}{job\+\_\+id}}
 \item 
 int \mbox{\hyperlink{globals_8h_abfb6a5b45038dfab7134f82adad169d7}{logfiledescriptor}}
 \item 
@@ -25,19 +29,31 @@ unsigned int \mbox{\hyperlink{globals_8h_a6c17b5754a836f005f69312ee0080106}{tick
 
 
 \doxysubsection{Variable Documentation}
-\Hypertarget{globals_8h_a4a5bf3e2ca112a01dc3029503e3e80e4}\label{globals_8h_a4a5bf3e2ca112a01dc3029503e3e80e4} 
+\Hypertarget{globals_8h_a094c1776b4826f9aff421225ba8bd96f}\label{globals_8h_a094c1776b4826f9aff421225ba8bd96f} 
+\index{globals.h@{globals.h}!bg\_list@{bg\_list}}
+\index{bg\_list@{bg\_list}!globals.h@{globals.h}}
+\doxysubsubsection{\texorpdfstring{bg\_list}{bg\_list}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCircularList}{Circular\+List}}\texorpdfstring{$\ast$}{*} bg\+\_\+list\hspace{0.3cm}{\ttfamily [extern]}}
+
+A global pointer to the process list of background processes. The processes enter this list when \Hypertarget{globals_8h_a4a5bf3e2ca112a01dc3029503e3e80e4}\label{globals_8h_a4a5bf3e2ca112a01dc3029503e3e80e4} 
 \index{globals.h@{globals.h}!blocked@{blocked}}
 \index{blocked@{blocked}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{blocked}{blocked}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structCircularList}{Circular\+List}}\texorpdfstring{$\ast$}{*} blocked\hspace{0.3cm}{\ttfamily [extern]}}
 
-A global pointer to the process list of blocked processes. Processes enter this list via \doxylink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid()} or \doxylink{sys__call_8c_aec37528a3c7935864924764d1911126c}{s\+\_\+sleep()}. \Hypertarget{globals_8h_aadfd9da35df54aa07940062a8b8326e2}\label{globals_8h_aadfd9da35df54aa07940062a8b8326e2} 
+A global pointer to the process list of blocked processes. Processes enter this list via \doxylink{sys__call_8c_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid()} or \doxylink{sys__call_8c_a0b8fdff50e5b9c5fa8559fe294e4243f}{s\+\_\+sleep()}. \Hypertarget{globals_8h_aadfd9da35df54aa07940062a8b8326e2}\label{globals_8h_aadfd9da35df54aa07940062a8b8326e2} 
 \index{globals.h@{globals.h}!current@{current}}
 \index{current@{current}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{current}{current}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}}\texorpdfstring{$\ast$}{*} current\hspace{0.3cm}{\ttfamily [extern]}}
 
-This is the currently scheduled process. It can be accessed by any method to easily access the current method. \Hypertarget{globals_8h_abfb6a5b45038dfab7134f82adad169d7}\label{globals_8h_abfb6a5b45038dfab7134f82adad169d7} 
+This is the currently scheduled process. It can be accessed by any method to easily access the current method. \Hypertarget{globals_8h_a6eaa855e821dfd115dd64e929aeb6102}\label{globals_8h_a6eaa855e821dfd115dd64e929aeb6102} 
+\index{globals.h@{globals.h}!job\_id@{job\_id}}
+\index{job\_id@{job\_id}!globals.h@{globals.h}}
+\doxysubsubsection{\texorpdfstring{job\_id}{job\_id}}
+{\footnotesize\ttfamily uint64\+\_\+t job\+\_\+id\hspace{0.3cm}{\ttfamily [extern]}}
+
+This is to keep track of the job numbers from processes that are in the background or stopped. \Hypertarget{globals_8h_abfb6a5b45038dfab7134f82adad169d7}\label{globals_8h_abfb6a5b45038dfab7134f82adad169d7} 
 \index{globals.h@{globals.h}!logfiledescriptor@{logfiledescriptor}}
 \index{logfiledescriptor@{logfiledescriptor}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{logfiledescriptor}{logfiledescriptor}}

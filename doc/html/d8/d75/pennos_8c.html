@@ -85,7 +85,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d3/d2d/pennos_8h_source.html">pennos.h</a>&quot;</code><br />
-<code>#include &lt;signal.h&gt;</code><br />
 <code>#include &quot;fcntl.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d5/d36/parser_8h_source.html">parser.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../dc/d3d/pennfat_8h_source.html">pennfat.h</a>&quot;</code><br />
@@ -93,9 +92,15 @@ $(function() {
 <code>#include &quot;unistd.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d0/daa/kernel_8h_source.html">util/kernel.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d6/dda/prioritylist_8h_source.html">util/prioritylist.h</a>&quot;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a3b5e2fef85d5401a65d922ea5b1074bf" id="r_a3b5e2fef85d5401a65d922ea5b1074bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b5e2fef85d5401a65d922ea5b1074bf">print_queue</a> ()</td></tr>
+<tr class="separator:a3b5e2fef85d5401a65d922ea5b1074bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc52712119cc00e63fc2748f652cfbac" id="r_afc52712119cc00e63fc2748f652cfbac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc52712119cc00e63fc2748f652cfbac">b_output_redir</a> (struct <a class="el" href="../../dd/d3e/structparsed__command.html">parsed_command</a> *parsed)</td></tr>
+<tr class="memdesc:afc52712119cc00e63fc2748f652cfbac"><td class="mdescLeft">&#160;</td><td class="mdescRight">handles edge case output redirection  <br /></td></tr>
+<tr class="separator:afc52712119cc00e63fc2748f652cfbac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e5f6827ba0dd8849e892ef8f2187386" id="r_a9e5f6827ba0dd8849e892ef8f2187386"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e5f6827ba0dd8849e892ef8f2187386">scheduler</a> (char *logfile)</td></tr>
 <tr class="separator:a9e5f6827ba0dd8849e892ef8f2187386"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aaa3b35330e32fa9b4f1150064c6579" id="r_a3aaa3b35330e32fa9b4f1150064c6579"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3aaa3b35330e32fa9b4f1150064c6579">cancel_and_join</a> (<a class="el" href="../../dc/d15/spthread_8h.html#ad5cf274963820ab3f4c332683445ca8d">spthread_t</a> thread)</td></tr>
@@ -109,6 +114,32 @@ Variables</h2></td></tr>
 <tr class="separator:a2e0cca4a43c21259b881d59c96c74fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="afc52712119cc00e63fc2748f652cfbac" name="afc52712119cc00e63fc2748f652cfbac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc52712119cc00e63fc2748f652cfbac">&#9670;&#160;</a></span>b_output_redir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int b_output_redir </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="../../dd/d3e/structparsed__command.html">parsed_command</a> *</td>          <td class="paramname"><span class="paramname"><em>parsed</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>handles edge case output redirection </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parsed</td><td>parsed user command</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>-1 if not output redirection, fd number if file is opened </dd></dl>
+
+</div>
+</div>
 <a id="a3aaa3b35330e32fa9b4f1150064c6579" name="a3aaa3b35330e32fa9b4f1150064c6579"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3aaa3b35330e32fa9b4f1150064c6579">&#9670;&#160;</a></span>cancel_and_join()</h2>
 
@@ -141,6 +172,23 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b5e2fef85d5401a65d922ea5b1074bf" name="a3b5e2fef85d5401a65d922ea5b1074bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b5e2fef85d5401a65d922ea5b1074bf">&#9670;&#160;</a></span>print_queue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_queue </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

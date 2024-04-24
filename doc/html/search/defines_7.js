@@ -1,15 +1,10 @@
 var searchData=
 [
-  ['sigpthd_0',['SIGPTHD',['../dc/d15/spthread_8h.html#aaed69c2567943d9d3d5708c0eaa490ac',1,'spthread.h']]],
-  ['spthread_5frunning_5fstate_1',['SPTHREAD_RUNNING_STATE',['../de/d1c/spthread_8c.html#a8f88c94afe5985b3187e6d6a006da60f',1,'spthread.c']]],
-  ['spthread_5fsig_5fcontinue_2',['SPTHREAD_SIG_CONTINUE',['../de/d1c/spthread_8c.html#a091e2f97d5f00c5ccfbb645510e1c1c6',1,'spthread.c']]],
-  ['spthread_5fsig_5fsuspend_3',['SPTHREAD_SIG_SUSPEND',['../de/d1c/spthread_8c.html#ab737b8f9ea16ebeae1016b924a4a7ab3',1,'spthread.c']]],
-  ['spthread_5fsuspended_5fstate_4',['SPTHREAD_SUSPENDED_STATE',['../de/d1c/spthread_8c.html#a83488fd87ada8d612d51b7f94d64d1ef',1,'spthread.c']]],
-  ['spthread_5fterminated_5fstate_5',['SPTHREAD_TERMINATED_STATE',['../de/d1c/spthread_8c.html#ae207b67c432d475264fcfd027390d70a',1,'spthread.c']]],
-  ['status_5fexited_6',['STATUS_EXITED',['../db/d80/sys__call_8h.html#a0985baf467c640978def72b6e0edc8bb',1,'sys_call.h']]],
-  ['status_5fsignaled_7',['STATUS_SIGNALED',['../db/d80/sys__call_8h.html#aad5f3b0332fe998d13d886e4d5969b19',1,'sys_call.h']]],
-  ['status_5fstopped_8',['STATUS_STOPPED',['../db/d80/sys__call_8h.html#ab26f0e851d5dd46ecec084f5b941acfd',1,'sys_call.h']]],
-  ['stderr_5ffileno_9',['STDERR_FILENO',['../d3/d2d/pennos_8h.html#ae2fe1725bb5e9823d089c46b9ed5266e',1,'pennos.h']]],
-  ['stdin_5ffileno_10',['STDIN_FILENO',['../d3/d2d/pennos_8h.html#afcf80a6d91178952d107ad00b165752b',1,'pennos.h']]],
-  ['stdout_5ffileno_11',['STDOUT_FILENO',['../d3/d2d/pennos_8h.html#abd165ee6474b5b75bf075842fff13a04',1,'pennos.h']]]
+  ['p_5fsigcont_0',['P_SIGCONT',['../d0/daa/kernel_8h.html#a3e7774a26af9a341045a1cc0d34070da',1,'kernel.h']]],
+  ['p_5fsigstop_1',['P_SIGSTOP',['../d0/daa/kernel_8h.html#ac5c325b088ff67236e4fc6616da63bb7',1,'kernel.h']]],
+  ['p_5fsigter_2',['P_SIGTER',['../d0/daa/kernel_8h.html#a608288786200cfdad154e66b4cd578ae',1,'kernel.h']]],
+  ['p_5fwifexited_3',['P_WIFEXITED',['../db/d80/sys__call_8h.html#ad1406bee782fa878df64c30b6a77c1e1',1,'sys_call.h']]],
+  ['p_5fwifsignaled_4',['P_WIFSIGNALED',['../db/d80/sys__call_8h.html#a7dd24dcb672da49b7fef53824f098693',1,'sys_call.h']]],
+  ['p_5fwifstopped_5',['P_WIFSTOPPED',['../db/d80/sys__call_8h.html#a4ab1ade32fa50a6b4ce169bfd5a1aa53',1,'sys_call.h']]],
+  ['prompt_6',['PROMPT',['../d3/d2d/pennos_8h.html#accdbea14ea06c15e271784368bd993e8',1,'pennos.h']]]
 ];

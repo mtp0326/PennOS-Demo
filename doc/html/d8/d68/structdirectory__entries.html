@@ -80,6 +80,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>This structure stores all required information about the directory entries that are stored in the root directory.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../d0/d4d/pennfat__kernel_8h_source.html">pennfat_kernel.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -87,19 +90,28 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a078107917c22fc5656a6952eb33285f1" id="r_a078107917c22fc5656a6952eb33285f1"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a078107917c22fc5656a6952eb33285f1">name</a> [32]</td></tr>
 <tr class="separator:a078107917c22fc5656a6952eb33285f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cc97989b9026b7b89576f94fde2deb7" id="r_a7cc97989b9026b7b89576f94fde2deb7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7cc97989b9026b7b89576f94fde2deb7">size</a></td></tr>
+<tr class="memdesc:a7cc97989b9026b7b89576f94fde2deb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">32-byte null-terminated file name. name[0] also serves as a special marker 0: end of directory 1: deleted entry; the file is also deleted 2: deleted entry; the file is still being used <br  />
+  <br /></td></tr>
 <tr class="separator:a7cc97989b9026b7b89576f94fde2deb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83126d6724bed8d40f5dd21023409ead" id="r_a83126d6724bed8d40f5dd21023409ead"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83126d6724bed8d40f5dd21023409ead">firstBlock</a></td></tr>
+<tr class="memdesc:a83126d6724bed8d40f5dd21023409ead"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-byte number of bytes in file  <br /></td></tr>
 <tr class="separator:a83126d6724bed8d40f5dd21023409ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1251eec3f57db41af2e3f887b737939d" id="r_a1251eec3f57db41af2e3f887b737939d"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1251eec3f57db41af2e3f887b737939d">type</a></td></tr>
+<tr class="memdesc:a1251eec3f57db41af2e3f887b737939d"><td class="mdescLeft">&#160;</td><td class="mdescRight">2-byte number indicating the first block number of the file (undefined if size is zero)  <br /></td></tr>
 <tr class="separator:a1251eec3f57db41af2e3f887b737939d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08438d395d69ac79c6af58e8b04e66c8" id="r_a08438d395d69ac79c6af58e8b04e66c8"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08438d395d69ac79c6af58e8b04e66c8">perm</a></td></tr>
+<tr class="memdesc:a08438d395d69ac79c6af58e8b04e66c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">1-byte number for the type of the file, which will be one of the following: 0: unknown 1: a regular file 2: a directory file  <br /></td></tr>
 <tr class="separator:a08438d395d69ac79c6af58e8b04e66c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a768620b88c243e244beb86b44aa20466" id="r_a768620b88c243e244beb86b44aa20466"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a768620b88c243e244beb86b44aa20466">mtime</a></td></tr>
+<tr class="memdesc:a768620b88c243e244beb86b44aa20466"><td class="mdescLeft">&#160;</td><td class="mdescRight">file permissions, which will be one of the following: 0: none 2: write only 4: read only 5: read and executable (shell scripts) 6: read and write 7: read, write, and executable  <br /></td></tr>
 <tr class="separator:a768620b88c243e244beb86b44aa20466"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13b872d6333f7887d812a93056a7c4a7" id="r_a13b872d6333f7887d812a93056a7c4a7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13b872d6333f7887d812a93056a7c4a7">reserved</a> [16]</td></tr>
+<tr class="memdesc:a13b872d6333f7887d812a93056a7c4a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">creation/modification time as returned by time(2) in Linux  <br /></td></tr>
 <tr class="separator:a13b872d6333f7887d812a93056a7c4a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Field Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This structure stores all required information about the directory entries that are stored in the root directory. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
 <a id="a83126d6724bed8d40f5dd21023409ead" name="a83126d6724bed8d40f5dd21023409ead"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a83126d6724bed8d40f5dd21023409ead">&#9670;&#160;</a></span>firstBlock</h2>
 
@@ -111,6 +123,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>4-byte number of bytes in file </p>
 
 </div>
 </div>
@@ -125,6 +139,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>file permissions, which will be one of the following: 0: none 2: write only 4: read only 5: read and executable (shell scripts) 6: read and write 7: read, write, and executable </p>
 
 </div>
 </div>
@@ -154,6 +170,8 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>1-byte number for the type of the file, which will be one of the following: 0: unknown 1: a regular file 2: a directory file </p>
+
 </div>
 </div>
 <a id="a13b872d6333f7887d812a93056a7c4a7" name="a13b872d6333f7887d812a93056a7c4a7"></a>
@@ -167,6 +185,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>creation/modification time as returned by time(2) in Linux </p>
 
 </div>
 </div>
@@ -182,6 +202,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>32-byte null-terminated file name. name[0] also serves as a special marker 0: end of directory 1: deleted entry; the file is also deleted 2: deleted entry; the file is still being used <br  />
+ </p>
+
 </div>
 </div>
 <a id="a1251eec3f57db41af2e3f887b737939d" name="a1251eec3f57db41af2e3f887b737939d"></a>
@@ -195,6 +218,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>2-byte number indicating the first block number of the file (undefined if size is zero) </p>
 
 </div>
 </div>

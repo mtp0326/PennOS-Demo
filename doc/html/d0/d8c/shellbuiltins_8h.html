@@ -83,11 +83,15 @@ $(function() {
   <div class="headertitle"><div class="title">shellbuiltins.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &quot;<a class="el" href="../../da/d41/error_8h_source.html">error.h</a>&quot;</code><br />
+</div>
 <p><a href="../../d0/d8c/shellbuiltins_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a69fe4fffb608d9acfba5ed9482ce18f3" id="r_a69fe4fffb608d9acfba5ed9482ce18f3"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69fe4fffb608d9acfba5ed9482ce18f3">b_background_poll</a> (void *arg)</td></tr>
+<tr class="memdesc:a69fe4fffb608d9acfba5ed9482ce18f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">For each shell run, the background processors are checked and signaled.  <br /></td></tr>
+<tr class="separator:a69fe4fffb608d9acfba5ed9482ce18f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12d3c2e9ad69506dfe091ed1467cde0c" id="r_a12d3c2e9ad69506dfe091ed1467cde0c"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12d3c2e9ad69506dfe091ed1467cde0c">b_cat</a> (void *arg)</td></tr>
 <tr class="memdesc:a12d3c2e9ad69506dfe091ed1467cde0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ususal <code>cat</code> program.  <br /></td></tr>
 <tr class="separator:a12d3c2e9ad69506dfe091ed1467cde0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,6 +148,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a184a1be3455442bda9bbd0789e438481" id="r_a184a1be3455442bda9bbd0789e438481"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a184a1be3455442bda9bbd0789e438481">b_logout</a> (void *arg)</td></tr>
 <tr class="memdesc:a184a1be3455442bda9bbd0789e438481"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exits the shell and shutsdown PennOS.  <br /></td></tr>
 <tr class="separator:a184a1be3455442bda9bbd0789e438481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0118ff3db9e343eeb6ad0d043fdee012" id="r_a0118ff3db9e343eeb6ad0d043fdee012"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0118ff3db9e343eeb6ad0d043fdee012">b_clear</a> (void *arg)</td></tr>
+<tr class="memdesc:a0118ff3db9e343eeb6ad0d043fdee012"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the terminal.  <br /></td></tr>
+<tr class="separator:a0118ff3db9e343eeb6ad0d043fdee012"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6f1b11929c2509c8c73d232643f2ae3" id="r_ac6f1b11929c2509c8c73d232643f2ae3"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6f1b11929c2509c8c73d232643f2ae3">b_zombify</a> (void *arg)</td></tr>
 <tr class="memdesc:ac6f1b11929c2509c8c73d232643f2ae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to test zombifying functionality of your kernel.  <br /></td></tr>
 <tr class="separator:ac6f1b11929c2509c8c73d232643f2ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,6 +165,25 @@ Functions</h2></td></tr>
 <tr class="separator:a8ffcfc65c56806d110fbb3eb2ac9238f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a69fe4fffb608d9acfba5ed9482ce18f3" name="a69fe4fffb608d9acfba5ed9482ce18f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69fe4fffb608d9acfba5ed9482ce18f3">&#9670;&#160;</a></span>b_background_poll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * b_background_poll </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>For each shell run, the background processors are checked and signaled. </p>
+
+</div>
+</div>
 <a id="a0b70bfb624f4ae16efbcbfa9b433c191" name="a0b70bfb624f4ae16efbcbfa9b433c191"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0b70bfb624f4ae16efbcbfa9b433c191">&#9670;&#160;</a></span>b_bg()</h2>
 
@@ -175,6 +201,8 @@ Functions</h2></td></tr>
 
 <p>Resumes the most recently stopped job in the background, or the job specified by job_id. </p>
 <p>Example Usage: bg Example Usage: bg 2 (job_id is 2) </p>
+<p>error: PID with specified number does not exist</p>
+<p>error: there are no stopped jobs</p>
 
 </div>
 </div>
@@ -243,6 +271,26 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a0118ff3db9e343eeb6ad0d043fdee012" name="a0118ff3db9e343eeb6ad0d043fdee012"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0118ff3db9e343eeb6ad0d043fdee012">&#9670;&#160;</a></span>b_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * b_clear </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clears the terminal. </p>
+<p>Example Usage: clear </p>
+
+</div>
+</div>
 <a id="a9cba475b009648053432d0cc0ec4bbbf" name="a9cba475b009648053432d0cc0ec4bbbf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9cba475b009648053432d0cc0ec4bbbf">&#9670;&#160;</a></span>b_cp()</h2>
 
@@ -304,6 +352,11 @@ Functions</h2></td></tr>
 
 <p>Brings the most recently stopped or background job to the foreground, or the job specified by job_id. </p>
 <p>Example Usage: fg Example Usage: fg 2 (job_id is 2) </p>
+<p>TODO: immediate send to tcprescp</p>
+<p>TODO: immediate send to tcprescp</p>
+<p>error: PID with specified number does not exist</p>
+<p>TODO: immediate send to tcprescp</p>
+<p>TODO: immediate send to tcprescp</p>
 
 </div>
 </div>
@@ -531,6 +584,7 @@ Functions</h2></td></tr>
 
 <p>List all processes on PennOS, displaying PID, PPID, priority, status, and command name. </p>
 <p>Example Usage: ps </p>
+<p>not sure if order has to change</p>
 
 </div>
 </div>

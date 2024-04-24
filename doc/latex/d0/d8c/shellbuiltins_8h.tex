@@ -1,8 +1,11 @@
 \doxysection{src/util/shellbuiltins.h File Reference}
 \hypertarget{shellbuiltins_8h}{}\label{shellbuiltins_8h}\index{src/util/shellbuiltins.h@{src/util/shellbuiltins.h}}
+{\ttfamily \#include "{}error.\+h"{}}\newline
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a69fe4fffb608d9acfba5ed9482ce18f3}{b\+\_\+background\+\_\+poll}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em For each shell run, the background processors are checked and signaled. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a12d3c2e9ad69506dfe091ed1467cde0c}{b\+\_\+cat}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em The ususal {\ttfamily cat} program. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a8caa9d892fd52ba7fbaf212e3bcdae06}{b\+\_\+sleep}} (void \texorpdfstring{$\ast$}{*}arg)
@@ -41,6 +44,8 @@ void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_add6abae88d55c
 \begin{DoxyCompactList}\small\item\em Lists all jobs. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a184a1be3455442bda9bbd0789e438481}{b\+\_\+logout}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Exits the shell and shutsdown Penn\+OS. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a0118ff3db9e343eeb6ad0d043fdee012}{b\+\_\+clear}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Clears the terminal. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_ac6f1b11929c2509c8c73d232643f2ae3}{b\+\_\+zombify}} (void \texorpdfstring{$\ast$}{*}arg)
 \begin{DoxyCompactList}\small\item\em Used to test zombifying functionality of your kernel. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_af7a3b6e724d8044a194e1c23e5499304}{b\+\_\+zombie\+\_\+child}} (void \texorpdfstring{$\ast$}{*}arg)
@@ -52,6 +57,16 @@ void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a8ffcfc65c5680
 
 
 \doxysubsection{Function Documentation}
+\Hypertarget{shellbuiltins_8h_a69fe4fffb608d9acfba5ed9482ce18f3}\label{shellbuiltins_8h_a69fe4fffb608d9acfba5ed9482ce18f3} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_background\_poll@{b\_background\_poll}}
+\index{b\_background\_poll@{b\_background\_poll}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_background\_poll()}{b\_background\_poll()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+background\+\_\+poll (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+For each shell run, the background processors are checked and signaled. 
+
 \Hypertarget{shellbuiltins_8h_a0b70bfb624f4ae16efbcbfa9b433c191}\label{shellbuiltins_8h_a0b70bfb624f4ae16efbcbfa9b433c191} 
 \index{shellbuiltins.h@{shellbuiltins.h}!b\_bg@{b\_bg}}
 \index{b\_bg@{b\_bg}!shellbuiltins.h@{shellbuiltins.h}}
@@ -62,7 +77,9 @@ void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{shellbuiltins_8h_a8ffcfc65c5680
 
 Resumes the most recently stopped job in the background, or the job specified by job\+\_\+id. 
 
-Example Usage\+: bg Example Usage\+: bg 2 (job\+\_\+id is 2) \Hypertarget{shellbuiltins_8h_a522b7a9dcadf792f7d79b3211f8bba9f}\label{shellbuiltins_8h_a522b7a9dcadf792f7d79b3211f8bba9f} 
+Example Usage\+: bg Example Usage\+: bg 2 (job\+\_\+id is 2) error\+: PID with specified number does not exist
+
+error\+: there are no stopped jobs\Hypertarget{shellbuiltins_8h_a522b7a9dcadf792f7d79b3211f8bba9f}\label{shellbuiltins_8h_a522b7a9dcadf792f7d79b3211f8bba9f} 
 \index{shellbuiltins.h@{shellbuiltins.h}!b\_busy@{b\_busy}}
 \index{b\_busy@{b\_busy}!shellbuiltins.h@{shellbuiltins.h}}
 \doxysubsubsection{\texorpdfstring{b\_busy()}{b\_busy()}}
@@ -100,7 +117,17 @@ Print appropriate error message if\+:
 \item {\ttfamily perms} is invalid
 \end{DoxyItemize}
 
-Example Usage\+: chmod +x file (adds executable permission to file) Example Usage\+: chmod +rw file (adds read + write permissions to file) Example Usage\+: chmod -\/wx file (removes write + executable permissions from file) \Hypertarget{shellbuiltins_8h_a9cba475b009648053432d0cc0ec4bbbf}\label{shellbuiltins_8h_a9cba475b009648053432d0cc0ec4bbbf} 
+Example Usage\+: chmod +x file (adds executable permission to file) Example Usage\+: chmod +rw file (adds read + write permissions to file) Example Usage\+: chmod -\/wx file (removes write + executable permissions from file) \Hypertarget{shellbuiltins_8h_a0118ff3db9e343eeb6ad0d043fdee012}\label{shellbuiltins_8h_a0118ff3db9e343eeb6ad0d043fdee012} 
+\index{shellbuiltins.h@{shellbuiltins.h}!b\_clear@{b\_clear}}
+\index{b\_clear@{b\_clear}!shellbuiltins.h@{shellbuiltins.h}}
+\doxysubsubsection{\texorpdfstring{b\_clear()}{b\_clear()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} b\+\_\+clear (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Clears the terminal. 
+
+Example Usage\+: clear \Hypertarget{shellbuiltins_8h_a9cba475b009648053432d0cc0ec4bbbf}\label{shellbuiltins_8h_a9cba475b009648053432d0cc0ec4bbbf} 
 \index{shellbuiltins.h@{shellbuiltins.h}!b\_cp@{b\_cp}}
 \index{b\_cp@{b\_cp}!shellbuiltins.h@{shellbuiltins.h}}
 \doxysubsubsection{\texorpdfstring{b\_cp()}{b\_cp()}}
@@ -135,7 +162,15 @@ Example Usage\+: echo Hello World \Hypertarget{shellbuiltins_8h_ad11ad4f83749953
 
 Brings the most recently stopped or background job to the foreground, or the job specified by job\+\_\+id. 
 
-Example Usage\+: fg Example Usage\+: fg 2 (job\+\_\+id is 2) \Hypertarget{shellbuiltins_8h_add6abae88d55c1b8ee57843799af9730}\label{shellbuiltins_8h_add6abae88d55c1b8ee57843799af9730} 
+Example Usage\+: fg Example Usage\+: fg 2 (job\+\_\+id is 2) TODO\+: immediate send to tcprescp
+
+TODO\+: immediate send to tcprescp
+
+error\+: PID with specified number does not exist
+
+TODO\+: immediate send to tcprescp
+
+TODO\+: immediate send to tcprescp\Hypertarget{shellbuiltins_8h_add6abae88d55c1b8ee57843799af9730}\label{shellbuiltins_8h_add6abae88d55c1b8ee57843799af9730} 
 \index{shellbuiltins.h@{shellbuiltins.h}!b\_jobs@{b\_jobs}}
 \index{b\_jobs@{b\_jobs}!shellbuiltins.h@{shellbuiltins.h}}
 \doxysubsubsection{\texorpdfstring{b\_jobs()}{b\_jobs()}}
@@ -257,7 +292,7 @@ Example Usage\+: orphanify \Hypertarget{shellbuiltins_8h_a18df407e357bc44721dd39
 
 List all processes on Penn\+OS, displaying PID, PPID, priority, status, and command name. 
 
-Example Usage\+: ps \Hypertarget{shellbuiltins_8h_aa583bdf1b3a5fbfb577ad5a7230fe054}\label{shellbuiltins_8h_aa583bdf1b3a5fbfb577ad5a7230fe054} 
+Example Usage\+: ps not sure if order has to change\Hypertarget{shellbuiltins_8h_aa583bdf1b3a5fbfb577ad5a7230fe054}\label{shellbuiltins_8h_aa583bdf1b3a5fbfb577ad5a7230fe054} 
 \index{shellbuiltins.h@{shellbuiltins.h}!b\_rm@{b\_rm}}
 \index{b\_rm@{b\_rm}!shellbuiltins.h@{shellbuiltins.h}}
 \doxysubsubsection{\texorpdfstring{b\_rm()}{b\_rm()}}
