@@ -32,8 +32,11 @@ static void* shell(void* arg)
   while (1) {
     prompt(true);
     char* cmd;
-    read_command(&cmd);
-
+    int read_flag = read_command(&cmd);
+    if (read_flag < 0) {
+      done = true;
+      break;
+    }
     b_background_poll(NULL);
 
     if (cmd[0] != '\n') {
@@ -191,7 +194,10 @@ static void* shell(void* arg)
       } else if (strcmp(args[0], "jobs") == 0) {
         b_jobs(NULL);
       } else if (strcmp(args[0], "logout") == 0) {
+        done = true;
+        return NULL;
         b_logout(NULL);
+        return NULL;
         break;
       } else if (strcmp(args[0], "clear") == 0) {
         b_clear(NULL);
@@ -201,7 +207,6 @@ static void* shell(void* arg)
         nohang(args);
       } else if (strcmp(args[0], "recur") == 0) {
         s_spawn_and_wait(recur, args, STDIN_FILENO, STDOUT_FILENO, false, -1); 
-
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
         // REPLACE WITH PERROR
