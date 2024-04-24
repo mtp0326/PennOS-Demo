@@ -46,14 +46,12 @@ static void spawn(bool nohang)
     if (i == 0) {
       pid = id;
     }
-
-    dprintf(STDERR_FILENO, "%s was spawned\n", *argv);
+    dprintf(STDOUT_FILENO, "%s was spawned\n", *argv);
   }
 
   // Wait on all children.
   while (1) {
     const pid_t cpid = s_waitpid(-1, NULL, nohang);
-    // fprintf(stderr, "AHH %d", cpid);
     if (cpid < 0) { // no more waitable children (if block-waiting) or error
       break;
     }
@@ -62,7 +60,8 @@ static void spawn(bool nohang)
       usleep(90000); // 90 milliseconds
       continue;
     }
-    dprintf(STDERR_FILENO, "child_%d was reaped\n", cpid - pid);
+    
+      dprintf(STDOUT_FILENO, "child_%d was reaped\n", cpid - pid);
   }
 }
 

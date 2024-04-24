@@ -200,7 +200,7 @@ static void* shell(void* arg)
       } else if (strcmp(args[0], "nohang") == 0) {
         nohang(args);
       } else if (strcmp(args[0], "recur") == 0) {
-        recur(args);
+        s_spawn_and_wait(recur, args, STDIN_FILENO, STDOUT_FILENO, false, -1); 
 
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
