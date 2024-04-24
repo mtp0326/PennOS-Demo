@@ -213,10 +213,6 @@ static void* shell(void* arg)
       }
       free(parsed);
     }
-    free(cmd);
-    done = true;
-    s_exit();
-    break;
   }
 
   return EXIT_SUCCESS;
