@@ -23,6 +23,13 @@
 #define MAX_LEN 4096
 #endif
 
+void free_global_fd_table();
+
+
+
+
+
+
 /**
  * @brief Creates a "filesytem" (file on host device) with name \p fs_name
  * with each of the \p blocks_in_fat blocks of size specified via

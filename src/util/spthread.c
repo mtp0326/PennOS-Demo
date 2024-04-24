@@ -108,14 +108,22 @@ static void* spthread_start(void* arg);
 // sets itself to be in the "terminated" status
 static void mark_self_terminated(void* arg);
 
+void cancel_and_join(spthread_t thread)
+{
+  spthread_cancel(thread);
+  spthread_continue(thread);
+  spthread_join(thread, NULL);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // public function definitions
 ///////////////////////////////////////////////////////////////////////////////
 
 int spthread_create(spthread_t* thread,
-                    const pthread_attr_t* attr,
-                    pthread_fn start_routine,
-                    void* arg) {
+    const pthread_attr_t* attr,
+    pthread_fn start_routine,
+    void* arg)
+{
   spthread_meta_t* child_meta = malloc(sizeof(spthread_meta_t));
   if (child_meta == NULL) {
     return EAGAIN;
@@ -126,11 +134,11 @@ int spthread_create(spthread_t* thread,
     free(child_meta);
     return EAGAIN;
   }
-  *fwd_args = (spthread_fwd_args){
-      .actual_routine = start_routine,
-      .actual_arg = arg,
-      .setup_done = false,
-      .child_meta = child_meta,
+  *fwd_args = (spthread_fwd_args) {
+    .actual_routine = start_routine,
+    .actual_arg = arg,
+    .setup_done = false,
+    .child_meta = child_meta,
   };
 
   int ret = pthread_mutex_init(&(fwd_args->setup_mutex), NULL);
@@ -161,31 +169,32 @@ int spthread_create(spthread_t* thread,
   pthread_mutex_destroy(&(fwd_args->setup_mutex));
   free(fwd_args);
 
-  *thread = (spthread_t){
-      .thread = pthread,
-      .meta = child_meta,
+  *thread = (spthread_t) {
+    .thread = pthread,
+    .meta = child_meta,
   };
 
   return result;
 }
 
-int spthread_suspend(spthread_t thread) {
+int spthread_suspend(spthread_t thread)
+{
   pthread_t pself = pthread_self();
 
   if (pthread_equal(pself, thread.thread) != 0) {
     return spthread_suspend_self();
   }
 
-  spthread_signal_args args = (spthread_signal_args){
-      .signal = SPTHREAD_SIG_SUSPEND,
-      .ack = 0,
+  spthread_signal_args args = (spthread_signal_args) {
+    .signal = SPTHREAD_SIG_SUSPEND,
+    .ack = 0,
   };
   pthread_mutex_init(&args.shutup_mutex, NULL);
 
   int ret = pthread_sigqueue(thread.thread, SIGPTHD,
-                             (union sigval){
-                                 .sival_ptr = &args,
-                             });
+      (union sigval) {
+          .sival_ptr = &args,
+      });
   if (ret != 0) {
     pthread_mutex_destroy(&args.shutup_mutex);
     // handles the case where the thread is already dead.
@@ -195,8 +204,8 @@ int spthread_suspend(spthread_t thread) {
   // wait for our signal to be ack'd
 
   // setting up args to nanosleep
-  const struct timespec t = (struct timespec){
-      .tv_nsec = MILISEC_IN_NANO,
+  const struct timespec t = (struct timespec) {
+    .tv_nsec = MILISEC_IN_NANO,
   };
 
   nanosleep(&t, NULL);
@@ -222,7 +231,8 @@ int spthread_suspend(spthread_t thread) {
   return ret;
 }
 
-int spthread_suspend_self() {
+int spthread_suspend_self()
+{
   spthread_t self;
   bool am_sp = spthread_self(&self);
   if (!am_sp) {
@@ -238,7 +248,8 @@ int spthread_suspend_self() {
   return 0;
 }
 
-int spthread_continue(spthread_t thread) {
+int spthread_continue(spthread_t thread)
+{
   pthread_t pself = pthread_self();
 
   if (pthread_equal(pself, thread.thread) != 0) {
@@ -247,16 +258,16 @@ int spthread_continue(spthread_t thread) {
     return 0;
   }
 
-  spthread_signal_args args = (spthread_signal_args){
-      .signal = SPTHREAD_SIG_CONTINUE,
-      .ack = 0,
+  spthread_signal_args args = (spthread_signal_args) {
+    .signal = SPTHREAD_SIG_CONTINUE,
+    .ack = 0,
   };
   pthread_mutex_init(&args.shutup_mutex, NULL);
 
   int ret = pthread_sigqueue(thread.thread, SIGPTHD,
-                             (union sigval){
-                                 .sival_ptr = &args,
-                             });
+      (union sigval) {
+          .sival_ptr = &args,
+      });
   if (ret != 0) {
     pthread_mutex_destroy(&args.shutup_mutex);
     // handles the case where the thread is already dead.
@@ -266,8 +277,8 @@ int spthread_continue(spthread_t thread) {
   // wait for our signal to be ack'd
 
   // setting up args to nanosleep
-  const struct timespec t = (struct timespec){
-      .tv_nsec = MILISEC_IN_NANO,
+  const struct timespec t = (struct timespec) {
+    .tv_nsec = MILISEC_IN_NANO,
   };
 
   pthread_mutex_lock(&args.shutup_mutex);
@@ -290,29 +301,33 @@ int spthread_continue(spthread_t thread) {
   return ret;
 }
 
-int spthread_cancel(spthread_t thread) {
+int spthread_cancel(spthread_t thread)
+{
   return pthread_cancel(thread.thread);
 }
 
-bool spthread_self(spthread_t* thread) {
+bool spthread_self(spthread_t* thread)
+{
   if (my_meta == NULL) {
     return false;
   }
-  *thread = (spthread_t){
-      .thread = pthread_self(),
-      .meta = my_meta,
+  *thread = (spthread_t) {
+    .thread = pthread_self(),
+    .meta = my_meta,
   };
   return true;
 }
 
-int spthread_join(spthread_t thread, void** retval) {
+int spthread_join(spthread_t thread, void** retval)
+{
   int res = pthread_join(thread.thread, retval);
   pthread_mutex_destroy(&thread.meta->meta_mutex);
   free(thread.meta);
   return res;
 }
 
-void spthread_exit(void* status) {
+void spthread_exit(void* status)
+{
   // necessary cleanup is registered
   // in a cleanup routine
   // that is pushed at start of an spthread
@@ -326,8 +341,9 @@ void spthread_exit(void* status) {
 #include <string.h>
 
 static void sigpthd_handler(int signum,
-                            siginfo_t* info,
-                            [[maybe_unused]] void* ucontext) {
+    siginfo_t* info,
+    [[maybe_unused]] void* ucontext)
+{
   //  since suspended is a volatile thread_local primitve,
   //  it should be safe to access from handler
   if (signum != SIGPTHD) {
@@ -341,21 +357,19 @@ static void sigpthd_handler(int signum,
   }
 
   if (info->si_code != SI_QUEUE) {
-    char* msg =
-        "ERROR: got a sigpthd signal that is not SI_QUEUE or SI_TKILL\nPLEASE "
-        "CONTACT COURSE STAFF\n";
+    char* msg = "ERROR: got a sigpthd signal that is not SI_QUEUE or SI_TKILL\nPLEASE "
+                "CONTACT COURSE STAFF\n";
     write(STDERR_FILENO, msg, strlen(msg));
     char buf[1024];
     snprintf(buf, 1024, "SI_TKILL %d\tSI_QUEUE %d\tACTUAL %d\n", SI_TKILL,
-             SI_QUEUE, info->si_code);
+        SI_QUEUE, info->si_code);
     write(STDERR_FILENO, buf, strlen(buf));
     exit(EXIT_FAILURE);
 
     return;
   }
 
-  spthread_signal_args* args =
-      ((spthread_signal_args*)info->si_value.sival_ptr);
+  spthread_signal_args* args = ((spthread_signal_args*)info->si_value.sival_ptr);
   pthread_mutex_lock(&args->shutup_mutex);
   int s_val = args->signal;
 
@@ -377,14 +391,15 @@ static void sigpthd_handler(int signum,
   }
 }
 
-static void* spthread_start(void* arg) {
+static void* spthread_start(void* arg)
+{
   spthread_fwd_args* args = (spthread_fwd_args*)arg;
   spthread_fwd_args func = *args;
   void* res = NULL;
 
   // using sigaction so that we can also send a value
   // with sig_queue
-  struct sigaction action = {0};  // 0 init (zero out the struct)
+  struct sigaction action = { 0 }; // 0 init (zero out the struct)
   action.sa_sigaction = &sigpthd_handler;
   action.sa_flags = SA_RESTART | SA_SIGINFO;
   sigaction(SIGPTHD, &action, NULL);
@@ -419,7 +434,8 @@ static void* spthread_start(void* arg) {
   return res;
 }
 
-static void mark_self_terminated(void* arg) {
+static void mark_self_terminated(void* arg)
+{
   // block SIGPTHD to make sure that our code
   // is not suspended during termination
   sigset_t mask;

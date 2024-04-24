@@ -1103,6 +1103,7 @@ void k_ls(const char* filename, int fd) {
       free(line);
     }
     k_write(fd, acc, total_acc_size);
+    free(temp);
     free(acc);
     return;
   }  // end of if

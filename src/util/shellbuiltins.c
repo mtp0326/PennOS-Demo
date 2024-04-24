@@ -1,13 +1,14 @@
 #include "shellbuiltins.h"
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
 #include "errno.h"
 #include "pennos.h"
 #include "sys_call.h"
 #include "unistd.h"
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
 
-void* b_background_poll(void* arg) {
+void* b_background_poll(void* arg)
+{
   if (bg_list == NULL || bg_list->head == NULL) {
     return NULL;
   }
@@ -49,14 +50,15 @@ void* b_background_poll(void* arg) {
   return NULL;
 }
 
-void* b_sleep(void* arg) {
+void* b_sleep(void* arg)
+{
   char** argv = (char**)arg;
   if (argv[1] == NULL) {
     // code later to add errno and write to the terminal (using pennfat writes),
     // but not today :(
     return NULL;
   }
-  int seconds = atoi(argv[1]);  // NOTE: use strtol in later implementation
+  int seconds = atoi(argv[1]); // NOTE: use strtol in later implementation
   // here, as atoi does not define errors
   // (differentiate on 0), will need for errno
   unsigned int ticks = seconds * 10;
@@ -65,13 +67,15 @@ void* b_sleep(void* arg) {
   return NULL;
 }
 
-void* b_busy(void* arg) {
+void* b_busy(void* arg)
+{
   s_busy();
   s_exit();
   return NULL;
 }
 
-void* b_kill(void* arg) {
+void* b_kill(void* arg)
+{
   char** argv = (char**)arg;
   int signal;
   int i = 1;
@@ -98,7 +102,8 @@ void* b_kill(void* arg) {
   return NULL;
 }
 
-void* b_ps(void* arg) {
+void* b_ps(void* arg)
+{
   // displaying PID, PPID, priority, status, and command name.
   /// not sure if order has to change
   fprintf(stdout, "  PID\t PPID\t  PRI\tSTAT\tCMD\n");
@@ -114,14 +119,16 @@ void* b_ps(void* arg) {
   return NULL;
 }
 
-void* b_jobs(void* arg) {
+void* b_jobs(void* arg)
+{
   s_print_jobs(bg_list);
   s_print_jobs(stopped);
 
   return NULL;
 }
 
-void* b_fg(void* arg) {
+void* b_fg(void* arg)
+{
   char** argv = (char**)arg;
   pcb_t* proc;
 
@@ -133,7 +140,7 @@ void* b_fg(void* arg) {
 
     if (proc != NULL) {
       fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
-              proc->processname);
+          proc->processname);
       if (proc->initial_state != RUNNING) {
         s_resume_block(proc->pid);
       } else {
@@ -157,7 +164,7 @@ void* b_fg(void* arg) {
 
     if (proc != NULL) {
       fprintf(stdout, "[%ld]  + %4u Running\t%s\n", proc->job_num, proc->pid,
-              proc->processname);
+          proc->processname);
       // if (s_kill(proc->pid, SIGCONT) < 0) {
       //   // error
       //   fprintf(stderr, "SIGCONT failed to send\n");
@@ -183,7 +190,7 @@ void* b_fg(void* arg) {
   if (stopped != NULL && stopped->tail != NULL) {
     proc = stopped->tail->process;
     fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
-            proc->processname);
+        proc->processname);
     /// TODO:there could be more but wrote for sleep for now
     if (proc->initial_state != RUNNING) {
       s_resume_block(proc->pid);
@@ -208,7 +215,7 @@ void* b_fg(void* arg) {
   if (bg_list != NULL && bg_list->tail != NULL) {
     proc = bg_list->tail->process;
     fprintf(stdout, "[%ld]  + %4u Running\t%s\n", proc->job_num, proc->pid,
-            proc->processname);
+        proc->processname);
     // if (s_kill(proc->pid, P_SIGCONT) < 0) {
     //   // error
     //   fprintf(stderr, "SIGCONT failed to send\n");
@@ -230,7 +237,8 @@ void* b_fg(void* arg) {
   return NULL;
 }
 
-void* b_bg(void* arg) {
+void* b_bg(void* arg)
+{
   char** argv = (char**)arg;
   pcb_t* proc;
 
@@ -255,7 +263,7 @@ void* b_bg(void* arg) {
       proc->is_bg = true;
       add_process(bg_list, proc);
       fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
-              proc->processname);
+          proc->processname);
 
       // proc->state = RUNNING;
       // /// proc->statechanged = true;
@@ -285,7 +293,7 @@ void* b_bg(void* arg) {
     proc->is_bg = true;
     add_process(bg_list, proc);
     fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
-            proc->processname);
+        proc->processname);
 
     // proc->state = RUNNING;
     // /// proc->statechanged = true;
@@ -299,11 +307,11 @@ void* b_bg(void* arg) {
   return NULL;
 }
 
-void* b_man(void* arg) {
-  char* output =
-      "cat\nsleep\nbusy\necho\nls\ntouch\nmv\ncp\nrm\nchmod\nps\nkill\nzombif"
-      "y"
-      "\norphanify\nnice\nnice_pid\nman\nbg\nfg\njobs\nlogout\n";
+void* b_man(void* arg)
+{
+  char* output = "cat\nsleep\nbusy\necho\nls\ntouch\nmv\ncp\nrm\nchmod\nps\nkill\nzombif"
+                 "y"
+                 "\norphanify\nnice\nnice_pid\nman\nbg\nfg\njobs\nlogout\n";
   ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
   if (result == -1) {
     u_perror("Failed to write to STDOUT");
@@ -312,25 +320,28 @@ void* b_man(void* arg) {
   return NULL;
 }
 
-void* b_nice(void* arg) {
+void* b_nice(void* arg)
+{
   struct parsed_command* parsed = NULL;
   parse_command(arg, &parsed);
   char** args = parsed->commands[0];
   void* (*func)(void*) = s_function_from_string(args[2]);
-  unsigned priority = atoi(args[1]);  // USE STROL AND ERRNO
+  unsigned priority = atoi(args[1]); // USE STROL AND ERRNO
   s_spawn_and_wait(func, &args[2], STDIN_FILENO, STDOUT_FILENO,
-                   parsed->is_background, priority);
+      parsed->is_background, priority);
   return NULL;
 }
 
-void* b_nice_pid(void* arg) {
+void* b_nice_pid(void* arg)
+{
   char** argv = (char**)arg;
   s_nice(atoi(argv[2]), atoi(argv[1]));
 
   return NULL;
 }
 
-void* b_orphan_child(void* arg) {
+void* b_orphan_child(void* arg)
+{
   // Please sir,
   // I want some more
   while (1)
@@ -338,28 +349,32 @@ void* b_orphan_child(void* arg) {
   return NULL;
 }
 
-void* b_orphanify(void* arg) {
-  char* args[2] = {"orphan_child", NULL};
+void* b_orphanify(void* arg)
+{
+  char* args[2] = { "orphan_child", NULL };
   s_spawn(b_orphan_child, args, STDIN_FILENO, STDOUT_FILENO);
   s_exit();
   return NULL;
 }
 
-void* b_zombie_child(void* arg) {
+void* b_zombie_child(void* arg)
+{
   // MMMMM Brains...!
   s_zombie(current->pid);
   return NULL;
 }
 
-void* b_zombify(void* arg) {
-  char* args[2] = {"zombie_child", NULL};
+void* b_zombify(void* arg)
+{
+  char* args[2] = { "zombie_child", NULL };
   s_spawn(b_zombie_child, args, STDIN_FILENO, STDOUT_FILENO);
   while (1)
     ;
   return NULL;
 }
 
-void* b_logout(void* arg) {
+void* b_logout(void* arg)
+{
   pthread_mutex_lock(&done_lock);
   done = true;
   pthread_mutex_unlock(&done_lock);
@@ -367,7 +382,8 @@ void* b_logout(void* arg) {
   return NULL;
 }
 
-void* b_clear(void* arg) {
+void* b_clear(void* arg)
+{
   char* clear = "\033c";
   s_write(STDOUT_FILENO, clear, strlen(clear));
 
@@ -376,14 +392,16 @@ void* b_clear(void* arg) {
 
 // FAT LEVEL SHELL FUNCTIONS
 
-void* b_ls(void* arg) {
+void* b_ls(void* arg)
+{
   s_ls(NULL, current->output_fd);
 
   s_exit();
   return NULL;
 }
 
-void* b_echo(void* arg) {
+void* b_echo(void* arg)
+{
   char** argv = (char**)arg;
 
   int i = 1;
@@ -397,7 +415,8 @@ void* b_echo(void* arg) {
   return NULL;
 }
 
-void* b_cat(void* arg) {
+void* b_cat(void* arg)
+{
   char** argv = (char**)arg;
   // int read_num;
 
@@ -434,7 +453,8 @@ void* b_cat(void* arg) {
   return NULL;
 }
 
-void* b_touch(void* arg) {
+void* b_touch(void* arg)
+{
   char** args = (char**)arg;
   int i = 1;
   while (args[i] != NULL) {
@@ -451,14 +471,16 @@ void* b_touch(void* arg) {
   return NULL;
 }
 
-void* b_mv(void* arg) {
+void* b_mv(void* arg)
+{
   char** args = (char**)arg;
   s_rename(args[1], args[2]);
   s_exit();
   return NULL;
 }
 
-void* b_rm(void* arg) {
+void* b_rm(void* arg)
+{
   char** args = (char**)arg;
   int i = 1;
   while (args[i] != NULL) {
@@ -469,14 +491,16 @@ void* b_rm(void* arg) {
   return NULL;
 }
 
-void* b_chmod(void* arg) {
+void* b_chmod(void* arg)
+{
   char** args = (char**)arg;
   s_change_mode(args[1], args[2]);
   s_exit();
   return NULL;
 }
 
-void* b_cp(void* arg) {
+void* b_cp(void* arg)
+{
   char** args = (char**)arg;
   if (strcmp(args[1], "-h") == 0) {
     // cp -h SOURCE DEST

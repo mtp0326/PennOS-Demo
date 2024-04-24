@@ -153,9 +153,9 @@ pid_t s_spawn_nice(void* (*func)(void*),
     free(arg);
     return -1;
   }
+  free(arg);
   child->processname = (char*)malloc(sizeof(char) * (strlen(child_argv[0]) + 1));
   strcpy(child->processname, child_argv[0]);
-
   s_write_log(CREATE, child, -1);
   if (priority != -1) {
     s_write_log(NICE, child, 1);
@@ -328,6 +328,9 @@ void s_reap_all_child(pcb_t* parent)
   }
 
   DynamicPIDArray* child_array = parent->child_pids;
+  if (child_array == NULL) {
+    return;
+  }
   int c_size = child_array->size;
   for (int i = 0; i < c_size; i++) {
     pcb_t* child_proc = s_find_process(child_array->array[i]);
@@ -398,7 +401,6 @@ int s_busy(void)
 {
   while (1)
     ;
-  s_exit();
   return 0;
 }
 

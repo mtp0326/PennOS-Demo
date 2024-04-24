@@ -41,11 +41,22 @@ pcb_t* k_proc_create(pcb_t* parent)
 
 void k_proc_cleanup(pcb_t* proc)
 {
- // dynamic_pid_array_destroy(proc->child_pids);
- // free(proc->open_fds);
-  //free(proc->processname);
-  //free(proc->argv);
-  //spthread_exit(NULL);
-  free(proc);
+  pcb_t* parent = s_find_process(proc->ppid);
+  if (parent != NULL) {
+    dynamic_pid_array_remove(parent->child_pids, proc->pid);
+  }
+
+  dynamic_pid_array_destroy(proc->child_pids);
+  free(proc->open_fds);
+  free(proc->processname);
+
+  if (proc->argv) {
+    for (int i = 0; proc->argv[i] != NULL; i++) {
+      free(proc->argv[i]);
+    }
+    free(proc->argv);
+  }
+
+  cancel_and_join(proc->handle);
   return;
 }
