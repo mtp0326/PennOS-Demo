@@ -358,6 +358,7 @@ void s_zombie(pid_t pid)
   for (size_t i = 0; i < pid_array->used; i++) {
     pid_t current_pid = pid_array->array[i];
     s_write_log(ORPHAN, s_find_process(current_pid), -1);
+    s_find_process(current_pid)->ppid = 0;
   }
   s_reap_all_child(s_find_process(pid));
 }

@@ -331,6 +331,9 @@ void scheduler(char* logfile)
           for (size_t i = 0; i < pid_array->used; i++) {
             pid_t current_pid = pid_array->array[i];
             child_pcb = s_find_process(current_pid);
+            if (child_pcb == NULL) {
+              continue;
+            }
             if (child_pcb->statechanged) {
               child_changed = true;
               break;
