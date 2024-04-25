@@ -150,3 +150,28 @@ pcb_t* find_process_job_id(CircularList* list, u_int64_t index) {
 
   return NULL;  // Process not found
 }
+
+
+
+
+void free_list(CircularList* list) {
+    if (list == NULL) {
+        return;
+    }
+
+    if (list->head == NULL) {
+        free(list);
+        return;
+    }
+
+    Node* current = list->head;
+    Node* next_node;
+
+    do {
+        next_node = current->next;
+        free(current);
+        current = next_node;
+    } while (current != list->head);
+
+    free(list);
+}

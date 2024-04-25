@@ -2,6 +2,11 @@
 \hypertarget{structdirectory__entries}{}\label{structdirectory__entries}\index{directory\_entries@{directory\_entries}}
 
 
+This structure stores all required information about the directory entries that are stored in the root directory.  
+
+
+
+
 {\ttfamily \#include $<$pennfat\+\_\+kernel.\+h$>$}
 
 \doxysubsubsection*{Data Fields}
@@ -10,18 +15,22 @@
 char \mbox{\hyperlink{structdirectory__entries_a078107917c22fc5656a6952eb33285f1}{name}} \mbox{[}32\mbox{]}
 \item 
 uint32\+\_\+t \mbox{\hyperlink{structdirectory__entries_a7cc97989b9026b7b89576f94fde2deb7}{size}}
-\item 
+\begin{DoxyCompactList}\small\item\em 32-\/byte null-\/terminated file name. name\mbox{[}0\mbox{]} also serves as a special marker 0\+: end of directory 1\+: deleted entry; the file is also deleted 2\+: deleted entry; the file is still being used ~\newline
+ \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{structdirectory__entries_a83126d6724bed8d40f5dd21023409ead}{first\+Block}}
-\item 
+\begin{DoxyCompactList}\small\item\em 4-\/byte number of bytes in file \end{DoxyCompactList}\item 
 uint8\+\_\+t \mbox{\hyperlink{structdirectory__entries_a1251eec3f57db41af2e3f887b737939d}{type}}
-\item 
+\begin{DoxyCompactList}\small\item\em 2-\/byte number indicating the first block number of the file (undefined if size is zero) \end{DoxyCompactList}\item 
 uint8\+\_\+t \mbox{\hyperlink{structdirectory__entries_a08438d395d69ac79c6af58e8b04e66c8}{perm}}
-\item 
+\begin{DoxyCompactList}\small\item\em 1-\/byte number for the type of the file, which will be one of the following\+: 0\+: unknown 1\+: a regular file 2\+: a directory file \end{DoxyCompactList}\item 
 time\+\_\+t \mbox{\hyperlink{structdirectory__entries_a768620b88c243e244beb86b44aa20466}{mtime}}
-\item 
+\begin{DoxyCompactList}\small\item\em file permissions, which will be one of the following\+: 0\+: none 2\+: write only 4\+: read only 5\+: read and executable (shell scripts) 6\+: read and write 7\+: read, write, and executable \end{DoxyCompactList}\item 
 uint8\+\_\+t \mbox{\hyperlink{structdirectory__entries_a13b872d6333f7887d812a93056a7c4a7}{reserved}} \mbox{[}16\mbox{]}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em creation/modification time as returned by time(2) in Linux \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+This structure stores all required information about the directory entries that are stored in the root directory. 
 
 \doxysubsection{Field Documentation}
 \Hypertarget{structdirectory__entries_a83126d6724bed8d40f5dd21023409ead}\label{structdirectory__entries_a83126d6724bed8d40f5dd21023409ead} 
@@ -30,11 +39,19 @@ uint8\+\_\+t \mbox{\hyperlink{structdirectory__entries_a13b872d6333f7887d812a930
 \doxysubsubsection{\texorpdfstring{firstBlock}{firstBlock}}
 {\footnotesize\ttfamily uint16\+\_\+t directory\+\_\+entries\+::first\+Block}
 
+
+
+4-\/byte number of bytes in file 
+
 \Hypertarget{structdirectory__entries_a768620b88c243e244beb86b44aa20466}\label{structdirectory__entries_a768620b88c243e244beb86b44aa20466} 
 \index{directory\_entries@{directory\_entries}!mtime@{mtime}}
 \index{mtime@{mtime}!directory\_entries@{directory\_entries}}
 \doxysubsubsection{\texorpdfstring{mtime}{mtime}}
 {\footnotesize\ttfamily time\+\_\+t directory\+\_\+entries\+::mtime}
+
+
+
+file permissions, which will be one of the following\+: 0\+: none 2\+: write only 4\+: read only 5\+: read and executable (shell scripts) 6\+: read and write 7\+: read, write, and executable 
 
 \Hypertarget{structdirectory__entries_a078107917c22fc5656a6952eb33285f1}\label{structdirectory__entries_a078107917c22fc5656a6952eb33285f1} 
 \index{directory\_entries@{directory\_entries}!name@{name}}
@@ -48,11 +65,19 @@ uint8\+\_\+t \mbox{\hyperlink{structdirectory__entries_a13b872d6333f7887d812a930
 \doxysubsubsection{\texorpdfstring{perm}{perm}}
 {\footnotesize\ttfamily uint8\+\_\+t directory\+\_\+entries\+::perm}
 
+
+
+1-\/byte number for the type of the file, which will be one of the following\+: 0\+: unknown 1\+: a regular file 2\+: a directory file 
+
 \Hypertarget{structdirectory__entries_a13b872d6333f7887d812a93056a7c4a7}\label{structdirectory__entries_a13b872d6333f7887d812a93056a7c4a7} 
 \index{directory\_entries@{directory\_entries}!reserved@{reserved}}
 \index{reserved@{reserved}!directory\_entries@{directory\_entries}}
 \doxysubsubsection{\texorpdfstring{reserved}{reserved}}
 {\footnotesize\ttfamily uint8\+\_\+t directory\+\_\+entries\+::reserved\mbox{[}16\mbox{]}}
+
+
+
+creation/modification time as returned by time(2) in Linux 
 
 \Hypertarget{structdirectory__entries_a7cc97989b9026b7b89576f94fde2deb7}\label{structdirectory__entries_a7cc97989b9026b7b89576f94fde2deb7} 
 \index{directory\_entries@{directory\_entries}!size@{size}}
@@ -60,11 +85,20 @@ uint8\+\_\+t \mbox{\hyperlink{structdirectory__entries_a13b872d6333f7887d812a930
 \doxysubsubsection{\texorpdfstring{size}{size}}
 {\footnotesize\ttfamily uint32\+\_\+t directory\+\_\+entries\+::size}
 
+
+
+32-\/byte null-\/terminated file name. name\mbox{[}0\mbox{]} also serves as a special marker 0\+: end of directory 1\+: deleted entry; the file is also deleted 2\+: deleted entry; the file is still being used ~\newline
+ 
+
 \Hypertarget{structdirectory__entries_a1251eec3f57db41af2e3f887b737939d}\label{structdirectory__entries_a1251eec3f57db41af2e3f887b737939d} 
 \index{directory\_entries@{directory\_entries}!type@{type}}
 \index{type@{type}!directory\_entries@{directory\_entries}}
 \doxysubsubsection{\texorpdfstring{type}{type}}
 {\footnotesize\ttfamily uint8\+\_\+t directory\+\_\+entries\+::type}
+
+
+
+2-\/byte number indicating the first block number of the file (undefined if size is zero) 
 
 
 

@@ -2,6 +2,11 @@
 \hypertarget{structfile__descriptor__st}{}\label{structfile__descriptor__st}\index{file\_descriptor\_st@{file\_descriptor\_st}}
 
 
+This structure stores all required information about the file descriptor.  
+
+
+
+
 {\ttfamily \#include $<$pennfat\+\_\+kernel.\+h$>$}
 
 \doxysubsubsection*{Data Fields}
@@ -10,14 +15,17 @@
 int \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}}
 \item 
 char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structfile__descriptor__st_a25cb5acb6a5c6e546b04f04cc56ee2be}{fname}}
-\item 
+\begin{DoxyCompactList}\small\item\em File descriptor number. This is also used as the index for the global\+\_\+fd\+\_\+table. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{structfile__descriptor__st_af4c53d9cd39f2efd92817d4605911fbf}{mode}}
-\item 
+\begin{DoxyCompactList}\small\item\em File name. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{structfile__descriptor__st_af7e61caeb159b544e2467d9a56e340fa}{offset}}
-\item 
+\begin{DoxyCompactList}\small\item\em Either F\+\_\+\+WRITE, F\+\_\+\+READ, F\+\_\+\+OPEN. Refer to k\+\_\+open for more details. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{structfile__descriptor__st_a97a1e01355076ddbcfa5f90d8de20197}{ref\+\_\+cnt}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Offset from the start of the file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+This structure stores all required information about the file descriptor. 
 
 \doxysubsection{Field Documentation}
 \Hypertarget{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}\label{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad} 
@@ -32,11 +40,19 @@ int \mbox{\hyperlink{structfile__descriptor__st_a97a1e01355076ddbcfa5f90d8de2019
 \doxysubsubsection{\texorpdfstring{fname}{fname}}
 {\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} file\+\_\+descriptor\+\_\+st\+::fname}
 
+
+
+File descriptor number. This is also used as the index for the global\+\_\+fd\+\_\+table. 
+
 \Hypertarget{structfile__descriptor__st_af4c53d9cd39f2efd92817d4605911fbf}\label{structfile__descriptor__st_af4c53d9cd39f2efd92817d4605911fbf} 
 \index{file\_descriptor\_st@{file\_descriptor\_st}!mode@{mode}}
 \index{mode@{mode}!file\_descriptor\_st@{file\_descriptor\_st}}
 \doxysubsubsection{\texorpdfstring{mode}{mode}}
 {\footnotesize\ttfamily int file\+\_\+descriptor\+\_\+st\+::mode}
+
+
+
+File name. 
 
 \Hypertarget{structfile__descriptor__st_af7e61caeb159b544e2467d9a56e340fa}\label{structfile__descriptor__st_af7e61caeb159b544e2467d9a56e340fa} 
 \index{file\_descriptor\_st@{file\_descriptor\_st}!offset@{offset}}
@@ -44,11 +60,19 @@ int \mbox{\hyperlink{structfile__descriptor__st_a97a1e01355076ddbcfa5f90d8de2019
 \doxysubsubsection{\texorpdfstring{offset}{offset}}
 {\footnotesize\ttfamily int file\+\_\+descriptor\+\_\+st\+::offset}
 
+
+
+Either F\+\_\+\+WRITE, F\+\_\+\+READ, F\+\_\+\+OPEN. Refer to k\+\_\+open for more details. 
+
 \Hypertarget{structfile__descriptor__st_a97a1e01355076ddbcfa5f90d8de20197}\label{structfile__descriptor__st_a97a1e01355076ddbcfa5f90d8de20197} 
 \index{file\_descriptor\_st@{file\_descriptor\_st}!ref\_cnt@{ref\_cnt}}
 \index{ref\_cnt@{ref\_cnt}!file\_descriptor\_st@{file\_descriptor\_st}}
 \doxysubsubsection{\texorpdfstring{ref\_cnt}{ref\_cnt}}
 {\footnotesize\ttfamily int file\+\_\+descriptor\+\_\+st\+::ref\+\_\+cnt}
+
+
+
+Offset from the start of the file. 
 
 
 

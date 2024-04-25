@@ -1,7 +1,6 @@
 \doxysection{src/pennos.c File Reference}
 \hypertarget{pennos_8c}{}\label{pennos_8c}\index{src/pennos.c@{src/pennos.c}}
 {\ttfamily \#include "{}pennos.\+h"{}}\newline
-{\ttfamily \#include $<$signal.\+h$>$}\newline
 {\ttfamily \#include "{}fcntl.\+h"{}}\newline
 {\ttfamily \#include "{}parser.\+h"{}}\newline
 {\ttfamily \#include "{}pennfat.\+h"{}}\newline
@@ -9,9 +8,14 @@
 {\ttfamily \#include "{}unistd.\+h"{}}\newline
 {\ttfamily \#include "{}util/kernel.\+h"{}}\newline
 {\ttfamily \#include "{}util/prioritylist.\+h"{}}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \mbox{\hyperlink{pennos_8c_a3b5e2fef85d5401a65d922ea5b1074bf}{print\+\_\+queue}} ()
+\item 
+int \mbox{\hyperlink{pennos_8c_afc52712119cc00e63fc2748f652cfbac}{b\+\_\+output\+\_\+redir}} (struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}parsed)
+\begin{DoxyCompactList}\small\item\em handles edge case output redirection \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennos_8c_a9e5f6827ba0dd8849e892ef8f2187386}{scheduler}} (char \texorpdfstring{$\ast$}{*}logfile)
 \item 
 void \mbox{\hyperlink{pennos_8c_a3aaa3b35330e32fa9b4f1150064c6579}{cancel\+\_\+and\+\_\+join}} (\mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} thread)
@@ -26,6 +30,24 @@ int \mbox{\hyperlink{pennos_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int ar
 
 
 \doxysubsection{Function Documentation}
+\Hypertarget{pennos_8c_afc52712119cc00e63fc2748f652cfbac}\label{pennos_8c_afc52712119cc00e63fc2748f652cfbac} 
+\index{pennos.c@{pennos.c}!b\_output\_redir@{b\_output\_redir}}
+\index{b\_output\_redir@{b\_output\_redir}!pennos.c@{pennos.c}}
+\doxysubsubsection{\texorpdfstring{b\_output\_redir()}{b\_output\_redir()}}
+{\footnotesize\ttfamily int b\+\_\+output\+\_\+redir (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structparsed__command}{parsed\+\_\+command}} \texorpdfstring{$\ast$}{*}}]{parsed }\end{DoxyParamCaption})}
+
+
+
+handles edge case output redirection 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parsed} & parsed user command\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if not output redirection, fd number if file is opened 
+\end{DoxyReturn}
 \Hypertarget{pennos_8c_a3aaa3b35330e32fa9b4f1150064c6579}\label{pennos_8c_a3aaa3b35330e32fa9b4f1150064c6579} 
 \index{pennos.c@{pennos.c}!cancel\_and\_join@{cancel\_and\_join}}
 \index{cancel\_and\_join@{cancel\_and\_join}!pennos.c@{pennos.c}}
@@ -37,6 +59,12 @@ int \mbox{\hyperlink{pennos_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int ar
 \index{main@{main}!pennos.c@{pennos.c}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+\Hypertarget{pennos_8c_a3b5e2fef85d5401a65d922ea5b1074bf}\label{pennos_8c_a3b5e2fef85d5401a65d922ea5b1074bf} 
+\index{pennos.c@{pennos.c}!print\_queue@{print\_queue}}
+\index{print\_queue@{print\_queue}!pennos.c@{pennos.c}}
+\doxysubsubsection{\texorpdfstring{print\_queue()}{print\_queue()}}
+{\footnotesize\ttfamily void print\+\_\+queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \Hypertarget{pennos_8c_a9e5f6827ba0dd8849e892ef8f2187386}\label{pennos_8c_a9e5f6827ba0dd8849e892ef8f2187386} 
 \index{pennos.c@{pennos.c}!scheduler@{scheduler}}

@@ -95,71 +95,111 @@ Functions</h2></td></tr>
 <tr class="memdesc:a4d2cf4232cddee738996ca9ad83ea56f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open file name <code>fname</code> with the mode <code>mode</code>, and return a file descriptor to that file.  <br /></td></tr>
 <tr class="separator:a4d2cf4232cddee738996ca9ad83ea56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada30dc78055b7b113ff2dac9aabe4eb3" id="r_ada30dc78055b7b113ff2dac9aabe4eb3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada30dc78055b7b113ff2dac9aabe4eb3">is_file_name_valid</a> (char *name)</td></tr>
+<tr class="memdesc:ada30dc78055b7b113ff2dac9aabe4eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the filename follows the POSIX standard.  <br /></td></tr>
 <tr class="separator:ada30dc78055b7b113ff2dac9aabe4eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78d95341bbd2b21ed69dd341ff47669f" id="r_a78d95341bbd2b21ed69dd341ff47669f"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d8/d68/structdirectory__entries.html">directory_entries</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78d95341bbd2b21ed69dd341ff47669f">does_file_exist</a> (const char *fname)</td></tr>
+<tr class="memdesc:a78d95341bbd2b21ed69dd341ff47669f"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper that traverses root directory block by block to check if fname file exists return: the directory entry struct with name fname (NULL if not found) also moves fs_fd to the end of the root directory  <br /></td></tr>
 <tr class="separator:a78d95341bbd2b21ed69dd341ff47669f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6532ad36b852dd09d641bcaac2642b9b" id="r_a6532ad36b852dd09d641bcaac2642b9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6532ad36b852dd09d641bcaac2642b9b">move_to_open_de</a> (bool found)</td></tr>
+<tr class="memdesc:a6532ad36b852dd09d641bcaac2642b9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the offset to the fs_fd to the first open directory entry.  <br /></td></tr>
 <tr class="separator:a6532ad36b852dd09d641bcaac2642b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8434cdce67b1512300f44ed38497c22a" id="r_a8434cdce67b1512300f44ed38497c22a"><td class="memItemLeft" align="right" valign="top">off_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8434cdce67b1512300f44ed38497c22a">does_file_exist2</a> (const char *fname)</td></tr>
+<tr class="memdesc:a8434cdce67b1512300f44ed38497c22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that given a files name, it outputs the offset to the directory entry or negative number if the file isn't found.  <br /></td></tr>
 <tr class="separator:a8434cdce67b1512300f44ed38497c22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addbc36d23ce41b02cb1508bf85ca24e2" id="r_addbc36d23ce41b02cb1508bf85ca24e2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addbc36d23ce41b02cb1508bf85ca24e2">get_first_empty_fat_index</a> ()</td></tr>
+<tr class="memdesc:addbc36d23ce41b02cb1508bf85ca24e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds and returns the first empty fat index marked as 0x0000.  <br /></td></tr>
 <tr class="separator:addbc36d23ce41b02cb1508bf85ca24e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d501c304eeba5035c83c1e2a4aec4fb" id="r_a2d501c304eeba5035c83c1e2a4aec4fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d501c304eeba5035c83c1e2a4aec4fb">lseek_to_root_directory</a> ()</td></tr>
+<tr class="memdesc:a2d501c304eeba5035c83c1e2a4aec4fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">lseek the file system's offset to the start of the root directory.  <br /></td></tr>
 <tr class="separator:a2d501c304eeba5035c83c1e2a4aec4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe5ffc180d9fc063efc7127d14378b54" id="r_abe5ffc180d9fc063efc7127d14378b54"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe5ffc180d9fc063efc7127d14378b54">get_file_descriptor</a> (int fd)</td></tr>
+<tr class="memdesc:abe5ffc180d9fc063efc7127d14378b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the file descriptor struct for the given file descriptor number.  <br /></td></tr>
 <tr class="separator:abe5ffc180d9fc063efc7127d14378b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25ad4d01d5ade905b2bfce04910a5c0d" id="r_a25ad4d01d5ade905b2bfce04910a5c0d"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25ad4d01d5ade905b2bfce04910a5c0d">create_file_descriptor</a> (int fd, char *fname, int mode, int offset)</td></tr>
+<tr class="memdesc:a25ad4d01d5ade905b2bfce04910a5c0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="../../d1/d06/structfile__descriptor__st.html" title="This structure stores all required information about the file descriptor.">file_descriptor_st</a> struct, initialized with the values provided by the parameters. For more information of the parameters, refer to struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html" title="This structure stores all required information about the file descriptor.">file_descriptor_st</a>.  <br /></td></tr>
 <tr class="separator:a25ad4d01d5ade905b2bfce04910a5c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fd2d5dba8f5f42be13d549b0e08a3ad" id="r_a3fd2d5dba8f5f42be13d549b0e08a3ad"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d8/d68/structdirectory__entries.html">directory_entries</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fd2d5dba8f5f42be13d549b0e08a3ad">create_directory_entry</a> (const char *name, uint32_t size, uint16_t firstBlock, uint8_t type, uint8_t perm, time_t mtime)</td></tr>
+<tr class="memdesc:a3fd2d5dba8f5f42be13d549b0e08a3ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="../../d8/d68/structdirectory__entries.html" title="This structure stores all required information about the directory entries that are stored in the roo...">directory_entries</a> struct, initialized with the values provided by the parameters. For more information of the parameters, refer to struct <a class="el" href="../../d8/d68/structdirectory__entries.html" title="This structure stores all required information about the directory entries that are stored in the roo...">directory_entries</a>.  <br /></td></tr>
 <tr class="separator:a3fd2d5dba8f5f42be13d549b0e08a3ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1951ec11865274b45144d6dd6f878692" id="r_a1951ec11865274b45144d6dd6f878692"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1951ec11865274b45144d6dd6f878692">k_read</a> (int fd, int n, char *buf)</td></tr>
+<tr class="memdesc:a1951ec11865274b45144d6dd6f878692"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read n bytes from the file referenced by fd. On return, k_read returns the number of bytes read, 0 if EOF is reached, or a negative number on error.  <br /></td></tr>
 <tr class="separator:a1951ec11865274b45144d6dd6f878692"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a580177591867f52c90932219a6c29e71" id="r_a580177591867f52c90932219a6c29e71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a580177591867f52c90932219a6c29e71">extend_fat</a> (int start_index, int empty_fat_index)</td></tr>
+<tr class="memdesc:a580177591867f52c90932219a6c29e71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extend the fat region of the given file (marked by the <code>start_index</code> ) by one block.  <br /></td></tr>
 <tr class="separator:a580177591867f52c90932219a6c29e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83562583c4bda73b3c02691374ed1655" id="r_a83562583c4bda73b3c02691374ed1655"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83562583c4bda73b3c02691374ed1655">write_one_byte_in_while</a> (int bytes_left, int size, int true_offset, int *size_increment, int *bytes_written, int *current_offset, const char *str, uint16_t firstBlock)</td></tr>
 <tr class="separator:a83562583c4bda73b3c02691374ed1655"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07773059737a331913ba55c458fbaccd" id="r_a07773059737a331913ba55c458fbaccd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07773059737a331913ba55c458fbaccd">update_directory_entry_after_write</a> (struct <a class="el" href="../../d8/d68/structdirectory__entries.html">directory_entries</a> *curr_de, char *fname, int bytes_written)</td></tr>
 <tr class="separator:a07773059737a331913ba55c458fbaccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79d2a9b65d0e04de358fe1a2cfa79baf" id="r_a79d2a9b65d0e04de358fe1a2cfa79baf"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79d2a9b65d0e04de358fe1a2cfa79baf">k_write</a> (int fd, const char *str, int n)</td></tr>
+<tr class="memdesc:a79d2a9b65d0e04de358fe1a2cfa79baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write n bytes of the string referenced by str to the file fd and increment the file pointer by n. On return, k_write returns the number of bytes written, or a negative value on error.  <br /></td></tr>
 <tr class="separator:a79d2a9b65d0e04de358fe1a2cfa79baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7f9a41e9fb0fdf97403eff276990e1f" id="r_af7f9a41e9fb0fdf97403eff276990e1f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7f9a41e9fb0fdf97403eff276990e1f">k_count_fd_num</a> (const char *name)</td></tr>
+<tr class="memdesc:af7f9a41e9fb0fdf97403eff276990e1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of currently open in the global_fd_table with the <code>name</code> as the fname.  <br /></td></tr>
 <tr class="separator:af7f9a41e9fb0fdf97403eff276990e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ecd38dc6f3a9721ab53ff9a815b5480" id="r_a9ecd38dc6f3a9721ab53ff9a815b5480"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ecd38dc6f3a9721ab53ff9a815b5480">k_close</a> (int fd)</td></tr>
+<tr class="memdesc:a9ecd38dc6f3a9721ab53ff9a815b5480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the file fd and return 0 on success, or a negative value on failure.  <br /></td></tr>
 <tr class="separator:a9ecd38dc6f3a9721ab53ff9a815b5480"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8b44b3621ebb542bec49f73d19d2885" id="r_ae8b44b3621ebb542bec49f73d19d2885"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8b44b3621ebb542bec49f73d19d2885">k_unlink</a> (const char *fname)</td></tr>
+<tr class="memdesc:ae8b44b3621ebb542bec49f73d19d2885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the file by freeing the FAT table and zeroing out previously existing data.  <br /></td></tr>
 <tr class="separator:ae8b44b3621ebb542bec49f73d19d2885"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a332b4729ef52b2a3132b1aea88fa5c96" id="r_a332b4729ef52b2a3132b1aea88fa5c96"><td class="memItemLeft" align="right" valign="top">off_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a332b4729ef52b2a3132b1aea88fa5c96">k_lseek</a> (int fd, int offset, int whence)</td></tr>
+<tr class="memdesc:a332b4729ef52b2a3132b1aea88fa5c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reposition the file pointer for fd to the offset relative to whence. Refer to lseek(2) for how whence interacts with the file offset. If the newly calculated offset is creater than the current size of the file, the file expands to match that offset with the newly allocated space filled with 0s.  <br /></td></tr>
 <tr class="separator:a332b4729ef52b2a3132b1aea88fa5c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4760215b7653953e799d8489ca88be8e" id="r_a4760215b7653953e799d8489ca88be8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4760215b7653953e799d8489ca88be8e">generate_permission</a> (uint8_t perm, char **permissions)</td></tr>
 <tr class="separator:a4760215b7653953e799d8489ca88be8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2e67755671ac41b267522c63e52a7ba" id="r_af2e67755671ac41b267522c63e52a7ba"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2e67755671ac41b267522c63e52a7ba">formatTime</a> (time_t t)</td></tr>
 <tr class="separator:af2e67755671ac41b267522c63e52a7ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9317fe11a36bfc2d731bcbacc3a57728" id="r_a9317fe11a36bfc2d731bcbacc3a57728"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9317fe11a36bfc2d731bcbacc3a57728">k_ls</a> (const char *filename)</td></tr>
-<tr class="separator:a9317fe11a36bfc2d731bcbacc3a57728"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f444f05860d0b719fef5252d58e206e" id="r_a9f444f05860d0b719fef5252d58e206e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f444f05860d0b719fef5252d58e206e">k_update_timestamp</a> (const char *source)</td></tr>
-<tr class="separator:a9f444f05860d0b719fef5252d58e206e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac41ad0b4fad0417ca8009c0475a8fb45" id="r_ac41ad0b4fad0417ca8009c0475a8fb45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac41ad0b4fad0417ca8009c0475a8fb45">k_rename</a> (const char *source, const char *dest)</td></tr>
-<tr class="separator:ac41ad0b4fad0417ca8009c0475a8fb45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a244379d41a5f93e98ab32fb999982696" id="r_a244379d41a5f93e98ab32fb999982696"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a244379d41a5f93e98ab32fb999982696">k_change_mode</a> (const char *change, const char *filename)</td></tr>
-<tr class="separator:a244379d41a5f93e98ab32fb999982696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a03cfc7e106d29d54196f03557b9ba" id="r_aa1a03cfc7e106d29d54196f03557b9ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1a03cfc7e106d29d54196f03557b9ba">k_ls</a> (const char *filename, int fd)</td></tr>
+<tr class="memdesc:aa1a03cfc7e106d29d54196f03557b9ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">List the file filename in the current directory. If filename is NULL, list all files in the current directory.  <br /></td></tr>
+<tr class="separator:aa1a03cfc7e106d29d54196f03557b9ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf487212da5b9d6ebceef678fa744ad9" id="r_abf487212da5b9d6ebceef678fa744ad9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf487212da5b9d6ebceef678fa744ad9">k_update_timestamp</a> (const char *source)</td></tr>
+<tr class="memdesc:abf487212da5b9d6ebceef678fa744ad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the timestamp of the file to the current time.  <br /></td></tr>
+<tr class="separator:abf487212da5b9d6ebceef678fa744ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85eace193c41193d1646af1a8b943200" id="r_a85eace193c41193d1646af1a8b943200"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85eace193c41193d1646af1a8b943200">k_rename</a> (const char *source, const char *dest)</td></tr>
+<tr class="memdesc:a85eace193c41193d1646af1a8b943200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rename <code>source</code> to <code>dest</code>.  <br /></td></tr>
+<tr class="separator:a85eace193c41193d1646af1a8b943200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4e9851dc3cbc61a9f8ffd36b94b9938" id="r_ad4e9851dc3cbc61a9f8ffd36b94b9938"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4e9851dc3cbc61a9f8ffd36b94b9938">k_change_mode</a> (const char *change, const char *filename)</td></tr>
+<tr class="memdesc:ad4e9851dc3cbc61a9f8ffd36b94b9938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change file mode bits.  <br /></td></tr>
+<tr class="separator:ad4e9851dc3cbc61a9f8ffd36b94b9938"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08194e0542962e4d980cd9278f33c7f5" id="r_a08194e0542962e4d980cd9278f33c7f5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08194e0542962e4d980cd9278f33c7f5">k_read_all</a> (const char *filename, int *read_num)</td></tr>
+<tr class="memdesc:a08194e0542962e4d980cd9278f33c7f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all contents from the file with the file name <code>filename</code>. Outputs the contents as well as update <code>read_num</code> to the number of bytes read.  <br /></td></tr>
 <tr class="separator:a08194e0542962e4d980cd9278f33c7f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6d6a9bc81e4cf0788c8f1de39999c22" id="r_af6d6a9bc81e4cf0788c8f1de39999c22"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6d6a9bc81e4cf0788c8f1de39999c22">k_get_fname_from_fd</a> (int fd)</td></tr>
+<tr class="memdesc:af6d6a9bc81e4cf0788c8f1de39999c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the filename for the given file descriptor number.  <br /></td></tr>
+<tr class="separator:af6d6a9bc81e4cf0788c8f1de39999c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82daa98d4c392b4249bfbc975be22daa" id="r_a82daa98d4c392b4249bfbc975be22daa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82daa98d4c392b4249bfbc975be22daa">k_cp_within_fat</a> (char *source, char *dest)</td></tr>
+<tr class="memdesc:a82daa98d4c392b4249bfbc975be22daa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the contents from <code>source</code> to <code>dest</code>. Both <code>source</code> and <code>dest</code> must be files within the PENNFAT system.  <br /></td></tr>
+<tr class="separator:a82daa98d4c392b4249bfbc975be22daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaad024bf5305fa73db8c92084f8a1df0" id="r_aaad024bf5305fa73db8c92084f8a1df0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaad024bf5305fa73db8c92084f8a1df0">k_cp_to_host</a> (char *source, char *host_dest)</td></tr>
+<tr class="memdesc:aaad024bf5305fa73db8c92084f8a1df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the contents from <code>source</code> to <code>host_dest</code> <code>source</code> must be a file within the PENNFAT system. <code>host_dest</code> is a host system file.  <br /></td></tr>
+<tr class="separator:aaad024bf5305fa73db8c92084f8a1df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90de0cbbfd37f924016dd07d60d38853" id="r_a90de0cbbfd37f924016dd07d60d38853"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90de0cbbfd37f924016dd07d60d38853">k_cp_from_host</a> (char *host_source, char *dest)</td></tr>
+<tr class="memdesc:a90de0cbbfd37f924016dd07d60d38853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the contents from <code>host_source</code> to <code>dest</code>. <code>dest</code> must be a file within the PENNFAT system. <code>host_source</code> is a host system file.  <br /></td></tr>
+<tr class="separator:a90de0cbbfd37f924016dd07d60d38853"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a0e52a1a113ded7f4787290edc22ad954" id="r_a0e52a1a113ded7f4787290edc22ad954"><td class="memItemLeft" align="right" valign="top">uint16_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e52a1a113ded7f4787290edc22ad954">fat</a> = NULL</td></tr>
+<tr class="memdesc:a0e52a1a113ded7f4787290edc22ad954"><td class="mdescLeft">&#160;</td><td class="mdescRight">PennFAT filesystem that has been mounted to memory using the mmap(2).  <br /></td></tr>
 <tr class="separator:a0e52a1a113ded7f4787290edc22ad954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa044c9a05adf7c4c653586036be5bd7" id="r_aaa044c9a05adf7c4c653586036be5bd7"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa044c9a05adf7c4c653586036be5bd7">global_fd_table</a> = NULL</td></tr>
-<tr class="separator:aaa044c9a05adf7c4c653586036be5bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07afa4cbf62f3ce8292a6ddbcb37c8fc" id="r_a07afa4cbf62f3ce8292a6ddbcb37c8fc"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07afa4cbf62f3ce8292a6ddbcb37c8fc">global_fd_table</a> = NULL</td></tr>
+<tr class="memdesc:a07afa4cbf62f3ce8292a6ddbcb37c8fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kernel level global file descriptor table that stores all file descriptor that has been created through out the program's runtime.  <br /></td></tr>
+<tr class="separator:a07afa4cbf62f3ce8292a6ddbcb37c8fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64b57b29bcc87a7b1967c7d55e7d4212" id="r_a64b57b29bcc87a7b1967c7d55e7d4212"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64b57b29bcc87a7b1967c7d55e7d4212">fs_fd</a> = -1</td></tr>
+<tr class="memdesc:a64b57b29bcc87a7b1967c7d55e7d4212"><td class="mdescLeft">&#160;</td><td class="mdescRight">File descriptor number (host system level) for the filesystem that has been mounted to the program.  <br /></td></tr>
 <tr class="separator:a64b57b29bcc87a7b1967c7d55e7d4212"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70b27761c7d0bd5cd90f4fe47e569b94" id="r_a70b27761c7d0bd5cd90f4fe47e569b94"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70b27761c7d0bd5cd90f4fe47e569b94">block_size</a> = 0</td></tr>
+<tr class="memdesc:a70b27761c7d0bd5cd90f4fe47e569b94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Block size of the currently mounted filesystem that is defined during the mkfs process.  <br /></td></tr>
 <tr class="separator:a70b27761c7d0bd5cd90f4fe47e569b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a5f2839b4852a1e8b5c0b10ec6caa5b" id="r_a6a5f2839b4852a1e8b5c0b10ec6caa5b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a5f2839b4852a1e8b5c0b10ec6caa5b">fat_size</a> = 0</td></tr>
+<tr class="memdesc:a6a5f2839b4852a1e8b5c0b10ec6caa5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">FAT region size of the currently mounted filesystem.  <br /></td></tr>
 <tr class="separator:a6a5f2839b4852a1e8b5c0b10ec6caa5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af866bcf6c2272c2f6b1b7e5ad3a2e127" id="r_af866bcf6c2272c2f6b1b7e5ad3a2e127"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af866bcf6c2272c2f6b1b7e5ad3a2e127">num_fat_entries</a> = 0</td></tr>
+<tr class="memdesc:af866bcf6c2272c2f6b1b7e5ad3a2e127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculated value of the total number of FAT entries within the currently mounted filesystem.  <br /></td></tr>
 <tr class="separator:af866bcf6c2272c2f6b1b7e5ad3a2e127"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af69e180c878a9c8f4e45ec7dc25a062f" id="r_af69e180c878a9c8f4e45ec7dc25a062f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af69e180c878a9c8f4e45ec7dc25a062f">data_size</a> = 0</td></tr>
+<tr class="memdesc:af69e180c878a9c8f4e45ec7dc25a062f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculated data region size of the currently mounted filesystem.  <br /></td></tr>
 <tr class="separator:af69e180c878a9c8f4e45ec7dc25a062f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5dda65dc446f15f9c0449ca2d9e82b1" id="r_ab5dda65dc446f15f9c0449ca2d9e82b1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5dda65dc446f15f9c0449ca2d9e82b1">fd_counter</a> = 3</td></tr>
 <tr class="separator:ab5dda65dc446f15f9c0449ca2d9e82b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -204,6 +244,20 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Creates a new <a class="el" href="../../d8/d68/structdirectory__entries.html" title="This structure stores all required information about the directory entries that are stored in the roo...">directory_entries</a> struct, initialized with the values provided by the parameters. For more information of the parameters, refer to struct <a class="el" href="../../d8/d68/structdirectory__entries.html" title="This structure stores all required information about the directory entries that are stored in the roo...">directory_entries</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of the file. </td></tr>
+    <tr><td class="paramname">size</td><td>Size of the current file. </td></tr>
+    <tr><td class="paramname">firstBlock</td><td>First FAT block number. </td></tr>
+    <tr><td class="paramname">type</td><td>Type of the file. </td></tr>
+    <tr><td class="paramname">perm</td><td>Permission of the file. </td></tr>
+    <tr><td class="paramname">mtime</td><td>Last modified time.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A newly created <a class="el" href="../../d8/d68/structdirectory__entries.html" title="This structure stores all required information about the directory entries that are stored in the roo...">directory_entries</a> struct. NULL on memory allocation error. </dd></dl>
+
 </div>
 </div>
 <a id="a25ad4d01d5ade905b2bfce04910a5c0d" name="a25ad4d01d5ade905b2bfce04910a5c0d"></a>
@@ -235,6 +289,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Creates a new <a class="el" href="../../d1/d06/structfile__descriptor__st.html" title="This structure stores all required information about the file descriptor.">file_descriptor_st</a> struct, initialized with the values provided by the parameters. For more information of the parameters, refer to struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html" title="This structure stores all required information about the file descriptor.">file_descriptor_st</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>File descriptor number. </td></tr>
+    <tr><td class="paramname">fname</td><td>Name of the file. </td></tr>
+    <tr><td class="paramname">mode</td><td>Either F_WRITE, F_READ, F_APPEND. </td></tr>
+    <tr><td class="paramname">offset</td><td>Offset to the start of the file.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A newly created <a class="el" href="../../d1/d06/structfile__descriptor__st.html" title="This structure stores all required information about the file descriptor.">file_descriptor_st</a> struct. NULL on memory allocation error. </dd></dl>
+
 </div>
 </div>
 <a id="a78d95341bbd2b21ed69dd341ff47669f" name="a78d95341bbd2b21ed69dd341ff47669f"></a>
@@ -252,6 +318,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>helper that traverses root directory block by block to check if fname file exists return: the directory entry struct with name fname (NULL if not found) also moves fs_fd to the end of the root directory </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fname</td><td>Name of the file that we want to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a8434cdce67b1512300f44ed38497c22a" name="a8434cdce67b1512300f44ed38497c22a"></a>
@@ -268,6 +342,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Helper function that given a files name, it outputs the offset to the directory entry or negative number if the file isn't found. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fname</td><td>Name of the file that we want to check. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -289,6 +371,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Extend the fat region of the given file (marked by the <code>start_index</code> ) by one block. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start_index</td><td>Start fat index for the given file. </td></tr>
+    <tr><td class="paramname">empty_fat_index</td><td>The first empty index of the current FAT table. Should be calculated using <a class="el" href="../../d0/d4d/pennfat__kernel_8h.html#addbc36d23ce41b02cb1508bf85ca24e2" title="Finds and returns the first empty fat index marked as 0x0000.">get_first_empty_fat_index()</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -345,6 +436,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return the file descriptor struct for the given file descriptor number. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>File descriptor number. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="addbc36d23ce41b02cb1508bf85ca24e2" name="addbc36d23ce41b02cb1508bf85ca24e2"></a>
@@ -361,6 +460,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Finds and returns the first empty fat index marked as 0x0000. </p>
+<dl class="section return"><dt>Returns</dt><dd>first empty fat index. </dd></dl>
 
 </div>
 </div>
@@ -379,16 +481,25 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Checks whether the filename follows the POSIX standard. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Filename.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if valid. False otherwise. </dd></dl>
+
 </div>
 </div>
-<a id="a244379d41a5f93e98ab32fb999982696" name="a244379d41a5f93e98ab32fb999982696"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a244379d41a5f93e98ab32fb999982696">&#9670;&#160;</a></span>k_change_mode()</h2>
+<a id="ad4e9851dc3cbc61a9f8ffd36b94b9938" name="ad4e9851dc3cbc61a9f8ffd36b94b9938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4e9851dc3cbc61a9f8ffd36b94b9938">&#9670;&#160;</a></span>k_change_mode()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void k_change_mode </td>
+          <td class="memname">int k_change_mode </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>change</em>, </span></td>
         </tr>
@@ -399,6 +510,17 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Change file mode bits. </p>
+<p>The operator + causes the selected file mode bits to be added to the existing file mode bits of each file; - causes them to be removed.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">change</td><td>String that determines how the bits are modified. </td></tr>
+    <tr><td class="paramname">filename</td><td>Name of the file.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 on success. Negative number on failure. </dd></dl>
 
 </div>
 </div>
@@ -416,13 +538,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Close the file fd and return 0 on success, or a negative value on failure. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fd</td><td></td></tr>
+    <tr><td class="paramname">fd</td><td>File descriptor number that needs to be closed </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, or a negative value on failure. </dd></dl>
 
 </div>
 </div>
@@ -441,10 +565,140 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns the number of currently open in the global_fd_table with the <code>name</code> as the fname. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of the file that we want to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a id="a9317fe11a36bfc2d731bcbacc3a57728" name="a9317fe11a36bfc2d731bcbacc3a57728"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9317fe11a36bfc2d731bcbacc3a57728">&#9670;&#160;</a></span>k_ls()</h2>
+<a id="a90de0cbbfd37f924016dd07d60d38853" name="a90de0cbbfd37f924016dd07d60d38853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90de0cbbfd37f924016dd07d60d38853">&#9670;&#160;</a></span>k_cp_from_host()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int k_cp_from_host </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>host_source</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copies the contents from <code>host_source</code> to <code>dest</code>. <code>dest</code> must be a file within the PENNFAT system. <code>host_source</code> is a host system file. </p>
+<p><code>host_source</code> must exist. If <code>dest</code> does not exist, it will be newly created.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">host_source</td><td>File name of source. Must be a host system file. </td></tr>
+    <tr><td class="paramname">dest</td><td>File name of dest. Must be a PennFAT file.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 on success. Negative number on failure. </dd></dl>
+
+</div>
+</div>
+<a id="aaad024bf5305fa73db8c92084f8a1df0" name="aaad024bf5305fa73db8c92084f8a1df0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaad024bf5305fa73db8c92084f8a1df0">&#9670;&#160;</a></span>k_cp_to_host()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int k_cp_to_host </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>source</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>host_dest</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copies the contents from <code>source</code> to <code>host_dest</code> <code>source</code> must be a file within the PENNFAT system. <code>host_dest</code> is a host system file. </p>
+<p><code>source</code> must exist. If <code>host_dest</code> does not exist, it will be newly created.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>File name of source. Must be a PennFAT file. </td></tr>
+    <tr><td class="paramname">host_dest</td><td>File name of dest. Must be a host system file.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 on success. Negative number on failure. </dd></dl>
+
+</div>
+</div>
+<a id="a82daa98d4c392b4249bfbc975be22daa" name="a82daa98d4c392b4249bfbc975be22daa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82daa98d4c392b4249bfbc975be22daa">&#9670;&#160;</a></span>k_cp_within_fat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int k_cp_within_fat </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>source</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copies the contents from <code>source</code> to <code>dest</code>. Both <code>source</code> and <code>dest</code> must be files within the PENNFAT system. </p>
+<p><code>source</code> must exist. If <code>dest</code> does not exist, it will be newly created.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>File name of source. Must be a PennFAT file. </td></tr>
+    <tr><td class="paramname">dest</td><td>File name of dest. Must be a PennFAT file.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 on success. Negative number on failure. </dd></dl>
+
+</div>
+</div>
+<a id="af6d6a9bc81e4cf0788c8f1de39999c22" name="af6d6a9bc81e4cf0788c8f1de39999c22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6d6a9bc81e4cf0788c8f1de39999c22">&#9670;&#160;</a></span>k_get_fname_from_fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * k_get_fname_from_fd </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the filename for the given file descriptor number. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>The file descriptor number.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The file name of the <code>fd</code> . NULL is <code>fd</code> is invalid. </dd></dl>
+
+</div>
+</div>
+<a id="aa1a03cfc7e106d29d54196f03557b9ba" name="aa1a03cfc7e106d29d54196f03557b9ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1a03cfc7e106d29d54196f03557b9ba">&#9670;&#160;</a></span>k_ls()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -452,14 +706,22 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void k_ls </td>
           <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>List the file filename in the current directory. If filename is NULL, list all files in the current directory. </p>
+<p>Similar to posix ls.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td></td></tr>
+    <tr><td class="paramname">filename</td><td>Optional parameter. If specified, ls data for the specified file is printed </td></tr>
+    <tr><td class="paramname">fd</td><td>The file descriptor you want to write the result of k_ls to </td></tr>
   </table>
   </dd>
 </dl>
@@ -489,15 +751,17 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reposition the file pointer for fd to the offset relative to whence. Refer to lseek(2) for how whence interacts with the file offset. If the newly calculated offset is creater than the current size of the file, the file expands to match that offset with the newly allocated space filled with 0s. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fd</td><td></td></tr>
-    <tr><td class="paramname">offset</td><td></td></tr>
-    <tr><td class="paramname">whence</td><td></td></tr>
+    <tr><td class="paramname">fd</td><td>File descriptor number </td></tr>
+    <tr><td class="paramname">offset</td><td>Offset value </td></tr>
+    <tr><td class="paramname">whence</td><td>F_SEEK_SET, F_SEEK_CUR, and F_SEEK_END. Follows the lseek(2) whence mode.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>off_t </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>off_t Newly calculated offset for <code>fd</code> </dd></dl>
 
 </div>
 </div>
@@ -562,15 +826,17 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Read n bytes from the file referenced by fd. On return, k_read returns the number of bytes read, 0 if EOF is reached, or a negative number on error. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fd</td><td>A </td></tr>
-    <tr><td class="paramname">n</td><td></td></tr>
-    <tr><td class="paramname">buf</td><td></td></tr>
+    <tr><td class="paramname">fd</td><td>File descriptor number we are reading from </td></tr>
+    <tr><td class="paramname">n</td><td>Number of bytes we are reading from <code>fd</code> </td></tr>
+    <tr><td class="paramname">buf</td><td>Buffer where we store the read value</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t the number of bytes read, 0 if EOF is reached, or a negative number on error </dd></dl>
 
 </div>
 </div>
@@ -593,16 +859,26 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Reads all contents from the file with the file name <code>filename</code>. Outputs the contents as well as update <code>read_num</code> to the number of bytes read. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Name of the file we want to read from. </td></tr>
+    <tr><td class="paramname">read_num</td><td>Pointer to an integer variable that will store the number of bytes read.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>All contents of <code>filename</code> in char* format. </dd></dl>
+
 </div>
 </div>
-<a id="ac41ad0b4fad0417ca8009c0475a8fb45" name="ac41ad0b4fad0417ca8009c0475a8fb45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac41ad0b4fad0417ca8009c0475a8fb45">&#9670;&#160;</a></span>k_rename()</h2>
+<a id="a85eace193c41193d1646af1a8b943200" name="a85eace193c41193d1646af1a8b943200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85eace193c41193d1646af1a8b943200">&#9670;&#160;</a></span>k_rename()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void k_rename </td>
+          <td class="memname">int k_rename </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>source</em>, </span></td>
         </tr>
@@ -613,6 +889,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Rename <code>source</code> to <code>dest</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>Source file name. </td></tr>
+    <tr><td class="paramname">dest</td><td>Destination file name.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 on success. Negative number on failure. </dd></dl>
 
 </div>
 </div>
@@ -630,30 +916,41 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Remove the file by freeing the FAT table and zeroing out previously existing data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fname</td><td></td></tr>
+    <tr><td class="paramname">fname</td><td>Name of the file we want to remove.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>1 on success. Negative value of failure. </dd></dl>
 
 </div>
 </div>
-<a id="a9f444f05860d0b719fef5252d58e206e" name="a9f444f05860d0b719fef5252d58e206e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f444f05860d0b719fef5252d58e206e">&#9670;&#160;</a></span>k_update_timestamp()</h2>
+<a id="abf487212da5b9d6ebceef678fa744ad9" name="abf487212da5b9d6ebceef678fa744ad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf487212da5b9d6ebceef678fa744ad9">&#9670;&#160;</a></span>k_update_timestamp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void k_update_timestamp </td>
+          <td class="memname">int k_update_timestamp </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>source</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Change the timestamp of the file to the current time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>Source file name.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 on success. Negative number on failure. </dd></dl>
 
 </div>
 </div>
@@ -680,15 +977,17 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Write n bytes of the string referenced by str to the file fd and increment the file pointer by n. On return, k_write returns the number of bytes written, or a negative value on error. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fd</td><td></td></tr>
-    <tr><td class="paramname">str</td><td></td></tr>
-    <tr><td class="paramname">n</td><td></td></tr>
+    <tr><td class="paramname">fd</td><td>File descriptor number we are reading to </td></tr>
+    <tr><td class="paramname">str</td><td>Provided string we want to write to <code>fd</code> </td></tr>
+    <tr><td class="paramname">n</td><td>Number of bytes we are writing</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t number of bytes written, or a negative value on error. </dd></dl>
 
 </div>
 </div>
@@ -707,6 +1006,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>lseek the file system's offset to the start of the root directory. </p>
+
 </div>
 </div>
 <a id="a6532ad36b852dd09d641bcaac2642b9b" name="a6532ad36b852dd09d641bcaac2642b9b"></a>
@@ -723,6 +1024,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Change the offset to the fs_fd to the first open directory entry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">found</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -833,6 +1142,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Block size of the currently mounted filesystem that is defined during the mkfs process. </p>
+
 </div>
 </div>
 <a id="af69e180c878a9c8f4e45ec7dc25a062f" name="af69e180c878a9c8f4e45ec7dc25a062f"></a>
@@ -846,6 +1157,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Calculated data region size of the currently mounted filesystem. </p>
 
 </div>
 </div>
@@ -861,6 +1174,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>PennFAT filesystem that has been mounted to memory using the mmap(2). </p>
+
 </div>
 </div>
 <a id="a6a5f2839b4852a1e8b5c0b10ec6caa5b" name="a6a5f2839b4852a1e8b5c0b10ec6caa5b"></a>
@@ -874,6 +1189,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>FAT region size of the currently mounted filesystem. </p>
 
 </div>
 </div>
@@ -903,19 +1220,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>File descriptor number (host system level) for the filesystem that has been mounted to the program. </p>
+
 </div>
 </div>
-<a id="aaa044c9a05adf7c4c653586036be5bd7" name="aaa044c9a05adf7c4c653586036be5bd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa044c9a05adf7c4c653586036be5bd7">&#9670;&#160;</a></span>global_fd_table</h2>
+<a id="a07afa4cbf62f3ce8292a6ddbcb37c8fc" name="a07afa4cbf62f3ce8292a6ddbcb37c8fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07afa4cbf62f3ce8292a6ddbcb37c8fc">&#9670;&#160;</a></span>global_fd_table</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a>* global_fd_table = NULL</td>
+          <td class="memname">struct <a class="el" href="../../d1/d06/structfile__descriptor__st.html">file_descriptor_st</a>** global_fd_table = NULL</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Kernel level global file descriptor table that stores all file descriptor that has been created through out the program's runtime. </p>
 
 </div>
 </div>
@@ -930,6 +1251,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Calculated value of the total number of FAT entries within the currently mounted filesystem. </p>
 
 </div>
 </div>

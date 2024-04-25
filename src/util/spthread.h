@@ -113,6 +113,8 @@ int spthread_suspend_self();
 // - ESRCH if the thread specified is not a valid pthread
 int spthread_continue(spthread_t thread);
 
+void cancel_and_join(spthread_t thread);
+
 // The spthread_cancel function will send a
 // cancellation request to the specified thread.
 //

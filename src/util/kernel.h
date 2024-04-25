@@ -8,7 +8,7 @@
 #include "globals.h"
 #include "spthread.h"
 #include "stdlib.h"
-#include "syscall.h"
+#include "sys_call.h"
 
 /**
  * @enum process_state_t
@@ -85,6 +85,8 @@ typedef struct pcb_t {
                             (0, 1, or 2). */
   process_state_t
       state; /** @brief This is an enum storing the process's current state.*/
+  process_state_t initial_state; /** @brief This is an enum storing the
+                                    process's initial state for bg fg.*/
   FD_Bitmap* open_fds; /** @brief This stores a bitmap containg all open file
                           descriptors.*/
 
@@ -108,7 +110,7 @@ typedef struct pcb_t {
 
   char* processname; /** @brief Name of process, to be used for logging and ps*/
 
-  bool bg_done; /** @brief To signal whether or not the processor in background
+  bool is_bg; /** @brief To signal whether or not the processor in background
                                   is terminated */
 
   u_int64_t job_num; /** @brief The command name that this processor has */

@@ -38,9 +38,14 @@
 \DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{kernel_8h}{util/kernel.h}}"{}}}
 \DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{shellbuiltins_8h}{util/shellbuiltins.h}}"{}}}
 \DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sys__call_8h}{util/sys\_call.h}}"{}}}
-\DoxyCodeLine{00037\ }
-\DoxyCodeLine{00038\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ done\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{stress_8h}{util/stress.h}}"{}}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ done\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{static}\ pthread\_mutex\_t\ done\_lock;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8h_afc52712119cc00e63fc2748f652cfbac}{b\_output\_redir}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structparsed__command}{parsed\_command}}*\ parsed);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

@@ -110,12 +110,16 @@ Typedefs</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a40af759c666c8683b21e533eae304bd5" id="r_a40af759c666c8683b21e533eae304bd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40af759c666c8683b21e533eae304bd5">init_list</a> (void)</td></tr>
 <tr class="separator:a40af759c666c8683b21e533eae304bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeedee99ef47d460de79eebe5bcf19d83" id="r_aeedee99ef47d460de79eebe5bcf19d83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeedee99ef47d460de79eebe5bcf19d83">add_process</a> (<a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *list, <a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *process)</td></tr>
-<tr class="separator:aeedee99ef47d460de79eebe5bcf19d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa502493a1fe088e8763033dcc4fc4839" id="r_aa502493a1fe088e8763033dcc4fc4839"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa502493a1fe088e8763033dcc4fc4839">add_process</a> (<a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *list, <a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *process)</td></tr>
+<tr class="separator:aa502493a1fe088e8763033dcc4fc4839"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65cec0c339fb28e407b3c42a9108a53b" id="r_a65cec0c339fb28e407b3c42a9108a53b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65cec0c339fb28e407b3c42a9108a53b">add_process_front</a> (<a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *list, <a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *process)</td></tr>
+<tr class="separator:a65cec0c339fb28e407b3c42a9108a53b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d27d9f54d9189fe8149a2d8cb8baa24" id="r_a6d27d9f54d9189fe8149a2d8cb8baa24"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d27d9f54d9189fe8149a2d8cb8baa24">remove_process</a> (<a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *list, pid_t pid)</td></tr>
 <tr class="separator:a6d27d9f54d9189fe8149a2d8cb8baa24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43d3a5a52f3e2c3d607e50ac257cb67b" id="r_a43d3a5a52f3e2c3d607e50ac257cb67b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43d3a5a52f3e2c3d607e50ac257cb67b">find_process</a> (<a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *list, pid_t pid)</td></tr>
 <tr class="separator:a43d3a5a52f3e2c3d607e50ac257cb67b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde8f3d4e1dd02b36cf5b7d2c3ac7b5e" id="r_afde8f3d4e1dd02b36cf5b7d2c3ac7b5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afde8f3d4e1dd02b36cf5b7d2c3ac7b5e">find_process_job_id</a> (<a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *list, u_int64_t index)</td></tr>
+<tr class="separator:afde8f3d4e1dd02b36cf5b7d2c3ac7b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a3b09f37e675bcd48a01bf22155996872" name="a3b09f37e675bcd48a01bf22155996872"></a>
@@ -147,14 +151,14 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aeedee99ef47d460de79eebe5bcf19d83" name="aeedee99ef47d460de79eebe5bcf19d83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeedee99ef47d460de79eebe5bcf19d83">&#9670;&#160;</a></span>add_process()</h2>
+<a id="aa502493a1fe088e8763033dcc4fc4839" name="aa502493a1fe088e8763033dcc4fc4839"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa502493a1fe088e8763033dcc4fc4839">&#9670;&#160;</a></span>add_process()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void add_process </td>
+          <td class="memname">int add_process </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *</td>          <td class="paramname"><span class="paramname"><em>list</em>, </span></td>
         </tr>
@@ -166,6 +170,34 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Adds a new process to the circular linked list. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Pointer to the circular linked list. </td></tr>
+    <tr><td class="paramname">process</td><td>Pointer to the process control block (<a class="el" href="../../dc/d5f/structpcb__t.html" title="This structure stores all required information about a running process.">pcb_t</a>) to add. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a65cec0c339fb28e407b3c42a9108a53b" name="a65cec0c339fb28e407b3c42a9108a53b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65cec0c339fb28e407b3c42a9108a53b">&#9670;&#160;</a></span>add_process_front()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_process_front </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *</td>          <td class="paramname"><span class="paramname"><em>list</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> *</td>          <td class="paramname"><span class="paramname"><em>process</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a new process to the front of circular linked list. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">list</td><td>Pointer to the circular linked list. </td></tr>
     <tr><td class="paramname">process</td><td>Pointer to the process control block (<a class="el" href="../../dc/d5f/structpcb__t.html" title="This structure stores all required information about a running process.">pcb_t</a>) to add. </td></tr>
@@ -197,6 +229,35 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">list</td><td>Pointer to the circular linked list. </td></tr>
     <tr><td class="paramname">pid</td><td>PID of the process to find. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pcb_t* Pointer to the found process control block, or NULL if not found. </dd></dl>
+
+</div>
+</div>
+<a id="afde8f3d4e1dd02b36cf5b7d2c3ac7b5e" name="afde8f3d4e1dd02b36cf5b7d2c3ac7b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afde8f3d4e1dd02b36cf5b7d2c3ac7b5e">&#9670;&#160;</a></span>find_process_job_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/d5f/structpcb__t.html">pcb_t</a> * find_process_job_id </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d82/structCircularList.html">CircularList</a> *</td>          <td class="paramname"><span class="paramname"><em>list</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u_int64_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Finds a process in the circular linked list by its Job ID. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Pointer to the circular linked list. </td></tr>
+    <tr><td class="paramname">index</td><td>Job Id specified by user. </td></tr>
   </table>
   </dd>
 </dl>

@@ -6,4 +6,37 @@
 [   3]	SCHEDULE 	   1	   0		shell
 [   4]	SCHEDULE 	   1	   0		shell
 [   5]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [   6]	SCHEDULE 	   1	   0		shell
+=======
+[   5]	CREATE   	   2	   1		ps
+[   5]	BLOCKED  	   1	   0		shell
+[   6]	SCHEDULE 	   2	   1		ps
+[   6]	EXITED   	   2	   1		ps
+[   6]	ZOMBIE   	   2	   1		ps
+[   7]	UNBLOCKED	   1	   0		shell
+[   7]	SCHEDULE 	   1	   0		shell
+[   7]	WAITED   	   2	   1		ps
+[   8]	SCHEDULE 	   1	   0		shell
+[   9]	SCHEDULE 	   1	   0		shell
+[  10]	SCHEDULE 	   1	   0		shell
+[  11]	SCHEDULE 	   1	   0		shell
+[  12]	SCHEDULE 	   1	   0		shell
+[  13]	SCHEDULE 	   1	   0		shell
+[  14]	SCHEDULE 	   1	   0		shell
+[  15]	SCHEDULE 	   1	   0		shell
+[  16]	SCHEDULE 	   1	   0		shell
+[  17]	SCHEDULE 	   1	   0		shell
+[  18]	SCHEDULE 	   1	   0		shell
+[  19]	SCHEDULE 	   1	   0		shell
+[  20]	SCHEDULE 	   1	   0		shell
+[  21]	SCHEDULE 	   1	   0		shell
+[  22]	SCHEDULE 	   1	   0		shell
+[  23]	SCHEDULE 	   1	   0		shell
+[  24]	SCHEDULE 	   1	   0		shell
+[  25]	SCHEDULE 	   1	   0		shell
+[  26]	SCHEDULE 	   1	   0		shell
+[  27]	SCHEDULE 	   1	   0		shell
+[  27]	EXITED   	   1	   0		shell
+[  27]	ZOMBIE   	   1	   0		shell
+>>>>>>> main

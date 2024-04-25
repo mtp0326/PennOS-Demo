@@ -27,8 +27,12 @@ unsigned int \mbox{\hyperlink{structpcb__t_a2a5d945da32720d61039f315ab64f527}{pr
 \begin{DoxyCompactList}\small\item\em This the priority level of the process. (0, 1, or 2). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structFD__Bitmap}{FD\+\_\+\+Bitmap}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structpcb__t_a53ab4c02de07bcca467dff05771554a0}{open\+\_\+fds}}
 \begin{DoxyCompactList}\small\item\em This is an enum storing the process\textquotesingle{}s current state. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{structpcb__t_a09cd01a482977b7d568726b57e3adeda}{statechanged}}
+int \mbox{\hyperlink{structpcb__t_ad6778a8e4c4755a5b6c0f98d104f9a4a}{input\+\_\+fd}}
 \begin{DoxyCompactList}\small\item\em This stores a bitmap containg all open file descriptors. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structpcb__t_a25cb35b3c96a2dc2876cd983ba65f0ff}{output\+\_\+fd}}
+\begin{DoxyCompactList}\small\item\em The input i/o that his process reads data from. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structpcb__t_a09cd01a482977b7d568726b57e3adeda}{statechanged}}
+\begin{DoxyCompactList}\small\item\em The out i/o that his process writes data to. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{structpcb__t_a649db56ea039615cb6e9a2c9ac0a5059}{exit\+\_\+status}}
 \begin{DoxyCompactList}\small\item\em This contains a bool that keeps track of whether or not the process state has changed. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{structpcb__t_a4e5283318d9e2dd1ab7913420044e65e}{term\+\_\+signal}}
@@ -40,13 +44,39 @@ pid\+\_\+t \mbox{\hyperlink{structpcb__t_ae5e37dd9ae11e9c941410b719ec2e41d}{wait
 unsigned int \mbox{\hyperlink{structpcb__t_a1a470d3da5aa9e6d87d2849d3228239c}{ticks\+\_\+to\+\_\+wait}}
 \begin{DoxyCompactList}\small\item\em PID of the child the process is currently waiting on, or -\/1 if none. \end{DoxyCompactList}\item 
 char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structpcb__t_abc136142080bdf5d6d5f430851e6d052}{processname}}
-\begin{DoxyCompactList}\small\item\em Ticks remaining to wait, used only for s\+\_\+sleep calls. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Ticks remaining to wait, used only for s\+\_\+sleep calls. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structpcb__t_a51e03090ceb30aba480f00adb06ba1b2}{bg\+\_\+done}}
+\begin{DoxyCompactList}\small\item\em Name of process, to be used for logging and ps. \end{DoxyCompactList}\item 
+u\+\_\+int64\+\_\+t \mbox{\hyperlink{structpcb__t_ad6fe13c375b62338dc716826fb1e0da3}{job\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em To signal whether or not the processor in background is terminated. \end{DoxyCompactList}\item 
+char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structpcb__t_a0e0a75a820f11a4b6b670495a8795ec0}{argv}}
+\begin{DoxyCompactList}\small\item\em The command name that this processor has. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 This structure stores all required information about a running process. 
 
 \doxysubsection{Field Documentation}
+\Hypertarget{structpcb__t_a0e0a75a820f11a4b6b670495a8795ec0}\label{structpcb__t_a0e0a75a820f11a4b6b670495a8795ec0} 
+\index{pcb\_t@{pcb\_t}!argv@{argv}}
+\index{argv@{argv}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{argv}{argv}}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} pcb\+\_\+t\+::argv}
+
+
+
+The command name that this processor has. 
+
+\Hypertarget{structpcb__t_a51e03090ceb30aba480f00adb06ba1b2}\label{structpcb__t_a51e03090ceb30aba480f00adb06ba1b2} 
+\index{pcb\_t@{pcb\_t}!bg\_done@{bg\_done}}
+\index{bg\_done@{bg\_done}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{bg\_done}{bg\_done}}
+{\footnotesize\ttfamily bool pcb\+\_\+t\+::bg\+\_\+done}
+
+
+
+Name of process, to be used for logging and ps. 
+
 \Hypertarget{structpcb__t_a905cc6faa7cf99a347e57bebcdf0da5e}\label{structpcb__t_a905cc6faa7cf99a347e57bebcdf0da5e} 
 \index{pcb\_t@{pcb\_t}!child\_pids@{child\_pids}}
 \index{child\_pids@{child\_pids}!pcb\_t@{pcb\_t}}
@@ -73,6 +103,26 @@ This contains a bool that keeps track of whether or not the process state has ch
 \doxysubsubsection{\texorpdfstring{handle}{handle}}
 {\footnotesize\ttfamily \mbox{\hyperlink{spthread_8h_ad5cf274963820ab3f4c332683445ca8d}{spthread\+\_\+t}} pcb\+\_\+t\+::handle}
 
+\Hypertarget{structpcb__t_ad6778a8e4c4755a5b6c0f98d104f9a4a}\label{structpcb__t_ad6778a8e4c4755a5b6c0f98d104f9a4a} 
+\index{pcb\_t@{pcb\_t}!input\_fd@{input\_fd}}
+\index{input\_fd@{input\_fd}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{input\_fd}{input\_fd}}
+{\footnotesize\ttfamily int pcb\+\_\+t\+::input\+\_\+fd}
+
+
+
+This stores a bitmap containg all open file descriptors. 
+
+\Hypertarget{structpcb__t_ad6fe13c375b62338dc716826fb1e0da3}\label{structpcb__t_ad6fe13c375b62338dc716826fb1e0da3} 
+\index{pcb\_t@{pcb\_t}!job\_num@{job\_num}}
+\index{job\_num@{job\_num}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{job\_num}{job\_num}}
+{\footnotesize\ttfamily u\+\_\+int64\+\_\+t pcb\+\_\+t\+::job\+\_\+num}
+
+
+
+To signal whether or not the processor in background is terminated. 
+
 \Hypertarget{structpcb__t_a53ab4c02de07bcca467dff05771554a0}\label{structpcb__t_a53ab4c02de07bcca467dff05771554a0} 
 \index{pcb\_t@{pcb\_t}!open\_fds@{open\_fds}}
 \index{open\_fds@{open\_fds}!pcb\_t@{pcb\_t}}
@@ -82,6 +132,16 @@ This contains a bool that keeps track of whether or not the process state has ch
 
 
 This is an enum storing the process\textquotesingle{}s current state. 
+
+\Hypertarget{structpcb__t_a25cb35b3c96a2dc2876cd983ba65f0ff}\label{structpcb__t_a25cb35b3c96a2dc2876cd983ba65f0ff} 
+\index{pcb\_t@{pcb\_t}!output\_fd@{output\_fd}}
+\index{output\_fd@{output\_fd}!pcb\_t@{pcb\_t}}
+\doxysubsubsection{\texorpdfstring{output\_fd}{output\_fd}}
+{\footnotesize\ttfamily int pcb\+\_\+t\+::output\+\_\+fd}
+
+
+
+The input i/o that his process reads data from. 
 
 \Hypertarget{structpcb__t_afa909915326969a57c5c1bd8b43954d4}\label{structpcb__t_afa909915326969a57c5c1bd8b43954d4} 
 \index{pcb\_t@{pcb\_t}!pid@{pid}}
@@ -142,7 +202,7 @@ This the priority level of the process. (0, 1, or 2).
 
 
 
-This stores a bitmap containg all open file descriptors. 
+The out i/o that his process writes data to. 
 
 \Hypertarget{structpcb__t_a4e5283318d9e2dd1ab7913420044e65e}\label{structpcb__t_a4e5283318d9e2dd1ab7913420044e65e} 
 \index{pcb\_t@{pcb\_t}!term\_signal@{term\_signal}}

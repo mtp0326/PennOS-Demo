@@ -80,6 +80,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>This structure stores all required information about the file descriptor.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../d0/d4d/pennfat__kernel_8h_source.html">pennfat_kernel.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -87,15 +90,21 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a2c4326771436651ee292d87a0bbf91ad" id="r_a2c4326771436651ee292d87a0bbf91ad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c4326771436651ee292d87a0bbf91ad">fd</a></td></tr>
 <tr class="separator:a2c4326771436651ee292d87a0bbf91ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25cb5acb6a5c6e546b04f04cc56ee2be" id="r_a25cb5acb6a5c6e546b04f04cc56ee2be"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25cb5acb6a5c6e546b04f04cc56ee2be">fname</a></td></tr>
+<tr class="memdesc:a25cb5acb6a5c6e546b04f04cc56ee2be"><td class="mdescLeft">&#160;</td><td class="mdescRight">File descriptor number. This is also used as the index for the global_fd_table.  <br /></td></tr>
 <tr class="separator:a25cb5acb6a5c6e546b04f04cc56ee2be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4c53d9cd39f2efd92817d4605911fbf" id="r_af4c53d9cd39f2efd92817d4605911fbf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4c53d9cd39f2efd92817d4605911fbf">mode</a></td></tr>
+<tr class="memdesc:af4c53d9cd39f2efd92817d4605911fbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">File name.  <br /></td></tr>
 <tr class="separator:af4c53d9cd39f2efd92817d4605911fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7e61caeb159b544e2467d9a56e340fa" id="r_af7e61caeb159b544e2467d9a56e340fa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7e61caeb159b544e2467d9a56e340fa">offset</a></td></tr>
+<tr class="memdesc:af7e61caeb159b544e2467d9a56e340fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Either F_WRITE, F_READ, F_OPEN. Refer to k_open for more details.  <br /></td></tr>
 <tr class="separator:af7e61caeb159b544e2467d9a56e340fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97a1e01355076ddbcfa5f90d8de20197" id="r_a97a1e01355076ddbcfa5f90d8de20197"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97a1e01355076ddbcfa5f90d8de20197">ref_cnt</a></td></tr>
+<tr class="memdesc:a97a1e01355076ddbcfa5f90d8de20197"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offset from the start of the file.  <br /></td></tr>
 <tr class="separator:a97a1e01355076ddbcfa5f90d8de20197"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Field Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This structure stores all required information about the file descriptor. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
 <a id="a2c4326771436651ee292d87a0bbf91ad" name="a2c4326771436651ee292d87a0bbf91ad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2c4326771436651ee292d87a0bbf91ad">&#9670;&#160;</a></span>fd</h2>
 
@@ -122,6 +131,8 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>File descriptor number. This is also used as the index for the global_fd_table. </p>
+
 </div>
 </div>
 <a id="af4c53d9cd39f2efd92817d4605911fbf" name="af4c53d9cd39f2efd92817d4605911fbf"></a>
@@ -135,6 +146,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>File name. </p>
 
 </div>
 </div>
@@ -150,6 +163,8 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Either F_WRITE, F_READ, F_OPEN. Refer to k_open for more details. </p>
+
 </div>
 </div>
 <a id="a97a1e01355076ddbcfa5f90d8de20197" name="a97a1e01355076ddbcfa5f90d8de20197"></a>
@@ -163,6 +178,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Offset from the start of the file. </p>
 
 </div>
 </div>
