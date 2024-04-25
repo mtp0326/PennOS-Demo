@@ -1178,7 +1178,7 @@ int k_rename(const char* source, const char* dest) {
 int k_change_mode(const char* change, const char* filename) {
   struct directory_entries* curr_de = does_file_exist(filename);
   if (curr_de == NULL) {
-    perror("k_rename error Error: source file not found");
+    // perror("k_rename error Error: source file not found");
     return FILE_NOT_FOUND;
   }
   does_file_exist2(filename);
@@ -1186,7 +1186,8 @@ int k_change_mode(const char* change, const char* filename) {
 
   if (strcmp(change, "-r") == 0) {
     if (perm == 2 || perm == 5 || perm == 7 || perm == 0) {
-      perror("chmod error Error invalid command");
+      // perror("chmod error Error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 6) {
       perm = 2;
     } else if (perm == 4) {
@@ -1200,7 +1201,8 @@ int k_change_mode(const char* change, const char* filename) {
     }
   } else if (strcmp(change, "-w") == 0) {
     if (perm == 4 || perm == 5 || perm == 0) {
-      perror("chmod error invalid command");
+      // perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 6) {
       perm = 4;
     } else if (perm == 7) {
@@ -1218,7 +1220,8 @@ int k_change_mode(const char* change, const char* filename) {
     }
   } else if (strcmp(change, "-x") == 0) {
     if (perm == 0 || perm == 2 || perm == 4 || perm == 6) {
-      perror("chmod error invalid command");
+      //perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 5) {
       perm = 4;
     } else if (perm == 7) {
@@ -1226,7 +1229,8 @@ int k_change_mode(const char* change, const char* filename) {
     }
   } else if (strcmp(change, "+x") == 0) {
     if (perm == 0 || perm == 2) {
-      perror("chmod error invalid command");
+      //error("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 4) {
       perm = 5;
     } else if (perm == 6) {
@@ -1240,19 +1244,22 @@ int k_change_mode(const char* change, const char* filename) {
     }
   } else if (strcmp(change, "-rw") == 0) {
     if (perm == 0 || perm == 5 || perm == 7) {
-      perror("chmod error invalid command");
+      // perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 6 || perm == 2 || perm == 4) {
       perm = 0;
     }
   } else if (strcmp(change, "+wx") == 0) {
     if (perm == 0 || perm == 5) {
-      perror("chmod error invalid command");
+      // perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 4 || perm == 5 || perm == 6) {
       perm = 7;
     }
   } else if (strcmp(change, "-wx") == 0) {
     if (perm == 0 || perm == 2 || perm == 4 || perm == 5 || perm == 6) {
-      perror("chmod error invalid command");
+      // perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 7) {
       perm = 4;
     }
@@ -1264,12 +1271,13 @@ int k_change_mode(const char* change, const char* filename) {
     }
   } else if (strcmp(change, "-rx") == 0) {
     if (perm == 0 || perm == 2 || perm == 4 || perm == 6 || perm == 7) {
-      perror("chmod error invalid command");
+      // perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 5) {
       perm = 0;
     }
   } else {
-    perror("chmod error invalid command");
+    // perror("chmod error invalid command");
     return INVALID_PARAMETERS;
   }
 
@@ -1312,7 +1320,7 @@ int k_cp_within_fat(char* source, char* dest) {
   // source file must exist
 
   if (does_file_exist2(source) == -1) {
-    perror("error: source does not exist");
+    // perror("error: source does not exist");
     return FILE_NOT_FOUND;
   }
 
@@ -1332,7 +1340,7 @@ int k_cp_within_fat(char* source, char* dest) {
 
 int k_cp_to_host(char* source, char* host_dest) {
   if (does_file_exist2(source) == -1) {
-    perror("error: source does not exist");
+    // perror("error: source does not exist");
     return FILE_NOT_FOUND;
   }
   int source_fd = k_open(source, F_READ);
@@ -1344,7 +1352,7 @@ int k_cp_to_host(char* source, char* host_dest) {
   int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, 0777);
 
   if (write(host_fd, contents, read_num) == -1) {
-    perror("error: write to host file failed\n");
+    // perror("error: write to host file failed\n");
     close(host_fd);
     k_close(source_fd);
     return SYSTEM_ERROR;
@@ -1359,7 +1367,7 @@ int k_cp_from_host(char* host_source, char* dest) {
   int host_fd = open(host_source, O_RDWR, 0777);
 
   if (host_fd == -1) {
-    perror("error: host source does not exist or is invalid\n");
+    //perror("error: host source does not exist or is invalid\n");
     return FILE_NOT_FOUND;
   }
 
