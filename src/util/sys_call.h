@@ -259,6 +259,8 @@ int s_print_process(CircularList* list);
 
 int s_print_jobs(CircularList* list);
 
+int file_errno_helper(int ret);
+
 /*== system call functions for interacting with PennOS filesystem ==*/
 /**
  * @brief open a file name fname with the mode mode and return a file
