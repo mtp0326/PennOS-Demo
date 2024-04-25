@@ -8,6 +8,7 @@
 #include "unistd.h"
 
 void* b_background_poll(void* arg) {
+  // b_ps(NULL);
   if (bg_list == NULL || bg_list->head == NULL) {
     return NULL;
   }

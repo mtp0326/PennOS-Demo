@@ -46,6 +46,13 @@ extern CircularList* bg_list;
 extern pcb_t* current;
 
 /**
+ * This is the foreground processor and if it exists, the processor takes
+ * control of the terminal
+ *
+ */
+extern pcb_t* fg_proc;
+
+/**
  * This the next pid to be used, by k_proc_create(), to ensure that PIDs are
  * not duplicated. This may be rewritten later to reuse/reallocate old processes
  * that have been exited/terminated. I have no strong desire to do so, but do so

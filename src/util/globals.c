@@ -8,6 +8,8 @@ CircularList* zombied;
 
 CircularList* bg_list;
 
+pcb_t* fg_proc = NULL;
+
 pcb_t* current = NULL;
 pid_t next_pid = 1;
 

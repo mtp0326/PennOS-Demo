@@ -1,4 +1,5 @@
 #include "pennos.h"
+#include <signal.h>
 #include "fcntl.h"
 #include "parser.h"
 #include "pennfat.h"
@@ -6,14 +7,12 @@
 #include "unistd.h"
 #include "util/kernel.h"
 #include "util/prioritylist.h"
-#include <signal.h>
 
-static const int centisecond = 10000; // 10 milliseconds
+static const int centisecond = 10000;  // 10 milliseconds
 
 PList* priority;
 
-void print_queue()
-{
+void print_queue() {
   fprintf(stdout, "  PID\t PPID\t  PRI\tSTAT\tCMD\n");
 
   for (int i = 0; i < 3; i++) {
@@ -23,12 +22,10 @@ void print_queue()
   s_print_process(stopped);
   s_print_process(zombied);
 
-  s_exit();
   return;
 }
 
-static void* shell(void* arg)
-{
+static void* shell(void* arg) {
   while (1) {
     prompt(true);
     char* cmd;
@@ -74,7 +71,7 @@ static void* shell(void* arg)
         }
 
         s_spawn_and_wait(b_cat, args, input_fd, output_fd,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
 
         if (input_fd != STDIN_FILENO) {
           s_close(input_fd);
@@ -86,7 +83,7 @@ static void* shell(void* arg)
 
       } else if (strcmp(args[0], "sleep") == 0) {
         s_spawn_and_wait(b_sleep, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "busy") == 0) {
         b_busy(NULL);
       } else if (strcmp(args[0], "echo") == 0) {
@@ -95,17 +92,17 @@ static void* shell(void* arg)
         if (parsed->stdout_file == NULL) {
           // we want to print to stdout
           s_spawn_and_wait(b_echo, args, STDIN_FILENO, STDOUT_FILENO,
-              parsed->is_background, -1);
+                           parsed->is_background, -1);
         } else {
           if (parsed->is_file_append) {
             int fd = s_open(parsed->stdout_file, F_APPEND);
             s_spawn_and_wait(b_echo, args, STDIN_FILENO, fd,
-                parsed->is_background, -1);
+                             parsed->is_background, -1);
             s_close(fd);
           } else {
             int fd = s_open(parsed->stdout_file, F_WRITE);
             s_spawn_and_wait(b_echo, args, STDIN_FILENO, fd,
-                parsed->is_background, -1);
+                             parsed->is_background, -1);
             s_close(fd);
           }
         }
@@ -114,17 +111,17 @@ static void* shell(void* arg)
         if (parsed->stdout_file == NULL) {
           // we want to print to stdout
           s_spawn_and_wait(b_ls, args, STDIN_FILENO, STDOUT_FILENO,
-              parsed->is_background, -1);
+                           parsed->is_background, -1);
         } else {
           if (parsed->is_file_append) {
             int fd = s_open(parsed->stdout_file, F_APPEND);
             s_spawn_and_wait(b_ls, args, STDIN_FILENO, fd,
-                parsed->is_background, -1);
+                             parsed->is_background, -1);
             s_close(fd);
           } else {
             int fd = s_open(parsed->stdout_file, F_WRITE);
             s_spawn_and_wait(b_ls, args, STDIN_FILENO, fd,
-                parsed->is_background, -1);
+                             parsed->is_background, -1);
             s_close(fd);
           }
         }
@@ -132,58 +129,58 @@ static void* shell(void* arg)
       } else if (strcmp(args[0], "touch") == 0) {
         // TODO: Call your implemented touch() function
         s_spawn_and_wait(b_touch, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
         int output_fd = b_output_redir(parsed);
         if (output_fd != -1) {
           s_close(output_fd);
         }
       } else if (strcmp(args[0], "mv") == 0) {
         s_spawn_and_wait(b_mv, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
         int output_fd = b_output_redir(parsed);
         if (output_fd != -1) {
           s_close(output_fd);
         }
       } else if (strcmp(args[0], "cp") == 0) {
         s_spawn_and_wait(b_cp, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
         int output_fd = b_output_redir(parsed);
         if (output_fd != -1) {
           s_close(output_fd);
         }
       } else if (strcmp(args[0], "rm") == 0) {
         s_spawn_and_wait(b_rm, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
         int output_fd = b_output_redir(parsed);
         if (output_fd != -1) {
           s_close(output_fd);
         }
       } else if (strcmp(args[0], "chmod") == 0) {
         s_spawn_and_wait(b_chmod, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
         int output_fd = b_output_redir(parsed);
         if (output_fd != -1) {
           s_close(output_fd);
         }
       } else if (strcmp(args[0], "ps") == 0) {
         s_spawn_and_wait(b_ps, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "kill") == 0) {
         s_spawn_and_wait(b_kill, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "zombify") == 0) {
         s_spawn_and_wait(b_zombify, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "orphanify") == 0) {
         s_spawn_and_wait(b_orphanify, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "nice") == 0) {
         b_nice(cmd);
       } else if (strcmp(args[0], "nice_pid") == 0) {
         b_nice_pid(args);
       } else if (strcmp(args[0], "man") == 0) {
         s_spawn_and_wait(b_man, args, STDIN_FILENO, STDOUT_FILENO,
-            parsed->is_background, -1);
+                         parsed->is_background, -1);
       } else if (strcmp(args[0], "bg") == 0) {
         b_bg(args);
       } else if (strcmp(args[0], "fg") == 0) {
@@ -206,6 +203,7 @@ static void* shell(void* arg)
         // REPLACE WITH PERROR
       }
       free(parsed);
+      // print_queue();
     }
     free(cmd);
   }
@@ -213,8 +211,7 @@ static void* shell(void* arg)
   return EXIT_SUCCESS;
 }
 
-int b_output_redir(struct parsed_command* parsed)
-{
+int b_output_redir(struct parsed_command* parsed) {
   int output_fd = -1;
   if (parsed->stdout_file != NULL) {
     if (parsed->is_file_append) {
@@ -227,10 +224,8 @@ int b_output_redir(struct parsed_command* parsed)
   return output_fd;
 }
 
-static void alarm_handler(int signum)
-{
-
-  if ((current->pid == 1) && (signum != SIGALRM)) {
+static void alarm_handler(int signum) {
+  if ((fg_proc->pid == 1) && (signum != SIGALRM)) {
     char* newline = "\n";
     s_write(STDOUT_FILENO, newline, strlen(newline));
     prompt(true);
@@ -239,14 +234,13 @@ static void alarm_handler(int signum)
   if (signum == SIGINT) {
     char* newline = "\n";
     s_write(STDOUT_FILENO, newline, strlen(newline));
-    s_kill(current->pid, P_SIGTER);
+    s_kill(fg_proc->pid, P_SIGTER);
   } else if (signum == SIGTSTP) {
-    s_kill(current->pid, P_SIGSTOP);
+    s_kill(fg_proc->pid, P_SIGSTOP);
   }
 }
 
-void scheduler(char* logfile)
-{
+void scheduler(char* logfile) {
   sigset_t suspend_set;
   sigfillset(&suspend_set);
   sigdelset(&suspend_set, SIGALRM);
@@ -256,10 +250,10 @@ void scheduler(char* logfile)
 
   // just to make sure that
   // sigalrm doesn't terminate the process
-  struct sigaction act = (struct sigaction) {
-    .sa_handler = alarm_handler,
-    .sa_mask = suspend_set,
-    .sa_flags = SA_RESTART,
+  struct sigaction act = (struct sigaction){
+      .sa_handler = alarm_handler,
+      .sa_mask = suspend_set,
+      .sa_flags = SA_RESTART,
   };
   sigaction(SIGALRM, &act, NULL);
   sigaction(SIGINT, &act, NULL);
@@ -272,7 +266,7 @@ void scheduler(char* logfile)
   pthread_sigmask(SIG_UNBLOCK, &alarm_set, NULL);
 
   struct itimerval it;
-  it.it_interval = (struct timeval) { .tv_usec = centisecond * 10 };
+  it.it_interval = (struct timeval){.tv_usec = centisecond * 10};
   it.it_value = it.it_interval;
   setitimer(ITIMER_REAL, &it, NULL);
 
@@ -287,9 +281,16 @@ void scheduler(char* logfile)
   place->pid = 0;
   place->child_pids = dynamic_pid_array_create(4);
   current = place;
-  char** arg = malloc(2 * sizeof(char*)); // Space for 3 pointers
-  arg[0] = strdup("shell");               // strdup allocates new memory for the string
-  arg[1] = NULL;                          // Terminate the array
+
+  pcb_t* place2 = malloc(sizeof(pcb_t));
+  place2->priority = 0;
+  place2->pid = 0;
+  place2->child_pids = dynamic_pid_array_create(4);
+  fg_proc = place2;
+
+  char** arg = malloc(2 * sizeof(char*));  // Space for 3 pointers
+  arg[0] = strdup("shell");  // strdup allocates new memory for the string
+  arg[1] = NULL;             // Terminate the array
 
   // spawn in the shell process at priority 0
   s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, 0);
@@ -322,7 +323,8 @@ void scheduler(char* logfile)
         continue;
       }
       pcb_t* child_pcb;
-      if (block->waiting_on_pid != 0) { // if this process is currently s_waitpiding on a child
+      if (block->waiting_on_pid !=
+          0) {  // if this process is currently s_waitpiding on a child
 
         if (block->waiting_on_pid == -1) {
           DynamicPIDArray* pid_array = block->child_pids;
@@ -352,6 +354,7 @@ void scheduler(char* logfile)
         block->state = RUNNING;
         remove_process(blocked, block->pid);
         add_process(processes[block->priority], block);
+        fg_proc = block;
 
         s_write_log(UNBLOCK, block, -1);
       }
@@ -370,14 +373,16 @@ void scheduler(char* logfile)
         break;
       }
     }
-    if (noRunningProcesses) { // remove and false later, debugging AHHHHHHH
+    if (noRunningProcesses) {  // remove and false later, debugging AHHHHHHH
       // All processes are blocked or queues are empty, so idle.
       // sigsuspend will atomically unblock signals and put the process to
       // sleep.
       sigsuspend(&suspend_set);
+      current = NULL;
 
     } else {
-      if (((processes[0]->size + processes[1]->size + processes[2]->size) - processes[priority->head->priority]->size) != 0) {
+      if (((processes[0]->size + processes[1]->size + processes[2]->size) -
+           processes[priority->head->priority]->size) != 0) {
         priority->head = priority->head->next;
         while (processes[priority->head->priority]->size == 0) {
           priority->head = priority->head->next;
@@ -408,8 +413,7 @@ void scheduler(char* logfile)
   return;
 }
 
-void cancel_and_join(spthread_t thread)
-{
+void cancel_and_join(spthread_t thread) {
   spthread_cancel(thread);
   spthread_continue(thread);
   spthread_join(thread, NULL);
@@ -417,14 +421,13 @@ void cancel_and_join(spthread_t thread)
 
 #include "pennfat.h"
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
   errno = -1;
   if (argc < 2) {
-    fprintf(stderr, "pennos: filesystem not specified"); // REPLACE WITH PERROR
+    fprintf(stderr, "pennos: filesystem not specified");  // REPLACE WITH PERROR
     return -1;
   } else if (argc > 3) {
-    fprintf(stderr, "pennos: too many arguments"); // REPLACE WITH PERROR
+    fprintf(stderr, "pennos: too many arguments");  // REPLACE WITH PERROR
     return -1;
   }
 
