@@ -355,12 +355,47 @@ off_t s_lseek(int fd, int offset, int whence);
  */
 void s_ls(const char* filename, int fd);
 
+/**
+ * @brief Wrapper function around k_read_all.
+ *
+ * Reads all contents from the file with the file name \p filename.
+ * Outputs the contents as well as update \p read_num to the number of bytes
+ * read.
+ *
+ *
+ * @param filename Name of the file we want to read from.
+ * @param read_num Pointer to an integer variable that will store the number of
+ * bytes read.
+ *
+ * @return All contents of \p filename in char* format.
+ */
 char* s_read_all(const char* filename, int* read_num);
 
+/**
+ * @brief Wrapper function around k_get_fname_from_fd.
+ *
+ * @param fd The file descriptor number.
+ *
+ * @return The file name of the \p fd . NULL is \p fd is invalid.
+ */
 char* s_get_fname_from_fd(int fd);
 
+/**
+ * @brief Wrapper function around k_update_timestamp.
+ * Returns the filename for the given file descriptor number.
+ *
+ * @param source
+ */
 int s_update_timestamp(const char* source);
 
+/**
+ * @brief Wrapper function around k_does_file_exst2.
+ * Change the timestamp of the file to the current time
+ *
+ * @param source Source file name.
+ *
+ * @return 1 on success. Negative number on failure.
+ */
 off_t s_does_file_exist2(const char* fname);
 
 int s_rename(const char* source, const char* dest);
