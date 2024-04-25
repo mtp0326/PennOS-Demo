@@ -34,7 +34,7 @@ int k_open(const char* fname, int mode) {
   char* fname_copy3 = strdup(fname);
   // using fname_copy3 check if the fname is a valid name (unix)
   if (!is_file_name_valid(fname_copy3)) {
-    perror("error: invalid filename please follow POSIX standard");
+    // perror("error: invalid filename please follow POSIX standard");
     return INVALID_FILE_NAME;
   }
 
@@ -56,18 +56,18 @@ int k_open(const char* fname, int mode) {
              global_fd_table[i]->mode == F_APPEND) &&
             (strcmp(global_fd_table[i]->fname, fname) == 0)) {
           fd_counter--;
-          perror(
-              "k_open: F_WRITE error: attempted to open a file in F_WRITE mode "
-              "more than once");
+          // perror(
+          //     "k_open: F_WRITE error: attempted to open a file in F_WRITE
+          //     mode " "more than once");
           return MULTIPLE_F_WRITE;
           // exit(EXIT_FAILURE);
         }
       }
       if (dir_entry->perm == 4 || dir_entry->perm == 5 ||
           dir_entry->perm == 0) {
-        perror(
-            "k_open: F_WRITE: attempting to open file without write "
-            "permission");
+        // perror(
+        //     "k_open: F_WRITE: attempting to open file without write "
+        //     "permission");
         return WRONG_PERMISSION;
         // exit(EXIT_FAILURE);
       }
@@ -122,7 +122,7 @@ int k_open(const char* fname, int mode) {
       if (write(fs_fd, new_de, sizeof(struct directory_entries)) !=
           sizeof(struct directory_entries)) {
         fd_counter--;
-        perror("k_open: write error");
+        // perror("k_open: write error");
         return SYSTEM_ERROR;
         // exit(EXIT_FAILURE);
       }
@@ -130,9 +130,9 @@ int k_open(const char* fname, int mode) {
   } else if (mode == F_READ) {  // F_READ
     if (dir_entry != NULL) {    // open file: add it to fd table
       if (dir_entry->perm == 2 || dir_entry->perm == 0) {
-        perror(
-            "k_open: F_READ: attempting to open file that doesn't have read "
-            "permission");
+        // perror(
+        //     "k_open: F_READ: attempting to open file that doesn't have read "
+        //     "permission");
         return WRONG_PERMISSION;
         // exit(EXIT_FAILURE);
       }
@@ -140,7 +140,7 @@ int k_open(const char* fname, int mode) {
       global_fd_table[curr_fd] = opened_file;
     } else {
       fd_counter--;
-      perror("k_open: f_read: file does not exist");
+      // perror("k_open: f_read: file does not exist");
       return FILE_NOT_FOUND;
     }
   } else if (mode == F_APPEND) {  // F_APPEND
@@ -148,9 +148,9 @@ int k_open(const char* fname, int mode) {
       // file offset is at end of the file
       if (dir_entry->perm == 4 || dir_entry->perm == 5 ||
           dir_entry->perm == 0) {
-        perror(
-            "k_open: F_READ: attempting to open file that doesn't have write "
-            "permission");
+        // perror(
+        //     "k_open: F_READ: attempting to open file that doesn't have write
+        //     " "permission");
         return WRONG_PERMISSION;
         // exit(EXIT_FAILURE);
       }
@@ -168,7 +168,7 @@ int k_open(const char* fname, int mode) {
       if (write(fs_fd, new_de, sizeof(struct directory_entries)) !=
           sizeof(struct directory_entries)) {
         fd_counter--;
-        perror("k_open: write error");
+        // perror("k_open: write error");
         return SYSTEM_ERROR;
         // exit(EXIT_FAILURE);
       }
@@ -452,12 +452,12 @@ ssize_t k_read(int fd, int n, char* buf) {
   }
 
   if (fd == STDOUT_FILENO) {
-    perror("Cannot read from STDOUT");
+    // perror("Cannot read from STDOUT");
     return WRONG_PERMISSION;
   }
 
   if (fd == STDERR_FILENO) {
-    perror("Cannot read from STDERR");
+    // perror("Cannot read from STDERR");
     return WRONG_PERMISSION;
   }
 
@@ -465,7 +465,7 @@ ssize_t k_read(int fd, int n, char* buf) {
   struct file_descriptor_st* curr = get_file_descriptor(fd);
   // fd is not a valid open file descriptor
   if (curr == NULL) {
-    perror("k_read error: could not find file descriptor");
+    // perror("k_read error: could not find file descriptor");
     return FILE_NOT_FOUND;
   }
 
@@ -473,7 +473,7 @@ ssize_t k_read(int fd, int n, char* buf) {
   char* fname = curr->fname;
 
   if (fname[0] == 1) {
-    perror("k_read error: attempting to read into a deleted file");
+    // perror("k_read error: attempting to read into a deleted file");
     return FILE_DELETED;
   }
 
@@ -483,7 +483,7 @@ ssize_t k_read(int fd, int n, char* buf) {
   uint16_t firstBlock = curr_de->firstBlock;
   uint32_t size = curr_de->size;
   if (curr_de == NULL) {
-    perror("k_read error: could not find directory entry");
+    // perror("k_read error: could not find directory entry");
     return FILE_NOT_FOUND;
   }
 
@@ -617,7 +617,7 @@ void update_directory_entry_after_write(struct directory_entries* curr_de,
 ssize_t k_write(int fd, const char* str, int n) {
   // special cases for 0, 1, 2
   if (fd == STDIN_FILENO) {
-    perror("Cannot write into STDIN");
+    // perror("Cannot write into STDIN");
     return WRONG_PERMISSION;
   }
 
@@ -648,13 +648,14 @@ ssize_t k_write(int fd, const char* str, int n) {
   struct directory_entries* curr_de = does_file_exist(fname);
 
   if (curr_de == NULL) {
-    perror("error: k_write: the file doesn't exist\n");
+    // perror("error: k_write: the file doesn't exist\n");
     return FILE_NOT_FOUND;
   }
 
   if (curr_de->name[0] == 1 || curr_de->name[1] == 2) {
-    perror(
-        "error: k_write: trying to write into a file that has been deleted\n");
+    // perror(
+    //     "error: k_write: trying to write into a file that has been
+    //     deleted\n");
     return FILE_DELETED;
   }
 
@@ -796,23 +797,23 @@ int k_unlink(const char* fname) {
   does_file_exist2(fname);  // lseeks to fname position
 
   if (curr_de == NULL) {
-    fprintf(stdout, "unlink error: file fname not found\n");
+    // fprintf(stdout, "unlink error: file fname not found\n");
     return FILE_NOT_FOUND;
   }
   // search for fd with same fname to get num processes
   int count = k_count_fd_num(fname);
   // for multiple processes (shouldn't be used in standalone fat)
   if (count > 1) {
-    perror(
-        "k_unlink error: this file is being used by another process. Unable to "
-        "delete the file");
+    // perror(
+    //     "k_unlink error: this file is being used by another process. Unable
+    //     to " "delete the file");
     return FILE_IN_USE;
 
   } else if (count == 1 ||
              count == 0) {  // im the only process with it, mark name[0] with 1
     (curr_de->name)[0] = 1;
   } else {
-    perror("k_unlink: count is negatives something wrong");
+    // perror("k_unlink: count is negatives something wrong");
     return SYSTEM_ERROR;
   }
 
@@ -873,8 +874,8 @@ off_t k_lseek(int fd, int offset, int whence) {
   }
 
   if (curr_de->name[0] == 1 || curr_de->name[1] == 2) {
-    fprintf(stderr,
-            "k_lseek: trying to klseek into a file that has been deleted\n");
+    // fprintf(stderr,
+    //         "k_lseek: trying to klseek into a file that has been deleted\n");
     return FILE_DELETED;
   }
 
