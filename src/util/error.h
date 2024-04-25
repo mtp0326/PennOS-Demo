@@ -16,7 +16,7 @@ extern int errno;
 
 // KERNEL LEVEL ERRORS
 
-    // S_SPAWN ERRORS
+// S_SPAWN ERRORS
 #define EPCBCREATE 0
 #define ENOARGS 1
 #define EADDPROC 2
@@ -24,8 +24,10 @@ extern int errno;
 #define EBITMAP 4
 
 
-    // S_SLEEP ERRORS
+// S_SLEEP ERRORS
 #define EINVARG 5
+
+// S_CP_FROM_HOST ERRORS
 
 
 // FAT LEVEL ERRORS

@@ -363,14 +363,62 @@ int s_update_timestamp(const char* source);
 
 off_t s_does_file_exist2(const char* fname);
 
+
+/**
+ * @brief s-function wrapper around k_rename, which renames \p source 
+ * to \p dest. \p source must exist, if \p dest already exists, then it is
+ * deleted
+ *
+ * @param source name of the source file to be renamed
+ * @param dest new name of file
+ *
+ * @return -1 on error, 0 if rename was successful
+ */
 int s_rename(const char* source, const char* dest);
 
+/**
+ * @brief s-function wrapper around k_change_mode, which changes the mode 
+ * (permission) of the file in the directory entry, specificed by \p filename
+ * with change \p change. Errors if the resulting permission is invalid or
+ * if \p filename doesn't exist
+ *
+ * @param change the change to be made (e.g. -w, +w, -rw, etc)
+ * @param filename name of the specified file to be changed
+ *
+ * @return -1 on error, 0 if change mode was successful
+ */
 int s_change_mode(const char* change, const char* filename);
 
+/**
+ * @brief s-function wrapper around k_cp_within_fat. 
+ * Copies contents of \p source to \p dest. \p source must exist, if 
+ * \p dest doesn't exist then it is created. 
+ *
+ * @param source source filename to copy from
+ * @param dest destination filename to copy into
+ *
+ * @return -1 on error, 0 if cp was successful
+ */
 int s_cp_within_fat(char* source, char* dest);
 
+/**
+ * @brief s-function wrapper around k_cp_to_host
+ *
+ * @param source source filename to copy from (in PennOS)
+ * @param host_dest destination filename to copy into (on host device)
+ *
+ * @return -1 on error, 0 if cp was successful
+ */
 int s_cp_to_host(char* source, char* host_dest);
 
+/**
+ * @brief s-function wrapper around k_cp_from_host
+ *
+ * @param host_source source filename to copy from (on host device)
+ * @param dest destination filename to copy into (in PennOS)
+ *
+ * @return -1 on error, 0 if cp was successful
+ */
 int s_cp_from_host(char* host_source, char* dest);
 
 #endif
