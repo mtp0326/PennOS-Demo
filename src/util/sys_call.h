@@ -241,6 +241,8 @@ int s_bg_wait(pcb_t* proc);
  */
 pcb_t* s_find_process(pid_t pid);
 
+pcb_t* find_jobs_proc(CircularList* list);
+
 /**
  * @brief Removes a process in any state.
  *
@@ -257,7 +259,7 @@ int s_move_process(CircularList* destination, pid_t pid);
 
 int s_print_process(CircularList* list);
 
-int s_print_jobs(CircularList* list);
+int s_print_jobs();
 
 /*== system call functions for interacting with PennOS filesystem ==*/
 /**

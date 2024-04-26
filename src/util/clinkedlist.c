@@ -137,7 +137,7 @@ pcb_t* find_process(CircularList* list, pid_t pid) {
 }
 
 // Finds a process in the circular linked list by its PID
-pcb_t* find_process_job_id(CircularList* list, u_int64_t index) {
+pcb_t* find_process_job_id(CircularList* list, int index) {
   if (list == NULL || list->head == NULL) {
     return NULL;  // List is empty or not initialized
   }

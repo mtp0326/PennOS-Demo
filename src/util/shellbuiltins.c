@@ -22,30 +22,6 @@ void* b_background_poll(void* arg) {
     }
     node = node->next;
   }
-  // do {
-  //   pcb_t* proc = node->process;
-  //   s_bg_wait(proc);
-  //   if (bg_list->size == 0) {
-  //     return NULL;
-  //   }
-  //   // if (P_WIFSIGNALED(status)) {
-  //   //   fprintf(stdout, "[%ld]\t %4u SIGNALED\t%s\n", proc->job_num,
-  //   proc->pid,
-  //   //           proc->processname);
-  //   //   // remove_process(bg_list, proc->pid);
-  //   //   /// might have to change processor manually
-  //   //   /// do we know with waitpid the processors changed???
-  //   // } else if (P_WIFSTOPPED(status)) {
-  //   //   fprintf(stdout, "[%ld]\t %4u STOPPED\t%s\n", proc->job_num,
-  //   proc->pid,
-  //   //           proc->processname);
-  //   //   // remove_process(bg_list, proc->pid);
-  //   // } else if (P_WIFEXITED(status)) {
-
-  //   // remove_process(bg_list, proc->pid);
-  //   // }
-  //   node = node->next;
-  // } while (node != bg_list->head);
 
   return NULL;
 }
@@ -116,8 +92,7 @@ void* b_ps(void* arg) {
 }
 
 void* b_jobs(void* arg) {
-  s_print_jobs(bg_list);
-  s_print_jobs(stopped);
+  s_print_jobs();
 
   return NULL;
 }
@@ -128,63 +103,42 @@ void* b_fg(void* arg) {
 
   if (argv[1] != NULL) {
     // job id is specified
-    long index = (long)atoi(argv[1]);
+    int index = atoi(argv[1]);
 
     proc = find_process_job_id(stopped, index);
 
     if (proc != NULL) {
-      fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
-              proc->processname);
+      fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+              proc->cmd_name);
       if (proc->initial_state != RUNNING) {
         s_resume_block(proc->pid);
       } else {
         if (s_kill(proc->pid, P_SIGCONT) < 0) {
-          // error
           fprintf(stderr, "SIGCONT failed to send\n");
           return NULL;
         }
       }
       s_fg(proc);
-
-      /// TODO: immediate send to tcprescp
-
-      //   remove_process(stopped, proc->pid);
-      //   // add to IMMEDIATE front of processes
-      //   add_process_front(processes[proc->priority], proc);
       return NULL;
     }
 
     proc = find_process_job_id(bg_list, index);
 
     if (proc != NULL) {
-      fprintf(stdout, "[%ld]  + %4u Running\t%s\n", proc->job_num, proc->pid,
-              proc->processname);
-      // if (s_kill(proc->pid, SIGCONT) < 0) {
-      //   // error
-      //   fprintf(stderr, "SIGCONT failed to send\n");
-      //   return NULL;
-      // }
+      fprintf(stdout, "[%d]  + %4u Running\t%s\n", proc->job_num, proc->pid,
+              proc->cmd_name);
       s_fg(proc);
-
-      /// TODO: immediate send to tcprescp
-
-      // remove_process(bg_list, proc->pid);
-      // // add to IMMEDIATE front of processes
-      // add_process_front(processes[proc->priority], proc);
-
       return NULL;
     }
-
-    /// error: PID with specified number does not exist
     fprintf(stderr, "PID with specified number does not exist\n");
 
     return NULL;
   }
 
-  if (stopped != NULL && stopped->tail != NULL) {
-    proc = stopped->tail->process;
-    fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
-            proc->processname);
+  proc = find_jobs_proc(stopped);
+  if (proc != NULL) {
+    fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+            proc->cmd_name);
     /// TODO:there could be more but wrote for sleep for now
     if (proc->initial_state != RUNNING) {
       s_resume_block(proc->pid);
@@ -197,36 +151,16 @@ void* b_fg(void* arg) {
     }
 
     s_fg(proc);
-
-    /// TODO: immediate send to tcprescp
-
-    // remove_process(stopped, proc->pid);
-    // // add to IMMEDIATE front of processes
-    // add_process_front(processes[proc->priority], proc);
     return NULL;
   }
 
-  if (bg_list != NULL && bg_list->tail != NULL) {
-    proc = bg_list->tail->process;
-    fprintf(stdout, "[%ld]  + %4u Running\t%s\n", proc->job_num, proc->pid,
-            proc->processname);
-    // if (s_kill(proc->pid, P_SIGCONT) < 0) {
-    //   // error
-    //   fprintf(stderr, "SIGCONT failed to send\n");
-    //   return NULL;
-    // }
+  proc = find_jobs_proc(bg_list);
+  if (proc != NULL) {
+    fprintf(stdout, "[%d]  + %4u Running\t%s\n", proc->job_num, proc->pid,
+            proc->cmd_name);
     s_fg(proc);
-
-    /// TODO: immediate send to tcprescp
-
-    // remove_process(bg_list, proc->pid);
-    // // add to IMMEDIATE front of processes
-    // add_process_front(processes[proc->priority], proc);
-
     return NULL;
   }
-
-  // error: to stopped or background job exist
   fprintf(stderr, "Job does not exist\n");
   return NULL;
 }
@@ -237,7 +171,7 @@ void* b_bg(void* arg) {
 
   if (argv[1] != NULL) {
     // pid is specified
-    long index = (long)atoi(argv[1]);
+    int index = atoi(argv[1]);
 
     proc = find_process_job_id(stopped, index);
 
@@ -247,7 +181,6 @@ void* b_bg(void* arg) {
         s_resume_block(proc->pid);
       } else {
         if (s_kill(proc->pid, P_SIGCONT) < 0) {
-          // error
           fprintf(stderr, "SIGCONT failed to send\n");
           return NULL;
         }
@@ -255,29 +188,21 @@ void* b_bg(void* arg) {
 
       proc->is_bg = true;
       add_process(bg_list, proc);
-      fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
-              proc->processname);
-
-      // proc->state = RUNNING;
-      // /// proc->statechanged = true;
-      // /// proc->is_background = true;
-      // remove_process(stopped, proc->pid);
-      // add_process(bg_list, proc);
-
+      fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+              proc->cmd_name);
       return NULL;
     }
-    /// error: PID with specified number does not exist
     fprintf(stderr, "PID with specified number does not exist\n");
     return NULL;
   }
 
-  if (stopped != NULL && stopped->head != NULL) {
+  proc = find_jobs_proc(stopped);
+  if (proc != NULL) {
     proc = stopped->tail->process;
     if (proc->initial_state != RUNNING) {
       s_resume_block(proc->pid);
     } else {
       if (s_kill(proc->pid, P_SIGCONT) < 0) {
-        // error
         fprintf(stderr, "SIGCONT failed to send\n");
         return NULL;
       }
@@ -285,16 +210,10 @@ void* b_bg(void* arg) {
 
     proc->is_bg = true;
     add_process(bg_list, proc);
-    fprintf(stdout, "[%ld]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
-            proc->processname);
-
-    // proc->state = RUNNING;
-    // /// proc->statechanged = true;
-    // /// proc->statechanged = true;
-    // remove_process(stopped, proc->pid);
+    fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+            proc->cmd_name);
     return NULL;
   }
-  /// error: there are no stopped jobs
   fprintf(stderr, "there are no stopped jobs\n");
 
   return NULL;
@@ -376,7 +295,6 @@ void* b_clear(void* arg) {
 }
 
 // FAT LEVEL SHELL FUNCTIONS
-
 void* b_ls(void* arg) {
   s_ls(NULL, current->output_fd);
 
@@ -393,6 +311,7 @@ void* b_echo(void* arg) {
     s_write(current->output_fd, " ", 1);
     i++;
   }
+  s_write(current->output_fd, "\n", 1);
 
   s_exit();
   return NULL;
