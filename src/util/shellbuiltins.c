@@ -220,14 +220,122 @@ void* b_bg(void* arg) {
 }
 
 void* b_man(void* arg) {
-  char* output =
-      "cat\nsleep\nbusy\necho\nls\ntouch\nmv\ncp\nrm\nchmod\nps\nkill\nzombif"
-      "y"
-      "\norphanify\nnice\nnice_pid\nman\nbg\nfg\njobs\nlogout\n";
+  char* output;
+  char** args = (char**)arg;
+  if (args[1] == NULL) {
+    output =
+        "cat\nsleep\nbusy\necho\nls\ntouch\nmv\ncp\nrm\nchmod\nps\nkill\nzombif"
+        "y"
+        "\norphanify\nnice\nnice_pid\nman\nbg\nfg\njobs\nlogout\n";
+  } else {
+    if (strcmp(args[1], "cat") == 0) {
+      output =
+          "The cat utility reads files sequentially, writing them to "
+          "the "
+          "standard output.  The file operands are processed in command-line "
+          "order.\n";
+    } else if (strcmp(args[1], "sleep") == 0) {
+      output =
+          "The sleep command suspends execution for a minimum of "
+          "seconds.\n";
+    } else if (strcmp(args[1], "busy") == 0) {
+      output = "Make shell wait indefinitely until a signal is given.\n";
+    } else if (strcmp(args[1], "echo") == 0) {
+      output =
+          "The echo utility writes any specified operands, separated "
+          "by "
+          "single "
+          "blank characters and followed by a newline character, to "
+          "the standard output.\n";
+    } else if (strcmp(args[1], "ls") == 0) {
+      output =
+          "For each operand that names a file of a type other than "
+          "directory, ls displays its name as well as any requested, "
+          "associated "
+          "information.\n";
+    } else if (strcmp(args[1], "touch") == 0) {
+      output =
+          "The touch utility sets the modification and access times "
+          "of "
+          "files.  If any file does not exist, it is created with default "
+          "permissions.\n";
+    } else if (strcmp(args[1], "mv") == 0) {
+      output =
+          "In its first form, the mv utility renames the file named by "
+          "the "
+          "source operand to the destination path named by the target operand. "
+          " "
+          "This form is assumed when the last operand does not name an already "
+          "existing directory.\n";
+    } else if (strcmp(args[1], "cp") == 0) {
+      output =
+          "Cp utility copies the contents of the source_file to the "
+          "target_file.\n";
+    } else if (strcmp(args[1], "rm") == 0) {
+      output =
+          "The rm utility attempts to remove the non-directory type "
+          "files "
+          "specified on the command line.\n";
+    } else if (strcmp(args[1], "chmod") == 0) {
+      output =
+          "The chmod utility modifies the file mode bits of the "
+          "listed "
+          "files as specified by the mode operand.\n";
+    } else if (strcmp(args[1], "ps") == 0) {
+      output =
+          "The ps utility displays a header line, followed by lines "
+          "containing information about all of your processes that have "
+          "controlling terminals.\n";
+    } else if (strcmp(args[1], "kill") == 0) {
+      output =
+          "The kill utility sends a signal to the processes specified "
+          "by "
+          "the pid operands.\n";
+    } else if (strcmp(args[1], "zombify") == 0) {
+      output = "zombify\n\nCreates a processor that has a zombie child.\n";
+    } else if (strcmp(args[1], "orphanify") == 0) {
+      output = "Creates a processor killed that has a child running.\n";
+    } else if (strcmp(args[1], "nice") == 0) {
+      output = "The nice utility assigns priority to a specific thread\n";
+    } else if (strcmp(args[1], "nice_pid") == 0) {
+      output =
+          "The nice utility assigns priority to a specific "
+          "processor "
+          "for a specified pid\n";
+    } else if (strcmp(args[1], "man") == 0) {
+      output =
+          "The man utility finds and displays online manual "
+          "documentation "
+          "pages.\n";
+    } else if (strcmp(args[1], "bg") == 0) {
+      output =
+          "The bg utility finds processors that are currently stopped "
+          "and "
+          "resumes the one with the highest job id in the background. bg can "
+          "also find processors with specified pid.\n";
+    } else if (strcmp(args[1], "fg") == 0) {
+      output =
+          "The fg utility finds processors in order of stopped and "
+          "background list, then in the highest job id. Then it resumes the "
+          "processor and gives it terminal control. fg can also find "
+          "processors "
+          "with specified pid\n";
+    } else if (strcmp(args[1], "jobs") == 0) {
+      output =
+          "The jobs command lists processors that are currently "
+          "stopped "
+          "or in background.\n";
+    } else if (strcmp(args[1], "logout") == 0) {
+      output = "logout\n\nExits the shell and shutsdown PennOS..\n";
+    } else {
+      output = "No manual entry.\n";
+    }
+  }
   ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
   if (result == -1) {
     u_perror("Failed to write to STDOUT");
   }
+
   s_exit();
   return NULL;
 }
@@ -236,6 +344,12 @@ void* b_nice(void* arg) {
   struct parsed_command* parsed = NULL;
   parse_command(arg, &parsed);
   char** args = parsed->commands[0];
+
+  if (args[1] == NULL || args[2] == NULL) {
+    /// error
+    return NULL;
+  }
+
   void* (*func)(void*) = s_function_from_string(args[2]);
   unsigned priority = atoi(args[1]);  // USE STROL AND ERRNO
   s_spawn_and_wait(func, &args[2], STDIN_FILENO, STDOUT_FILENO,
