@@ -51,6 +51,7 @@ void free_argv(char* argv[]) {
   free(argv);
 }
 
+// get the total length of the command line
 int get_arg_size(char* argv[]) {
   int i = 0;
   int size = 0;
