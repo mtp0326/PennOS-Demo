@@ -25,11 +25,6 @@
 
 void free_global_fd_table();
 
-
-
-
-
-
 /**
  * @brief Creates a "filesytem" (file on host device) with name \p fs_name
  * with each of the \p blocks_in_fat blocks of size specified via
@@ -197,7 +192,7 @@ void cat_file_wa(char** args);
  * @brief Implements standard ls function
  *
  */
-void ls();
+int ls(char* filename);
 
 /**
  * @brief Implements cp function of copying within the fat by calling

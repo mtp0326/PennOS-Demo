@@ -95,7 +95,7 @@ int main(int argc, char* argv[]) {
         if (!mounted) {
           perror("error: needs to mount fs");
         } else {
-          ls();
+          ls(args[1]);
         }
       }
 

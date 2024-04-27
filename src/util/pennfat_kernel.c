@@ -1043,9 +1043,15 @@ char* formatTime(time_t t) {
   return buffer;
 }
 
-void k_ls(const char* filename, int fd) {
+int k_ls(const char* filename, int fd) {
   struct directory_entries* temp = calloc(1, sizeof(struct directory_entries));
+  if (temp == NULL) {
+    return SYSTEM_ERROR;
+  }
   char* acc = calloc(sizeof(char), 2048);
+  if (acc == NULL) {
+    return SYSTEM_ERROR;
+  }
   int total_acc_size = 0;
   if (filename == NULL) {
     // we need to list everything in the current directory
@@ -1065,7 +1071,12 @@ void k_ls(const char* filename, int fd) {
         curr_root_block = fat[curr_root_block];
 
         // to the start of that block!
-        lseek(fs_fd, get_offset_size(curr_root_block, 0), SEEK_SET);
+        int ret = lseek(fs_fd, get_offset_size(curr_root_block, 0), SEEK_SET);
+        if (ret == -1) {
+          free(temp);
+          free(acc);
+          return SYSTEM_ERROR;
+        }
 
         read_cnt = 0;
       }
@@ -1094,6 +1105,12 @@ void k_ls(const char* filename, int fd) {
 
       char* line = calloc(sizeof(char), 100);
 
+      if (line == NULL) {
+        free(temp);
+        free(acc);
+        return SYSTEM_ERROR;
+      }
+
       total_acc_size +=
           sprintf(line, "%u %s %d %s %s\n", firstBlock, permissions, temp->size,
                   formatTime(temp->mtime), temp->name);
@@ -1103,10 +1120,15 @@ void k_ls(const char* filename, int fd) {
       read_cnt += 1;
       free(line);
     }
-    k_write(fd, acc, total_acc_size);
+    int ret = k_write(fd, acc, total_acc_size);
+    if (ret < 0) {
+      free(temp);
+      free(acc);
+      return ret;
+    }
     free(temp);
     free(acc);
-    return;
+    return 1;
   }  // end of if
 
   // here we have a specific file we want to ls
@@ -1117,12 +1139,12 @@ void k_ls(const char* filename, int fd) {
   read(fs_fd, temp, sizeof(struct directory_entries));
 
   if (temp->name[0] == 0) {
-    return;
+    return 1;
   }
 
   // deleted files we don't want!
   if (temp->name[0] == 1 || temp->name[0] == 2) {
-    return;
+    return 1;
   }
 
   char* permissions = "";
@@ -1135,9 +1157,13 @@ void k_ls(const char* filename, int fd) {
       sprintf(line, "%u %s %d %s %s\n", temp->firstBlock, permissions,
               temp->size, formatTime(temp->mtime), temp->name);
 
-  k_write(fd, line, line_size);
+  int ret = k_write(fd, line, line_size);
 
-  return;
+  if (ret < 0) {
+    return ret;
+  }
+
+  return 1;
 }
 
 int k_update_timestamp(const char* source) {

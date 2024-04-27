@@ -813,8 +813,14 @@ off_t s_lseek(int fd, int offset, int whence) {
   return ret;
 }
 
-void s_ls(const char* filename, int fd) {
-  k_ls(filename, fd);
+int s_ls(const char* filename, int fd) {
+  int ret = k_ls(filename, fd);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 char* s_read_all(const char* filename, int* read_num) {

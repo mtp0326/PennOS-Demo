@@ -381,8 +381,10 @@ off_t k_lseek(int fd, int offset, int whence);
  * @param filename Optional parameter. If specified, ls data for the specified
  * file is printed
  * @param fd The file descriptor you want to write the result of k_ls to
+ *
+ * @return 1 on success, negative value on failure
  */
-void k_ls(const char* filename, int fd);
+int k_ls(const char* filename, int fd);
 
 /**
  * @brief Rename \p source to \p dest
