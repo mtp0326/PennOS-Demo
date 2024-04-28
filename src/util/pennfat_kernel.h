@@ -91,6 +91,11 @@
 #define FS_NOT_MOUNTED -10
 
 /**
+* @brief Error number for when the resulting file mode/permission is invalid
+*/
+#define INVALID_CHMOD -11
+
+/**
  * @enum Whence
  * @brief Defines how the offset will be calculated when using the k_lseek
  * method. For more detail, refer to lseek(2).

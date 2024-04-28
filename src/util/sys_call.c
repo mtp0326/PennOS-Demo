@@ -750,6 +750,9 @@ int file_errno_helper(int ret) {
   } else if (ret == FILE_IN_USE) {
     errno = EUSEDFILE;
     return -1;
+  } else if (ret == INVALID_CHMOD) {
+    errno = EINVALIDCHMOD;
+    return -1;
   }
   return ret;
 }
@@ -840,21 +843,51 @@ off_t s_does_file_exist2(const char* fname) {
 }
 
 int s_rename(const char* source, const char* dest) {
-  return k_rename(source, dest);
+  int ret = k_rename(source, dest);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 int s_change_mode(const char* change, const char* filename) {
-  return k_change_mode(change, filename);
+  int ret = k_change_mode(change, filename);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 int s_cp_within_fat(char* source, char* dest) {
-  return k_cp_within_fat(source, dest);
+  int ret = k_cp_within_fat(source, dest);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 int s_cp_to_host(char* source, char* host_dest) {
-  return k_cp_to_host(source, host_dest);
+  int ret = k_cp_to_host(source, host_dest);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 int s_cp_from_host(char* host_source, char* dest) {
-  return k_cp_from_host(host_source, dest);
+  int ret = k_cp_from_host(host_source, dest);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
