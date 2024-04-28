@@ -71,7 +71,7 @@ pcb_t* find_process(CircularList* list, pid_t pid);
  * @return pcb_t* Pointer to the found process control block, or NULL if not
  * found.
  */
-pcb_t* find_process_job_id(CircularList* list, u_int64_t index);
+pcb_t* find_process_job_id(CircularList* list, int index);
 
 /**
  * Frees all nodes and their associated processes in a circular linked list,

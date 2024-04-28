@@ -16,7 +16,8 @@ CircularList* init_list(void) {
 
 // Adds a new process to the circular linked list
 int add_process(CircularList* list, pcb_t* process) {
-  if (list == NULL || process == NULL) {
+  if (list == NULL || process == NULL ||
+      find_process(list, process->pid) != NULL) {
     return -1;  // Invalid parameters
   }
 
@@ -46,7 +47,8 @@ int add_process(CircularList* list, pcb_t* process) {
 
 // Adds a new process to the circular linked list
 void add_process_front(CircularList* list, pcb_t* process) {
-  if (list == NULL || process == NULL) {
+  if (list == NULL || process == NULL ||
+      find_process(list, process->pid) != NULL) {
     return;  // Invalid parameters
   }
 
@@ -135,7 +137,7 @@ pcb_t* find_process(CircularList* list, pid_t pid) {
 }
 
 // Finds a process in the circular linked list by its PID
-pcb_t* find_process_job_id(CircularList* list, u_int64_t index) {
+pcb_t* find_process_job_id(CircularList* list, int index) {
   if (list == NULL || list->head == NULL) {
     return NULL;  // List is empty or not initialized
   }

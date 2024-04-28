@@ -26,6 +26,7 @@
     "cerrno": "c",
     "parser.h": "c",
     "shellbuiltins.h": "c",
-    "typeinfo": "c"
+    "typeinfo": "c",
+    "random": "c"
   }
 }

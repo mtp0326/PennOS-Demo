@@ -113,9 +113,11 @@ typedef struct pcb_t {
   bool is_bg; /** @brief To signal whether or not the processor in background
                                   is terminated */
 
-  u_int64_t job_num; /** @brief The command name that this processor has */
+  int job_num; /** @brief The job number if process is in background
+                                  or stopped */
 
-  char** argv; /** @brief The arguments that the processor has */
+  char* cmd_name; /** @brief The command name that this processor has
+                                  used for background or stopped signals */
 } pcb_t;
 
 /**

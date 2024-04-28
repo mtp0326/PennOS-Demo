@@ -193,16 +193,45 @@ pcb_t* s_find_process(pid_t pid);
  * @brief Removes a process in any state.
  *
  * @param pid
- * @return int
+ * @return int Returns 0 on success, -1 on failure and sets errno.
  */
 int s_remove_process(pid_t pid);
 
+/**
+ * @brief Returns the function that was specified through string.
+ *
+ * @param program
+ * @return the function that was specified.
+ */
 void* s_function_from_string(char* program);
 
+/**
+ * @brief Prints information to log.txt for each movement of each
+ * processor/thread.
+ *
+ * @param logtype
+ * @param proc
+ * @param old_nice
+ * @return int Returns 0 on success, -1 on failure and sets errno.
+ */
 int s_write_log(log_message_t logtype, pcb_t* proc, unsigned int old_nice);
 
+/**
+ * @brief Find the list that the processor belongs to, removes it from that
+ * list, and adds it to the specified list in argument.
+ *
+ * @param destination
+ * @param pid
+ * @return int Returns 0 on success, -1 on failure and sets errno.
+ */
 int s_move_process(CircularList* destination, pid_t pid);
 
+/**
+ * @brief Makes the specified processor a zombie, orpanifies all its child
+ * processors, then reaps all children.
+ *
+ * @param pid
+ */
 void s_zombie(pid_t pid);
 /***** CUSTOM SYSCALLS FOR SCHEDULER*/
 
@@ -223,13 +252,22 @@ int s_spawn_and_wait(void* (*func)(void*),
                      bool nohang,
                      unsigned int priority);
 
+/**
+ * @brief If pid is specified, fg looks for processor with the pid. If no
+ * specified pid, fg looks in order of stopped and background, then the
+ * processor with the highest job id. Fg then gives the processor terminal
+ * control.
+ *
+ * @param proc
+ * @return int Returns 0 on success, -1 on failure and sets errno.
+ */
 int s_fg(pcb_t* proc);
 
 /**
- * @brief Checks status of background processes with waitpid(nohang)
+ * @brief Checks status of background processes with waitpid(nohang).
  *
  * @param proc
- * @return int
+ * @return int Returns 0 on success, -1 on failure and sets errno.
  */
 int s_bg_wait(pcb_t* proc);
 
@@ -242,10 +280,19 @@ int s_bg_wait(pcb_t* proc);
 pcb_t* s_find_process(pid_t pid);
 
 /**
+ * @brief Looks for the processor in stopped or background with the highest job
+ * id.
+ *
+ * @param list
+ * @return pcb_t*
+ */
+pcb_t* find_jobs_proc(CircularList* list);
+
+/**
  * @brief Removes a process in any state.
  *
  * @param pid
- * @return int
+ * @return int Returns 0 on success, -1 on failure and sets errno.
  */
 int s_remove_process(pid_t pid);
 
@@ -255,9 +302,22 @@ int s_write_log(log_message_t logtype, pcb_t* proc, unsigned int old_nice);
 
 int s_move_process(CircularList* destination, pid_t pid);
 
+/**
+ * @brief Prints all processes in processes, stopped, blocked, zombied.
+ * Used for 'ps' command.
+ *
+ * @param list
+ * @return int Returns 0 on success, -1 on failure and sets errno.
+ */
 int s_print_process(CircularList* list);
 
-int s_print_jobs(CircularList* list);
+/**
+ * @brief Prints the list of processes in stopped or background list.
+ *
+ * @param
+ * @return int Returns 0 on success, -1 on failure and sets errno.
+ */
+int s_print_jobs();
 
 int file_errno_helper(int ret);
 

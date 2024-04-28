@@ -51,6 +51,17 @@ void free_argv(char* argv[]) {
   free(argv);
 }
 
+// get the total length of the command line
+int get_arg_size(char* argv[]) {
+  int i = 0;
+  int size = 0;
+  while (argv[i] != NULL) {
+    size += strlen(argv[i]) + 1;
+    i++;
+  }
+  return size + 1;
+}
+
 pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
   pcb_t* child = k_proc_create(current);
   if (child == NULL) {
@@ -85,6 +96,7 @@ pid_t s_spawn(void* (*func)(void*), char* argv[], int fd0, int fd1) {
     return -1;
   }
   arg->argv = child_argv;
+  fg_proc = child;
 
   if (add_process(processes[1], child) == -1) {
     errno = EADDPROC;
@@ -142,7 +154,8 @@ pid_t s_spawn_nice(void* (*func)(void*),
   }
   arg->argv = child_argv;
   child->priority = (priority == -1 ? 1 : priority);
-  child->argv = child_argv;
+  fg_proc = child;
+
   add_process(processes[(priority == -1 ? 1 : priority)], child);
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
     k_proc_cleanup(child);
@@ -154,6 +167,17 @@ pid_t s_spawn_nice(void* (*func)(void*),
   child->processname =
       (char*)malloc(sizeof(char) * (strlen(child_argv[0]) + 1));
   strcpy(child->processname, child_argv[0]);
+
+  int arg_size = get_arg_size(argv);
+  child->cmd_name = (char*)malloc(sizeof(char) * arg_size);
+
+  int i = 0;
+  while (argv[i] != NULL) {
+    strcat(child->cmd_name, argv[i]);
+    strcat(child->cmd_name, " ");
+    i++;
+  }
+
   s_write_log(CREATE, child, -1);
   if (priority != -1) {
     s_write_log(NICE, child, 1);
@@ -166,11 +190,10 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
   // current->pid, pid); fprintf(stdout, "process caller was: %s \n",
   // current->processname);
   pcb_t* child_pcb;
-  child_pcb = s_find_process(pid);
+  // child_pcb = s_find_process(pid);
+
   if (pid > 0) {
-    if (child_pcb == NULL) {
-      return -1;
-    }
+    child_pcb = s_find_process(pid);
   } else {
     bool give_up = true;
     DynamicPIDArray* pid_array = current->child_pids;
@@ -284,14 +307,15 @@ int s_kill(pid_t pid, int signal) {
       s_move_process(stopped, pid);
       process->state = STOPPED;
       process->statechanged = true;
+      process->is_bg = false;
       if (process->job_num == -1) {
         process->job_num = job_id;
         job_id++;
       }
       s_write_log(STOP, process, -1);
       char message[40];
-      sprintf(message, "\n[%d] + Stopped %s\n", process->pid,
-              process->processname);
+      sprintf(message, "\n[%d] + Stopped %s\n", process->job_num,
+              process->cmd_name);
       s_write(STDOUT_FILENO, message, strlen(message));
       break;
     case P_SIGCONT:
@@ -305,9 +329,9 @@ int s_kill(pid_t pid, int signal) {
       s_write_log(CONTINUE, process, -1);
       break;
     case P_SIGTER:
-
       process->term_signal = P_SIGTER;
       process->exit_status = 0;
+
       s_write_log(SIGNAL, process, -1);
       s_zombie(pid);
       break;
@@ -411,7 +435,7 @@ int s_spawn_and_wait(void* (*func)(void*),
     child_proc->is_bg = true;
     add_process(bg_list, child_proc);
     char message[25];
-    sprintf(message, "[%lu] %4u\n", child_proc->job_num, child_proc->pid);
+    sprintf(message, "[%d] %4u\n", child_proc->job_num, child_proc->pid);
     s_write(STDOUT_FILENO, message, strlen(message));
   }
   int wstatus = 0;
@@ -427,17 +451,18 @@ int s_spawn_and_wait(void* (*func)(void*),
 }
 
 int s_fg(pcb_t* proc) {
-  // void* func = s_function_from_string(proc->processname);
-  remove_process(bg_list, proc->pid);
   proc->is_bg = false;
-  add_process(bg_list, proc);
+  fg_proc = proc;
 
   int wstatus = 0;
-  s_waitpid(proc->pid, &wstatus, false);
+  s_waitpid(proc->pid, &wstatus, proc->is_bg);
 
-  s_reap_all_child(proc);
-  s_remove_process(proc->pid);
-  k_proc_cleanup(proc);
+  if (!proc->is_bg &&
+      (wstatus == STATUS_EXITED || wstatus == STATUS_SIGNALED)) {
+    s_reap_all_child(proc);
+    s_remove_process(proc->pid);
+    k_proc_cleanup(proc);
+  }
   return 0;
 }
 
@@ -445,13 +470,11 @@ int s_bg_wait(pcb_t* proc) {
   int status = 0;
   if (proc->state == ZOMBIED) {
     char message[50];
-    sprintf(message, "[%lu]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
+    sprintf(message, "[%d]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
             proc->processname);
     s_write(STDOUT_FILENO, message, strlen(message));
 
-    remove_process(bg_list, proc->pid);
     proc->is_bg = false;
-    add_process(bg_list, proc);
     s_remove_process(proc->pid);
 
     return 0;
@@ -459,13 +482,11 @@ int s_bg_wait(pcb_t* proc) {
   pid_t wpid = s_waitpid(proc->pid, &status, true);
   if (wpid == proc->pid) {
     char message[50];
-    sprintf(message, "[%lu]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
+    sprintf(message, "[%d]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
             proc->processname);
     s_write(STDOUT_FILENO, message, strlen(message));
 
-    remove_process(bg_list, proc->pid);
     proc->is_bg = false;
-    add_process(bg_list, proc);
     s_remove_process(proc->pid);
   }
 
@@ -499,6 +520,35 @@ pcb_t* s_find_process(pid_t pid) {
   if (ret != NULL) {
     return ret;
   }
+  return NULL;
+}
+
+pcb_t* find_jobs_proc(CircularList* list) {
+  if (list == NULL || list->head == NULL) {
+    return NULL;
+  }
+
+  int max_job_num = -1;
+  pid_t max_pid = -1;
+
+  Node* current_node = list->head;
+  pcb_t* proc;
+  do {
+    proc = current_node->process;
+
+    if (proc->job_num > max_job_num &&
+        (proc->state == STOPPED || proc->is_bg)) {
+      max_job_num = proc->job_num;
+      max_pid = proc->pid;
+    }
+
+    current_node = current_node->next;
+  } while (current_node != list->head);
+
+  if (max_job_num != -1 && max_pid != -1) {
+    return find_process(list, max_pid);
+  }
+
   return NULL;
 }
 
@@ -687,37 +737,28 @@ int s_print_process(CircularList* list) {
   return 0;
 }
 
-int s_print_jobs(CircularList* list) {
-  if (list == NULL || list->head == NULL) {
-    return -1;
+int s_print_jobs(void) {
+  if (bg_list != NULL && bg_list->head != NULL) {
+    Node* current_node = bg_list->head;
+    pcb_t* proc;
+    do {
+      proc = current_node->process;
+      if (proc->is_bg) {
+        fprintf(stdout, "[%d] Running %s\n", proc->job_num, proc->cmd_name);
+      }
+      current_node = current_node->next;
+    } while (current_node != bg_list->head);
   }
 
-  Node* current_node = list->head;
-  pcb_t* proc;
-  do {
-    proc = current_node->process;
-    if (proc->is_bg) {
-      switch (proc->state) {
-        case RUNNING:
-          fprintf(stdout, "[%ld] RUNNING %s\n", proc->job_num,
-                  proc->processname);
-          break;
-        case BLOCKED:
-          fprintf(stdout, "[%ld] BLOCKED %s\n", proc->job_num,
-                  proc->processname);
-          break;
-        case STOPPED:
-          fprintf(stdout, "[%ld] STOPPED %s\n", proc->job_num,
-                  proc->processname);
-          break;
-        case ZOMBIED:
-          fprintf(stdout, "[%ld] ZOMBIED %s\n", proc->job_num,
-                  proc->processname);
-          break;
-      }
-    }
-    current_node = current_node->next;
-  } while (current_node != list->head);
+  if (stopped != NULL && stopped->head != NULL) {
+    Node* current_node = stopped->head;
+    pcb_t* proc;
+    do {
+      proc = current_node->process;
+      fprintf(stdout, "[%d] Stopped %s\n", proc->job_num, proc->cmd_name);
+      current_node = current_node->next;
+    } while (current_node != stopped->head);
+  }
 
   return 0;
 }
