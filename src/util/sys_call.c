@@ -186,9 +186,6 @@ pid_t s_spawn_nice(void* (*func)(void*),
 }
 
 pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
-  // fprintf(stdout, "s_waitpid called by pid: %d, to wait on pid: %d\n",
-  // current->pid, pid); fprintf(stdout, "process caller was: %s \n",
-  // current->processname);
   pcb_t* child_pcb;
   // child_pcb = s_find_process(pid);
 
@@ -713,24 +710,31 @@ int s_print_process(CircularList* list) {
 
   do {
     proc = current_node->process;
+
+    char message[50];
     switch (proc->state) {
       case RUNNING:
-        fprintf(stdout, "%4u\t%4u\t%4u\t R\t%s\n", proc->pid, proc->ppid,
+        sprintf(message, "%4u\t%4u\t%4u\t R\t%s\n", proc->pid, proc->ppid,
                 proc->priority, proc->processname);
         break;
       case BLOCKED:
-        fprintf(stdout, "%4u\t%4u\t%4u\t B\t%s\n", proc->pid, proc->ppid,
+        sprintf(message, "%4u\t%4u\t%4u\t B\t%s\n", proc->pid, proc->ppid,
                 proc->priority, proc->processname);
         break;
       case STOPPED:
-        fprintf(stdout, "%4u\t%4u\t%4u\t S\t%s\n", proc->pid, proc->ppid,
+        sprintf(message, "%4u\t%4u\t%4u\t S\t%s\n", proc->pid, proc->ppid,
                 proc->priority, proc->processname);
         break;
       case ZOMBIED:
-        fprintf(stdout, "%4u\t%4u\t%4u\t Z\t%s\n", proc->pid, proc->ppid,
+        sprintf(message, "%4u\t%4u\t%4u\t Z\t%s\n", proc->pid, proc->ppid,
                 proc->priority, proc->processname);
         break;
     }
+    ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
+    if (result == -1) {
+      u_perror("Failed to write to STDOUT");
+    }
+
     current_node = current_node->next;
   } while (current_node != list->head);
 
@@ -743,9 +747,16 @@ int s_print_jobs(void) {
     pcb_t* proc;
     do {
       proc = current_node->process;
+
       if (proc->is_bg) {
-        fprintf(stdout, "[%d] Running %s\n", proc->job_num, proc->cmd_name);
+        char message[40];
+        sprintf(message, "[%d] Running %s\n", proc->job_num, proc->cmd_name);
+        ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
+        if (result == -1) {
+          u_perror("Failed to write to STDOUT");
+        }
       }
+
       current_node = current_node->next;
     } while (current_node != bg_list->head);
   }
@@ -755,7 +766,14 @@ int s_print_jobs(void) {
     pcb_t* proc;
     do {
       proc = current_node->process;
-      fprintf(stdout, "[%d] Stopped %s\n", proc->job_num, proc->cmd_name);
+
+      char message[40];
+      sprintf(message, "[%d] Stopped %s\n", proc->job_num, proc->cmd_name);
+      ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
+      if (result == -1) {
+        u_perror("Failed to write to STDOUT");
+      }
+
       current_node = current_node->next;
     } while (current_node != stopped->head);
   }

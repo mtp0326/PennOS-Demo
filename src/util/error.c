@@ -1,9 +1,7 @@
 #include "error.h"
 void u_perror(char* message) {
   char* err_message;
-  if (message == NULL) {
-    return;
-  } else if (strcmp(message, "\0") == 0) {
+  if (message == NULL || strcmp(message, "\0") == 0) {
     return;
   } else {
     write(STDERR_FILENO, message, strlen(message));
@@ -55,3 +53,16 @@ void u_perror(char* message) {
   write(STDERR_FILENO, err_message, strlen(err_message));
   write(STDERR_FILENO, "\n", 1);
 }
+
+// char* output;
+// ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
+// if (result == -1) {
+//   u_perror("Failed to write to STDOUT");
+// }
+
+// char message[40];
+// sprintf(message, "\n[%d] + Stopped %s\n", process->job_num,
+// process->cmd_name); ssize_t result = s_write(STDOUT_FILENO, message,
+// strlen(message)); if (result == -1) {
+//   u_perror("Failed to write to STDOUT");
+// }
