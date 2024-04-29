@@ -20,9 +20,14 @@
 [  11]	SCHEDULE 	   1	   0		shell
 [  12]	SCHEDULE 	   1	   0		shell
 [  13]	SCHEDULE 	   1	   0		shell
+[  13]	CREATE   	   2	   1		sleep
+[  13]	BLOCKED  	   1	   0		shell
 [  14]	SCHEDULE 	   1	   0		shell
-[  15]	SCHEDULE 	   1	   0		shell
+[  15]	SCHEDULE 	   2	   1		sleep
+[  16]	STOPPED  	   2	   1		sleep
+[  16]	UNBLOCKED	   1	   0		shell
 [  16]	SCHEDULE 	   1	   0		shell
+[  16]	WAITED   	   2	   1		sleep
 [  17]	SCHEDULE 	   1	   0		shell
 [  18]	SCHEDULE 	   1	   0		shell
 [  19]	SCHEDULE 	   1	   0		shell
@@ -42,8 +47,17 @@
 [  29]	ZOMBIE   	   3	   1		man
 [  30]	UNBLOCKED	   1	   0		shell
 [  30]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [  30]	WAITED   	   3	   1		man
+=======
+[  30]	EXITED   	   2	   1		sleep
+[  30]	BLOCKED  	   1	   0		shell
+[  31]	SIGNALED 	   2	   1		sleep
+[  31]	ZOMBIE   	   2	   1		sleep
+[  31]	UNBLOCKED	   1	   0		shell
+>>>>>>> move
 [  31]	SCHEDULE 	   1	   0		shell
+[  31]	WAITED   	   2	   1		sleep
 [  32]	SCHEDULE 	   1	   0		shell
 [  33]	SCHEDULE 	   1	   0		shell
 [  34]	SCHEDULE 	   1	   0		shell
@@ -51,8 +65,14 @@
 [  36]	SCHEDULE 	   1	   0		shell
 [  37]	SCHEDULE 	   1	   0		shell
 [  38]	SCHEDULE 	   1	   0		shell
-[  39]	SCHEDULE 	   1	   0		shell
+[  38]	CREATE   	   3	   1		ps
+[  38]	BLOCKED  	   1	   0		shell
+[  39]	SCHEDULE 	   3	   1		ps
+[  39]	EXITED   	   3	   1		ps
+[  39]	ZOMBIE   	   3	   1		ps
+[  40]	UNBLOCKED	   1	   0		shell
 [  40]	SCHEDULE 	   1	   0		shell
+[  40]	WAITED   	   3	   1		ps
 [  41]	SCHEDULE 	   1	   0		shell
 [  42]	SCHEDULE 	   1	   0		shell
 [  43]	SCHEDULE 	   1	   0		shell
@@ -319,13 +339,18 @@
 [ 304]	SCHEDULE 	   1	   0		shell
 [ 305]	SCHEDULE 	   1	   0		shell
 [ 306]	SCHEDULE 	   1	   0		shell
-[ 307]	SCHEDULE 	   1	   0		shell
+[ 306]	CREATE   	   4	   1		sleep
+[ 307]	SCHEDULE 	   4	   1		sleep
 [ 308]	SCHEDULE 	   1	   0		shell
 [ 309]	SCHEDULE 	   1	   0		shell
 [ 310]	SCHEDULE 	   1	   0		shell
 [ 311]	SCHEDULE 	   1	   0		shell
 [ 312]	SCHEDULE 	   1	   0		shell
+[ 312]	BLOCKED  	   1	   0		shell
+[ 313]	STOPPED  	   4	   1		sleep
+[ 313]	UNBLOCKED	   1	   0		shell
 [ 313]	SCHEDULE 	   1	   0		shell
+[ 313]	WAITED   	   4	   1		sleep
 [ 314]	SCHEDULE 	   1	   0		shell
 [ 315]	SCHEDULE 	   1	   0		shell
 [ 316]	SCHEDULE 	   1	   0		shell
@@ -336,6 +361,7 @@
 [ 321]	SCHEDULE 	   1	   0		shell
 [ 322]	SCHEDULE 	   1	   0		shell
 [ 323]	SCHEDULE 	   1	   0		shell
+<<<<<<< HEAD
 [ 324]	SCHEDULE 	   1	   0		shell
 [ 325]	SCHEDULE 	   1	   0		shell
 [ 326]	SCHEDULE 	   1	   0		shell
@@ -1356,3 +1382,7 @@
 [1335]	SCHEDULE 	   1	   0		shell
 [1336]	SCHEDULE 	   1	   0		shell
 [1337]	SCHEDULE 	   1	   0		shell
+=======
+[ 323]	EXITED   	   4	   1		sleep
+[ 323]	BLOCKED  	   1	   0		shell
+>>>>>>> move
