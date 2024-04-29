@@ -27,6 +27,8 @@
     "parser.h": "c",
     "shellbuiltins.h": "c",
     "typeinfo": "c",
-    "random": "c"
+    "random": "c",
+    "functional": "c",
+    "system_error": "c"
   }
 }

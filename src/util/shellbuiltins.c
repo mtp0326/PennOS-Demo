@@ -78,7 +78,11 @@ void* b_kill(void* arg) {
 void* b_ps(void* arg) {
   // displaying PID, PPID, priority, status, and command name.
   /// not sure if order has to change
-  fprintf(stdout, "  PID\t PPID\t  PRI\tSTAT\tCMD\n");
+  char* output = "  PID\t PPID\t  PRI\tSTAT\tCMD\n";
+  ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
+  if (result == -1) {
+    u_perror("Failed to write to STDOUT");
+  }
 
   for (int i = 0; i < 3; i++) {
     s_print_process(processes[i]);
@@ -108,13 +112,19 @@ void* b_fg(void* arg) {
     proc = find_process_job_id(stopped, index);
 
     if (proc != NULL) {
-      fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+      char message[40];
+      sprintf(message, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
               proc->cmd_name);
+      ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
+      if (result == -1) {
+        u_perror("Failed to write to STDOUT");
+      }
+
       if (proc->initial_state != RUNNING) {
         s_resume_block(proc->pid);
       } else {
         if (s_kill(proc->pid, P_SIGCONT) < 0) {
-          fprintf(stderr, "SIGCONT failed to send\n");
+          fprintf(stderr, "SIGCONT failed to send\n");  /// switch to errno
           return NULL;
         }
       }
@@ -125,27 +135,40 @@ void* b_fg(void* arg) {
     proc = find_process_job_id(bg_list, index);
 
     if (proc != NULL) {
-      fprintf(stdout, "[%d]  + %4u Running\t%s\n", proc->job_num, proc->pid,
+      char message[40];
+      sprintf(message, "[%d]  + %4u Running\t%s\n", proc->job_num, proc->pid,
               proc->cmd_name);
+      ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
+      if (result == -1) {
+        u_perror("Failed to write to STDOUT");
+      }
+
       s_fg(proc);
       return NULL;
     }
-    fprintf(stderr, "PID with specified number does not exist\n");
+    fprintf(stderr,
+            "PID with specified number does not exist\n");  /// switch to errno
 
     return NULL;
   }
 
   proc = find_jobs_proc(stopped);
   if (proc != NULL) {
-    fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+    char message[40];
+    sprintf(message, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
             proc->cmd_name);
+    ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
+    if (result == -1) {
+      u_perror("Failed to write to STDOUT");
+    }
+
     /// TODO:there could be more but wrote for sleep for now
     if (proc->initial_state != RUNNING) {
       s_resume_block(proc->pid);
     } else {
       if (s_kill(proc->pid, P_SIGCONT) < 0) {
         // error
-        fprintf(stderr, "SIGCONT failed to send\n");
+        fprintf(stderr, "SIGCONT failed to send\n");  /// switch to errno
         return NULL;
       }
     }
@@ -156,12 +179,18 @@ void* b_fg(void* arg) {
 
   proc = find_jobs_proc(bg_list);
   if (proc != NULL) {
-    fprintf(stdout, "[%d]  + %4u Running\t%s\n", proc->job_num, proc->pid,
+    char message[40];
+    sprintf(message, "[%d]  + %4u Running\t%s\n", proc->job_num, proc->pid,
             proc->cmd_name);
+    ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
+    if (result == -1) {
+      u_perror("Failed to write to STDOUT");
+    }
+
     s_fg(proc);
     return NULL;
   }
-  fprintf(stderr, "Job does not exist\n");
+  fprintf(stderr, "Job does not exist\n");  /// switch to errno
   return NULL;
 }
 
@@ -181,18 +210,25 @@ void* b_bg(void* arg) {
         s_resume_block(proc->pid);
       } else {
         if (s_kill(proc->pid, P_SIGCONT) < 0) {
-          fprintf(stderr, "SIGCONT failed to send\n");
+          fprintf(stderr, "SIGCONT failed to send\n");  /// switch to errno
           return NULL;
         }
       }
 
       proc->is_bg = true;
       add_process(bg_list, proc);
-      fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+      char message[40];
+      sprintf(message, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
               proc->cmd_name);
+      ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
+      if (result == -1) {
+        u_perror("Failed to write to STDOUT");
+      }
+
       return NULL;
     }
-    fprintf(stderr, "PID with specified number does not exist\n");
+    fprintf(stderr,
+            "PID with specified number does not exist\n");  /// switch to errno
     return NULL;
   }
 
@@ -203,18 +239,24 @@ void* b_bg(void* arg) {
       s_resume_block(proc->pid);
     } else {
       if (s_kill(proc->pid, P_SIGCONT) < 0) {
-        fprintf(stderr, "SIGCONT failed to send\n");
+        fprintf(stderr, "SIGCONT failed to send\n");  /// switch to errno
         return NULL;
       }
     }
 
     proc->is_bg = true;
     add_process(bg_list, proc);
-    fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+    char message[40];
+    sprintf(message, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
             proc->cmd_name);
+    ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
+    if (result == -1) {
+      u_perror("Failed to write to STDOUT");
+    }
+
     return NULL;
   }
-  fprintf(stderr, "there are no stopped jobs\n");
+  fprintf(stderr, "There are no stopped jobs\n");  /// switch to errno
 
   return NULL;
 }
@@ -388,6 +430,7 @@ void* b_zombie_child(void* arg) {
 void* b_zombify(void* arg) {
   char* args[2] = {"zombie_child", NULL};
   s_spawn(b_zombie_child, args, STDIN_FILENO, STDOUT_FILENO);
+  fg_proc = s_find_process(current->pid);
   while (1)
     ;
   return NULL;
