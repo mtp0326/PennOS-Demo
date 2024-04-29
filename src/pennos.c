@@ -29,11 +29,8 @@ static void* shell(void* arg) {
   while (1) {
     prompt(true);
     char* cmd;
-    int read_flag = read_command(&cmd);
-    if (read_flag < 0) {
-      done = true;
-      break;
-    }
+    read_command(&cmd);
+
     b_background_poll(NULL);
 
     if (cmd[0] != '\n') {
@@ -88,8 +85,7 @@ static void* shell(void* arg) {
         s_spawn_and_wait(b_sleep, args, STDIN_FILENO, STDOUT_FILENO,
                          parsed->is_background, -1);
       } else if (strcmp(args[0], "busy") == 0) {
-        s_spawn_and_wait(b_busy, args, STDIN_FILENO, STDOUT_FILENO,
-                         parsed->is_background, -1);
+        b_busy(NULL);
       } else if (strcmp(args[0], "echo") == 0) {
         // echo should ignore any input redirection
         // but it should write to the redirected output file
@@ -192,10 +188,7 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "jobs") == 0) {
         b_jobs(NULL);
       } else if (strcmp(args[0], "logout") == 0) {
-        done = true;
-        free(parsed);
-        free(cmd);
-        s_exit();
+        b_logout(NULL);
         break;
       } else if (strcmp(args[0], "clear") == 0) {
         b_clear(NULL);
@@ -204,7 +197,7 @@ static void* shell(void* arg) {
       } else if (strcmp(args[0], "nohang") == 0) {
         nohang(args);
       } else if (strcmp(args[0], "recur") == 0) {
-        s_spawn_and_wait(recur, args, STDIN_FILENO, STDOUT_FILENO, false, -1);
+        recur(args);
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
         // REPLACE WITH PERROR
@@ -301,6 +294,7 @@ void scheduler(char* logfile) {
 
   // spawn in the shell process at priority 0
   s_spawn_nice(shell, arg, STDIN_FILENO, STDOUT_FILENO, 0);
+
   // main loop
   while (!done) {
     // unlock done lock so that other processes can lock it if they are not
@@ -338,9 +332,6 @@ void scheduler(char* logfile) {
           for (size_t i = 0; i < pid_array->used; i++) {
             pid_t current_pid = pid_array->array[i];
             child_pcb = s_find_process(current_pid);
-            if (child_pcb == NULL) {
-              continue;
-            }
             if (child_pcb->statechanged) {
               child_changed = true;
               break;
@@ -417,14 +408,6 @@ void scheduler(char* logfile) {
       pthread_mutex_lock(&done_lock);
     }
   }
-
-  free(arg[0]);
-  free(arg);
-  k_proc_cleanup(current);
-  dynamic_pid_array_destroy(place->child_pids);
-  free(place);
-  free(current);
-
   close(file);
   pthread_mutex_unlock(&done_lock);
   return;
@@ -500,14 +483,6 @@ int main(int argc, char** argv) {
 
   scheduler(log);
   pthread_mutex_destroy(&done_lock);
-  free_global_fd_table();
-  free_list(processes[0]);
-  free_list(processes[1]);
-  free_list(processes[2]);
-  free_list(blocked);
-  free_list(stopped);
-  free_list(zombied);
-  free_list(bg_list);
-  free_plist(priority);
+
   return EXIT_SUCCESS;
 }

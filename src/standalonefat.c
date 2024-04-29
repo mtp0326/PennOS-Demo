@@ -7,12 +7,6 @@ int main(int argc, char* argv[]) {
     perror("error: can't handle sigint\n");
     exit(EXIT_FAILURE);
   }
-
-  if (signal(SIGTSTP, int_handler) == SIG_ERR) {
-    perror("error: can't handle sigtstp\n");
-    exit(EXIT_FAILURE);
-  }
-
   bool mounted = false;
   // create fd_table
   initialize_global_fd_table();
@@ -95,7 +89,7 @@ int main(int argc, char* argv[]) {
         if (!mounted) {
           perror("error: needs to mount fs");
         } else {
-          ls(args[1]);
+          ls();
         }
       }
 

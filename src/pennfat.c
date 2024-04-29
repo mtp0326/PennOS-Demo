@@ -49,15 +49,14 @@ int read_command(char** cmds) {
 
 void int_handler(int signo) {
   // fprintf(stderr, "entered int handler");
-  if (signo == SIGINT || SIGTSTP) {
+  if (signo == SIGINT) {
     ssize_t new_line = write(STDERR_FILENO, "\n", strlen("\n"));
     if (new_line < 0) {
       perror("error: printing new line upon CTRL+C");
       exit(EXIT_FAILURE);
     }
   }
-
-  prompt(false);
+  prompt(true);
 }
 
 void initialize_global_fd_table() {
@@ -85,23 +84,6 @@ void initialize_global_fd_table() {
       create_file_descriptor(2, "stdout", F_WRITE, 0);
 
   global_fd_table[2] = std_err;
-}
-
-void free_global_fd_table() {
-  if (global_fd_table == NULL) {
-    return;
-  }
-
-  for (int i = 0; i < MAX_FD_NUM; i++) {
-    if (global_fd_table[i] != NULL) {
-      free(global_fd_table[i]->fname);
-      free(global_fd_table[i]);
-    }
-    global_fd_table[i] = NULL;  // Safeguard against double free
-  }
-
-  free(global_fd_table);
-  global_fd_table = NULL;
 }
 
 void mkfs(const char* fs_name, int blocks_in_fat, int block_size_config) {
@@ -397,8 +379,8 @@ void cat_a(char* output) {
   k_close(fd);
 }
 
-int ls(char* filename) {
-  return k_ls(filename, STDERR_FILENO);
+void ls() {
+  k_ls(NULL, STDERR_FILENO);
 }
 
 int cp_within_fat(char* source, char* dest) {

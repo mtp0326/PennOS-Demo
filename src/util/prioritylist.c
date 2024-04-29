@@ -75,27 +75,3 @@ bool remove_priority(PList* list, unsigned int priority) {
 
   return false;  // Process not found
 }
-
-
-void free_plist(PList* list) {
-    if (list == NULL) {
-        return;
-    }
-
-    if (list->head == NULL) {
-        free(list);
-        return;
-    }
-
-    PNode* current = list->head;
-    PNode* next_node;
-
-    do {
-        next_node = current->next;
-        free(current);
-        current = next_node;
-    } while (current != list->head);
-
-    free(list);
-}
-
