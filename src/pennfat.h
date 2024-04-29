@@ -15,15 +15,13 @@
 #include "parser.h"
 #include "util/pennfat_kernel.h"
 #ifndef PROMPT_PENN_FAT
-#define PROMPT_PENN_FAT "\033[31mpenn-fat>\033[0m "
+#define PROMPT_PENN_FAT "penn-fat> "
 #endif
 #ifndef PROMPT_SHELL
 #define PROMPT_SHELL "$ "
 #endif
 #define MAX_LEN 4096
 #endif
-
-void free_global_fd_table();
 
 /**
  * @brief Creates a "filesytem" (file on host device) with name \p fs_name
@@ -192,7 +190,7 @@ void cat_file_wa(char** args);
  * @brief Implements standard ls function
  *
  */
-int ls(char* filename);
+void ls();
 
 /**
  * @brief Implements cp function of copying within the fat by calling

@@ -44,12 +44,4 @@ void add_priority(PList* list, unsigned int priority);
  */
 bool remove_priority(PList* list, unsigned int priority);
 
-/**
- * Frees all nodes and their associated processes in a circular linked list,
- * then frees the list itself.
- * 
- * @param list Pointer to the circular linked list to free.
- */
-void free_plist(PList* list);
-
 #endif  // SCHEDULER_LIST_H

@@ -319,8 +319,6 @@ int s_print_process(CircularList* list);
  */
 int s_print_jobs();
 
-int file_errno_helper(int ret);
-
 /*== system call functions for interacting with PennOS filesystem ==*/
 /**
  * @brief open a file name fname with the mode mode and return a file
@@ -415,107 +413,24 @@ off_t s_lseek(int fd, int offset, int whence);
  *
  * @param filename
  */
-int s_ls(const char* filename, int fd);
+void s_ls(const char* filename, int fd);
 
-/**
- * @brief Wrapper function around k_read_all.
- *
- * Reads all contents from the file with the file name \p filename.
- * Outputs the contents as well as update \p read_num to the number of bytes
- * read.
- *
- *
- * @param filename Name of the file we want to read from.
- * @param read_num Pointer to an integer variable that will store the number of
- * bytes read.
- *
- * @return All contents of \p filename in char* format.
- */
 char* s_read_all(const char* filename, int* read_num);
 
-/**
- * @brief Wrapper function around k_get_fname_from_fd.
- *
- * @param fd The file descriptor number.
- *
- * @return The file name of the \p fd . NULL is \p fd is invalid.
- */
 char* s_get_fname_from_fd(int fd);
 
-/**
- * @brief Wrapper function around k_update_timestamp.
- * Returns the filename for the given file descriptor number.
- *
- * @param source
- */
 int s_update_timestamp(const char* source);
 
-/**
- * @brief Wrapper function around k_does_file_exst2.
- * Change the timestamp of the file to the current time
- *
- * @param source Source file name.
- *
- * @return 1 on success. Negative number on failure.
- */
 off_t s_does_file_exist2(const char* fname);
 
-
-/**
- * @brief s-function wrapper around k_rename, which renames \p source 
- * to \p dest. \p source must exist, if \p dest already exists, then it is
- * deleted
- *
- * @param source name of the source file to be renamed
- * @param dest new name of file
- *
- * @return -1 on error, 0 if rename was successful
- */
 int s_rename(const char* source, const char* dest);
 
-/**
- * @brief s-function wrapper around k_change_mode, which changes the mode 
- * (permission) of the file in the directory entry, specificed by \p filename
- * with change \p change. Errors if the resulting permission is invalid or
- * if \p filename doesn't exist
- *
- * @param change the change to be made (e.g. -w, +w, -rw, etc)
- * @param filename name of the specified file to be changed
- *
- * @return -1 on error, 0 if change mode was successful
- */
 int s_change_mode(const char* change, const char* filename);
 
-/**
- * @brief s-function wrapper around k_cp_within_fat. 
- * Copies contents of \p source to \p dest. \p source must exist, if 
- * \p dest doesn't exist then it is created. 
- *
- * @param source source filename to copy from
- * @param dest destination filename to copy into
- *
- * @return -1 on error, 0 if cp was successful
- */
 int s_cp_within_fat(char* source, char* dest);
 
-/**
- * @brief s-function wrapper around k_cp_to_host
- *
- * @param source source filename to copy from (in PennOS)
- * @param host_dest destination filename to copy into (on host device)
- *
- * @return -1 on error, 0 if cp was successful
- */
 int s_cp_to_host(char* source, char* host_dest);
 
-/**
- * @brief s-function wrapper around k_cp_from_host
- *
- * @param host_source source filename to copy from (on host device)
- * @param dest destination filename to copy into (in PennOS)
- *
- * @return -1 on error, 0 if cp was successful
- */
 int s_cp_from_host(char* host_source, char* dest);
 
 #endif

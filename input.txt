@@ -1,0 +1,6 @@
+nice 0 busy &
+nice 1 busy &
+nice 1 busy &
+nice 2 busy &
+nice 2 busy &
+ps

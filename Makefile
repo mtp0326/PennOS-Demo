@@ -9,7 +9,7 @@ DOXYGEN_ENABLED = 1
 
 CC = gcc-12
 CXX = g++-12
-CFLAGS = -pthread -Wall -Werror  -O0 -g --std=gnu2x
+CFLAGS = -pthread -Wall -Werror -O0 -g --std=gnu2x
 CXXFLAGS = -pthread -Wall -Werror -O0 -g --std=c++20
 
 # tells it to search for 
