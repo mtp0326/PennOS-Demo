@@ -1,8 +1,7 @@
-#include "unistd.h"
+#include <string.h>
 #include "errno.h"
 #include "stdio.h"
-#include <string.h>
-
+#include "unistd.h"
 
 #ifndef ERROR
 #define ERROR
@@ -16,17 +15,27 @@ extern int errno;
 
 // KERNEL LEVEL ERRORS
 
-    // S_SPAWN ERRORS
+// S_SPAWN ERRORS
 #define EPCBCREATE 0
 #define ENOARGS 1
 #define EADDPROC 2
 #define ETHREADCREATE 3
 #define EBITMAP 4
 
-
-    // S_SLEEP ERRORS
+// S_SLEEP ERRORS
 #define EINVARG 5
 
+// S_OPEN, S_READ, S_WRITE, S_CLOSE, S_UNLINK, S_LSEEK, S_LS, S_CHMOD ERRORS
+#define EBADFILENAME 400
+#define EMULTWRITE 401
+#define EWRONGPERM 402
+#define ESYSERR 403
+#define ENOFILE 404
+#define EFILEDEL 405
+#define EINVALIDFD 406
+#define EINVALIDPARAMETER 407
+#define EUSEDFILE 408
+#define EINVALIDCHMOD 500
 
 // FAT LEVEL ERRORS
 /**

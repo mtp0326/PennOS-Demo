@@ -163,7 +163,7 @@ pid_t s_spawn_nice(void* (*func)(void*),
     free(arg);
     return -1;
   }
-
+  free(arg);
   child->processname =
       (char*)malloc(sizeof(char) * (strlen(child_argv[0]) + 1));
   strcpy(child->processname, child_argv[0]);
@@ -186,8 +186,12 @@ pid_t s_spawn_nice(void* (*func)(void*),
 }
 
 pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
+  // fprintf(stdout, "s_waitpid called by pid: %d, to wait on pid: %d\n",
+  // current->pid, pid); fprintf(stdout, "process caller was: %s \n",
+  // current->processname);
   pcb_t* child_pcb;
   // child_pcb = s_find_process(pid);
+
   if (pid > 0) {
     child_pcb = s_find_process(pid);
   } else {
@@ -197,6 +201,9 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
       pid_t current_pid = pid_array->array[i];
       child_pcb = s_find_process(current_pid);
       // is there at least one child process left to wait on?
+      if (child_pcb == NULL) {
+        continue;
+      }
       if ((child_pcb->state == RUNNING) || (child_pcb->state == BLOCKED) ||
           (child_pcb->statechanged)) {
         give_up = false;
@@ -342,6 +349,9 @@ void s_reap_all_child(pcb_t* parent) {
   }
 
   DynamicPIDArray* child_array = parent->child_pids;
+  if (child_array == NULL) {
+    return;
+  }
   int c_size = child_array->size;
   for (int i = 0; i < c_size; i++) {
     pcb_t* child_proc = s_find_process(child_array->array[i]);
@@ -368,6 +378,7 @@ void s_zombie(pid_t pid) {
   for (size_t i = 0; i < pid_array->used; i++) {
     pid_t current_pid = pid_array->array[i];
     s_write_log(ORPHAN, s_find_process(current_pid), -1);
+    s_find_process(current_pid)->ppid = 0;
   }
   s_reap_all_child(s_find_process(pid));
 }
@@ -406,7 +417,6 @@ int s_sleep(unsigned int ticks) {
 int s_busy(void) {
   while (1)
     ;
-  s_exit();
   return 0;
 }
 
@@ -753,51 +763,108 @@ int s_print_jobs(void) {
   return 0;
 }
 
+int file_errno_helper(int ret) {
+  if (ret == INVALID_FILE_NAME) {
+    errno = EBADFILENAME;
+    return -1;
+  } else if (ret == MULTIPLE_F_WRITE) {
+    errno = EMULTWRITE;
+    return -1;
+  } else if (ret == WRONG_PERMISSION) {
+    errno = EWRONGPERM;
+    return -1;
+  } else if (ret == SYSTEM_ERROR) {
+    errno = ESYSERR;
+    return -1;
+  } else if (ret == FILE_NOT_FOUND) {
+    errno = ENOFILE;
+    return -1;
+  } else if (ret == FILE_DELETED) {
+    errno = EFILEDEL;
+    return -1;
+  } else if (ret == INVALID_FILE_DESCRIPTOR) {
+    errno = EINVALIDFD;
+    return -1;
+  } else if (ret == INVALID_PARAMETERS) {
+    errno = EINVALIDPARAMETER;
+    return -1;
+  } else if (ret == FILE_IN_USE) {
+    errno = EUSEDFILE;
+    return -1;
+  } else if (ret == INVALID_CHMOD) {
+    errno = EINVALIDCHMOD;
+    return -1;
+  }
+  return ret;
+}
+
 int s_open(const char* fname, int mode) {
   int fd = k_open(fname, mode);
 
-  if (fd == -1) {
-    perror("error: s_open: k_open error");
+  if (file_errno_helper(fd) == -1) {
     return -1;
   }
+
   fd_bitmap_set(current->open_fds, fd);
   return fd;
 }
 
 ssize_t s_read(int fd, int n, char* buf) {
   ssize_t ret = k_read(fd, n, buf);
-  if (ret == -1) {
-    perror("error: s_read: k_read error");
+
+  if (file_errno_helper(ret) == -1) {
     return -1;
   }
+
   return ret;
 }
 
 ssize_t s_write(int fd, const char* str, int n) {
   ssize_t ret = k_write(fd, str, n);
-  if (ret == -1) {
-    perror("error: s_write: k_write error");
+  if (file_errno_helper(ret) == -1) {
     return -1;
   }
   return ret;
 }
 
 int s_close(int fd) {
-  k_close(fd);
+  int ret = k_close(fd);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
   fd_bitmap_clear(current->open_fds, fd);
   return 0;
 }
 
 int s_unlink(const char* fname) {
-  return k_unlink(fname);
+  int ret = k_unlink(fname);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 off_t s_lseek(int fd, int offset, int whence) {
-  return k_lseek(fd, offset, whence);
+  int ret = k_lseek(fd, offset, whence);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+  return ret;
 }
 
-void s_ls(const char* filename, int fd) {
-  k_ls(filename, fd);
+int s_ls(const char* filename, int fd) {
+  int ret = k_ls(filename, fd);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 char* s_read_all(const char* filename, int* read_num) {
@@ -817,21 +884,51 @@ off_t s_does_file_exist2(const char* fname) {
 }
 
 int s_rename(const char* source, const char* dest) {
-  return k_rename(source, dest);
+  int ret = k_rename(source, dest);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 int s_change_mode(const char* change, const char* filename) {
-  return k_change_mode(change, filename);
+  int ret = k_change_mode(change, filename);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 int s_cp_within_fat(char* source, char* dest) {
-  return k_cp_within_fat(source, dest);
+  int ret = k_cp_within_fat(source, dest);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 int s_cp_to_host(char* source, char* host_dest) {
-  return k_cp_to_host(source, host_dest);
+  int ret = k_cp_to_host(source, host_dest);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 int s_cp_from_host(char* host_source, char* dest) {
-  return k_cp_from_host(host_source, dest);
+  int ret = k_cp_from_host(host_source, dest);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }

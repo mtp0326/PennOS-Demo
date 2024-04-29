@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <sys/types.h>
+#include <stdlib.h>
 
 typedef struct pcb_t pcb_t;
 
@@ -71,5 +72,13 @@ pcb_t* find_process(CircularList* list, pid_t pid);
  * found.
  */
 pcb_t* find_process_job_id(CircularList* list, int index);
+
+/**
+ * Frees all nodes and their associated processes in a circular linked list,
+ * then frees the list itself.
+ * 
+ * @param list Pointer to the circular linked list to free.
+ */
+void free_list(CircularList* list);
 
 #endif  // SCHEDULER_LIST_H

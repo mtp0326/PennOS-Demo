@@ -8,7 +8,7 @@
 #include "globals.h"
 #include "spthread.h"
 #include "stdlib.h"
-#include "syscall.h"
+#include "sys_call.h"
 
 /**
  * @enum process_state_t

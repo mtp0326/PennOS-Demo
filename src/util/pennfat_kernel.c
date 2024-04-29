@@ -34,7 +34,7 @@ int k_open(const char* fname, int mode) {
   char* fname_copy3 = strdup(fname);
   // using fname_copy3 check if the fname is a valid name (unix)
   if (!is_file_name_valid(fname_copy3)) {
-    perror("error: invalid filename please follow POSIX standard");
+    // perror("error: invalid filename please follow POSIX standard");
     return INVALID_FILE_NAME;
   }
 
@@ -56,18 +56,18 @@ int k_open(const char* fname, int mode) {
              global_fd_table[i]->mode == F_APPEND) &&
             (strcmp(global_fd_table[i]->fname, fname) == 0)) {
           fd_counter--;
-          perror(
-              "k_open: F_WRITE error: attempted to open a file in F_WRITE mode "
-              "more than once");
+          // perror(
+          //     "k_open: F_WRITE error: attempted to open a file in F_WRITE
+          //     mode " "more than once");
           return MULTIPLE_F_WRITE;
           // exit(EXIT_FAILURE);
         }
       }
       if (dir_entry->perm == 4 || dir_entry->perm == 5 ||
           dir_entry->perm == 0) {
-        perror(
-            "k_open: F_WRITE: attempting to open file without write "
-            "permission");
+        // perror(
+        //     "k_open: F_WRITE: attempting to open file without write "
+        //     "permission");
         return WRONG_PERMISSION;
         // exit(EXIT_FAILURE);
       }
@@ -122,7 +122,7 @@ int k_open(const char* fname, int mode) {
       if (write(fs_fd, new_de, sizeof(struct directory_entries)) !=
           sizeof(struct directory_entries)) {
         fd_counter--;
-        perror("k_open: write error");
+        // perror("k_open: write error");
         return SYSTEM_ERROR;
         // exit(EXIT_FAILURE);
       }
@@ -130,9 +130,9 @@ int k_open(const char* fname, int mode) {
   } else if (mode == F_READ) {  // F_READ
     if (dir_entry != NULL) {    // open file: add it to fd table
       if (dir_entry->perm == 2 || dir_entry->perm == 0) {
-        perror(
-            "k_open: F_READ: attempting to open file that doesn't have read "
-            "permission");
+        // perror(
+        //     "k_open: F_READ: attempting to open file that doesn't have read "
+        //     "permission");
         return WRONG_PERMISSION;
         // exit(EXIT_FAILURE);
       }
@@ -140,7 +140,7 @@ int k_open(const char* fname, int mode) {
       global_fd_table[curr_fd] = opened_file;
     } else {
       fd_counter--;
-      perror("k_open: f_read: file does not exist");
+      // perror("k_open: f_read: file does not exist");
       return FILE_NOT_FOUND;
     }
   } else if (mode == F_APPEND) {  // F_APPEND
@@ -148,9 +148,9 @@ int k_open(const char* fname, int mode) {
       // file offset is at end of the file
       if (dir_entry->perm == 4 || dir_entry->perm == 5 ||
           dir_entry->perm == 0) {
-        perror(
-            "k_open: F_READ: attempting to open file that doesn't have write "
-            "permission");
+        // perror(
+        //     "k_open: F_READ: attempting to open file that doesn't have write
+        //     " "permission");
         return WRONG_PERMISSION;
         // exit(EXIT_FAILURE);
       }
@@ -168,7 +168,7 @@ int k_open(const char* fname, int mode) {
       if (write(fs_fd, new_de, sizeof(struct directory_entries)) !=
           sizeof(struct directory_entries)) {
         fd_counter--;
-        perror("k_open: write error");
+        // perror("k_open: write error");
         return SYSTEM_ERROR;
         // exit(EXIT_FAILURE);
       }
@@ -452,12 +452,12 @@ ssize_t k_read(int fd, int n, char* buf) {
   }
 
   if (fd == STDOUT_FILENO) {
-    perror("Cannot read from STDOUT");
+    // perror("Cannot read from STDOUT");
     return WRONG_PERMISSION;
   }
 
   if (fd == STDERR_FILENO) {
-    perror("Cannot read from STDERR");
+    // perror("Cannot read from STDERR");
     return WRONG_PERMISSION;
   }
 
@@ -465,7 +465,7 @@ ssize_t k_read(int fd, int n, char* buf) {
   struct file_descriptor_st* curr = get_file_descriptor(fd);
   // fd is not a valid open file descriptor
   if (curr == NULL) {
-    perror("k_read error: could not find file descriptor");
+    // perror("k_read error: could not find file descriptor");
     return FILE_NOT_FOUND;
   }
 
@@ -473,7 +473,7 @@ ssize_t k_read(int fd, int n, char* buf) {
   char* fname = curr->fname;
 
   if (fname[0] == 1) {
-    perror("k_read error: attempting to read into a deleted file");
+    // perror("k_read error: attempting to read into a deleted file");
     return FILE_DELETED;
   }
 
@@ -483,7 +483,7 @@ ssize_t k_read(int fd, int n, char* buf) {
   uint16_t firstBlock = curr_de->firstBlock;
   uint32_t size = curr_de->size;
   if (curr_de == NULL) {
-    perror("k_read error: could not find directory entry");
+    // perror("k_read error: could not find directory entry");
     return FILE_NOT_FOUND;
   }
 
@@ -617,7 +617,7 @@ void update_directory_entry_after_write(struct directory_entries* curr_de,
 ssize_t k_write(int fd, const char* str, int n) {
   // special cases for 0, 1, 2
   if (fd == STDIN_FILENO) {
-    perror("Cannot write into STDIN");
+    // perror("Cannot write into STDIN");
     return WRONG_PERMISSION;
   }
 
@@ -648,13 +648,14 @@ ssize_t k_write(int fd, const char* str, int n) {
   struct directory_entries* curr_de = does_file_exist(fname);
 
   if (curr_de == NULL) {
-    perror("error: k_write: the file doesn't exist\n");
+    // perror("error: k_write: the file doesn't exist\n");
     return FILE_NOT_FOUND;
   }
 
   if (curr_de->name[0] == 1 || curr_de->name[1] == 2) {
-    perror(
-        "error: k_write: trying to write into a file that has been deleted\n");
+    // perror(
+    //     "error: k_write: trying to write into a file that has been
+    //     deleted\n");
     return FILE_DELETED;
   }
 
@@ -796,23 +797,23 @@ int k_unlink(const char* fname) {
   does_file_exist2(fname);  // lseeks to fname position
 
   if (curr_de == NULL) {
-    fprintf(stdout, "unlink error: file fname not found\n");
+    // fprintf(stdout, "unlink error: file fname not found\n");
     return FILE_NOT_FOUND;
   }
   // search for fd with same fname to get num processes
   int count = k_count_fd_num(fname);
   // for multiple processes (shouldn't be used in standalone fat)
   if (count > 1) {
-    perror(
-        "k_unlink error: this file is being used by another process. Unable to "
-        "delete the file");
+    // perror(
+    //     "k_unlink error: this file is being used by another process. Unable
+    //     to " "delete the file");
     return FILE_IN_USE;
 
   } else if (count == 1 ||
              count == 0) {  // im the only process with it, mark name[0] with 1
     (curr_de->name)[0] = 1;
   } else {
-    perror("k_unlink: count is negatives something wrong");
+    // perror("k_unlink: count is negatives something wrong");
     return SYSTEM_ERROR;
   }
 
@@ -873,8 +874,8 @@ off_t k_lseek(int fd, int offset, int whence) {
   }
 
   if (curr_de->name[0] == 1 || curr_de->name[1] == 2) {
-    fprintf(stderr,
-            "k_lseek: trying to klseek into a file that has been deleted\n");
+    // fprintf(stderr,
+    //         "k_lseek: trying to klseek into a file that has been deleted\n");
     return FILE_DELETED;
   }
 
@@ -1042,9 +1043,15 @@ char* formatTime(time_t t) {
   return buffer;
 }
 
-void k_ls(const char* filename, int fd) {
+int k_ls(const char* filename, int fd) {
   struct directory_entries* temp = calloc(1, sizeof(struct directory_entries));
+  if (temp == NULL) {
+    return SYSTEM_ERROR;
+  }
   char* acc = calloc(sizeof(char), 2048);
+  if (acc == NULL) {
+    return SYSTEM_ERROR;
+  }
   int total_acc_size = 0;
   if (filename == NULL) {
     // we need to list everything in the current directory
@@ -1064,7 +1071,12 @@ void k_ls(const char* filename, int fd) {
         curr_root_block = fat[curr_root_block];
 
         // to the start of that block!
-        lseek(fs_fd, get_offset_size(curr_root_block, 0), SEEK_SET);
+        int ret = lseek(fs_fd, get_offset_size(curr_root_block, 0), SEEK_SET);
+        if (ret == -1) {
+          free(temp);
+          free(acc);
+          return SYSTEM_ERROR;
+        }
 
         read_cnt = 0;
       }
@@ -1093,6 +1105,12 @@ void k_ls(const char* filename, int fd) {
 
       char* line = calloc(sizeof(char), 100);
 
+      if (line == NULL) {
+        free(temp);
+        free(acc);
+        return SYSTEM_ERROR;
+      }
+
       total_acc_size +=
           sprintf(line, "%u %s %d %s %s\n", firstBlock, permissions, temp->size,
                   formatTime(temp->mtime), temp->name);
@@ -1102,9 +1120,15 @@ void k_ls(const char* filename, int fd) {
       read_cnt += 1;
       free(line);
     }
-    k_write(fd, acc, total_acc_size);
+    int ret = k_write(fd, acc, total_acc_size);
+    if (ret < 0) {
+      free(temp);
+      free(acc);
+      return ret;
+    }
+    free(temp);
     free(acc);
-    return;
+    return 1;
   }  // end of if
 
   // here we have a specific file we want to ls
@@ -1115,12 +1139,12 @@ void k_ls(const char* filename, int fd) {
   read(fs_fd, temp, sizeof(struct directory_entries));
 
   if (temp->name[0] == 0) {
-    return;
+    return 1;
   }
 
   // deleted files we don't want!
   if (temp->name[0] == 1 || temp->name[0] == 2) {
-    return;
+    return 1;
   }
 
   char* permissions = "";
@@ -1133,9 +1157,13 @@ void k_ls(const char* filename, int fd) {
       sprintf(line, "%u %s %d %s %s\n", temp->firstBlock, permissions,
               temp->size, formatTime(temp->mtime), temp->name);
 
-  k_write(fd, line, line_size);
+  int ret = k_write(fd, line, line_size);
 
-  return;
+  if (ret < 0) {
+    return ret;
+  }
+
+  return 1;
 }
 
 int k_update_timestamp(const char* source) {
@@ -1176,7 +1204,7 @@ int k_rename(const char* source, const char* dest) {
 int k_change_mode(const char* change, const char* filename) {
   struct directory_entries* curr_de = does_file_exist(filename);
   if (curr_de == NULL) {
-    perror("k_rename error Error: source file not found");
+    // perror("k_rename error Error: source file not found");
     return FILE_NOT_FOUND;
   }
   does_file_exist2(filename);
@@ -1184,7 +1212,8 @@ int k_change_mode(const char* change, const char* filename) {
 
   if (strcmp(change, "-r") == 0) {
     if (perm == 2 || perm == 5 || perm == 7 || perm == 0) {
-      perror("chmod error Error invalid command");
+      // perror("chmod error Error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 6) {
       perm = 2;
     } else if (perm == 4) {
@@ -1198,7 +1227,8 @@ int k_change_mode(const char* change, const char* filename) {
     }
   } else if (strcmp(change, "-w") == 0) {
     if (perm == 4 || perm == 5 || perm == 0) {
-      perror("chmod error invalid command");
+      // perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 6) {
       perm = 4;
     } else if (perm == 7) {
@@ -1216,7 +1246,8 @@ int k_change_mode(const char* change, const char* filename) {
     }
   } else if (strcmp(change, "-x") == 0) {
     if (perm == 0 || perm == 2 || perm == 4 || perm == 6) {
-      perror("chmod error invalid command");
+      //perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 5) {
       perm = 4;
     } else if (perm == 7) {
@@ -1224,7 +1255,8 @@ int k_change_mode(const char* change, const char* filename) {
     }
   } else if (strcmp(change, "+x") == 0) {
     if (perm == 0 || perm == 2) {
-      perror("chmod error invalid command");
+      //error("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 4) {
       perm = 5;
     } else if (perm == 6) {
@@ -1238,19 +1270,22 @@ int k_change_mode(const char* change, const char* filename) {
     }
   } else if (strcmp(change, "-rw") == 0) {
     if (perm == 0 || perm == 5 || perm == 7) {
-      perror("chmod error invalid command");
+      // perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 6 || perm == 2 || perm == 4) {
       perm = 0;
     }
   } else if (strcmp(change, "+wx") == 0) {
     if (perm == 0 || perm == 5) {
-      perror("chmod error invalid command");
+      // perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 4 || perm == 5 || perm == 6) {
       perm = 7;
     }
   } else if (strcmp(change, "-wx") == 0) {
     if (perm == 0 || perm == 2 || perm == 4 || perm == 5 || perm == 6) {
-      perror("chmod error invalid command");
+      // perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 7) {
       perm = 4;
     }
@@ -1262,12 +1297,13 @@ int k_change_mode(const char* change, const char* filename) {
     }
   } else if (strcmp(change, "-rx") == 0) {
     if (perm == 0 || perm == 2 || perm == 4 || perm == 6 || perm == 7) {
-      perror("chmod error invalid command");
+      // perror("chmod error invalid command");
+      return INVALID_CHMOD;
     } else if (perm == 5) {
       perm = 0;
     }
   } else {
-    perror("chmod error invalid command");
+    // perror("chmod error invalid command");
     return INVALID_PARAMETERS;
   }
 
@@ -1310,7 +1346,7 @@ int k_cp_within_fat(char* source, char* dest) {
   // source file must exist
 
   if (does_file_exist2(source) == -1) {
-    perror("error: source does not exist");
+    // perror("error: source does not exist");
     return FILE_NOT_FOUND;
   }
 
@@ -1330,7 +1366,7 @@ int k_cp_within_fat(char* source, char* dest) {
 
 int k_cp_to_host(char* source, char* host_dest) {
   if (does_file_exist2(source) == -1) {
-    perror("error: source does not exist");
+    // perror("error: source does not exist");
     return FILE_NOT_FOUND;
   }
   int source_fd = k_open(source, F_READ);
@@ -1342,7 +1378,7 @@ int k_cp_to_host(char* source, char* host_dest) {
   int host_fd = open(host_dest, O_RDWR | O_CREAT | O_TRUNC, 0777);
 
   if (write(host_fd, contents, read_num) == -1) {
-    perror("error: write to host file failed\n");
+    // perror("error: write to host file failed\n");
     close(host_fd);
     k_close(source_fd);
     return SYSTEM_ERROR;
@@ -1357,7 +1393,7 @@ int k_cp_from_host(char* host_source, char* dest) {
   int host_fd = open(host_source, O_RDWR, 0777);
 
   if (host_fd == -1) {
-    perror("error: host source does not exist or is invalid\n");
+    //perror("error: host source does not exist or is invalid\n");
     return FILE_NOT_FOUND;
   }
 
