@@ -417,6 +417,7 @@ int s_sleep(unsigned int ticks) {
 int s_busy(void) {
   while (1)
     ;
+  s_exit();
   return 0;
 }
 
