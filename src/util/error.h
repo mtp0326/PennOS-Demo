@@ -41,6 +41,7 @@ extern int errno;
 #define ENOPROC 410
 #define EPCBSTATE 411
 #define EREMOVEPROC 412
+#define EINVALIDCMD 413
 
 // FAT LEVEL ERRORS
 /**

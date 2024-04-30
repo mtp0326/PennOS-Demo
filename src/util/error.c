@@ -52,6 +52,9 @@ void u_perror(char* message) {
       case EREMOVEPROC:
         err_message = "Failed to remove PCB";
         break;
+      case EINVALIDCMD:
+        err_message = "Invalid command name";
+        break;
       // ..
       default:
         err_message = "Invalid value of errno";

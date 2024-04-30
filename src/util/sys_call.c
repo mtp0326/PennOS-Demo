@@ -653,34 +653,35 @@ int s_remove_process(pid_t pid) {
 void* s_function_from_string(char* program) {
   // replace as you create/define more function
   if (strcmp(program, "cat") == 0) {
-    return NULL;
+    return b_cat;
   } else if (strcmp(program, "sleep") == 0) {
     return b_sleep;
   } else if (strcmp(program, "busy") == 0) {
     return b_busy;
   } else if (strcmp(program, "echo") == 0) {
-    return NULL;
+    return b_echo;
   } else if (strcmp(program, "ls") == 0) {
-    return NULL;
+    return b_ls;
   } else if (strcmp(program, "touch") == 0) {
-    return NULL;
+    return b_touch;
   } else if (strcmp(program, "mv") == 0) {
-    return NULL;
+    return b_mv;
   } else if (strcmp(program, "cp") == 0) {
-    return NULL;
+    return b_cp;
   } else if (strcmp(program, "rm") == 0) {
-    return NULL;
+    return b_rm;
   } else if (strcmp(program, "chmod") == 0) {
-    return NULL;
+    return b_chmod;
   } else if (strcmp(program, "ps") == 0) {
     return b_ps;
   } else if (strcmp(program, "kill") == 0) {
     return b_kill;
   } else if (strcmp(program, "zombify") == 0) {
-    return NULL;
+    return b_zombify;
   } else if (strcmp(program, "orphanify") == 0) {
-    return NULL;
+    return b_orphanify;
   } else {
+    errno = EINVALIDCMD;
     return NULL;
   }
 }
