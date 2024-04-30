@@ -43,7 +43,15 @@ void u_perror(char* message) {
       case EUSEDFILE:
         err_message = "Attempting to delete a file used by other process";
         break;
-
+      case ENOPROC:
+        err_message = "PCB not found";
+        break;
+      case EPCBSTATE:
+        err_message = "Invalid state";
+        break;
+      case EREMOVEPROC:
+        err_message = "Failed to remove PCB";
+        break;
       // ..
       default:
         err_message = "Invalid value of errno";

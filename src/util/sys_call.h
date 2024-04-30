@@ -231,8 +231,9 @@ int s_move_process(CircularList* destination, pid_t pid);
  * processors, then reaps all children.
  *
  * @param pid
+ * @return int Returns 0 on success, -1 on failure and sets errno.
  */
-void s_zombie(pid_t pid);
+int s_zombie(pid_t pid);
 /***** CUSTOM SYSCALLS FOR SCHEDULER*/
 
 /**
@@ -460,9 +461,8 @@ int s_update_timestamp(const char* source);
  */
 off_t s_does_file_exist2(const char* fname);
 
-
 /**
- * @brief s-function wrapper around k_rename, which renames \p source 
+ * @brief s-function wrapper around k_rename, which renames \p source
  * to \p dest. \p source must exist, if \p dest already exists, then it is
  * deleted
  *
@@ -474,7 +474,7 @@ off_t s_does_file_exist2(const char* fname);
 int s_rename(const char* source, const char* dest);
 
 /**
- * @brief s-function wrapper around k_change_mode, which changes the mode 
+ * @brief s-function wrapper around k_change_mode, which changes the mode
  * (permission) of the file in the directory entry, specificed by \p filename
  * with change \p change. Errors if the resulting permission is invalid or
  * if \p filename doesn't exist
@@ -487,9 +487,9 @@ int s_rename(const char* source, const char* dest);
 int s_change_mode(const char* change, const char* filename);
 
 /**
- * @brief s-function wrapper around k_cp_within_fat. 
- * Copies contents of \p source to \p dest. \p source must exist, if 
- * \p dest doesn't exist then it is created. 
+ * @brief s-function wrapper around k_cp_within_fat.
+ * Copies contents of \p source to \p dest. \p source must exist, if
+ * \p dest doesn't exist then it is created.
  *
  * @param source source filename to copy from
  * @param dest destination filename to copy into

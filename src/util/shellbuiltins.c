@@ -81,7 +81,7 @@ void* b_ps(void* arg) {
   char* output = "  PID\t PPID\t  PRI\tSTAT\tCMD\n";
   ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
   if (result == -1) {
-    u_perror("Failed to write to STDOUT");
+    u_perror("Failed to write to STDOUT");  /// incluing perror
   }
 
   for (int i = 0; i < 3; i++) {
@@ -117,7 +117,7 @@ void* b_fg(void* arg) {
               proc->cmd_name);
       ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
       if (result == -1) {
-        u_perror("Failed to write to STDOUT");
+        u_perror("Failed to write to STDOUT");  /// incluing perror
       }
 
       if (proc->initial_state != RUNNING) {
@@ -140,7 +140,7 @@ void* b_fg(void* arg) {
               proc->cmd_name);
       ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
       if (result == -1) {
-        u_perror("Failed to write to STDOUT");
+        u_perror("Failed to write to STDOUT");  /// incluing perror
       }
 
       s_fg(proc);
@@ -159,7 +159,7 @@ void* b_fg(void* arg) {
             proc->cmd_name);
     ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
     if (result == -1) {
-      u_perror("Failed to write to STDOUT");
+      u_perror("Failed to write to STDOUT");  /// incluing perror
     }
 
     /// TODO:there could be more but wrote for sleep for now
@@ -184,7 +184,7 @@ void* b_fg(void* arg) {
             proc->cmd_name);
     ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
     if (result == -1) {
-      u_perror("Failed to write to STDOUT");
+      u_perror("Failed to write to STDOUT");  /// incluing perror
     }
 
     s_fg(proc);
@@ -222,7 +222,7 @@ void* b_bg(void* arg) {
               proc->cmd_name);
       ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
       if (result == -1) {
-        u_perror("Failed to write to STDOUT");
+        u_perror("Failed to write to STDOUT");  /// incluing perror
       }
 
       return NULL;
@@ -251,7 +251,7 @@ void* b_bg(void* arg) {
             proc->cmd_name);
     ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
     if (result == -1) {
-      u_perror("Failed to write to STDOUT");
+      u_perror("Failed to write to STDOUT");  /// incluing perror
     }
 
     return NULL;
@@ -375,7 +375,7 @@ void* b_man(void* arg) {
   }
   ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
   if (result == -1) {
-    u_perror("Failed to write to STDOUT");
+    u_perror("Failed to write to STDOUT");  /// incluing perror
   }
 
   s_exit();

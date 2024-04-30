@@ -37,6 +37,11 @@ extern int errno;
 #define EUSEDFILE 408
 #define EINVALIDCHMOD 500
 
+/// feel free to fix the number
+#define ENOPROC 410
+#define EPCBSTATE 411
+#define EREMOVEPROC 412
+
 // FAT LEVEL ERRORS
 /**
  * @brief This is an analogue of the perror(3) function. This allows the shell

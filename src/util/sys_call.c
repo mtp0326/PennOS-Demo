@@ -127,11 +127,13 @@ pid_t s_spawn_nice(void* (*func)(void*),
                    unsigned int priority) {
   pcb_t* child = k_proc_create(current);
   if (child == NULL) {
+    errno = EPCBCREATE;
     return -1;
   }
 
   char** child_argv = duplicate_argv(argv);
   if (child_argv == NULL) {
+    errno = ENOARGS;
     k_proc_cleanup(child);
     return -1;
   }
@@ -148,6 +150,7 @@ pid_t s_spawn_nice(void* (*func)(void*),
   }* arg = malloc(sizeof(struct child_process_arg));
 
   if (arg == NULL) {
+    errno = ENOARGS;
     k_proc_cleanup(child);
     free(child_argv);
     return -1;
@@ -156,8 +159,15 @@ pid_t s_spawn_nice(void* (*func)(void*),
   child->priority = (priority == -1 ? 1 : priority);
   fg_proc = child;
 
-  add_process(processes[(priority == -1 ? 1 : priority)], child);
+  if (add_process(processes[(priority == -1 ? 1 : priority)], child) == -1) {
+    errno = EADDPROC;
+    k_proc_cleanup(child);
+    free_argv(child_argv);
+    free(arg);
+    return -1;
+  }
   if (spthread_create(&child->handle, NULL, func, child_argv) != 0) {
+    errno = ETHREADCREATE;
     k_proc_cleanup(child);
     free_argv(child_argv);
     free(arg);
@@ -194,6 +204,10 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
 
   if (pid > 0) {
     child_pcb = s_find_process(pid);
+    if (child_pcb == NULL) {
+      errno = ENOPROC;
+      return -1;
+    }
   } else {
     bool give_up = true;
     DynamicPIDArray* pid_array = current->child_pids;
@@ -277,11 +291,13 @@ pid_t s_waitpid(pid_t pid, int* wstatus, bool nohang) {
 int s_resume_block(pid_t pid) {
   pcb_t* process = s_find_process(pid);
   if (process == NULL) {
-    // SET ERRNO: PROCESS NOT FOUND
+    errno = ENOPROC;
     return -1;
   }
 
-  s_move_process(blocked, pid);
+  if (s_move_process(blocked, pid) == -1) {
+    return -1;
+  }
   process->state = BLOCKED;
   // process->statechanged = true;
   if (process->job_num == -1) {
@@ -298,13 +314,15 @@ int s_resume_block(pid_t pid) {
 int s_kill(pid_t pid, int signal) {
   pcb_t* process = s_find_process(pid);
   if (process == NULL) {
-    // SET ERRNO: PROCESS NOT FOUND
+    errno = ENOPROC;
     return -1;
   }
 
   switch (signal) {
     case P_SIGSTOP:
-      s_move_process(stopped, pid);
+      if (s_move_process(stopped, pid) == -1) {
+        return -1;
+      }
       process->state = STOPPED;
       process->statechanged = true;
       process->is_bg = false;
@@ -323,7 +341,9 @@ int s_kill(pid_t pid, int signal) {
         // SET ERRNO? Ignore?
         return -1;
       }
-      s_move_process(processes[process->priority], pid);
+      if (s_move_process(processes[process->priority], pid) == -1) {
+        return -1;
+      }
       process->state = RUNNING;
       process->statechanged = true;
       s_write_log(CONTINUE, process, -1);
@@ -368,30 +388,43 @@ void s_exit(void) {
   s_zombie(current->pid);
 }
 
-void s_zombie(pid_t pid) {
+int s_zombie(pid_t pid) {
   pcb_t* proc = s_find_process(pid);
-  s_move_process(zombied, pid);
+  if (proc == NULL) {
+    errno = ENOPROC;
+    return -1;
+  }
+  if (s_move_process(zombied, pid) == -1) {
+    return -1;
+  }
   proc->state = ZOMBIED;
   proc->statechanged = true;
-  s_write_log(ZOMBIE, s_find_process(pid), -1);
-  DynamicPIDArray* pid_array = s_find_process(pid)->child_pids;
+  s_write_log(ZOMBIE, proc, -1);
+  DynamicPIDArray* pid_array = proc->child_pids;
   for (size_t i = 0; i < pid_array->used; i++) {
     pid_t current_pid = pid_array->array[i];
-    s_write_log(ORPHAN, s_find_process(current_pid), -1);
-    s_find_process(current_pid)->ppid = 0;
+    pcb_t* child_proc = s_find_process(current_pid);
+    if (child_proc == NULL) {
+      continue;
+    }
+    s_write_log(ORPHAN, child_proc, -1);
+    child_proc->ppid = 0;
   }
-  s_reap_all_child(s_find_process(pid));
+  s_reap_all_child(proc);
+  return 0;
 }
 
 int s_nice(pid_t pid, int priority) {
   pcb_t* pcb = s_find_process(pid);
   if (pcb == NULL) {
-    // ERRNO: could not find process
+    errno = ENOPROC;
     return -1;
   }
   pcb->priority = priority;
   if (pcb->state == RUNNING) {
-    s_move_process(processes[priority], pid);
+    if (s_move_process(processes[priority], pid) == -1) {
+      return -1;
+    }
   }
 
   return 0;
@@ -407,8 +440,15 @@ int s_sleep(unsigned int ticks) {
   current->initial_state = BLOCKED;
   while (current->ticks_to_wait >= 1) {
     current->state = BLOCKED;
-    remove_process(processes[current->priority], current->pid);
-    add_process(blocked, current);
+    if (!remove_process(processes[current->priority], current->pid)) {
+      errno = EREMOVEPROC;
+      return -1;
+    }
+    if (add_process(blocked, current) == -1) {
+      errno = EADDPROC;
+      return -1;
+    }
+    /// error
     spthread_suspend_self();
   }
   return 0;
@@ -431,19 +471,35 @@ int s_spawn_and_wait(void* (*func)(void*),
 
   if (nohang) {
     pcb_t* child_proc = s_find_process(child);
+    if (child_proc == NULL) {
+      errno = ENOPROC;
+      return -1;
+    }
+
     child_proc->job_num = job_id;
     job_id++;
     child_proc->is_bg = true;
-    add_process(bg_list, child_proc);
+
+    if (add_process(bg_list, child_proc) == -1) {
+      errno = EADDPROC;
+      return -1;
+    }
     char message[25];
     sprintf(message, "[%d] %4u\n", child_proc->job_num, child_proc->pid);
-    s_write(STDOUT_FILENO, message, strlen(message));
+    if (s_write(STDOUT_FILENO, message, strlen(message)) == -1) {
+      u_perror("Failed to write to STDOUT");
+    }
   }
   int wstatus = 0;
   s_waitpid(child, &wstatus, nohang);
   /// or status signaled?
   if (!nohang && (wstatus == STATUS_EXITED || wstatus == STATUS_SIGNALED)) {
     pcb_t* child_pcb = s_find_process(child);
+    if (child_pcb == NULL) {
+      errno = ENOPROC;
+      return -1;
+    }
+
     s_reap_all_child(child_pcb);
     s_remove_process(child);
     k_proc_cleanup(child_pcb);
@@ -473,7 +529,9 @@ int s_bg_wait(pcb_t* proc) {
     char message[50];
     sprintf(message, "[%d]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
             proc->processname);
-    s_write(STDOUT_FILENO, message, strlen(message));
+    if (s_write(STDOUT_FILENO, message, strlen(message)) == -1) {
+      u_perror("Failed to write to STDOUT");
+    }
 
     proc->is_bg = false;
     s_remove_process(proc->pid);
@@ -485,7 +543,9 @@ int s_bg_wait(pcb_t* proc) {
     char message[50];
     sprintf(message, "[%d]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
             proc->processname);
-    s_write(STDOUT_FILENO, message, strlen(message));
+    if (s_write(STDOUT_FILENO, message, strlen(message)) == -1) {
+      u_perror("Failed to write to STDOUT");
+    }
 
     proc->is_bg = false;
     s_remove_process(proc->pid);
@@ -556,21 +616,33 @@ pcb_t* find_jobs_proc(CircularList* list) {
 int s_remove_process(pid_t pid) {
   pcb_t* proc = s_find_process(pid);
   if (proc == NULL) {
-    // SET ERRNO
+    errno = ENOPROC;
     return -1;
   }
   switch (proc->state) {
     case BLOCKED:
-      remove_process(blocked, pid);
+      if (!remove_process(blocked, pid)) {
+        errno = EREMOVEPROC;
+        return -1;
+      }
       return 0;
     case STOPPED:
-      remove_process(stopped, pid);
+      if (!remove_process(stopped, pid)) {
+        errno = EREMOVEPROC;
+        return -1;
+      }
       return 0;
     case ZOMBIED:
-      remove_process(zombied, pid);
+      if (!remove_process(zombied, pid)) {
+        errno = EREMOVEPROC;
+        return -1;
+      }
       return 0;
     case RUNNING:
-      remove_process(processes[proc->priority], pid);
+      if (!remove_process(processes[proc->priority], pid)) {
+        errno = EREMOVEPROC;
+        return -1;
+      }
       return 0;
     default:
       // SET ERRNO
@@ -669,6 +741,7 @@ int s_write_log(log_message_t logtype, pcb_t* proc, unsigned int old_nice) {
       return -1;
   }
   if (write(logfiledescriptor, buf, strlen(buf)) == -1) {
+    u_perror("Failed to write to STDOUT");
     // SET ERRNO, WRITE TO LOGFILE FAILED
     return -1;
   } else {
@@ -679,28 +752,47 @@ int s_write_log(log_message_t logtype, pcb_t* proc, unsigned int old_nice) {
 int s_move_process(CircularList* destination, pid_t pid) {
   pcb_t* pcb = s_find_process(pid);
   if (pcb == NULL) {
-    // SET ERRNO?
+    errno = ENOPROC;
     return -1;
   }
 
   switch (pcb->state) {
     case STOPPED:
-      remove_process(stopped, pid);
+      if (!remove_process(stopped, pid)) {
+        /// specify and add list is empty or process not found????
+        errno = EREMOVEPROC;
+        return -1;
+      }
       break;
     case BLOCKED:
-      remove_process(blocked, pid);
+      if (!remove_process(blocked, pid)) {
+        /// specify and add list is empty or process not found????
+        errno = EREMOVEPROC;
+        return -1;
+      }
       break;
     case ZOMBIED:
-      remove_process(zombied, pid);
+      if (!remove_process(zombied, pid)) {
+        /// specify and add list is empty or process not found????
+        errno = EREMOVEPROC;
+        return -1;
+      }
       break;
     case RUNNING:
-      remove_process(processes[pcb->priority], pid);
+      if (!remove_process(processes[pcb->priority], pid)) {
+        /// specify and add list is empty or process not found????
+        errno = EREMOVEPROC;
+        return -1;
+      }
       break;
     default:
-      // SET ERRNO? INVALID?
+      errno = EPCBSTATE;
       return -1;
   }
-  add_process(destination, pcb);
+  if (add_process(destination, pcb) == -1) {
+    errno = EADDPROC;
+    return -1;
+  }
   return 0;
 }
 

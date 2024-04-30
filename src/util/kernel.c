@@ -40,15 +40,16 @@ pcb_t* k_proc_create(pcb_t* parent) {
 
 void k_proc_cleanup(pcb_t* proc) {
   /// need more
-  pcb_t* parent = s_find_process(proc->ppid);
-  if (parent != NULL) {
-    dynamic_pid_array_remove(parent->child_pids, proc->pid);
-  }
+  // pcb_t* parent = s_find_process(proc->ppid);
+  // if (parent != NULL) {
+  //   dynamic_pid_array_remove(parent->child_pids, proc->pid);
+  // }
 
-  dynamic_pid_array_destroy(proc->child_pids);
-  free(proc->open_fds);
-  free(proc->processname);
+  // dynamic_pid_array_destroy(proc->child_pids);
+  // free(proc->open_fds);
+  // free(proc->processname);
 
-  cancel_and_join(proc->handle);
+  // cancel_and_join(proc->handle);
+  free(proc);
   return;
 }
