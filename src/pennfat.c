@@ -285,13 +285,17 @@ void touch(char** args) {
 void rm(char** args) {
   int i = 1;
   while (args[i] != NULL) {
-    k_unlink(args[i]);
+    if (k_unlink(args[i]) < 0) {
+      perror("rm: cannot remove file");
+    }
     i += 1;
   }
 }
 
 void mv(char** args) {
-  k_rename(args[1], args[2]);
+  if (k_rename(args[1], args[2]) < 0) {
+    perror("mv: cannot rename file");
+  }
 }
 
 void chmod(char** args) {
@@ -398,17 +402,36 @@ void cat_a(char* output) {
 }
 
 int ls(char* filename) {
-  return k_ls(filename, STDERR_FILENO);
+  int ret = k_ls(filename, STDERR_FILENO);
+  if (ret < 0) {
+    perror("ls error");
+  }
+  return ret;
 }
 
 int cp_within_fat(char* source, char* dest) {
-  return k_cp_within_fat(source, dest);
+  int ret = k_cp_within_fat(source, dest);
+
+  if (ret < 0) {
+    perror("cp error");
+  }
+  return ret;
 }
 
 int cp_to_host(char* source, char* host_dest) {
-  return k_cp_to_host(source, host_dest);
+  int ret = k_cp_to_host(source, host_dest);
+
+  if (ret < 0) {
+    perror("cp error");
+  }
+  return ret;
 }
 
 int cp_from_host(char* host_source, char* dest) {
-  return k_cp_from_host(host_source, dest);
+  int ret = k_cp_from_host(host_source, dest);
+
+  if (ret < 0) {
+    perror("cp error");
+  }
+  return ret;
 }

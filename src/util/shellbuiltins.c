@@ -453,7 +453,9 @@ void* b_clear(void* arg) {
 
 // FAT LEVEL SHELL FUNCTIONS
 void* b_ls(void* arg) {
-  s_ls(NULL, current->output_fd);
+  if (s_ls(NULL, current->output_fd) == -1) {
+    u_perror("ls: ");
+  }
 
   s_exit();
   return NULL;
@@ -464,11 +466,17 @@ void* b_echo(void* arg) {
 
   int i = 1;
   while (argv[i] != NULL) {
-    s_write(current->output_fd, argv[i], strlen(argv[i]));
-    s_write(current->output_fd, " ", 1);
+    if (s_write(current->output_fd, argv[i], strlen(argv[i])) == -1) {
+      u_perror("echo: ");
+    }
+    if (s_write(current->output_fd, " ", 1) == -1) {
+      u_perror("echo: ");
+    }
     i++;
   }
-  s_write(current->output_fd, "\n", 1);
+  if (s_write(current->output_fd, "\n", 1) == -1) {
+    u_perror("echo: ");
+  }
 
   s_exit();
   return NULL;
@@ -516,21 +524,28 @@ void* b_touch(void* arg) {
   int i = 1;
   while (args[i] != NULL) {
     if (s_does_file_exist2(args[i]) != -1) {
-      s_update_timestamp(args[i]);
+      if (s_update_timestamp(args[i]) == -1) {
+        u_perror("touch: ");
+      }
     } else {
       int fd = s_open(args[i], F_WRITE);
-      s_close(fd);
+      if (fd == -1) {
+        u_perror("touch: ");
+      } else {
+        s_close(fd);
+      }
     }
     i += 1;
   }
-
   s_exit();
   return NULL;
 }
 
 void* b_mv(void* arg) {
   char** args = (char**)arg;
-  s_rename(args[1], args[2]);
+  if (s_rename(args[1], args[2]) == -1) {
+    u_perror("mv: ");
+  }
   s_exit();
   return NULL;
 }
@@ -539,7 +554,9 @@ void* b_rm(void* arg) {
   char** args = (char**)arg;
   int i = 1;
   while (args[i] != NULL) {
-    s_unlink(args[i]);
+    if (s_unlink(args[i]) == -1) {
+      u_perror("rm: ");
+    }
     i += 1;
   }
   s_exit();
@@ -548,7 +565,9 @@ void* b_rm(void* arg) {
 
 void* b_chmod(void* arg) {
   char** args = (char**)arg;
-  s_change_mode(args[1], args[2]);
+  if (s_change_mode(args[1], args[2]) == -1) {
+    u_perror("chmod: ");
+  }
   s_exit();
   return NULL;
 }
@@ -557,14 +576,20 @@ void* b_cp(void* arg) {
   char** args = (char**)arg;
   if (strcmp(args[1], "-h") == 0) {
     // cp -h SOURCE DEST
-    s_cp_from_host(args[2], args[3]);
+    if(s_cp_from_host(args[2], args[3]) == -1) {
+      u_perror("cp: ");
+    }
   } else {
     if (strcmp(args[2], "-h") == 0) {
       // cp SOURCE -h DEST
-      s_cp_to_host(args[1], args[3]);
+      if(s_cp_to_host(args[1], args[3]) == -1) {
+        u_perror("cp: ");
+      }
     } else {
       // cp SOURCE DEST
-      s_cp_within_fat(args[1], args[2]);
+      if(s_cp_within_fat(args[1], args[2]) == -1) {
+        u_perror("cp: ");
+      }
     }
   }
   s_exit();

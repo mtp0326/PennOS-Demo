@@ -1169,7 +1169,7 @@ int k_ls(const char* filename, int fd) {
 int k_update_timestamp(const char* source) {
   struct directory_entries* curr_de = does_file_exist(source);
   if (curr_de == NULL) {
-    perror("k_update_timestamp error Error: source file not found");
+    //perror("k_update_timestamp error Error: source file not found");
     return FILE_NOT_FOUND;
   }
   struct directory_entries* new_de =
@@ -1184,7 +1184,7 @@ int k_rename(const char* source, const char* dest) {
   struct directory_entries* curr_de = does_file_exist(source);
   struct directory_entries* curr_de2 = does_file_exist(dest);
   if (curr_de == NULL) {
-    perror("k_rename error Error: source file not found");
+    //perror("k_rename error Error: source file not found");
     return FILE_NOT_FOUND;
   }
   if (curr_de2 != NULL) {
@@ -1211,7 +1211,7 @@ int k_change_mode(const char* change, const char* filename) {
   int perm = curr_de->perm;
 
   if (strcmp(change, "-r") == 0) {
-    if (perm == 2 || perm == 5 || perm == 7 || perm == 0) {
+    if (perm == 5 || perm == 7) {
       // perror("chmod error Error invalid command");
       return INVALID_CHMOD;
     } else if (perm == 6) {
@@ -1226,10 +1226,7 @@ int k_change_mode(const char* change, const char* filename) {
       perm = 6;
     }
   } else if (strcmp(change, "-w") == 0) {
-    if (perm == 4 || perm == 5 || perm == 0) {
-      // perror("chmod error invalid command");
-      return INVALID_CHMOD;
-    } else if (perm == 6) {
+    if (perm == 6) {
       perm = 4;
     } else if (perm == 7) {
       perm = 5;
@@ -1245,10 +1242,7 @@ int k_change_mode(const char* change, const char* filename) {
       perm = 6;
     }
   } else if (strcmp(change, "-x") == 0) {
-    if (perm == 0 || perm == 2 || perm == 4 || perm == 6) {
-      //perror("chmod error invalid command");
-      return INVALID_CHMOD;
-    } else if (perm == 5) {
+    if (perm == 5) {
       perm = 4;
     } else if (perm == 7) {
       perm = 6;
@@ -1269,38 +1263,36 @@ int k_change_mode(const char* change, const char* filename) {
       perm = 7;
     }
   } else if (strcmp(change, "-rw") == 0) {
-    if (perm == 0 || perm == 5 || perm == 7) {
+    if (perm == 5 || perm == 7) {
       // perror("chmod error invalid command");
       return INVALID_CHMOD;
     } else if (perm == 6 || perm == 2 || perm == 4) {
       perm = 0;
     }
   } else if (strcmp(change, "+wx") == 0) {
-    if (perm == 0 || perm == 5) {
+    if (perm == 0) {
       // perror("chmod error invalid command");
       return INVALID_CHMOD;
     } else if (perm == 4 || perm == 5 || perm == 6) {
       perm = 7;
     }
   } else if (strcmp(change, "-wx") == 0) {
-    if (perm == 0 || perm == 2 || perm == 4 || perm == 5 || perm == 6) {
-      // perror("chmod error invalid command");
-      return INVALID_CHMOD;
-    } else if (perm == 7) {
+    if (perm == 7 || perm == 5 || perm ==6) {
       perm = 4;
+    } else if (perm == 2) {
+      perm = 0;
     }
   } else if (strcmp(change, "+rx") == 0) {
     if (perm == 2 || perm == 6) {
       perm = 7;
-    } else if (perm == 4 || perm == 5) {
+    } else if (perm == 4 || perm == 5 || perm == 0) {
       perm = 5;
     }
   } else if (strcmp(change, "-rx") == 0) {
-    if (perm == 0 || perm == 2 || perm == 4 || perm == 6 || perm == 7) {
-      // perror("chmod error invalid command");
-      return INVALID_CHMOD;
-    } else if (perm == 5) {
+    if (perm == 5 || perm == 4) {
       perm = 0;
+    } else if (perm == 6 || perm == 7) {
+      perm = 2;
     }
   } else {
     // perror("chmod error invalid command");
@@ -1318,18 +1310,17 @@ int k_change_mode(const char* change, const char* filename) {
 char* k_read_all(const char* filename, int* read_num) {
   struct directory_entries* curr_de = does_file_exist(filename);
   if (curr_de == NULL) {
-    perror("k_read_all, error: filename not found");
+    //perror("k_read_all, error: filename not found");
     return NULL;
   }
   uint32_t file_size = curr_de->size;
   int fd = k_open(filename, F_READ);
   char* contents = (char*)calloc(1, file_size);
   int ret = k_read(fd, file_size, contents);
-  if (ret == -1) {
+  if (ret < 0) {
     k_close(fd);
     return NULL;
   }
-
   *read_num = ret;
   k_close(fd);
   return contents;
@@ -1348,6 +1339,20 @@ int k_cp_within_fat(char* source, char* dest) {
   if (does_file_exist2(source) == -1) {
     // perror("error: source does not exist");
     return FILE_NOT_FOUND;
+  }
+
+  struct directory_entries* source_de = does_file_exist(source);
+
+  if (source_de->perm < 4) {
+    return SOURCE_FILE_NO_READ_PERM;
+  }
+
+  if (does_file_exist2(dest) != -1) {
+    struct directory_entries* dest_de = does_file_exist(dest);
+    int perm = dest_de->perm;
+    if (perm == 0 || perm == 4 || perm == 5) {
+      return DEST_FILE_NO_WRITE_PERM;
+    }
   }
 
   int dest_fd = k_open(dest, F_WRITE);

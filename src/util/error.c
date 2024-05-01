@@ -15,7 +15,6 @@ void u_perror(char* message) {
       case ENOARGS:
         err_message = "Spawn recieved no arguments";
         break;
-
       case EBADFILENAME:
         err_message = "Invalid file name";
         break;
@@ -54,6 +53,18 @@ void u_perror(char* message) {
         break;
       case EINVALIDCMD:
         err_message = "Invalid command name";
+        break;
+      case EINVALIDCHMOD:
+        err_message = "Invalid chmod";
+        break;
+      case EREADERROR:
+        err_message = "Invalid read";
+        break;
+      case ENOREADPERM:
+        err_message = "Invalid read, attempting to read file with no read perm";
+        break;
+      case ENOWRITEPERM:
+        err_message = "Invalid write, attempting to write to file with no write perm";
         break;
       // ..
       default:
