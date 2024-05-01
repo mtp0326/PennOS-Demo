@@ -13,7 +13,7 @@ void u_perror(char* message) {
         err_message = "PCB creation failed";
         break;
       case ENOARGS:
-        err_message = "Spawn recieved no arguments";
+        err_message = "Recieved no or not enough arguments";
         break;
       case EBADFILENAME:
         err_message = "Invalid file name";
@@ -54,6 +54,30 @@ void u_perror(char* message) {
       case EINVALIDCMD:
         err_message = "Invalid command name";
         break;
+      case ELISTNULL:
+        err_message = "Given list not initialized";
+        break;
+      case ENOJOB:
+        err_message = "Job does not exist";
+        break;
+      case ENOPIDJOB:
+        err_message = "Job with specified PID does not exist";
+        break;
+      case ENOTSTOP:
+        err_message = "Expected stopped state, given another state";
+        break;
+      case EINVALIDSIG:
+        err_message = "Invalid Signal";
+        break;
+      case EINVALIDLOG:
+        err_message = "Invalid Logtype";
+        break;
+      case EINVALIDLOGWRITE:
+        err_message = "Invalid write to log descriptor";
+        break;
+      case EINVALIDSTDOUT:
+        err_message = "Failed to write to STDOUT";
+        break;
       case EINVALIDCHMOD:
         err_message = "Invalid chmod";
         break;
@@ -64,7 +88,8 @@ void u_perror(char* message) {
         err_message = "Invalid read, attempting to read file with no read perm";
         break;
       case ENOWRITEPERM:
-        err_message = "Invalid write, attempting to write to file with no write perm";
+        err_message =
+            "Invalid write, attempting to write to file with no write perm";
         break;
       // ..
       default:
