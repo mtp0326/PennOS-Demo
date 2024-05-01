@@ -18,7 +18,9 @@ void* b_background_poll(void* arg) {
   for (int i = 0; i < bgsize; i++) {
     pcb_t* proc = node->process;
     if (proc->is_bg) {
-      s_bg_wait(proc);
+      if (s_bg_wait(proc) == -1) {
+        u_perror("background_poll: ");
+      }
     }
     node = node->next;
   }
@@ -29,21 +31,29 @@ void* b_background_poll(void* arg) {
 void* b_sleep(void* arg) {
   char** argv = (char**)arg;
   if (argv[1] == NULL) {
-    // code later to add errno and write to the terminal (using pennfat writes),
-    // but not today :(
+    errno = ENOARGS;
+    u_perror("sleep: ");
     return NULL;
   }
-  int seconds = atoi(argv[1]);  // NOTE: use strtol in later implementation
-  // here, as atoi does not define errors
-  // (differentiate on 0), will need for errno
+
+  errno = 0;
+  int seconds = (int)strtol(argv[1], NULL, 10);
+  if (errno != 0) {
+    u_perror("sleep: ");
+    return NULL;
+  }
   unsigned int ticks = seconds * 10;
 
-  s_sleep(ticks);
+  if (s_sleep(ticks) == -1) {
+    u_perror("sleep: ");
+  }
   return NULL;
 }
 
 void* b_busy(void* arg) {
-  s_busy();
+  if (s_busy() == -1) {
+    u_perror("busy: ");
+  }
   s_exit();
   return NULL;
 }
@@ -68,7 +78,16 @@ void* b_kill(void* arg) {
     i = 2;
   }
   for (; argv[i] != NULL; i++) {
-    s_kill(atoi(argv[i]), signal);
+    errno = 0;
+    int arg_int = (int)strtol(argv[i], NULL, 10);
+    if (errno != 0) {
+      u_perror("kill: ");
+      s_exit();
+      return NULL;
+    }
+    if (s_kill(arg_int, signal) == -1) {
+      u_perror("kill: ");
+    }
   }
 
   s_exit();
@@ -77,26 +96,35 @@ void* b_kill(void* arg) {
 
 void* b_ps(void* arg) {
   // displaying PID, PPID, priority, status, and command name.
-  /// not sure if order has to change
   char* output = "  PID\t PPID\t  PRI\tSTAT\tCMD\n";
   ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
   if (result == -1) {
-    u_perror("Failed to write to STDOUT");  /// incluing perror
+    u_perror("ps: ");
   }
 
   for (int i = 0; i < 3; i++) {
-    s_print_process(processes[i]);
+    if (s_print_process(processes[i]) == -1) {
+      u_perror("ps: ");
+    }
   }
-  s_print_process(blocked);
-  s_print_process(stopped);
-  s_print_process(zombied);
+  if (s_print_process(blocked) == -1) {
+    u_perror("ps: ");
+  }
+  if (s_print_process(stopped) == -1) {
+    u_perror("ps: ");
+  }
+  if (s_print_process(zombied) == -1) {
+    u_perror("ps: ");
+  }
 
   s_exit();
   return NULL;
 }
 
 void* b_jobs(void* arg) {
-  s_print_jobs();
+  if (s_print_jobs() == -1) {
+    u_perror("jobs: ");
+  }
 
   return NULL;
 }
@@ -107,7 +135,12 @@ void* b_fg(void* arg) {
 
   if (argv[1] != NULL) {
     // job id is specified
-    int index = atoi(argv[1]);
+    errno = 0;
+    int index = (int)strtol(argv[1], NULL, 10);
+    if (errno != 0) {
+      u_perror("fg: ");
+      return NULL;
+    }
 
     proc = find_process_job_id(stopped, index);
 
@@ -117,14 +150,14 @@ void* b_fg(void* arg) {
               proc->cmd_name);
       ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
       if (result == -1) {
-        u_perror("Failed to write to STDOUT");  /// incluing perror
+        u_perror("fg: ");
       }
 
       if (proc->initial_state != RUNNING) {
         s_resume_block(proc->pid);
       } else {
         if (s_kill(proc->pid, P_SIGCONT) < 0) {
-          fprintf(stderr, "SIGCONT failed to send\n");  /// switch to errno
+          u_perror("fg: ");
           return NULL;
         }
       }
@@ -140,14 +173,14 @@ void* b_fg(void* arg) {
               proc->cmd_name);
       ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
       if (result == -1) {
-        u_perror("Failed to write to STDOUT");  /// incluing perror
+        u_perror("fg: ");
       }
 
       s_fg(proc);
       return NULL;
     }
-    fprintf(stderr,
-            "PID with specified number does not exist\n");  /// switch to errno
+    errno = ENOPIDJOB;
+    u_perror("fg: ");
 
     return NULL;
   }
@@ -159,16 +192,14 @@ void* b_fg(void* arg) {
             proc->cmd_name);
     ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
     if (result == -1) {
-      u_perror("Failed to write to STDOUT");  /// incluing perror
+      u_perror("fg: ");
     }
 
-    /// TODO:there could be more but wrote for sleep for now
     if (proc->initial_state != RUNNING) {
       s_resume_block(proc->pid);
     } else {
       if (s_kill(proc->pid, P_SIGCONT) < 0) {
-        // error
-        fprintf(stderr, "SIGCONT failed to send\n");  /// switch to errno
+        u_perror("fg: ");
         return NULL;
       }
     }
@@ -184,13 +215,15 @@ void* b_fg(void* arg) {
             proc->cmd_name);
     ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
     if (result == -1) {
-      u_perror("Failed to write to STDOUT");  /// incluing perror
+      u_perror("fg: ");
     }
 
     s_fg(proc);
     return NULL;
   }
-  fprintf(stderr, "Job does not exist\n");  /// switch to errno
+  errno = ENOJOB;
+  u_perror("fg: ");
+
   return NULL;
 }
 
@@ -200,17 +233,25 @@ void* b_bg(void* arg) {
 
   if (argv[1] != NULL) {
     // pid is specified
-    int index = atoi(argv[1]);
+    errno = 0;
+    int index = (int)strtol(argv[1], NULL, 10);
+    if (errno != 0) {
+      u_perror("bg: ");
+      return NULL;
+    }
 
     proc = find_process_job_id(stopped, index);
 
     if (proc != NULL) {
       proc = stopped->head->process;
       if (proc->initial_state != RUNNING) {
-        s_resume_block(proc->pid);
+        if (s_resume_block(proc->pid) == -1) {
+          u_perror("bg: ");
+          return NULL;
+        }
       } else {
         if (s_kill(proc->pid, P_SIGCONT) < 0) {
-          fprintf(stderr, "SIGCONT failed to send\n");  /// switch to errno
+          u_perror("bg: ");
           return NULL;
         }
       }
@@ -222,13 +263,14 @@ void* b_bg(void* arg) {
               proc->cmd_name);
       ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
       if (result == -1) {
-        u_perror("Failed to write to STDOUT");  /// incluing perror
+        u_perror("bg: ");
       }
 
       return NULL;
     }
-    fprintf(stderr,
-            "PID with specified number does not exist\n");  /// switch to errno
+    errno = ENOPIDJOB;
+    u_perror("bg: ");
+
     return NULL;
   }
 
@@ -239,7 +281,7 @@ void* b_bg(void* arg) {
       s_resume_block(proc->pid);
     } else {
       if (s_kill(proc->pid, P_SIGCONT) < 0) {
-        fprintf(stderr, "SIGCONT failed to send\n");  /// switch to errno
+        u_perror("bg: ");
         return NULL;
       }
     }
@@ -251,12 +293,13 @@ void* b_bg(void* arg) {
             proc->cmd_name);
     ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
     if (result == -1) {
-      u_perror("Failed to write to STDOUT");  /// incluing perror
+      u_perror("bg: ");
     }
 
     return NULL;
   }
-  fprintf(stderr, "There are no stopped jobs\n");  /// switch to errno
+  errno = ENOJOB;
+  u_perror("bg: ");
 
   return NULL;
 }
@@ -338,12 +381,12 @@ void* b_man(void* arg) {
     } else if (strcmp(args[1], "orphanify") == 0) {
       output = "Creates a processor killed that has a child running.\n";
     } else if (strcmp(args[1], "nice") == 0) {
-      output = "The nice utility assigns priority to a specific thread\n";
+      output = "The nice utility assigns priority to a specific thread.\n";
     } else if (strcmp(args[1], "nice_pid") == 0) {
       output =
           "The nice utility assigns priority to a specific "
           "processor "
-          "for a specified pid\n";
+          "for a specified pid.\n";
     } else if (strcmp(args[1], "man") == 0) {
       output =
           "The man utility finds and displays online manual "
@@ -361,7 +404,7 @@ void* b_man(void* arg) {
           "background list, then in the highest job id. Then it resumes the "
           "processor and gives it terminal control. fg can also find "
           "processors "
-          "with specified pid\n";
+          "with specified pid.\n";
     } else if (strcmp(args[1], "jobs") == 0) {
       output =
           "The jobs command lists processors that are currently "
@@ -375,7 +418,7 @@ void* b_man(void* arg) {
   }
   ssize_t result = s_write(STDOUT_FILENO, output, strlen(output));
   if (result == -1) {
-    u_perror("Failed to write to STDOUT");  /// incluing perror
+    u_perror("man: ");
   }
 
   s_exit();
@@ -384,24 +427,54 @@ void* b_man(void* arg) {
 
 void* b_nice(void* arg) {
   struct parsed_command* parsed = NULL;
-  parse_command(arg, &parsed);
+  if (parse_command(arg, &parsed) != 0) {
+    u_perror("nice: ");
+    return NULL;
+  }
+
   char** args = parsed->commands[0];
 
   if (args[1] == NULL || args[2] == NULL) {
-    /// error
+    errno = ENOARGS;
+    u_perror("nice: ");
     return NULL;
   }
 
   void* (*func)(void*) = s_function_from_string(args[2]);
-  unsigned priority = atoi(args[1]);  // USE STROL AND ERRNO
-  s_spawn_and_wait(func, &args[2], STDIN_FILENO, STDOUT_FILENO,
-                   parsed->is_background, priority);
+  if (func == NULL) {
+    u_perror("nice: ");
+    return NULL;
+  }
+  errno = 0;
+  unsigned priority = (int)strtol(args[1], NULL, 10);
+  if (errno != 0) {
+    u_perror("nice: ");
+    return NULL;
+  }
+  if (s_spawn_and_wait(func, &args[2], STDIN_FILENO, STDOUT_FILENO,
+                       parsed->is_background, priority) == -1) {
+    u_perror("nice: ");
+  }
   return NULL;
 }
 
 void* b_nice_pid(void* arg) {
   char** argv = (char**)arg;
-  s_nice(atoi(argv[2]), atoi(argv[1]));
+  errno = 0;
+  int argv2_int = (int)strtol(argv[2], NULL, 10);
+  if (errno != 0) {
+    u_perror("nice_pid: ");
+    return NULL;
+  }
+  int argv1_int = (int)strtol(argv[1], NULL, 10);
+  if (errno != 0) {
+    u_perror("nice_pid: ");
+    return NULL;
+  }
+
+  if (s_nice(argv2_int, argv1_int) == -1) {
+    u_perror("nice_pid: ");
+  }
 
   return NULL;
 }
@@ -416,20 +489,27 @@ void* b_orphan_child(void* arg) {
 
 void* b_orphanify(void* arg) {
   char* args[2] = {"orphan_child", NULL};
-  s_spawn(b_orphan_child, args, STDIN_FILENO, STDOUT_FILENO);
+  if (s_spawn(b_orphan_child, args, STDIN_FILENO, STDOUT_FILENO) == -1) {
+    u_perror("orphanify: ");
+  }
   s_exit();
   return NULL;
 }
 
 void* b_zombie_child(void* arg) {
   // MMMMM Brains...!
-  s_zombie(current->pid);
+  if (s_zombie(current->pid) == -1) {
+    u_perror("zombify: ");
+  }
   return NULL;
 }
 
 void* b_zombify(void* arg) {
   char* args[2] = {"zombie_child", NULL};
-  s_spawn(b_zombie_child, args, STDIN_FILENO, STDOUT_FILENO);
+  if (s_spawn(b_zombie_child, args, STDIN_FILENO, STDOUT_FILENO) == -1) {
+    u_perror("zombify: ");
+    return NULL;
+  }
   fg_proc = s_find_process(current->pid);
   while (1)
     ;
@@ -576,18 +656,18 @@ void* b_cp(void* arg) {
   char** args = (char**)arg;
   if (strcmp(args[1], "-h") == 0) {
     // cp -h SOURCE DEST
-    if(s_cp_from_host(args[2], args[3]) == -1) {
+    if (s_cp_from_host(args[2], args[3]) == -1) {
       u_perror("cp: ");
     }
   } else {
     if (strcmp(args[2], "-h") == 0) {
       // cp SOURCE -h DEST
-      if(s_cp_to_host(args[1], args[3]) == -1) {
+      if (s_cp_to_host(args[1], args[3]) == -1) {
         u_perror("cp: ");
       }
     } else {
       // cp SOURCE DEST
-      if(s_cp_within_fat(args[1], args[2]) == -1) {
+      if (s_cp_within_fat(args[1], args[2]) == -1) {
         u_perror("cp: ");
       }
     }

@@ -6,6 +6,7 @@
 CircularList* init_list(void) {
   CircularList* list = (CircularList*)malloc(sizeof(CircularList));
   if (list == NULL) {
+    errno = ELISTNULL;
     return NULL;  // Failed to allocate memory for the list
   }
   list->head = NULL;
@@ -80,8 +81,12 @@ void add_process_front(CircularList* list, pcb_t* process) {
 
 // Removes a process from the circular linked list by its PID
 bool remove_process(CircularList* list, pid_t pid) {
-  if (list == NULL || list->head == NULL) {
-    return false;  // List is empty or not initialized
+  if (list == NULL) {
+    errno = ELISTNULL;
+    return NULL;  // List is not initialized
+  }
+  if (list->head == NULL) {
+    return NULL;  // List is empty
   }
 
   Node *currentnode = list->head, *prev = NULL;
@@ -121,8 +126,12 @@ bool remove_process(CircularList* list, pid_t pid) {
 
 // Finds a process in the circular linked list by its PID
 pcb_t* find_process(CircularList* list, pid_t pid) {
-  if (list == NULL || list->head == NULL) {
-    return NULL;  // List is empty or not initialized
+  if (list == NULL) {
+    errno = ELISTNULL;
+    return NULL;  // List is not initialized
+  }
+  if (list->head == NULL) {
+    return NULL;  // List is empty
   }
 
   Node* currentnode = list->head;
@@ -138,8 +147,12 @@ pcb_t* find_process(CircularList* list, pid_t pid) {
 
 // Finds a process in the circular linked list by its PID
 pcb_t* find_process_job_id(CircularList* list, int index) {
-  if (list == NULL || list->head == NULL) {
-    return NULL;  // List is empty or not initialized
+  if (list == NULL) {
+    errno = ELISTNULL;
+    return NULL;  // List is not initialized
+  }
+  if (list->head == NULL) {
+    return NULL;  // List is empty
   }
 
   Node* currentnode = list->head;
@@ -153,27 +166,25 @@ pcb_t* find_process_job_id(CircularList* list, int index) {
   return NULL;  // Process not found
 }
 
-
-
-
 void free_list(CircularList* list) {
-    if (list == NULL) {
-        return;
-    }
+  if (list == NULL) {
+    errno = ELISTNULL;
+    return;
+  }
 
-    if (list->head == NULL) {
-        free(list);
-        return;
-    }
-
-    Node* current = list->head;
-    Node* next_node;
-
-    do {
-        next_node = current->next;
-        free(current);
-        current = next_node;
-    } while (current != list->head);
-
+  if (list->head == NULL) {
     free(list);
+    return;
+  }
+
+  Node* current = list->head;
+  Node* next_node;
+
+  do {
+    next_node = current->next;
+    free(current);
+    current = next_node;
+  } while (current != list->head);
+
+  free(list);
 }

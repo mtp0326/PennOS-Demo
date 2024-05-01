@@ -187,6 +187,7 @@ pid_t s_spawn_nice(void* (*func)(void*),
     strcat(child->cmd_name, " ");
     i++;
   }
+  child->cmd_name[arg_size] = '\0';
 
   s_write_log(CREATE, child, -1);
   if (priority != -1) {
@@ -338,7 +339,7 @@ int s_kill(pid_t pid, int signal) {
       break;
     case P_SIGCONT:
       if (!(process->state == STOPPED)) {
-        // SET ERRNO? Ignore?
+        errno = ENOTSTOP;
         return -1;
       }
       if (s_move_process(processes[process->priority], pid) == -1) {
@@ -356,7 +357,7 @@ int s_kill(pid_t pid, int signal) {
       s_zombie(pid);
       break;
     default:
-      // ERRNO: invalid SIGNAL?
+      errno = EINVALIDSIG;
       return -1;
   }
   return 0;
@@ -448,7 +449,6 @@ int s_sleep(unsigned int ticks) {
       errno = EADDPROC;
       return -1;
     }
-    /// error
     spthread_suspend_self();
   }
   return 0;
@@ -487,12 +487,11 @@ int s_spawn_and_wait(void* (*func)(void*),
     char message[25];
     sprintf(message, "[%d] %4u\n", child_proc->job_num, child_proc->pid);
     if (s_write(STDOUT_FILENO, message, strlen(message)) == -1) {
-      u_perror("Failed to write to STDOUT");
+      errno = EINVALIDSTDOUT;
     }
   }
   int wstatus = 0;
   s_waitpid(child, &wstatus, nohang);
-  /// or status signaled?
   if (!nohang && (wstatus == STATUS_EXITED || wstatus == STATUS_SIGNALED)) {
     pcb_t* child_pcb = s_find_process(child);
     if (child_pcb == NULL) {
@@ -530,7 +529,8 @@ int s_bg_wait(pcb_t* proc) {
     sprintf(message, "[%d]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
             proc->processname);
     if (s_write(STDOUT_FILENO, message, strlen(message)) == -1) {
-      u_perror("Failed to write to STDOUT");
+      errno = EINVALIDSTDOUT;
+      return -1;
     }
 
     proc->is_bg = false;
@@ -544,7 +544,8 @@ int s_bg_wait(pcb_t* proc) {
     sprintf(message, "[%d]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
             proc->processname);
     if (s_write(STDOUT_FILENO, message, strlen(message)) == -1) {
-      u_perror("Failed to write to STDOUT");
+      errno = EINVALIDSTDOUT;
+      return -1;
     }
 
     proc->is_bg = false;
@@ -645,7 +646,7 @@ int s_remove_process(pid_t pid) {
       }
       return 0;
     default:
-      // SET ERRNO
+      errno = EPCBSTATE;
       return -1;
   }
 }
@@ -738,12 +739,11 @@ int s_write_log(log_message_t logtype, pcb_t* proc, unsigned int old_nice) {
               proc->priority, proc->processname);
       break;
     default:
-      // SET ERRNO, INVALID LOGTYPE
+      errno = EINVALIDLOG;
       return -1;
   }
   if (write(logfiledescriptor, buf, strlen(buf)) == -1) {
-    u_perror("Failed to write to STDOUT");
-    // SET ERRNO, WRITE TO LOGFILE FAILED
+    errno = EINVALIDLOGWRITE;
     return -1;
   } else {
     return 0;  // exit successfully
@@ -760,28 +760,24 @@ int s_move_process(CircularList* destination, pid_t pid) {
   switch (pcb->state) {
     case STOPPED:
       if (!remove_process(stopped, pid)) {
-        /// specify and add list is empty or process not found????
         errno = EREMOVEPROC;
         return -1;
       }
       break;
     case BLOCKED:
       if (!remove_process(blocked, pid)) {
-        /// specify and add list is empty or process not found????
         errno = EREMOVEPROC;
         return -1;
       }
       break;
     case ZOMBIED:
       if (!remove_process(zombied, pid)) {
-        /// specify and add list is empty or process not found????
         errno = EREMOVEPROC;
         return -1;
       }
       break;
     case RUNNING:
       if (!remove_process(processes[pcb->priority], pid)) {
-        /// specify and add list is empty or process not found????
         errno = EREMOVEPROC;
         return -1;
       }
@@ -798,8 +794,12 @@ int s_move_process(CircularList* destination, pid_t pid) {
 }
 
 int s_print_process(CircularList* list) {
-  if (list == NULL || list->head == NULL) {
+  if (list == NULL) {
+    errno = ELISTNULL;
     return -1;
+  }
+  if (list->head == NULL) {
+    return 0;
   }
 
   Node* current_node = list->head;
@@ -829,7 +829,8 @@ int s_print_process(CircularList* list) {
     }
     ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
     if (result == -1) {
-      u_perror("Failed to write to STDOUT");
+      errno = EINVALIDSTDOUT;
+      return -1;
     }
 
     current_node = current_node->next;
@@ -850,7 +851,8 @@ int s_print_jobs(void) {
         sprintf(message, "[%d] Running %s\n", proc->job_num, proc->cmd_name);
         ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
         if (result == -1) {
-          u_perror("Failed to write to STDOUT");
+          errno = EINVALIDSTDOUT;
+          return -1;
         }
       }
 
@@ -868,7 +870,8 @@ int s_print_jobs(void) {
       sprintf(message, "[%d] Stopped %s\n", proc->job_num, proc->cmd_name);
       ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
       if (result == -1) {
-        u_perror("Failed to write to STDOUT");
+        errno = EINVALIDSTDOUT;
+        return -1;
       }
 
       current_node = current_node->next;

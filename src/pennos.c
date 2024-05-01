@@ -12,19 +12,6 @@ static const int centisecond = 10000;  // 10 milliseconds
 
 PList* priority;
 
-// void print_queue() {
-//   fprintf(stdout, "  PID\t PPID\t  PRI\tSTAT\tCMD\n");
-
-//   for (int i = 0; i < 3; i++) {
-//     s_print_process(processes[i]);
-//   }
-//   s_print_process(blocked);
-//   s_print_process(stopped);
-//   s_print_process(zombied);
-
-//   return;
-// }
-
 static void* shell(void* arg) {
   while (1) {
     prompt(true);
@@ -207,10 +194,9 @@ static void* shell(void* arg) {
         s_spawn_and_wait(recur, args, STDIN_FILENO, STDOUT_FILENO, false, -1);
       } else {
         fprintf(stderr, "pennos: command not found: %s\n", args[0]);
-        // REPLACE WITH PERROR
+        errno = EINVALIDCMD;
       }
       free(parsed);
-      // print_queue();
     }
     free(cmd);
   }
