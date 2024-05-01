@@ -96,6 +96,16 @@
 #define INVALID_CHMOD -11
 
 /**
+* @brief Error number for cp when source file doesn't have read permission
+*/
+#define SOURCE_FILE_NO_READ_PERM -12
+
+/**
+* @brief Error number for cp when dest file doesn't have write permission
+*/
+#define DEST_FILE_NO_WRITE_PERM -13
+
+/**
  * @enum Whence
  * @brief Defines how the offset will be calculated when using the k_lseek
  * method. For more detail, refer to lseek(2).

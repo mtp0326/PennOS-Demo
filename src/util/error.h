@@ -36,6 +36,9 @@ extern int errno;
 #define EINVALIDPARAMETER 407
 #define EUSEDFILE 408
 #define EINVALIDCHMOD 500
+#define EREADERROR 501
+#define ENOREADPERM 502
+#define ENOWRITEPERM 503
 
 /// feel free to fix the number
 #define ENOPROC 410

@@ -342,9 +342,10 @@ such file descriptor is managed by the calling process. This can be done in
 multiple ways.
 
  *
- * @param fname
- * @param mode
- * @return int
+ * @param fname opens file with this name
+ * @param mode opens file in this mode
+ *
+ * @return int (-1 on error), on success returns fd number of opened file
  */
 int s_open(const char* fname, int mode);
 
@@ -355,10 +356,11 @@ int s_open(const char* fname, int mode);
  * important to remember that the process’ file descriptor may need to be
  * updated as the position of the file pointer changes.
  *
- * @param fd
- * @param n
- * @param buf
- * @return ssize_t
+ * @param fd file descriptor to read from (from fd's offset)
+ * @param n number of bytes to read
+ * @param buf buffer to read into
+ *
+ * @return ssize_t (-1 on error), 0 if EOF reached, otherwise number of bytes read
  */
 ssize_t s_read(int fd, int n, char* buf);
 
@@ -371,10 +373,11 @@ ssize_t s_read(int fd, int n, char* buf);
  * process’ file descriptor may need to be updated as the position of the file
  * pointer changes.
  *
- * @param fd
- * @param str
- * @param n
- * @return ssize_t
+ * @param fd file descriptor to write to (from fd's offset)
+ * @param str input string to be written
+ * @param n number of bytes to be written
+ *
+ * @return ssize_t (-1 on error), otherwise number of bytes written
  */
 ssize_t s_write(int fd, const char* str, int n);
 
@@ -383,16 +386,19 @@ ssize_t s_write(int fd, const char* str, int n);
  * failure. A kernel level close should occur, and on success the local process’
  * file descriptor table should be cleaned up appropriately.
  *
- * @param fd
- * @return int
+ * @param fd file descriptor number to be closed
+ * 
+ * @return int (-1 on error)
  */
 int s_close(int fd);
 
 /**
- * @brief
+ * @brief removes the file specified by \p fname , \p fname must exist, returns 
+ * -1 on error if it doesn't
  *
- * @param fname
- * @return int
+ * @param fname name of the file to be removed
+ *
+ * @return int (-1 on error)
  */
 int s_unlink(const char* fname);
 
@@ -403,9 +409,11 @@ int s_unlink(const char* fname);
  * lseek(2). A kernel level lseek should occur, and necessary changes to the
  * calling process’ file descriptor table will be necessary.
  *
- * @param fd
- * @param offset
- * @param whence
+ * @param fd The filedescriptor whose file pointer is to be moved
+ * @param offset The offset at which to move by (in bytes)
+ * @param whence Relative byte location to offset from
+ * 
+ * @return off_t (-1 on error)
  */
 off_t s_lseek(int fd, int offset, int whence);
 
@@ -414,7 +422,9 @@ off_t s_lseek(int fd, int offset, int whence);
  * list all files in the current directory. Before EC implementations, this
  * should be very simple and could literally be a call a similar k_function.
  *
- * @param filename
+ * @param filename Lists information about the specified file
+ *
+ * @return int (-1 on error)
  */
 int s_ls(const char* filename, int fd);
 
@@ -447,7 +457,9 @@ char* s_get_fname_from_fd(int fd);
  * @brief Wrapper function around k_update_timestamp.
  * Returns the filename for the given file descriptor number.
  *
- * @param source
+ * @param source Soruce file name
+ *
+ * @return int (-1 on error)
  */
 int s_update_timestamp(const char* source);
 

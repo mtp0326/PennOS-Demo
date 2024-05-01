@@ -909,6 +909,12 @@ int file_errno_helper(int ret) {
   } else if (ret == INVALID_CHMOD) {
     errno = EINVALIDCHMOD;
     return -1;
+  } else if (ret == SOURCE_FILE_NO_READ_PERM) {
+    errno = ENOREADPERM;
+    return -1;
+  } else if (ret == DEST_FILE_NO_WRITE_PERM) {
+    errno = ENOWRITEPERM;
+    return -1;
   }
   return ret;
 }
@@ -983,19 +989,45 @@ int s_ls(const char* filename, int fd) {
 }
 
 char* s_read_all(const char* filename, int* read_num) {
-  return k_read_all(filename, read_num);
+  char* ret = k_read_all(filename, read_num);
+
+  if (ret == NULL) {
+    errno = EREADERROR;
+    return NULL;
+  }
+
+  return ret;
 }
 
 char* s_get_fname_from_fd(int fd) {
-  return k_get_fname_from_fd(fd);
+  char* ret = k_get_fname_from_fd(fd);
+
+  if (ret == NULL) {
+    errno = EINVALIDFD;
+    return NULL;
+  }
+
+  return ret;
 }
 
 int s_update_timestamp(const char* source) {
-  return k_update_timestamp(source);
+  int ret = k_update_timestamp(source);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 off_t s_does_file_exist2(const char* fname) {
-  return does_file_exist2(fname);
+  int ret = does_file_exist2(fname);
+
+  if (file_errno_helper(ret) == -1) {
+    return -1;
+  }
+
+  return ret;
 }
 
 int s_rename(const char* source, const char* dest) {
