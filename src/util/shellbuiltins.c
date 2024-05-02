@@ -570,8 +570,12 @@ void* b_cat(void* arg) {
   if (argv[1] == NULL) {
     if ((current->input_fd) == STDIN_FILENO) {
       char contents[4096];
-      s_read(STDIN_FILENO, 4096, contents);
-      s_write(current->output_fd, contents, strlen(contents));
+
+      while (s_read(STDIN_FILENO, 4096, contents) > 0) {
+        s_write(current->output_fd, contents, strlen(contents));
+        memset(contents, 0, sizeof contents);
+      }
+
     } else {
       int read_num;
       char* fname = s_get_fname_from_fd(current->input_fd);
