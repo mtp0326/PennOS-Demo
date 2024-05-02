@@ -10,6 +10,8 @@
 void \mbox{\hyperlink{prioritylist_8c_a00f10d8a58f009415a3ee62349834249}{add\+\_\+priority}} (\mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*}list, unsigned int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
 \item 
 bool \mbox{\hyperlink{prioritylist_8c_acf5ffc2a9a57d64a940360fe6151aafc}{remove\+\_\+priority}} (\mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*}list, unsigned int \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}})
+\item 
+void \mbox{\hyperlink{prioritylist_8c_a04b1079ddfca468066c501ed3a780109}{free\+\_\+plist}} (\mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*}list)
 \end{DoxyCompactItemize}
 
 
@@ -25,6 +27,19 @@ Adds a new process to the circular linked list.
 {\em list} & Pointer to the circular linked list. \\
 \hline
 {\em process} & Pointer to the process control block (\doxylink{structpcb__t}{pcb\+\_\+t}) to add. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{prioritylist_8c_a04b1079ddfca468066c501ed3a780109}\label{prioritylist_8c_a04b1079ddfca468066c501ed3a780109} 
+\index{prioritylist.c@{prioritylist.c}!free\_plist@{free\_plist}}
+\index{free\_plist@{free\_plist}!prioritylist.c@{prioritylist.c}}
+\doxysubsubsection{\texorpdfstring{free\_plist()}{free\_plist()}}
+{\footnotesize\ttfamily void free\+\_\+plist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPList}{PList}} \texorpdfstring{$\ast$}{*}}]{list }\end{DoxyParamCaption})}
+
+Frees all nodes and their associated processes in a circular linked list, then frees the list itself.
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & Pointer to the circular linked list to free. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{prioritylist_8c_ac55c6aca6e9e03dc0c52ef4fff694e29}\label{prioritylist_8c_ac55c6aca6e9e03dc0c52ef4fff694e29} 

@@ -19,7 +19,7 @@
 \DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{parser_8h}{parser.h}}"{}}}
 \DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pennfat__kernel_8h}{util/pennfat\_kernel.h}}"{}}}
 \DoxyCodeLine{00017\ \textcolor{preprocessor}{\#ifndef\ PROMPT\_PENN\_FAT}}
-\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ PROMPT\_PENN\_FAT\ "{}penn-\/fat>\ "{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ PROMPT\_PENN\_FAT\ "{}\(\backslash\)033[31mpenn-\/fat>\(\backslash\)033[0m\ "{}}}
 \DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#ifndef\ PROMPT\_SHELL}}
 \DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ PROMPT\_SHELL\ "{}\$\ "{}}}
@@ -27,50 +27,52 @@
 \DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ MAX\_LEN\ 4096}}
 \DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{00025\ }
-\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_adf6e89b78280efda4b5c486c9697b513}{mkfs}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fs\_name,\ \textcolor{keywordtype}{int}\ blocks\_in\_fat,\ \textcolor{keywordtype}{int}\ block\_size\_config);}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00047\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a2fe0ff1115fb73cfaef3441eb8d77426}{mount}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fs\_name);}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00055\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a1db7f084483fe1bc09d688e3d3a69eb4}{unmount}}();}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00063\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a346afcda0823eef7a0e3082d715bf7ff}{prompt}}(\textcolor{keywordtype}{bool}\ shell);}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00069\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_ac7f326a6111f42f1adbaf05923c128de}{read\_command}}(\textcolor{keywordtype}{char}**\ cmds);}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00077\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a95c1eedbf28e070d02d04fbbb832a3b8}{int\_handler}}(\textcolor{keywordtype}{int}\ signo);}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00087\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a1d5876a5f78107bed3847c8d5485b7c4}{get\_block\_size}}(\textcolor{keywordtype}{int}\ block\_size\_config);}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00098\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_ad9f7eae33584363000a4ef799b8a53bf}{get\_fat\_size}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\_size}},\ \textcolor{keywordtype}{int}\ blocks\_in\_fat);}
-\DoxyCodeLine{00099\ }
-\DoxyCodeLine{00109\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a3c58e4046bc0fb7d042ae61a478b902f}{get\_num\_fat\_entries}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\_size}},\ \textcolor{keywordtype}{int}\ blocks\_in\_fat);}
-\DoxyCodeLine{00110\ }
-\DoxyCodeLine{00120\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_afe223c13a71e93bc31d9c453fd2fb856}{get\_data\_size}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\_size}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8c_af866bcf6c2272c2f6b1b7e5ad3a2e127}{num\_fat\_entries}});}
-\DoxyCodeLine{00121\ }
-\DoxyCodeLine{00132\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_af81db977c099887a61b6c74f0893cb4a}{get\_offset\_size}}(\textcolor{keywordtype}{int}\ block\_num,\ \textcolor{keywordtype}{int}\ offset);}
-\DoxyCodeLine{00133\ }
-\DoxyCodeLine{00138\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a7d5ac507ab09ed439fe59e6ba52e6374}{initialize\_global\_fd\_table}}();}
-\DoxyCodeLine{00139\ }
-\DoxyCodeLine{00147\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a71f9fc8600d2bc8e7a150dc916c31105}{touch}}(\textcolor{keywordtype}{char}**\ args);}
-\DoxyCodeLine{00148\ }
-\DoxyCodeLine{00156\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_ac7051d05598e13d47c1f51c8f4fc41ec}{rm}}(\textcolor{keywordtype}{char}**\ args);}
-\DoxyCodeLine{00157\ }
-\DoxyCodeLine{00166\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_af3c595e77dc267c7748160ff5070eb12}{mv}}(\textcolor{keywordtype}{char}**\ args);}
-\DoxyCodeLine{00167\ }
-\DoxyCodeLine{00176\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a3c36044e4d46eeeac317c0625aa2a0aa}{chmod}}(\textcolor{keywordtype}{char}**\ args);}
-\DoxyCodeLine{00177\ }
-\DoxyCodeLine{00187\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_afdca5618cfd95ac674ef9714c8aaf94b}{cat\_file\_wa}}(\textcolor{keywordtype}{char}**\ args);}
-\DoxyCodeLine{00188\ }
-\DoxyCodeLine{00193\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a0a4a3cef40cd8acefe8d3913380a814a}{ls}}();}
-\DoxyCodeLine{00194\ }
-\DoxyCodeLine{00206\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a96e0c0752c3a4f14c705c8438d4e1d32}{cp\_within\_fat}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ dest);}
-\DoxyCodeLine{00207\ }
-\DoxyCodeLine{00219\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_ae1db417a813b6e049324bcc193940e91}{cp\_to\_host}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ host\_dest);}
-\DoxyCodeLine{00220\ }
-\DoxyCodeLine{00232\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_aa8a88599335904e85ca7186505bc07ae}{cp\_from\_host}}(\textcolor{keywordtype}{char}*\ host\_source,\ \textcolor{keywordtype}{char}*\ dest);}
-\DoxyCodeLine{00233\ }
-\DoxyCodeLine{00240\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a474b370f4b5879f82110fdca97892348}{cat\_w}}(\textcolor{keywordtype}{char}*\ output);}
-\DoxyCodeLine{00241\ }
-\DoxyCodeLine{00248\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_ab188252d77516fed55f14aee897fcaf8}{cat\_a}}(\textcolor{keywordtype}{char}*\ output);}
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_ad9cbb2c6de69fff159fe38f137afa179}{free\_global\_fd\_table}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_adf6e89b78280efda4b5c486c9697b513}{mkfs}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fs\_name,\ \textcolor{keywordtype}{int}\ blocks\_in\_fat,\ \textcolor{keywordtype}{int}\ block\_size\_config);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a2fe0ff1115fb73cfaef3441eb8d77426}{mount}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fs\_name);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a1db7f084483fe1bc09d688e3d3a69eb4}{unmount}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00065\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a346afcda0823eef7a0e3082d715bf7ff}{prompt}}(\textcolor{keywordtype}{bool}\ shell);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_ac7f326a6111f42f1adbaf05923c128de}{read\_command}}(\textcolor{keywordtype}{char}**\ cmds);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00079\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a95c1eedbf28e070d02d04fbbb832a3b8}{int\_handler}}(\textcolor{keywordtype}{int}\ signo);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00089\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a1d5876a5f78107bed3847c8d5485b7c4}{get\_block\_size}}(\textcolor{keywordtype}{int}\ block\_size\_config);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00100\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_ad9f7eae33584363000a4ef799b8a53bf}{get\_fat\_size}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\_size}},\ \textcolor{keywordtype}{int}\ blocks\_in\_fat);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00111\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a3c58e4046bc0fb7d042ae61a478b902f}{get\_num\_fat\_entries}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\_size}},\ \textcolor{keywordtype}{int}\ blocks\_in\_fat);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00122\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_afe223c13a71e93bc31d9c453fd2fb856}{get\_data\_size}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8c_a70b27761c7d0bd5cd90f4fe47e569b94}{block\_size}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8c_af866bcf6c2272c2f6b1b7e5ad3a2e127}{num\_fat\_entries}});}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00134\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_af81db977c099887a61b6c74f0893cb4a}{get\_offset\_size}}(\textcolor{keywordtype}{int}\ block\_num,\ \textcolor{keywordtype}{int}\ offset);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a7d5ac507ab09ed439fe59e6ba52e6374}{initialize\_global\_fd\_table}}();}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00149\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a71f9fc8600d2bc8e7a150dc916c31105}{touch}}(\textcolor{keywordtype}{char}**\ args);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00158\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_ac7051d05598e13d47c1f51c8f4fc41ec}{rm}}(\textcolor{keywordtype}{char}**\ args);}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00168\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_af3c595e77dc267c7748160ff5070eb12}{mv}}(\textcolor{keywordtype}{char}**\ args);}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00178\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a3c36044e4d46eeeac317c0625aa2a0aa}{chmod}}(\textcolor{keywordtype}{char}**\ args);}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00189\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_afdca5618cfd95ac674ef9714c8aaf94b}{cat\_file\_wa}}(\textcolor{keywordtype}{char}**\ args);}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00195\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a95b380ceb023b12c760335e1b365c331}{ls}}(\textcolor{keywordtype}{char}*\ filename);}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00208\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_a96e0c0752c3a4f14c705c8438d4e1d32}{cp\_within\_fat}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ dest);}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00221\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_ae1db417a813b6e049324bcc193940e91}{cp\_to\_host}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ host\_dest);}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00234\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat_8h_aa8a88599335904e85ca7186505bc07ae}{cp\_from\_host}}(\textcolor{keywordtype}{char}*\ host\_source,\ \textcolor{keywordtype}{char}*\ dest);}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00242\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_a474b370f4b5879f82110fdca97892348}{cat\_w}}(\textcolor{keywordtype}{char}*\ output);}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00250\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat_8h_ab188252d77516fed55f14aee897fcaf8}{cat\_a}}(\textcolor{keywordtype}{char}*\ output);}
 
 \end{DoxyCode}

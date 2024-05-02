@@ -41,7 +41,13 @@ struct \mbox{\hyperlink{structfile__descriptor__st}{file\+\_\+descriptor\+\_\+st
 \#define \mbox{\hyperlink{pennfat__kernel_8h_a388389bcfc8bc6948baafab7862e0ad9}{INVALID\+\_\+\+PARAMETERS}}~-\/9
 \begin{DoxyCompactList}\small\item\em Error number for when the parameter given to the function is invalid. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{pennfat__kernel_8h_a5570301c863e2a1c4cdcc49083d8a041}{FS\+\_\+\+NOT\+\_\+\+MOUNTED}}~-\/10
-\begin{DoxyCompactList}\small\item\em Error number for when the filesystem is not mounted but tries to access or use the file system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Error number for when the filesystem is not mounted but tries to access or use the file system. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_a2780a8ce4e02d53e53908967bbbb01fb}{INVALID\+\_\+\+CHMOD}}~-\/11
+\begin{DoxyCompactList}\small\item\em Error number for when the resulting file mode/permission is invalid. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_a6a1314a6927d7a3e809e5ca78e613b71}{SOURCE\+\_\+\+FILE\+\_\+\+NO\+\_\+\+READ\+\_\+\+PERM}}~-\/12
+\begin{DoxyCompactList}\small\item\em Error number for cp when source file doesn\textquotesingle{}t have read permission. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{pennfat__kernel_8h_af87b5d8b3a779b50997818d0ed085493}{DEST\+\_\+\+FILE\+\_\+\+NO\+\_\+\+WRITE\+\_\+\+PERM}}~-\/13
+\begin{DoxyCompactList}\small\item\em Error number for cp when dest file doesn\textquotesingle{}t have write permission. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -85,7 +91,7 @@ int \mbox{\hyperlink{pennfat__kernel_8h_ae8b44b3621ebb542bec49f73d19d2885}{k\+\_
 \begin{DoxyCompactList}\small\item\em Remove the file by freeing the FAT table and zeroing out previously existing data. \end{DoxyCompactList}\item 
 off\+\_\+t \mbox{\hyperlink{pennfat__kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96}{k\+\_\+lseek}} (int fd, int offset, int whence)
 \begin{DoxyCompactList}\small\item\em Reposition the file pointer for fd to the offset relative to whence. Refer to lseek(2) for how whence interacts with the file offset. If the newly calculated offset is creater than the current size of the file, the file expands to match that offset with the newly allocated space filled with 0s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{pennfat__kernel_8h_aa1a03cfc7e106d29d54196f03557b9ba}{k\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename, int fd)
+int \mbox{\hyperlink{pennfat__kernel_8h_a8d29dec65e04c5f1fe04b09921dede89}{k\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename, int fd)
 \begin{DoxyCompactList}\small\item\em List the file filename in the current directory. If filename is NULL, list all files in the current directory. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8h_a85eace193c41193d1646af1a8b943200}{k\+\_\+rename}} (const char \texorpdfstring{$\ast$}{*}source, const char \texorpdfstring{$\ast$}{*}dest)
 \begin{DoxyCompactList}\small\item\em Rename {\ttfamily source} to {\ttfamily dest}. \end{DoxyCompactList}\item 
@@ -125,6 +131,16 @@ int \mbox{\hyperlink{pennfat__kernel_8h_af69e180c878a9c8f4e45ec7dc25a062f}{data\
 
 
 \doxysubsection{Macro Definition Documentation}
+\Hypertarget{pennfat__kernel_8h_af87b5d8b3a779b50997818d0ed085493}\label{pennfat__kernel_8h_af87b5d8b3a779b50997818d0ed085493} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!DEST\_FILE\_NO\_WRITE\_PERM@{DEST\_FILE\_NO\_WRITE\_PERM}}
+\index{DEST\_FILE\_NO\_WRITE\_PERM@{DEST\_FILE\_NO\_WRITE\_PERM}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{DEST\_FILE\_NO\_WRITE\_PERM}{DEST\_FILE\_NO\_WRITE\_PERM}}
+{\footnotesize\ttfamily \#define DEST\+\_\+\+FILE\+\_\+\+NO\+\_\+\+WRITE\+\_\+\+PERM~-\/13}
+
+
+
+Error number for cp when dest file doesn\textquotesingle{}t have write permission. 
+
 \Hypertarget{pennfat__kernel_8h_a298b91deec2bed5a79398eedd81cd754}\label{pennfat__kernel_8h_a298b91deec2bed5a79398eedd81cd754} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!F\_APPEND@{F\_APPEND}}
 \index{F\_APPEND@{F\_APPEND}!pennfat\_kernel.h@{pennfat\_kernel.h}}
@@ -195,6 +211,16 @@ Error number for when there does not exist a file with the given file name.
 
 Error number for when the filesystem is not mounted but tries to access or use the file system. 
 
+\Hypertarget{pennfat__kernel_8h_a2780a8ce4e02d53e53908967bbbb01fb}\label{pennfat__kernel_8h_a2780a8ce4e02d53e53908967bbbb01fb} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!INVALID\_CHMOD@{INVALID\_CHMOD}}
+\index{INVALID\_CHMOD@{INVALID\_CHMOD}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{INVALID\_CHMOD}{INVALID\_CHMOD}}
+{\footnotesize\ttfamily \#define INVALID\+\_\+\+CHMOD~-\/11}
+
+
+
+Error number for when the resulting file mode/permission is invalid. 
+
 \Hypertarget{pennfat__kernel_8h_ac464698b9650d3fae2d2fa746624130a}\label{pennfat__kernel_8h_ac464698b9650d3fae2d2fa746624130a} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!INVALID\_FILE\_DESCRIPTOR@{INVALID\_FILE\_DESCRIPTOR}}
 \index{INVALID\_FILE\_DESCRIPTOR@{INVALID\_FILE\_DESCRIPTOR}!pennfat\_kernel.h@{pennfat\_kernel.h}}
@@ -244,6 +270,16 @@ Size of the global\+\_\+fd\+\_\+table.
 
 
 Error number for when trying to open more than one file descriptor in F\+\_\+\+WRITE / F\+\_\+\+APPEND mode. 
+
+\Hypertarget{pennfat__kernel_8h_a6a1314a6927d7a3e809e5ca78e613b71}\label{pennfat__kernel_8h_a6a1314a6927d7a3e809e5ca78e613b71} 
+\index{pennfat\_kernel.h@{pennfat\_kernel.h}!SOURCE\_FILE\_NO\_READ\_PERM@{SOURCE\_FILE\_NO\_READ\_PERM}}
+\index{SOURCE\_FILE\_NO\_READ\_PERM@{SOURCE\_FILE\_NO\_READ\_PERM}!pennfat\_kernel.h@{pennfat\_kernel.h}}
+\doxysubsubsection{\texorpdfstring{SOURCE\_FILE\_NO\_READ\_PERM}{SOURCE\_FILE\_NO\_READ\_PERM}}
+{\footnotesize\ttfamily \#define SOURCE\+\_\+\+FILE\+\_\+\+NO\+\_\+\+READ\+\_\+\+PERM~-\/12}
+
+
+
+Error number for cp when source file doesn\textquotesingle{}t have read permission. 
 
 \Hypertarget{pennfat__kernel_8h_afc193a671d528c44d636e641c0eedf1e}\label{pennfat__kernel_8h_afc193a671d528c44d636e641c0eedf1e} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!SYSTEM\_ERROR@{SYSTEM\_ERROR}}
@@ -579,11 +615,11 @@ Returns the filename for the given file descriptor number.
 \begin{DoxyReturn}{Returns}
 The file name of the {\ttfamily fd} . NULL is {\ttfamily fd} is invalid. 
 \end{DoxyReturn}
-\Hypertarget{pennfat__kernel_8h_aa1a03cfc7e106d29d54196f03557b9ba}\label{pennfat__kernel_8h_aa1a03cfc7e106d29d54196f03557b9ba} 
+\Hypertarget{pennfat__kernel_8h_a8d29dec65e04c5f1fe04b09921dede89}\label{pennfat__kernel_8h_a8d29dec65e04c5f1fe04b09921dede89} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_ls@{k\_ls}}
 \index{k\_ls@{k\_ls}!pennfat\_kernel.h@{pennfat\_kernel.h}}
 \doxysubsubsection{\texorpdfstring{k\_ls()}{k\_ls()}}
-{\footnotesize\ttfamily void k\+\_\+ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename,  }\item[{int}]{fd }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int k\+\_\+ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename,  }\item[{int}]{fd }\end{DoxyParamCaption})}
 
 
 
@@ -595,9 +631,12 @@ Similar to posix ls.
 \begin{DoxyParams}{Parameters}
 {\em filename} & Optional parameter. If specified, ls data for the specified file is printed \\
 \hline
-{\em fd} & The file descriptor you want to write the result of k\+\_\+ls to \\
+{\em fd} & The file descriptor you want to write the result of k\+\_\+ls to\\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, negative value on failure 
+\end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96}\label{pennfat__kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96} 
 \index{pennfat\_kernel.h@{pennfat\_kernel.h}!k\_lseek@{k\_lseek}}
 \index{k\_lseek@{k\_lseek}!pennfat\_kernel.h@{pennfat\_kernel.h}}

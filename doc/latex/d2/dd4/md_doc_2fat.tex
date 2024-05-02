@@ -1,2 +1,53 @@
-\chapter{fat}
-\hypertarget{md_doc_2fat}{}\label{md_doc_2fat}\index{fat@{fat}}
+\chapter{Filesystem Team\+: Aaron Tsui and Joseph Cho}
+\hypertarget{md_doc_2fat}{}\label{md_doc_2fat}\index{Filesystem Team: Aaron Tsui and Joseph Cho@{Filesystem Team: Aaron Tsui and Joseph Cho}}
+\label{md_doc_2fat_autotoc_md0}%
+\Hypertarget{md_doc_2fat_autotoc_md0}%
+ \hypertarget{md_doc_2fat_autotoc_md1}{}\doxysection{\texorpdfstring{List of Submitted Source Files for Standalone FAT\+:}{List of Submitted Source Files for Standalone FAT\+:}}\label{md_doc_2fat_autotoc_md1}
+
+\begin{DoxyItemize}
+\item parser.\+c and \doxylink{parser_8h}{parser.\+h}
+\item \doxylink{pennfat_8c}{pennfat.\+c} and \doxylink{pennfat_8h}{pennfat.\+h}
+\item \doxylink{pennfat__kernel_8c}{pennfat\+\_\+kernel.\+c} and \doxylink{pennfat__kernel_8h}{pennfat\+\_\+kernel.\+h}
+\item \doxylink{standalonefat_8c}{standalonefat.\+c}
+\end{DoxyItemize}\hypertarget{md_doc_2fat_autotoc_md2}{}\doxysection{\texorpdfstring{List of Submitted Source Files for Integrated FAT with Kernel\+:}{List of Submitted Source Files for Integrated FAT with Kernel\+:}}\label{md_doc_2fat_autotoc_md2}
+
+\begin{DoxyItemize}
+\item parser.\+c and \doxylink{parser_8h}{parser.\+h}
+\item \doxylink{pennfat_8c}{pennfat.\+c} and \doxylink{pennfat_8h}{pennfat.\+h}
+\item \doxylink{pennfat__kernel_8c}{pennfat\+\_\+kernel.\+c} and \doxylink{pennfat__kernel_8h}{pennfat\+\_\+kernel.\+h}
+\item \doxylink{sys__call_8c}{sys\+\_\+call.\+c} and \doxylink{sys__call_8h}{sys\+\_\+call.\+h}
+\item \doxylink{shellbuiltins_8c}{shellbuiltins.\+c} and \doxylink{shellbuiltins_8h}{shellbuiltins.\+h}
+\item \doxylink{error_8c}{error.\+c} and \doxylink{error_8h}{error.\+h}
+\item \doxylink{bitmap_8c}{bitmap.\+c} and \doxylink{bitmap_8h}{bitmap.\+h}
+\item All other kernel files necessary for scheduling
+\end{DoxyItemize}\hypertarget{md_doc_2fat_autotoc_md3}{}\doxysection{\texorpdfstring{Compilation Instructions\+:}{Compilation Instructions\+:}}\label{md_doc_2fat_autotoc_md3}
+\hypertarget{md_doc_2fat_autotoc_md4}{}\doxysection{\texorpdfstring{For Standalone FAT\+:}{For Standalone FAT\+:}}\label{md_doc_2fat_autotoc_md4}
+
+\begin{DoxyItemize}
+\item First, use the make commmand to compile the sttandalonefat.
+\item Then, type ./bin/standalonefat in the terminal and press enter
+\end{DoxyItemize}\hypertarget{md_doc_2fat_autotoc_md5}{}\doxysection{\texorpdfstring{For Integrated FAT with Kernel\+:}{For Integrated FAT with Kernel\+:}}\label{md_doc_2fat_autotoc_md5}
+
+\begin{DoxyItemize}
+\item First, use the make commmand to compile the sttandalonefat.
+\item Then, type ./bin/standalonefat in the terminal and press enter
+\item Create a filesystem with command such as "{}mkfs minfs 1 0"{}
+\item Exit the standalone fat
+\item Use ./bin/pennos "{}fs\+\_\+name"{} to start the pennos with "{}fs\+\_\+name"{} mounted (e.\+g. ./bin/pennos minfs)
+\end{DoxyItemize}\hypertarget{md_doc_2fat_autotoc_md6}{}\doxysection{\texorpdfstring{Overview of Work Accomplished\+:}{Overview of Work Accomplished\+:}}\label{md_doc_2fat_autotoc_md6}
+\hypertarget{md_doc_2fat_autotoc_md7}{}\doxysubsection{\texorpdfstring{Standalone FAT}{Standalone FAT}}\label{md_doc_2fat_autotoc_md7}
+Standalone FAT is based on FAT 16. It supports a root directory that can store multiple text files. It is interacts with the user using the routine commands which is described in the project description. The implementation of the Standalone FAT is abstracted away from the user. That is, it is not possible for the user to directly utilize the kernel level functions to interact with the FAT system. This reduces the overhead of the user that is using this FAT system so that they can focus on maintaining the data they are interested in.
+
+In the high level, the Standalone FAT is maintained by the FAT region and the DATA region. FAT region is stored in memory so that the system can easily access and index the DATA region. DATA region is divided into the user-\/set block size. As the data is written or deleted from the DATA region, the Standalone FAT maintains the soundness of the system by modifying and updating both the FAT region and the DATA region.\hypertarget{md_doc_2fat_autotoc_md8}{}\doxysubsection{\texorpdfstring{Integrated FAT}{Integrated FAT}}\label{md_doc_2fat_autotoc_md8}
+The Integrated FAT is mounted on to the pennos over the terminal. Once it is mounted, the user can interact with the file system just like it would interact with the unix terminal. All of the commands that are FAT related are scheduled by the scheduler and logged accordingly.\hypertarget{md_doc_2fat_autotoc_md9}{}\doxysection{\texorpdfstring{Description of Code and Code Layout\+:}{Description of Code and Code Layout\+:}}\label{md_doc_2fat_autotoc_md9}
+\hypertarget{md_doc_2fat_autotoc_md10}{}\doxysubsection{\texorpdfstring{Standalone FAT}{Standalone FAT}}\label{md_doc_2fat_autotoc_md10}
+\doxylink{pennfat__kernel_8c}{pennfat\+\_\+kernel.\+c} \+: All kernel level functions that directly interacts with the FAT system. It it also the only place we use system level functions such as write and read. It is abstracted away from the user, so that they don\textquotesingle{}t have to worry about the actualy file descriptor table or numbers.
+
+\doxylink{pennfat_8c}{pennfat.\+c} \+: Functions that call the kernel level functions to carry out the routine for the Standalone FAT. This level effectively abstracts the detail of the FAT implementation from the user.
+
+standalone.\+c \+: "{}\+Shell"{} for the Standalone FAT. It continuously takes in user input through the terminal and carry them out.\hypertarget{md_doc_2fat_autotoc_md11}{}\doxysubsection{\texorpdfstring{Integrated FAT}{Integrated FAT}}\label{md_doc_2fat_autotoc_md11}
+\doxylink{pennfat__kernel_8c}{pennfat\+\_\+kernel.\+c} \+: All kernel level functions that directly interacts with the FAT system. It it also the only place we use system level functions such as write and read. It is abstracted away from the user, so that they don\textquotesingle{}t have to worry about the actualy file descriptor table or numbers.
+
+\doxylink{sys__call_8c}{sys\+\_\+call.\+c} \+: Functions that call the kernel level functions to carry out the routine for the Standalone FAT. This level effectively abstracts the detail of the FAT implementation from the user. Also, on error of the kernel level functions, all system level functions sets the errno, so that u\+\_\+perror can successfully.
+
+\doxylink{shellbuiltins_8c}{shellbuiltins.\+c} \+: Functions that call the system level functions to carry out the built-\/in features. All built-\/in level functions aren\textquotesingle{}t called "{}directly"{} by our host system. It is always scheduled by the scheduler in order for it to be executed. 

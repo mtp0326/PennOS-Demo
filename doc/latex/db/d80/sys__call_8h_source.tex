@@ -47,101 +47,107 @@
 \DoxyCodeLine{00074\ }
 \DoxyCodeLine{00087\ pid\_t\ \mbox{\hyperlink{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}{s\_waitpid}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}*\ wstatus,\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{stress_8c_aaacb1f06dd4ec309398fb76d008fdc90}{nohang}});}
 \DoxyCodeLine{00088\ }
-\DoxyCodeLine{00096\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\_kill}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ signal);}
-\DoxyCodeLine{00097\ }
-\DoxyCodeLine{00103\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_a964c6f7d6a06dddfd15cbd2d348dbd59}{s\_reap\_all\_child}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ parent);}
-\DoxyCodeLine{00104\ }
-\DoxyCodeLine{00111\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}{s\_exit}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00095\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ac6d9cddaea840f87aee45bd6e6122acc}{s\_resume\_block}}(pid\_t\ pid);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00104\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\_kill}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ signal);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00111\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_a964c6f7d6a06dddfd15cbd2d348dbd59}{s\_reap\_all\_child}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ parent);}
 \DoxyCodeLine{00112\ }
-\DoxyCodeLine{00113\ \textcolor{comment}{/*============================\ system\ calls\ for\ interacting\ with\ the\ scheduler}}
-\DoxyCodeLine{00114\ \textcolor{comment}{\ *\ ===================================*/}}
-\DoxyCodeLine{00115\ }
-\DoxyCodeLine{00123\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\_nice}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
-\DoxyCodeLine{00124\ }
-\DoxyCodeLine{00139\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a0b8fdff50e5b9c5fa8559fe294e4243f}{s\_sleep}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ticks);}
-\DoxyCodeLine{00140\ }
-\DoxyCodeLine{00149\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1a3aeae7e3fb489c4cf3c4dc3911bbce}{s\_busy}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00150\ }
-\DoxyCodeLine{00151\ \textcolor{comment}{/*****\ CUSTOM\ SYSCALLS\ FOR\ SCHEDULER*/}}
-\DoxyCodeLine{00152\ }
-\DoxyCodeLine{00169\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a9116ac84aeec3a4717eab9aa7137080e}{s\_spawn\_and\_wait}}(\textcolor{keywordtype}{void}*\ (*func)(\textcolor{keywordtype}{void}*),}
-\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ argv[],}
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd0,}
-\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd1,}
-\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{stress_8c_aaacb1f06dd4ec309398fb76d008fdc90}{nohang}},}
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
-\DoxyCodeLine{00175\ }
-\DoxyCodeLine{00182\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ \mbox{\hyperlink{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db}{s\_find\_process}}(pid\_t\ pid);}
+\DoxyCodeLine{00119\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}{s\_exit}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{comment}{/*============================\ system\ calls\ for\ interacting\ with\ the\ scheduler}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ *\ ===================================*/}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00131\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ac711d33fcf2573a590b224b6debab996}{s\_nice}}(pid\_t\ pid,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00147\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a0b8fdff50e5b9c5fa8559fe294e4243f}{s\_sleep}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ticks);}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00157\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1a3aeae7e3fb489c4cf3c4dc3911bbce}{s\_busy}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \textcolor{comment}{/*****\ CUSTOM\ SYSCALLS\ FOR\ SCHEDULER*/}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00177\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a9116ac84aeec3a4717eab9aa7137080e}{s\_spawn\_and\_wait}}(\textcolor{keywordtype}{void}*\ (*func)(\textcolor{keywordtype}{void}*),}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ argv[],}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd0,}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd1,}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{stress_8c_aaacb1f06dd4ec309398fb76d008fdc90}{nohang}},}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
 \DoxyCodeLine{00183\ }
-\DoxyCodeLine{00190\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a09ef4dc77a6071976f7d93759d48afa6}{s\_remove\_process}}(pid\_t\ pid);}
+\DoxyCodeLine{00190\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ \mbox{\hyperlink{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db}{s\_find\_process}}(pid\_t\ pid);}
 \DoxyCodeLine{00191\ }
-\DoxyCodeLine{00192\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{sys__call_8h_ab5efee98239591e685e3ae7da8203b21}{s\_function\_from\_string}}(\textcolor{keywordtype}{char}*\ program);}
-\DoxyCodeLine{00193\ }
-\DoxyCodeLine{00194\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1db57eb907f680ab844066357b793d5f}{s\_write\_log}}(\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\_message\_t}}\ logtype,\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ proc,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ old\_nice);}
-\DoxyCodeLine{00195\ }
-\DoxyCodeLine{00196\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a7cc95330d937650d14281e3d6041f284}{s\_move\_process}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ destination,\ pid\_t\ pid);}
-\DoxyCodeLine{00197\ }
-\DoxyCodeLine{00198\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_abc68daae1d550a0993e99d583b0c1264}{s\_zombie}}(pid\_t\ pid);}
-\DoxyCodeLine{00199\ \textcolor{comment}{/*****\ CUSTOM\ SYSCALLS\ FOR\ SCHEDULER*/}}
-\DoxyCodeLine{00200\ }
-\DoxyCodeLine{00211\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a9116ac84aeec3a4717eab9aa7137080e}{s\_spawn\_and\_wait}}(\textcolor{keywordtype}{void}*\ (*func)(\textcolor{keywordtype}{void}*),}
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ argv[],}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd0,}
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd1,}
-\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{stress_8c_aaacb1f06dd4ec309398fb76d008fdc90}{nohang}},}
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
-\DoxyCodeLine{00217\ }
-\DoxyCodeLine{00218\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a31e11484cfd56821c3e9a1fa43aafcf0}{s\_fg}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ proc);}
-\DoxyCodeLine{00219\ }
-\DoxyCodeLine{00226\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a3dd0bc17589ba38590b19d8256ffee4f}{s\_bg\_wait}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ proc);}
-\DoxyCodeLine{00227\ }
-\DoxyCodeLine{00234\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ \mbox{\hyperlink{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db}{s\_find\_process}}(pid\_t\ pid);}
-\DoxyCodeLine{00235\ }
-\DoxyCodeLine{00242\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a09ef4dc77a6071976f7d93759d48afa6}{s\_remove\_process}}(pid\_t\ pid);}
-\DoxyCodeLine{00243\ }
-\DoxyCodeLine{00244\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{sys__call_8h_ab5efee98239591e685e3ae7da8203b21}{s\_function\_from\_string}}(\textcolor{keywordtype}{char}*\ program);}
-\DoxyCodeLine{00245\ }
-\DoxyCodeLine{00246\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1db57eb907f680ab844066357b793d5f}{s\_write\_log}}(\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\_message\_t}}\ logtype,\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ proc,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ old\_nice);}
-\DoxyCodeLine{00247\ }
-\DoxyCodeLine{00248\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a7cc95330d937650d14281e3d6041f284}{s\_move\_process}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ destination,\ pid\_t\ pid);}
-\DoxyCodeLine{00249\ }
-\DoxyCodeLine{00250\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a2e87f593f5c2f59d7a90958b3e51751d}{s\_print\_process}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ list);}
-\DoxyCodeLine{00251\ }
-\DoxyCodeLine{00252\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a4e0c2e47d0948979e7be9350582158c8}{s\_print\_jobs}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ list);}
-\DoxyCodeLine{00253\ }
-\DoxyCodeLine{00254\ \textcolor{comment}{/*==\ system\ call\ functions\ for\ interacting\ with\ PennOS\ filesystem\ ==*/}}
-\DoxyCodeLine{00278\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_afec6e61720e05918efefeab347e950f3}{s\_open}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname,\ \textcolor{keywordtype}{int}\ mode);}
-\DoxyCodeLine{00279\ }
-\DoxyCodeLine{00292\ ssize\_t\ \mbox{\hyperlink{sys__call_8h_afdcf52e63af8002a5d7c02774ee0578f}{s\_read}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{char}*\ buf);}
-\DoxyCodeLine{00293\ }
-\DoxyCodeLine{00308\ ssize\_t\ \mbox{\hyperlink{sys__call_8h_ad3317435b4bd7309160538fc5d730eb9}{s\_write}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ \textcolor{keywordtype}{int}\ n);}
-\DoxyCodeLine{00309\ }
-\DoxyCodeLine{00318\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1ee856dbd0706f79a440d1e98b42d32d}{s\_close}}(\textcolor{keywordtype}{int}\ fd);}
-\DoxyCodeLine{00319\ }
-\DoxyCodeLine{00326\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a395873f1de0b89a686d438580ba5dcf7}{s\_unlink}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname);}
-\DoxyCodeLine{00327\ }
-\DoxyCodeLine{00339\ off\_t\ \mbox{\hyperlink{sys__call_8h_ac21f611f4fb486935d9ad2915a529d3b}{s\_lseek}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keywordtype}{int}\ offset,\ \textcolor{keywordtype}{int}\ whence);}
-\DoxyCodeLine{00340\ }
-\DoxyCodeLine{00348\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{sys__call_8h_ae166ac7970869bda5550149e8771c3af}{s\_ls}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename,\ \textcolor{keywordtype}{int}\ fd);}
-\DoxyCodeLine{00349\ }
-\DoxyCodeLine{00350\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{sys__call_8h_a18b25be5ab040f60070ff9ea839648be}{s\_read\_all}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename,\ \textcolor{keywordtype}{int}*\ read\_num);}
+\DoxyCodeLine{00198\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a09ef4dc77a6071976f7d93759d48afa6}{s\_remove\_process}}(pid\_t\ pid);}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00206\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{sys__call_8h_ab5efee98239591e685e3ae7da8203b21}{s\_function\_from\_string}}(\textcolor{keywordtype}{char}*\ program);}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00217\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1db57eb907f680ab844066357b793d5f}{s\_write\_log}}(\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\_message\_t}}\ logtype,\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ proc,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ old\_nice);}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00227\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a7cc95330d937650d14281e3d6041f284}{s\_move\_process}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ destination,\ pid\_t\ pid);}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00236\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_abf654a2582830ad3a5ce3db38c944f81}{s\_zombie}}(pid\_t\ pid);}
+\DoxyCodeLine{00237\ \textcolor{comment}{/*****\ CUSTOM\ SYSCALLS\ FOR\ SCHEDULER*/}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00249\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a9116ac84aeec3a4717eab9aa7137080e}{s\_spawn\_and\_wait}}(\textcolor{keywordtype}{void}*\ (*func)(\textcolor{keywordtype}{void}*),}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ argv[],}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd0,}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd1,}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{stress_8c_aaacb1f06dd4ec309398fb76d008fdc90}{nohang}},}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennos_8c_a2e0cca4a43c21259b881d59c96c74fe0}{priority}});}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00265\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a31e11484cfd56821c3e9a1fa43aafcf0}{s\_fg}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ proc);}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00273\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a3dd0bc17589ba38590b19d8256ffee4f}{s\_bg\_wait}}(\mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ proc);}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00281\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ \mbox{\hyperlink{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db}{s\_find\_process}}(pid\_t\ pid);}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00290\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ \mbox{\hyperlink{sys__call_8h_a6a3382896d35c17f052ccce317c40dc2}{find\_jobs\_proc}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ list);}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00298\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a09ef4dc77a6071976f7d93759d48afa6}{s\_remove\_process}}(pid\_t\ pid);}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{sys__call_8h_ab5efee98239591e685e3ae7da8203b21}{s\_function\_from\_string}}(\textcolor{keywordtype}{char}*\ program);}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1db57eb907f680ab844066357b793d5f}{s\_write\_log}}(\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\_message\_t}}\ logtype,\ \mbox{\hyperlink{structpcb__t}{pcb\_t}}*\ proc,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ old\_nice);}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a7cc95330d937650d14281e3d6041f284}{s\_move\_process}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ destination,\ pid\_t\ pid);}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00313\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a2e87f593f5c2f59d7a90958b3e51751d}{s\_print\_process}}(\mbox{\hyperlink{structCircularList}{CircularList}}*\ list);}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00321\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_adc34021a4da6a8e67a92d16e8adef872}{s\_print\_jobs}}();}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a941a4ccb62fb48fd5feb049c32df7fdd}{file\_errno\_helper}}(\textcolor{keywordtype}{int}\ ret);}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \textcolor{comment}{/*==\ system\ call\ functions\ for\ interacting\ with\ PennOS\ filesystem\ ==*/}}
+\DoxyCodeLine{00350\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_afec6e61720e05918efefeab347e950f3}{s\_open}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname,\ \textcolor{keywordtype}{int}\ mode);}
 \DoxyCodeLine{00351\ }
-\DoxyCodeLine{00352\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{sys__call_8h_a2638b24106c052e0a513643f712e8d00}{s\_get\_fname\_from\_fd}}(\textcolor{keywordtype}{int}\ fd);}
-\DoxyCodeLine{00353\ }
-\DoxyCodeLine{00354\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ab40c873ca412b774e2fc1b59527538be}{s\_update\_timestamp}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ source);}
-\DoxyCodeLine{00355\ }
-\DoxyCodeLine{00356\ off\_t\ \mbox{\hyperlink{sys__call_8h_ae8b8546b3350e1602c1574b1b0cb58d0}{s\_does\_file\_exist2}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname);}
-\DoxyCodeLine{00357\ }
-\DoxyCodeLine{00358\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_aeea2dcf94b9a35c86a67cf6ec97fd21d}{s\_rename}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ source,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ dest);}
-\DoxyCodeLine{00359\ }
-\DoxyCodeLine{00360\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a92d71eb90d0b9786bec0302347f5a99f}{s\_change\_mode}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ change,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename);}
-\DoxyCodeLine{00361\ }
-\DoxyCodeLine{00362\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ad55b8ad7785acad109a35a819e415622}{s\_cp\_within\_fat}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ dest);}
-\DoxyCodeLine{00363\ }
-\DoxyCodeLine{00364\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a494917a8ce36ad19470a2116e57a1bc3}{s\_cp\_to\_host}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ host\_dest);}
-\DoxyCodeLine{00365\ }
-\DoxyCodeLine{00366\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1e2fd1371e1cd60d964afd80eb89943e}{s\_cp\_from\_host}}(\textcolor{keywordtype}{char}*\ host\_source,\ \textcolor{keywordtype}{char}*\ dest);}
-\DoxyCodeLine{00367\ }
-\DoxyCodeLine{00368\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00365\ ssize\_t\ \mbox{\hyperlink{sys__call_8h_afdcf52e63af8002a5d7c02774ee0578f}{s\_read}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{char}*\ buf);}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00382\ ssize\_t\ \mbox{\hyperlink{sys__call_8h_ad3317435b4bd7309160538fc5d730eb9}{s\_write}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ \textcolor{keywordtype}{int}\ n);}
+\DoxyCodeLine{00383\ }
+\DoxyCodeLine{00393\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1ee856dbd0706f79a440d1e98b42d32d}{s\_close}}(\textcolor{keywordtype}{int}\ fd);}
+\DoxyCodeLine{00394\ }
+\DoxyCodeLine{00403\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a395873f1de0b89a686d438580ba5dcf7}{s\_unlink}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname);}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00418\ off\_t\ \mbox{\hyperlink{sys__call_8h_ac21f611f4fb486935d9ad2915a529d3b}{s\_lseek}}(\textcolor{keywordtype}{int}\ fd,\ \textcolor{keywordtype}{int}\ offset,\ \textcolor{keywordtype}{int}\ whence);}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00429\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a6f0dde68afa56241329a522dcf741dec}{s\_ls}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename,\ \textcolor{keywordtype}{int}\ fd);}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00445\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{sys__call_8h_a18b25be5ab040f60070ff9ea839648be}{s\_read\_all}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename,\ \textcolor{keywordtype}{int}*\ read\_num);}
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00454\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{sys__call_8h_a2638b24106c052e0a513643f712e8d00}{s\_get\_fname\_from\_fd}}(\textcolor{keywordtype}{int}\ fd);}
+\DoxyCodeLine{00455\ }
+\DoxyCodeLine{00464\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ab40c873ca412b774e2fc1b59527538be}{s\_update\_timestamp}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ source);}
+\DoxyCodeLine{00465\ }
+\DoxyCodeLine{00474\ off\_t\ \mbox{\hyperlink{sys__call_8h_ae8b8546b3350e1602c1574b1b0cb58d0}{s\_does\_file\_exist2}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname);}
+\DoxyCodeLine{00475\ }
+\DoxyCodeLine{00486\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_aeea2dcf94b9a35c86a67cf6ec97fd21d}{s\_rename}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ source,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ dest);}
+\DoxyCodeLine{00487\ }
+\DoxyCodeLine{00499\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a92d71eb90d0b9786bec0302347f5a99f}{s\_change\_mode}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ change,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename);}
+\DoxyCodeLine{00500\ }
+\DoxyCodeLine{00511\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_ad55b8ad7785acad109a35a819e415622}{s\_cp\_within\_fat}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ dest);}
+\DoxyCodeLine{00512\ }
+\DoxyCodeLine{00521\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a494917a8ce36ad19470a2116e57a1bc3}{s\_cp\_to\_host}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ host\_dest);}
+\DoxyCodeLine{00522\ }
+\DoxyCodeLine{00531\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sys__call_8h_a1e2fd1371e1cd60d964afd80eb89943e}{s\_cp\_from\_host}}(\textcolor{keywordtype}{char}*\ host\_source,\ \textcolor{keywordtype}{char}*\ dest);}
+\DoxyCodeLine{00532\ }
+\DoxyCodeLine{00533\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

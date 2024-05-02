@@ -2,635 +2,689 @@
 \contentsline {chapter}{\numberline {1}Penn\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}OS}{1}{chapter.1}%
 \contentsline {subsection}{\numberline {1.0.1}Overview}{1}{subsection.1.0.1}%
 \contentsline {subsection}{\numberline {1.0.2}Documentation}{1}{subsection.1.0.2}%
-\contentsline {chapter}{\numberline {2}fat}{3}{chapter.2}%
-\contentsline {chapter}{\numberline {3}kernel}{5}{chapter.3}%
-\contentsline {chapter}{\numberline {4}scheduler}{7}{chapter.4}%
-\contentsline {chapter}{\numberline {5}shell}{9}{chapter.5}%
-\contentsline {chapter}{\numberline {6}system}{11}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Data Structure Index}{13}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Data Structures}{13}{section.7.1}%
-\contentsline {chapter}{\numberline {8}File Index}{15}{chapter.8}%
-\contentsline {section}{\numberline {8.1}File List}{15}{section.8.1}%
-\contentsline {chapter}{\numberline {9}Data Structure Documentation}{17}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Circular\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}List Struct Reference}{17}{section.9.1}%
-\contentsline {subsection}{\numberline {9.1.1}Detailed Description}{17}{subsection.9.1.1}%
-\contentsline {subsection}{\numberline {9.1.2}Field Documentation}{17}{subsection.9.1.2}%
-\contentsline {subsubsection}{\numberline {9.1.2.1}head}{17}{subsubsection.9.1.2.1}%
-\contentsline {subsubsection}{\numberline {9.1.2.2}size}{17}{subsubsection.9.1.2.2}%
-\contentsline {subsubsection}{\numberline {9.1.2.3}tail}{18}{subsubsection.9.1.2.3}%
-\contentsline {section}{\numberline {9.2}directory\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}entries Struct Reference}{18}{section.9.2}%
-\contentsline {subsection}{\numberline {9.2.1}Detailed Description}{18}{subsection.9.2.1}%
-\contentsline {subsection}{\numberline {9.2.2}Field Documentation}{18}{subsection.9.2.2}%
-\contentsline {subsubsection}{\numberline {9.2.2.1}firstBlock}{18}{subsubsection.9.2.2.1}%
-\contentsline {subsubsection}{\numberline {9.2.2.2}mtime}{19}{subsubsection.9.2.2.2}%
-\contentsline {subsubsection}{\numberline {9.2.2.3}name}{19}{subsubsection.9.2.2.3}%
-\contentsline {subsubsection}{\numberline {9.2.2.4}perm}{19}{subsubsection.9.2.2.4}%
-\contentsline {subsubsection}{\numberline {9.2.2.5}reserved}{19}{subsubsection.9.2.2.5}%
-\contentsline {subsubsection}{\numberline {9.2.2.6}size}{19}{subsubsection.9.2.2.6}%
-\contentsline {subsubsection}{\numberline {9.2.2.7}type}{19}{subsubsection.9.2.2.7}%
-\contentsline {section}{\numberline {9.3}Dynamic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}PIDArray Struct Reference}{19}{section.9.3}%
-\contentsline {subsection}{\numberline {9.3.1}Detailed Description}{20}{subsection.9.3.1}%
-\contentsline {subsection}{\numberline {9.3.2}Field Documentation}{20}{subsection.9.3.2}%
-\contentsline {subsubsection}{\numberline {9.3.2.1}array}{20}{subsubsection.9.3.2.1}%
-\contentsline {subsubsection}{\numberline {9.3.2.2}size}{20}{subsubsection.9.3.2.2}%
-\contentsline {subsubsection}{\numberline {9.3.2.3}used}{20}{subsubsection.9.3.2.3}%
-\contentsline {section}{\numberline {9.4}FD\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Bitmap Struct Reference}{20}{section.9.4}%
-\contentsline {subsection}{\numberline {9.4.1}Detailed Description}{21}{subsection.9.4.1}%
-\contentsline {subsection}{\numberline {9.4.2}Field Documentation}{21}{subsection.9.4.2}%
-\contentsline {subsubsection}{\numberline {9.4.2.1}bits}{21}{subsubsection.9.4.2.1}%
-\contentsline {section}{\numberline {9.5}file\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}descriptor\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{21}{section.9.5}%
-\contentsline {subsection}{\numberline {9.5.1}Detailed Description}{21}{subsection.9.5.1}%
-\contentsline {subsection}{\numberline {9.5.2}Field Documentation}{21}{subsection.9.5.2}%
-\contentsline {subsubsection}{\numberline {9.5.2.1}fd}{21}{subsubsection.9.5.2.1}%
-\contentsline {subsubsection}{\numberline {9.5.2.2}fname}{22}{subsubsection.9.5.2.2}%
-\contentsline {subsubsection}{\numberline {9.5.2.3}mode}{22}{subsubsection.9.5.2.3}%
-\contentsline {subsubsection}{\numberline {9.5.2.4}offset}{22}{subsubsection.9.5.2.4}%
-\contentsline {subsubsection}{\numberline {9.5.2.5}ref\_cnt}{22}{subsubsection.9.5.2.5}%
-\contentsline {section}{\numberline {9.6}Node Struct Reference}{22}{section.9.6}%
-\contentsline {subsection}{\numberline {9.6.1}Detailed Description}{22}{subsection.9.6.1}%
-\contentsline {subsection}{\numberline {9.6.2}Field Documentation}{23}{subsection.9.6.2}%
-\contentsline {subsubsection}{\numberline {9.6.2.1}next}{23}{subsubsection.9.6.2.1}%
-\contentsline {subsubsection}{\numberline {9.6.2.2}process}{23}{subsubsection.9.6.2.2}%
-\contentsline {section}{\numberline {9.7}parsed\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}command Struct Reference}{23}{section.9.7}%
-\contentsline {subsection}{\numberline {9.7.1}Detailed Description}{23}{subsection.9.7.1}%
-\contentsline {subsection}{\numberline {9.7.2}Field Documentation}{23}{subsection.9.7.2}%
-\contentsline {subsubsection}{\numberline {9.7.2.1}commands}{23}{subsubsection.9.7.2.1}%
-\contentsline {subsubsection}{\numberline {9.7.2.2}is\_background}{23}{subsubsection.9.7.2.2}%
-\contentsline {subsubsection}{\numberline {9.7.2.3}is\_file\_append}{24}{subsubsection.9.7.2.3}%
-\contentsline {subsubsection}{\numberline {9.7.2.4}num\_commands}{24}{subsubsection.9.7.2.4}%
-\contentsline {subsubsection}{\numberline {9.7.2.5}stdin\_file}{24}{subsubsection.9.7.2.5}%
-\contentsline {subsubsection}{\numberline {9.7.2.6}stdout\_file}{24}{subsubsection.9.7.2.6}%
-\contentsline {section}{\numberline {9.8}pcb\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{24}{section.9.8}%
-\contentsline {subsection}{\numberline {9.8.1}Detailed Description}{25}{subsection.9.8.1}%
-\contentsline {subsection}{\numberline {9.8.2}Field Documentation}{25}{subsection.9.8.2}%
-\contentsline {subsubsection}{\numberline {9.8.2.1}argv}{25}{subsubsection.9.8.2.1}%
-\contentsline {subsubsection}{\numberline {9.8.2.2}bg\_done}{25}{subsubsection.9.8.2.2}%
-\contentsline {subsubsection}{\numberline {9.8.2.3}child\_pids}{25}{subsubsection.9.8.2.3}%
-\contentsline {subsubsection}{\numberline {9.8.2.4}exit\_status}{26}{subsubsection.9.8.2.4}%
-\contentsline {subsubsection}{\numberline {9.8.2.5}handle}{26}{subsubsection.9.8.2.5}%
-\contentsline {subsubsection}{\numberline {9.8.2.6}input\_fd}{26}{subsubsection.9.8.2.6}%
-\contentsline {subsubsection}{\numberline {9.8.2.7}job\_num}{26}{subsubsection.9.8.2.7}%
-\contentsline {subsubsection}{\numberline {9.8.2.8}open\_fds}{26}{subsubsection.9.8.2.8}%
-\contentsline {subsubsection}{\numberline {9.8.2.9}output\_fd}{26}{subsubsection.9.8.2.9}%
-\contentsline {subsubsection}{\numberline {9.8.2.10}pid}{26}{subsubsection.9.8.2.10}%
-\contentsline {subsubsection}{\numberline {9.8.2.11}ppid}{26}{subsubsection.9.8.2.11}%
-\contentsline {subsubsection}{\numberline {9.8.2.12}priority}{27}{subsubsection.9.8.2.12}%
-\contentsline {subsubsection}{\numberline {9.8.2.13}processname}{27}{subsubsection.9.8.2.13}%
-\contentsline {subsubsection}{\numberline {9.8.2.14}state}{27}{subsubsection.9.8.2.14}%
-\contentsline {subsubsection}{\numberline {9.8.2.15}statechanged}{27}{subsubsection.9.8.2.15}%
-\contentsline {subsubsection}{\numberline {9.8.2.16}term\_signal}{27}{subsubsection.9.8.2.16}%
-\contentsline {subsubsection}{\numberline {9.8.2.17}ticks\_to\_wait}{27}{subsubsection.9.8.2.17}%
-\contentsline {subsubsection}{\numberline {9.8.2.18}waiting\_for\_change}{27}{subsubsection.9.8.2.18}%
-\contentsline {subsubsection}{\numberline {9.8.2.19}waiting\_on\_pid}{28}{subsubsection.9.8.2.19}%
-\contentsline {section}{\numberline {9.9}PList Struct Reference}{28}{section.9.9}%
-\contentsline {subsection}{\numberline {9.9.1}Field Documentation}{28}{subsection.9.9.1}%
-\contentsline {subsubsection}{\numberline {9.9.1.1}head}{28}{subsubsection.9.9.1.1}%
-\contentsline {subsubsection}{\numberline {9.9.1.2}size}{28}{subsubsection.9.9.1.2}%
-\contentsline {section}{\numberline {9.10}PNode Struct Reference}{28}{section.9.10}%
-\contentsline {subsection}{\numberline {9.10.1}Field Documentation}{29}{subsection.9.10.1}%
-\contentsline {subsubsection}{\numberline {9.10.1.1}next}{29}{subsubsection.9.10.1.1}%
-\contentsline {subsubsection}{\numberline {9.10.1.2}priority}{29}{subsubsection.9.10.1.2}%
-\contentsline {section}{\numberline {9.11}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}fwd\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}args\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{29}{section.9.11}%
-\contentsline {subsection}{\numberline {9.11.1}Field Documentation}{29}{subsection.9.11.1}%
-\contentsline {subsubsection}{\numberline {9.11.1.1}actual\_arg}{29}{subsubsection.9.11.1.1}%
-\contentsline {subsubsection}{\numberline {9.11.1.2}actual\_routine}{29}{subsubsection.9.11.1.2}%
-\contentsline {subsubsection}{\numberline {9.11.1.3}child\_meta}{29}{subsubsection.9.11.1.3}%
-\contentsline {subsubsection}{\numberline {9.11.1.4}setup\_cond}{30}{subsubsection.9.11.1.4}%
-\contentsline {subsubsection}{\numberline {9.11.1.5}setup\_done}{30}{subsubsection.9.11.1.5}%
-\contentsline {subsubsection}{\numberline {9.11.1.6}setup\_mutex}{30}{subsubsection.9.11.1.6}%
-\contentsline {section}{\numberline {9.12}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}meta\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{30}{section.9.12}%
-\contentsline {subsection}{\numberline {9.12.1}Field Documentation}{30}{subsection.9.12.1}%
-\contentsline {subsubsection}{\numberline {9.12.1.1}meta\_mutex}{30}{subsubsection.9.12.1.1}%
-\contentsline {subsubsection}{\numberline {9.12.1.2}state}{30}{subsubsection.9.12.1.2}%
-\contentsline {subsubsection}{\numberline {9.12.1.3}suspend\_set}{30}{subsubsection.9.12.1.3}%
-\contentsline {section}{\numberline {9.13}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}signal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}args\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{31}{section.9.13}%
-\contentsline {subsection}{\numberline {9.13.1}Field Documentation}{31}{subsection.9.13.1}%
-\contentsline {subsubsection}{\numberline {9.13.1.1}ack}{31}{subsubsection.9.13.1.1}%
-\contentsline {subsubsection}{\numberline {9.13.1.2}shutup\_mutex}{31}{subsubsection.9.13.1.2}%
-\contentsline {subsubsection}{\numberline {9.13.1.3}signal}{31}{subsubsection.9.13.1.3}%
-\contentsline {section}{\numberline {9.14}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{31}{section.9.14}%
-\contentsline {subsection}{\numberline {9.14.1}Field Documentation}{31}{subsection.9.14.1}%
-\contentsline {subsubsection}{\numberline {9.14.1.1}meta}{31}{subsubsection.9.14.1.1}%
-\contentsline {subsubsection}{\numberline {9.14.1.2}thread}{31}{subsubsection.9.14.1.2}%
-\contentsline {chapter}{\numberline {10}File Documentation}{33}{chapter.10}%
-\contentsline {section}{\numberline {10.1}doc/fat.md File Reference}{33}{section.10.1}%
-\contentsline {section}{\numberline {10.2}doc/kernel.md File Reference}{33}{section.10.2}%
-\contentsline {section}{\numberline {10.3}doc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}README.md File Reference}{33}{section.10.3}%
-\contentsline {section}{\numberline {10.4}doc/scheduler.md File Reference}{33}{section.10.4}%
-\contentsline {section}{\numberline {10.5}doc/shell.md File Reference}{33}{section.10.5}%
-\contentsline {section}{\numberline {10.6}doc/system.md File Reference}{33}{section.10.6}%
-\contentsline {section}{\numberline {10.7}src/parser.h File Reference}{33}{section.10.7}%
-\contentsline {subsection}{\numberline {10.7.1}Macro Definition Documentation}{34}{subsection.10.7.1}%
-\contentsline {subsubsection}{\numberline {10.7.1.1}EXPECT\_COMMANDS}{34}{subsubsection.10.7.1.1}%
-\contentsline {subsubsection}{\numberline {10.7.1.2}EXPECT\_INPUT\_FILENAME}{34}{subsubsection.10.7.1.2}%
-\contentsline {subsubsection}{\numberline {10.7.1.3}EXPECT\_OUTPUT\_FILENAME}{34}{subsubsection.10.7.1.3}%
-\contentsline {subsubsection}{\numberline {10.7.1.4}UNEXPECTED\_AMPERSAND}{34}{subsubsection.10.7.1.4}%
-\contentsline {subsubsection}{\numberline {10.7.1.5}UNEXPECTED\_FILE\_INPUT}{34}{subsubsection.10.7.1.5}%
-\contentsline {subsubsection}{\numberline {10.7.1.6}UNEXPECTED\_FILE\_OUTPUT}{34}{subsubsection.10.7.1.6}%
-\contentsline {subsubsection}{\numberline {10.7.1.7}UNEXPECTED\_PIPELINE}{34}{subsubsection.10.7.1.7}%
-\contentsline {subsection}{\numberline {10.7.2}Function Documentation}{35}{subsection.10.7.2}%
-\contentsline {subsubsection}{\numberline {10.7.2.1}parse\_command()}{35}{subsubsection.10.7.2.1}%
-\contentsline {subsubsection}{\numberline {10.7.2.2}print\_parsed\_command()}{35}{subsubsection.10.7.2.2}%
-\contentsline {subsubsection}{\numberline {10.7.2.3}print\_parser\_errcode()}{35}{subsubsection.10.7.2.3}%
-\contentsline {section}{\numberline {10.8}parser.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{35}{section.10.8}%
-\contentsline {section}{\numberline {10.9}src/pennfat.c File Reference}{36}{section.10.9}%
-\contentsline {subsection}{\numberline {10.9.1}Function Documentation}{37}{subsection.10.9.1}%
-\contentsline {subsubsection}{\numberline {10.9.1.1}cat\_a()}{37}{subsubsection.10.9.1.1}%
-\contentsline {subsubsection}{\numberline {10.9.1.2}cat\_file\_wa()}{38}{subsubsection.10.9.1.2}%
-\contentsline {subsubsection}{\numberline {10.9.1.3}cat\_w()}{38}{subsubsection.10.9.1.3}%
-\contentsline {subsubsection}{\numberline {10.9.1.4}chmod()}{38}{subsubsection.10.9.1.4}%
-\contentsline {subsubsection}{\numberline {10.9.1.5}cp\_from\_host()}{38}{subsubsection.10.9.1.5}%
-\contentsline {subsubsection}{\numberline {10.9.1.6}cp\_to\_host()}{40}{subsubsection.10.9.1.6}%
-\contentsline {subsubsection}{\numberline {10.9.1.7}cp\_within\_fat()}{40}{subsubsection.10.9.1.7}%
-\contentsline {subsubsection}{\numberline {10.9.1.8}get\_block\_size()}{40}{subsubsection.10.9.1.8}%
-\contentsline {subsubsection}{\numberline {10.9.1.9}get\_data\_size()}{41}{subsubsection.10.9.1.9}%
-\contentsline {subsubsection}{\numberline {10.9.1.10}get\_fat\_size()}{41}{subsubsection.10.9.1.10}%
-\contentsline {subsubsection}{\numberline {10.9.1.11}get\_num\_fat\_entries()}{42}{subsubsection.10.9.1.11}%
-\contentsline {subsubsection}{\numberline {10.9.1.12}get\_offset\_size()}{42}{subsubsection.10.9.1.12}%
-\contentsline {subsubsection}{\numberline {10.9.1.13}initialize\_global\_fd\_table()}{42}{subsubsection.10.9.1.13}%
-\contentsline {subsubsection}{\numberline {10.9.1.14}int\_handler()}{42}{subsubsection.10.9.1.14}%
-\contentsline {subsubsection}{\numberline {10.9.1.15}ls()}{43}{subsubsection.10.9.1.15}%
-\contentsline {subsubsection}{\numberline {10.9.1.16}mkfs()}{43}{subsubsection.10.9.1.16}%
-\contentsline {subsubsection}{\numberline {10.9.1.17}mount()}{43}{subsubsection.10.9.1.17}%
-\contentsline {subsubsection}{\numberline {10.9.1.18}mv()}{43}{subsubsection.10.9.1.18}%
-\contentsline {subsubsection}{\numberline {10.9.1.19}prompt()}{44}{subsubsection.10.9.1.19}%
-\contentsline {subsubsection}{\numberline {10.9.1.20}read\_command()}{44}{subsubsection.10.9.1.20}%
-\contentsline {subsubsection}{\numberline {10.9.1.21}rm()}{44}{subsubsection.10.9.1.21}%
-\contentsline {subsubsection}{\numberline {10.9.1.22}touch()}{44}{subsubsection.10.9.1.22}%
-\contentsline {subsubsection}{\numberline {10.9.1.23}unmount()}{45}{subsubsection.10.9.1.23}%
-\contentsline {section}{\numberline {10.10}src/pennfat.h File Reference}{45}{section.10.10}%
-\contentsline {subsection}{\numberline {10.10.1}Macro Definition Documentation}{46}{subsection.10.10.1}%
-\contentsline {subsubsection}{\numberline {10.10.1.1}MAX\_LEN}{46}{subsubsection.10.10.1.1}%
-\contentsline {subsection}{\numberline {10.10.2}Function Documentation}{46}{subsection.10.10.2}%
-\contentsline {subsubsection}{\numberline {10.10.2.1}cat\_a()}{46}{subsubsection.10.10.2.1}%
-\contentsline {subsubsection}{\numberline {10.10.2.2}cat\_file\_wa()}{47}{subsubsection.10.10.2.2}%
-\contentsline {subsubsection}{\numberline {10.10.2.3}cat\_w()}{47}{subsubsection.10.10.2.3}%
-\contentsline {subsubsection}{\numberline {10.10.2.4}chmod()}{47}{subsubsection.10.10.2.4}%
-\contentsline {subsubsection}{\numberline {10.10.2.5}cp\_from\_host()}{47}{subsubsection.10.10.2.5}%
-\contentsline {subsubsection}{\numberline {10.10.2.6}cp\_to\_host()}{49}{subsubsection.10.10.2.6}%
-\contentsline {subsubsection}{\numberline {10.10.2.7}cp\_within\_fat()}{49}{subsubsection.10.10.2.7}%
-\contentsline {subsubsection}{\numberline {10.10.2.8}get\_block\_size()}{49}{subsubsection.10.10.2.8}%
-\contentsline {subsubsection}{\numberline {10.10.2.9}get\_data\_size()}{50}{subsubsection.10.10.2.9}%
-\contentsline {subsubsection}{\numberline {10.10.2.10}get\_fat\_size()}{50}{subsubsection.10.10.2.10}%
-\contentsline {subsubsection}{\numberline {10.10.2.11}get\_num\_fat\_entries()}{51}{subsubsection.10.10.2.11}%
-\contentsline {subsubsection}{\numberline {10.10.2.12}get\_offset\_size()}{51}{subsubsection.10.10.2.12}%
-\contentsline {subsubsection}{\numberline {10.10.2.13}initialize\_global\_fd\_table()}{51}{subsubsection.10.10.2.13}%
-\contentsline {subsubsection}{\numberline {10.10.2.14}int\_handler()}{51}{subsubsection.10.10.2.14}%
-\contentsline {subsubsection}{\numberline {10.10.2.15}ls()}{52}{subsubsection.10.10.2.15}%
-\contentsline {subsubsection}{\numberline {10.10.2.16}mkfs()}{52}{subsubsection.10.10.2.16}%
-\contentsline {subsubsection}{\numberline {10.10.2.17}mount()}{52}{subsubsection.10.10.2.17}%
-\contentsline {subsubsection}{\numberline {10.10.2.18}mv()}{52}{subsubsection.10.10.2.18}%
-\contentsline {subsubsection}{\numberline {10.10.2.19}prompt()}{53}{subsubsection.10.10.2.19}%
-\contentsline {subsubsection}{\numberline {10.10.2.20}read\_command()}{53}{subsubsection.10.10.2.20}%
-\contentsline {subsubsection}{\numberline {10.10.2.21}rm()}{53}{subsubsection.10.10.2.21}%
-\contentsline {subsubsection}{\numberline {10.10.2.22}touch()}{53}{subsubsection.10.10.2.22}%
-\contentsline {subsubsection}{\numberline {10.10.2.23}unmount()}{54}{subsubsection.10.10.2.23}%
-\contentsline {section}{\numberline {10.11}pennfat.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{54}{section.10.11}%
-\contentsline {section}{\numberline {10.12}src/pennos.c File Reference}{55}{section.10.12}%
-\contentsline {subsection}{\numberline {10.12.1}Function Documentation}{55}{subsection.10.12.1}%
-\contentsline {subsubsection}{\numberline {10.12.1.1}b\_output\_redir()}{55}{subsubsection.10.12.1.1}%
-\contentsline {subsubsection}{\numberline {10.12.1.2}cancel\_and\_join()}{56}{subsubsection.10.12.1.2}%
-\contentsline {subsubsection}{\numberline {10.12.1.3}main()}{56}{subsubsection.10.12.1.3}%
-\contentsline {subsubsection}{\numberline {10.12.1.4}print\_queue()}{56}{subsubsection.10.12.1.4}%
-\contentsline {subsubsection}{\numberline {10.12.1.5}scheduler()}{56}{subsubsection.10.12.1.5}%
-\contentsline {subsection}{\numberline {10.12.2}Variable Documentation}{56}{subsection.10.12.2}%
-\contentsline {subsubsection}{\numberline {10.12.2.1}priority}{56}{subsubsection.10.12.2.1}%
-\contentsline {section}{\numberline {10.13}src/pennos.h File Reference}{56}{section.10.13}%
-\contentsline {subsection}{\numberline {10.13.1}Macro Definition Documentation}{57}{subsection.10.13.1}%
-\contentsline {subsubsection}{\numberline {10.13.1.1}\_DEFAULT\_SOURCE}{57}{subsubsection.10.13.1.1}%
-\contentsline {subsubsection}{\numberline {10.13.1.2}\_POSIX\_C\_SOURCE}{57}{subsubsection.10.13.1.2}%
-\contentsline {subsubsection}{\numberline {10.13.1.3}\_XOPEN\_SOURCE}{57}{subsubsection.10.13.1.3}%
-\contentsline {subsubsection}{\numberline {10.13.1.4}MAX\_LEN}{57}{subsubsection.10.13.1.4}%
-\contentsline {subsubsection}{\numberline {10.13.1.5}PROMPT}{57}{subsubsection.10.13.1.5}%
-\contentsline {subsubsection}{\numberline {10.13.1.6}STDERR\_FILENO}{57}{subsubsection.10.13.1.6}%
-\contentsline {subsubsection}{\numberline {10.13.1.7}STDIN\_FILENO}{57}{subsubsection.10.13.1.7}%
-\contentsline {subsubsection}{\numberline {10.13.1.8}STDOUT\_FILENO}{57}{subsubsection.10.13.1.8}%
-\contentsline {subsection}{\numberline {10.13.2}Function Documentation}{57}{subsection.10.13.2}%
-\contentsline {subsubsection}{\numberline {10.13.2.1}b\_output\_redir()}{57}{subsubsection.10.13.2.1}%
-\contentsline {section}{\numberline {10.14}pennos.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{58}{section.10.14}%
-\contentsline {section}{\numberline {10.15}src/standalonefat.c File Reference}{58}{section.10.15}%
-\contentsline {subsection}{\numberline {10.15.1}Function Documentation}{59}{subsection.10.15.1}%
-\contentsline {subsubsection}{\numberline {10.15.1.1}main()}{59}{subsubsection.10.15.1.1}%
-\contentsline {section}{\numberline {10.16}src/util/array.c File Reference}{59}{section.10.16}%
-\contentsline {subsection}{\numberline {10.16.1}Function Documentation}{59}{subsection.10.16.1}%
-\contentsline {subsubsection}{\numberline {10.16.1.1}dynamic\_pid\_array\_add()}{59}{subsubsection.10.16.1.1}%
-\contentsline {subsubsection}{\numberline {10.16.1.2}dynamic\_pid\_array\_contains()}{60}{subsubsection.10.16.1.2}%
-\contentsline {subsubsection}{\numberline {10.16.1.3}dynamic\_pid\_array\_create()}{60}{subsubsection.10.16.1.3}%
-\contentsline {subsubsection}{\numberline {10.16.1.4}dynamic\_pid\_array\_destroy()}{60}{subsubsection.10.16.1.4}%
-\contentsline {subsubsection}{\numberline {10.16.1.5}dynamic\_pid\_array\_remove()}{60}{subsubsection.10.16.1.5}%
-\contentsline {section}{\numberline {10.17}src/util/array.h File Reference}{61}{section.10.17}%
-\contentsline {subsection}{\numberline {10.17.1}Function Documentation}{61}{subsection.10.17.1}%
-\contentsline {subsubsection}{\numberline {10.17.1.1}dynamic\_pid\_array\_add()}{61}{subsubsection.10.17.1.1}%
-\contentsline {subsubsection}{\numberline {10.17.1.2}dynamic\_pid\_array\_contains()}{62}{subsubsection.10.17.1.2}%
-\contentsline {subsubsection}{\numberline {10.17.1.3}dynamic\_pid\_array\_create()}{62}{subsubsection.10.17.1.3}%
-\contentsline {subsubsection}{\numberline {10.17.1.4}dynamic\_pid\_array\_destroy()}{62}{subsubsection.10.17.1.4}%
-\contentsline {subsubsection}{\numberline {10.17.1.5}dynamic\_pid\_array\_remove()}{63}{subsubsection.10.17.1.5}%
-\contentsline {section}{\numberline {10.18}array.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{63}{section.10.18}%
-\contentsline {section}{\numberline {10.19}src/util/bitmap.c File Reference}{63}{section.10.19}%
-\contentsline {subsection}{\numberline {10.19.1}Function Documentation}{64}{subsection.10.19.1}%
-\contentsline {subsubsection}{\numberline {10.19.1.1}fd\_bitmap\_clear()}{64}{subsubsection.10.19.1.1}%
-\contentsline {subsubsection}{\numberline {10.19.1.2}fd\_bitmap\_initialize()}{64}{subsubsection.10.19.1.2}%
-\contentsline {subsubsection}{\numberline {10.19.1.3}fd\_bitmap\_set()}{64}{subsubsection.10.19.1.3}%
-\contentsline {subsubsection}{\numberline {10.19.1.4}fd\_bitmap\_test()}{65}{subsubsection.10.19.1.4}%
-\contentsline {section}{\numberline {10.20}src/util/bitmap.h File Reference}{65}{section.10.20}%
-\contentsline {subsection}{\numberline {10.20.1}Macro Definition Documentation}{66}{subsection.10.20.1}%
-\contentsline {subsubsection}{\numberline {10.20.1.1}FD\_BITMAP\_BYTES}{66}{subsubsection.10.20.1.1}%
-\contentsline {subsubsection}{\numberline {10.20.1.2}FD\_BITMAP\_SIZE}{66}{subsubsection.10.20.1.2}%
-\contentsline {subsection}{\numberline {10.20.2}Function Documentation}{66}{subsection.10.20.2}%
-\contentsline {subsubsection}{\numberline {10.20.2.1}fd\_bitmap\_clear()}{66}{subsubsection.10.20.2.1}%
-\contentsline {subsubsection}{\numberline {10.20.2.2}fd\_bitmap\_initialize()}{66}{subsubsection.10.20.2.2}%
-\contentsline {subsubsection}{\numberline {10.20.2.3}fd\_bitmap\_set()}{67}{subsubsection.10.20.2.3}%
-\contentsline {subsubsection}{\numberline {10.20.2.4}fd\_bitmap\_test()}{67}{subsubsection.10.20.2.4}%
-\contentsline {section}{\numberline {10.21}bitmap.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{67}{section.10.21}%
-\contentsline {section}{\numberline {10.22}src/util/clinkedlist.c File Reference}{68}{section.10.22}%
-\contentsline {subsection}{\numberline {10.22.1}Function Documentation}{68}{subsection.10.22.1}%
-\contentsline {subsubsection}{\numberline {10.22.1.1}add\_process()}{68}{subsubsection.10.22.1.1}%
-\contentsline {subsubsection}{\numberline {10.22.1.2}add\_process\_front()}{68}{subsubsection.10.22.1.2}%
-\contentsline {subsubsection}{\numberline {10.22.1.3}find\_process()}{69}{subsubsection.10.22.1.3}%
-\contentsline {subsubsection}{\numberline {10.22.1.4}find\_process\_job\_id()}{69}{subsubsection.10.22.1.4}%
-\contentsline {subsubsection}{\numberline {10.22.1.5}init\_list()}{69}{subsubsection.10.22.1.5}%
-\contentsline {subsubsection}{\numberline {10.22.1.6}remove\_process()}{70}{subsubsection.10.22.1.6}%
-\contentsline {section}{\numberline {10.23}src/util/clinkedlist.h File Reference}{70}{section.10.23}%
-\contentsline {subsection}{\numberline {10.23.1}Typedef Documentation}{70}{subsection.10.23.1}%
-\contentsline {subsubsection}{\numberline {10.23.1.1}Node}{70}{subsubsection.10.23.1.1}%
-\contentsline {subsubsection}{\numberline {10.23.1.2}pcb\_t}{71}{subsubsection.10.23.1.2}%
-\contentsline {subsection}{\numberline {10.23.2}Function Documentation}{71}{subsection.10.23.2}%
-\contentsline {subsubsection}{\numberline {10.23.2.1}add\_process()}{71}{subsubsection.10.23.2.1}%
-\contentsline {subsubsection}{\numberline {10.23.2.2}add\_process\_front()}{71}{subsubsection.10.23.2.2}%
-\contentsline {subsubsection}{\numberline {10.23.2.3}find\_process()}{71}{subsubsection.10.23.2.3}%
-\contentsline {subsubsection}{\numberline {10.23.2.4}find\_process\_job\_id()}{72}{subsubsection.10.23.2.4}%
-\contentsline {subsubsection}{\numberline {10.23.2.5}init\_list()}{72}{subsubsection.10.23.2.5}%
-\contentsline {subsubsection}{\numberline {10.23.2.6}remove\_process()}{72}{subsubsection.10.23.2.6}%
-\contentsline {section}{\numberline {10.24}clinkedlist.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{73}{section.10.24}%
-\contentsline {section}{\numberline {10.25}src/util/error.c File Reference}{73}{section.10.25}%
-\contentsline {subsection}{\numberline {10.25.1}Function Documentation}{73}{subsection.10.25.1}%
-\contentsline {subsubsection}{\numberline {10.25.1.1}u\_perror()}{73}{subsubsection.10.25.1.1}%
-\contentsline {section}{\numberline {10.26}src/util/error.h File Reference}{74}{section.10.26}%
-\contentsline {subsection}{\numberline {10.26.1}Macro Definition Documentation}{74}{subsection.10.26.1}%
-\contentsline {subsubsection}{\numberline {10.26.1.1}EADDPROC}{74}{subsubsection.10.26.1.1}%
-\contentsline {subsubsection}{\numberline {10.26.1.2}EBITMAP}{74}{subsubsection.10.26.1.2}%
-\contentsline {subsubsection}{\numberline {10.26.1.3}EINVARG}{75}{subsubsection.10.26.1.3}%
-\contentsline {subsubsection}{\numberline {10.26.1.4}ENOARGS}{75}{subsubsection.10.26.1.4}%
-\contentsline {subsubsection}{\numberline {10.26.1.5}EPCBCREATE}{75}{subsubsection.10.26.1.5}%
-\contentsline {subsubsection}{\numberline {10.26.1.6}ETHREADCREATE}{75}{subsubsection.10.26.1.6}%
-\contentsline {subsection}{\numberline {10.26.2}Function Documentation}{75}{subsection.10.26.2}%
-\contentsline {subsubsection}{\numberline {10.26.2.1}u\_perror()}{75}{subsubsection.10.26.2.1}%
-\contentsline {subsection}{\numberline {10.26.3}Variable Documentation}{75}{subsection.10.26.3}%
-\contentsline {subsubsection}{\numberline {10.26.3.1}errno}{75}{subsubsection.10.26.3.1}%
-\contentsline {section}{\numberline {10.27}error.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{76}{section.10.27}%
-\contentsline {section}{\numberline {10.28}src/util/globals.c File Reference}{76}{section.10.28}%
-\contentsline {subsection}{\numberline {10.28.1}Variable Documentation}{76}{subsection.10.28.1}%
-\contentsline {subsubsection}{\numberline {10.28.1.1}bg\_list}{76}{subsubsection.10.28.1.1}%
-\contentsline {subsubsection}{\numberline {10.28.1.2}blocked}{77}{subsubsection.10.28.1.2}%
-\contentsline {subsubsection}{\numberline {10.28.1.3}current}{77}{subsubsection.10.28.1.3}%
-\contentsline {subsubsection}{\numberline {10.28.1.4}job\_id}{77}{subsubsection.10.28.1.4}%
-\contentsline {subsubsection}{\numberline {10.28.1.5}logfiledescriptor}{77}{subsubsection.10.28.1.5}%
-\contentsline {subsubsection}{\numberline {10.28.1.6}next\_pid}{77}{subsubsection.10.28.1.6}%
-\contentsline {subsubsection}{\numberline {10.28.1.7}processes}{77}{subsubsection.10.28.1.7}%
-\contentsline {subsubsection}{\numberline {10.28.1.8}stopped}{77}{subsubsection.10.28.1.8}%
-\contentsline {subsubsection}{\numberline {10.28.1.9}tick}{78}{subsubsection.10.28.1.9}%
-\contentsline {subsubsection}{\numberline {10.28.1.10}zombied}{78}{subsubsection.10.28.1.10}%
-\contentsline {section}{\numberline {10.29}src/util/globals.h File Reference}{78}{section.10.29}%
-\contentsline {subsection}{\numberline {10.29.1}Variable Documentation}{78}{subsection.10.29.1}%
-\contentsline {subsubsection}{\numberline {10.29.1.1}bg\_list}{78}{subsubsection.10.29.1.1}%
-\contentsline {subsubsection}{\numberline {10.29.1.2}blocked}{78}{subsubsection.10.29.1.2}%
-\contentsline {subsubsection}{\numberline {10.29.1.3}current}{79}{subsubsection.10.29.1.3}%
-\contentsline {subsubsection}{\numberline {10.29.1.4}job\_id}{79}{subsubsection.10.29.1.4}%
-\contentsline {subsubsection}{\numberline {10.29.1.5}logfiledescriptor}{79}{subsubsection.10.29.1.5}%
-\contentsline {subsubsection}{\numberline {10.29.1.6}next\_pid}{79}{subsubsection.10.29.1.6}%
-\contentsline {subsubsection}{\numberline {10.29.1.7}processes}{79}{subsubsection.10.29.1.7}%
-\contentsline {subsubsection}{\numberline {10.29.1.8}stopped}{79}{subsubsection.10.29.1.8}%
-\contentsline {subsubsection}{\numberline {10.29.1.9}tick}{79}{subsubsection.10.29.1.9}%
-\contentsline {subsubsection}{\numberline {10.29.1.10}zombied}{80}{subsubsection.10.29.1.10}%
-\contentsline {section}{\numberline {10.30}globals.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{80}{section.10.30}%
-\contentsline {section}{\numberline {10.31}src/util/kernel.c File Reference}{80}{section.10.31}%
-\contentsline {subsection}{\numberline {10.31.1}Function Documentation}{80}{subsection.10.31.1}%
-\contentsline {subsubsection}{\numberline {10.31.1.1}k\_proc\_cleanup()}{80}{subsubsection.10.31.1.1}%
-\contentsline {subsubsection}{\numberline {10.31.1.2}k\_proc\_create()}{81}{subsubsection.10.31.1.2}%
-\contentsline {section}{\numberline {10.32}src/util/kernel.h File Reference}{81}{section.10.32}%
-\contentsline {subsection}{\numberline {10.32.1}Macro Definition Documentation}{82}{subsection.10.32.1}%
-\contentsline {subsubsection}{\numberline {10.32.1.1}P\_SIGCONT}{82}{subsubsection.10.32.1.1}%
-\contentsline {subsubsection}{\numberline {10.32.1.2}P\_SIGSTOP}{82}{subsubsection.10.32.1.2}%
-\contentsline {subsubsection}{\numberline {10.32.1.3}P\_SIGTER}{82}{subsubsection.10.32.1.3}%
-\contentsline {subsection}{\numberline {10.32.2}Typedef Documentation}{82}{subsection.10.32.2}%
-\contentsline {subsubsection}{\numberline {10.32.2.1}pcb\_t}{82}{subsubsection.10.32.2.1}%
-\contentsline {subsection}{\numberline {10.32.3}Enumeration Type Documentation}{82}{subsection.10.32.3}%
-\contentsline {subsubsection}{\numberline {10.32.3.1}process\_state\_t}{82}{subsubsection.10.32.3.1}%
-\contentsline {subsection}{\numberline {10.32.4}Function Documentation}{83}{subsection.10.32.4}%
-\contentsline {subsubsection}{\numberline {10.32.4.1}k\_proc\_cleanup()}{83}{subsubsection.10.32.4.1}%
-\contentsline {subsubsection}{\numberline {10.32.4.2}k\_proc\_create()}{83}{subsubsection.10.32.4.2}%
-\contentsline {section}{\numberline {10.33}kernel.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{83}{section.10.33}%
-\contentsline {section}{\numberline {10.34}src/util/pennfat\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kernel.c File Reference}{84}{section.10.34}%
-\contentsline {subsection}{\numberline {10.34.1}Function Documentation}{86}{subsection.10.34.1}%
-\contentsline {subsubsection}{\numberline {10.34.1.1}create\_directory\_entry()}{86}{subsubsection.10.34.1.1}%
-\contentsline {subsubsection}{\numberline {10.34.1.2}create\_file\_descriptor()}{87}{subsubsection.10.34.1.2}%
-\contentsline {subsubsection}{\numberline {10.34.1.3}does\_file\_exist()}{87}{subsubsection.10.34.1.3}%
-\contentsline {subsubsection}{\numberline {10.34.1.4}does\_file\_exist2()}{87}{subsubsection.10.34.1.4}%
-\contentsline {subsubsection}{\numberline {10.34.1.5}extend\_fat()}{88}{subsubsection.10.34.1.5}%
-\contentsline {subsubsection}{\numberline {10.34.1.6}formatTime()}{88}{subsubsection.10.34.1.6}%
-\contentsline {subsubsection}{\numberline {10.34.1.7}generate\_permission()}{88}{subsubsection.10.34.1.7}%
-\contentsline {subsubsection}{\numberline {10.34.1.8}get\_file\_descriptor()}{88}{subsubsection.10.34.1.8}%
-\contentsline {subsubsection}{\numberline {10.34.1.9}get\_first\_empty\_fat\_index()}{88}{subsubsection.10.34.1.9}%
-\contentsline {subsubsection}{\numberline {10.34.1.10}is\_file\_name\_valid()}{89}{subsubsection.10.34.1.10}%
-\contentsline {subsubsection}{\numberline {10.34.1.11}k\_change\_mode()}{89}{subsubsection.10.34.1.11}%
-\contentsline {subsubsection}{\numberline {10.34.1.12}k\_close()}{89}{subsubsection.10.34.1.12}%
-\contentsline {subsubsection}{\numberline {10.34.1.13}k\_count\_fd\_num()}{90}{subsubsection.10.34.1.13}%
-\contentsline {subsubsection}{\numberline {10.34.1.14}k\_cp\_from\_host()}{90}{subsubsection.10.34.1.14}%
-\contentsline {subsubsection}{\numberline {10.34.1.15}k\_cp\_to\_host()}{90}{subsubsection.10.34.1.15}%
-\contentsline {subsubsection}{\numberline {10.34.1.16}k\_cp\_within\_fat()}{91}{subsubsection.10.34.1.16}%
-\contentsline {subsubsection}{\numberline {10.34.1.17}k\_get\_fname\_from\_fd()}{91}{subsubsection.10.34.1.17}%
-\contentsline {subsubsection}{\numberline {10.34.1.18}k\_ls()}{91}{subsubsection.10.34.1.18}%
-\contentsline {subsubsection}{\numberline {10.34.1.19}k\_lseek()}{92}{subsubsection.10.34.1.19}%
-\contentsline {subsubsection}{\numberline {10.34.1.20}k\_open()}{92}{subsubsection.10.34.1.20}%
-\contentsline {subsubsection}{\numberline {10.34.1.21}k\_read()}{93}{subsubsection.10.34.1.21}%
-\contentsline {subsubsection}{\numberline {10.34.1.22}k\_read\_all()}{93}{subsubsection.10.34.1.22}%
-\contentsline {subsubsection}{\numberline {10.34.1.23}k\_rename()}{94}{subsubsection.10.34.1.23}%
-\contentsline {subsubsection}{\numberline {10.34.1.24}k\_unlink()}{94}{subsubsection.10.34.1.24}%
-\contentsline {subsubsection}{\numberline {10.34.1.25}k\_update\_timestamp()}{94}{subsubsection.10.34.1.25}%
-\contentsline {subsubsection}{\numberline {10.34.1.26}k\_write()}{95}{subsubsection.10.34.1.26}%
-\contentsline {subsubsection}{\numberline {10.34.1.27}lseek\_to\_root\_directory()}{95}{subsubsection.10.34.1.27}%
-\contentsline {subsubsection}{\numberline {10.34.1.28}move\_to\_open\_de()}{95}{subsubsection.10.34.1.28}%
-\contentsline {subsubsection}{\numberline {10.34.1.29}update\_directory\_entry\_after\_write()}{95}{subsubsection.10.34.1.29}%
-\contentsline {subsubsection}{\numberline {10.34.1.30}write\_one\_byte\_in\_while()}{96}{subsubsection.10.34.1.30}%
-\contentsline {subsubsection}{\numberline {10.34.1.31}zero\_out\_helper()}{96}{subsubsection.10.34.1.31}%
-\contentsline {subsection}{\numberline {10.34.2}Variable Documentation}{96}{subsection.10.34.2}%
-\contentsline {subsubsection}{\numberline {10.34.2.1}block\_size}{96}{subsubsection.10.34.2.1}%
-\contentsline {subsubsection}{\numberline {10.34.2.2}data\_size}{96}{subsubsection.10.34.2.2}%
-\contentsline {subsubsection}{\numberline {10.34.2.3}fat}{96}{subsubsection.10.34.2.3}%
-\contentsline {subsubsection}{\numberline {10.34.2.4}fat\_size}{96}{subsubsection.10.34.2.4}%
-\contentsline {subsubsection}{\numberline {10.34.2.5}fd\_counter}{96}{subsubsection.10.34.2.5}%
-\contentsline {subsubsection}{\numberline {10.34.2.6}fs\_fd}{97}{subsubsection.10.34.2.6}%
-\contentsline {subsubsection}{\numberline {10.34.2.7}global\_fd\_table}{97}{subsubsection.10.34.2.7}%
-\contentsline {subsubsection}{\numberline {10.34.2.8}num\_fat\_entries}{97}{subsubsection.10.34.2.8}%
-\contentsline {section}{\numberline {10.35}src/util/pennfat\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kernel.h File Reference}{97}{section.10.35}%
-\contentsline {subsection}{\numberline {10.35.1}Macro Definition Documentation}{100}{subsection.10.35.1}%
-\contentsline {subsubsection}{\numberline {10.35.1.1}F\_APPEND}{100}{subsubsection.10.35.1.1}%
-\contentsline {subsubsection}{\numberline {10.35.1.2}F\_READ}{100}{subsubsection.10.35.1.2}%
-\contentsline {subsubsection}{\numberline {10.35.1.3}F\_WRITE}{100}{subsubsection.10.35.1.3}%
-\contentsline {subsubsection}{\numberline {10.35.1.4}FILE\_DELETED}{100}{subsubsection.10.35.1.4}%
-\contentsline {subsubsection}{\numberline {10.35.1.5}FILE\_IN\_USE}{100}{subsubsection.10.35.1.5}%
-\contentsline {subsubsection}{\numberline {10.35.1.6}FILE\_NOT\_FOUND}{100}{subsubsection.10.35.1.6}%
-\contentsline {subsubsection}{\numberline {10.35.1.7}FS\_NOT\_MOUNTED}{101}{subsubsection.10.35.1.7}%
-\contentsline {subsubsection}{\numberline {10.35.1.8}INVALID\_FILE\_DESCRIPTOR}{101}{subsubsection.10.35.1.8}%
-\contentsline {subsubsection}{\numberline {10.35.1.9}INVALID\_FILE\_NAME}{101}{subsubsection.10.35.1.9}%
-\contentsline {subsubsection}{\numberline {10.35.1.10}INVALID\_PARAMETERS}{101}{subsubsection.10.35.1.10}%
-\contentsline {subsubsection}{\numberline {10.35.1.11}MAX\_FD\_NUM}{101}{subsubsection.10.35.1.11}%
-\contentsline {subsubsection}{\numberline {10.35.1.12}MULTIPLE\_F\_WRITE}{101}{subsubsection.10.35.1.12}%
-\contentsline {subsubsection}{\numberline {10.35.1.13}SYSTEM\_ERROR}{101}{subsubsection.10.35.1.13}%
-\contentsline {subsubsection}{\numberline {10.35.1.14}WRONG\_PERMISSION}{101}{subsubsection.10.35.1.14}%
-\contentsline {subsection}{\numberline {10.35.2}Enumeration Type Documentation}{101}{subsection.10.35.2}%
-\contentsline {subsubsection}{\numberline {10.35.2.1}Whence}{101}{subsubsection.10.35.2.1}%
-\contentsline {subsection}{\numberline {10.35.3}Function Documentation}{102}{subsection.10.35.3}%
-\contentsline {subsubsection}{\numberline {10.35.3.1}create\_directory\_entry()}{102}{subsubsection.10.35.3.1}%
-\contentsline {subsubsection}{\numberline {10.35.3.2}create\_file\_descriptor()}{102}{subsubsection.10.35.3.2}%
-\contentsline {subsubsection}{\numberline {10.35.3.3}does\_file\_exist()}{103}{subsubsection.10.35.3.3}%
-\contentsline {subsubsection}{\numberline {10.35.3.4}does\_file\_exist2()}{103}{subsubsection.10.35.3.4}%
-\contentsline {subsubsection}{\numberline {10.35.3.5}extend\_fat()}{103}{subsubsection.10.35.3.5}%
-\contentsline {subsubsection}{\numberline {10.35.3.6}get\_file\_descriptor()}{103}{subsubsection.10.35.3.6}%
-\contentsline {subsubsection}{\numberline {10.35.3.7}get\_first\_empty\_fat\_index()}{104}{subsubsection.10.35.3.7}%
-\contentsline {subsubsection}{\numberline {10.35.3.8}is\_file\_name\_valid()}{104}{subsubsection.10.35.3.8}%
-\contentsline {subsubsection}{\numberline {10.35.3.9}k\_change\_mode()}{104}{subsubsection.10.35.3.9}%
-\contentsline {subsubsection}{\numberline {10.35.3.10}k\_close()}{105}{subsubsection.10.35.3.10}%
-\contentsline {subsubsection}{\numberline {10.35.3.11}k\_count\_fd\_num()}{105}{subsubsection.10.35.3.11}%
-\contentsline {subsubsection}{\numberline {10.35.3.12}k\_cp\_from\_host()}{105}{subsubsection.10.35.3.12}%
-\contentsline {subsubsection}{\numberline {10.35.3.13}k\_cp\_to\_host()}{106}{subsubsection.10.35.3.13}%
-\contentsline {subsubsection}{\numberline {10.35.3.14}k\_cp\_within\_fat()}{106}{subsubsection.10.35.3.14}%
-\contentsline {subsubsection}{\numberline {10.35.3.15}k\_get\_fname\_from\_fd()}{106}{subsubsection.10.35.3.15}%
-\contentsline {subsubsection}{\numberline {10.35.3.16}k\_ls()}{107}{subsubsection.10.35.3.16}%
-\contentsline {subsubsection}{\numberline {10.35.3.17}k\_lseek()}{107}{subsubsection.10.35.3.17}%
-\contentsline {subsubsection}{\numberline {10.35.3.18}k\_open()}{107}{subsubsection.10.35.3.18}%
-\contentsline {subsubsection}{\numberline {10.35.3.19}k\_read()}{108}{subsubsection.10.35.3.19}%
-\contentsline {subsubsection}{\numberline {10.35.3.20}k\_read\_all()}{109}{subsubsection.10.35.3.20}%
-\contentsline {subsubsection}{\numberline {10.35.3.21}k\_rename()}{109}{subsubsection.10.35.3.21}%
-\contentsline {subsubsection}{\numberline {10.35.3.22}k\_unlink()}{109}{subsubsection.10.35.3.22}%
-\contentsline {subsubsection}{\numberline {10.35.3.23}k\_update\_timestamp()}{110}{subsubsection.10.35.3.23}%
-\contentsline {subsubsection}{\numberline {10.35.3.24}k\_write()}{110}{subsubsection.10.35.3.24}%
-\contentsline {subsubsection}{\numberline {10.35.3.25}lseek\_to\_root\_directory()}{110}{subsubsection.10.35.3.25}%
-\contentsline {subsubsection}{\numberline {10.35.3.26}move\_to\_open\_de()}{110}{subsubsection.10.35.3.26}%
-\contentsline {subsection}{\numberline {10.35.4}Variable Documentation}{111}{subsection.10.35.4}%
-\contentsline {subsubsection}{\numberline {10.35.4.1}block\_size}{111}{subsubsection.10.35.4.1}%
-\contentsline {subsubsection}{\numberline {10.35.4.2}data\_size}{111}{subsubsection.10.35.4.2}%
-\contentsline {subsubsection}{\numberline {10.35.4.3}fat}{111}{subsubsection.10.35.4.3}%
-\contentsline {subsubsection}{\numberline {10.35.4.4}fat\_size}{111}{subsubsection.10.35.4.4}%
-\contentsline {subsubsection}{\numberline {10.35.4.5}fs\_fd}{111}{subsubsection.10.35.4.5}%
-\contentsline {subsubsection}{\numberline {10.35.4.6}global\_fd\_table}{111}{subsubsection.10.35.4.6}%
-\contentsline {subsubsection}{\numberline {10.35.4.7}num\_fat\_entries}{112}{subsubsection.10.35.4.7}%
-\contentsline {section}{\numberline {10.36}pennfat\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kernel.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{112}{section.10.36}%
-\contentsline {section}{\numberline {10.37}src/util/prioritylist.c File Reference}{113}{section.10.37}%
-\contentsline {subsection}{\numberline {10.37.1}Function Documentation}{114}{subsection.10.37.1}%
-\contentsline {subsubsection}{\numberline {10.37.1.1}add\_priority()}{114}{subsubsection.10.37.1.1}%
-\contentsline {subsubsection}{\numberline {10.37.1.2}init\_priority()}{114}{subsubsection.10.37.1.2}%
-\contentsline {subsubsection}{\numberline {10.37.1.3}remove\_priority()}{114}{subsubsection.10.37.1.3}%
-\contentsline {section}{\numberline {10.38}src/util/prioritylist.h File Reference}{115}{section.10.38}%
-\contentsline {subsection}{\numberline {10.38.1}Typedef Documentation}{115}{subsection.10.38.1}%
-\contentsline {subsubsection}{\numberline {10.38.1.1}PNode}{115}{subsubsection.10.38.1.1}%
-\contentsline {subsection}{\numberline {10.38.2}Function Documentation}{115}{subsection.10.38.2}%
-\contentsline {subsubsection}{\numberline {10.38.2.1}add\_priority()}{115}{subsubsection.10.38.2.1}%
-\contentsline {subsubsection}{\numberline {10.38.2.2}init\_priority()}{116}{subsubsection.10.38.2.2}%
-\contentsline {subsubsection}{\numberline {10.38.2.3}remove\_priority()}{116}{subsubsection.10.38.2.3}%
-\contentsline {section}{\numberline {10.39}prioritylist.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{116}{section.10.39}%
-\contentsline {section}{\numberline {10.40}src/util/shellbuiltins.c File Reference}{117}{section.10.40}%
-\contentsline {subsection}{\numberline {10.40.1}Function Documentation}{118}{subsection.10.40.1}%
-\contentsline {subsubsection}{\numberline {10.40.1.1}b\_background\_poll()}{118}{subsubsection.10.40.1.1}%
-\contentsline {subsubsection}{\numberline {10.40.1.2}b\_bg()}{118}{subsubsection.10.40.1.2}%
-\contentsline {subsubsection}{\numberline {10.40.1.3}b\_busy()}{118}{subsubsection.10.40.1.3}%
-\contentsline {subsubsection}{\numberline {10.40.1.4}b\_cat()}{119}{subsubsection.10.40.1.4}%
-\contentsline {subsubsection}{\numberline {10.40.1.5}b\_chmod()}{119}{subsubsection.10.40.1.5}%
-\contentsline {subsubsection}{\numberline {10.40.1.6}b\_clear()}{119}{subsubsection.10.40.1.6}%
-\contentsline {subsubsection}{\numberline {10.40.1.7}b\_cp()}{119}{subsubsection.10.40.1.7}%
-\contentsline {subsubsection}{\numberline {10.40.1.8}b\_echo()}{120}{subsubsection.10.40.1.8}%
-\contentsline {subsubsection}{\numberline {10.40.1.9}b\_fg()}{120}{subsubsection.10.40.1.9}%
-\contentsline {subsubsection}{\numberline {10.40.1.10}b\_jobs()}{120}{subsubsection.10.40.1.10}%
-\contentsline {subsubsection}{\numberline {10.40.1.11}b\_kill()}{120}{subsubsection.10.40.1.11}%
-\contentsline {subsubsection}{\numberline {10.40.1.12}b\_logout()}{121}{subsubsection.10.40.1.12}%
-\contentsline {subsubsection}{\numberline {10.40.1.13}b\_ls()}{121}{subsubsection.10.40.1.13}%
-\contentsline {subsubsection}{\numberline {10.40.1.14}b\_man()}{121}{subsubsection.10.40.1.14}%
-\contentsline {subsubsection}{\numberline {10.40.1.15}b\_mv()}{121}{subsubsection.10.40.1.15}%
-\contentsline {subsubsection}{\numberline {10.40.1.16}b\_nice()}{121}{subsubsection.10.40.1.16}%
-\contentsline {subsubsection}{\numberline {10.40.1.17}b\_nice\_pid()}{122}{subsubsection.10.40.1.17}%
-\contentsline {subsubsection}{\numberline {10.40.1.18}b\_orphan\_child()}{122}{subsubsection.10.40.1.18}%
-\contentsline {subsubsection}{\numberline {10.40.1.19}b\_orphanify()}{122}{subsubsection.10.40.1.19}%
-\contentsline {subsubsection}{\numberline {10.40.1.20}b\_ps()}{122}{subsubsection.10.40.1.20}%
-\contentsline {subsubsection}{\numberline {10.40.1.21}b\_rm()}{122}{subsubsection.10.40.1.21}%
-\contentsline {subsubsection}{\numberline {10.40.1.22}b\_sleep()}{123}{subsubsection.10.40.1.22}%
-\contentsline {subsubsection}{\numberline {10.40.1.23}b\_touch()}{123}{subsubsection.10.40.1.23}%
-\contentsline {subsubsection}{\numberline {10.40.1.24}b\_zombie\_child()}{123}{subsubsection.10.40.1.24}%
-\contentsline {subsubsection}{\numberline {10.40.1.25}b\_zombify()}{123}{subsubsection.10.40.1.25}%
-\contentsline {section}{\numberline {10.41}src/util/shellbuiltins.h File Reference}{123}{section.10.41}%
-\contentsline {subsection}{\numberline {10.41.1}Function Documentation}{125}{subsection.10.41.1}%
-\contentsline {subsubsection}{\numberline {10.41.1.1}b\_background\_poll()}{125}{subsubsection.10.41.1.1}%
-\contentsline {subsubsection}{\numberline {10.41.1.2}b\_bg()}{125}{subsubsection.10.41.1.2}%
-\contentsline {subsubsection}{\numberline {10.41.1.3}b\_busy()}{125}{subsubsection.10.41.1.3}%
-\contentsline {subsubsection}{\numberline {10.41.1.4}b\_cat()}{125}{subsubsection.10.41.1.4}%
-\contentsline {subsubsection}{\numberline {10.41.1.5}b\_chmod()}{125}{subsubsection.10.41.1.5}%
-\contentsline {subsubsection}{\numberline {10.41.1.6}b\_clear()}{126}{subsubsection.10.41.1.6}%
-\contentsline {subsubsection}{\numberline {10.41.1.7}b\_cp()}{126}{subsubsection.10.41.1.7}%
-\contentsline {subsubsection}{\numberline {10.41.1.8}b\_echo()}{126}{subsubsection.10.41.1.8}%
-\contentsline {subsubsection}{\numberline {10.41.1.9}b\_fg()}{126}{subsubsection.10.41.1.9}%
-\contentsline {subsubsection}{\numberline {10.41.1.10}b\_jobs()}{127}{subsubsection.10.41.1.10}%
-\contentsline {subsubsection}{\numberline {10.41.1.11}b\_kill()}{127}{subsubsection.10.41.1.11}%
-\contentsline {subsubsection}{\numberline {10.41.1.12}b\_logout()}{127}{subsubsection.10.41.1.12}%
-\contentsline {subsubsection}{\numberline {10.41.1.13}b\_ls()}{127}{subsubsection.10.41.1.13}%
-\contentsline {subsubsection}{\numberline {10.41.1.14}b\_man()}{127}{subsubsection.10.41.1.14}%
-\contentsline {subsubsection}{\numberline {10.41.1.15}b\_mv()}{128}{subsubsection.10.41.1.15}%
-\contentsline {subsubsection}{\numberline {10.41.1.16}b\_nice()}{128}{subsubsection.10.41.1.16}%
-\contentsline {subsubsection}{\numberline {10.41.1.17}b\_nice\_pid()}{128}{subsubsection.10.41.1.17}%
-\contentsline {subsubsection}{\numberline {10.41.1.18}b\_orphan\_child()}{128}{subsubsection.10.41.1.18}%
-\contentsline {subsubsection}{\numberline {10.41.1.19}b\_orphanify()}{128}{subsubsection.10.41.1.19}%
-\contentsline {subsubsection}{\numberline {10.41.1.20}b\_ps()}{129}{subsubsection.10.41.1.20}%
-\contentsline {subsubsection}{\numberline {10.41.1.21}b\_rm()}{129}{subsubsection.10.41.1.21}%
-\contentsline {subsubsection}{\numberline {10.41.1.22}b\_sleep()}{129}{subsubsection.10.41.1.22}%
-\contentsline {subsubsection}{\numberline {10.41.1.23}b\_touch()}{129}{subsubsection.10.41.1.23}%
-\contentsline {subsubsection}{\numberline {10.41.1.24}b\_zombie\_child()}{129}{subsubsection.10.41.1.24}%
-\contentsline {subsubsection}{\numberline {10.41.1.25}b\_zombify()}{130}{subsubsection.10.41.1.25}%
-\contentsline {section}{\numberline {10.42}shellbuiltins.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{130}{section.10.42}%
-\contentsline {section}{\numberline {10.43}src/util/spthread.c File Reference}{131}{section.10.43}%
-\contentsline {subsection}{\numberline {10.43.1}Macro Definition Documentation}{132}{subsection.10.43.1}%
-\contentsline {subsubsection}{\numberline {10.43.1.1}\_GNU\_SOURCE}{132}{subsubsection.10.43.1.1}%
-\contentsline {subsubsection}{\numberline {10.43.1.2}\_XOPEN\_SOURCE}{132}{subsubsection.10.43.1.2}%
-\contentsline {subsubsection}{\numberline {10.43.1.3}MILISEC\_IN\_NANO}{132}{subsubsection.10.43.1.3}%
-\contentsline {subsubsection}{\numberline {10.43.1.4}SPTHREAD\_RUNNING\_STATE}{132}{subsubsection.10.43.1.4}%
-\contentsline {subsubsection}{\numberline {10.43.1.5}SPTHREAD\_SIG\_CONTINUE}{132}{subsubsection.10.43.1.5}%
-\contentsline {subsubsection}{\numberline {10.43.1.6}SPTHREAD\_SIG\_SUSPEND}{132}{subsubsection.10.43.1.6}%
-\contentsline {subsubsection}{\numberline {10.43.1.7}SPTHREAD\_SUSPENDED\_STATE}{132}{subsubsection.10.43.1.7}%
-\contentsline {subsubsection}{\numberline {10.43.1.8}SPTHREAD\_TERMINATED\_STATE}{132}{subsubsection.10.43.1.8}%
-\contentsline {subsection}{\numberline {10.43.2}Typedef Documentation}{132}{subsection.10.43.2}%
-\contentsline {subsubsection}{\numberline {10.43.2.1}pthread\_fn}{132}{subsubsection.10.43.2.1}%
-\contentsline {subsubsection}{\numberline {10.43.2.2}spthread\_fwd\_args}{133}{subsubsection.10.43.2.2}%
-\contentsline {subsubsection}{\numberline {10.43.2.3}spthread\_meta\_t}{133}{subsubsection.10.43.2.3}%
-\contentsline {subsubsection}{\numberline {10.43.2.4}spthread\_signal\_args}{133}{subsubsection.10.43.2.4}%
-\contentsline {subsection}{\numberline {10.43.3}Function Documentation}{133}{subsection.10.43.3}%
-\contentsline {subsubsection}{\numberline {10.43.3.1}spthread\_cancel()}{133}{subsubsection.10.43.3.1}%
-\contentsline {subsubsection}{\numberline {10.43.3.2}spthread\_continue()}{133}{subsubsection.10.43.3.2}%
-\contentsline {subsubsection}{\numberline {10.43.3.3}spthread\_create()}{133}{subsubsection.10.43.3.3}%
-\contentsline {subsubsection}{\numberline {10.43.3.4}spthread\_exit()}{133}{subsubsection.10.43.3.4}%
-\contentsline {subsubsection}{\numberline {10.43.3.5}spthread\_join()}{133}{subsubsection.10.43.3.5}%
-\contentsline {subsubsection}{\numberline {10.43.3.6}spthread\_self()}{134}{subsubsection.10.43.3.6}%
-\contentsline {subsubsection}{\numberline {10.43.3.7}spthread\_suspend()}{134}{subsubsection.10.43.3.7}%
-\contentsline {subsubsection}{\numberline {10.43.3.8}spthread\_suspend\_self()}{134}{subsubsection.10.43.3.8}%
-\contentsline {section}{\numberline {10.44}src/util/spthread.h File Reference}{134}{section.10.44}%
-\contentsline {subsection}{\numberline {10.44.1}Macro Definition Documentation}{135}{subsection.10.44.1}%
-\contentsline {subsubsection}{\numberline {10.44.1.1}SIGPTHD}{135}{subsubsection.10.44.1.1}%
-\contentsline {subsection}{\numberline {10.44.2}Typedef Documentation}{135}{subsection.10.44.2}%
-\contentsline {subsubsection}{\numberline {10.44.2.1}spthread\_meta\_t}{135}{subsubsection.10.44.2.1}%
-\contentsline {subsubsection}{\numberline {10.44.2.2}spthread\_t}{135}{subsubsection.10.44.2.2}%
-\contentsline {subsection}{\numberline {10.44.3}Function Documentation}{135}{subsection.10.44.3}%
-\contentsline {subsubsection}{\numberline {10.44.3.1}spthread\_cancel()}{135}{subsubsection.10.44.3.1}%
-\contentsline {subsubsection}{\numberline {10.44.3.2}spthread\_continue()}{135}{subsubsection.10.44.3.2}%
-\contentsline {subsubsection}{\numberline {10.44.3.3}spthread\_create()}{135}{subsubsection.10.44.3.3}%
-\contentsline {subsubsection}{\numberline {10.44.3.4}spthread\_exit()}{135}{subsubsection.10.44.3.4}%
-\contentsline {subsubsection}{\numberline {10.44.3.5}spthread\_join()}{136}{subsubsection.10.44.3.5}%
-\contentsline {subsubsection}{\numberline {10.44.3.6}spthread\_self()}{136}{subsubsection.10.44.3.6}%
-\contentsline {subsubsection}{\numberline {10.44.3.7}spthread\_suspend()}{136}{subsubsection.10.44.3.7}%
-\contentsline {subsubsection}{\numberline {10.44.3.8}spthread\_suspend\_self()}{136}{subsubsection.10.44.3.8}%
-\contentsline {section}{\numberline {10.45}spthread.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{136}{section.10.45}%
-\contentsline {section}{\numberline {10.46}src/util/stress.c File Reference}{138}{section.10.46}%
-\contentsline {subsection}{\numberline {10.46.1}Function Documentation}{139}{subsection.10.46.1}%
-\contentsline {subsubsection}{\numberline {10.46.1.1}hang()}{139}{subsubsection.10.46.1.1}%
-\contentsline {subsubsection}{\numberline {10.46.1.2}nohang()}{139}{subsubsection.10.46.1.2}%
-\contentsline {subsubsection}{\numberline {10.46.1.3}recur()}{139}{subsubsection.10.46.1.3}%
-\contentsline {section}{\numberline {10.47}src/util/stress.h File Reference}{139}{section.10.47}%
-\contentsline {subsection}{\numberline {10.47.1}Function Documentation}{139}{subsection.10.47.1}%
-\contentsline {subsubsection}{\numberline {10.47.1.1}hang()}{139}{subsubsection.10.47.1.1}%
-\contentsline {subsubsection}{\numberline {10.47.1.2}nohang()}{140}{subsubsection.10.47.1.2}%
-\contentsline {subsubsection}{\numberline {10.47.1.3}recur()}{140}{subsubsection.10.47.1.3}%
-\contentsline {section}{\numberline {10.48}stress.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{140}{section.10.48}%
-\contentsline {section}{\numberline {10.49}src/util/sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.c File Reference}{140}{section.10.49}%
-\contentsline {subsection}{\numberline {10.49.1}Function Documentation}{142}{subsection.10.49.1}%
-\contentsline {subsubsection}{\numberline {10.49.1.1}duplicate\_argv()}{142}{subsubsection.10.49.1.1}%
-\contentsline {subsubsection}{\numberline {10.49.1.2}free\_argv()}{142}{subsubsection.10.49.1.2}%
-\contentsline {subsubsection}{\numberline {10.49.1.3}s\_bg\_wait()}{142}{subsubsection.10.49.1.3}%
-\contentsline {subsubsection}{\numberline {10.49.1.4}s\_busy()}{142}{subsubsection.10.49.1.4}%
-\contentsline {subsubsection}{\numberline {10.49.1.5}s\_change\_mode()}{142}{subsubsection.10.49.1.5}%
-\contentsline {subsubsection}{\numberline {10.49.1.6}s\_close()}{143}{subsubsection.10.49.1.6}%
-\contentsline {subsubsection}{\numberline {10.49.1.7}s\_cp\_from\_host()}{143}{subsubsection.10.49.1.7}%
-\contentsline {subsubsection}{\numberline {10.49.1.8}s\_cp\_to\_host()}{143}{subsubsection.10.49.1.8}%
-\contentsline {subsubsection}{\numberline {10.49.1.9}s\_cp\_within\_fat()}{143}{subsubsection.10.49.1.9}%
-\contentsline {subsubsection}{\numberline {10.49.1.10}s\_does\_file\_exist2()}{143}{subsubsection.10.49.1.10}%
-\contentsline {subsubsection}{\numberline {10.49.1.11}s\_exit()}{143}{subsubsection.10.49.1.11}%
-\contentsline {subsubsection}{\numberline {10.49.1.12}s\_fg()}{144}{subsubsection.10.49.1.12}%
-\contentsline {subsubsection}{\numberline {10.49.1.13}s\_find\_process()}{144}{subsubsection.10.49.1.13}%
-\contentsline {subsubsection}{\numberline {10.49.1.14}s\_function\_from\_string()}{144}{subsubsection.10.49.1.14}%
-\contentsline {subsubsection}{\numberline {10.49.1.15}s\_get\_fname\_from\_fd()}{144}{subsubsection.10.49.1.15}%
-\contentsline {subsubsection}{\numberline {10.49.1.16}s\_kill()}{144}{subsubsection.10.49.1.16}%
-\contentsline {subsubsection}{\numberline {10.49.1.17}s\_ls()}{145}{subsubsection.10.49.1.17}%
-\contentsline {subsubsection}{\numberline {10.49.1.18}s\_lseek()}{145}{subsubsection.10.49.1.18}%
-\contentsline {subsubsection}{\numberline {10.49.1.19}s\_move\_process()}{145}{subsubsection.10.49.1.19}%
-\contentsline {subsubsection}{\numberline {10.49.1.20}s\_nice()}{145}{subsubsection.10.49.1.20}%
-\contentsline {subsubsection}{\numberline {10.49.1.21}s\_open()}{146}{subsubsection.10.49.1.21}%
-\contentsline {subsubsection}{\numberline {10.49.1.22}s\_print\_jobs()}{146}{subsubsection.10.49.1.22}%
-\contentsline {subsubsection}{\numberline {10.49.1.23}s\_print\_process()}{146}{subsubsection.10.49.1.23}%
-\contentsline {subsubsection}{\numberline {10.49.1.24}s\_read()}{147}{subsubsection.10.49.1.24}%
-\contentsline {subsubsection}{\numberline {10.49.1.25}s\_read\_all()}{147}{subsubsection.10.49.1.25}%
-\contentsline {subsubsection}{\numberline {10.49.1.26}s\_reap\_all\_child()}{147}{subsubsection.10.49.1.26}%
-\contentsline {subsubsection}{\numberline {10.49.1.27}s\_remove\_process()}{147}{subsubsection.10.49.1.27}%
-\contentsline {subsubsection}{\numberline {10.49.1.28}s\_rename()}{148}{subsubsection.10.49.1.28}%
-\contentsline {subsubsection}{\numberline {10.49.1.29}s\_sleep()}{148}{subsubsection.10.49.1.29}%
-\contentsline {subsubsection}{\numberline {10.49.1.30}s\_spawn()}{148}{subsubsection.10.49.1.30}%
-\contentsline {subsubsection}{\numberline {10.49.1.31}s\_spawn\_and\_wait()}{149}{subsubsection.10.49.1.31}%
-\contentsline {subsubsection}{\numberline {10.49.1.32}s\_spawn\_nice()}{149}{subsubsection.10.49.1.32}%
-\contentsline {subsubsection}{\numberline {10.49.1.33}s\_unlink()}{150}{subsubsection.10.49.1.33}%
-\contentsline {subsubsection}{\numberline {10.49.1.34}s\_update\_timestamp()}{150}{subsubsection.10.49.1.34}%
-\contentsline {subsubsection}{\numberline {10.49.1.35}s\_waitpid()}{150}{subsubsection.10.49.1.35}%
-\contentsline {subsubsection}{\numberline {10.49.1.36}s\_write()}{150}{subsubsection.10.49.1.36}%
-\contentsline {subsubsection}{\numberline {10.49.1.37}s\_write\_log()}{151}{subsubsection.10.49.1.37}%
-\contentsline {subsubsection}{\numberline {10.49.1.38}s\_zombie()}{151}{subsubsection.10.49.1.38}%
-\contentsline {section}{\numberline {10.50}src/util/sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.h File Reference}{151}{section.10.50}%
-\contentsline {subsection}{\numberline {10.50.1}Macro Definition Documentation}{153}{subsection.10.50.1}%
-\contentsline {subsubsection}{\numberline {10.50.1.1}P\_WIFEXITED}{153}{subsubsection.10.50.1.1}%
-\contentsline {subsubsection}{\numberline {10.50.1.2}P\_WIFSIGNALED}{153}{subsubsection.10.50.1.2}%
-\contentsline {subsubsection}{\numberline {10.50.1.3}P\_WIFSTOPPED}{153}{subsubsection.10.50.1.3}%
-\contentsline {subsubsection}{\numberline {10.50.1.4}STATUS\_EXITED}{153}{subsubsection.10.50.1.4}%
-\contentsline {subsubsection}{\numberline {10.50.1.5}STATUS\_SIGNALED}{154}{subsubsection.10.50.1.5}%
-\contentsline {subsubsection}{\numberline {10.50.1.6}STATUS\_STOPPED}{154}{subsubsection.10.50.1.6}%
-\contentsline {subsection}{\numberline {10.50.2}Enumeration Type Documentation}{154}{subsection.10.50.2}%
-\contentsline {subsubsection}{\numberline {10.50.2.1}log\_message\_t}{154}{subsubsection.10.50.2.1}%
-\contentsline {subsection}{\numberline {10.50.3}Function Documentation}{154}{subsection.10.50.3}%
-\contentsline {subsubsection}{\numberline {10.50.3.1}s\_bg\_wait()}{154}{subsubsection.10.50.3.1}%
-\contentsline {subsubsection}{\numberline {10.50.3.2}s\_busy()}{155}{subsubsection.10.50.3.2}%
-\contentsline {subsubsection}{\numberline {10.50.3.3}s\_change\_mode()}{155}{subsubsection.10.50.3.3}%
-\contentsline {subsubsection}{\numberline {10.50.3.4}s\_close()}{155}{subsubsection.10.50.3.4}%
-\contentsline {subsubsection}{\numberline {10.50.3.5}s\_cp\_from\_host()}{155}{subsubsection.10.50.3.5}%
-\contentsline {subsubsection}{\numberline {10.50.3.6}s\_cp\_to\_host()}{156}{subsubsection.10.50.3.6}%
-\contentsline {subsubsection}{\numberline {10.50.3.7}s\_cp\_within\_fat()}{156}{subsubsection.10.50.3.7}%
-\contentsline {subsubsection}{\numberline {10.50.3.8}s\_does\_file\_exist2()}{156}{subsubsection.10.50.3.8}%
-\contentsline {subsubsection}{\numberline {10.50.3.9}s\_exit()}{156}{subsubsection.10.50.3.9}%
-\contentsline {subsubsection}{\numberline {10.50.3.10}s\_fg()}{156}{subsubsection.10.50.3.10}%
-\contentsline {subsubsection}{\numberline {10.50.3.11}s\_find\_process()}{156}{subsubsection.10.50.3.11}%
-\contentsline {subsubsection}{\numberline {10.50.3.12}s\_function\_from\_string()}{157}{subsubsection.10.50.3.12}%
-\contentsline {subsubsection}{\numberline {10.50.3.13}s\_get\_fname\_from\_fd()}{157}{subsubsection.10.50.3.13}%
-\contentsline {subsubsection}{\numberline {10.50.3.14}s\_kill()}{157}{subsubsection.10.50.3.14}%
-\contentsline {subsubsection}{\numberline {10.50.3.15}s\_ls()}{157}{subsubsection.10.50.3.15}%
-\contentsline {subsubsection}{\numberline {10.50.3.16}s\_lseek()}{158}{subsubsection.10.50.3.16}%
-\contentsline {subsubsection}{\numberline {10.50.3.17}s\_move\_process()}{158}{subsubsection.10.50.3.17}%
-\contentsline {subsubsection}{\numberline {10.50.3.18}s\_nice()}{158}{subsubsection.10.50.3.18}%
-\contentsline {subsubsection}{\numberline {10.50.3.19}s\_open()}{158}{subsubsection.10.50.3.19}%
-\contentsline {subsubsection}{\numberline {10.50.3.20}s\_print\_jobs()}{159}{subsubsection.10.50.3.20}%
-\contentsline {subsubsection}{\numberline {10.50.3.21}s\_print\_process()}{159}{subsubsection.10.50.3.21}%
-\contentsline {subsubsection}{\numberline {10.50.3.22}s\_read()}{159}{subsubsection.10.50.3.22}%
-\contentsline {subsubsection}{\numberline {10.50.3.23}s\_read\_all()}{160}{subsubsection.10.50.3.23}%
-\contentsline {subsubsection}{\numberline {10.50.3.24}s\_reap\_all\_child()}{160}{subsubsection.10.50.3.24}%
-\contentsline {subsubsection}{\numberline {10.50.3.25}s\_remove\_process()}{160}{subsubsection.10.50.3.25}%
-\contentsline {subsubsection}{\numberline {10.50.3.26}s\_rename()}{160}{subsubsection.10.50.3.26}%
-\contentsline {subsubsection}{\numberline {10.50.3.27}s\_sleep()}{160}{subsubsection.10.50.3.27}%
-\contentsline {subsubsection}{\numberline {10.50.3.28}s\_spawn()}{161}{subsubsection.10.50.3.28}%
-\contentsline {subsubsection}{\numberline {10.50.3.29}s\_spawn\_and\_wait()}{161}{subsubsection.10.50.3.29}%
-\contentsline {subsubsection}{\numberline {10.50.3.30}s\_spawn\_nice()}{162}{subsubsection.10.50.3.30}%
-\contentsline {subsubsection}{\numberline {10.50.3.31}s\_unlink()}{163}{subsubsection.10.50.3.31}%
-\contentsline {subsubsection}{\numberline {10.50.3.32}s\_update\_timestamp()}{163}{subsubsection.10.50.3.32}%
-\contentsline {subsubsection}{\numberline {10.50.3.33}s\_waitpid()}{163}{subsubsection.10.50.3.33}%
-\contentsline {subsubsection}{\numberline {10.50.3.34}s\_write()}{163}{subsubsection.10.50.3.34}%
-\contentsline {subsubsection}{\numberline {10.50.3.35}s\_write\_log()}{164}{subsubsection.10.50.3.35}%
-\contentsline {subsubsection}{\numberline {10.50.3.36}s\_zombie()}{164}{subsubsection.10.50.3.36}%
-\contentsline {section}{\numberline {10.51}sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{164}{section.10.51}%
-\contentsline {section}{\numberline {10.52}test/sched-\/demo.c File Reference}{166}{section.10.52}%
-\contentsline {subsection}{\numberline {10.52.1}Macro Definition Documentation}{166}{subsection.10.52.1}%
-\contentsline {subsubsection}{\numberline {10.52.1.1}\_DEFAULT\_SOURCE}{166}{subsubsection.10.52.1.1}%
-\contentsline {subsubsection}{\numberline {10.52.1.2}\_POSIX\_C\_SOURCE}{167}{subsubsection.10.52.1.2}%
-\contentsline {subsubsection}{\numberline {10.52.1.3}\_XOPEN\_SOURCE}{167}{subsubsection.10.52.1.3}%
-\contentsline {subsubsection}{\numberline {10.52.1.4}BUF\_SIZE}{167}{subsubsection.10.52.1.4}%
-\contentsline {subsubsection}{\numberline {10.52.1.5}NUM\_THREADS}{167}{subsubsection.10.52.1.5}%
-\contentsline {subsection}{\numberline {10.52.2}Function Documentation}{167}{subsection.10.52.2}%
-\contentsline {subsubsection}{\numberline {10.52.2.1}cancel\_and\_join()}{167}{subsubsection.10.52.2.1}%
-\contentsline {subsubsection}{\numberline {10.52.2.2}main()}{167}{subsubsection.10.52.2.2}%
-\contentsline {chapter}{Index}{169}{section*.78}%
+\contentsline {chapter}{\numberline {2}Filesystem Team\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}: Aaron Tsui and Joseph Cho}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}List of Submitted Source Files for Standalone FAT\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}List of Submitted Source Files for Integrated FAT with Kernel\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Compilation Instructions\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:}{3}{section.2.3}%
+\contentsline {section}{\numberline {2.4}For Standalone FAT\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:}{3}{section.2.4}%
+\contentsline {section}{\numberline {2.5}For Integrated FAT with Kernel\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:}{4}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Overview of Work Accomplished\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:}{4}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Standalone FAT}{4}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Integrated FAT}{4}{subsection.2.6.2}%
+\contentsline {section}{\numberline {2.7}Description of Code and Code Layout\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:}{4}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Standalone FAT}{4}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}Integrated FAT}{5}{subsection.2.7.2}%
+\contentsline {chapter}{\numberline {3}kernel}{7}{chapter.3}%
+\contentsline {chapter}{\numberline {4}scheduler}{9}{chapter.4}%
+\contentsline {chapter}{\numberline {5}shell}{11}{chapter.5}%
+\contentsline {chapter}{\numberline {6}system}{13}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Data Structure Index}{15}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Data Structures}{15}{section.7.1}%
+\contentsline {chapter}{\numberline {8}File Index}{17}{chapter.8}%
+\contentsline {section}{\numberline {8.1}File List}{17}{section.8.1}%
+\contentsline {chapter}{\numberline {9}Data Structure Documentation}{19}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Circular\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}List Struct Reference}{19}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}Detailed Description}{19}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}Field Documentation}{19}{subsection.9.1.2}%
+\contentsline {subsubsection}{\numberline {9.1.2.1}head}{19}{subsubsection.9.1.2.1}%
+\contentsline {subsubsection}{\numberline {9.1.2.2}size}{19}{subsubsection.9.1.2.2}%
+\contentsline {subsubsection}{\numberline {9.1.2.3}tail}{20}{subsubsection.9.1.2.3}%
+\contentsline {section}{\numberline {9.2}directory\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}entries Struct Reference}{20}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Detailed Description}{20}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}Field Documentation}{20}{subsection.9.2.2}%
+\contentsline {subsubsection}{\numberline {9.2.2.1}firstBlock}{20}{subsubsection.9.2.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.2.2}mtime}{21}{subsubsection.9.2.2.2}%
+\contentsline {subsubsection}{\numberline {9.2.2.3}name}{21}{subsubsection.9.2.2.3}%
+\contentsline {subsubsection}{\numberline {9.2.2.4}perm}{21}{subsubsection.9.2.2.4}%
+\contentsline {subsubsection}{\numberline {9.2.2.5}reserved}{21}{subsubsection.9.2.2.5}%
+\contentsline {subsubsection}{\numberline {9.2.2.6}size}{21}{subsubsection.9.2.2.6}%
+\contentsline {subsubsection}{\numberline {9.2.2.7}type}{21}{subsubsection.9.2.2.7}%
+\contentsline {section}{\numberline {9.3}Dynamic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}PIDArray Struct Reference}{21}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}Detailed Description}{22}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Field Documentation}{22}{subsection.9.3.2}%
+\contentsline {subsubsection}{\numberline {9.3.2.1}array}{22}{subsubsection.9.3.2.1}%
+\contentsline {subsubsection}{\numberline {9.3.2.2}size}{22}{subsubsection.9.3.2.2}%
+\contentsline {subsubsection}{\numberline {9.3.2.3}used}{22}{subsubsection.9.3.2.3}%
+\contentsline {section}{\numberline {9.4}FD\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Bitmap Struct Reference}{22}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}Detailed Description}{23}{subsection.9.4.1}%
+\contentsline {subsection}{\numberline {9.4.2}Field Documentation}{23}{subsection.9.4.2}%
+\contentsline {subsubsection}{\numberline {9.4.2.1}bits}{23}{subsubsection.9.4.2.1}%
+\contentsline {section}{\numberline {9.5}file\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}descriptor\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{23}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Detailed Description}{23}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Field Documentation}{23}{subsection.9.5.2}%
+\contentsline {subsubsection}{\numberline {9.5.2.1}fd}{23}{subsubsection.9.5.2.1}%
+\contentsline {subsubsection}{\numberline {9.5.2.2}fname}{24}{subsubsection.9.5.2.2}%
+\contentsline {subsubsection}{\numberline {9.5.2.3}mode}{24}{subsubsection.9.5.2.3}%
+\contentsline {subsubsection}{\numberline {9.5.2.4}offset}{24}{subsubsection.9.5.2.4}%
+\contentsline {subsubsection}{\numberline {9.5.2.5}ref\_cnt}{24}{subsubsection.9.5.2.5}%
+\contentsline {section}{\numberline {9.6}Node Struct Reference}{24}{section.9.6}%
+\contentsline {subsection}{\numberline {9.6.1}Detailed Description}{24}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}Field Documentation}{25}{subsection.9.6.2}%
+\contentsline {subsubsection}{\numberline {9.6.2.1}next}{25}{subsubsection.9.6.2.1}%
+\contentsline {subsubsection}{\numberline {9.6.2.2}process}{25}{subsubsection.9.6.2.2}%
+\contentsline {section}{\numberline {9.7}parsed\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}command Struct Reference}{25}{section.9.7}%
+\contentsline {subsection}{\numberline {9.7.1}Detailed Description}{25}{subsection.9.7.1}%
+\contentsline {subsection}{\numberline {9.7.2}Field Documentation}{25}{subsection.9.7.2}%
+\contentsline {subsubsection}{\numberline {9.7.2.1}commands}{25}{subsubsection.9.7.2.1}%
+\contentsline {subsubsection}{\numberline {9.7.2.2}is\_background}{25}{subsubsection.9.7.2.2}%
+\contentsline {subsubsection}{\numberline {9.7.2.3}is\_file\_append}{26}{subsubsection.9.7.2.3}%
+\contentsline {subsubsection}{\numberline {9.7.2.4}num\_commands}{26}{subsubsection.9.7.2.4}%
+\contentsline {subsubsection}{\numberline {9.7.2.5}stdin\_file}{26}{subsubsection.9.7.2.5}%
+\contentsline {subsubsection}{\numberline {9.7.2.6}stdout\_file}{26}{subsubsection.9.7.2.6}%
+\contentsline {section}{\numberline {9.8}pcb\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{26}{section.9.8}%
+\contentsline {subsection}{\numberline {9.8.1}Detailed Description}{27}{subsection.9.8.1}%
+\contentsline {subsection}{\numberline {9.8.2}Field Documentation}{27}{subsection.9.8.2}%
+\contentsline {subsubsection}{\numberline {9.8.2.1}child\_pids}{27}{subsubsection.9.8.2.1}%
+\contentsline {subsubsection}{\numberline {9.8.2.2}cmd\_name}{27}{subsubsection.9.8.2.2}%
+\contentsline {subsubsection}{\numberline {9.8.2.3}exit\_status}{27}{subsubsection.9.8.2.3}%
+\contentsline {subsubsection}{\numberline {9.8.2.4}handle}{28}{subsubsection.9.8.2.4}%
+\contentsline {subsubsection}{\numberline {9.8.2.5}initial\_state}{28}{subsubsection.9.8.2.5}%
+\contentsline {subsubsection}{\numberline {9.8.2.6}input\_fd}{28}{subsubsection.9.8.2.6}%
+\contentsline {subsubsection}{\numberline {9.8.2.7}is\_bg}{28}{subsubsection.9.8.2.7}%
+\contentsline {subsubsection}{\numberline {9.8.2.8}job\_num}{28}{subsubsection.9.8.2.8}%
+\contentsline {subsubsection}{\numberline {9.8.2.9}open\_fds}{28}{subsubsection.9.8.2.9}%
+\contentsline {subsubsection}{\numberline {9.8.2.10}output\_fd}{28}{subsubsection.9.8.2.10}%
+\contentsline {subsubsection}{\numberline {9.8.2.11}pid}{28}{subsubsection.9.8.2.11}%
+\contentsline {subsubsection}{\numberline {9.8.2.12}ppid}{29}{subsubsection.9.8.2.12}%
+\contentsline {subsubsection}{\numberline {9.8.2.13}priority}{29}{subsubsection.9.8.2.13}%
+\contentsline {subsubsection}{\numberline {9.8.2.14}processname}{29}{subsubsection.9.8.2.14}%
+\contentsline {subsubsection}{\numberline {9.8.2.15}state}{29}{subsubsection.9.8.2.15}%
+\contentsline {subsubsection}{\numberline {9.8.2.16}statechanged}{29}{subsubsection.9.8.2.16}%
+\contentsline {subsubsection}{\numberline {9.8.2.17}term\_signal}{29}{subsubsection.9.8.2.17}%
+\contentsline {subsubsection}{\numberline {9.8.2.18}ticks\_to\_wait}{29}{subsubsection.9.8.2.18}%
+\contentsline {subsubsection}{\numberline {9.8.2.19}waiting\_for\_change}{29}{subsubsection.9.8.2.19}%
+\contentsline {subsubsection}{\numberline {9.8.2.20}waiting\_on\_pid}{30}{subsubsection.9.8.2.20}%
+\contentsline {section}{\numberline {9.9}PList Struct Reference}{30}{section.9.9}%
+\contentsline {subsection}{\numberline {9.9.1}Field Documentation}{30}{subsection.9.9.1}%
+\contentsline {subsubsection}{\numberline {9.9.1.1}head}{30}{subsubsection.9.9.1.1}%
+\contentsline {subsubsection}{\numberline {9.9.1.2}size}{30}{subsubsection.9.9.1.2}%
+\contentsline {section}{\numberline {9.10}PNode Struct Reference}{30}{section.9.10}%
+\contentsline {subsection}{\numberline {9.10.1}Field Documentation}{31}{subsection.9.10.1}%
+\contentsline {subsubsection}{\numberline {9.10.1.1}next}{31}{subsubsection.9.10.1.1}%
+\contentsline {subsubsection}{\numberline {9.10.1.2}priority}{31}{subsubsection.9.10.1.2}%
+\contentsline {section}{\numberline {9.11}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}fwd\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}args\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{31}{section.9.11}%
+\contentsline {subsection}{\numberline {9.11.1}Field Documentation}{31}{subsection.9.11.1}%
+\contentsline {subsubsection}{\numberline {9.11.1.1}actual\_arg}{31}{subsubsection.9.11.1.1}%
+\contentsline {subsubsection}{\numberline {9.11.1.2}actual\_routine}{31}{subsubsection.9.11.1.2}%
+\contentsline {subsubsection}{\numberline {9.11.1.3}child\_meta}{31}{subsubsection.9.11.1.3}%
+\contentsline {subsubsection}{\numberline {9.11.1.4}setup\_cond}{32}{subsubsection.9.11.1.4}%
+\contentsline {subsubsection}{\numberline {9.11.1.5}setup\_done}{32}{subsubsection.9.11.1.5}%
+\contentsline {subsubsection}{\numberline {9.11.1.6}setup\_mutex}{32}{subsubsection.9.11.1.6}%
+\contentsline {section}{\numberline {9.12}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}meta\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{32}{section.9.12}%
+\contentsline {subsection}{\numberline {9.12.1}Field Documentation}{32}{subsection.9.12.1}%
+\contentsline {subsubsection}{\numberline {9.12.1.1}meta\_mutex}{32}{subsubsection.9.12.1.1}%
+\contentsline {subsubsection}{\numberline {9.12.1.2}state}{32}{subsubsection.9.12.1.2}%
+\contentsline {subsubsection}{\numberline {9.12.1.3}suspend\_set}{32}{subsubsection.9.12.1.3}%
+\contentsline {section}{\numberline {9.13}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}signal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}args\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{33}{section.9.13}%
+\contentsline {subsection}{\numberline {9.13.1}Field Documentation}{33}{subsection.9.13.1}%
+\contentsline {subsubsection}{\numberline {9.13.1.1}ack}{33}{subsubsection.9.13.1.1}%
+\contentsline {subsubsection}{\numberline {9.13.1.2}shutup\_mutex}{33}{subsubsection.9.13.1.2}%
+\contentsline {subsubsection}{\numberline {9.13.1.3}signal}{33}{subsubsection.9.13.1.3}%
+\contentsline {section}{\numberline {9.14}spthread\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}st Struct Reference}{33}{section.9.14}%
+\contentsline {subsection}{\numberline {9.14.1}Field Documentation}{33}{subsection.9.14.1}%
+\contentsline {subsubsection}{\numberline {9.14.1.1}meta}{33}{subsubsection.9.14.1.1}%
+\contentsline {subsubsection}{\numberline {9.14.1.2}thread}{33}{subsubsection.9.14.1.2}%
+\contentsline {chapter}{\numberline {10}File Documentation}{35}{chapter.10}%
+\contentsline {section}{\numberline {10.1}doc/fat.md File Reference}{35}{section.10.1}%
+\contentsline {section}{\numberline {10.2}doc/kernel.md File Reference}{35}{section.10.2}%
+\contentsline {section}{\numberline {10.3}doc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}README.md File Reference}{35}{section.10.3}%
+\contentsline {section}{\numberline {10.4}doc/scheduler.md File Reference}{35}{section.10.4}%
+\contentsline {section}{\numberline {10.5}doc/shell.md File Reference}{35}{section.10.5}%
+\contentsline {section}{\numberline {10.6}doc/system.md File Reference}{35}{section.10.6}%
+\contentsline {section}{\numberline {10.7}src/parser.h File Reference}{35}{section.10.7}%
+\contentsline {subsection}{\numberline {10.7.1}Macro Definition Documentation}{36}{subsection.10.7.1}%
+\contentsline {subsubsection}{\numberline {10.7.1.1}EXPECT\_COMMANDS}{36}{subsubsection.10.7.1.1}%
+\contentsline {subsubsection}{\numberline {10.7.1.2}EXPECT\_INPUT\_FILENAME}{36}{subsubsection.10.7.1.2}%
+\contentsline {subsubsection}{\numberline {10.7.1.3}EXPECT\_OUTPUT\_FILENAME}{36}{subsubsection.10.7.1.3}%
+\contentsline {subsubsection}{\numberline {10.7.1.4}UNEXPECTED\_AMPERSAND}{36}{subsubsection.10.7.1.4}%
+\contentsline {subsubsection}{\numberline {10.7.1.5}UNEXPECTED\_FILE\_INPUT}{36}{subsubsection.10.7.1.5}%
+\contentsline {subsubsection}{\numberline {10.7.1.6}UNEXPECTED\_FILE\_OUTPUT}{36}{subsubsection.10.7.1.6}%
+\contentsline {subsubsection}{\numberline {10.7.1.7}UNEXPECTED\_PIPELINE}{36}{subsubsection.10.7.1.7}%
+\contentsline {subsection}{\numberline {10.7.2}Function Documentation}{37}{subsection.10.7.2}%
+\contentsline {subsubsection}{\numberline {10.7.2.1}parse\_command()}{37}{subsubsection.10.7.2.1}%
+\contentsline {subsubsection}{\numberline {10.7.2.2}print\_parsed\_command()}{37}{subsubsection.10.7.2.2}%
+\contentsline {subsubsection}{\numberline {10.7.2.3}print\_parser\_errcode()}{37}{subsubsection.10.7.2.3}%
+\contentsline {section}{\numberline {10.8}parser.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{37}{section.10.8}%
+\contentsline {section}{\numberline {10.9}src/pennfat.c File Reference}{38}{section.10.9}%
+\contentsline {subsection}{\numberline {10.9.1}Function Documentation}{39}{subsection.10.9.1}%
+\contentsline {subsubsection}{\numberline {10.9.1.1}cat\_a()}{39}{subsubsection.10.9.1.1}%
+\contentsline {subsubsection}{\numberline {10.9.1.2}cat\_file\_wa()}{40}{subsubsection.10.9.1.2}%
+\contentsline {subsubsection}{\numberline {10.9.1.3}cat\_w()}{40}{subsubsection.10.9.1.3}%
+\contentsline {subsubsection}{\numberline {10.9.1.4}chmod()}{40}{subsubsection.10.9.1.4}%
+\contentsline {subsubsection}{\numberline {10.9.1.5}cp\_from\_host()}{40}{subsubsection.10.9.1.5}%
+\contentsline {subsubsection}{\numberline {10.9.1.6}cp\_to\_host()}{42}{subsubsection.10.9.1.6}%
+\contentsline {subsubsection}{\numberline {10.9.1.7}cp\_within\_fat()}{42}{subsubsection.10.9.1.7}%
+\contentsline {subsubsection}{\numberline {10.9.1.8}free\_global\_fd\_table()}{42}{subsubsection.10.9.1.8}%
+\contentsline {subsubsection}{\numberline {10.9.1.9}get\_block\_size()}{43}{subsubsection.10.9.1.9}%
+\contentsline {subsubsection}{\numberline {10.9.1.10}get\_data\_size()}{43}{subsubsection.10.9.1.10}%
+\contentsline {subsubsection}{\numberline {10.9.1.11}get\_fat\_size()}{43}{subsubsection.10.9.1.11}%
+\contentsline {subsubsection}{\numberline {10.9.1.12}get\_num\_fat\_entries()}{44}{subsubsection.10.9.1.12}%
+\contentsline {subsubsection}{\numberline {10.9.1.13}get\_offset\_size()}{44}{subsubsection.10.9.1.13}%
+\contentsline {subsubsection}{\numberline {10.9.1.14}initialize\_global\_fd\_table()}{44}{subsubsection.10.9.1.14}%
+\contentsline {subsubsection}{\numberline {10.9.1.15}int\_handler()}{44}{subsubsection.10.9.1.15}%
+\contentsline {subsubsection}{\numberline {10.9.1.16}ls()}{45}{subsubsection.10.9.1.16}%
+\contentsline {subsubsection}{\numberline {10.9.1.17}mkfs()}{45}{subsubsection.10.9.1.17}%
+\contentsline {subsubsection}{\numberline {10.9.1.18}mount()}{45}{subsubsection.10.9.1.18}%
+\contentsline {subsubsection}{\numberline {10.9.1.19}mv()}{45}{subsubsection.10.9.1.19}%
+\contentsline {subsubsection}{\numberline {10.9.1.20}prompt()}{46}{subsubsection.10.9.1.20}%
+\contentsline {subsubsection}{\numberline {10.9.1.21}read\_command()}{46}{subsubsection.10.9.1.21}%
+\contentsline {subsubsection}{\numberline {10.9.1.22}rm()}{46}{subsubsection.10.9.1.22}%
+\contentsline {subsubsection}{\numberline {10.9.1.23}touch()}{46}{subsubsection.10.9.1.23}%
+\contentsline {subsubsection}{\numberline {10.9.1.24}unmount()}{47}{subsubsection.10.9.1.24}%
+\contentsline {section}{\numberline {10.10}src/pennfat.h File Reference}{47}{section.10.10}%
+\contentsline {subsection}{\numberline {10.10.1}Macro Definition Documentation}{48}{subsection.10.10.1}%
+\contentsline {subsubsection}{\numberline {10.10.1.1}MAX\_LEN}{48}{subsubsection.10.10.1.1}%
+\contentsline {subsection}{\numberline {10.10.2}Function Documentation}{48}{subsection.10.10.2}%
+\contentsline {subsubsection}{\numberline {10.10.2.1}cat\_a()}{48}{subsubsection.10.10.2.1}%
+\contentsline {subsubsection}{\numberline {10.10.2.2}cat\_file\_wa()}{49}{subsubsection.10.10.2.2}%
+\contentsline {subsubsection}{\numberline {10.10.2.3}cat\_w()}{49}{subsubsection.10.10.2.3}%
+\contentsline {subsubsection}{\numberline {10.10.2.4}chmod()}{49}{subsubsection.10.10.2.4}%
+\contentsline {subsubsection}{\numberline {10.10.2.5}cp\_from\_host()}{49}{subsubsection.10.10.2.5}%
+\contentsline {subsubsection}{\numberline {10.10.2.6}cp\_to\_host()}{51}{subsubsection.10.10.2.6}%
+\contentsline {subsubsection}{\numberline {10.10.2.7}cp\_within\_fat()}{51}{subsubsection.10.10.2.7}%
+\contentsline {subsubsection}{\numberline {10.10.2.8}free\_global\_fd\_table()}{51}{subsubsection.10.10.2.8}%
+\contentsline {subsubsection}{\numberline {10.10.2.9}get\_block\_size()}{52}{subsubsection.10.10.2.9}%
+\contentsline {subsubsection}{\numberline {10.10.2.10}get\_data\_size()}{52}{subsubsection.10.10.2.10}%
+\contentsline {subsubsection}{\numberline {10.10.2.11}get\_fat\_size()}{52}{subsubsection.10.10.2.11}%
+\contentsline {subsubsection}{\numberline {10.10.2.12}get\_num\_fat\_entries()}{53}{subsubsection.10.10.2.12}%
+\contentsline {subsubsection}{\numberline {10.10.2.13}get\_offset\_size()}{53}{subsubsection.10.10.2.13}%
+\contentsline {subsubsection}{\numberline {10.10.2.14}initialize\_global\_fd\_table()}{53}{subsubsection.10.10.2.14}%
+\contentsline {subsubsection}{\numberline {10.10.2.15}int\_handler()}{53}{subsubsection.10.10.2.15}%
+\contentsline {subsubsection}{\numberline {10.10.2.16}ls()}{54}{subsubsection.10.10.2.16}%
+\contentsline {subsubsection}{\numberline {10.10.2.17}mkfs()}{54}{subsubsection.10.10.2.17}%
+\contentsline {subsubsection}{\numberline {10.10.2.18}mount()}{54}{subsubsection.10.10.2.18}%
+\contentsline {subsubsection}{\numberline {10.10.2.19}mv()}{54}{subsubsection.10.10.2.19}%
+\contentsline {subsubsection}{\numberline {10.10.2.20}prompt()}{55}{subsubsection.10.10.2.20}%
+\contentsline {subsubsection}{\numberline {10.10.2.21}read\_command()}{55}{subsubsection.10.10.2.21}%
+\contentsline {subsubsection}{\numberline {10.10.2.22}rm()}{55}{subsubsection.10.10.2.22}%
+\contentsline {subsubsection}{\numberline {10.10.2.23}touch()}{55}{subsubsection.10.10.2.23}%
+\contentsline {subsubsection}{\numberline {10.10.2.24}unmount()}{56}{subsubsection.10.10.2.24}%
+\contentsline {section}{\numberline {10.11}pennfat.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{56}{section.10.11}%
+\contentsline {section}{\numberline {10.12}src/pennos.c File Reference}{57}{section.10.12}%
+\contentsline {subsection}{\numberline {10.12.1}Function Documentation}{57}{subsection.10.12.1}%
+\contentsline {subsubsection}{\numberline {10.12.1.1}b\_output\_redir()}{57}{subsubsection.10.12.1.1}%
+\contentsline {subsubsection}{\numberline {10.12.1.2}cancel\_and\_join()}{58}{subsubsection.10.12.1.2}%
+\contentsline {subsubsection}{\numberline {10.12.1.3}main()}{58}{subsubsection.10.12.1.3}%
+\contentsline {subsubsection}{\numberline {10.12.1.4}scheduler()}{58}{subsubsection.10.12.1.4}%
+\contentsline {subsection}{\numberline {10.12.2}Variable Documentation}{58}{subsection.10.12.2}%
+\contentsline {subsubsection}{\numberline {10.12.2.1}priority}{58}{subsubsection.10.12.2.1}%
+\contentsline {section}{\numberline {10.13}src/pennos.h File Reference}{58}{section.10.13}%
+\contentsline {subsection}{\numberline {10.13.1}Macro Definition Documentation}{59}{subsection.10.13.1}%
+\contentsline {subsubsection}{\numberline {10.13.1.1}\_DEFAULT\_SOURCE}{59}{subsubsection.10.13.1.1}%
+\contentsline {subsubsection}{\numberline {10.13.1.2}\_POSIX\_C\_SOURCE}{59}{subsubsection.10.13.1.2}%
+\contentsline {subsubsection}{\numberline {10.13.1.3}\_XOPEN\_SOURCE}{59}{subsubsection.10.13.1.3}%
+\contentsline {subsubsection}{\numberline {10.13.1.4}MAX\_LEN}{59}{subsubsection.10.13.1.4}%
+\contentsline {subsubsection}{\numberline {10.13.1.5}PROMPT}{59}{subsubsection.10.13.1.5}%
+\contentsline {subsubsection}{\numberline {10.13.1.6}STDERR\_FILENO}{59}{subsubsection.10.13.1.6}%
+\contentsline {subsubsection}{\numberline {10.13.1.7}STDIN\_FILENO}{59}{subsubsection.10.13.1.7}%
+\contentsline {subsubsection}{\numberline {10.13.1.8}STDOUT\_FILENO}{59}{subsubsection.10.13.1.8}%
+\contentsline {subsection}{\numberline {10.13.2}Function Documentation}{59}{subsection.10.13.2}%
+\contentsline {subsubsection}{\numberline {10.13.2.1}b\_output\_redir()}{59}{subsubsection.10.13.2.1}%
+\contentsline {section}{\numberline {10.14}pennos.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{60}{section.10.14}%
+\contentsline {section}{\numberline {10.15}src/standalonefat.c File Reference}{60}{section.10.15}%
+\contentsline {subsection}{\numberline {10.15.1}Function Documentation}{61}{subsection.10.15.1}%
+\contentsline {subsubsection}{\numberline {10.15.1.1}main()}{61}{subsubsection.10.15.1.1}%
+\contentsline {section}{\numberline {10.16}src/util/array.c File Reference}{61}{section.10.16}%
+\contentsline {subsection}{\numberline {10.16.1}Function Documentation}{61}{subsection.10.16.1}%
+\contentsline {subsubsection}{\numberline {10.16.1.1}dynamic\_pid\_array\_add()}{61}{subsubsection.10.16.1.1}%
+\contentsline {subsubsection}{\numberline {10.16.1.2}dynamic\_pid\_array\_contains()}{62}{subsubsection.10.16.1.2}%
+\contentsline {subsubsection}{\numberline {10.16.1.3}dynamic\_pid\_array\_create()}{62}{subsubsection.10.16.1.3}%
+\contentsline {subsubsection}{\numberline {10.16.1.4}dynamic\_pid\_array\_destroy()}{62}{subsubsection.10.16.1.4}%
+\contentsline {subsubsection}{\numberline {10.16.1.5}dynamic\_pid\_array\_remove()}{62}{subsubsection.10.16.1.5}%
+\contentsline {section}{\numberline {10.17}src/util/array.h File Reference}{63}{section.10.17}%
+\contentsline {subsection}{\numberline {10.17.1}Function Documentation}{63}{subsection.10.17.1}%
+\contentsline {subsubsection}{\numberline {10.17.1.1}dynamic\_pid\_array\_add()}{63}{subsubsection.10.17.1.1}%
+\contentsline {subsubsection}{\numberline {10.17.1.2}dynamic\_pid\_array\_contains()}{64}{subsubsection.10.17.1.2}%
+\contentsline {subsubsection}{\numberline {10.17.1.3}dynamic\_pid\_array\_create()}{64}{subsubsection.10.17.1.3}%
+\contentsline {subsubsection}{\numberline {10.17.1.4}dynamic\_pid\_array\_destroy()}{64}{subsubsection.10.17.1.4}%
+\contentsline {subsubsection}{\numberline {10.17.1.5}dynamic\_pid\_array\_remove()}{65}{subsubsection.10.17.1.5}%
+\contentsline {section}{\numberline {10.18}array.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{65}{section.10.18}%
+\contentsline {section}{\numberline {10.19}src/util/bitmap.c File Reference}{65}{section.10.19}%
+\contentsline {subsection}{\numberline {10.19.1}Function Documentation}{66}{subsection.10.19.1}%
+\contentsline {subsubsection}{\numberline {10.19.1.1}fd\_bitmap\_clear()}{66}{subsubsection.10.19.1.1}%
+\contentsline {subsubsection}{\numberline {10.19.1.2}fd\_bitmap\_initialize()}{66}{subsubsection.10.19.1.2}%
+\contentsline {subsubsection}{\numberline {10.19.1.3}fd\_bitmap\_set()}{66}{subsubsection.10.19.1.3}%
+\contentsline {subsubsection}{\numberline {10.19.1.4}fd\_bitmap\_test()}{67}{subsubsection.10.19.1.4}%
+\contentsline {section}{\numberline {10.20}src/util/bitmap.h File Reference}{67}{section.10.20}%
+\contentsline {subsection}{\numberline {10.20.1}Macro Definition Documentation}{68}{subsection.10.20.1}%
+\contentsline {subsubsection}{\numberline {10.20.1.1}FD\_BITMAP\_BYTES}{68}{subsubsection.10.20.1.1}%
+\contentsline {subsubsection}{\numberline {10.20.1.2}FD\_BITMAP\_SIZE}{68}{subsubsection.10.20.1.2}%
+\contentsline {subsection}{\numberline {10.20.2}Function Documentation}{68}{subsection.10.20.2}%
+\contentsline {subsubsection}{\numberline {10.20.2.1}fd\_bitmap\_clear()}{68}{subsubsection.10.20.2.1}%
+\contentsline {subsubsection}{\numberline {10.20.2.2}fd\_bitmap\_initialize()}{68}{subsubsection.10.20.2.2}%
+\contentsline {subsubsection}{\numberline {10.20.2.3}fd\_bitmap\_set()}{69}{subsubsection.10.20.2.3}%
+\contentsline {subsubsection}{\numberline {10.20.2.4}fd\_bitmap\_test()}{69}{subsubsection.10.20.2.4}%
+\contentsline {section}{\numberline {10.21}bitmap.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{69}{section.10.21}%
+\contentsline {section}{\numberline {10.22}src/util/clinkedlist.c File Reference}{70}{section.10.22}%
+\contentsline {subsection}{\numberline {10.22.1}Function Documentation}{70}{subsection.10.22.1}%
+\contentsline {subsubsection}{\numberline {10.22.1.1}add\_process()}{70}{subsubsection.10.22.1.1}%
+\contentsline {subsubsection}{\numberline {10.22.1.2}add\_process\_front()}{70}{subsubsection.10.22.1.2}%
+\contentsline {subsubsection}{\numberline {10.22.1.3}find\_process()}{72}{subsubsection.10.22.1.3}%
+\contentsline {subsubsection}{\numberline {10.22.1.4}find\_process\_job\_id()}{72}{subsubsection.10.22.1.4}%
+\contentsline {subsubsection}{\numberline {10.22.1.5}free\_list()}{72}{subsubsection.10.22.1.5}%
+\contentsline {subsubsection}{\numberline {10.22.1.6}init\_list()}{73}{subsubsection.10.22.1.6}%
+\contentsline {subsubsection}{\numberline {10.22.1.7}remove\_process()}{73}{subsubsection.10.22.1.7}%
+\contentsline {section}{\numberline {10.23}src/util/clinkedlist.h File Reference}{73}{section.10.23}%
+\contentsline {subsection}{\numberline {10.23.1}Typedef Documentation}{74}{subsection.10.23.1}%
+\contentsline {subsubsection}{\numberline {10.23.1.1}Node}{74}{subsubsection.10.23.1.1}%
+\contentsline {subsubsection}{\numberline {10.23.1.2}pcb\_t}{74}{subsubsection.10.23.1.2}%
+\contentsline {subsection}{\numberline {10.23.2}Function Documentation}{74}{subsection.10.23.2}%
+\contentsline {subsubsection}{\numberline {10.23.2.1}add\_process()}{74}{subsubsection.10.23.2.1}%
+\contentsline {subsubsection}{\numberline {10.23.2.2}add\_process\_front()}{74}{subsubsection.10.23.2.2}%
+\contentsline {subsubsection}{\numberline {10.23.2.3}find\_process()}{75}{subsubsection.10.23.2.3}%
+\contentsline {subsubsection}{\numberline {10.23.2.4}find\_process\_job\_id()}{75}{subsubsection.10.23.2.4}%
+\contentsline {subsubsection}{\numberline {10.23.2.5}free\_list()}{75}{subsubsection.10.23.2.5}%
+\contentsline {subsubsection}{\numberline {10.23.2.6}init\_list()}{76}{subsubsection.10.23.2.6}%
+\contentsline {subsubsection}{\numberline {10.23.2.7}remove\_process()}{76}{subsubsection.10.23.2.7}%
+\contentsline {section}{\numberline {10.24}clinkedlist.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{76}{section.10.24}%
+\contentsline {section}{\numberline {10.25}src/util/error.c File Reference}{77}{section.10.25}%
+\contentsline {subsection}{\numberline {10.25.1}Function Documentation}{77}{subsection.10.25.1}%
+\contentsline {subsubsection}{\numberline {10.25.1.1}u\_perror()}{77}{subsubsection.10.25.1.1}%
+\contentsline {section}{\numberline {10.26}src/util/error.h File Reference}{77}{section.10.26}%
+\contentsline {subsection}{\numberline {10.26.1}Macro Definition Documentation}{78}{subsection.10.26.1}%
+\contentsline {subsubsection}{\numberline {10.26.1.1}EADDPROC}{78}{subsubsection.10.26.1.1}%
+\contentsline {subsubsection}{\numberline {10.26.1.2}EBADFILENAME}{79}{subsubsection.10.26.1.2}%
+\contentsline {subsubsection}{\numberline {10.26.1.3}EBITMAP}{79}{subsubsection.10.26.1.3}%
+\contentsline {subsubsection}{\numberline {10.26.1.4}EFILEDEL}{79}{subsubsection.10.26.1.4}%
+\contentsline {subsubsection}{\numberline {10.26.1.5}EINVALIDCHMOD}{79}{subsubsection.10.26.1.5}%
+\contentsline {subsubsection}{\numberline {10.26.1.6}EINVALIDCMD}{79}{subsubsection.10.26.1.6}%
+\contentsline {subsubsection}{\numberline {10.26.1.7}EINVALIDFD}{79}{subsubsection.10.26.1.7}%
+\contentsline {subsubsection}{\numberline {10.26.1.8}EINVALIDLOG}{79}{subsubsection.10.26.1.8}%
+\contentsline {subsubsection}{\numberline {10.26.1.9}EINVALIDLOGWRITE}{79}{subsubsection.10.26.1.9}%
+\contentsline {subsubsection}{\numberline {10.26.1.10}EINVALIDPARAMETER}{79}{subsubsection.10.26.1.10}%
+\contentsline {subsubsection}{\numberline {10.26.1.11}EINVALIDSIG}{79}{subsubsection.10.26.1.11}%
+\contentsline {subsubsection}{\numberline {10.26.1.12}EINVALIDSTDOUT}{80}{subsubsection.10.26.1.12}%
+\contentsline {subsubsection}{\numberline {10.26.1.13}EINVARG}{80}{subsubsection.10.26.1.13}%
+\contentsline {subsubsection}{\numberline {10.26.1.14}ELISTNULL}{80}{subsubsection.10.26.1.14}%
+\contentsline {subsubsection}{\numberline {10.26.1.15}EMULTWRITE}{80}{subsubsection.10.26.1.15}%
+\contentsline {subsubsection}{\numberline {10.26.1.16}ENOARGS}{80}{subsubsection.10.26.1.16}%
+\contentsline {subsubsection}{\numberline {10.26.1.17}ENOFILE}{80}{subsubsection.10.26.1.17}%
+\contentsline {subsubsection}{\numberline {10.26.1.18}ENOJOB}{80}{subsubsection.10.26.1.18}%
+\contentsline {subsubsection}{\numberline {10.26.1.19}ENOPIDJOB}{80}{subsubsection.10.26.1.19}%
+\contentsline {subsubsection}{\numberline {10.26.1.20}ENOPROC}{80}{subsubsection.10.26.1.20}%
+\contentsline {subsubsection}{\numberline {10.26.1.21}ENOREADPERM}{80}{subsubsection.10.26.1.21}%
+\contentsline {subsubsection}{\numberline {10.26.1.22}ENOTSTOP}{81}{subsubsection.10.26.1.22}%
+\contentsline {subsubsection}{\numberline {10.26.1.23}ENOWRITEPERM}{81}{subsubsection.10.26.1.23}%
+\contentsline {subsubsection}{\numberline {10.26.1.24}EPCBCREATE}{81}{subsubsection.10.26.1.24}%
+\contentsline {subsubsection}{\numberline {10.26.1.25}EPCBSTATE}{81}{subsubsection.10.26.1.25}%
+\contentsline {subsubsection}{\numberline {10.26.1.26}EREADERROR}{81}{subsubsection.10.26.1.26}%
+\contentsline {subsubsection}{\numberline {10.26.1.27}EREMOVEPROC}{81}{subsubsection.10.26.1.27}%
+\contentsline {subsubsection}{\numberline {10.26.1.28}ESYSERR}{81}{subsubsection.10.26.1.28}%
+\contentsline {subsubsection}{\numberline {10.26.1.29}ETHREADCREATE}{81}{subsubsection.10.26.1.29}%
+\contentsline {subsubsection}{\numberline {10.26.1.30}EUSEDFILE}{81}{subsubsection.10.26.1.30}%
+\contentsline {subsubsection}{\numberline {10.26.1.31}EWRONGPERM}{81}{subsubsection.10.26.1.31}%
+\contentsline {subsection}{\numberline {10.26.2}Function Documentation}{81}{subsection.10.26.2}%
+\contentsline {subsubsection}{\numberline {10.26.2.1}u\_perror()}{81}{subsubsection.10.26.2.1}%
+\contentsline {subsection}{\numberline {10.26.3}Variable Documentation}{82}{subsection.10.26.3}%
+\contentsline {subsubsection}{\numberline {10.26.3.1}errno}{82}{subsubsection.10.26.3.1}%
+\contentsline {section}{\numberline {10.27}error.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{82}{section.10.27}%
+\contentsline {section}{\numberline {10.28}src/util/globals.c File Reference}{83}{section.10.28}%
+\contentsline {subsection}{\numberline {10.28.1}Variable Documentation}{83}{subsection.10.28.1}%
+\contentsline {subsubsection}{\numberline {10.28.1.1}bg\_list}{83}{subsubsection.10.28.1.1}%
+\contentsline {subsubsection}{\numberline {10.28.1.2}blocked}{83}{subsubsection.10.28.1.2}%
+\contentsline {subsubsection}{\numberline {10.28.1.3}current}{83}{subsubsection.10.28.1.3}%
+\contentsline {subsubsection}{\numberline {10.28.1.4}fg\_proc}{83}{subsubsection.10.28.1.4}%
+\contentsline {subsubsection}{\numberline {10.28.1.5}job\_id}{84}{subsubsection.10.28.1.5}%
+\contentsline {subsubsection}{\numberline {10.28.1.6}logfiledescriptor}{84}{subsubsection.10.28.1.6}%
+\contentsline {subsubsection}{\numberline {10.28.1.7}next\_pid}{84}{subsubsection.10.28.1.7}%
+\contentsline {subsubsection}{\numberline {10.28.1.8}processes}{84}{subsubsection.10.28.1.8}%
+\contentsline {subsubsection}{\numberline {10.28.1.9}stopped}{84}{subsubsection.10.28.1.9}%
+\contentsline {subsubsection}{\numberline {10.28.1.10}tick}{84}{subsubsection.10.28.1.10}%
+\contentsline {subsubsection}{\numberline {10.28.1.11}zombied}{84}{subsubsection.10.28.1.11}%
+\contentsline {section}{\numberline {10.29}src/util/globals.h File Reference}{85}{section.10.29}%
+\contentsline {subsection}{\numberline {10.29.1}Variable Documentation}{85}{subsection.10.29.1}%
+\contentsline {subsubsection}{\numberline {10.29.1.1}bg\_list}{85}{subsubsection.10.29.1.1}%
+\contentsline {subsubsection}{\numberline {10.29.1.2}blocked}{85}{subsubsection.10.29.1.2}%
+\contentsline {subsubsection}{\numberline {10.29.1.3}current}{85}{subsubsection.10.29.1.3}%
+\contentsline {subsubsection}{\numberline {10.29.1.4}fg\_proc}{85}{subsubsection.10.29.1.4}%
+\contentsline {subsubsection}{\numberline {10.29.1.5}job\_id}{86}{subsubsection.10.29.1.5}%
+\contentsline {subsubsection}{\numberline {10.29.1.6}logfiledescriptor}{86}{subsubsection.10.29.1.6}%
+\contentsline {subsubsection}{\numberline {10.29.1.7}next\_pid}{86}{subsubsection.10.29.1.7}%
+\contentsline {subsubsection}{\numberline {10.29.1.8}processes}{86}{subsubsection.10.29.1.8}%
+\contentsline {subsubsection}{\numberline {10.29.1.9}stopped}{86}{subsubsection.10.29.1.9}%
+\contentsline {subsubsection}{\numberline {10.29.1.10}tick}{86}{subsubsection.10.29.1.10}%
+\contentsline {subsubsection}{\numberline {10.29.1.11}zombied}{86}{subsubsection.10.29.1.11}%
+\contentsline {section}{\numberline {10.30}globals.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{87}{section.10.30}%
+\contentsline {section}{\numberline {10.31}src/util/kernel.c File Reference}{87}{section.10.31}%
+\contentsline {subsection}{\numberline {10.31.1}Function Documentation}{87}{subsection.10.31.1}%
+\contentsline {subsubsection}{\numberline {10.31.1.1}k\_proc\_cleanup()}{87}{subsubsection.10.31.1.1}%
+\contentsline {subsubsection}{\numberline {10.31.1.2}k\_proc\_create()}{88}{subsubsection.10.31.1.2}%
+\contentsline {section}{\numberline {10.32}src/util/kernel.h File Reference}{88}{section.10.32}%
+\contentsline {subsection}{\numberline {10.32.1}Macro Definition Documentation}{89}{subsection.10.32.1}%
+\contentsline {subsubsection}{\numberline {10.32.1.1}P\_SIGCONT}{89}{subsubsection.10.32.1.1}%
+\contentsline {subsubsection}{\numberline {10.32.1.2}P\_SIGSTOP}{89}{subsubsection.10.32.1.2}%
+\contentsline {subsubsection}{\numberline {10.32.1.3}P\_SIGTER}{89}{subsubsection.10.32.1.3}%
+\contentsline {subsection}{\numberline {10.32.2}Typedef Documentation}{89}{subsection.10.32.2}%
+\contentsline {subsubsection}{\numberline {10.32.2.1}pcb\_t}{89}{subsubsection.10.32.2.1}%
+\contentsline {subsection}{\numberline {10.32.3}Enumeration Type Documentation}{89}{subsection.10.32.3}%
+\contentsline {subsubsection}{\numberline {10.32.3.1}process\_state\_t}{89}{subsubsection.10.32.3.1}%
+\contentsline {subsection}{\numberline {10.32.4}Function Documentation}{90}{subsection.10.32.4}%
+\contentsline {subsubsection}{\numberline {10.32.4.1}k\_proc\_cleanup()}{90}{subsubsection.10.32.4.1}%
+\contentsline {subsubsection}{\numberline {10.32.4.2}k\_proc\_create()}{90}{subsubsection.10.32.4.2}%
+\contentsline {section}{\numberline {10.33}kernel.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{90}{section.10.33}%
+\contentsline {section}{\numberline {10.34}src/util/pennfat\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kernel.c File Reference}{91}{section.10.34}%
+\contentsline {subsection}{\numberline {10.34.1}Function Documentation}{93}{subsection.10.34.1}%
+\contentsline {subsubsection}{\numberline {10.34.1.1}create\_directory\_entry()}{93}{subsubsection.10.34.1.1}%
+\contentsline {subsubsection}{\numberline {10.34.1.2}create\_file\_descriptor()}{94}{subsubsection.10.34.1.2}%
+\contentsline {subsubsection}{\numberline {10.34.1.3}does\_file\_exist()}{94}{subsubsection.10.34.1.3}%
+\contentsline {subsubsection}{\numberline {10.34.1.4}does\_file\_exist2()}{94}{subsubsection.10.34.1.4}%
+\contentsline {subsubsection}{\numberline {10.34.1.5}extend\_fat()}{95}{subsubsection.10.34.1.5}%
+\contentsline {subsubsection}{\numberline {10.34.1.6}formatTime()}{95}{subsubsection.10.34.1.6}%
+\contentsline {subsubsection}{\numberline {10.34.1.7}generate\_permission()}{95}{subsubsection.10.34.1.7}%
+\contentsline {subsubsection}{\numberline {10.34.1.8}get\_file\_descriptor()}{95}{subsubsection.10.34.1.8}%
+\contentsline {subsubsection}{\numberline {10.34.1.9}get\_first\_empty\_fat\_index()}{95}{subsubsection.10.34.1.9}%
+\contentsline {subsubsection}{\numberline {10.34.1.10}is\_file\_name\_valid()}{96}{subsubsection.10.34.1.10}%
+\contentsline {subsubsection}{\numberline {10.34.1.11}k\_change\_mode()}{96}{subsubsection.10.34.1.11}%
+\contentsline {subsubsection}{\numberline {10.34.1.12}k\_close()}{96}{subsubsection.10.34.1.12}%
+\contentsline {subsubsection}{\numberline {10.34.1.13}k\_count\_fd\_num()}{97}{subsubsection.10.34.1.13}%
+\contentsline {subsubsection}{\numberline {10.34.1.14}k\_cp\_from\_host()}{97}{subsubsection.10.34.1.14}%
+\contentsline {subsubsection}{\numberline {10.34.1.15}k\_cp\_to\_host()}{97}{subsubsection.10.34.1.15}%
+\contentsline {subsubsection}{\numberline {10.34.1.16}k\_cp\_within\_fat()}{98}{subsubsection.10.34.1.16}%
+\contentsline {subsubsection}{\numberline {10.34.1.17}k\_get\_fname\_from\_fd()}{98}{subsubsection.10.34.1.17}%
+\contentsline {subsubsection}{\numberline {10.34.1.18}k\_ls()}{98}{subsubsection.10.34.1.18}%
+\contentsline {subsubsection}{\numberline {10.34.1.19}k\_lseek()}{99}{subsubsection.10.34.1.19}%
+\contentsline {subsubsection}{\numberline {10.34.1.20}k\_open()}{99}{subsubsection.10.34.1.20}%
+\contentsline {subsubsection}{\numberline {10.34.1.21}k\_read()}{100}{subsubsection.10.34.1.21}%
+\contentsline {subsubsection}{\numberline {10.34.1.22}k\_read\_all()}{100}{subsubsection.10.34.1.22}%
+\contentsline {subsubsection}{\numberline {10.34.1.23}k\_rename()}{101}{subsubsection.10.34.1.23}%
+\contentsline {subsubsection}{\numberline {10.34.1.24}k\_unlink()}{101}{subsubsection.10.34.1.24}%
+\contentsline {subsubsection}{\numberline {10.34.1.25}k\_update\_timestamp()}{101}{subsubsection.10.34.1.25}%
+\contentsline {subsubsection}{\numberline {10.34.1.26}k\_write()}{102}{subsubsection.10.34.1.26}%
+\contentsline {subsubsection}{\numberline {10.34.1.27}lseek\_to\_root\_directory()}{102}{subsubsection.10.34.1.27}%
+\contentsline {subsubsection}{\numberline {10.34.1.28}move\_to\_open\_de()}{102}{subsubsection.10.34.1.28}%
+\contentsline {subsubsection}{\numberline {10.34.1.29}update\_directory\_entry\_after\_write()}{103}{subsubsection.10.34.1.29}%
+\contentsline {subsubsection}{\numberline {10.34.1.30}write\_one\_byte\_in\_while()}{103}{subsubsection.10.34.1.30}%
+\contentsline {subsubsection}{\numberline {10.34.1.31}zero\_out\_helper()}{103}{subsubsection.10.34.1.31}%
+\contentsline {subsection}{\numberline {10.34.2}Variable Documentation}{103}{subsection.10.34.2}%
+\contentsline {subsubsection}{\numberline {10.34.2.1}block\_size}{103}{subsubsection.10.34.2.1}%
+\contentsline {subsubsection}{\numberline {10.34.2.2}data\_size}{103}{subsubsection.10.34.2.2}%
+\contentsline {subsubsection}{\numberline {10.34.2.3}fat}{103}{subsubsection.10.34.2.3}%
+\contentsline {subsubsection}{\numberline {10.34.2.4}fat\_size}{103}{subsubsection.10.34.2.4}%
+\contentsline {subsubsection}{\numberline {10.34.2.5}fd\_counter}{104}{subsubsection.10.34.2.5}%
+\contentsline {subsubsection}{\numberline {10.34.2.6}fs\_fd}{104}{subsubsection.10.34.2.6}%
+\contentsline {subsubsection}{\numberline {10.34.2.7}global\_fd\_table}{104}{subsubsection.10.34.2.7}%
+\contentsline {subsubsection}{\numberline {10.34.2.8}num\_fat\_entries}{104}{subsubsection.10.34.2.8}%
+\contentsline {section}{\numberline {10.35}src/util/pennfat\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kernel.h File Reference}{104}{section.10.35}%
+\contentsline {subsection}{\numberline {10.35.1}Macro Definition Documentation}{107}{subsection.10.35.1}%
+\contentsline {subsubsection}{\numberline {10.35.1.1}DEST\_FILE\_NO\_WRITE\_PERM}{107}{subsubsection.10.35.1.1}%
+\contentsline {subsubsection}{\numberline {10.35.1.2}F\_APPEND}{107}{subsubsection.10.35.1.2}%
+\contentsline {subsubsection}{\numberline {10.35.1.3}F\_READ}{108}{subsubsection.10.35.1.3}%
+\contentsline {subsubsection}{\numberline {10.35.1.4}F\_WRITE}{108}{subsubsection.10.35.1.4}%
+\contentsline {subsubsection}{\numberline {10.35.1.5}FILE\_DELETED}{108}{subsubsection.10.35.1.5}%
+\contentsline {subsubsection}{\numberline {10.35.1.6}FILE\_IN\_USE}{108}{subsubsection.10.35.1.6}%
+\contentsline {subsubsection}{\numberline {10.35.1.7}FILE\_NOT\_FOUND}{108}{subsubsection.10.35.1.7}%
+\contentsline {subsubsection}{\numberline {10.35.1.8}FS\_NOT\_MOUNTED}{108}{subsubsection.10.35.1.8}%
+\contentsline {subsubsection}{\numberline {10.35.1.9}INVALID\_CHMOD}{108}{subsubsection.10.35.1.9}%
+\contentsline {subsubsection}{\numberline {10.35.1.10}INVALID\_FILE\_DESCRIPTOR}{109}{subsubsection.10.35.1.10}%
+\contentsline {subsubsection}{\numberline {10.35.1.11}INVALID\_FILE\_NAME}{109}{subsubsection.10.35.1.11}%
+\contentsline {subsubsection}{\numberline {10.35.1.12}INVALID\_PARAMETERS}{109}{subsubsection.10.35.1.12}%
+\contentsline {subsubsection}{\numberline {10.35.1.13}MAX\_FD\_NUM}{109}{subsubsection.10.35.1.13}%
+\contentsline {subsubsection}{\numberline {10.35.1.14}MULTIPLE\_F\_WRITE}{109}{subsubsection.10.35.1.14}%
+\contentsline {subsubsection}{\numberline {10.35.1.15}SOURCE\_FILE\_NO\_READ\_PERM}{109}{subsubsection.10.35.1.15}%
+\contentsline {subsubsection}{\numberline {10.35.1.16}SYSTEM\_ERROR}{109}{subsubsection.10.35.1.16}%
+\contentsline {subsubsection}{\numberline {10.35.1.17}WRONG\_PERMISSION}{109}{subsubsection.10.35.1.17}%
+\contentsline {subsection}{\numberline {10.35.2}Enumeration Type Documentation}{109}{subsection.10.35.2}%
+\contentsline {subsubsection}{\numberline {10.35.2.1}Whence}{109}{subsubsection.10.35.2.1}%
+\contentsline {subsection}{\numberline {10.35.3}Function Documentation}{110}{subsection.10.35.3}%
+\contentsline {subsubsection}{\numberline {10.35.3.1}create\_directory\_entry()}{110}{subsubsection.10.35.3.1}%
+\contentsline {subsubsection}{\numberline {10.35.3.2}create\_file\_descriptor()}{110}{subsubsection.10.35.3.2}%
+\contentsline {subsubsection}{\numberline {10.35.3.3}does\_file\_exist()}{111}{subsubsection.10.35.3.3}%
+\contentsline {subsubsection}{\numberline {10.35.3.4}does\_file\_exist2()}{111}{subsubsection.10.35.3.4}%
+\contentsline {subsubsection}{\numberline {10.35.3.5}extend\_fat()}{111}{subsubsection.10.35.3.5}%
+\contentsline {subsubsection}{\numberline {10.35.3.6}get\_file\_descriptor()}{111}{subsubsection.10.35.3.6}%
+\contentsline {subsubsection}{\numberline {10.35.3.7}get\_first\_empty\_fat\_index()}{112}{subsubsection.10.35.3.7}%
+\contentsline {subsubsection}{\numberline {10.35.3.8}is\_file\_name\_valid()}{112}{subsubsection.10.35.3.8}%
+\contentsline {subsubsection}{\numberline {10.35.3.9}k\_change\_mode()}{112}{subsubsection.10.35.3.9}%
+\contentsline {subsubsection}{\numberline {10.35.3.10}k\_close()}{113}{subsubsection.10.35.3.10}%
+\contentsline {subsubsection}{\numberline {10.35.3.11}k\_count\_fd\_num()}{113}{subsubsection.10.35.3.11}%
+\contentsline {subsubsection}{\numberline {10.35.3.12}k\_cp\_from\_host()}{113}{subsubsection.10.35.3.12}%
+\contentsline {subsubsection}{\numberline {10.35.3.13}k\_cp\_to\_host()}{114}{subsubsection.10.35.3.13}%
+\contentsline {subsubsection}{\numberline {10.35.3.14}k\_cp\_within\_fat()}{114}{subsubsection.10.35.3.14}%
+\contentsline {subsubsection}{\numberline {10.35.3.15}k\_get\_fname\_from\_fd()}{114}{subsubsection.10.35.3.15}%
+\contentsline {subsubsection}{\numberline {10.35.3.16}k\_ls()}{115}{subsubsection.10.35.3.16}%
+\contentsline {subsubsection}{\numberline {10.35.3.17}k\_lseek()}{115}{subsubsection.10.35.3.17}%
+\contentsline {subsubsection}{\numberline {10.35.3.18}k\_open()}{116}{subsubsection.10.35.3.18}%
+\contentsline {subsubsection}{\numberline {10.35.3.19}k\_read()}{116}{subsubsection.10.35.3.19}%
+\contentsline {subsubsection}{\numberline {10.35.3.20}k\_read\_all()}{117}{subsubsection.10.35.3.20}%
+\contentsline {subsubsection}{\numberline {10.35.3.21}k\_rename()}{117}{subsubsection.10.35.3.21}%
+\contentsline {subsubsection}{\numberline {10.35.3.22}k\_unlink()}{117}{subsubsection.10.35.3.22}%
+\contentsline {subsubsection}{\numberline {10.35.3.23}k\_update\_timestamp()}{118}{subsubsection.10.35.3.23}%
+\contentsline {subsubsection}{\numberline {10.35.3.24}k\_write()}{118}{subsubsection.10.35.3.24}%
+\contentsline {subsubsection}{\numberline {10.35.3.25}lseek\_to\_root\_directory()}{118}{subsubsection.10.35.3.25}%
+\contentsline {subsubsection}{\numberline {10.35.3.26}move\_to\_open\_de()}{118}{subsubsection.10.35.3.26}%
+\contentsline {subsection}{\numberline {10.35.4}Variable Documentation}{119}{subsection.10.35.4}%
+\contentsline {subsubsection}{\numberline {10.35.4.1}block\_size}{119}{subsubsection.10.35.4.1}%
+\contentsline {subsubsection}{\numberline {10.35.4.2}data\_size}{119}{subsubsection.10.35.4.2}%
+\contentsline {subsubsection}{\numberline {10.35.4.3}fat}{119}{subsubsection.10.35.4.3}%
+\contentsline {subsubsection}{\numberline {10.35.4.4}fat\_size}{119}{subsubsection.10.35.4.4}%
+\contentsline {subsubsection}{\numberline {10.35.4.5}fs\_fd}{119}{subsubsection.10.35.4.5}%
+\contentsline {subsubsection}{\numberline {10.35.4.6}global\_fd\_table}{119}{subsubsection.10.35.4.6}%
+\contentsline {subsubsection}{\numberline {10.35.4.7}num\_fat\_entries}{120}{subsubsection.10.35.4.7}%
+\contentsline {section}{\numberline {10.36}pennfat\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kernel.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{120}{section.10.36}%
+\contentsline {section}{\numberline {10.37}src/util/prioritylist.c File Reference}{121}{section.10.37}%
+\contentsline {subsection}{\numberline {10.37.1}Function Documentation}{122}{subsection.10.37.1}%
+\contentsline {subsubsection}{\numberline {10.37.1.1}add\_priority()}{122}{subsubsection.10.37.1.1}%
+\contentsline {subsubsection}{\numberline {10.37.1.2}free\_plist()}{122}{subsubsection.10.37.1.2}%
+\contentsline {subsubsection}{\numberline {10.37.1.3}init\_priority()}{122}{subsubsection.10.37.1.3}%
+\contentsline {subsubsection}{\numberline {10.37.1.4}remove\_priority()}{122}{subsubsection.10.37.1.4}%
+\contentsline {section}{\numberline {10.38}src/util/prioritylist.h File Reference}{123}{section.10.38}%
+\contentsline {subsection}{\numberline {10.38.1}Typedef Documentation}{123}{subsection.10.38.1}%
+\contentsline {subsubsection}{\numberline {10.38.1.1}PNode}{123}{subsubsection.10.38.1.1}%
+\contentsline {subsection}{\numberline {10.38.2}Function Documentation}{123}{subsection.10.38.2}%
+\contentsline {subsubsection}{\numberline {10.38.2.1}add\_priority()}{123}{subsubsection.10.38.2.1}%
+\contentsline {subsubsection}{\numberline {10.38.2.2}free\_plist()}{124}{subsubsection.10.38.2.2}%
+\contentsline {subsubsection}{\numberline {10.38.2.3}init\_priority()}{124}{subsubsection.10.38.2.3}%
+\contentsline {subsubsection}{\numberline {10.38.2.4}remove\_priority()}{124}{subsubsection.10.38.2.4}%
+\contentsline {section}{\numberline {10.39}prioritylist.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{124}{section.10.39}%
+\contentsline {section}{\numberline {10.40}src/util/shellbuiltins.c File Reference}{125}{section.10.40}%
+\contentsline {subsection}{\numberline {10.40.1}Function Documentation}{126}{subsection.10.40.1}%
+\contentsline {subsubsection}{\numberline {10.40.1.1}b\_background\_poll()}{126}{subsubsection.10.40.1.1}%
+\contentsline {subsubsection}{\numberline {10.40.1.2}b\_bg()}{126}{subsubsection.10.40.1.2}%
+\contentsline {subsubsection}{\numberline {10.40.1.3}b\_busy()}{127}{subsubsection.10.40.1.3}%
+\contentsline {subsubsection}{\numberline {10.40.1.4}b\_cat()}{127}{subsubsection.10.40.1.4}%
+\contentsline {subsubsection}{\numberline {10.40.1.5}b\_chmod()}{127}{subsubsection.10.40.1.5}%
+\contentsline {subsubsection}{\numberline {10.40.1.6}b\_clear()}{127}{subsubsection.10.40.1.6}%
+\contentsline {subsubsection}{\numberline {10.40.1.7}b\_cp()}{128}{subsubsection.10.40.1.7}%
+\contentsline {subsubsection}{\numberline {10.40.1.8}b\_echo()}{128}{subsubsection.10.40.1.8}%
+\contentsline {subsubsection}{\numberline {10.40.1.9}b\_fg()}{128}{subsubsection.10.40.1.9}%
+\contentsline {subsubsection}{\numberline {10.40.1.10}b\_jobs()}{128}{subsubsection.10.40.1.10}%
+\contentsline {subsubsection}{\numberline {10.40.1.11}b\_kill()}{128}{subsubsection.10.40.1.11}%
+\contentsline {subsubsection}{\numberline {10.40.1.12}b\_logout()}{129}{subsubsection.10.40.1.12}%
+\contentsline {subsubsection}{\numberline {10.40.1.13}b\_ls()}{129}{subsubsection.10.40.1.13}%
+\contentsline {subsubsection}{\numberline {10.40.1.14}b\_man()}{129}{subsubsection.10.40.1.14}%
+\contentsline {subsubsection}{\numberline {10.40.1.15}b\_mv()}{129}{subsubsection.10.40.1.15}%
+\contentsline {subsubsection}{\numberline {10.40.1.16}b\_nice()}{129}{subsubsection.10.40.1.16}%
+\contentsline {subsubsection}{\numberline {10.40.1.17}b\_nice\_pid()}{130}{subsubsection.10.40.1.17}%
+\contentsline {subsubsection}{\numberline {10.40.1.18}b\_orphan\_child()}{130}{subsubsection.10.40.1.18}%
+\contentsline {subsubsection}{\numberline {10.40.1.19}b\_orphanify()}{130}{subsubsection.10.40.1.19}%
+\contentsline {subsubsection}{\numberline {10.40.1.20}b\_ps()}{130}{subsubsection.10.40.1.20}%
+\contentsline {subsubsection}{\numberline {10.40.1.21}b\_rm()}{130}{subsubsection.10.40.1.21}%
+\contentsline {subsubsection}{\numberline {10.40.1.22}b\_sleep()}{131}{subsubsection.10.40.1.22}%
+\contentsline {subsubsection}{\numberline {10.40.1.23}b\_touch()}{131}{subsubsection.10.40.1.23}%
+\contentsline {subsubsection}{\numberline {10.40.1.24}b\_zombie\_child()}{131}{subsubsection.10.40.1.24}%
+\contentsline {subsubsection}{\numberline {10.40.1.25}b\_zombify()}{131}{subsubsection.10.40.1.25}%
+\contentsline {section}{\numberline {10.41}src/util/shellbuiltins.h File Reference}{131}{section.10.41}%
+\contentsline {subsection}{\numberline {10.41.1}Function Documentation}{133}{subsection.10.41.1}%
+\contentsline {subsubsection}{\numberline {10.41.1.1}b\_background\_poll()}{133}{subsubsection.10.41.1.1}%
+\contentsline {subsubsection}{\numberline {10.41.1.2}b\_bg()}{133}{subsubsection.10.41.1.2}%
+\contentsline {subsubsection}{\numberline {10.41.1.3}b\_busy()}{133}{subsubsection.10.41.1.3}%
+\contentsline {subsubsection}{\numberline {10.41.1.4}b\_cat()}{133}{subsubsection.10.41.1.4}%
+\contentsline {subsubsection}{\numberline {10.41.1.5}b\_chmod()}{133}{subsubsection.10.41.1.5}%
+\contentsline {subsubsection}{\numberline {10.41.1.6}b\_clear()}{134}{subsubsection.10.41.1.6}%
+\contentsline {subsubsection}{\numberline {10.41.1.7}b\_cp()}{134}{subsubsection.10.41.1.7}%
+\contentsline {subsubsection}{\numberline {10.41.1.8}b\_echo()}{134}{subsubsection.10.41.1.8}%
+\contentsline {subsubsection}{\numberline {10.41.1.9}b\_fg()}{134}{subsubsection.10.41.1.9}%
+\contentsline {subsubsection}{\numberline {10.41.1.10}b\_jobs()}{134}{subsubsection.10.41.1.10}%
+\contentsline {subsubsection}{\numberline {10.41.1.11}b\_kill()}{135}{subsubsection.10.41.1.11}%
+\contentsline {subsubsection}{\numberline {10.41.1.12}b\_logout()}{135}{subsubsection.10.41.1.12}%
+\contentsline {subsubsection}{\numberline {10.41.1.13}b\_ls()}{135}{subsubsection.10.41.1.13}%
+\contentsline {subsubsection}{\numberline {10.41.1.14}b\_man()}{135}{subsubsection.10.41.1.14}%
+\contentsline {subsubsection}{\numberline {10.41.1.15}b\_mv()}{135}{subsubsection.10.41.1.15}%
+\contentsline {subsubsection}{\numberline {10.41.1.16}b\_nice()}{136}{subsubsection.10.41.1.16}%
+\contentsline {subsubsection}{\numberline {10.41.1.17}b\_nice\_pid()}{136}{subsubsection.10.41.1.17}%
+\contentsline {subsubsection}{\numberline {10.41.1.18}b\_orphan\_child()}{136}{subsubsection.10.41.1.18}%
+\contentsline {subsubsection}{\numberline {10.41.1.19}b\_orphanify()}{136}{subsubsection.10.41.1.19}%
+\contentsline {subsubsection}{\numberline {10.41.1.20}b\_ps()}{136}{subsubsection.10.41.1.20}%
+\contentsline {subsubsection}{\numberline {10.41.1.21}b\_rm()}{137}{subsubsection.10.41.1.21}%
+\contentsline {subsubsection}{\numberline {10.41.1.22}b\_sleep()}{137}{subsubsection.10.41.1.22}%
+\contentsline {subsubsection}{\numberline {10.41.1.23}b\_touch()}{137}{subsubsection.10.41.1.23}%
+\contentsline {subsubsection}{\numberline {10.41.1.24}b\_zombie\_child()}{137}{subsubsection.10.41.1.24}%
+\contentsline {subsubsection}{\numberline {10.41.1.25}b\_zombify()}{137}{subsubsection.10.41.1.25}%
+\contentsline {section}{\numberline {10.42}shellbuiltins.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{138}{section.10.42}%
+\contentsline {section}{\numberline {10.43}src/util/spthread.c File Reference}{138}{section.10.43}%
+\contentsline {subsection}{\numberline {10.43.1}Macro Definition Documentation}{139}{subsection.10.43.1}%
+\contentsline {subsubsection}{\numberline {10.43.1.1}\_GNU\_SOURCE}{139}{subsubsection.10.43.1.1}%
+\contentsline {subsubsection}{\numberline {10.43.1.2}\_XOPEN\_SOURCE}{139}{subsubsection.10.43.1.2}%
+\contentsline {subsubsection}{\numberline {10.43.1.3}MILISEC\_IN\_NANO}{139}{subsubsection.10.43.1.3}%
+\contentsline {subsubsection}{\numberline {10.43.1.4}SPTHREAD\_RUNNING\_STATE}{140}{subsubsection.10.43.1.4}%
+\contentsline {subsubsection}{\numberline {10.43.1.5}SPTHREAD\_SIG\_CONTINUE}{140}{subsubsection.10.43.1.5}%
+\contentsline {subsubsection}{\numberline {10.43.1.6}SPTHREAD\_SIG\_SUSPEND}{140}{subsubsection.10.43.1.6}%
+\contentsline {subsubsection}{\numberline {10.43.1.7}SPTHREAD\_SUSPENDED\_STATE}{140}{subsubsection.10.43.1.7}%
+\contentsline {subsubsection}{\numberline {10.43.1.8}SPTHREAD\_TERMINATED\_STATE}{140}{subsubsection.10.43.1.8}%
+\contentsline {subsection}{\numberline {10.43.2}Typedef Documentation}{140}{subsection.10.43.2}%
+\contentsline {subsubsection}{\numberline {10.43.2.1}pthread\_fn}{140}{subsubsection.10.43.2.1}%
+\contentsline {subsubsection}{\numberline {10.43.2.2}spthread\_fwd\_args}{140}{subsubsection.10.43.2.2}%
+\contentsline {subsubsection}{\numberline {10.43.2.3}spthread\_meta\_t}{140}{subsubsection.10.43.2.3}%
+\contentsline {subsubsection}{\numberline {10.43.2.4}spthread\_signal\_args}{140}{subsubsection.10.43.2.4}%
+\contentsline {subsection}{\numberline {10.43.3}Function Documentation}{141}{subsection.10.43.3}%
+\contentsline {subsubsection}{\numberline {10.43.3.1}spthread\_cancel()}{141}{subsubsection.10.43.3.1}%
+\contentsline {subsubsection}{\numberline {10.43.3.2}spthread\_continue()}{141}{subsubsection.10.43.3.2}%
+\contentsline {subsubsection}{\numberline {10.43.3.3}spthread\_create()}{141}{subsubsection.10.43.3.3}%
+\contentsline {subsubsection}{\numberline {10.43.3.4}spthread\_exit()}{141}{subsubsection.10.43.3.4}%
+\contentsline {subsubsection}{\numberline {10.43.3.5}spthread\_join()}{141}{subsubsection.10.43.3.5}%
+\contentsline {subsubsection}{\numberline {10.43.3.6}spthread\_self()}{141}{subsubsection.10.43.3.6}%
+\contentsline {subsubsection}{\numberline {10.43.3.7}spthread\_suspend()}{141}{subsubsection.10.43.3.7}%
+\contentsline {subsubsection}{\numberline {10.43.3.8}spthread\_suspend\_self()}{141}{subsubsection.10.43.3.8}%
+\contentsline {section}{\numberline {10.44}src/util/spthread.h File Reference}{142}{section.10.44}%
+\contentsline {subsection}{\numberline {10.44.1}Macro Definition Documentation}{142}{subsection.10.44.1}%
+\contentsline {subsubsection}{\numberline {10.44.1.1}SIGPTHD}{142}{subsubsection.10.44.1.1}%
+\contentsline {subsection}{\numberline {10.44.2}Typedef Documentation}{142}{subsection.10.44.2}%
+\contentsline {subsubsection}{\numberline {10.44.2.1}spthread\_meta\_t}{142}{subsubsection.10.44.2.1}%
+\contentsline {subsubsection}{\numberline {10.44.2.2}spthread\_t}{142}{subsubsection.10.44.2.2}%
+\contentsline {subsection}{\numberline {10.44.3}Function Documentation}{143}{subsection.10.44.3}%
+\contentsline {subsubsection}{\numberline {10.44.3.1}spthread\_cancel()}{143}{subsubsection.10.44.3.1}%
+\contentsline {subsubsection}{\numberline {10.44.3.2}spthread\_continue()}{143}{subsubsection.10.44.3.2}%
+\contentsline {subsubsection}{\numberline {10.44.3.3}spthread\_create()}{143}{subsubsection.10.44.3.3}%
+\contentsline {subsubsection}{\numberline {10.44.3.4}spthread\_exit()}{143}{subsubsection.10.44.3.4}%
+\contentsline {subsubsection}{\numberline {10.44.3.5}spthread\_join()}{143}{subsubsection.10.44.3.5}%
+\contentsline {subsubsection}{\numberline {10.44.3.6}spthread\_self()}{143}{subsubsection.10.44.3.6}%
+\contentsline {subsubsection}{\numberline {10.44.3.7}spthread\_suspend()}{143}{subsubsection.10.44.3.7}%
+\contentsline {subsubsection}{\numberline {10.44.3.8}spthread\_suspend\_self()}{143}{subsubsection.10.44.3.8}%
+\contentsline {section}{\numberline {10.45}spthread.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{144}{section.10.45}%
+\contentsline {section}{\numberline {10.46}src/util/stress.c File Reference}{146}{section.10.46}%
+\contentsline {subsection}{\numberline {10.46.1}Function Documentation}{146}{subsection.10.46.1}%
+\contentsline {subsubsection}{\numberline {10.46.1.1}hang()}{146}{subsubsection.10.46.1.1}%
+\contentsline {subsubsection}{\numberline {10.46.1.2}nohang()}{146}{subsubsection.10.46.1.2}%
+\contentsline {subsubsection}{\numberline {10.46.1.3}recur()}{147}{subsubsection.10.46.1.3}%
+\contentsline {section}{\numberline {10.47}src/util/stress.h File Reference}{147}{section.10.47}%
+\contentsline {subsection}{\numberline {10.47.1}Function Documentation}{147}{subsection.10.47.1}%
+\contentsline {subsubsection}{\numberline {10.47.1.1}hang()}{147}{subsubsection.10.47.1.1}%
+\contentsline {subsubsection}{\numberline {10.47.1.2}nohang()}{147}{subsubsection.10.47.1.2}%
+\contentsline {subsubsection}{\numberline {10.47.1.3}recur()}{147}{subsubsection.10.47.1.3}%
+\contentsline {section}{\numberline {10.48}stress.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{147}{section.10.48}%
+\contentsline {section}{\numberline {10.49}src/util/sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.c File Reference}{148}{section.10.49}%
+\contentsline {subsection}{\numberline {10.49.1}Function Documentation}{150}{subsection.10.49.1}%
+\contentsline {subsubsection}{\numberline {10.49.1.1}duplicate\_argv()}{150}{subsubsection.10.49.1.1}%
+\contentsline {subsubsection}{\numberline {10.49.1.2}file\_errno\_helper()}{150}{subsubsection.10.49.1.2}%
+\contentsline {subsubsection}{\numberline {10.49.1.3}find\_jobs\_proc()}{150}{subsubsection.10.49.1.3}%
+\contentsline {subsubsection}{\numberline {10.49.1.4}free\_argv()}{150}{subsubsection.10.49.1.4}%
+\contentsline {subsubsection}{\numberline {10.49.1.5}get\_arg\_size()}{150}{subsubsection.10.49.1.5}%
+\contentsline {subsubsection}{\numberline {10.49.1.6}s\_bg\_wait()}{150}{subsubsection.10.49.1.6}%
+\contentsline {subsubsection}{\numberline {10.49.1.7}s\_busy()}{151}{subsubsection.10.49.1.7}%
+\contentsline {subsubsection}{\numberline {10.49.1.8}s\_change\_mode()}{151}{subsubsection.10.49.1.8}%
+\contentsline {subsubsection}{\numberline {10.49.1.9}s\_close()}{151}{subsubsection.10.49.1.9}%
+\contentsline {subsubsection}{\numberline {10.49.1.10}s\_cp\_from\_host()}{152}{subsubsection.10.49.1.10}%
+\contentsline {subsubsection}{\numberline {10.49.1.11}s\_cp\_to\_host()}{152}{subsubsection.10.49.1.11}%
+\contentsline {subsubsection}{\numberline {10.49.1.12}s\_cp\_within\_fat()}{152}{subsubsection.10.49.1.12}%
+\contentsline {subsubsection}{\numberline {10.49.1.13}s\_does\_file\_exist2()}{153}{subsubsection.10.49.1.13}%
+\contentsline {subsubsection}{\numberline {10.49.1.14}s\_exit()}{153}{subsubsection.10.49.1.14}%
+\contentsline {subsubsection}{\numberline {10.49.1.15}s\_fg()}{153}{subsubsection.10.49.1.15}%
+\contentsline {subsubsection}{\numberline {10.49.1.16}s\_find\_process()}{154}{subsubsection.10.49.1.16}%
+\contentsline {subsubsection}{\numberline {10.49.1.17}s\_function\_from\_string()}{154}{subsubsection.10.49.1.17}%
+\contentsline {subsubsection}{\numberline {10.49.1.18}s\_get\_fname\_from\_fd()}{154}{subsubsection.10.49.1.18}%
+\contentsline {subsubsection}{\numberline {10.49.1.19}s\_kill()}{155}{subsubsection.10.49.1.19}%
+\contentsline {subsubsection}{\numberline {10.49.1.20}s\_ls()}{155}{subsubsection.10.49.1.20}%
+\contentsline {subsubsection}{\numberline {10.49.1.21}s\_lseek()}{155}{subsubsection.10.49.1.21}%
+\contentsline {subsubsection}{\numberline {10.49.1.22}s\_move\_process()}{156}{subsubsection.10.49.1.22}%
+\contentsline {subsubsection}{\numberline {10.49.1.23}s\_nice()}{156}{subsubsection.10.49.1.23}%
+\contentsline {subsubsection}{\numberline {10.49.1.24}s\_open()}{156}{subsubsection.10.49.1.24}%
+\contentsline {subsubsection}{\numberline {10.49.1.25}s\_print\_jobs()}{157}{subsubsection.10.49.1.25}%
+\contentsline {subsubsection}{\numberline {10.49.1.26}s\_print\_process()}{157}{subsubsection.10.49.1.26}%
+\contentsline {subsubsection}{\numberline {10.49.1.27}s\_read()}{158}{subsubsection.10.49.1.27}%
+\contentsline {subsubsection}{\numberline {10.49.1.28}s\_read\_all()}{158}{subsubsection.10.49.1.28}%
+\contentsline {subsubsection}{\numberline {10.49.1.29}s\_reap\_all\_child()}{158}{subsubsection.10.49.1.29}%
+\contentsline {subsubsection}{\numberline {10.49.1.30}s\_remove\_process()}{160}{subsubsection.10.49.1.30}%
+\contentsline {subsubsection}{\numberline {10.49.1.31}s\_rename()}{160}{subsubsection.10.49.1.31}%
+\contentsline {subsubsection}{\numberline {10.49.1.32}s\_resume\_block()}{160}{subsubsection.10.49.1.32}%
+\contentsline {subsubsection}{\numberline {10.49.1.33}s\_sleep()}{161}{subsubsection.10.49.1.33}%
+\contentsline {subsubsection}{\numberline {10.49.1.34}s\_spawn()}{161}{subsubsection.10.49.1.34}%
+\contentsline {subsubsection}{\numberline {10.49.1.35}s\_spawn\_and\_wait()}{161}{subsubsection.10.49.1.35}%
+\contentsline {subsubsection}{\numberline {10.49.1.36}s\_spawn\_nice()}{162}{subsubsection.10.49.1.36}%
+\contentsline {subsubsection}{\numberline {10.49.1.37}s\_unlink()}{162}{subsubsection.10.49.1.37}%
+\contentsline {subsubsection}{\numberline {10.49.1.38}s\_update\_timestamp()}{163}{subsubsection.10.49.1.38}%
+\contentsline {subsubsection}{\numberline {10.49.1.39}s\_waitpid()}{163}{subsubsection.10.49.1.39}%
+\contentsline {subsubsection}{\numberline {10.49.1.40}s\_write()}{163}{subsubsection.10.49.1.40}%
+\contentsline {subsubsection}{\numberline {10.49.1.41}s\_write\_log()}{164}{subsubsection.10.49.1.41}%
+\contentsline {subsubsection}{\numberline {10.49.1.42}s\_zombie()}{164}{subsubsection.10.49.1.42}%
+\contentsline {section}{\numberline {10.50}src/util/sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.h File Reference}{165}{section.10.50}%
+\contentsline {subsection}{\numberline {10.50.1}Macro Definition Documentation}{167}{subsection.10.50.1}%
+\contentsline {subsubsection}{\numberline {10.50.1.1}P\_WIFEXITED}{167}{subsubsection.10.50.1.1}%
+\contentsline {subsubsection}{\numberline {10.50.1.2}P\_WIFSIGNALED}{167}{subsubsection.10.50.1.2}%
+\contentsline {subsubsection}{\numberline {10.50.1.3}P\_WIFSTOPPED}{167}{subsubsection.10.50.1.3}%
+\contentsline {subsubsection}{\numberline {10.50.1.4}STATUS\_EXITED}{167}{subsubsection.10.50.1.4}%
+\contentsline {subsubsection}{\numberline {10.50.1.5}STATUS\_SIGNALED}{168}{subsubsection.10.50.1.5}%
+\contentsline {subsubsection}{\numberline {10.50.1.6}STATUS\_STOPPED}{168}{subsubsection.10.50.1.6}%
+\contentsline {subsection}{\numberline {10.50.2}Enumeration Type Documentation}{168}{subsection.10.50.2}%
+\contentsline {subsubsection}{\numberline {10.50.2.1}log\_message\_t}{168}{subsubsection.10.50.2.1}%
+\contentsline {subsection}{\numberline {10.50.3}Function Documentation}{168}{subsection.10.50.3}%
+\contentsline {subsubsection}{\numberline {10.50.3.1}file\_errno\_helper()}{168}{subsubsection.10.50.3.1}%
+\contentsline {subsubsection}{\numberline {10.50.3.2}find\_jobs\_proc()}{168}{subsubsection.10.50.3.2}%
+\contentsline {subsubsection}{\numberline {10.50.3.3}s\_bg\_wait()}{169}{subsubsection.10.50.3.3}%
+\contentsline {subsubsection}{\numberline {10.50.3.4}s\_busy()}{169}{subsubsection.10.50.3.4}%
+\contentsline {subsubsection}{\numberline {10.50.3.5}s\_change\_mode()}{169}{subsubsection.10.50.3.5}%
+\contentsline {subsubsection}{\numberline {10.50.3.6}s\_close()}{170}{subsubsection.10.50.3.6}%
+\contentsline {subsubsection}{\numberline {10.50.3.7}s\_cp\_from\_host()}{170}{subsubsection.10.50.3.7}%
+\contentsline {subsubsection}{\numberline {10.50.3.8}s\_cp\_to\_host()}{170}{subsubsection.10.50.3.8}%
+\contentsline {subsubsection}{\numberline {10.50.3.9}s\_cp\_within\_fat()}{172}{subsubsection.10.50.3.9}%
+\contentsline {subsubsection}{\numberline {10.50.3.10}s\_does\_file\_exist2()}{172}{subsubsection.10.50.3.10}%
+\contentsline {subsubsection}{\numberline {10.50.3.11}s\_exit()}{172}{subsubsection.10.50.3.11}%
+\contentsline {subsubsection}{\numberline {10.50.3.12}s\_fg()}{173}{subsubsection.10.50.3.12}%
+\contentsline {subsubsection}{\numberline {10.50.3.13}s\_find\_process()}{173}{subsubsection.10.50.3.13}%
+\contentsline {subsubsection}{\numberline {10.50.3.14}s\_function\_from\_string()}{173}{subsubsection.10.50.3.14}%
+\contentsline {subsubsection}{\numberline {10.50.3.15}s\_get\_fname\_from\_fd()}{174}{subsubsection.10.50.3.15}%
+\contentsline {subsubsection}{\numberline {10.50.3.16}s\_kill()}{174}{subsubsection.10.50.3.16}%
+\contentsline {subsubsection}{\numberline {10.50.3.17}s\_ls()}{174}{subsubsection.10.50.3.17}%
+\contentsline {subsubsection}{\numberline {10.50.3.18}s\_lseek()}{175}{subsubsection.10.50.3.18}%
+\contentsline {subsubsection}{\numberline {10.50.3.19}s\_move\_process()}{175}{subsubsection.10.50.3.19}%
+\contentsline {subsubsection}{\numberline {10.50.3.20}s\_nice()}{175}{subsubsection.10.50.3.20}%
+\contentsline {subsubsection}{\numberline {10.50.3.21}s\_open()}{176}{subsubsection.10.50.3.21}%
+\contentsline {subsubsection}{\numberline {10.50.3.22}s\_print\_jobs()}{176}{subsubsection.10.50.3.22}%
+\contentsline {subsubsection}{\numberline {10.50.3.23}s\_print\_process()}{177}{subsubsection.10.50.3.23}%
+\contentsline {subsubsection}{\numberline {10.50.3.24}s\_read()}{177}{subsubsection.10.50.3.24}%
+\contentsline {subsubsection}{\numberline {10.50.3.25}s\_read\_all()}{177}{subsubsection.10.50.3.25}%
+\contentsline {subsubsection}{\numberline {10.50.3.26}s\_reap\_all\_child()}{178}{subsubsection.10.50.3.26}%
+\contentsline {subsubsection}{\numberline {10.50.3.27}s\_remove\_process()}{178}{subsubsection.10.50.3.27}%
+\contentsline {subsubsection}{\numberline {10.50.3.28}s\_rename()}{178}{subsubsection.10.50.3.28}%
+\contentsline {subsubsection}{\numberline {10.50.3.29}s\_resume\_block()}{179}{subsubsection.10.50.3.29}%
+\contentsline {subsubsection}{\numberline {10.50.3.30}s\_sleep()}{179}{subsubsection.10.50.3.30}%
+\contentsline {subsubsection}{\numberline {10.50.3.31}s\_spawn()}{179}{subsubsection.10.50.3.31}%
+\contentsline {subsubsection}{\numberline {10.50.3.32}s\_spawn\_and\_wait()}{180}{subsubsection.10.50.3.32}%
+\contentsline {subsubsection}{\numberline {10.50.3.33}s\_spawn\_nice()}{181}{subsubsection.10.50.3.33}%
+\contentsline {subsubsection}{\numberline {10.50.3.34}s\_unlink()}{181}{subsubsection.10.50.3.34}%
+\contentsline {subsubsection}{\numberline {10.50.3.35}s\_update\_timestamp()}{182}{subsubsection.10.50.3.35}%
+\contentsline {subsubsection}{\numberline {10.50.3.36}s\_waitpid()}{182}{subsubsection.10.50.3.36}%
+\contentsline {subsubsection}{\numberline {10.50.3.37}s\_write()}{182}{subsubsection.10.50.3.37}%
+\contentsline {subsubsection}{\numberline {10.50.3.38}s\_write\_log()}{183}{subsubsection.10.50.3.38}%
+\contentsline {subsubsection}{\numberline {10.50.3.39}s\_zombie()}{183}{subsubsection.10.50.3.39}%
+\contentsline {section}{\numberline {10.51}sys\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}call.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{183}{section.10.51}%
+\contentsline {section}{\numberline {10.52}test/sched-\/demo.c File Reference}{185}{section.10.52}%
+\contentsline {subsection}{\numberline {10.52.1}Macro Definition Documentation}{186}{subsection.10.52.1}%
+\contentsline {subsubsection}{\numberline {10.52.1.1}\_DEFAULT\_SOURCE}{186}{subsubsection.10.52.1.1}%
+\contentsline {subsubsection}{\numberline {10.52.1.2}\_POSIX\_C\_SOURCE}{186}{subsubsection.10.52.1.2}%
+\contentsline {subsubsection}{\numberline {10.52.1.3}\_XOPEN\_SOURCE}{186}{subsubsection.10.52.1.3}%
+\contentsline {subsubsection}{\numberline {10.52.1.4}BUF\_SIZE}{186}{subsubsection.10.52.1.4}%
+\contentsline {subsubsection}{\numberline {10.52.1.5}NUM\_THREADS}{186}{subsubsection.10.52.1.5}%
+\contentsline {subsection}{\numberline {10.52.2}Function Documentation}{186}{subsection.10.52.2}%
+\contentsline {subsubsection}{\numberline {10.52.2.1}cancel\_and\_join()}{186}{subsubsection.10.52.2.1}%
+\contentsline {subsubsection}{\numberline {10.52.2.2}main()}{186}{subsubsection.10.52.2.2}%
+\contentsline {chapter}{Index}{187}{section*.78}%

@@ -20,6 +20,8 @@
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \mbox{\hyperlink{pennfat_8h_ad9cbb2c6de69fff159fe38f137afa179}{free\+\_\+global\+\_\+fd\+\_\+table}} ()
+\item 
 void \mbox{\hyperlink{pennfat_8h_adf6e89b78280efda4b5c486c9697b513}{mkfs}} (const char \texorpdfstring{$\ast$}{*}fs\+\_\+name, int blocks\+\_\+in\+\_\+fat, int block\+\_\+size\+\_\+config)
 \begin{DoxyCompactList}\small\item\em Creates a "{}filesytem"{} (file on host device) with name {\ttfamily fs\+\_\+name} with each of the {\ttfamily blocks\+\_\+in\+\_\+fat} blocks of size specified via {\ttfamily block\+\_\+size\+\_\+config} . \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat_8h_a2fe0ff1115fb73cfaef3441eb8d77426}{mount}} (const char \texorpdfstring{$\ast$}{*}fs\+\_\+name)
@@ -54,7 +56,7 @@ void \mbox{\hyperlink{pennfat_8h_a3c36044e4d46eeeac317c0625aa2a0aa}{chmod}} (cha
 \begin{DoxyCompactList}\small\item\em Implements chmod function via k\+\_\+change\+\_\+mode. Changes mode (file permission) of file directory entry Errors if resulting file permission is invalid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pennfat_8h_afdca5618cfd95ac674ef9714c8aaf94b}{cat\+\_\+file\+\_\+wa}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Implements cat functions E.\+g. cat f1 -\/w f2 writes contents of f1 into f2, cat f1 f2 prints contents of f1 and f2 into stdout, cat f1 -\/a f2, appends contents of f1 into f2. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{pennfat_8h_a0a4a3cef40cd8acefe8d3913380a814a}{ls}} ()
+int \mbox{\hyperlink{pennfat_8h_a95b380ceb023b12c760335e1b365c331}{ls}} (char \texorpdfstring{$\ast$}{*}filename)
 \begin{DoxyCompactList}\small\item\em Implements standard ls function. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat_8h_a96e0c0752c3a4f14c705c8438d4e1d32}{cp\+\_\+within\+\_\+fat}} (char \texorpdfstring{$\ast$}{*}source, char \texorpdfstring{$\ast$}{*}dest)
 \begin{DoxyCompactList}\small\item\em Implements cp function of copying within the fat by calling k\+\_\+cp\+\_\+within\+\_\+fat Creates {\ttfamily dest} file if it doesn\textquotesingle{}t exist, {\ttfamily source} must exist. \end{DoxyCompactList}\item 
@@ -198,6 +200,12 @@ Implements cp function of copying within the fat by calling k\+\_\+cp\+\_\+withi
 \begin{DoxyReturn}{Returns}
 -\/1 on error, 0 if successful 
 \end{DoxyReturn}
+\Hypertarget{pennfat_8h_ad9cbb2c6de69fff159fe38f137afa179}\label{pennfat_8h_ad9cbb2c6de69fff159fe38f137afa179} 
+\index{pennfat.h@{pennfat.h}!free\_global\_fd\_table@{free\_global\_fd\_table}}
+\index{free\_global\_fd\_table@{free\_global\_fd\_table}!pennfat.h@{pennfat.h}}
+\doxysubsubsection{\texorpdfstring{free\_global\_fd\_table()}{free\_global\_fd\_table()}}
+{\footnotesize\ttfamily void free\+\_\+global\+\_\+fd\+\_\+table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 \Hypertarget{pennfat_8h_a1d5876a5f78107bed3847c8d5485b7c4}\label{pennfat_8h_a1d5876a5f78107bed3847c8d5485b7c4} 
 \index{pennfat.h@{pennfat.h}!get\_block\_size@{get\_block\_size}}
 \index{get\_block\_size@{get\_block\_size}!pennfat.h@{pennfat.h}}
@@ -321,11 +329,11 @@ Helper function that handles CTRL-\/Z.
 {\em signo} & Signal for int handler \\
 \hline
 \end{DoxyParams}
-\Hypertarget{pennfat_8h_a0a4a3cef40cd8acefe8d3913380a814a}\label{pennfat_8h_a0a4a3cef40cd8acefe8d3913380a814a} 
+\Hypertarget{pennfat_8h_a95b380ceb023b12c760335e1b365c331}\label{pennfat_8h_a95b380ceb023b12c760335e1b365c331} 
 \index{pennfat.h@{pennfat.h}!ls@{ls}}
 \index{ls@{ls}!pennfat.h@{pennfat.h}}
 \doxysubsubsection{\texorpdfstring{ls()}{ls()}}
-{\footnotesize\ttfamily void ls (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int ls (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
 
 
 

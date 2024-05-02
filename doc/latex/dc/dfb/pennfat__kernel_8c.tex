@@ -49,7 +49,7 @@ void \mbox{\hyperlink{pennfat__kernel_8c_a4760215b7653953e799d8489ca88be8e}{gene
 \item 
 char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pennfat__kernel_8c_af2e67755671ac41b267522c63e52a7ba}{format\+Time}} (time\+\_\+t t)
 \item 
-void \mbox{\hyperlink{pennfat__kernel_8c_aa1a03cfc7e106d29d54196f03557b9ba}{k\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename, int fd)
+int \mbox{\hyperlink{pennfat__kernel_8c_a8d29dec65e04c5f1fe04b09921dede89}{k\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename, int fd)
 \begin{DoxyCompactList}\small\item\em List the file filename in the current directory. If filename is NULL, list all files in the current directory. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{pennfat__kernel_8c_abf487212da5b9d6ebceef678fa744ad9}{k\+\_\+update\+\_\+timestamp}} (const char \texorpdfstring{$\ast$}{*}source)
 \begin{DoxyCompactList}\small\item\em Change the timestamp of the file to the current time. \end{DoxyCompactList}\item 
@@ -385,11 +385,11 @@ Returns the filename for the given file descriptor number.
 \begin{DoxyReturn}{Returns}
 The file name of the {\ttfamily fd} . NULL is {\ttfamily fd} is invalid. 
 \end{DoxyReturn}
-\Hypertarget{pennfat__kernel_8c_aa1a03cfc7e106d29d54196f03557b9ba}\label{pennfat__kernel_8c_aa1a03cfc7e106d29d54196f03557b9ba} 
+\Hypertarget{pennfat__kernel_8c_a8d29dec65e04c5f1fe04b09921dede89}\label{pennfat__kernel_8c_a8d29dec65e04c5f1fe04b09921dede89} 
 \index{pennfat\_kernel.c@{pennfat\_kernel.c}!k\_ls@{k\_ls}}
 \index{k\_ls@{k\_ls}!pennfat\_kernel.c@{pennfat\_kernel.c}}
 \doxysubsubsection{\texorpdfstring{k\_ls()}{k\_ls()}}
-{\footnotesize\ttfamily void k\+\_\+ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename,  }\item[{int}]{fd }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int k\+\_\+ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename,  }\item[{int}]{fd }\end{DoxyParamCaption})}
 
 
 
@@ -401,9 +401,12 @@ Similar to posix ls.
 \begin{DoxyParams}{Parameters}
 {\em filename} & Optional parameter. If specified, ls data for the specified file is printed \\
 \hline
-{\em fd} & The file descriptor you want to write the result of k\+\_\+ls to \\
+{\em fd} & The file descriptor you want to write the result of k\+\_\+ls to\\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, negative value on failure 
+\end{DoxyReturn}
 \Hypertarget{pennfat__kernel_8c_a332b4729ef52b2a3132b1aea88fa5c96}\label{pennfat__kernel_8c_a332b4729ef52b2a3132b1aea88fa5c96} 
 \index{pennfat\_kernel.c@{pennfat\_kernel.c}!k\_lseek@{k\_lseek}}
 \index{k\_lseek@{k\_lseek}!pennfat\_kernel.c@{pennfat\_kernel.c}}

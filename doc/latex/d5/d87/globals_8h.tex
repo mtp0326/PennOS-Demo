@@ -18,6 +18,8 @@
 \item 
 \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{globals_8h_aadfd9da35df54aa07940062a8b8326e2}{current}}
 \item 
+\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{globals_8h_a1f65fd8fbd2801faa7b2aba622ffe5ee}{fg\+\_\+proc}}
+\item 
 pid\+\_\+t \mbox{\hyperlink{globals_8h_a54a60f61f4b468b7e6ef164c4b5ba60b}{next\+\_\+pid}}
 \item 
 uint64\+\_\+t \mbox{\hyperlink{globals_8h_a6eaa855e821dfd115dd64e929aeb6102}{job\+\_\+id}}
@@ -47,7 +49,13 @@ A global pointer to the process list of blocked processes. Processes enter this 
 \doxysubsubsection{\texorpdfstring{current}{current}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}}\texorpdfstring{$\ast$}{*} current\hspace{0.3cm}{\ttfamily [extern]}}
 
-This is the currently scheduled process. It can be accessed by any method to easily access the current method. \Hypertarget{globals_8h_a6eaa855e821dfd115dd64e929aeb6102}\label{globals_8h_a6eaa855e821dfd115dd64e929aeb6102} 
+This is the currently scheduled process. It can be accessed by any method to easily access the current method. \Hypertarget{globals_8h_a1f65fd8fbd2801faa7b2aba622ffe5ee}\label{globals_8h_a1f65fd8fbd2801faa7b2aba622ffe5ee} 
+\index{globals.h@{globals.h}!fg\_proc@{fg\_proc}}
+\index{fg\_proc@{fg\_proc}!globals.h@{globals.h}}
+\doxysubsubsection{\texorpdfstring{fg\_proc}{fg\_proc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}}\texorpdfstring{$\ast$}{*} fg\+\_\+proc\hspace{0.3cm}{\ttfamily [extern]}}
+
+This is the foreground processor and if it exists, the processor takes control of the terminal \Hypertarget{globals_8h_a6eaa855e821dfd115dd64e929aeb6102}\label{globals_8h_a6eaa855e821dfd115dd64e929aeb6102} 
 \index{globals.h@{globals.h}!job\_id@{job\_id}}
 \index{job\_id@{job\_id}!globals.h@{globals.h}}
 \doxysubsubsection{\texorpdfstring{job\_id}{job\_id}}

@@ -1,9 +1,9 @@
 \doxysection{src/util/error.h File Reference}
 \hypertarget{error_8h}{}\label{error_8h}\index{src/util/error.h@{src/util/error.h}}
-{\ttfamily \#include "{}unistd.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include "{}errno.\+h"{}}\newline
 {\ttfamily \#include "{}stdio.\+h"{}}\newline
-{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}unistd.\+h"{}}\newline
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -18,6 +18,56 @@
 \#define \mbox{\hyperlink{error_8h_ab63e8f0456257c703a5c5f25ed139981}{EBITMAP}}~4
 \item 
 \#define \mbox{\hyperlink{error_8h_ab3d8ec79ca1a1eb0d42f5bdf5c473e83}{EINVARG}}~5
+\item 
+\#define \mbox{\hyperlink{error_8h_ab0301a4457636d9fb5ffc604522f8d5a}{EBADFILENAME}}~400
+\item 
+\#define \mbox{\hyperlink{error_8h_a7a24a92c13808edc4a96dab56964d4b6}{EMULTWRITE}}~401
+\item 
+\#define \mbox{\hyperlink{error_8h_ae884038335ba74679a0c291cbb8a7bb0}{EWRONGPERM}}~402
+\item 
+\#define \mbox{\hyperlink{error_8h_a009c098f75fc7ae2949228093e99881b}{ESYSERR}}~403
+\item 
+\#define \mbox{\hyperlink{error_8h_a0cd5578a2f25af7d671c41148b6d87f4}{ENOFILE}}~404
+\item 
+\#define \mbox{\hyperlink{error_8h_afa5117c779d3722c1d83b20bf7d9954c}{EFILEDEL}}~405
+\item 
+\#define \mbox{\hyperlink{error_8h_a5113bcf70b4bd5b7ce0027da04e7baff}{EINVALIDFD}}~406
+\item 
+\#define \mbox{\hyperlink{error_8h_aefc33546795e7609ad3d07889796b681}{EINVALIDPARAMETER}}~407
+\item 
+\#define \mbox{\hyperlink{error_8h_a691c09308f1c74357375e683919991d5}{EUSEDFILE}}~408
+\item 
+\#define \mbox{\hyperlink{error_8h_a85b7bf7a1abb4ce96f4ebdf70850096f}{EINVALIDCHMOD}}~500
+\item 
+\#define \mbox{\hyperlink{error_8h_ab5eeb6409f8b0f39286196f4c29ba941}{EREADERROR}}~501
+\item 
+\#define \mbox{\hyperlink{error_8h_a7b2474fb4b2efda289b37777aa346444}{ENOREADPERM}}~502
+\item 
+\#define \mbox{\hyperlink{error_8h_a03253ebed37f2495f8ebe4b9e7b5e936}{ENOWRITEPERM}}~503
+\item 
+\#define \mbox{\hyperlink{error_8h_acc9d480ef0c9f39f885298a98899a789}{ENOPROC}}~410
+\begin{DoxyCompactList}\small\item\em feel free to fix the number \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{error_8h_ad43a0decaa16dd0eadba926cb4f407d4}{EPCBSTATE}}~411
+\item 
+\#define \mbox{\hyperlink{error_8h_a95b629278216e576b8cda2937ea8ae5c}{EREMOVEPROC}}~412
+\item 
+\#define \mbox{\hyperlink{error_8h_af2f6d24170085d82b5d48163fcd70d6b}{EINVALIDCMD}}~413
+\item 
+\#define \mbox{\hyperlink{error_8h_a7f7f01051ff8ebecee6f137fef20e3ba}{ELISTNULL}}~414
+\item 
+\#define \mbox{\hyperlink{error_8h_a76f1ff85846b91143a105dad0ba3a267}{ENOJOB}}~415
+\item 
+\#define \mbox{\hyperlink{error_8h_a3c0a12037bad89da8932e5ec51e1418a}{ENOPIDJOB}}~416
+\item 
+\#define \mbox{\hyperlink{error_8h_aa540d8b9e2ad210c9f13c5b27d03fb0a}{ENOTSTOP}}~417
+\item 
+\#define \mbox{\hyperlink{error_8h_aa37ee8f75839e904d43206a7e4e85d5c}{EINVALIDSIG}}~418
+\item 
+\#define \mbox{\hyperlink{error_8h_a280367bf85414fc54193f00dae00e5be}{EINVALIDLOG}}~419
+\item 
+\#define \mbox{\hyperlink{error_8h_a086e57657fcaf0c4ac8b6bacd338adb8}{EINVALIDLOGWRITE}}~420
+\item 
+\#define \mbox{\hyperlink{error_8h_a221b2faeea9365b4d14f8d1d0193602e}{EINVALIDSTDOUT}}~421
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -38,11 +88,71 @@ int \mbox{\hyperlink{error_8h_ad65a8842cc674e3ddf69355898c0ecbf}{errno}}
 \doxysubsubsection{\texorpdfstring{EADDPROC}{EADDPROC}}
 {\footnotesize\ttfamily \#define EADDPROC~2}
 
+\Hypertarget{error_8h_ab0301a4457636d9fb5ffc604522f8d5a}\label{error_8h_ab0301a4457636d9fb5ffc604522f8d5a} 
+\index{error.h@{error.h}!EBADFILENAME@{EBADFILENAME}}
+\index{EBADFILENAME@{EBADFILENAME}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EBADFILENAME}{EBADFILENAME}}
+{\footnotesize\ttfamily \#define EBADFILENAME~400}
+
 \Hypertarget{error_8h_ab63e8f0456257c703a5c5f25ed139981}\label{error_8h_ab63e8f0456257c703a5c5f25ed139981} 
 \index{error.h@{error.h}!EBITMAP@{EBITMAP}}
 \index{EBITMAP@{EBITMAP}!error.h@{error.h}}
 \doxysubsubsection{\texorpdfstring{EBITMAP}{EBITMAP}}
 {\footnotesize\ttfamily \#define EBITMAP~4}
+
+\Hypertarget{error_8h_afa5117c779d3722c1d83b20bf7d9954c}\label{error_8h_afa5117c779d3722c1d83b20bf7d9954c} 
+\index{error.h@{error.h}!EFILEDEL@{EFILEDEL}}
+\index{EFILEDEL@{EFILEDEL}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EFILEDEL}{EFILEDEL}}
+{\footnotesize\ttfamily \#define EFILEDEL~405}
+
+\Hypertarget{error_8h_a85b7bf7a1abb4ce96f4ebdf70850096f}\label{error_8h_a85b7bf7a1abb4ce96f4ebdf70850096f} 
+\index{error.h@{error.h}!EINVALIDCHMOD@{EINVALIDCHMOD}}
+\index{EINVALIDCHMOD@{EINVALIDCHMOD}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EINVALIDCHMOD}{EINVALIDCHMOD}}
+{\footnotesize\ttfamily \#define EINVALIDCHMOD~500}
+
+\Hypertarget{error_8h_af2f6d24170085d82b5d48163fcd70d6b}\label{error_8h_af2f6d24170085d82b5d48163fcd70d6b} 
+\index{error.h@{error.h}!EINVALIDCMD@{EINVALIDCMD}}
+\index{EINVALIDCMD@{EINVALIDCMD}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EINVALIDCMD}{EINVALIDCMD}}
+{\footnotesize\ttfamily \#define EINVALIDCMD~413}
+
+\Hypertarget{error_8h_a5113bcf70b4bd5b7ce0027da04e7baff}\label{error_8h_a5113bcf70b4bd5b7ce0027da04e7baff} 
+\index{error.h@{error.h}!EINVALIDFD@{EINVALIDFD}}
+\index{EINVALIDFD@{EINVALIDFD}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EINVALIDFD}{EINVALIDFD}}
+{\footnotesize\ttfamily \#define EINVALIDFD~406}
+
+\Hypertarget{error_8h_a280367bf85414fc54193f00dae00e5be}\label{error_8h_a280367bf85414fc54193f00dae00e5be} 
+\index{error.h@{error.h}!EINVALIDLOG@{EINVALIDLOG}}
+\index{EINVALIDLOG@{EINVALIDLOG}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EINVALIDLOG}{EINVALIDLOG}}
+{\footnotesize\ttfamily \#define EINVALIDLOG~419}
+
+\Hypertarget{error_8h_a086e57657fcaf0c4ac8b6bacd338adb8}\label{error_8h_a086e57657fcaf0c4ac8b6bacd338adb8} 
+\index{error.h@{error.h}!EINVALIDLOGWRITE@{EINVALIDLOGWRITE}}
+\index{EINVALIDLOGWRITE@{EINVALIDLOGWRITE}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EINVALIDLOGWRITE}{EINVALIDLOGWRITE}}
+{\footnotesize\ttfamily \#define EINVALIDLOGWRITE~420}
+
+\Hypertarget{error_8h_aefc33546795e7609ad3d07889796b681}\label{error_8h_aefc33546795e7609ad3d07889796b681} 
+\index{error.h@{error.h}!EINVALIDPARAMETER@{EINVALIDPARAMETER}}
+\index{EINVALIDPARAMETER@{EINVALIDPARAMETER}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EINVALIDPARAMETER}{EINVALIDPARAMETER}}
+{\footnotesize\ttfamily \#define EINVALIDPARAMETER~407}
+
+\Hypertarget{error_8h_aa37ee8f75839e904d43206a7e4e85d5c}\label{error_8h_aa37ee8f75839e904d43206a7e4e85d5c} 
+\index{error.h@{error.h}!EINVALIDSIG@{EINVALIDSIG}}
+\index{EINVALIDSIG@{EINVALIDSIG}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EINVALIDSIG}{EINVALIDSIG}}
+{\footnotesize\ttfamily \#define EINVALIDSIG~418}
+
+\Hypertarget{error_8h_a221b2faeea9365b4d14f8d1d0193602e}\label{error_8h_a221b2faeea9365b4d14f8d1d0193602e} 
+\index{error.h@{error.h}!EINVALIDSTDOUT@{EINVALIDSTDOUT}}
+\index{EINVALIDSTDOUT@{EINVALIDSTDOUT}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EINVALIDSTDOUT}{EINVALIDSTDOUT}}
+{\footnotesize\ttfamily \#define EINVALIDSTDOUT~421}
 
 \Hypertarget{error_8h_ab3d8ec79ca1a1eb0d42f5bdf5c473e83}\label{error_8h_ab3d8ec79ca1a1eb0d42f5bdf5c473e83} 
 \index{error.h@{error.h}!EINVARG@{EINVARG}}
@@ -50,11 +160,69 @@ int \mbox{\hyperlink{error_8h_ad65a8842cc674e3ddf69355898c0ecbf}{errno}}
 \doxysubsubsection{\texorpdfstring{EINVARG}{EINVARG}}
 {\footnotesize\ttfamily \#define EINVARG~5}
 
+\Hypertarget{error_8h_a7f7f01051ff8ebecee6f137fef20e3ba}\label{error_8h_a7f7f01051ff8ebecee6f137fef20e3ba} 
+\index{error.h@{error.h}!ELISTNULL@{ELISTNULL}}
+\index{ELISTNULL@{ELISTNULL}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{ELISTNULL}{ELISTNULL}}
+{\footnotesize\ttfamily \#define ELISTNULL~414}
+
+\Hypertarget{error_8h_a7a24a92c13808edc4a96dab56964d4b6}\label{error_8h_a7a24a92c13808edc4a96dab56964d4b6} 
+\index{error.h@{error.h}!EMULTWRITE@{EMULTWRITE}}
+\index{EMULTWRITE@{EMULTWRITE}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EMULTWRITE}{EMULTWRITE}}
+{\footnotesize\ttfamily \#define EMULTWRITE~401}
+
 \Hypertarget{error_8h_a0ba510724fffc6e8b380e18ef76174aa}\label{error_8h_a0ba510724fffc6e8b380e18ef76174aa} 
 \index{error.h@{error.h}!ENOARGS@{ENOARGS}}
 \index{ENOARGS@{ENOARGS}!error.h@{error.h}}
 \doxysubsubsection{\texorpdfstring{ENOARGS}{ENOARGS}}
 {\footnotesize\ttfamily \#define ENOARGS~1}
+
+\Hypertarget{error_8h_a0cd5578a2f25af7d671c41148b6d87f4}\label{error_8h_a0cd5578a2f25af7d671c41148b6d87f4} 
+\index{error.h@{error.h}!ENOFILE@{ENOFILE}}
+\index{ENOFILE@{ENOFILE}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{ENOFILE}{ENOFILE}}
+{\footnotesize\ttfamily \#define ENOFILE~404}
+
+\Hypertarget{error_8h_a76f1ff85846b91143a105dad0ba3a267}\label{error_8h_a76f1ff85846b91143a105dad0ba3a267} 
+\index{error.h@{error.h}!ENOJOB@{ENOJOB}}
+\index{ENOJOB@{ENOJOB}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{ENOJOB}{ENOJOB}}
+{\footnotesize\ttfamily \#define ENOJOB~415}
+
+\Hypertarget{error_8h_a3c0a12037bad89da8932e5ec51e1418a}\label{error_8h_a3c0a12037bad89da8932e5ec51e1418a} 
+\index{error.h@{error.h}!ENOPIDJOB@{ENOPIDJOB}}
+\index{ENOPIDJOB@{ENOPIDJOB}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{ENOPIDJOB}{ENOPIDJOB}}
+{\footnotesize\ttfamily \#define ENOPIDJOB~416}
+
+\Hypertarget{error_8h_acc9d480ef0c9f39f885298a98899a789}\label{error_8h_acc9d480ef0c9f39f885298a98899a789} 
+\index{error.h@{error.h}!ENOPROC@{ENOPROC}}
+\index{ENOPROC@{ENOPROC}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{ENOPROC}{ENOPROC}}
+{\footnotesize\ttfamily \#define ENOPROC~410}
+
+
+
+feel free to fix the number 
+
+\Hypertarget{error_8h_a7b2474fb4b2efda289b37777aa346444}\label{error_8h_a7b2474fb4b2efda289b37777aa346444} 
+\index{error.h@{error.h}!ENOREADPERM@{ENOREADPERM}}
+\index{ENOREADPERM@{ENOREADPERM}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{ENOREADPERM}{ENOREADPERM}}
+{\footnotesize\ttfamily \#define ENOREADPERM~502}
+
+\Hypertarget{error_8h_aa540d8b9e2ad210c9f13c5b27d03fb0a}\label{error_8h_aa540d8b9e2ad210c9f13c5b27d03fb0a} 
+\index{error.h@{error.h}!ENOTSTOP@{ENOTSTOP}}
+\index{ENOTSTOP@{ENOTSTOP}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{ENOTSTOP}{ENOTSTOP}}
+{\footnotesize\ttfamily \#define ENOTSTOP~417}
+
+\Hypertarget{error_8h_a03253ebed37f2495f8ebe4b9e7b5e936}\label{error_8h_a03253ebed37f2495f8ebe4b9e7b5e936} 
+\index{error.h@{error.h}!ENOWRITEPERM@{ENOWRITEPERM}}
+\index{ENOWRITEPERM@{ENOWRITEPERM}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{ENOWRITEPERM}{ENOWRITEPERM}}
+{\footnotesize\ttfamily \#define ENOWRITEPERM~503}
 
 \Hypertarget{error_8h_a53d186873a290a149683f9b9ee11c492}\label{error_8h_a53d186873a290a149683f9b9ee11c492} 
 \index{error.h@{error.h}!EPCBCREATE@{EPCBCREATE}}
@@ -62,11 +230,47 @@ int \mbox{\hyperlink{error_8h_ad65a8842cc674e3ddf69355898c0ecbf}{errno}}
 \doxysubsubsection{\texorpdfstring{EPCBCREATE}{EPCBCREATE}}
 {\footnotesize\ttfamily \#define EPCBCREATE~0}
 
+\Hypertarget{error_8h_ad43a0decaa16dd0eadba926cb4f407d4}\label{error_8h_ad43a0decaa16dd0eadba926cb4f407d4} 
+\index{error.h@{error.h}!EPCBSTATE@{EPCBSTATE}}
+\index{EPCBSTATE@{EPCBSTATE}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EPCBSTATE}{EPCBSTATE}}
+{\footnotesize\ttfamily \#define EPCBSTATE~411}
+
+\Hypertarget{error_8h_ab5eeb6409f8b0f39286196f4c29ba941}\label{error_8h_ab5eeb6409f8b0f39286196f4c29ba941} 
+\index{error.h@{error.h}!EREADERROR@{EREADERROR}}
+\index{EREADERROR@{EREADERROR}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EREADERROR}{EREADERROR}}
+{\footnotesize\ttfamily \#define EREADERROR~501}
+
+\Hypertarget{error_8h_a95b629278216e576b8cda2937ea8ae5c}\label{error_8h_a95b629278216e576b8cda2937ea8ae5c} 
+\index{error.h@{error.h}!EREMOVEPROC@{EREMOVEPROC}}
+\index{EREMOVEPROC@{EREMOVEPROC}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EREMOVEPROC}{EREMOVEPROC}}
+{\footnotesize\ttfamily \#define EREMOVEPROC~412}
+
+\Hypertarget{error_8h_a009c098f75fc7ae2949228093e99881b}\label{error_8h_a009c098f75fc7ae2949228093e99881b} 
+\index{error.h@{error.h}!ESYSERR@{ESYSERR}}
+\index{ESYSERR@{ESYSERR}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{ESYSERR}{ESYSERR}}
+{\footnotesize\ttfamily \#define ESYSERR~403}
+
 \Hypertarget{error_8h_a29a8288f3c0f2111159dbeadfd619c1a}\label{error_8h_a29a8288f3c0f2111159dbeadfd619c1a} 
 \index{error.h@{error.h}!ETHREADCREATE@{ETHREADCREATE}}
 \index{ETHREADCREATE@{ETHREADCREATE}!error.h@{error.h}}
 \doxysubsubsection{\texorpdfstring{ETHREADCREATE}{ETHREADCREATE}}
 {\footnotesize\ttfamily \#define ETHREADCREATE~3}
+
+\Hypertarget{error_8h_a691c09308f1c74357375e683919991d5}\label{error_8h_a691c09308f1c74357375e683919991d5} 
+\index{error.h@{error.h}!EUSEDFILE@{EUSEDFILE}}
+\index{EUSEDFILE@{EUSEDFILE}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EUSEDFILE}{EUSEDFILE}}
+{\footnotesize\ttfamily \#define EUSEDFILE~408}
+
+\Hypertarget{error_8h_ae884038335ba74679a0c291cbb8a7bb0}\label{error_8h_ae884038335ba74679a0c291cbb8a7bb0} 
+\index{error.h@{error.h}!EWRONGPERM@{EWRONGPERM}}
+\index{EWRONGPERM@{EWRONGPERM}!error.h@{error.h}}
+\doxysubsubsection{\texorpdfstring{EWRONGPERM}{EWRONGPERM}}
+{\footnotesize\ttfamily \#define EWRONGPERM~402}
 
 
 

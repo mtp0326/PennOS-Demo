@@ -16,7 +16,9 @@ bool \mbox{\hyperlink{clinkedlist_8c_a6d27d9f54d9189fe8149a2d8cb8baa24}{remove\+
 \item 
 \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{clinkedlist_8c_a43d3a5a52f3e2c3d607e50ac257cb67b}{find\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, pid\+\_\+t pid)
 \item 
-\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{clinkedlist_8c_afde8f3d4e1dd02b36cf5b7d2c3ac7b5e}{find\+\_\+process\+\_\+job\+\_\+id}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, u\+\_\+int64\+\_\+t index)
+\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{clinkedlist_8c_a93feeabf0e4c437893534f57a930659d}{find\+\_\+process\+\_\+job\+\_\+id}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list, int index)
+\item 
+void \mbox{\hyperlink{clinkedlist_8c_acefe7c8742f5696c1a8a9fb4da0ec23b}{free\+\_\+list}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list)
 \end{DoxyCompactItemize}
 
 
@@ -63,11 +65,11 @@ Finds a process in the circular linked list by its PID.
 \begin{DoxyReturn}{Returns}
 pcb\+\_\+t\texorpdfstring{$\ast$}{*} Pointer to the found process control block, or NULL if not found. 
 \end{DoxyReturn}
-\Hypertarget{clinkedlist_8c_afde8f3d4e1dd02b36cf5b7d2c3ac7b5e}\label{clinkedlist_8c_afde8f3d4e1dd02b36cf5b7d2c3ac7b5e} 
+\Hypertarget{clinkedlist_8c_a93feeabf0e4c437893534f57a930659d}\label{clinkedlist_8c_a93feeabf0e4c437893534f57a930659d} 
 \index{clinkedlist.c@{clinkedlist.c}!find\_process\_job\_id@{find\_process\_job\_id}}
 \index{find\_process\_job\_id@{find\_process\_job\_id}!clinkedlist.c@{clinkedlist.c}}
 \doxysubsubsection{\texorpdfstring{find\_process\_job\_id()}{find\_process\_job\_id()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} find\+\_\+process\+\_\+job\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{u\+\_\+int64\+\_\+t}]{index }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} find\+\_\+process\+\_\+job\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{int}]{index }\end{DoxyParamCaption})}
 
 Finds a process in the circular linked list by its Job ID. 
 \begin{DoxyParams}{Parameters}
@@ -79,6 +81,19 @@ Finds a process in the circular linked list by its Job ID.
 \begin{DoxyReturn}{Returns}
 pcb\+\_\+t\texorpdfstring{$\ast$}{*} Pointer to the found process control block, or NULL if not found. 
 \end{DoxyReturn}
+\Hypertarget{clinkedlist_8c_acefe7c8742f5696c1a8a9fb4da0ec23b}\label{clinkedlist_8c_acefe7c8742f5696c1a8a9fb4da0ec23b} 
+\index{clinkedlist.c@{clinkedlist.c}!free\_list@{free\_list}}
+\index{free\_list@{free\_list}!clinkedlist.c@{clinkedlist.c}}
+\doxysubsubsection{\texorpdfstring{free\_list()}{free\_list()}}
+{\footnotesize\ttfamily void free\+\_\+list (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list }\end{DoxyParamCaption})}
+
+Frees all nodes and their associated processes in a circular linked list, then frees the list itself.
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & Pointer to the circular linked list to free. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{clinkedlist_8c_a40af759c666c8683b21e533eae304bd5}\label{clinkedlist_8c_a40af759c666c8683b21e533eae304bd5} 
 \index{clinkedlist.c@{clinkedlist.c}!init\_list@{init\_list}}
 \index{init\_list@{init\_list}!clinkedlist.c@{clinkedlist.c}}

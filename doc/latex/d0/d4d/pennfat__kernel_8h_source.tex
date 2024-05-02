@@ -42,104 +42,110 @@
 \DoxyCodeLine{00086\ }
 \DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ FS\_NOT\_MOUNTED\ -\/10}}
 \DoxyCodeLine{00092\ }
-\DoxyCodeLine{00098\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6}{Whence}}\ \{\ \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6ad21e659a9215dc7d9bc52f5d7e27b7cb}{F\_SEEK\_SET}},\ \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6ab31ac29c12e35bd468f95e18263e9850}{F\_SEEK\_CUR}},\ \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6a3efde7f3f3639fd0801644753d2e5674}{F\_SEEK\_END}}\ \};}
-\DoxyCodeLine{00099\ }
-\DoxyCodeLine{00102\ \textcolor{keyword}{extern}\ uint16\_t*\ \mbox{\hyperlink{pennfat__kernel_8h_a0e52a1a113ded7f4787290edc22ad954}{fat}};}
-\DoxyCodeLine{00103\ }
-\DoxyCodeLine{00106\ \textcolor{keyword}{extern}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structfile__descriptor__st}{file\_descriptor\_st}}**\ \mbox{\hyperlink{pennfat__kernel_8h_a07afa4cbf62f3ce8292a6ddbcb37c8fc}{global\_fd\_table}};}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ INVALID\_CHMOD\ -\/11}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ SOURCE\_FILE\_NO\_READ\_PERM\ -\/12}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ DEST\_FILE\_NO\_WRITE\_PERM\ -\/13}}
 \DoxyCodeLine{00107\ }
-\DoxyCodeLine{00110\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a64b57b29bcc87a7b1967c7d55e7d4212}{fs\_fd}};}
-\DoxyCodeLine{00111\ }
-\DoxyCodeLine{00114\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a70b27761c7d0bd5cd90f4fe47e569b94}{block\_size}};}
-\DoxyCodeLine{00115\ }
-\DoxyCodeLine{00117\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a6a5f2839b4852a1e8b5c0b10ec6caa5b}{fat\_size}};}
+\DoxyCodeLine{00113\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6}{Whence}}\ \{\ \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6ad21e659a9215dc7d9bc52f5d7e27b7cb}{F\_SEEK\_SET}},\ \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6ab31ac29c12e35bd468f95e18263e9850}{F\_SEEK\_CUR}},\ \mbox{\hyperlink{pennfat__kernel_8h_a157e51c85caee5bec44a2f9a4e5605e6a3efde7f3f3639fd0801644753d2e5674}{F\_SEEK\_END}}\ \};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00117\ \textcolor{keyword}{extern}\ uint16\_t*\ \mbox{\hyperlink{pennfat__kernel_8h_a0e52a1a113ded7f4787290edc22ad954}{fat}};}
 \DoxyCodeLine{00118\ }
-\DoxyCodeLine{00121\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_af866bcf6c2272c2f6b1b7e5ad3a2e127}{num\_fat\_entries}};}
+\DoxyCodeLine{00121\ \textcolor{keyword}{extern}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structfile__descriptor__st}{file\_descriptor\_st}}**\ \mbox{\hyperlink{pennfat__kernel_8h_a07afa4cbf62f3ce8292a6ddbcb37c8fc}{global\_fd\_table}};}
 \DoxyCodeLine{00122\ }
-\DoxyCodeLine{00124\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_af69e180c878a9c8f4e45ec7dc25a062f}{data\_size}};}
-\DoxyCodeLine{00125\ }
-\DoxyCodeLine{00131\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structdirectory__entries}{directory\_entries}}\ \{}
-\DoxyCodeLine{00132\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structdirectory__entries_a078107917c22fc5656a6952eb33285f1}{name}}[32];\ }
-\DoxyCodeLine{00136\ \ \ uint32\_t\ \mbox{\hyperlink{structdirectory__entries_a7cc97989b9026b7b89576f94fde2deb7}{size}};\ }
-\DoxyCodeLine{00138\ \ \ uint16\_t\ \mbox{\hyperlink{structdirectory__entries_a83126d6724bed8d40f5dd21023409ead}{firstBlock}};\ }
-\DoxyCodeLine{00141\ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a1251eec3f57db41af2e3f887b737939d}{type}};\ }
-\DoxyCodeLine{00144\ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a08438d395d69ac79c6af58e8b04e66c8}{perm}};\ }
-\DoxyCodeLine{00148\ \ \ time\_t\ \mbox{\hyperlink{structdirectory__entries_a768620b88c243e244beb86b44aa20466}{mtime}};\ }
-\DoxyCodeLine{00151\ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a13b872d6333f7887d812a93056a7c4a7}{reserved}}[16];\ }
-\DoxyCodeLine{00152\ \};}
-\DoxyCodeLine{00153\ }
-\DoxyCodeLine{00159\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structfile__descriptor__st}{file\_descriptor\_st}}\ \{}
-\DoxyCodeLine{00160\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}};\ }
-\DoxyCodeLine{00162\ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structfile__descriptor__st_a25cb5acb6a5c6e546b04f04cc56ee2be}{fname}};\ }
-\DoxyCodeLine{00163\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af4c53d9cd39f2efd92817d4605911fbf}{mode}};\ }
-\DoxyCodeLine{00165\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af7e61caeb159b544e2467d9a56e340fa}{offset}};\ \ }
-\DoxyCodeLine{00166\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a97a1e01355076ddbcfa5f90d8de20197}{ref\_cnt}};\ }
-\DoxyCodeLine{00168\ \};}
-\DoxyCodeLine{00169\ }
-\DoxyCodeLine{00183\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structfile__descriptor__st}{file\_descriptor\_st}}*\ \mbox{\hyperlink{pennfat__kernel_8h_a25ad4d01d5ade905b2bfce04910a5c0d}{create\_file\_descriptor}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}},}
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structfile__descriptor__st_a25cb5acb6a5c6e546b04f04cc56ee2be}{fname}},}
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af4c53d9cd39f2efd92817d4605911fbf}{mode}},}
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af7e61caeb159b544e2467d9a56e340fa}{offset}});}
-\DoxyCodeLine{00187\ }
-\DoxyCodeLine{00203\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structdirectory__entries}{directory\_entries}}*\ \mbox{\hyperlink{pennfat__kernel_8h_a3fd2d5dba8f5f42be13d549b0e08a3ad}{create\_directory\_entry}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structdirectory__entries_a078107917c22fc5656a6952eb33285f1}{name}},}
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structdirectory__entries_a7cc97989b9026b7b89576f94fde2deb7}{size}},}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structdirectory__entries_a83126d6724bed8d40f5dd21023409ead}{firstBlock}},}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a1251eec3f57db41af2e3f887b737939d}{type}},}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a08438d395d69ac79c6af58e8b04e66c8}{perm}},}
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ time\_t\ \mbox{\hyperlink{structdirectory__entries_a768620b88c243e244beb86b44aa20466}{mtime}});}
-\DoxyCodeLine{00209\ }
-\DoxyCodeLine{00214\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat__kernel_8h_a2d501c304eeba5035c83c1e2a4aec4fb}{lseek\_to\_root\_directory}}();}
-\DoxyCodeLine{00215\ }
-\DoxyCodeLine{00225\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat__kernel_8h_a580177591867f52c90932219a6c29e71}{extend\_fat}}(\textcolor{keywordtype}{int}\ start\_index,\ \textcolor{keywordtype}{int}\ empty\_fat\_index);}
-\DoxyCodeLine{00226\ }
-\DoxyCodeLine{00232\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_addbc36d23ce41b02cb1508bf85ca24e2}{get\_first\_empty\_fat\_index}}();}
-\DoxyCodeLine{00233\ }
-\DoxyCodeLine{00239\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat__kernel_8h_a6532ad36b852dd09d641bcaac2642b9b}{move\_to\_open\_de}}(\textcolor{keywordtype}{bool}\ found);}
-\DoxyCodeLine{00240\ }
-\DoxyCodeLine{00248\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structdirectory__entries}{directory\_entries}}*\ \mbox{\hyperlink{pennfat__kernel_8h_a78d95341bbd2b21ed69dd341ff47669f}{does\_file\_exist}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname);}
-\DoxyCodeLine{00249\ }
-\DoxyCodeLine{00256\ off\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a8434cdce67b1512300f44ed38497c22a}{does\_file\_exist2}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname);}
-\DoxyCodeLine{00257\ }
-\DoxyCodeLine{00264\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_af7f9a41e9fb0fdf97403eff276990e1f}{k\_count\_fd\_num}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structdirectory__entries_a078107917c22fc5656a6952eb33285f1}{name}});}
-\DoxyCodeLine{00265\ }
-\DoxyCodeLine{00272\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structfile__descriptor__st}{file\_descriptor\_st}}*\ \mbox{\hyperlink{pennfat__kernel_8h_abe5ffc180d9fc063efc7127d14378b54}{get\_file\_descriptor}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}});}
-\DoxyCodeLine{00273\ }
-\DoxyCodeLine{00274\ \textcolor{comment}{/************************************************}}
-\DoxyCodeLine{00275\ \textcolor{comment}{\ *\ \ PENNFAT\ KERNEL\ LEVEL\ FUNCTIONS}}
-\DoxyCodeLine{00276\ \textcolor{comment}{\ ***********************************************/}}
-\DoxyCodeLine{00277\ }
-\DoxyCodeLine{00313\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a4d2cf4232cddee738996ca9ad83ea56f}{k\_open}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structfile__descriptor__st_a25cb5acb6a5c6e546b04f04cc56ee2be}{fname}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af4c53d9cd39f2efd92817d4605911fbf}{mode}});}
-\DoxyCodeLine{00314\ }
-\DoxyCodeLine{00326\ ssize\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a1951ec11865274b45144d6dd6f878692}{k\_read}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}},\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{char}*\ buf);}
-\DoxyCodeLine{00327\ }
-\DoxyCodeLine{00339\ ssize\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a79d2a9b65d0e04de358fe1a2cfa79baf}{k\_write}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ \textcolor{keywordtype}{int}\ n);}
-\DoxyCodeLine{00340\ }
-\DoxyCodeLine{00348\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a9ecd38dc6f3a9721ab53ff9a815b5480}{k\_close}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}});}
-\DoxyCodeLine{00349\ }
-\DoxyCodeLine{00358\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_ae8b44b3621ebb542bec49f73d19d2885}{k\_unlink}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structfile__descriptor__st_a25cb5acb6a5c6e546b04f04cc56ee2be}{fname}});}
-\DoxyCodeLine{00359\ }
-\DoxyCodeLine{00373\ off\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96}{k\_lseek}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af7e61caeb159b544e2467d9a56e340fa}{offset}},\ \textcolor{keywordtype}{int}\ whence);}
+\DoxyCodeLine{00125\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a64b57b29bcc87a7b1967c7d55e7d4212}{fs\_fd}};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00129\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a70b27761c7d0bd5cd90f4fe47e569b94}{block\_size}};}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00132\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a6a5f2839b4852a1e8b5c0b10ec6caa5b}{fat\_size}};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00136\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_af866bcf6c2272c2f6b1b7e5ad3a2e127}{num\_fat\_entries}};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00139\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_af69e180c878a9c8f4e45ec7dc25a062f}{data\_size}};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00146\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structdirectory__entries}{directory\_entries}}\ \{}
+\DoxyCodeLine{00147\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structdirectory__entries_a078107917c22fc5656a6952eb33285f1}{name}}[32];\ }
+\DoxyCodeLine{00151\ \ \ uint32\_t\ \mbox{\hyperlink{structdirectory__entries_a7cc97989b9026b7b89576f94fde2deb7}{size}};\ }
+\DoxyCodeLine{00153\ \ \ uint16\_t\ \mbox{\hyperlink{structdirectory__entries_a83126d6724bed8d40f5dd21023409ead}{firstBlock}};\ }
+\DoxyCodeLine{00156\ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a1251eec3f57db41af2e3f887b737939d}{type}};\ }
+\DoxyCodeLine{00159\ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a08438d395d69ac79c6af58e8b04e66c8}{perm}};\ }
+\DoxyCodeLine{00163\ \ \ time\_t\ \mbox{\hyperlink{structdirectory__entries_a768620b88c243e244beb86b44aa20466}{mtime}};\ }
+\DoxyCodeLine{00166\ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a13b872d6333f7887d812a93056a7c4a7}{reserved}}[16];\ }
+\DoxyCodeLine{00167\ \};}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00174\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structfile__descriptor__st}{file\_descriptor\_st}}\ \{}
+\DoxyCodeLine{00175\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}};\ }
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structfile__descriptor__st_a25cb5acb6a5c6e546b04f04cc56ee2be}{fname}};\ }
+\DoxyCodeLine{00178\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af4c53d9cd39f2efd92817d4605911fbf}{mode}};\ }
+\DoxyCodeLine{00180\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af7e61caeb159b544e2467d9a56e340fa}{offset}};\ \ }
+\DoxyCodeLine{00181\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a97a1e01355076ddbcfa5f90d8de20197}{ref\_cnt}};\ }
+\DoxyCodeLine{00183\ \};}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00198\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structfile__descriptor__st}{file\_descriptor\_st}}*\ \mbox{\hyperlink{pennfat__kernel_8h_a25ad4d01d5ade905b2bfce04910a5c0d}{create\_file\_descriptor}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}},}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structfile__descriptor__st_a25cb5acb6a5c6e546b04f04cc56ee2be}{fname}},}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af4c53d9cd39f2efd92817d4605911fbf}{mode}},}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af7e61caeb159b544e2467d9a56e340fa}{offset}});}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00218\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structdirectory__entries}{directory\_entries}}*\ \mbox{\hyperlink{pennfat__kernel_8h_a3fd2d5dba8f5f42be13d549b0e08a3ad}{create\_directory\_entry}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structdirectory__entries_a078107917c22fc5656a6952eb33285f1}{name}},}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structdirectory__entries_a7cc97989b9026b7b89576f94fde2deb7}{size}},}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structdirectory__entries_a83126d6724bed8d40f5dd21023409ead}{firstBlock}},}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a1251eec3f57db41af2e3f887b737939d}{type}},}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structdirectory__entries_a08438d395d69ac79c6af58e8b04e66c8}{perm}},}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ time\_t\ \mbox{\hyperlink{structdirectory__entries_a768620b88c243e244beb86b44aa20466}{mtime}});}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00229\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat__kernel_8h_a2d501c304eeba5035c83c1e2a4aec4fb}{lseek\_to\_root\_directory}}();}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00240\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat__kernel_8h_a580177591867f52c90932219a6c29e71}{extend\_fat}}(\textcolor{keywordtype}{int}\ start\_index,\ \textcolor{keywordtype}{int}\ empty\_fat\_index);}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00247\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_addbc36d23ce41b02cb1508bf85ca24e2}{get\_first\_empty\_fat\_index}}();}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00254\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat__kernel_8h_a6532ad36b852dd09d641bcaac2642b9b}{move\_to\_open\_de}}(\textcolor{keywordtype}{bool}\ found);}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00263\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structdirectory__entries}{directory\_entries}}*\ \mbox{\hyperlink{pennfat__kernel_8h_a78d95341bbd2b21ed69dd341ff47669f}{does\_file\_exist}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname);}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00271\ off\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a8434cdce67b1512300f44ed38497c22a}{does\_file\_exist2}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fname);}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00279\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_af7f9a41e9fb0fdf97403eff276990e1f}{k\_count\_fd\_num}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structdirectory__entries_a078107917c22fc5656a6952eb33285f1}{name}});}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00287\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structfile__descriptor__st}{file\_descriptor\_st}}*\ \mbox{\hyperlink{pennfat__kernel_8h_abe5ffc180d9fc063efc7127d14378b54}{get\_file\_descriptor}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}});}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \textcolor{comment}{/************************************************}}
+\DoxyCodeLine{00290\ \textcolor{comment}{\ *\ \ PENNFAT\ KERNEL\ LEVEL\ FUNCTIONS}}
+\DoxyCodeLine{00291\ \textcolor{comment}{\ ***********************************************/}}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00328\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a4d2cf4232cddee738996ca9ad83ea56f}{k\_open}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structfile__descriptor__st_a25cb5acb6a5c6e546b04f04cc56ee2be}{fname}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af4c53d9cd39f2efd92817d4605911fbf}{mode}});}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00341\ ssize\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a1951ec11865274b45144d6dd6f878692}{k\_read}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}},\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{char}*\ buf);}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00354\ ssize\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a79d2a9b65d0e04de358fe1a2cfa79baf}{k\_write}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str,\ \textcolor{keywordtype}{int}\ n);}
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00363\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a9ecd38dc6f3a9721ab53ff9a815b5480}{k\_close}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}});}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00373\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_ae8b44b3621ebb542bec49f73d19d2885}{k\_unlink}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structfile__descriptor__st_a25cb5acb6a5c6e546b04f04cc56ee2be}{fname}});}
 \DoxyCodeLine{00374\ }
-\DoxyCodeLine{00385\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pennfat__kernel_8h_aa1a03cfc7e106d29d54196f03557b9ba}{k\_ls}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}});}
-\DoxyCodeLine{00386\ }
-\DoxyCodeLine{00395\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a85eace193c41193d1646af1a8b943200}{k\_rename}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ source,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ dest);}
-\DoxyCodeLine{00396\ }
-\DoxyCodeLine{00404\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_abf487212da5b9d6ebceef678fa744ad9}{k\_update\_timestamp}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ source);}
-\DoxyCodeLine{00405\ }
-\DoxyCodeLine{00417\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_ad4e9851dc3cbc61a9f8ffd36b94b9938}{k\_change\_mode}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ change,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename);}
-\DoxyCodeLine{00418\ }
-\DoxyCodeLine{00430\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{pennfat__kernel_8h_a08194e0542962e4d980cd9278f33c7f5}{k\_read\_all}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename,\ \textcolor{keywordtype}{int}*\ read\_num);}
-\DoxyCodeLine{00431\ }
-\DoxyCodeLine{00439\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{pennfat__kernel_8h_ada30dc78055b7b113ff2dac9aabe4eb3}{is\_file\_name\_valid}}(\textcolor{keywordtype}{char}*\ name);}
-\DoxyCodeLine{00440\ }
-\DoxyCodeLine{00448\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{pennfat__kernel_8h_af6d6a9bc81e4cf0788c8f1de39999c22}{k\_get\_fname\_from\_fd}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}});}
-\DoxyCodeLine{00449\ }
-\DoxyCodeLine{00461\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a82daa98d4c392b4249bfbc975be22daa}{k\_cp\_within\_fat}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ dest);}
-\DoxyCodeLine{00462\ }
-\DoxyCodeLine{00475\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_aaad024bf5305fa73db8c92084f8a1df0}{k\_cp\_to\_host}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ host\_dest);}
-\DoxyCodeLine{00476\ }
-\DoxyCodeLine{00489\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a90de0cbbfd37f924016dd07d60d38853}{k\_cp\_from\_host}}(\textcolor{keywordtype}{char}*\ host\_source,\ \textcolor{keywordtype}{char}*\ dest);}
-\DoxyCodeLine{00490\ }
-\DoxyCodeLine{00491\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00388\ off\_t\ \mbox{\hyperlink{pennfat__kernel_8h_a332b4729ef52b2a3132b1aea88fa5c96}{k\_lseek}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_af7e61caeb159b544e2467d9a56e340fa}{offset}},\ \textcolor{keywordtype}{int}\ whence);}
+\DoxyCodeLine{00389\ }
+\DoxyCodeLine{00402\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a8d29dec65e04c5f1fe04b09921dede89}{k\_ls}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}});}
+\DoxyCodeLine{00403\ }
+\DoxyCodeLine{00412\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a85eace193c41193d1646af1a8b943200}{k\_rename}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ source,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ dest);}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00421\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_abf487212da5b9d6ebceef678fa744ad9}{k\_update\_timestamp}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ source);}
+\DoxyCodeLine{00422\ }
+\DoxyCodeLine{00434\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_ad4e9851dc3cbc61a9f8ffd36b94b9938}{k\_change\_mode}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ change,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename);}
+\DoxyCodeLine{00435\ }
+\DoxyCodeLine{00447\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{pennfat__kernel_8h_a08194e0542962e4d980cd9278f33c7f5}{k\_read\_all}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filename,\ \textcolor{keywordtype}{int}*\ read\_num);}
+\DoxyCodeLine{00448\ }
+\DoxyCodeLine{00456\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{pennfat__kernel_8h_ada30dc78055b7b113ff2dac9aabe4eb3}{is\_file\_name\_valid}}(\textcolor{keywordtype}{char}*\ name);}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00465\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{pennfat__kernel_8h_af6d6a9bc81e4cf0788c8f1de39999c22}{k\_get\_fname\_from\_fd}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structfile__descriptor__st_a2c4326771436651ee292d87a0bbf91ad}{fd}});}
+\DoxyCodeLine{00466\ }
+\DoxyCodeLine{00478\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a82daa98d4c392b4249bfbc975be22daa}{k\_cp\_within\_fat}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ dest);}
+\DoxyCodeLine{00479\ }
+\DoxyCodeLine{00492\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_aaad024bf5305fa73db8c92084f8a1df0}{k\_cp\_to\_host}}(\textcolor{keywordtype}{char}*\ source,\ \textcolor{keywordtype}{char}*\ host\_dest);}
+\DoxyCodeLine{00493\ }
+\DoxyCodeLine{00506\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{pennfat__kernel_8h_a90de0cbbfd37f924016dd07d60d38853}{k\_cp\_from\_host}}(\textcolor{keywordtype}{char}*\ host\_source,\ \textcolor{keywordtype}{char}*\ dest);}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00508\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

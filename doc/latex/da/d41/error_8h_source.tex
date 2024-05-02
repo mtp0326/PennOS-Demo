@@ -2,33 +2,58 @@
 \hypertarget{error_8h_source}{}\label{error_8h_source}\index{src/util/error.h@{src/util/error.h}}
 \mbox{\hyperlink{error_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}unistd.h"{}}}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <string.h>}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}errno.h"{}}}
 \DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}stdio.h"{}}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}unistd.h"{}}}
 \DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ ERROR}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ ERROR}}
-\DoxyCodeLine{00015\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{error_8h_ad65a8842cc674e3ddf69355898c0ecbf}{errno}};}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{comment}{//\ KERNEL\ LEVEL\ ERRORS}}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{comment}{//\ S\_SPAWN\ ERRORS}}
-\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ EPCBCREATE\ 0}}
-\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ ENOARGS\ 1}}
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ EADDPROC\ 2}}
-\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ ETHREADCREATE\ 3}}
-\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ EBITMAP\ 4}}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ S\_SLEEP\ ERRORS}}
-\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ EINVARG\ 5}}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \textcolor{comment}{//\ FAT\ LEVEL\ ERRORS}}
-\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{error_8h_ab2e01b83bcc336abdcc77b088661cdfd}{u\_perror}}(\textcolor{keywordtype}{char}*\ message);}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ ERROR}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ ERROR}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{error_8h_ad65a8842cc674e3ddf69355898c0ecbf}{errno}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ KERNEL\ LEVEL\ ERRORS}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ S\_SPAWN\ ERRORS}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ EPCBCREATE\ 0}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ ENOARGS\ 1}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ EADDPROC\ 2}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ ETHREADCREATE\ 3}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ EBITMAP\ 4}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ S\_SLEEP\ ERRORS}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ EINVARG\ 5}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ S\_OPEN,\ S\_READ,\ S\_WRITE,\ S\_CLOSE,\ S\_UNLINK,\ S\_LSEEK,\ S\_LS,\ S\_CHMOD\ ERRORS}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ EBADFILENAME\ 400}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ EMULTWRITE\ 401}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ EWRONGPERM\ 402}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ ESYSERR\ 403}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ ENOFILE\ 404}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ EFILEDEL\ 405}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ EINVALIDFD\ 406}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ EINVALIDPARAMETER\ 407}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ EUSEDFILE\ 408}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ EINVALIDCHMOD\ 500}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ EREADERROR\ 501}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ ENOREADPERM\ 502}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ ENOWRITEPERM\ 503}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ ENOPROC\ 410}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ EPCBSTATE\ 411}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ EREMOVEPROC\ 412}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ EINVALIDCMD\ 413}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ ELISTNULL\ 414}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ ENOJOB\ 415}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ ENOPIDJOB\ 416}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ ENOTSTOP\ 417}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ EINVALIDSIG\ 418}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ EINVALIDLOG\ 419}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ EINVALIDLOGWRITE\ 420}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ EINVALIDSTDOUT\ 421}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ FAT\ LEVEL\ ERRORS}}
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{error_8h_ab2e01b83bcc336abdcc77b088661cdfd}{u\_perror}}(\textcolor{keywordtype}{char}*\ message);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

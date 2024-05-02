@@ -51,6 +51,8 @@ pid\+\_\+t \mbox{\hyperlink{sys__call_8h_a62b97025761b7f8ad7e59b641cad08d6}{s\+\
 \begin{DoxyCompactList}\small\item\em Create a child process that executes the function {\ttfamily func}, with a specified priority. This is an exact copy of \doxylink{sys__call_8c_a43b789c710ba1501bcd8cf54e4382e50}{s\+\_\+spawn} except that the priority of the created process can be specificed at creation. \end{DoxyCompactList}\item 
 pid\+\_\+t \mbox{\hyperlink{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}{s\+\_\+waitpid}} (pid\+\_\+t pid, int \texorpdfstring{$\ast$}{*}wstatus, bool \mbox{\hyperlink{stress_8c_aaacb1f06dd4ec309398fb76d008fdc90}{nohang}})
 \begin{DoxyCompactList}\small\item\em Wait on a child of the calling process, until it changes state. If {\ttfamily nohang} is true, this will not block the calling process and return immediately. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8h_ac6d9cddaea840f87aee45bd6e6122acc}{s\+\_\+resume\+\_\+block}} (pid\+\_\+t pid)
+\begin{DoxyCompactList}\small\item\em Blocks process with command "{}sleep"{} that has been stopped before. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}{s\+\_\+kill}} (pid\+\_\+t pid, int signal)
 \begin{DoxyCompactList}\small\item\em Send a signal to a particular process. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{sys__call_8h_a964c6f7d6a06dddfd15cbd2d348dbd59}{s\+\_\+reap\+\_\+all\+\_\+child}} (\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}parent)
@@ -70,20 +72,24 @@ int \mbox{\hyperlink{sys__call_8h_a9116ac84aeec3a4717eab9aa7137080e}{s\+\_\+spaw
 int \mbox{\hyperlink{sys__call_8h_a09ef4dc77a6071976f7d93759d48afa6}{s\+\_\+remove\+\_\+process}} (pid\+\_\+t pid)
 \begin{DoxyCompactList}\small\item\em Removes a process in any state. \end{DoxyCompactList}\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sys__call_8h_ab5efee98239591e685e3ae7da8203b21}{s\+\_\+function\+\_\+from\+\_\+string}} (char \texorpdfstring{$\ast$}{*}program)
-\item 
+\begin{DoxyCompactList}\small\item\em Returns the function that was specified through string. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a1db57eb907f680ab844066357b793d5f}{s\+\_\+write\+\_\+log}} (\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\+\_\+message\+\_\+t}} logtype, \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}proc, unsigned int old\+\_\+nice)
-\item 
+\begin{DoxyCompactList}\small\item\em Prints information to log.\+txt for each movement of each processor/thread. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a7cc95330d937650d14281e3d6041f284}{s\+\_\+move\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}destination, pid\+\_\+t pid)
-\item 
-void \mbox{\hyperlink{sys__call_8h_abc68daae1d550a0993e99d583b0c1264}{s\+\_\+zombie}} (pid\+\_\+t pid)
-\item 
+\begin{DoxyCompactList}\small\item\em Find the list that the processor belongs to, removes it from that list, and adds it to the specified list in argument. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8h_abf654a2582830ad3a5ce3db38c944f81}{s\+\_\+zombie}} (pid\+\_\+t pid)
+\begin{DoxyCompactList}\small\item\em Makes the specified processor a zombie, orpanifies all its child processors, then reaps all children. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a31e11484cfd56821c3e9a1fa43aafcf0}{s\+\_\+fg}} (\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}proc)
-\item 
+\begin{DoxyCompactList}\small\item\em If pid is specified, fg looks for processor with the pid. If no specified pid, fg looks in order of stopped and background, then the processor with the highest job id. Fg then gives the processor terminal control. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a3dd0bc17589ba38590b19d8256ffee4f}{s\+\_\+bg\+\_\+wait}} (\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}proc)
-\begin{DoxyCompactList}\small\item\em Checks status of background processes with waitpid(nohang) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Checks status of background processes with waitpid(nohang). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sys__call_8h_a6a3382896d35c17f052ccce317c40dc2}{find\+\_\+jobs\+\_\+proc}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list)
+\begin{DoxyCompactList}\small\item\em Looks for the processor in stopped or background with the highest job id. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a2e87f593f5c2f59d7a90958b3e51751d}{s\+\_\+print\+\_\+process}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list)
-\item 
-int \mbox{\hyperlink{sys__call_8h_a4e0c2e47d0948979e7be9350582158c8}{s\+\_\+print\+\_\+jobs}} (\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}list)
+\begin{DoxyCompactList}\small\item\em Prints all processes in processes, stopped, blocked, zombied. Used for \textquotesingle{}ps\textquotesingle{} command. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8h_adc34021a4da6a8e67a92d16e8adef872}{s\+\_\+print\+\_\+jobs}} ()
+\begin{DoxyCompactList}\small\item\em Prints the list of processes in stopped or background list. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sys__call_8h_a941a4ccb62fb48fd5feb049c32df7fdd}{file\+\_\+errno\+\_\+helper}} (int ret)
 \item 
 int \mbox{\hyperlink{sys__call_8h_afec6e61720e05918efefeab347e950f3}{s\+\_\+open}} (const char \texorpdfstring{$\ast$}{*}fname, int mode)
 \begin{DoxyCompactList}\small\item\em open a file name fname with the mode mode and return a file descriptor. The allowed modes are as follows\+: \end{DoxyCompactList}\item 
@@ -94,29 +100,29 @@ ssize\+\_\+t \mbox{\hyperlink{sys__call_8h_ad3317435b4bd7309160538fc5d730eb9}{s\
 int \mbox{\hyperlink{sys__call_8h_a1ee856dbd0706f79a440d1e98b42d32d}{s\+\_\+close}} (int fd)
 \begin{DoxyCompactList}\small\item\em close the file fd and return 0 on success, or a negative value on failure. A kernel level close should occur, and on success the local process’ file descriptor table should be cleaned up appropriately. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a395873f1de0b89a686d438580ba5dcf7}{s\+\_\+unlink}} (const char \texorpdfstring{$\ast$}{*}fname)
-\item 
+\begin{DoxyCompactList}\small\item\em removes the file specified by {\ttfamily fname} , {\ttfamily fname} must exist, returns -\/1 on error if it doesn\textquotesingle{}t \end{DoxyCompactList}\item 
 off\+\_\+t \mbox{\hyperlink{sys__call_8h_ac21f611f4fb486935d9ad2915a529d3b}{s\+\_\+lseek}} (int fd, int offset, int whence)
 \begin{DoxyCompactList}\small\item\em reposition the file pointer for fd to the offset relative to whence. You must also implement the constants F\+\_\+\+SEEK\+\_\+\+SET, F\+\_\+\+SEEK\+\_\+\+CUR, and F\+\_\+\+SEEK\+\_\+\+END, which reference similar file whences as their similarly named counterparts in lseek(2). A kernel level lseek should occur, and necessary changes to the calling process’ file descriptor table will be necessary. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{sys__call_8h_ae166ac7970869bda5550149e8771c3af}{s\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename, int fd)
+int \mbox{\hyperlink{sys__call_8h_a6f0dde68afa56241329a522dcf741dec}{s\+\_\+ls}} (const char \texorpdfstring{$\ast$}{*}filename, int fd)
 \begin{DoxyCompactList}\small\item\em List the file filename in the current directory. If filename is NULL, list all files in the current directory. Before EC implementations, this should be very simple and could literally be a call a similar k\+\_\+function. \end{DoxyCompactList}\item 
 char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sys__call_8h_a18b25be5ab040f60070ff9ea839648be}{s\+\_\+read\+\_\+all}} (const char \texorpdfstring{$\ast$}{*}filename, int \texorpdfstring{$\ast$}{*}read\+\_\+num)
-\item 
+\begin{DoxyCompactList}\small\item\em Wrapper function around k\+\_\+read\+\_\+all. \end{DoxyCompactList}\item 
 char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sys__call_8h_a2638b24106c052e0a513643f712e8d00}{s\+\_\+get\+\_\+fname\+\_\+from\+\_\+fd}} (int fd)
-\item 
+\begin{DoxyCompactList}\small\item\em Wrapper function around k\+\_\+get\+\_\+fname\+\_\+from\+\_\+fd. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_ab40c873ca412b774e2fc1b59527538be}{s\+\_\+update\+\_\+timestamp}} (const char \texorpdfstring{$\ast$}{*}source)
-\item 
+\begin{DoxyCompactList}\small\item\em Wrapper function around k\+\_\+update\+\_\+timestamp. Returns the filename for the given file descriptor number. \end{DoxyCompactList}\item 
 off\+\_\+t \mbox{\hyperlink{sys__call_8h_ae8b8546b3350e1602c1574b1b0cb58d0}{s\+\_\+does\+\_\+file\+\_\+exist2}} (const char \texorpdfstring{$\ast$}{*}fname)
-\item 
+\begin{DoxyCompactList}\small\item\em Wrapper function around k\+\_\+does\+\_\+file\+\_\+exst2. Change the timestamp of the file to the current time. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_aeea2dcf94b9a35c86a67cf6ec97fd21d}{s\+\_\+rename}} (const char \texorpdfstring{$\ast$}{*}source, const char \texorpdfstring{$\ast$}{*}dest)
-\item 
+\begin{DoxyCompactList}\small\item\em s-\/function wrapper around k\+\_\+rename, which renames {\ttfamily source} to {\ttfamily dest}. {\ttfamily source} must exist, if {\ttfamily dest} already exists, then it is deleted \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a92d71eb90d0b9786bec0302347f5a99f}{s\+\_\+change\+\_\+mode}} (const char \texorpdfstring{$\ast$}{*}change, const char \texorpdfstring{$\ast$}{*}filename)
-\item 
+\begin{DoxyCompactList}\small\item\em s-\/function wrapper around k\+\_\+change\+\_\+mode, which changes the mode (permission) of the file in the directory entry, specificed by {\ttfamily filename} with change {\ttfamily change}. Errors if the resulting permission is invalid or if {\ttfamily filename} doesn\textquotesingle{}t exist \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_ad55b8ad7785acad109a35a819e415622}{s\+\_\+cp\+\_\+within\+\_\+fat}} (char \texorpdfstring{$\ast$}{*}source, char \texorpdfstring{$\ast$}{*}dest)
-\item 
+\begin{DoxyCompactList}\small\item\em s-\/function wrapper around k\+\_\+cp\+\_\+within\+\_\+fat. Copies contents of {\ttfamily source} to {\ttfamily dest}. {\ttfamily source} must exist, if {\ttfamily dest} doesn\textquotesingle{}t exist then it is created. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a494917a8ce36ad19470a2116e57a1bc3}{s\+\_\+cp\+\_\+to\+\_\+host}} (char \texorpdfstring{$\ast$}{*}source, char \texorpdfstring{$\ast$}{*}host\+\_\+dest)
-\item 
+\begin{DoxyCompactList}\small\item\em s-\/function wrapper around k\+\_\+cp\+\_\+to\+\_\+host \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sys__call_8h_a1e2fd1371e1cd60d964afd80eb89943e}{s\+\_\+cp\+\_\+from\+\_\+host}} (char \texorpdfstring{$\ast$}{*}host\+\_\+source, char \texorpdfstring{$\ast$}{*}dest)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em s-\/function wrapper around k\+\_\+cp\+\_\+from\+\_\+host \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -222,6 +228,30 @@ CONTINUE&\\
 
 
 \doxysubsection{Function Documentation}
+\Hypertarget{sys__call_8h_a941a4ccb62fb48fd5feb049c32df7fdd}\label{sys__call_8h_a941a4ccb62fb48fd5feb049c32df7fdd} 
+\index{sys\_call.h@{sys\_call.h}!file\_errno\_helper@{file\_errno\_helper}}
+\index{file\_errno\_helper@{file\_errno\_helper}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{file\_errno\_helper()}{file\_errno\_helper()}}
+{\footnotesize\ttfamily int file\+\_\+errno\+\_\+helper (\begin{DoxyParamCaption}\item[{int}]{ret }\end{DoxyParamCaption})}
+
+\Hypertarget{sys__call_8h_a6a3382896d35c17f052ccce317c40dc2}\label{sys__call_8h_a6a3382896d35c17f052ccce317c40dc2} 
+\index{sys\_call.h@{sys\_call.h}!find\_jobs\_proc@{find\_jobs\_proc}}
+\index{find\_jobs\_proc@{find\_jobs\_proc}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{find\_jobs\_proc()}{find\_jobs\_proc()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*} find\+\_\+jobs\+\_\+proc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list }\end{DoxyParamCaption})}
+
+
+
+Looks for the processor in stopped or background with the highest job id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pcb\+\_\+t\texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_a3dd0bc17589ba38590b19d8256ffee4f}\label{sys__call_8h_a3dd0bc17589ba38590b19d8256ffee4f} 
 \index{sys\_call.h@{sys\_call.h}!s\_bg\_wait@{s\_bg\_wait}}
 \index{s\_bg\_wait@{s\_bg\_wait}!sys\_call.h@{sys\_call.h}}
@@ -230,7 +260,7 @@ CONTINUE&\\
 
 
 
-Checks status of background processes with waitpid(nohang) 
+Checks status of background processes with waitpid(nohang). 
 
 
 \begin{DoxyParams}{Parameters}
@@ -238,7 +268,7 @@ Checks status of background processes with waitpid(nohang)
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int 
+int Returns 0 on success, -\/1 on failure and sets errno. 
 \end{DoxyReturn}
 \Hypertarget{sys__call_8h_a1a3aeae7e3fb489c4cf3c4dc3911bbce}\label{sys__call_8h_a1a3aeae7e3fb489c4cf3c4dc3911bbce} 
 \index{sys\_call.h@{sys\_call.h}!s\_busy@{s\_busy}}
@@ -264,6 +294,20 @@ int Returns 0 on success, -\/1 on failure and sets errno.
 \doxysubsubsection{\texorpdfstring{s\_change\_mode()}{s\_change\_mode()}}
 {\footnotesize\ttfamily int s\+\_\+change\+\_\+mode (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{change,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
 
+
+
+s-\/function wrapper around k\+\_\+change\+\_\+mode, which changes the mode (permission) of the file in the directory entry, specificed by {\ttfamily filename} with change {\ttfamily change}. Errors if the resulting permission is invalid or if {\ttfamily filename} doesn\textquotesingle{}t exist 
+
+
+\begin{DoxyParams}{Parameters}
+{\em change} & the change to be made (e.\+g. -\/w, +w, -\/rw, etc) \\
+\hline
+{\em filename} & name of the specified file to be changed\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on error, 0 if change mode was successful 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_a1ee856dbd0706f79a440d1e98b42d32d}\label{sys__call_8h_a1ee856dbd0706f79a440d1e98b42d32d} 
 \index{sys\_call.h@{sys\_call.h}!s\_close@{s\_close}}
 \index{s\_close@{s\_close}!sys\_call.h@{sys\_call.h}}
@@ -276,11 +320,11 @@ close the file fd and return 0 on success, or a negative value on failure. A ker
 
 
 \begin{DoxyParams}{Parameters}
-{\em fd} & \\
+{\em fd} & file descriptor number to be closed\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int 
+int (-\/1 on error) 
 \end{DoxyReturn}
 \Hypertarget{sys__call_8h_a1e2fd1371e1cd60d964afd80eb89943e}\label{sys__call_8h_a1e2fd1371e1cd60d964afd80eb89943e} 
 \index{sys\_call.h@{sys\_call.h}!s\_cp\_from\_host@{s\_cp\_from\_host}}
@@ -288,24 +332,78 @@ int
 \doxysubsubsection{\texorpdfstring{s\_cp\_from\_host()}{s\_cp\_from\_host()}}
 {\footnotesize\ttfamily int s\+\_\+cp\+\_\+from\+\_\+host (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{host\+\_\+source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
 
+
+
+s-\/function wrapper around k\+\_\+cp\+\_\+from\+\_\+host 
+
+
+\begin{DoxyParams}{Parameters}
+{\em host\+\_\+source} & source filename to copy from (on host device) \\
+\hline
+{\em dest} & destination filename to copy into (in Penn\+OS)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on error, 0 if cp was successful 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_a494917a8ce36ad19470a2116e57a1bc3}\label{sys__call_8h_a494917a8ce36ad19470a2116e57a1bc3} 
 \index{sys\_call.h@{sys\_call.h}!s\_cp\_to\_host@{s\_cp\_to\_host}}
 \index{s\_cp\_to\_host@{s\_cp\_to\_host}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_cp\_to\_host()}{s\_cp\_to\_host()}}
 {\footnotesize\ttfamily int s\+\_\+cp\+\_\+to\+\_\+host (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{host\+\_\+dest }\end{DoxyParamCaption})}
 
+
+
+s-\/function wrapper around k\+\_\+cp\+\_\+to\+\_\+host 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & source filename to copy from (in Penn\+OS) \\
+\hline
+{\em host\+\_\+dest} & destination filename to copy into (on host device)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on error, 0 if cp was successful 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_ad55b8ad7785acad109a35a819e415622}\label{sys__call_8h_ad55b8ad7785acad109a35a819e415622} 
 \index{sys\_call.h@{sys\_call.h}!s\_cp\_within\_fat@{s\_cp\_within\_fat}}
 \index{s\_cp\_within\_fat@{s\_cp\_within\_fat}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_cp\_within\_fat()}{s\_cp\_within\_fat()}}
 {\footnotesize\ttfamily int s\+\_\+cp\+\_\+within\+\_\+fat (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
 
+
+
+s-\/function wrapper around k\+\_\+cp\+\_\+within\+\_\+fat. Copies contents of {\ttfamily source} to {\ttfamily dest}. {\ttfamily source} must exist, if {\ttfamily dest} doesn\textquotesingle{}t exist then it is created. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & source filename to copy from \\
+\hline
+{\em dest} & destination filename to copy into\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on error, 0 if cp was successful 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_ae8b8546b3350e1602c1574b1b0cb58d0}\label{sys__call_8h_ae8b8546b3350e1602c1574b1b0cb58d0} 
 \index{sys\_call.h@{sys\_call.h}!s\_does\_file\_exist2@{s\_does\_file\_exist2}}
 \index{s\_does\_file\_exist2@{s\_does\_file\_exist2}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_does\_file\_exist2()}{s\_does\_file\_exist2()}}
 {\footnotesize\ttfamily off\+\_\+t s\+\_\+does\+\_\+file\+\_\+exist2 (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fname }\end{DoxyParamCaption})}
 
+
+
+Wrapper function around k\+\_\+does\+\_\+file\+\_\+exst2. Change the timestamp of the file to the current time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & Source file name.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success. Negative number on failure. 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690}\label{sys__call_8h_a53c8865d5bf1ca946e5b5405190f6690} 
 \index{sys\_call.h@{sys\_call.h}!s\_exit@{s\_exit}}
 \index{s\_exit@{s\_exit}!sys\_call.h@{sys\_call.h}}
@@ -322,7 +420,19 @@ This will set the process state to zombied, adjust its state within the schedule
 \doxysubsubsection{\texorpdfstring{s\_fg()}{s\_fg()}}
 {\footnotesize\ttfamily int s\+\_\+fg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proc }\end{DoxyParamCaption})}
 
-random number to convert int to string\Hypertarget{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db}\label{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db} 
+
+
+If pid is specified, fg looks for processor with the pid. If no specified pid, fg looks in order of stopped and background, then the processor with the highest job id. Fg then gives the processor terminal control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em proc} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Returns 0 on success, -\/1 on failure and sets errno. 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db}\label{sys__call_8h_a35ff16131dec7dc8b25686329a19d0db} 
 \index{sys\_call.h@{sys\_call.h}!s\_find\_process@{s\_find\_process}}
 \index{s\_find\_process@{s\_find\_process}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_find\_process()}{s\_find\_process()}}
@@ -346,12 +456,36 @@ pcb\+\_\+t\texorpdfstring{$\ast$}{*}
 \doxysubsubsection{\texorpdfstring{s\_function\_from\_string()}{s\_function\_from\_string()}}
 {\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} s\+\_\+function\+\_\+from\+\_\+string (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{program }\end{DoxyParamCaption})}
 
+
+
+Returns the function that was specified through string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em program} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the function that was specified. 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_a2638b24106c052e0a513643f712e8d00}\label{sys__call_8h_a2638b24106c052e0a513643f712e8d00} 
 \index{sys\_call.h@{sys\_call.h}!s\_get\_fname\_from\_fd@{s\_get\_fname\_from\_fd}}
 \index{s\_get\_fname\_from\_fd@{s\_get\_fname\_from\_fd}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_get\_fname\_from\_fd()}{s\_get\_fname\_from\_fd()}}
 {\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*} s\+\_\+get\+\_\+fname\+\_\+from\+\_\+fd (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})}
 
+
+
+Wrapper function around k\+\_\+get\+\_\+fname\+\_\+from\+\_\+fd. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The file name of the {\ttfamily fd} . NULL is {\ttfamily fd} is invalid. 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76}\label{sys__call_8h_a18e6794b108eea25459bd7fe31de4e76} 
 \index{sys\_call.h@{sys\_call.h}!s\_kill@{s\_kill}}
 \index{s\_kill@{s\_kill}!sys\_call.h@{sys\_call.h}}
@@ -372,11 +506,11 @@ Send a signal to a particular process.
 \begin{DoxyReturn}{Returns}
 0 on success, -\/1 on error. 
 \end{DoxyReturn}
-\Hypertarget{sys__call_8h_ae166ac7970869bda5550149e8771c3af}\label{sys__call_8h_ae166ac7970869bda5550149e8771c3af} 
+\Hypertarget{sys__call_8h_a6f0dde68afa56241329a522dcf741dec}\label{sys__call_8h_a6f0dde68afa56241329a522dcf741dec} 
 \index{sys\_call.h@{sys\_call.h}!s\_ls@{s\_ls}}
 \index{s\_ls@{s\_ls}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_ls()}{s\_ls()}}
-{\footnotesize\ttfamily void s\+\_\+ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename,  }\item[{int}]{fd }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int s\+\_\+ls (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename,  }\item[{int}]{fd }\end{DoxyParamCaption})}
 
 
 
@@ -384,9 +518,12 @@ List the file filename in the current directory. If filename is NULL, list all f
 
 
 \begin{DoxyParams}{Parameters}
-{\em filename} & \\
+{\em filename} & Lists information about the specified file\\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int (-\/1 on error) 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_ac21f611f4fb486935d9ad2915a529d3b}\label{sys__call_8h_ac21f611f4fb486935d9ad2915a529d3b} 
 \index{sys\_call.h@{sys\_call.h}!s\_lseek@{s\_lseek}}
 \index{s\_lseek@{s\_lseek}!sys\_call.h@{sys\_call.h}}
@@ -399,19 +536,36 @@ reposition the file pointer for fd to the offset relative to whence. You must al
 
 
 \begin{DoxyParams}{Parameters}
-{\em fd} & \\
+{\em fd} & The filedescriptor whose file pointer is to be moved \\
 \hline
-{\em offset} & \\
+{\em offset} & The offset at which to move by (in bytes) \\
 \hline
-{\em whence} & \\
+{\em whence} & Relative byte location to offset from\\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+off\+\_\+t (-\/1 on error) 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_a7cc95330d937650d14281e3d6041f284}\label{sys__call_8h_a7cc95330d937650d14281e3d6041f284} 
 \index{sys\_call.h@{sys\_call.h}!s\_move\_process@{s\_move\_process}}
 \index{s\_move\_process@{s\_move\_process}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_move\_process()}{s\_move\_process()}}
 {\footnotesize\ttfamily int s\+\_\+move\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{destination,  }\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
 
+
+
+Find the list that the processor belongs to, removes it from that list, and adds it to the specified list in argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em destination} & \\
+\hline
+{\em pid} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Returns 0 on success, -\/1 on failure and sets errno. 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_ac711d33fcf2573a590b224b6debab996}\label{sys__call_8h_ac711d33fcf2573a590b224b6debab996} 
 \index{sys\_call.h@{sys\_call.h}!s\_nice@{s\_nice}}
 \index{s\_nice@{s\_nice}!sys\_call.h@{sys\_call.h}}
@@ -448,26 +602,47 @@ s\+\_\+open returns a file descriptor on success and a negative value on error. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em fname} & \\
+{\em fname} & opens file with this name \\
 \hline
-{\em mode} & \\
+{\em mode} & opens file in this mode\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int 
+int (-\/1 on error), on success returns fd number of opened file 
 \end{DoxyReturn}
-\Hypertarget{sys__call_8h_a4e0c2e47d0948979e7be9350582158c8}\label{sys__call_8h_a4e0c2e47d0948979e7be9350582158c8} 
+\Hypertarget{sys__call_8h_adc34021a4da6a8e67a92d16e8adef872}\label{sys__call_8h_adc34021a4da6a8e67a92d16e8adef872} 
 \index{sys\_call.h@{sys\_call.h}!s\_print\_jobs@{s\_print\_jobs}}
 \index{s\_print\_jobs@{s\_print\_jobs}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_print\_jobs()}{s\_print\_jobs()}}
-{\footnotesize\ttfamily int s\+\_\+print\+\_\+jobs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int s\+\_\+print\+\_\+jobs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\Hypertarget{sys__call_8h_a2e87f593f5c2f59d7a90958b3e51751d}\label{sys__call_8h_a2e87f593f5c2f59d7a90958b3e51751d} 
+
+
+Prints the list of processes in stopped or background list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
+return int Returns 0 on success, -\/1 on failure and sets errno. \Hypertarget{sys__call_8h_a2e87f593f5c2f59d7a90958b3e51751d}\label{sys__call_8h_a2e87f593f5c2f59d7a90958b3e51751d} 
 \index{sys\_call.h@{sys\_call.h}!s\_print\_process@{s\_print\_process}}
 \index{s\_print\_process@{s\_print\_process}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_print\_process()}{s\_print\_process()}}
 {\footnotesize\ttfamily int s\+\_\+print\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCircularList}{Circular\+List}} \texorpdfstring{$\ast$}{*}}]{list }\end{DoxyParamCaption})}
 
+
+
+Prints all processes in processes, stopped, blocked, zombied. Used for \textquotesingle{}ps\textquotesingle{} command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Returns 0 on success, -\/1 on failure and sets errno. 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_afdcf52e63af8002a5d7c02774ee0578f}\label{sys__call_8h_afdcf52e63af8002a5d7c02774ee0578f} 
 \index{sys\_call.h@{sys\_call.h}!s\_read@{s\_read}}
 \index{s\_read@{s\_read}!sys\_call.h@{sys\_call.h}}
@@ -480,15 +655,15 @@ read n bytes from the file referenced by fd. On return, s\+\_\+read returns the 
 
 
 \begin{DoxyParams}{Parameters}
-{\em fd} & \\
+{\em fd} & file descriptor to read from (from fd\textquotesingle{}s offset) \\
 \hline
-{\em n} & \\
+{\em n} & number of bytes to read \\
 \hline
-{\em buf} & \\
+{\em buf} & buffer to read into\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-ssize\+\_\+t 
+ssize\+\_\+t (-\/1 on error), 0 if EOF reached, otherwise number of bytes read 
 \end{DoxyReturn}
 \Hypertarget{sys__call_8h_a18b25be5ab040f60070ff9ea839648be}\label{sys__call_8h_a18b25be5ab040f60070ff9ea839648be} 
 \index{sys\_call.h@{sys\_call.h}!s\_read\_all@{s\_read\_all}}
@@ -496,6 +671,22 @@ ssize\+\_\+t
 \doxysubsubsection{\texorpdfstring{s\_read\_all()}{s\_read\_all()}}
 {\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*} s\+\_\+read\+\_\+all (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename,  }\item[{int \texorpdfstring{$\ast$}{*}}]{read\+\_\+num }\end{DoxyParamCaption})}
 
+
+
+Wrapper function around k\+\_\+read\+\_\+all. 
+
+Reads all contents from the file with the file name {\ttfamily filename}. Outputs the contents as well as update {\ttfamily read\+\_\+num} to the number of bytes read.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Name of the file we want to read from. \\
+\hline
+{\em read\+\_\+num} & Pointer to an integer variable that will store the number of bytes read.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+All contents of {\ttfamily filename} in char\texorpdfstring{$\ast$}{*} format. 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_a964c6f7d6a06dddfd15cbd2d348dbd59}\label{sys__call_8h_a964c6f7d6a06dddfd15cbd2d348dbd59} 
 \index{sys\_call.h@{sys\_call.h}!s\_reap\_all\_child@{s\_reap\_all\_child}}
 \index{s\_reap\_all\_child@{s\_reap\_all\_child}!sys\_call.h@{sys\_call.h}}
@@ -527,7 +718,7 @@ Removes a process in any state.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int 
+int Returns 0 on success, -\/1 on failure and sets errno. 
 \end{DoxyReturn}
 \Hypertarget{sys__call_8h_aeea2dcf94b9a35c86a67cf6ec97fd21d}\label{sys__call_8h_aeea2dcf94b9a35c86a67cf6ec97fd21d} 
 \index{sys\_call.h@{sys\_call.h}!s\_rename@{s\_rename}}
@@ -535,6 +726,38 @@ int
 \doxysubsubsection{\texorpdfstring{s\_rename()}{s\_rename()}}
 {\footnotesize\ttfamily int s\+\_\+rename (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{source,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{dest }\end{DoxyParamCaption})}
 
+
+
+s-\/function wrapper around k\+\_\+rename, which renames {\ttfamily source} to {\ttfamily dest}. {\ttfamily source} must exist, if {\ttfamily dest} already exists, then it is deleted 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & name of the source file to be renamed \\
+\hline
+{\em dest} & new name of file\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on error, 0 if rename was successful 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8h_ac6d9cddaea840f87aee45bd6e6122acc}\label{sys__call_8h_ac6d9cddaea840f87aee45bd6e6122acc} 
+\index{sys\_call.h@{sys\_call.h}!s\_resume\_block@{s\_resume\_block}}
+\index{s\_resume\_block@{s\_resume\_block}!sys\_call.h@{sys\_call.h}}
+\doxysubsubsection{\texorpdfstring{s\_resume\_block()}{s\_resume\_block()}}
+{\footnotesize\ttfamily int s\+\_\+resume\+\_\+block (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+
+
+
+Blocks process with command "{}sleep"{} that has been stopped before. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & Process ID of the child to wait for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on error. 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_a0b8fdff50e5b9c5fa8559fe294e4243f}\label{sys__call_8h_a0b8fdff50e5b9c5fa8559fe294e4243f} 
 \index{sys\_call.h@{sys\_call.h}!s\_sleep@{s\_sleep}}
 \index{s\_sleep@{s\_sleep}!sys\_call.h@{sys\_call.h}}
@@ -643,7 +866,7 @@ Spawns and waits for a process, combining s\+\_\+spawn and s\+\_\+waitpid.
 \begin{DoxyReturn}{Returns}
 int 
 \end{DoxyReturn}
-or status signaled?\Hypertarget{sys__call_8h_a62b97025761b7f8ad7e59b641cad08d6}\label{sys__call_8h_a62b97025761b7f8ad7e59b641cad08d6} 
+\Hypertarget{sys__call_8h_a62b97025761b7f8ad7e59b641cad08d6}\label{sys__call_8h_a62b97025761b7f8ad7e59b641cad08d6} 
 \index{sys\_call.h@{sys\_call.h}!s\_spawn\_nice@{s\_spawn\_nice}}
 \index{s\_spawn\_nice@{s\_spawn\_nice}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_spawn\_nice()}{s\_spawn\_nice()}}
@@ -674,12 +897,16 @@ pid\+\_\+t The process ID of the created child process.
 {\footnotesize\ttfamily int s\+\_\+unlink (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fname }\end{DoxyParamCaption})}
 
 
+
+removes the file specified by {\ttfamily fname} , {\ttfamily fname} must exist, returns -\/1 on error if it doesn\textquotesingle{}t 
+
+
 \begin{DoxyParams}{Parameters}
-{\em fname} & \\
+{\em fname} & name of the file to be removed\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-int 
+int (-\/1 on error) 
 \end{DoxyReturn}
 \Hypertarget{sys__call_8h_ab40c873ca412b774e2fc1b59527538be}\label{sys__call_8h_ab40c873ca412b774e2fc1b59527538be} 
 \index{sys\_call.h@{sys\_call.h}!s\_update\_timestamp@{s\_update\_timestamp}}
@@ -687,6 +914,18 @@ int
 \doxysubsubsection{\texorpdfstring{s\_update\_timestamp()}{s\_update\_timestamp()}}
 {\footnotesize\ttfamily int s\+\_\+update\+\_\+timestamp (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{source }\end{DoxyParamCaption})}
 
+
+
+Wrapper function around k\+\_\+update\+\_\+timestamp. Returns the filename for the given file descriptor number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & Soruce file name\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int (-\/1 on error) 
+\end{DoxyReturn}
 \Hypertarget{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3}\label{sys__call_8h_a3c0c6c4ae69799354d707ff57ac925d3} 
 \index{sys\_call.h@{sys\_call.h}!s\_waitpid@{s\_waitpid}}
 \index{s\_waitpid@{s\_waitpid}!sys\_call.h@{sys\_call.h}}
@@ -721,15 +960,15 @@ write n bytes of the string referenced by str to the file fd and increment the f
 
 
 \begin{DoxyParams}{Parameters}
-{\em fd} & \\
+{\em fd} & file descriptor to write to (from fd\textquotesingle{}s offset) \\
 \hline
-{\em str} & \\
+{\em str} & input string to be written \\
 \hline
-{\em n} & \\
+{\em n} & number of bytes to be written\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-ssize\+\_\+t 
+ssize\+\_\+t (-\/1 on error), otherwise number of bytes written 
 \end{DoxyReturn}
 \Hypertarget{sys__call_8h_a1db57eb907f680ab844066357b793d5f}\label{sys__call_8h_a1db57eb907f680ab844066357b793d5f} 
 \index{sys\_call.h@{sys\_call.h}!s\_write\_log@{s\_write\_log}}
@@ -737,9 +976,37 @@ ssize\+\_\+t
 \doxysubsubsection{\texorpdfstring{s\_write\_log()}{s\_write\_log()}}
 {\footnotesize\ttfamily int s\+\_\+write\+\_\+log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{sys__call_8h_a9df1ce5034a7614c2c55bc05500f5991}{log\+\_\+message\+\_\+t}}}]{logtype,  }\item[{\mbox{\hyperlink{structpcb__t}{pcb\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proc,  }\item[{unsigned int}]{old\+\_\+nice }\end{DoxyParamCaption})}
 
-\Hypertarget{sys__call_8h_abc68daae1d550a0993e99d583b0c1264}\label{sys__call_8h_abc68daae1d550a0993e99d583b0c1264} 
+
+
+Prints information to log.\+txt for each movement of each processor/thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em logtype} & \\
+\hline
+{\em proc} & \\
+\hline
+{\em old\+\_\+nice} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Returns 0 on success, -\/1 on failure and sets errno. 
+\end{DoxyReturn}
+\Hypertarget{sys__call_8h_abf654a2582830ad3a5ce3db38c944f81}\label{sys__call_8h_abf654a2582830ad3a5ce3db38c944f81} 
 \index{sys\_call.h@{sys\_call.h}!s\_zombie@{s\_zombie}}
 \index{s\_zombie@{s\_zombie}!sys\_call.h@{sys\_call.h}}
 \doxysubsubsection{\texorpdfstring{s\_zombie()}{s\_zombie()}}
-{\footnotesize\ttfamily void s\+\_\+zombie (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int s\+\_\+zombie (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{pid }\end{DoxyParamCaption})}
 
+
+
+Makes the specified processor a zombie, orpanifies all its child processors, then reaps all children. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Returns 0 on success, -\/1 on failure and sets errno. 
+\end{DoxyReturn}
