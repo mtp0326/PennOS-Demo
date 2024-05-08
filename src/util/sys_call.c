@@ -527,7 +527,7 @@ int s_bg_wait(pcb_t* proc) {
   if (proc->state == ZOMBIED) {
     char message[50];
     sprintf(message, "[%d]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
-            proc->processname);
+            proc->cmd_name);
     if (s_write(STDOUT_FILENO, message, strlen(message)) == -1) {
       errno = EINVALIDSTDOUT;
       return -1;
@@ -542,7 +542,7 @@ int s_bg_wait(pcb_t* proc) {
   if (wpid == proc->pid) {
     char message[50];
     sprintf(message, "[%d]\t %4u DONE\t%s\n", proc->job_num, proc->pid,
-            proc->processname);
+            proc->cmd_name);
     if (s_write(STDOUT_FILENO, message, strlen(message)) == -1) {
       errno = EINVALIDSTDOUT;
       return -1;

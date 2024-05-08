@@ -145,13 +145,8 @@ void* b_fg(void* arg) {
     proc = find_process_job_id(stopped, index);
 
     if (proc != NULL) {
-      char message[40];
-      sprintf(message, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+      fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
               proc->cmd_name);
-      ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
-      if (result == -1) {
-        u_perror("fg: ");
-      }
 
       if (proc->initial_state != RUNNING) {
         s_resume_block(proc->pid);
@@ -187,13 +182,8 @@ void* b_fg(void* arg) {
 
   proc = find_jobs_proc(stopped);
   if (proc != NULL) {
-    char message[40];
-    sprintf(message, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+    fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
             proc->cmd_name);
-    ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
-    if (result == -1) {
-      u_perror("fg: ");
-    }
 
     if (proc->initial_state != RUNNING) {
       s_resume_block(proc->pid);
@@ -258,13 +248,8 @@ void* b_bg(void* arg) {
 
       proc->is_bg = true;
       add_process(bg_list, proc);
-      char message[40];
-      sprintf(message, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+      fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
               proc->cmd_name);
-      ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
-      if (result == -1) {
-        u_perror("bg: ");
-      }
 
       return NULL;
     }
@@ -288,13 +273,8 @@ void* b_bg(void* arg) {
 
     proc->is_bg = true;
     add_process(bg_list, proc);
-    char message[40];
-    sprintf(message, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
+    fprintf(stdout, "[%d]  + %4u Continued\t%s\n", proc->job_num, proc->pid,
             proc->cmd_name);
-    ssize_t result = s_write(STDOUT_FILENO, message, strlen(message));
-    if (result == -1) {
-      u_perror("bg: ");
-    }
 
     return NULL;
   }

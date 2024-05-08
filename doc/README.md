@@ -1,9 +1,8 @@
 Welcome to PennOS, a project designed to simulate the functionalities of a UNIX-like operating system. This project was created by Aaron Tsui, Matt Park, Joesph Cho, and Maya Huizar.
 
-Aaron Tsui: PennID 70714281
-Matt Park: PennID
-Joseph Cho: PennID
-Maya Huizar: PennID
+Kernel: Matt Park, Maya Huizar
+
+File System: Aaron Tsui, Joseph Cho
 
 ## Overview
 
