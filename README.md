@@ -18,5 +18,5 @@ If the symbol $ appears, you are in the PennOS shell!
 
 ## Documentation
 
-- [**Kernel Documentation**](kernel.md): Here is an overview of the Kernel, Scheduler, and Shell, and its related functions and structure. 
-- [**FAT Documentation**](fat.md): Here is an overview of the structure of the filesystem, and its related functions.
+- [**Kernel Documentation**](doc/kernel.md): Here is an overview of the Kernel, Scheduler, and Shell, and its related functions and structure. 
+- [**FAT Documentation**](doc/fat.md): Here is an overview of the structure of the filesystem, and its related functions.
